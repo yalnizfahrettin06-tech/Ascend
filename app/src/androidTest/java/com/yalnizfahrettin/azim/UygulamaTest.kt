@@ -36,11 +36,13 @@ class UygulamaTest {
         compose.onNodeWithText("45s").performScrollTo().performClick()
         compose.runOnUiThread { compose.activity.recreate() }
         compose.waitUntil(10000) { compose.onAllNodesWithText("45s").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(15000) { compose.onAllNodesWithTag("share-preview").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithText("45s").performScrollTo().assertIsSelected(); shot("08-share-video")
         compose.onNodeWithContentDescription("Kâğıt").performScrollTo().performClick()
         compose.onNodeWithText("Görsel").performClick()
         compose.onNodeWithText("Galeriye kaydet").performClick()
         compose.waitUntil(20000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithText("Galeriye kaydedildi ✓").assertIsDisplayed()
         shot("09-gallery-saved")
         compose.onNodeWithContentDescription("Kapat").performClick()
         compose.onNodeWithText("Kaydedilen").performClick()

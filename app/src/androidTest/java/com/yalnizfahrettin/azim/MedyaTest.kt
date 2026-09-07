@@ -25,8 +25,8 @@ class MedyaTest {
                 assertNotNull(frame); frame?.recycle()
                 if (duration == 5) {
                     val saved = MedyaDeposu.galeriyeKaydet(ctx, result.uri!!, true)
-                    try { assertNotNull(ctx.contentResolver.openInputStream(saved)?.use { it.read() }) }
-                    finally { /* Retain this sample in the disposable emulator for artifact inspection. */ }
+                    assertNotNull(ctx.contentResolver.openInputStream(saved)?.use { it.read() })
+                    // Keep the sample in this disposable emulator for artifact inspection.
                 }
             } finally { retriever.release() }
         }
@@ -47,9 +47,18 @@ class MedyaTest {
         val quote = Sozler.tumu().maxBy { it.tr.length }
         assertTrue(com.yalnizfahrettin.azim.notif.Bildirimler.goster(ctx,quote,"tr"))
         val manager = ctx.getSystemService(android.app.NotificationManager::class.java)
-        val notification = manager.activeNotifications.first { it.id == quote.kimlik.hashCode() }.notification
-        val full = notification.extras.getCharSequence(android.app.Notification.EXTRA_BIG_TEXT).toString()
-        assertTrue(full.contains(quote.tr)); assertTrue(full.contains(quote.yazar))
-        manager.cancel(quote.kimlik.hashCode())
+        val id = quote.kimlik.hashCode()
+        try {
+            // notify() enqueues a system-service operation; wait for its observable result.
+            val deadline = android.os.SystemClock.elapsedRealtime() + 5000
+            var posted = manager.activeNotifications.firstOrNull { it.id == id }
+            while (posted == null && android.os.SystemClock.elapsedRealtime() < deadline) {
+                android.os.SystemClock.sleep(50)
+                posted = manager.activeNotifications.firstOrNull { it.id == id }
+            }
+            assertNotNull("Notification was not posted within 5 seconds", posted)
+            val full = posted!!.notification.extras.getCharSequence(android.app.Notification.EXTRA_BIG_TEXT).toString()
+            assertTrue(full.contains(quote.tr)); assertTrue(full.contains(quote.imza("tr")))
+        } finally { manager.cancel(id) }
     }
 }

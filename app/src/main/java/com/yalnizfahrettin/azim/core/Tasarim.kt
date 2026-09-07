@@ -12,6 +12,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -132,7 +133,9 @@ fun AzimTema(
     }
     val view = androidx.compose.ui.platform.LocalView.current
     val activity = generateSequence(ctx) { (it as? android.content.ContextWrapper)?.baseContext }.filterIsInstance<android.app.Activity>().firstOrNull()
-    SideEffect { activity?.let { androidx.core.view.WindowCompat.getInsetsController(it.window, view).apply {
+    SideEffect { activity?.let {
+        it.window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(renk.zemin.toArgb()))
+        androidx.core.view.WindowCompat.getInsetsController(it.window, view).apply {
         isAppearanceLightStatusBars = !renk.karanlikMi
         isAppearanceLightNavigationBars = !renk.karanlikMi
     } } }

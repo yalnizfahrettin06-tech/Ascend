@@ -154,10 +154,10 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit) {
                         Slider(ayar.karartma, { ayar = ayar.copy(karartma = it) }, valueRange = .25f.. .75f, enabled = !hazirlaniyor, modifier = Modifier.semantics { contentDescription = cevir(dil, "Arka plan karartması", "Background dimming") })
                     }
                 }
-                durum?.let { Text(it, color = Renk.accent, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) }
-                hata?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Assertive }) }
             }
             Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                durum?.let { Text(it, color = Renk.accent, modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Polite }) }
+                hata?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Assertive }) }
                 if (hazirlaniyor) {
                     LinearProgressIndicator(progress = { ilerleme }, modifier = Modifier.fillMaxWidth())
                     Text(cevir(dil, "${if (video) "Video" else "Görsel"} hazırlanıyor · ${(ilerleme * 100).toInt()}%", "Preparing ${if (video) "video" else "image"} · ${(ilerleme * 100).toInt()}%"), Modifier.padding(8.dp), color = Renk.metin)
