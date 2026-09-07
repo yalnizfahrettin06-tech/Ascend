@@ -6,6 +6,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -129,6 +130,12 @@ fun AzimTema(
             onPrimary = if (renk.karanlikMi) Color(0xFF121416) else Color.White, onBackground = renk.metin, onSurface = renk.metin,
         )
     }
+    val view = androidx.compose.ui.platform.LocalView.current
+    val activity = generateSequence(ctx) { (it as? android.content.ContextWrapper)?.baseContext }.filterIsInstance<android.app.Activity>().firstOrNull()
+    SideEffect { activity?.let { androidx.core.view.WindowCompat.getInsetsController(it.window, view).apply {
+        isAppearanceLightStatusBars = !renk.karanlikMi
+        isAppearanceLightNavigationBars = !renk.karanlikMi
+    } } }
     CompositionLocalProvider(LocalAzimRenk provides renk) {
         MaterialTheme(colorScheme = m3, typography = AzimTipografi, content = icerik)
     }

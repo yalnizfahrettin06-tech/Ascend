@@ -111,3 +111,8 @@ Dört manzara yerleşik imagegen aracıyla bu proje için üretildi; rakiplerden
 Bu rapordaki uygulama değişiklikleri kaynak kodda yer alır. APK derlemesi, cihaz testleri, ekran görüntüleri ve gerçek çıktı dosyalarının sonuçları ayrı teslim/doğrulama belgesine yazılır. Test tamamlanmadan bir cihaz davranışı doğrulanmış olarak kabul edilmez.
 
 Üretime çıkış öncesi gerçek Samsung cihazında One UI menülerinin ve üretici video kodlayıcısının kontrolü gerekir. Otomatik Android emülatör testi bu üreticiye özgü kontrolün yerini tutmaz. Bildirim zamanlamasının uzun süreli pil tasarrufu altındaki davranışı ayrıca gerçek kullanımda izlenmelidir. Reklam entegrasyonu hâlâ hazır olmadığı için diğer kilitli gruplar açıkça kilitli kalır; gelir sistemi bu görsel güncellemede yeniden kurulmadı. İçerik atıflarının kaynak eser düzeyinde editoryal doğrulaması ayrı bir içerik işidir; bu güncelleme alıntıların tarihsel doğruluğunu sertifikalandırmaz.
+
+
+### Felsefe başlangıç içeriği
+
+Yeni ücretsiz felsefe grubunda minimum içerik kontrolü bir eksik yakaladı. Grup toplamını 10 söze tamamlayan beş kısa, iki dilli uyarlama eklendi. Bunlar Marcus Aurelius’un *Düşünceler*, IV. kitap 2, 3, 17, 20 ve 24 bölümlerinden türetildi; uygulamada ve paylaşımda “uyarlama/adapted” etiketi taşır. Doğrudan tarihsel alıntı olarak sunulmaz. İncelenen kaynak: [George Long çevirisi, Internet Classics Archive](https://classics.mit.edu/Antoninus/meditations.4.four.html). Mevcut sözlerin kimlikleri değiştirilmedi.

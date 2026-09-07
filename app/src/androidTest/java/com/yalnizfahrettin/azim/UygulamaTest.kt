@@ -28,12 +28,15 @@ class UygulamaTest {
         compose.onNodeWithText("Şimdilik bildirimsiz devam et").performClick()
         compose.waitUntil(15000) { compose.onAllNodesWithText("Senin için").fetchSemanticsNodes().isNotEmpty() }
         shot("06-home")
-        compose.onNodeWithText("Kaydet").performScrollTo().performClick()
-        compose.onNodeWithText("Paylaş").performClick()
+        compose.onNode(hasText("Kaydet") and hasAnyAncestor(hasTestTag("active-quote"))).performScrollTo().performClick()
+        compose.onNode(hasText("Paylaş") and hasAnyAncestor(hasTestTag("active-quote"))).performClick()
         compose.waitUntil(10000) { compose.onAllNodesWithTag("share-preview").fetchSemanticsNodes().isNotEmpty() }
         shot("07-share-image")
         compose.onNodeWithText("Video").performScrollTo().performClick()
-        compose.onNodeWithText("45s").performScrollTo().performClick(); shot("08-share-video")
+        compose.onNodeWithText("45s").performScrollTo().performClick()
+        compose.runOnUiThread { compose.activity.recreate() }
+        compose.waitUntil(10000) { compose.onAllNodesWithText("45s").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithText("45s").performScrollTo().assertIsSelected(); shot("08-share-video")
         compose.onNodeWithContentDescription("Kâğıt").performScrollTo().performClick()
         compose.onNodeWithText("Görsel").performClick()
         compose.onNodeWithText("Galeriye kaydet").performClick()
@@ -48,9 +51,13 @@ class UygulamaTest {
         compose.onNodeWithText("Kendi yolunda.").assertIsDisplayed(); shot("12-journey")
         compose.onNodeWithText("Bugün").performClick()
         compose.onNodeWithContentDescription("Ayarlar").performScrollTo().performClick()
+        compose.onNodeWithText("Karanlık").performScrollTo().performClick()
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.onNodeWithText("Senin için").assertExists(); shot("13-home-dark")
+        compose.onNodeWithContentDescription("Ayarlar").performClick()
         compose.onNodeWithText("English").performScrollTo().performClick()
         compose.waitUntil(5000) { compose.onAllNodesWithText("Settings").fetchSemanticsNodes().isNotEmpty() }
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
-        compose.onNodeWithText("For you").assertExists(); shot("13-home-english")
+        compose.onNodeWithText("For you").assertExists(); shot("15-home-english")
     }
 }

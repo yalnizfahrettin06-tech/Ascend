@@ -31,7 +31,7 @@ private fun karanlikOmurga(oled: Boolean) = AzimRenkleri(
     metin         = Color(0xFFF4F1EB),   // 11.65:1 — orta kontrast
     metinIkincil  = Color(0xFFAEBCC5),   //  6.66:1
     metinSonuk    = Color(0xFFAEBCC5),   //  3.78:1
-    accent        = Color(0xFFBB6885),   // palete göre değişir
+    accent        = Color(0xFFC17892),   // palete göre değişir
     accentSonuk   = Color(0xFF502131),
     accentZemin   = Color(0xFF1C1719),
     accentDerin   = Color(0xFF421A28),
@@ -67,17 +67,17 @@ private val vurgular = mapOf(
     // düşürmek kontrastı 4.5:1 altına indiriyordu (ölçüldü); tonu şaraba
     // çekmek pembeliği alıp okunabilirliği koruyor. Derin tonlar ayrı.
     Palet.BORDO to Vurgu(
-        0xFFBB6885, 0xFF502131, 0xFF1C1719, 0xFF421A28,
+        0xFFC17892, 0xFF502131, 0xFF1C1719, 0xFF421A28,
         0xFF842A49, 0xFFD9BCC3, 0xFFF6EEF0, 0xFFC9A0AB,
     ),
     // #6688AE → 5.01:1 / #3B5F87 → 6.06:1
     Palet.LACIVERT to Vurgu(
-        0xFF6688AE, 0xFF2C3D50, 0xFF161A1F, 0xFF1E3047,
+        0xFF7597BC, 0xFF2C3D50, 0xFF161A1F, 0xFF1E3047,
         0xFF3B5F87, 0xFFB9C8D9, 0xFFEDF1F6, 0xFF9DB3CA,
     ),
     // #639277 → 5.19:1 / #2F6B4F → 5.77:1
     Palet.YOSUN to Vurgu(
-        0xFF639277, 0xFF2B4034, 0xFF141A17, 0xFF1B2E23,
+        0xFF75A086, 0xFF2B4034, 0xFF141A17, 0xFF1B2E23,
         0xFF2F6B4F, 0xFFB5CFC0, 0xFFEBF3EE, 0xFF97BFA8,
     ),
 )

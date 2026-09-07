@@ -26,7 +26,7 @@ class MedyaTest {
                 if (duration == 5) {
                     val saved = MedyaDeposu.galeriyeKaydet(ctx, result.uri!!, true)
                     try { assertNotNull(ctx.contentResolver.openInputStream(saved)?.use { it.read() }) }
-                    finally { ctx.contentResolver.delete(saved,null,null) }
+                    finally { /* Retain this sample in the disposable emulator for artifact inspection. */ }
                 }
             } finally { retriever.release() }
         }

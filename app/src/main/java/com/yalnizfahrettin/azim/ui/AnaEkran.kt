@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -81,7 +82,7 @@ fun AnaEkran(
                 HorizontalPager(pager, contentPadding = PaddingValues(horizontal = 20.dp), pageSpacing = 12.dp, key = { liste[it].kimlik }) { sayfa ->
                     val soz = liste[sayfa]
                     val atmosfer = secilenAtmosfer?.let { Atmosfer.valueOf(it) } ?: Atmosfer.grup(Kategoriler.bul(soz.kategori)?.grup)
-                    Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(28.dp))) {
+                    Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(28.dp)).testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")) {
                         AtmosferResmi(atmosfer, Modifier.matchParentSize(), karartma = .30f)
                         Column(Modifier.fillMaxWidth().heightIn(min = 424.dp).padding(22.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {

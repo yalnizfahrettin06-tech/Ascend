@@ -30,6 +30,19 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
     var bas by rememberSaveable { mutableIntStateOf(9) }
     var bit by rememberSaveable { mutableIntStateOf(21) }
     val scroll = rememberScrollState()
+    val ctx = androidx.compose.ui.platform.LocalContext.current
+    val view = androidx.compose.ui.platform.LocalView.current
+    val renk = Renk
+    val activity = generateSequence(ctx) { (it as? android.content.ContextWrapper)?.baseContext }.filterIsInstance<android.app.Activity>().firstOrNull()
+    DisposableEffect(adim, renk.karanlikMi) {
+        val controller = activity?.let { androidx.core.view.WindowCompat.getInsetsController(it.window, view) }
+        controller?.isAppearanceLightStatusBars = adim != 0 && !renk.karanlikMi
+        controller?.isAppearanceLightNavigationBars = adim != 0 && !renk.karanlikMi
+        onDispose {
+            controller?.isAppearanceLightStatusBars = !renk.karanlikMi
+            controller?.isAppearanceLightNavigationBars = !renk.karanlikMi
+        }
+    }
     LaunchedEffect(adim) { scroll.scrollTo(0) }
     BackHandler(adim > 0 || kaydediliyor) { if (!kaydediliyor) adim-- }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
@@ -71,7 +84,8 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
                                     Box(Modifier.weight(1f).clip(RoundedCornerShape(22.dp)).border(if (aktif) 2.dp else 0.dp, if (aktif) Renk.accent else Color.Transparent, RoundedCornerShape(22.dp)).toggleable(aktif, role = Role.Checkbox) { secili = Baslangic.secimiDegistir(secili, key) }) {
                                         AtmosferResmi(Atmosfer.grup(kat.grup), Modifier.matchParentSize(), .28f)
                                         Column(Modifier.fillMaxWidth().heightIn(min = 132.dp).padding(14.dp)) {
-                                            Icon(if (aktif) AzimIkon.Tik else AzimIkon.Izgara, if (aktif) cevir(dil, "Seçili", "Selected") else null, Modifier.size(20.dp).align(Alignment.End), tint = Color.White)
+                                            if (aktif) Icon(AzimIkon.Tik, cevir(dil, "Seçili", "Selected"), Modifier.size(20.dp).align(Alignment.End), tint = Color.White)
+                                            else Box(Modifier.size(20.dp).align(Alignment.End).border(1.5.dp, Color.White, androidx.compose.foundation.shape.CircleShape))
                                             Spacer(Modifier.height(42.dp))
                                             Text(baslangicAdi(key, dil), color = Color.White, fontWeight = FontWeight.Medium, fontSize = 15.sp)
                                         }

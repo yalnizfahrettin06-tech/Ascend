@@ -63,7 +63,7 @@ class KontrastTest {
     @Test
     fun `accent okunabilir`() = tumSetler().forEach { (ad, r) ->
         kontrol(ad, r.accent, r.zemin, 4.5, "accent/zemin")
-        kontrol(ad, r.accent, r.yuzey, 4.0, "accent/yüzey")
+        kontrol(ad, r.accent, r.yuzey, 4.5, "accent/yüzey")
     }
 
     /**

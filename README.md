@@ -1,35 +1,32 @@
 # Ascend
 
-Günlük olumlamalar için Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiş Android uygulaması. Azim kaynaklarından Ascend 3.0 deneyimine geçiş.
+Motivasyon, olumlama, azim, odak ve felsefeden sözleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir. Ascend 4.0, görsel ana ekranı ve medya paylaşımını merkeze alır.
 
 ## Telefonuna APK indir
 
 1. [Actions → Ascend APK](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) sayfasını aç.
 2. Başarılı çalışmayı seç. İstersen **Run workflow** ile yeni derleme başlat.
-3. **Artifacts → Ascend-3.0.0-test-APK** dosyasını indir ve ZIP içindeki APK’yı telefonunda aç.
+3. **Artifacts → Ascend-4.0.0-test-APK** dosyasını indir ve ZIP içindeki APK’yı telefonunda aç.
 
 GitHub’dan artifact indirmek için oturum açman gerekir. APK geliştirme imzasıyla üretilen test sürümüdür; mağazaya yükleme paketi değildir. Paket adı `.debug` ile bittiği için mevcut Azim sürümüyle yan yana kurulabilir. Farklı Actions çalışmaları farklı geliştirme imzaları oluşturabilir; güncelleme imza hatası verirse eski test sürümünün kaldırılması gerekir ve o test sürümünün verileri silinir. Kalıcı güncelleme için sabit imzalama anahtarı sonraki yayın adımıdır.
 
-## Neler değişti?
+## 4.0 deneyimi
 
-- İlk olumlamayla başlayan, geri dönülebilen üç adımlı onboarding.
-- Altı başlangıç niyeti, 24 özgün Türkçe/İngilizce olumlama.
-- Bildirimsiz devam, atomik kurulum kaydı, ayarlarda hatırlatıcı anahtarı.
-- Olumlama odaklı Bugün ekranı, görünür önceki/sonraki ve kaydet/paylaş eylemleri.
-- Keşfet, Kaydedilenler, Yolculuk ve ayarlarda okunabilirlik/erişilebilirlik iyileştirmeleri.
-- Bildirim teslimatını okumadan ayıran sayaçlar ve yenilenen zamanlama.
-- GitHub üzerinde APK derleme, birim testleri, Android lint ve emülatör UI testleri.
+- Dört özgün manzara üzerinde kaydırılan söz kartları; konu filtreleri ve arka plan seçimi.
+- Motivasyon, olumlama ve felsefeyi birlikte sunan başlangıç içeriği.
+- Dört adımlı onboarding: karşılama, konular, sıklık/saat aralığı, bildirim kurulumu.
+- Android izni, Samsung kısa/ayrıntılı görünüm rehberi, kanal ayarı ve deneme bildirimi.
+- Görsel koleksiyonlar, arama, kaydedilen sözlerden doğrudan paylaşım ve yenilenen yolculuk ekranı.
+- Story/kare/yatay PNG; 5/10/30/45 saniyelik H.264 video; fotoğraf, yazı ve arka plan seçimi.
+- Paylaşım seçicisi, galeriye kaydetme, üretim ilerlemesi, iptal ve açık hata durumları.
+- GitHub üzerinde APK, JVM testleri, lint ve Android emülatöründe gerçek UI/medya testleri.
 
-## Raporlar
+## Güncel raporlar
 
-- [24 bulguyla ayrıntılı UI/UX incelemesi](docs/01-UI-UX-INCELEME.md)
-- [Onboarding tasarımı ve kabul ölçütleri](docs/02-ONBOARDING-TASARIMI.md)
-- [Entegrasyon, APK ve doğrulama](docs/03-ENTEGRASYON-VE-DOGRULAMA.md)
-- [Gerçek Android ekranları](docs/04-EKRAN-GORUNTULERI.md)
+- [Ayrıntılı ürün ve tasarım raporu](docs/05-ASCEND-4-TASARIM-RAPORU.md)
+- [Özgün arka planların üretim kaydı](docs/06-GORSEL-ISTEMLERI.md)
 
-Son doğrulamada 30 JVM testi ve 7 Android UI testi geçti; lint 0 hatayla tamamlandı. [Doğrulanmış APK çalışması](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34156282949).
-
- Kod içindeki eski sürümlere atıf yapan yorumlar tarihsel kaynak notlarıdır; doğrulanmış ürün araştırması sayılmaz.
+`01`–`04` numaralı belgeler önceki 3.0 sürümünün tarihsel inceleme ve ekranlarıdır. 4.0 görünümünü temsil etmezler. Güncel doğrulama sonuçları teslim belgesine eklenir; Actions durumunu yukarıdaki bağlantıdan izleyebilirsin.
 
 ## Geliştirme
 
