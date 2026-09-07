@@ -5,6 +5,10 @@ import androidx.work.*
 import com.yalnizfahrettin.azim.data.Depo
 import com.yalnizfahrettin.azim.data.Sozler
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.time.Duration
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
@@ -56,19 +60,25 @@ class YenileWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx
     }
 }
 
+private val teslimKilidi = Mutex()
+
 class SozWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
-    override suspend fun doWork(): Result {
+    override suspend fun doWork(): Result = teslimKilidi.withLock {
         val depo = Depo(applicationContext)
-        if (!depo.onboardingBitti.first() || !depo.hatirlaticiAcik.first() || !Bildirimler.izinVarMi(applicationContext)) return Result.success()
+        if (!depo.onboardingBitti.first() || !depo.hatirlaticiAcik.first() || !Bildirimler.izinVarMi(applicationContext)) return@withLock Result.success()
         val saat = java.time.LocalTime.now().hour
-        if (saat < depo.baslangicSaati.first() || saat >= depo.bitisSaati.first()) return Result.success()
-        val havuz = Sozler.bildirimHavuzu(depo.secili.first(), depo.dil.first())
-        val gecmis = depo.gecmis.first()
-        val soz = havuz.filterNot { it.kimlik in gecmis }.ifEmpty { havuz }.randomOrNull() ?: return Result.success()
-        if (Bildirimler.goster(applicationContext, soz, depo.dil.first())) {
-            depo.bildirimGecmisineEkle(soz.kimlik)
-            depo.bugunGeldi(soz.kimlik)
+        if (saat < depo.baslangicSaati.first() || saat >= depo.bitisSaati.first()) return@withLock Result.success()
+        val secili = depo.secili.first()
+        val dil = depo.dil.first()
+        val secim = Sozler.bildirimSec(secili, dil, depo.gecmis.first(), depo.sonBildirimKimlik.first()) ?: return@withLock Result.success()
+        val soz = secim.soz
+        if (Bildirimler.goster(applicationContext, soz, dil)) {
+            // Replanning can cancel this worker after Android accepted the notification.
+            withContext(NonCancellable) {
+                depo.bildirimGecmisineEkle(soz.kimlik, if (secim.yeniTur) secili else emptySet())
+                depo.bugunGeldi(soz.kimlik)
+            }
         }
-        return Result.success()
+        Result.success()
     }
 }

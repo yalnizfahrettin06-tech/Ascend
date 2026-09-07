@@ -1,0 +1,3981 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "5.0.0",
+  "sourceLanguage": "en",
+  "author": "Ascend",
+  "editorialNote": "Original Ascend writing. Inspired reflections are not quotations from people or sacred texts. Translate quote text only; preserve IDs and categories.",
+  "groups": [
+    {
+      "id": "olumlamalar",
+      "name": "Daily affirmations"
+    },
+    {
+      "id": "azim",
+      "name": "Grit & Endurance"
+    },
+    {
+      "id": "disiplin",
+      "name": "Discipline & Focus"
+    },
+    {
+      "id": "cesaret",
+      "name": "Confidence & Courage"
+    },
+    {
+      "id": "filozoflar",
+      "name": "Philosophers"
+    },
+    {
+      "id": "tasavvuf",
+      "name": "Sufism & East"
+    },
+    {
+      "id": "inanc",
+      "name": "Faith"
+    },
+    {
+      "id": "spor",
+      "name": "Sports & Body"
+    },
+    {
+      "id": "is",
+      "name": "Work & Success"
+    },
+    {
+      "id": "iliskiler",
+      "name": "Relationships"
+    },
+    {
+      "id": "zihin",
+      "name": "Mind & Calm"
+    },
+    {
+      "id": "ogrenme",
+      "name": "Learning & Growth"
+    }
+  ],
+  "categories": [
+    {
+      "id": "ozsefkat",
+      "group": "olumlamalar",
+      "name": "Be kinder to myself",
+      "kind": "affirmation"
+    },
+    {
+      "id": "ic_huzur",
+      "group": "olumlamalar",
+      "name": "Find a moment of calm",
+      "kind": "affirmation"
+    },
+    {
+      "id": "kendine_guven",
+      "group": "olumlamalar",
+      "name": "Build trust in myself",
+      "kind": "affirmation"
+    },
+    {
+      "id": "motivasyon",
+      "group": "azim",
+      "name": "Motivation",
+      "kind": "reflection"
+    },
+    {
+      "id": "azim",
+      "group": "azim",
+      "name": "Persistence",
+      "kind": "reflection"
+    },
+    {
+      "id": "pes",
+      "group": "azim",
+      "name": "Never Give Up",
+      "kind": "reflection"
+    },
+    {
+      "id": "zorluk_sabir",
+      "group": "azim",
+      "name": "Patience with Hardship",
+      "kind": "reflection"
+    },
+    {
+      "id": "yorgunluk_sabir",
+      "group": "azim",
+      "name": "Patience with Fatigue",
+      "kind": "reflection"
+    },
+    {
+      "id": "tukenmislik",
+      "group": "azim",
+      "name": "Burnout",
+      "kind": "reflection"
+    },
+    {
+      "id": "yeniden",
+      "group": "azim",
+      "name": "Starting Over",
+      "kind": "reflection"
+    },
+    {
+      "id": "uzun_soluk",
+      "group": "azim",
+      "name": "Long-Term Goals",
+      "kind": "reflection"
+    },
+    {
+      "id": "umut",
+      "group": "azim",
+      "name": "Hope",
+      "kind": "reflection"
+    },
+    {
+      "id": "erteleme",
+      "group": "disiplin",
+      "name": "Procrastination",
+      "kind": "reflection"
+    },
+    {
+      "id": "derin_odak",
+      "group": "disiplin",
+      "name": "Deep Focus",
+      "kind": "reflection"
+    },
+    {
+      "id": "durtu",
+      "group": "disiplin",
+      "name": "Impulse Control",
+      "kind": "reflection"
+    },
+    {
+      "id": "rutin",
+      "group": "disiplin",
+      "name": "Building Routines",
+      "kind": "reflection"
+    },
+    {
+      "id": "dagilma",
+      "group": "disiplin",
+      "name": "Distraction",
+      "kind": "reflection"
+    },
+    {
+      "id": "ozguven",
+      "group": "cesaret",
+      "name": "Self-Confidence",
+      "kind": "reflection"
+    },
+    {
+      "id": "korku",
+      "group": "cesaret",
+      "name": "Facing Fear",
+      "kind": "reflection"
+    },
+    {
+      "id": "reddedilme",
+      "group": "cesaret",
+      "name": "Rejection",
+      "kind": "reflection"
+    },
+    {
+      "id": "risk",
+      "group": "cesaret",
+      "name": "Taking Risks",
+      "kind": "reflection"
+    },
+    {
+      "id": "utangaclik",
+      "group": "cesaret",
+      "name": "Shyness",
+      "kind": "reflection"
+    },
+    {
+      "id": "marcus",
+      "group": "filozoflar",
+      "name": "Marcus Aurelius",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "seneca",
+      "group": "filozoflar",
+      "name": "Seneca",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "epiktetos",
+      "group": "filozoflar",
+      "name": "Epictetus",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "platon",
+      "group": "filozoflar",
+      "name": "Plato",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "aristoteles",
+      "group": "filozoflar",
+      "name": "Aristotle",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "nietzsche",
+      "group": "filozoflar",
+      "name": "Nietzsche",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "konfucyus",
+      "group": "filozoflar",
+      "name": "Confucius",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "machiavelli",
+      "group": "filozoflar",
+      "name": "Machiavelli",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "mevlana",
+      "group": "tasavvuf",
+      "name": "Rumi",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "yunus",
+      "group": "tasavvuf",
+      "name": "Yunus Emre",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "sems",
+      "group": "tasavvuf",
+      "name": "Shams",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "hafiz",
+      "group": "tasavvuf",
+      "name": "Hafez",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "zen",
+      "group": "tasavvuf",
+      "name": "Zen",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "kuran",
+      "group": "inanc",
+      "name": "Reflections on the Quran",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "incil",
+      "group": "inanc",
+      "name": "Reflections on the Bible",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "tevrat",
+      "group": "inanc",
+      "name": "Reflections on the Torah",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "dua",
+      "group": "inanc",
+      "name": "Prayer",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "sukur",
+      "group": "inanc",
+      "name": "Gratitude in Faith",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "antrenman",
+      "group": "spor",
+      "name": "Training",
+      "kind": "reflection"
+    },
+    {
+      "id": "dayaniklilik",
+      "group": "spor",
+      "name": "Endurance",
+      "kind": "reflection"
+    },
+    {
+      "id": "sakatlik",
+      "group": "spor",
+      "name": "Comeback from Injury",
+      "kind": "reflection"
+    },
+    {
+      "id": "sabah_rutini",
+      "group": "spor",
+      "name": "Morning Routine",
+      "kind": "reflection"
+    },
+    {
+      "id": "beslenme",
+      "group": "spor",
+      "name": "Nutrition Discipline",
+      "kind": "reflection"
+    },
+    {
+      "id": "girisimcilik",
+      "group": "is",
+      "name": "Entrepreneurship",
+      "kind": "reflection"
+    },
+    {
+      "id": "kariyer",
+      "group": "is",
+      "name": "Career",
+      "kind": "reflection"
+    },
+    {
+      "id": "liderlik",
+      "group": "is",
+      "name": "Leadership",
+      "kind": "reflection"
+    },
+    {
+      "id": "para",
+      "group": "is",
+      "name": "Money",
+      "kind": "reflection"
+    },
+    {
+      "id": "zaman",
+      "group": "is",
+      "name": "Time Management",
+      "kind": "reflection"
+    },
+    {
+      "id": "basarisizlik",
+      "group": "is",
+      "name": "Failure",
+      "kind": "reflection"
+    },
+    {
+      "id": "basari",
+      "group": "is",
+      "name": "Success",
+      "kind": "reflection"
+    },
+    {
+      "id": "ask",
+      "group": "iliskiler",
+      "name": "Love",
+      "kind": "reflection"
+    },
+    {
+      "id": "ayrilik",
+      "group": "iliskiler",
+      "name": "Breakup",
+      "kind": "reflection"
+    },
+    {
+      "id": "aile",
+      "group": "iliskiler",
+      "name": "Family",
+      "kind": "reflection"
+    },
+    {
+      "id": "arkadaslik",
+      "group": "iliskiler",
+      "name": "Friendship",
+      "kind": "reflection"
+    },
+    {
+      "id": "yalnizlik",
+      "group": "iliskiler",
+      "name": "Loneliness",
+      "kind": "reflection"
+    },
+    {
+      "id": "affetmek",
+      "group": "iliskiler",
+      "name": "Forgiveness",
+      "kind": "reflection"
+    },
+    {
+      "id": "kaygi",
+      "group": "zihin",
+      "name": "Anxiety",
+      "kind": "reflection"
+    },
+    {
+      "id": "stres",
+      "group": "zihin",
+      "name": "Stress",
+      "kind": "reflection"
+    },
+    {
+      "id": "minnettarlik",
+      "group": "zihin",
+      "name": "Gratitude",
+      "kind": "reflection"
+    },
+    {
+      "id": "simdiki_an",
+      "group": "zihin",
+      "name": "The Present",
+      "kind": "reflection"
+    },
+    {
+      "id": "uyku",
+      "group": "zihin",
+      "name": "Sleep",
+      "kind": "reflection"
+    },
+    {
+      "id": "karamsarlik",
+      "group": "zihin",
+      "name": "Pessimism",
+      "kind": "reflection"
+    },
+    {
+      "id": "huzur",
+      "group": "zihin",
+      "name": "Serenity",
+      "kind": "reflection"
+    },
+    {
+      "id": "merak",
+      "group": "ogrenme",
+      "name": "Curiosity",
+      "kind": "reflection"
+    },
+    {
+      "id": "okumak",
+      "group": "ogrenme",
+      "name": "Reading",
+      "kind": "reflection"
+    },
+    {
+      "id": "hata",
+      "group": "ogrenme",
+      "name": "Making Mistakes",
+      "kind": "reflection"
+    },
+    {
+      "id": "aliskanlik",
+      "group": "ogrenme",
+      "name": "Habits",
+      "kind": "reflection"
+    },
+    {
+      "id": "sinav",
+      "group": "ogrenme",
+      "name": "Exams & Study",
+      "kind": "reflection"
+    }
+  ],
+  "quotes": [
+    {
+      "id": "v5_ozsefkat_01",
+      "category": "ozsefkat",
+      "text": "When I feel hurt, I listen for what I need and offer myself a gentler response."
+    },
+    {
+      "id": "v5_ozsefkat_02",
+      "category": "ozsefkat",
+      "text": "Alongside unfinished tasks, I count the unseen burdens I have been carrying."
+    },
+    {
+      "id": "v5_ozsefkat_03",
+      "category": "ozsefkat",
+      "text": "I am learning to face my mistakes without using words that hurt me."
+    },
+    {
+      "id": "v5_ozsefkat_04",
+      "category": "ozsefkat",
+      "text": "I give my confused mind the same care I offer my tired body."
+    },
+    {
+      "id": "v5_ozsefkat_05",
+      "category": "ozsefkat",
+      "text": "I can hear my harsh inner voice and stay beside myself without agreeing with it."
+    },
+    {
+      "id": "v5_ozsefkat_06",
+      "category": "ozsefkat",
+      "text": "I do not use what I know now to punish the person I was before I learned it."
+    },
+    {
+      "id": "v5_ozsefkat_07",
+      "category": "ozsefkat",
+      "text": "I see the time I set aside for rest as a promise to care for myself."
+    },
+    {
+      "id": "v5_ozsefkat_08",
+      "category": "ozsefkat",
+      "text": "I can honestly admit that I feel hurt without trying to make myself look fine."
+    },
+    {
+      "id": "v5_ozsefkat_09",
+      "category": "ozsefkat",
+      "text": "When I tell my own story, I make room for its difficult chapters with understanding."
+    },
+    {
+      "id": "v5_ozsefkat_10",
+      "category": "ozsefkat",
+      "text": "I choose to let my self-respect stand apart from the number of tasks I finish."
+    },
+    {
+      "id": "v5_ic_huzur_01",
+      "category": "ic_huzur",
+      "text": "In a quiet pause, I notice my shoulders and listen to my body again."
+    },
+    {
+      "id": "v5_ic_huzur_02",
+      "category": "ic_huzur",
+      "text": "Even when I feel unsettled, I can pause long enough to notice light at the window."
+    },
+    {
+      "id": "v5_ic_huzur_03",
+      "category": "ic_huzur",
+      "text": "This evening, I can leave my unanswered questions open for a while."
+    },
+    {
+      "id": "v5_ic_huzur_04",
+      "category": "ic_huzur",
+      "text": "When my mind travels far away, I can bring my attention to the warmth of my cup."
+    },
+    {
+      "id": "v5_ic_huzur_05",
+      "category": "ic_huzur",
+      "text": "Among the sounds of the day, I choose a quiet corner that feels kind to me."
+    },
+    {
+      "id": "v5_ic_huzur_06",
+      "category": "ic_huzur",
+      "text": "I am learning to recognize my feelings without attaching a decision to each one."
+    },
+    {
+      "id": "v5_ic_huzur_07",
+      "category": "ic_huzur",
+      "text": "I use a few unhurried minutes to reconnect with myself."
+    },
+    {
+      "id": "v5_ic_huzur_08",
+      "category": "ic_huzur",
+      "text": "As I notice tension around me, I can slow down the pace of my own voice."
+    },
+    {
+      "id": "v5_ic_huzur_09",
+      "category": "ic_huzur",
+      "text": "Even in an unfinished day, I can prepare a comfortable corner for myself."
+    },
+    {
+      "id": "v5_ic_huzur_10",
+      "category": "ic_huzur",
+      "text": "When I name what has gathered inside me, I can choose what to attend to now."
+    },
+    {
+      "id": "v5_kendine_guven_01",
+      "category": "kendine_guven",
+      "text": "When making a decision, I remember that my own experience deserves a place at the table."
+    },
+    {
+      "id": "v5_kendine_guven_02",
+      "category": "kendine_guven",
+      "text": "I can acknowledge what I have yet to learn without minimizing what I already know."
+    },
+    {
+      "id": "v5_kendine_guven_03",
+      "category": "kendine_guven",
+      "text": "When I cannot keep a promise to myself, I can reshape it into something realistic."
+    },
+    {
+      "id": "v5_kendine_guven_04",
+      "category": "kendine_guven",
+      "text": "When I change my mind, I can value the part of me that takes new information seriously."
+    },
+    {
+      "id": "v5_kendine_guven_05",
+      "category": "kendine_guven",
+      "text": "When choosing words to describe myself, I have more to draw on than other people's labels."
+    },
+    {
+      "id": "v5_kendine_guven_06",
+      "category": "kendine_guven",
+      "text": "When I do something for the first time, I belong there even as a beginner."
+    },
+    {
+      "id": "v5_kendine_guven_07",
+      "category": "kendine_guven",
+      "text": "I can trust myself to pause and reconsider a decision that does not feel right."
+    },
+    {
+      "id": "v5_kendine_guven_08",
+      "category": "kendine_guven",
+      "text": "I keep the difficulties I have faced as concrete reminders of my own abilities."
+    },
+    {
+      "id": "v5_kendine_guven_09",
+      "category": "kendine_guven",
+      "text": "I ask myself questions to understand what I want, and I value my answers."
+    },
+    {
+      "id": "v5_kendine_guven_10",
+      "category": "kendine_guven",
+      "text": "I can take responsibility for my choices while accepting the support I need."
+    },
+    {
+      "id": "v5_motivasyon_01",
+      "category": "motivasyon",
+      "text": "The blank page on your desk asks for one visible thought, not a flawless performance."
+    },
+    {
+      "id": "v5_motivasyon_02",
+      "category": "motivasyon",
+      "text": "Remember what drew you to this work. That reason can stay when other people's excitement fades."
+    },
+    {
+      "id": "v5_motivasyon_03",
+      "category": "motivasyon",
+      "text": "If enthusiasm is absent, begin with what makes you curious; interest can emerge while you work."
+    },
+    {
+      "id": "v5_motivasyon_04",
+      "category": "motivasyon",
+      "text": "Tell someone about something you managed to do. Hearing your own progress can make it feel real."
+    },
+    {
+      "id": "v5_motivasyon_05",
+      "category": "motivasyon",
+      "text": "Make room for the idea on your mind; your curiosity deserves a place within the life you live."
+    },
+    {
+      "id": "v5_motivasyon_06",
+      "category": "motivasyon",
+      "text": "An ordinary Tuesday is meaningful enough to spend some effort on work you care about."
+    },
+    {
+      "id": "v5_motivasyon_07",
+      "category": "motivasyon",
+      "text": "If your goal brings only pressure, look again for the desire within it that belongs to you."
+    },
+    {
+      "id": "v5_motivasyon_08",
+      "category": "motivasyon",
+      "text": "Alongside the pleasure of finishing a task, there is a quieter joy in learning how to do it."
+    },
+    {
+      "id": "v5_motivasyon_09",
+      "category": "motivasyon",
+      "text": "Give your wish to begin a setting: an open notebook, a tool within reach, a space in your day."
+    },
+    {
+      "id": "v5_motivasyon_10",
+      "category": "motivasyon",
+      "text": "Your whole dream may still be far away; you can care for it before covering all that distance."
+    },
+    {
+      "id": "v5_azim_01",
+      "category": "azim",
+      "text": "Bring a different tool when you return to the same question. Persistence grows through learning."
+    },
+    {
+      "id": "v5_azim_02",
+      "category": "azim",
+      "text": "Your unseen repetitions carry weight too; the witness to your effort is not always a crowd."
+    },
+    {
+      "id": "v5_azim_03",
+      "category": "azim",
+      "text": "Asking for help with difficult work can make the commitment you made more possible to carry."
+    },
+    {
+      "id": "v5_azim_04",
+      "category": "azim",
+      "text": "When progress slows, examine your method. Look for a better fit before demanding more of yourself."
+    },
+    {
+      "id": "v5_azim_05",
+      "category": "azim",
+      "text": "Revisit what you work toward regularly; if it still meets your values, make room for it again."
+    },
+    {
+      "id": "v5_azim_06",
+      "category": "azim",
+      "text": "Learning a skill has its dull stretches. Find one detail within them that you can be curious about."
+    },
+    {
+      "id": "v5_azim_07",
+      "category": "azim",
+      "text": "Determination has room for blank days on the calendar and for the way you return after them."
+    },
+    {
+      "id": "v5_azim_08",
+      "category": "azim",
+      "text": "Work without hiding where you struggle. An obstacle you can name makes useful support easier to seek."
+    },
+    {
+      "id": "v5_azim_09",
+      "category": "azim",
+      "text": "Waiting for effort to show results can feel heavy. Kindness to yourself need not wait with it."
+    },
+    {
+      "id": "v5_azim_10",
+      "category": "azim",
+      "text": "You can change your plan while staying devoted to a goal; a steady direction allows a flexible route."
+    },
+    {
+      "id": "v5_pes_01",
+      "category": "pes",
+      "text": "Before letting go, make room to ask: is the goal stopping me, or are these conditions the problem?"
+    },
+    {
+      "id": "v5_pes_02",
+      "category": "pes",
+      "text": "Leave your hardest moment's verdict open for a while. Let your rested self have a voice in the decision."
+    },
+    {
+      "id": "v5_pes_03",
+      "category": "pes",
+      "text": "Returning to an unfinished file can start with finding your place, even before old enthusiasm returns."
+    },
+    {
+      "id": "v5_pes_04",
+      "category": "pes",
+      "text": "A door that stays closed does not ask you to spend every future attempt standing in front of it."
+    },
+    {
+      "id": "v5_pes_05",
+      "category": "pes",
+      "text": "If you choose to continue, say what support you need; give the weight you are carrying a name."
+    },
+    {
+      "id": "v5_pes_06",
+      "category": "pes",
+      "text": "Ending one attempt does not erase the worth of your effort. What you learned can travel with you."
+    },
+    {
+      "id": "v5_pes_07",
+      "category": "pes",
+      "text": "After a difficult week, examine the weight of that week before judging the course of your whole life."
+    },
+    {
+      "id": "v5_pes_08",
+      "category": "pes",
+      "text": "Listen to your inner resistance; it may be asking for a new method or for conditions that are fairer."
+    },
+    {
+      "id": "v5_pes_09",
+      "category": "pes",
+      "text": "Accepting someone's support can reconnect you with a goal that has become too heavy to carry alone."
+    },
+    {
+      "id": "v5_pes_10",
+      "category": "pes",
+      "text": "If you are unsure, allow yourself time to think. Every exhausting evening need not become an ending."
+    },
+    {
+      "id": "v5_zorluk_sabir_01",
+      "category": "zorluk_sabir",
+      "text": "While waiting for a solution, arrange what you know; look at the piece you can see within uncertainty."
+    },
+    {
+      "id": "v5_zorluk_sabir_02",
+      "category": "zorluk_sabir",
+      "text": "The limits of your patience deserve a hearing. When harm keeps recurring, consider changing the conditions."
+    },
+    {
+      "id": "v5_zorluk_sabir_03",
+      "category": "zorluk_sabir",
+      "text": "Not every pull helps untie a knot. You may pause to see where there is room for it to loosen."
+    },
+    {
+      "id": "v5_zorluk_sabir_04",
+      "category": "zorluk_sabir",
+      "text": "You need not carry an entire difficult day at once; ask what you need for the hour in front of you."
+    },
+    {
+      "id": "v5_zorluk_sabir_05",
+      "category": "zorluk_sabir",
+      "text": "Say when waiting wears you down. Bearing something quietly does not make the difficulty insignificant."
+    },
+    {
+      "id": "v5_zorluk_sabir_06",
+      "category": "zorluk_sabir",
+      "text": "Do not put living on hold while an outcome is delayed; a pleasant moment can exist within the wait."
+    },
+    {
+      "id": "v5_zorluk_sabir_07",
+      "category": "zorluk_sabir",
+      "text": "You can feel anger and still choose a measured reply. Leave some time between the feeling and the action."
+    },
+    {
+      "id": "v5_zorluk_sabir_08",
+      "category": "zorluk_sabir",
+      "text": "Some days bring no new answer to a hard question; carrying the question may be enough for a while."
+    },
+    {
+      "id": "v5_zorluk_sabir_09",
+      "category": "zorluk_sabir",
+      "text": "Review the process you are being patient with; changing conditions may deserve a fresh decision."
+    },
+    {
+      "id": "v5_zorluk_sabir_10",
+      "category": "zorluk_sabir",
+      "text": "A slowly resolving problem may feel more bearable with someone beside you; you can ask for company."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_01",
+      "category": "yorgunluk_sabir",
+      "text": "If tired eyes keep reading the same line, you can close the book; learning has room for rest too."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_02",
+      "category": "yorgunluk_sabir",
+      "text": "When judging your evening energy, include all the invisible work you carried through the day."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_03",
+      "category": "yorgunluk_sabir",
+      "text": "You do not have to negotiate with your body's request to slow down; you can simply hear it."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_04",
+      "category": "yorgunluk_sabir",
+      "text": "Let this break have a space of its own, without filling it with every task that belongs to tomorrow."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_05",
+      "category": "yorgunluk_sabir",
+      "text": "After a demanding day, you may want fewer words. Let the people close to you know gently."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_06",
+      "category": "yorgunluk_sabir",
+      "text": "Place your capacity beside your to-do list; the sheet of paper may have more room than you do."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_07",
+      "category": "yorgunluk_sabir",
+      "text": "When fatigue makes your words harsh, pausing the conversation can be a thoughtful choice."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_08",
+      "category": "yorgunluk_sabir",
+      "text": "Sitting down and releasing your shoulders is a valid part of the day; the pause needs no extra task."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_09",
+      "category": "yorgunluk_sabir",
+      "text": "When energy runs low, ask to share a task. Your need can be heard before you reach your limit."
+    },
+    {
+      "id": "v5_yorgunluk_sabir_10",
+      "category": "yorgunluk_sabir",
+      "text": "Include time to rest among the promises you make to yourself; that promise deserves keeping too."
+    },
+    {
+      "id": "v5_tukenmislik_01",
+      "category": "tukenmislik",
+      "text": "If work brings only a sense of weight, you can talk with someone you trust instead of hiding it."
+    },
+    {
+      "id": "v5_tukenmislik_02",
+      "category": "tukenmislik",
+      "text": "Make the workload you have carried for so long visible; repeated demands for more need a boundary."
+    },
+    {
+      "id": "v5_tukenmislik_03",
+      "category": "tukenmislik",
+      "text": "When work fills your whole space, consider a relationship, pastime or quiet moment you can welcome back."
+    },
+    {
+      "id": "v5_tukenmislik_04",
+      "category": "tukenmislik",
+      "text": "Your worth stays intact when you cannot meet every request. Responsibilities can be discussed again."
+    },
+    {
+      "id": "v5_tukenmislik_05",
+      "category": "tukenmislik",
+      "text": "You are allowed a break even when stepping away brings guilt; resting need not become another test."
+    },
+    {
+      "id": "v5_tukenmislik_06",
+      "category": "tukenmislik",
+      "text": "You need not repair a difficult work setup alone; name the responsibilities that need to be shared."
+    },
+    {
+      "id": "v5_tukenmislik_07",
+      "category": "tukenmislik",
+      "text": "Do not scold yourself for missing enthusiasm. First make room for the draining conditions to be heard."
+    },
+    {
+      "id": "v5_tukenmislik_08",
+      "category": "tukenmislik",
+      "text": "Discussing when you can be reached after work is one way to protect the time that belongs to you."
+    },
+    {
+      "id": "v5_tukenmislik_09",
+      "category": "tukenmislik",
+      "text": "Let recovery be free of performance targets; you do not have to hurry to understand what you need."
+    },
+    {
+      "id": "v5_tukenmislik_10",
+      "category": "tukenmislik",
+      "text": "If you have felt depleted for a long time, you can seek professional support; this need not be solved alone."
+    },
+    {
+      "id": "v5_yeniden_01",
+      "category": "yeniden",
+      "text": "Opening an old notebook does not bind you to where you stopped; another page can hold a new thought."
+    },
+    {
+      "id": "v5_yeniden_02",
+      "category": "yeniden",
+      "text": "Take one lesson from the previous attempt as you begin again; this place is not entirely unfamiliar."
+    },
+    {
+      "id": "v5_yeniden_03",
+      "category": "yeniden",
+      "text": "Your return need not begin with an announcement; work you restart quietly can still matter in your life."
+    },
+    {
+      "id": "v5_yeniden_04",
+      "category": "yeniden",
+      "text": "After a long break, you do not owe your old pace to anyone. Get to know your present conditions."
+    },
+    {
+      "id": "v5_yeniden_05",
+      "category": "yeniden",
+      "text": "You can return to an unfinished interest without becoming the person you were when you left it."
+    },
+    {
+      "id": "v5_yeniden_06",
+      "category": "yeniden",
+      "text": "A fresh start can fit into a suitable corner of your life, even while other parts remain unsettled."
+    },
+    {
+      "id": "v5_yeniden_07",
+      "category": "yeniden",
+      "text": "Rather than restoring an old plan exactly, you can adapt the part that worked to the life you have now."
+    },
+    {
+      "id": "v5_yeniden_08",
+      "category": "yeniden",
+      "text": "Name what you miss before choosing where to return; familiarity and desire can look much alike."
+    },
+    {
+      "id": "v5_yeniden_09",
+      "category": "yeniden",
+      "text": "You can try again without a special date on the calendar; the decision carries meaning of its own."
+    },
+    {
+      "id": "v5_yeniden_10",
+      "category": "yeniden",
+      "text": "A closing chapter can leave you feeling empty. You do not have to fill the next page immediately."
+    },
+    {
+      "id": "v5_uzun_soluk_01",
+      "category": "uzun_soluk",
+      "text": "Choose a sustainable pace for work that will take months; let the plan leave room for your life."
+    },
+    {
+      "id": "v5_uzun_soluk_02",
+      "category": "uzun_soluk",
+      "text": "Set a nearby checkpoint alongside a distant goal, somewhere to reconsider how the journey is going."
+    },
+    {
+      "id": "v5_uzun_soluk_03",
+      "category": "uzun_soluk",
+      "text": "Long stretches of effort include ordinary-looking days; each repetition need not put on a show."
+    },
+    {
+      "id": "v5_uzun_soluk_04",
+      "category": "uzun_soluk",
+      "text": "Leave a note about where to resume when you pause your work; your next meeting with it can begin more easily."
+    },
+    {
+      "id": "v5_uzun_soluk_05",
+      "category": "uzun_soluk",
+      "text": "When giving months to a goal, ask whether it still belongs to you; past effort need not own your decision."
+    },
+    {
+      "id": "v5_uzun_soluk_06",
+      "category": "uzun_soluk",
+      "text": "A distant result need not hide your effort; keep a regular record of what you are learning along the way."
+    },
+    {
+      "id": "v5_uzun_soluk_07",
+      "category": "uzun_soluk",
+      "text": "A long pursuit has room for companionship; sometimes knowledge, sometimes courage, sometimes simply company."
+    },
+    {
+      "id": "v5_uzun_soluk_08",
+      "category": "uzun_soluk",
+      "text": "Give disrupted days some room in your plan; a real life cannot always fit a perfectly drawn calendar."
+    },
+    {
+      "id": "v5_uzun_soluk_09",
+      "category": "uzun_soluk",
+      "text": "Bring curiosity to a skill you want to develop over years; there is more to see than the finish line."
+    },
+    {
+      "id": "v5_uzun_soluk_10",
+      "category": "uzun_soluk",
+      "text": "You can renegotiate a pace that consumes you; continuing over time may ask for less, rather than more."
+    },
+    {
+      "id": "v5_umut_01",
+      "category": "umut",
+      "text": "Leave room for a possibility you cannot yet see; you do not hold every detail of the future."
+    },
+    {
+      "id": "v5_umut_02",
+      "category": "umut",
+      "text": "Be gentle with yourself while waiting for good news; uncertainty does not put your need for care on hold."
+    },
+    {
+      "id": "v5_umut_03",
+      "category": "umut",
+      "text": "Opening a window to the sounds outside may remind you that life extends beyond a difficult day."
+    },
+    {
+      "id": "v5_umut_04",
+      "category": "umut",
+      "text": "On an evening when hope feels faint, you need not force it brighter; you can stay near a voice you trust."
+    },
+    {
+      "id": "v5_umut_05",
+      "category": "umut",
+      "text": "One welcome possibility for tomorrow may be enough; you do not need to make a promise about all the future."
+    },
+    {
+      "id": "v5_umut_06",
+      "category": "umut",
+      "text": "Leave an open place for people you have not met, pages you have not read and interests you have not tried."
+    },
+    {
+      "id": "v5_umut_07",
+      "category": "umut",
+      "text": "You can enjoy something lovely during a hard season; pain and pleasure can belong to the same day."
+    },
+    {
+      "id": "v5_umut_08",
+      "category": "umut",
+      "text": "Let someone's care matter; imagining what lies ahead can feel easier with another person beside you."
+    },
+    {
+      "id": "v5_umut_09",
+      "category": "umut",
+      "text": "If the route you hoped for closes, there is time to grieve. Other possibilities can be explored later."
+    },
+    {
+      "id": "v5_umut_10",
+      "category": "umut",
+      "text": "You can approach the future with care while remaining unsure of it; hope sometimes finds a place there."
+    },
+    {
+      "id": "v5_erteleme_01",
+      "category": "erteleme",
+      "text": "Describe the delayed task with a verb: open the file, write the title, read the first question."
+    },
+    {
+      "id": "v5_erteleme_02",
+      "category": "erteleme",
+      "text": "Which part of the task are you avoiding? Naming the uncertainty can make the beginning less tangled."
+    },
+    {
+      "id": "v5_erteleme_03",
+      "category": "erteleme",
+      "text": "A first draft gives you something to work with; it does not have to arrive already polished."
+    },
+    {
+      "id": "v5_erteleme_04",
+      "category": "erteleme",
+      "text": "If starting slips your mind, link it to a familiar moment: put down your coffee, then open the document."
+    },
+    {
+      "id": "v5_erteleme_05",
+      "category": "erteleme",
+      "text": "Set a limit on the time you will spend; beginning a task need not mean giving it your entire evening."
+    },
+    {
+      "id": "v5_erteleme_06",
+      "category": "erteleme",
+      "text": "When preparation starts to blur into delay, do one thing that brings you into contact with the work itself."
+    },
+    {
+      "id": "v5_erteleme_07",
+      "category": "erteleme",
+      "text": "Write the opening sentence for the call that looms in your mind; the conversation can help with the rest."
+    },
+    {
+      "id": "v5_erteleme_08",
+      "category": "erteleme",
+      "text": "Scolding yourself for delay adds another burden. Make the conditions for starting a little easier."
+    },
+    {
+      "id": "v5_erteleme_09",
+      "category": "erteleme",
+      "text": "After a last-minute task, look beyond blame and try to understand what made beginning difficult."
+    },
+    {
+      "id": "v5_erteleme_10",
+      "category": "erteleme",
+      "text": "If you cannot finish, leave useful preparation for later; gather the materials the task will need."
+    },
+    {
+      "id": "v5_derin_odak_01",
+      "category": "derin_odak",
+      "text": "Give your work a question to answer; knowing what you seek can help you keep direction among the details."
+    },
+    {
+      "id": "v5_derin_odak_02",
+      "category": "derin_odak",
+      "text": "Close the windows you do not need on the screen; your thoughts need not reach every place at once."
+    },
+    {
+      "id": "v5_derin_odak_03",
+      "category": "derin_odak",
+      "text": "You can slow down to understand a paragraph; your understanding does not owe your eyes the same speed."
+    },
+    {
+      "id": "v5_derin_odak_04",
+      "category": "derin_odak",
+      "text": "When another task comes to mind, note it down. Let paper hold the reminder while you return to your work."
+    },
+    {
+      "id": "v5_derin_odak_05",
+      "category": "derin_odak",
+      "text": "Give a period of focus an ending; knowing when you will stop can make that space easier to protect."
+    },
+    {
+      "id": "v5_derin_odak_06",
+      "category": "derin_odak",
+      "text": "A difficult thought may not open quickly. Give it some uninterrupted time without rushing the answer."
+    },
+    {
+      "id": "v5_derin_odak_07",
+      "category": "derin_odak",
+      "text": "Choose the piece you want to complete in this session; give your attention a clear boundary."
+    },
+    {
+      "id": "v5_derin_odak_08",
+      "category": "derin_odak",
+      "text": "Tell those around you what you need while working deeply; quiet is sometimes something people protect together."
+    },
+    {
+      "id": "v5_derin_odak_09",
+      "category": "derin_odak",
+      "text": "Write two similar ideas separately; looking for the difference between them can give your thinking a sharper direction."
+    },
+    {
+      "id": "v5_derin_odak_10",
+      "category": "derin_odak",
+      "text": "When your attention tires, you can pause and look again; forcing the same gaze is not your only option."
+    },
+    {
+      "id": "v5_durtu_01",
+      "category": "durtu",
+      "text": "When the first urge arrives, you can leave it unanswered for a moment; that space belongs to your choice."
+    },
+    {
+      "id": "v5_durtu_02",
+      "category": "durtu",
+      "text": "Read your message once more before sending it; does it carry what you mean beneath the moment's anger?"
+    },
+    {
+      "id": "v5_durtu_03",
+      "category": "durtu",
+      "text": "When your hand reaches for the screen, pause to ask what you want; the phone may not hold the answer."
+    },
+    {
+      "id": "v5_durtu_04",
+      "category": "durtu",
+      "text": "You need not suppress every desire. Looking with curiosity at which one you want to follow is an option."
+    },
+    {
+      "id": "v5_durtu_05",
+      "category": "durtu",
+      "text": "Make room to imagine the evening after a decision, alongside the excitement you feel at its beginning."
+    },
+    {
+      "id": "v5_durtu_06",
+      "category": "durtu",
+      "text": "You can write the harsh sentence on your mind and leave it unsent; expression and delivery are separate choices."
+    },
+    {
+      "id": "v5_durtu_07",
+      "category": "durtu",
+      "text": "Wanting something immediately may not make the need urgent; give yourself a little time to observe."
+    },
+    {
+      "id": "v5_durtu_08",
+      "category": "durtu",
+      "text": "Before following each new invitation to your attention, take one look at what you are leaving unfinished."
+    },
+    {
+      "id": "v5_durtu_09",
+      "category": "durtu",
+      "text": "You can arrange surroundings that support your choices; every moment need not become a struggle with yourself."
+    },
+    {
+      "id": "v5_durtu_10",
+      "category": "durtu",
+      "text": "Noticing an urge gives you a moment to look at the story it carries before being pulled into it."
+    },
+    {
+      "id": "v5_rutin_01",
+      "category": "rutin",
+      "text": "Put your notebook beside your morning cup; give what you want to do a place in ordinary life."
+    },
+    {
+      "id": "v5_rutin_02",
+      "category": "rutin",
+      "text": "A useful routine can be shaped for an ordinary day, with room for the energy you actually have."
+    },
+    {
+      "id": "v5_rutin_03",
+      "category": "rutin",
+      "text": "Review what you repeat from time to time; a routine that once helped may no longer fit the life you lead."
+    },
+    {
+      "id": "v5_rutin_04",
+      "category": "rutin",
+      "text": "One empty day does not take away what you learned. You can meet the practice again at the next suitable moment."
+    },
+    {
+      "id": "v5_rutin_05",
+      "category": "rutin",
+      "text": "If making a fresh decision each morning feels tiring, choose your starting place and time in advance."
+    },
+    {
+      "id": "v5_rutin_06",
+      "category": "rutin",
+      "text": "As you make room for a habit, notice what it adds to your life; let repetition have a meaning you can feel."
+    },
+    {
+      "id": "v5_rutin_07",
+      "category": "rutin",
+      "text": "Putting your tools away at day's end is a quiet kindness you can leave for tomorrow's beginning."
+    },
+    {
+      "id": "v5_rutin_08",
+      "category": "rutin",
+      "text": "When life changes shape, adjust your routine without blame; the new setting may need a new arrangement."
+    },
+    {
+      "id": "v5_rutin_09",
+      "category": "rutin",
+      "text": "When building a habit, leave comparisons about speed aside; your own experience deserves close attention."
+    },
+    {
+      "id": "v5_rutin_10",
+      "category": "rutin",
+      "text": "Notice the details within repetition: a familiar movement, easier preparation, a beginning you recognise."
+    },
+    {
+      "id": "v5_dagilma_01",
+      "category": "dagilma",
+      "text": "When attention wanders elsewhere, keep the route back simple: return to the sentence you last read."
+    },
+    {
+      "id": "v5_dagilma_02",
+      "category": "dagilma",
+      "text": "If every task on your desk calls at once, place the one you will attend to now directly in front of you."
+    },
+    {
+      "id": "v5_dagilma_03",
+      "category": "dagilma",
+      "text": "Before blaming a scattered mind, look around; you may be surrounded by too many competing calls."
+    },
+    {
+      "id": "v5_dagilma_04",
+      "category": "dagilma",
+      "text": "Notice the moment you return after a thought carries you away; that noticing is part of attention too."
+    },
+    {
+      "id": "v5_dagilma_05",
+      "category": "dagilma",
+      "text": "You can silence notifications for a suitable stretch; every update need not enter the middle of a thought."
+    },
+    {
+      "id": "v5_dagilma_06",
+      "category": "dagilma",
+      "text": "You can let a pending task wait in a note; remembering it need not mean carrying it in your mind all day."
+    },
+    {
+      "id": "v5_dagilma_07",
+      "category": "dagilma",
+      "text": "After an interruption, allow a moment to find your place before expecting your previous pace to return."
+    },
+    {
+      "id": "v5_dagilma_08",
+      "category": "dagilma",
+      "text": "If you keep moving between two tasks, choose a stopping point for one before turning to the other."
+    },
+    {
+      "id": "v5_dagilma_09",
+      "category": "dagilma",
+      "text": "When your mind is full, choose only what comes next; you do not need to settle the whole list at once."
+    },
+    {
+      "id": "v5_dagilma_10",
+      "category": "dagilma",
+      "text": "Use a gentle voice when calling your attention back; your relationship with yourself remains part of the work."
+    },
+    {
+      "id": "v5_ozguven_01",
+      "category": "ozguven",
+      "text": "You do not need a perfect sentence before speaking; a clear thought is enough."
+    },
+    {
+      "id": "v5_ozguven_02",
+      "category": "ozguven",
+      "text": "A note you prepare for a meeting can bridge the gap between your nerves and your idea."
+    },
+    {
+      "id": "v5_ozguven_03",
+      "category": "ozguven",
+      "text": "Sometimes, making a skill visible starts with letting others see the work you have done."
+    },
+    {
+      "id": "v5_ozguven_04",
+      "category": "ozguven",
+      "text": "Asking for clarification is a thoughtful way to take part in a conversation."
+    },
+    {
+      "id": "v5_ozguven_05",
+      "category": "ozguven",
+      "text": "Accept praise without shrinking it; you can let your effort be acknowledged."
+    },
+    {
+      "id": "v5_ozguven_06",
+      "category": "ozguven",
+      "text": "Giving a calm reason for an objection gives your voice a steady foundation."
+    },
+    {
+      "id": "v5_ozguven_07",
+      "category": "ozguven",
+      "text": "Rehearsing aloud once can bring you closer to the words you want to say."
+    },
+    {
+      "id": "v5_ozguven_08",
+      "category": "ozguven",
+      "text": "When describing your ability, share a clear example of your work without exaggerating."
+    },
+    {
+      "id": "v5_ozguven_09",
+      "category": "ozguven",
+      "text": "A sentence that sets a boundary can be brief; your dignity needs no lengthy explanation."
+    },
+    {
+      "id": "v5_ozguven_10",
+      "category": "ozguven",
+      "text": "Choosing what is useful in feedback is part of learning to understand yourself."
+    },
+    {
+      "id": "v5_korku_01",
+      "category": "korku",
+      "text": "Naming your fear can help you begin to see what you are facing in the fog."
+    },
+    {
+      "id": "v5_korku_02",
+      "category": "korku",
+      "text": "There is room to think between taking danger seriously and seeing danger in every possibility."
+    },
+    {
+      "id": "v5_korku_03",
+      "category": "korku",
+      "text": "Courage can mean walking through a door, or closing it to protect your safety."
+    },
+    {
+      "id": "v5_korku_04",
+      "category": "korku",
+      "text": "When facing something that frightens you, include the support you need in your plan."
+    },
+    {
+      "id": "v5_korku_05",
+      "category": "korku",
+      "text": "If you do not feel ready yet, explore what you could learn to prepare yourself."
+    },
+    {
+      "id": "v5_korku_06",
+      "category": "korku",
+      "text": "Hear your inner alarm, then look around and gather the facts available to you."
+    },
+    {
+      "id": "v5_korku_07",
+      "category": "korku",
+      "text": "Writing the first sentence of a difficult conversation can give uncertainty an outline."
+    },
+    {
+      "id": "v5_korku_08",
+      "category": "korku",
+      "text": "Curiosity can stand beside fear: What might this experience give me a chance to learn?"
+    },
+    {
+      "id": "v5_korku_09",
+      "category": "korku",
+      "text": "For a daunting attempt, choose a safe setting where you can pause or turn back."
+    },
+    {
+      "id": "v5_korku_10",
+      "category": "korku",
+      "text": "Even with a racing heart, you can ask for time to think; you owe no one haste."
+    },
+    {
+      "id": "v5_reddedilme_01",
+      "category": "reddedilme",
+      "text": "A negative reply does not erase the rest of the story you have been telling."
+    },
+    {
+      "id": "v5_reddedilme_02",
+      "category": "reddedilme",
+      "text": "Approval from a place that does not suit you cannot be the only way to a life that does."
+    },
+    {
+      "id": "v5_reddedilme_03",
+      "category": "reddedilme",
+      "text": "You do not have to cover rejection with a lesson right away; make room for sadness first."
+    },
+    {
+      "id": "v5_reddedilme_04",
+      "category": "reddedilme",
+      "text": "The outcome of one application is not a complete assessment of all your abilities."
+    },
+    {
+      "id": "v5_reddedilme_05",
+      "category": "reddedilme",
+      "text": "Try not to fill the silence of an unanswered message with harsh judgments about yourself."
+    },
+    {
+      "id": "v5_reddedilme_06",
+      "category": "reddedilme",
+      "text": "Respecting someone else's boundary does not require you to surrender your own worth."
+    },
+    {
+      "id": "v5_reddedilme_07",
+      "category": "reddedilme",
+      "text": "After an unsuccessful meeting, gather your notes; the experience can stay with you."
+    },
+    {
+      "id": "v5_reddedilme_08",
+      "category": "reddedilme",
+      "text": "Before trying again, ask what you want; you do not have to knock on every door twice."
+    },
+    {
+      "id": "v5_reddedilme_09",
+      "category": "reddedilme",
+      "text": "Sharing a disappointment with someone you trust can keep you from carrying it alone."
+    },
+    {
+      "id": "v5_reddedilme_10",
+      "category": "reddedilme",
+      "text": "Wanting acceptance is understandable; try not to suspend your self-respect while you wait."
+    },
+    {
+      "id": "v5_risk_01",
+      "category": "risk",
+      "text": "When weighing a possibility, write down what you could gain and what you can afford to risk."
+    },
+    {
+      "id": "v5_risk_02",
+      "category": "risk",
+      "text": "A brave decision can include preparation, information, and room to turn back if needed."
+    },
+    {
+      "id": "v5_risk_03",
+      "category": "risk",
+      "text": "Scaling down an experiment can be a wise way to introduce an idea to real life."
+    },
+    {
+      "id": "v5_risk_04",
+      "category": "risk",
+      "text": "Saying no to one decision can preserve your energy for a more meaningful possibility."
+    },
+    {
+      "id": "v5_risk_05",
+      "category": "risk",
+      "text": "As you listen to your excitement, honestly consider the weight this choice may carry tomorrow."
+    },
+    {
+      "id": "v5_risk_06",
+      "category": "risk",
+      "text": "A reversible experiment can bring useful information out of a large uncertainty."
+    },
+    {
+      "id": "v5_risk_07",
+      "category": "risk",
+      "text": "An opportunity presented as urgent does not require you to accept it in a hurry."
+    },
+    {
+      "id": "v5_risk_08",
+      "category": "risk",
+      "text": "Setting your limits beforehand helps you remember when to stop during an experiment."
+    },
+    {
+      "id": "v5_risk_09",
+      "category": "risk",
+      "text": "Look for a decision you would still want to live with after other people's applause fades."
+    },
+    {
+      "id": "v5_risk_10",
+      "category": "risk",
+      "text": "As you approach the unknown, ask yourself: If I am mistaken, what would I want to protect?"
+    },
+    {
+      "id": "v5_utangaclik_01",
+      "category": "utangaclik",
+      "text": "You do not need to be the most interesting person in a conversation; curiosity can make room."
+    },
+    {
+      "id": "v5_utangaclik_02",
+      "category": "utangaclik",
+      "text": "Starting quietly does not mean you have nothing to say in the rest of the conversation."
+    },
+    {
+      "id": "v5_utangaclik_03",
+      "category": "utangaclik",
+      "text": "Noticing a shared detail can offer a more natural introduction than a rehearsed line."
+    },
+    {
+      "id": "v5_utangaclik_04",
+      "category": "utangaclik",
+      "text": "If a crowd feels difficult, first think of a comfortable conversation with just one person."
+    },
+    {
+      "id": "v5_utangaclik_05",
+      "category": "utangaclik",
+      "text": "Even if you notice yourself blushing, you can finish your sentence; give yourself time."
+    },
+    {
+      "id": "v5_utangaclik_06",
+      "category": "utangaclik",
+      "text": "A question that shows you are listening can turn your quietness into a warm connection."
+    },
+    {
+      "id": "v5_utangaclik_07",
+      "category": "utangaclik",
+      "text": "You do not have to open up to everyone at once; share at the pace that trust develops."
+    },
+    {
+      "id": "v5_utangaclik_08",
+      "category": "utangaclik",
+      "text": "When accepting an invitation, you can choose a length of stay that feels comfortable."
+    },
+    {
+      "id": "v5_utangaclik_09",
+      "category": "utangaclik",
+      "text": "After a conversation, remember the connection you made as well as the word you stumbled over."
+    },
+    {
+      "id": "v5_utangaclik_10",
+      "category": "utangaclik",
+      "text": "A thought spoken in a quiet voice can still change the direction of a conversation."
+    },
+    {
+      "id": "v5_marcus_01",
+      "category": "marcus",
+      "text": "Even in a crowded morning, I can make a little room to act with fairness."
+    },
+    {
+      "id": "v5_marcus_02",
+      "category": "marcus",
+      "text": "When my task is done, I also notice the disorder left behind; my responsibility reaches past my convenience."
+    },
+    {
+      "id": "v5_marcus_03",
+      "category": "marcus",
+      "text": "When the argument ends, the fact that we must go on sharing life remains on the table."
+    },
+    {
+      "id": "v5_marcus_04",
+      "category": "marcus",
+      "text": "When someone speaks harshly, I can try to keep that harshness from reaching someone else."
+    },
+    {
+      "id": "v5_marcus_05",
+      "category": "marcus",
+      "text": "When plans go wrong, I can look at the facts before judging the rest of the day."
+    },
+    {
+      "id": "v5_marcus_06",
+      "category": "marcus",
+      "text": "An honest evening review need not become an attack on myself; I can look plainly at what I did."
+    },
+    {
+      "id": "v5_marcus_07",
+      "category": "marcus",
+      "text": "While waiting for thanks, I do not want to turn an act of kindness into a bargain."
+    },
+    {
+      "id": "v5_marcus_08",
+      "category": "marcus",
+      "text": "Caring for a temporary opportunity differs from trying to keep it in our hands forever."
+    },
+    {
+      "id": "v5_marcus_09",
+      "category": "marcus",
+      "text": "As I finish my part of the work, I want to consider the day of everyone it touches."
+    },
+    {
+      "id": "v5_marcus_10",
+      "category": "marcus",
+      "text": "A day when kindness feels difficult can invite me to return to my own principles."
+    },
+    {
+      "id": "v5_seneca_01",
+      "category": "seneca",
+      "text": "After calling a day busy, let me look honestly at what occupied it, without hiding behind the word."
+    },
+    {
+      "id": "v5_seneca_02",
+      "category": "seneca",
+      "text": "I do not want time with a friend to survive only in the gaps between my tasks."
+    },
+    {
+      "id": "v5_seneca_03",
+      "category": "seneca",
+      "text": "A calendar records what we give our lives to, alongside the things we manage to finish."
+    },
+    {
+      "id": "v5_seneca_04",
+      "category": "seneca",
+      "text": "Trying one page in daily life may teach me more than opening another book."
+    },
+    {
+      "id": "v5_seneca_05",
+      "category": "seneca",
+      "text": "Leaving an angry message unsent can spare a relationship that tomorrow would need repair."
+    },
+    {
+      "id": "v5_seneca_06",
+      "category": "seneca",
+      "text": "Before buying something, I can consider when and how the desire for it began."
+    },
+    {
+      "id": "v5_seneca_07",
+      "category": "seneca",
+      "text": "A lavish evening may fade while a story heard with care over a simple meal stays with us."
+    },
+    {
+      "id": "v5_seneca_08",
+      "category": "seneca",
+      "text": "Today I choose another use for the minutes I might spend resenting a lost hour."
+    },
+    {
+      "id": "v5_seneca_09",
+      "category": "seneca",
+      "text": "A friend's advice gains depth when they also make time to hear the difficult parts of our lives."
+    },
+    {
+      "id": "v5_seneca_10",
+      "category": "seneca",
+      "text": "At day's end, I can review not just my results but the desires that wore me out needlessly."
+    },
+    {
+      "id": "v5_epiktetos_01",
+      "category": "epiktetos",
+      "text": "I cannot choose a reply to my application; I can practise how I treat myself while waiting."
+    },
+    {
+      "id": "v5_epiktetos_02",
+      "category": "epiktetos",
+      "text": "If I fill a short message's missing tone with anger, I answer words that have not yet been spoken."
+    },
+    {
+      "id": "v5_epiktetos_03",
+      "category": "epiktetos",
+      "text": "A compliment is feedback from a particular moment, not a certificate for my entire character."
+    },
+    {
+      "id": "v5_epiktetos_04",
+      "category": "epiktetos",
+      "text": "Allowing for delays when preparing for an appointment takes more than packing my bag."
+    },
+    {
+      "id": "v5_epiktetos_05",
+      "category": "epiktetos",
+      "text": "If I cannot act on a reminder now, I can choose it again at the next suitable moment."
+    },
+    {
+      "id": "v5_epiktetos_06",
+      "category": "epiktetos",
+      "text": "Not every role expected of me requires leaving my own values at the door."
+    },
+    {
+      "id": "v5_epiktetos_07",
+      "category": "epiktetos",
+      "text": "When explaining a decision, I can state my reasons without securing everyone's approval."
+    },
+    {
+      "id": "v5_epiktetos_08",
+      "category": "epiktetos",
+      "text": "The force in a thought that rushes me does not show how sound its information is."
+    },
+    {
+      "id": "v5_epiktetos_09",
+      "category": "epiktetos",
+      "text": "If I promised effort rather than an outcome, I need not belittle that effort when judging it."
+    },
+    {
+      "id": "v5_epiktetos_10",
+      "category": "epiktetos",
+      "text": "Before measuring the crowd's approval, I can examine whether the choice was truly mine."
+    },
+    {
+      "id": "v5_platon_01",
+      "category": "platon",
+      "text": "Before defending an idea, I can explain to myself why I believe it is true."
+    },
+    {
+      "id": "v5_platon_02",
+      "category": "platon",
+      "text": "Asking about a word I do not understand begins a better conversation than pretending I do."
+    },
+    {
+      "id": "v5_platon_03",
+      "category": "platon",
+      "text": "Experience in one field does not mean I have nothing to learn in another."
+    },
+    {
+      "id": "v5_platon_04",
+      "category": "platon",
+      "text": "The persuasive force of an elegant sentence is not the same as the strength of its reasons."
+    },
+    {
+      "id": "v5_platon_05",
+      "category": "platon",
+      "text": "An honest question about my own answer may teach me more than the other person's silence."
+    },
+    {
+      "id": "v5_platon_06",
+      "category": "platon",
+      "text": "When weighing how a decision helps me, I can also ask whether it is fair to others."
+    },
+    {
+      "id": "v5_platon_07",
+      "category": "platon",
+      "text": "An objection today may open a door to a side of my thinking I have not examined."
+    },
+    {
+      "id": "v5_platon_08",
+      "category": "platon",
+      "text": "We need not start in agreement to think together; we can start by trying to understand."
+    },
+    {
+      "id": "v5_platon_09",
+      "category": "platon",
+      "text": "Pausing where I do not know does not mean I have lost my way toward understanding."
+    },
+    {
+      "id": "v5_platon_10",
+      "category": "platon",
+      "text": "A screen shows part of an event; thinking also includes looking for the context it leaves unseen."
+    },
+    {
+      "id": "v5_aristoteles_01",
+      "category": "aristoteles",
+      "text": "Being considerate asks me to notice this person's needs, not repeat the same polite phrase."
+    },
+    {
+      "id": "v5_aristoteles_02",
+      "category": "aristoteles",
+      "text": "Wanting to be dependable becomes everyday work when the time comes to keep a small promise."
+    },
+    {
+      "id": "v5_aristoteles_03",
+      "category": "aristoteles",
+      "text": "The help a friend needs may differ from the help that is easiest for me to offer."
+    },
+    {
+      "id": "v5_aristoteles_04",
+      "category": "aristoteles",
+      "text": "The worth of a courageous decision lies in what it serves, as well as the size of its risk."
+    },
+    {
+      "id": "v5_aristoteles_05",
+      "category": "aristoteles",
+      "text": "My generosity can take tomorrow's responsibilities into account as well."
+    },
+    {
+      "id": "v5_aristoteles_06",
+      "category": "aristoteles",
+      "text": "Between always staying silent and saying everything, I can seek honesty that fits the moment."
+    },
+    {
+      "id": "v5_aristoteles_07",
+      "category": "aristoteles",
+      "text": "I can judge an action by the character it nurtures, as well as by whether it works."
+    },
+    {
+      "id": "v5_aristoteles_08",
+      "category": "aristoteles",
+      "text": "A good habit does not try to replace judgment when the details of life change."
+    },
+    {
+      "id": "v5_aristoteles_09",
+      "category": "aristoteles",
+      "text": "The time I regularly make for friendship puts my wish to live well with others into practice."
+    },
+    {
+      "id": "v5_aristoteles_10",
+      "category": "aristoteles",
+      "text": "In today's decision, I can remember that knowing a rule is not the same as understanding the situation."
+    },
+    {
+      "id": "v5_nietzsche_01",
+      "category": "nietzsche",
+      "text": "Before copying a life I admire, I can ask which of its costs I would actually choose."
+    },
+    {
+      "id": "v5_nietzsche_02",
+      "category": "nietzsche",
+      "text": "A goal I call my own can become an old command if it remains closed to my own questions."
+    },
+    {
+      "id": "v5_nietzsche_03",
+      "category": "nietzsche",
+      "text": "Even in a life of opposing for opposition's sake, I may still orbit the thing I reject."
+    },
+    {
+      "id": "v5_nietzsche_04",
+      "category": "nietzsche",
+      "text": "I can reconsider something long called good by asking what kind of life it serves today."
+    },
+    {
+      "id": "v5_nietzsche_05",
+      "category": "nietzsche",
+      "text": "While making something, I can notice where pleasing others parts from what I want to express."
+    },
+    {
+      "id": "v5_nietzsche_06",
+      "category": "nietzsche",
+      "text": "Setting my own standard means I cannot leave responsibility for my choice to others' applause."
+    },
+    {
+      "id": "v5_nietzsche_07",
+      "category": "nietzsche",
+      "text": "A title that once described me need not stand guard over the lives I have yet to try."
+    },
+    {
+      "id": "v5_nietzsche_08",
+      "category": "nietzsche",
+      "text": "I need not rush to learn from a hard experience; I can take time to decide what it means to me."
+    },
+    {
+      "id": "v5_nietzsche_09",
+      "category": "nietzsche",
+      "text": "As I leave a familiar pattern, I can consider what daily life I want to build in its place."
+    },
+    {
+      "id": "v5_nietzsche_10",
+      "category": "nietzsche",
+      "text": "An evening alone can help me hear which of the expectations within me are actually my own."
+    },
+    {
+      "id": "v5_konfucyus_01",
+      "category": "konfucyus",
+      "text": "Respect continues after a greeting by leaving the other person room to speak."
+    },
+    {
+      "id": "v5_konfucyus_02",
+      "category": "konfucyus",
+      "text": "Patiently sharing what I learned with a colleague can deepen the learning itself."
+    },
+    {
+      "id": "v5_konfucyus_03",
+      "category": "konfucyus",
+      "text": "Stating the limits of a task I take on is a more dependable beginning than a grand promise."
+    },
+    {
+      "id": "v5_konfucyus_04",
+      "category": "konfucyus",
+      "text": "Even when I disagree with those close to me, my response can show that I have heard them."
+    },
+    {
+      "id": "v5_konfucyus_05",
+      "category": "konfucyus",
+      "text": "Before reminding others of a practice, I can try setting an example at my own desk."
+    },
+    {
+      "id": "v5_konfucyus_06",
+      "category": "konfucyus",
+      "text": "A sincere thank-you begins with actually noticing the other person's work."
+    },
+    {
+      "id": "v5_konfucyus_07",
+      "category": "konfucyus",
+      "text": "Passing on a kindness learned in my family is one way to stay connected to the past."
+    },
+    {
+      "id": "v5_konfucyus_08",
+      "category": "konfucyus",
+      "text": "As a guest, let my courtesy begin with learning how things are done there, before assuming my habits belong."
+    },
+    {
+      "id": "v5_konfucyus_09",
+      "category": "konfucyus",
+      "text": "If I notice I am speaking to display knowledge, I can return to listening in order to learn."
+    },
+    {
+      "id": "v5_konfucyus_10",
+      "category": "konfucyus",
+      "text": "As I reflect on the day, I can consider the care I showed someone who placed trust in me."
+    },
+    {
+      "id": "v5_machiavelli_01",
+      "category": "machiavelli",
+      "text": "When judging a plan, I can look beyond its success story and consider how it might go wrong."
+    },
+    {
+      "id": "v5_machiavelli_02",
+      "category": "machiavelli",
+      "text": "A table that accepts only good news may be late to recognise a bad decision."
+    },
+    {
+      "id": "v5_machiavelli_03",
+      "category": "machiavelli",
+      "text": "Yesterday's method must answer to today's conditions before relying on its past success."
+    },
+    {
+      "id": "v5_machiavelli_04",
+      "category": "machiavelli",
+      "text": "Using a quiet day to prepare can give me more options when a difficult day arrives."
+    },
+    {
+      "id": "v5_machiavelli_05",
+      "category": "machiavelli",
+      "text": "When sharing responsibility, I can discuss someone's capacity as well as their promises."
+    },
+    {
+      "id": "v5_machiavelli_06",
+      "category": "machiavelli",
+      "text": "Waiting has a cost too; a postponed decision's account does not close because nothing was done."
+    },
+    {
+      "id": "v5_machiavelli_07",
+      "category": "machiavelli",
+      "text": "Seeing that today's support may be temporary helps me examine my arrangements more carefully."
+    },
+    {
+      "id": "v5_machiavelli_08",
+      "category": "machiavelli",
+      "text": "When seeking feedback, I can show that people will not be punished for a difficult truth."
+    },
+    {
+      "id": "v5_machiavelli_09",
+      "category": "machiavelli",
+      "text": "Before announcing a change, I can learn what the people carrying it out will need."
+    },
+    {
+      "id": "v5_machiavelli_10",
+      "category": "machiavelli",
+      "text": "Acknowledging luck does not stop me from seeing which parts of my work I can strengthen."
+    },
+    {
+      "id": "v5_mevlana_01",
+      "category": "mevlana",
+      "text": "A conversation finds depth in the attention we offer each other before any grand words."
+    },
+    {
+      "id": "v5_mevlana_02",
+      "category": "mevlana",
+      "text": "Letting my answer wait while I hear someone's burden is a small moment when love gives up its hurry."
+    },
+    {
+      "id": "v5_mevlana_03",
+      "category": "mevlana",
+      "text": "I can tend the love I want to grow in my heart through an ordinary task today."
+    },
+    {
+      "id": "v5_mevlana_04",
+      "category": "mevlana",
+      "text": "Hearing different stories at one table reveals how narrow my own window on the world can be."
+    },
+    {
+      "id": "v5_mevlana_05",
+      "category": "mevlana",
+      "text": "I can hear my hurt without letting it answer on behalf of everything I love."
+    },
+    {
+      "id": "v5_mevlana_06",
+      "category": "mevlana",
+      "text": "The silence we do not have to fill beside a friend is also a form of closeness."
+    },
+    {
+      "id": "v5_mevlana_07",
+      "category": "mevlana",
+      "text": "Where I seek change, I can try a small new action instead of lingering in self-accusation."
+    },
+    {
+      "id": "v5_mevlana_08",
+      "category": "mevlana",
+      "text": "As less attention goes to appearing flawless, there is room for questions we have not heard within."
+    },
+    {
+      "id": "v5_mevlana_09",
+      "category": "mevlana",
+      "text": "Defining someone by a first meeting closes a door on the story they have not yet told."
+    },
+    {
+      "id": "v5_mevlana_10",
+      "category": "mevlana",
+      "text": "Love's task today may be a quiet minute for someone weary, rather than a sweeping promise."
+    },
+    {
+      "id": "v5_yunus_01",
+      "category": "yunus",
+      "text": "Caring for another's heart includes considering what my words leave behind when I go."
+    },
+    {
+      "id": "v5_yunus_02",
+      "category": "yunus",
+      "text": "Setting one more place at the table can translate love of people into the language of daily life."
+    },
+    {
+      "id": "v5_yunus_03",
+      "category": "yunus",
+      "text": "My knowledge reaches another person where I can help without making them feel small."
+    },
+    {
+      "id": "v5_yunus_04",
+      "category": "yunus",
+      "text": "While searching for elegant words of apology, let me not delay a plain admission of responsibility."
+    },
+    {
+      "id": "v5_yunus_05",
+      "category": "yunus",
+      "text": "Trying to read a person's worth from their clothes keeps me from hearing their real story."
+    },
+    {
+      "id": "v5_yunus_06",
+      "category": "yunus",
+      "text": "Softening a harsh word on my tongue is closer at hand than imagining some distant good."
+    },
+    {
+      "id": "v5_yunus_07",
+      "category": "yunus",
+      "text": "People we fail to notice on our own street reveal the everyday limits of our care."
+    },
+    {
+      "id": "v5_yunus_08",
+      "category": "yunus",
+      "text": "My name going unmentioned does not lessen the fact that my help touched someone's life."
+    },
+    {
+      "id": "v5_yunus_09",
+      "category": "yunus",
+      "text": "Meeting our own failings gives us a chance to soften our voice when speaking of another's mistake."
+    },
+    {
+      "id": "v5_yunus_10",
+      "category": "yunus",
+      "text": "May the time I set aside to make amends not disappear among the day's tasks."
+    },
+    {
+      "id": "v5_sems_01",
+      "category": "sems",
+      "text": "Alongside answers that comfort me, I make room for a question that asks me to think honestly."
+    },
+    {
+      "id": "v5_sems_02",
+      "category": "sems",
+      "text": "When a friend's question unsettles me, I want to listen to the defence behind that discomfort too."
+    },
+    {
+      "id": "v5_sems_03",
+      "category": "sems",
+      "text": "The distance between words about belief and the daily conduct carrying it deserves an honest question."
+    },
+    {
+      "id": "v5_sems_04",
+      "category": "sems",
+      "text": "An honest conversation moves from displaying what I know toward revealing what I do not."
+    },
+    {
+      "id": "v5_sems_05",
+      "category": "sems",
+      "text": "As I examine my intentions, I do not want to hide in the easier task of discussing others' faults."
+    },
+    {
+      "id": "v5_sems_06",
+      "category": "sems",
+      "text": "I can honour an encounter that changed me without enlarging what happened into a different story."
+    },
+    {
+      "id": "v5_sems_07",
+      "category": "sems",
+      "text": "Closeness to someone does not require replacing my questions with all their answers."
+    },
+    {
+      "id": "v5_sems_08",
+      "category": "sems",
+      "text": "If an insight touches none of my actions, it remains only a lovely sentence in my memory."
+    },
+    {
+      "id": "v5_sems_09",
+      "category": "sems",
+      "text": "When my rush to appear right eases, I can hear more about myself within a conversation."
+    },
+    {
+      "id": "v5_sems_10",
+      "category": "sems",
+      "text": "I need not find new answers every evening to keep my search alive; I can remain honest with it."
+    },
+    {
+      "id": "v5_hafiz_01",
+      "category": "hafiz",
+      "text": "The joy I forgot in my rush to appear flawless still has a place to sit in my life."
+    },
+    {
+      "id": "v5_hafiz_02",
+      "category": "hafiz",
+      "text": "I need not wait for every problem to be solved before noticing the beauty of a garden."
+    },
+    {
+      "id": "v5_hafiz_03",
+      "category": "hafiz",
+      "text": "The solemn face I wear while judging others need not become a curtain over my own failings."
+    },
+    {
+      "id": "v5_hafiz_04",
+      "category": "hafiz",
+      "text": "Sincerity at a cheerful table may be closer to me than trying to look virtuous with solemn words."
+    },
+    {
+      "id": "v5_hafiz_05",
+      "category": "hafiz",
+      "text": "I can feel close to a beloved face without turning its beauty into something to possess."
+    },
+    {
+      "id": "v5_hafiz_06",
+      "category": "hafiz",
+      "text": "As I join a song, I set aside the question of how well I sing; my joy does not always ask to be judged."
+    },
+    {
+      "id": "v5_hafiz_07",
+      "category": "hafiz",
+      "text": "I do not want to apply a standard easily to another life when I do not apply it to my own."
+    },
+    {
+      "id": "v5_hafiz_08",
+      "category": "hafiz",
+      "text": "I can look for a person's sincerity beyond the words they choose to appear respectable."
+    },
+    {
+      "id": "v5_hafiz_09",
+      "category": "hafiz",
+      "text": "Without trying to hold a passing beauty still, I can give it a moment of real attention today."
+    },
+    {
+      "id": "v5_hafiz_10",
+      "category": "hafiz",
+      "text": "I can admit my own contradictions instead of covering them with advice about someone else's life."
+    },
+    {
+      "id": "v5_zen_01",
+      "category": "zen",
+      "text": "The water on the cup I am washing is not trying to reach tomorrow's tasks; it is here in my hands."
+    },
+    {
+      "id": "v5_zen_02",
+      "category": "zen",
+      "text": "As the light on the window changes, I can briefly set aside the name I gave it yesterday."
+    },
+    {
+      "id": "v5_zen_03",
+      "category": "zen",
+      "text": "Sitting here, I can notice thoughts arriving and passing without trying to silence them."
+    },
+    {
+      "id": "v5_zen_04",
+      "category": "zen",
+      "text": "Wiping my desk is not outside life while I wait for a more important moment."
+    },
+    {
+      "id": "v5_zen_05",
+      "category": "zen",
+      "text": "Hearing a sound, I can listen for a while before sorting it into pleasant or irritating."
+    },
+    {
+      "id": "v5_zen_06",
+      "category": "zen",
+      "text": "While walking, I can notice the ground my foot meets now, as well as where I am heading."
+    },
+    {
+      "id": "v5_zen_07",
+      "category": "zen",
+      "text": "A quiet minute does not have to prove that I finished more work afterward in order to exist."
+    },
+    {
+      "id": "v5_zen_08",
+      "category": "zen",
+      "text": "Over a meal, I can consider the hands that prepared it and the soil that grew it meeting here."
+    },
+    {
+      "id": "v5_zen_09",
+      "category": "zen",
+      "text": "As I bring the edges of a folded cloth together, I finish the task in my hands before finishing it in my mind."
+    },
+    {
+      "id": "v5_zen_10",
+      "category": "zen",
+      "text": "Without forcing this moment to be complete, I can meet the task before me in its own detail."
+    },
+    {
+      "id": "v5_kuran_01",
+      "category": "kuran",
+      "text": "The time I take to check a story before spreading it is part of my respect for other people."
+    },
+    {
+      "id": "v5_kuran_02",
+      "category": "kuran",
+      "text": "Leaving the gaps in what I know about someone free of ill intent is a form of care I can offer today."
+    },
+    {
+      "id": "v5_kuran_03",
+      "category": "kuran",
+      "text": "I can look for faith's trace in daily life through the care I give to something entrusted to me."
+    },
+    {
+      "id": "v5_kuran_04",
+      "category": "kuran",
+      "text": "Protecting a person's dignity while discussing a mistake is one of truth-telling's careful tasks."
+    },
+    {
+      "id": "v5_kuran_05",
+      "category": "kuran",
+      "text": "Knowing a neighbour takes effort; defining them with a ready-made judgment cannot replace it."
+    },
+    {
+      "id": "v5_kuran_06",
+      "category": "kuran",
+      "text": "I do not want to separate turning toward God from a small choice to respect someone's rights today."
+    },
+    {
+      "id": "v5_kuran_07",
+      "category": "kuran",
+      "text": "The joy of helping can be fully felt while the privacy of the person helped remains protected."
+    },
+    {
+      "id": "v5_kuran_08",
+      "category": "kuran",
+      "text": "I want to support the sincerity of an apology with the step I take afterward to make amends."
+    },
+    {
+      "id": "v5_kuran_09",
+      "category": "kuran",
+      "text": "Before leaving someone else to carry the weight of my words, I can weigh those words again."
+    },
+    {
+      "id": "v5_kuran_10",
+      "category": "kuran",
+      "text": "May today's reflection include the people who share this life with me, as well as myself."
+    },
+    {
+      "id": "v5_incil_01",
+      "category": "incil",
+      "text": "When I notice someone's need, I want to listen before weighing whether they deserve my help."
+    },
+    {
+      "id": "v5_incil_02",
+      "category": "incil",
+      "text": "Compassion today may ask for no grand speech, just a pause to listen when I am in a hurry."
+    },
+    {
+      "id": "v5_incil_03",
+      "category": "incil",
+      "text": "An act of kindness known to no one is not incomplete because it goes unseen."
+    },
+    {
+      "id": "v5_incil_04",
+      "category": "incil",
+      "text": "Peace sometimes begins in returning to the same conversation with a calmer voice, before any agreement."
+    },
+    {
+      "id": "v5_incil_05",
+      "category": "incil",
+      "text": "I need not make someone's whole story resemble mine before treating them as a neighbour."
+    },
+    {
+      "id": "v5_incil_06",
+      "category": "incil",
+      "text": "On an evening spent speaking of others' faults, let me remember the apology that is mine to offer."
+    },
+    {
+      "id": "v5_incil_07",
+      "category": "incil",
+      "text": "I can make room for someone who struggles to ask for help without making them explain their worth."
+    },
+    {
+      "id": "v5_incil_08",
+      "category": "incil",
+      "text": "The quiet time I set aside for prayer can remain apart from calculating how others see me."
+    },
+    {
+      "id": "v5_incil_09",
+      "category": "incil",
+      "text": "A listener who lets their own agenda wait speaks love in the practical language of today."
+    },
+    {
+      "id": "v5_incil_10",
+      "category": "incil",
+      "text": "Noticing who is left out at a table can turn my reflection on compassion into action."
+    },
+    {
+      "id": "v5_tevrat_01",
+      "category": "tevrat",
+      "text": "Paying for work on time makes my respect for another person's labour visible on the calendar."
+    },
+    {
+      "id": "v5_tevrat_02",
+      "category": "tevrat",
+      "text": "When sharing is considered from the start, the place for help is not limited to whatever remains."
+    },
+    {
+      "id": "v5_tevrat_03",
+      "category": "tevrat",
+      "text": "Seeing a newcomer's hesitation, I can remember a day when I too stood somewhere unfamiliar."
+    },
+    {
+      "id": "v5_tevrat_04",
+      "category": "tevrat",
+      "text": "Fairness asks for the same care when I judge the actions of someone close to me."
+    },
+    {
+      "id": "v5_tevrat_05",
+      "category": "tevrat",
+      "text": "Being able to help someone does not mean their private space is mine to open as I please."
+    },
+    {
+      "id": "v5_tevrat_06",
+      "category": "tevrat",
+      "text": "Removing an obstacle I left in a shared space shows respect for the day of people I do not know."
+    },
+    {
+      "id": "v5_tevrat_07",
+      "category": "tevrat",
+      "text": "The care I take in returning something borrowed also attends to the trust between us."
+    },
+    {
+      "id": "v5_tevrat_08",
+      "category": "tevrat",
+      "text": "An opportunity to profit from someone else's hardship does not make that profit right before conscience."
+    },
+    {
+      "id": "v5_tevrat_09",
+      "category": "tevrat",
+      "text": "In a disagreement with my neighbour, I can seek fair ground where their account can also be heard."
+    },
+    {
+      "id": "v5_tevrat_10",
+      "category": "tevrat",
+      "text": "A small transaction that honours someone's rights reminds me that faith reaches beyond private life."
+    },
+    {
+      "id": "v5_dua_01",
+      "category": "dua",
+      "text": "God, give me patience to hear the person before me where I would rush to speak today."
+    },
+    {
+      "id": "v5_dua_02",
+      "category": "dua",
+      "text": "God, help me take responsibility for a mistake I see in myself rather than hide it."
+    },
+    {
+      "id": "v5_dua_03",
+      "category": "dua",
+      "text": "In today's prayer, I name not only the result I seek but the person I hope to be along the way."
+    },
+    {
+      "id": "v5_dua_04",
+      "category": "dua",
+      "text": "God, grant me the openness to say when I need help and the chance to find suitable support."
+    },
+    {
+      "id": "v5_dua_05",
+      "category": "dua",
+      "text": "God, help me keep my respect for work and for people even in a task that no one sees."
+    },
+    {
+      "id": "v5_dua_06",
+      "category": "dua",
+      "text": "I am not waiting to explain myself perfectly before praying; I begin with what is within me today."
+    },
+    {
+      "id": "v5_dua_07",
+      "category": "dua",
+      "text": "God, help me carry my hurt without turning it into a reason to wound someone else."
+    },
+    {
+      "id": "v5_dua_08",
+      "category": "dua",
+      "text": "God, when I notice a wrong I can help put right, let me not take shelter in postponing it."
+    },
+    {
+      "id": "v5_dua_09",
+      "category": "dua",
+      "text": "In tonight's prayer, I also remember the work of people who eased my day though I do not know their names."
+    },
+    {
+      "id": "v5_dua_10",
+      "category": "dua",
+      "text": "God, help me honestly see and narrow the gap between the promises I make and the work I do."
+    },
+    {
+      "id": "v5_sukur_01",
+      "category": "sukur",
+      "text": "As I give thanks for something on my table today, I remember the people whose work brought it here."
+    },
+    {
+      "id": "v5_sukur_02",
+      "category": "sukur",
+      "text": "One expression of my gratitude can be using a resource I have to make someone else's day easier."
+    },
+    {
+      "id": "v5_sukur_03",
+      "category": "sukur",
+      "text": "Noticing a blessing does not require me to deny a difficulty that remains unresolved."
+    },
+    {
+      "id": "v5_sukur_04",
+      "category": "sukur",
+      "text": "Accepting help and giving thanks for it does not make my own worth any smaller."
+    },
+    {
+      "id": "v5_sukur_05",
+      "category": "sukur",
+      "text": "Mending an old possession, I am glad it can stay with me; gratitude finds a voice before anything new arrives."
+    },
+    {
+      "id": "v5_sukur_06",
+      "category": "sukur",
+      "text": "Using what I have with care is a way for the thanks on my lips to continue through daily life."
+    },
+    {
+      "id": "v5_sukur_07",
+      "category": "sukur",
+      "text": "As I give thanks to God, I remember that a blessing is not simply an achievement of my own."
+    },
+    {
+      "id": "v5_sukur_08",
+      "category": "sukur",
+      "text": "It is easy to grow used to a friend's care; noticing it each time gives gratitude fresh meaning."
+    },
+    {
+      "id": "v5_sukur_09",
+      "category": "sukur",
+      "text": "I need not turn another person's deprivation into my comfort to notice the good in today."
+    },
+    {
+      "id": "v5_sukur_10",
+      "category": "sukur",
+      "text": "As I express gratitude, I want to make room for someone with less without drowning out their needs."
+    },
+    {
+      "id": "v5_antrenman_01",
+      "category": "antrenman",
+      "text": "Putting on your trainers can mark the start of time you have set aside for yourself."
+    },
+    {
+      "id": "v5_antrenman_02",
+      "category": "antrenman",
+      "text": "Movement need not look impressive; finding what suits you is a sound beginning."
+    },
+    {
+      "id": "v5_antrenman_03",
+      "category": "antrenman",
+      "text": "Learning a movement with care can mean more than making the numbers climb quickly."
+    },
+    {
+      "id": "v5_antrenman_04",
+      "category": "antrenman",
+      "text": "When judging a workout, consider how you relate to yourself the following day."
+    },
+    {
+      "id": "v5_antrenman_05",
+      "category": "antrenman",
+      "text": "You can look for a pace your body can work with, rather than treating it as a rival."
+    },
+    {
+      "id": "v5_antrenman_06",
+      "category": "antrenman",
+      "text": "When you find movement you enjoy, making room for it can feel more natural."
+    },
+    {
+      "id": "v5_antrenman_07",
+      "category": "antrenman",
+      "text": "Your training log can record what you learned as well as how many reps you did."
+    },
+    {
+      "id": "v5_antrenman_08",
+      "category": "antrenman",
+      "text": "A day when you cannot reach the gym does not erase your whole relationship with movement."
+    },
+    {
+      "id": "v5_antrenman_09",
+      "category": "antrenman",
+      "text": "Time spent warming up is a way of welcoming yourself into your workout."
+    },
+    {
+      "id": "v5_antrenman_10",
+      "category": "antrenman",
+      "text": "While watching someone else's pace, take care to leave room for your own practice."
+    },
+    {
+      "id": "v5_dayaniklilik_01",
+      "category": "dayaniklilik",
+      "text": "On a long route, knowing which pace you can sustain is a skill in its own right."
+    },
+    {
+      "id": "v5_dayaniklilik_02",
+      "category": "dayaniklilik",
+      "text": "When you look at today's distance, you can also notice the preparation that brought you here."
+    },
+    {
+      "id": "v5_dayaniklilik_03",
+      "category": "dayaniklilik",
+      "text": "Putting a rest stop in your plan means thinking about the whole journey."
+    },
+    {
+      "id": "v5_dayaniklilik_04",
+      "category": "dayaniklilik",
+      "text": "Recognising when to turn back matters alongside finishing a route."
+    },
+    {
+      "id": "v5_dayaniklilik_05",
+      "category": "dayaniklilik",
+      "text": "When your pace changes, your effort remains and begins responding to the conditions."
+    },
+    {
+      "id": "v5_dayaniklilik_06",
+      "category": "dayaniklilik",
+      "text": "Endurance can show in another effort, or in adjusting the load you carry."
+    },
+    {
+      "id": "v5_dayaniklilik_07",
+      "category": "dayaniklilik",
+      "text": "Before weighing up the entire hill, you can take a look around from where you stand."
+    },
+    {
+      "id": "v5_dayaniklilik_08",
+      "category": "dayaniklilik",
+      "text": "You need not turn every session into a test to get to know your own rhythm."
+    },
+    {
+      "id": "v5_dayaniklilik_09",
+      "category": "dayaniklilik",
+      "text": "What you learned on the previous lap can be a guide you carry into the next."
+    },
+    {
+      "id": "v5_dayaniklilik_10",
+      "category": "dayaniklilik",
+      "text": "The record of a long journey includes the care along the way, as well as the finish."
+    },
+    {
+      "id": "v5_sakatlik_01",
+      "category": "sakatlik",
+      "text": "Your recovery timetable cannot measure the value you place on yourself."
+    },
+    {
+      "id": "v5_sakatlik_02",
+      "category": "sakatlik",
+      "text": "You can ask the professional supporting your recovery about a question in your return plan."
+    },
+    {
+      "id": "v5_sakatlik_03",
+      "category": "sakatlik",
+      "text": "Being open about a warning from your body is an honest part of finding your way back."
+    },
+    {
+      "id": "v5_sakatlik_04",
+      "category": "sakatlik",
+      "text": "As you remember your former performance, make room at the table for your current needs."
+    },
+    {
+      "id": "v5_sakatlik_05",
+      "category": "sakatlik",
+      "text": "When waiting feels difficult, that feeling deserves a place in recovery conversations too."
+    },
+    {
+      "id": "v5_sakatlik_06",
+      "category": "sakatlik",
+      "text": "Your connection to sport is made of more than the minutes you spend on the field."
+    },
+    {
+      "id": "v5_sakatlik_07",
+      "category": "sakatlik",
+      "text": "Someone else's return date is not a deadline that has been handed to your body."
+    },
+    {
+      "id": "v5_sakatlik_08",
+      "category": "sakatlik",
+      "text": "A daily movement that feels easier can have a place in your progress notes too."
+    },
+    {
+      "id": "v5_sakatlik_09",
+      "category": "sakatlik",
+      "text": "Your own questions and preferences matter in a return plan built with support."
+    },
+    {
+      "id": "v5_sakatlik_10",
+      "category": "sakatlik",
+      "text": "Saying that you do not feel ready is one way of using your voice within the team."
+    },
+    {
+      "id": "v5_sabah_rutini_01",
+      "category": "sabah_rutini",
+      "text": "Make room for the first thing in your morning to be a chosen habit rather than a demand."
+    },
+    {
+      "id": "v5_sabah_rutini_02",
+      "category": "sabah_rutini",
+      "text": "As you open the curtains, you can notice the room before moving on to the day's plans."
+    },
+    {
+      "id": "v5_sabah_rutini_03",
+      "category": "sabah_rutini",
+      "text": "Your waking time gives you no character grade; you can seek a routine that fits your life."
+    },
+    {
+      "id": "v5_sabah_rutini_04",
+      "category": "sabah_rutini",
+      "text": "An item prepared the evening before is a small kindness left for your morning self."
+    },
+    {
+      "id": "v5_sabah_rutini_05",
+      "category": "sabah_rutini",
+      "text": "With your first coffee, you could write one sentence about what you hope for from your day."
+    },
+    {
+      "id": "v5_sabah_rutini_06",
+      "category": "sabah_rutini",
+      "text": "When your morning routine goes astray, you do not have to cancel the rest of the day."
+    },
+    {
+      "id": "v5_sabah_rutini_07",
+      "category": "sabah_rutini",
+      "text": "Before carrying every headline as soon as you wake, leave an interval to check in with yourself."
+    },
+    {
+      "id": "v5_sabah_rutini_08",
+      "category": "sabah_rutini",
+      "text": "On a rushed morning, removing one task may suit you better than adding another habit."
+    },
+    {
+      "id": "v5_sabah_rutini_09",
+      "category": "sabah_rutini",
+      "text": "A beginning that belongs to you need not imitate someone else's perfect morning."
+    },
+    {
+      "id": "v5_sabah_rutini_10",
+      "category": "sabah_rutini",
+      "text": "You need not know every answer as your day opens; noticing the first need may be enough."
+    },
+    {
+      "id": "v5_beslenme_01",
+      "category": "beslenme",
+      "text": "As you sit down to eat, you can include your body's needs in the conversation."
+    },
+    {
+      "id": "v5_beslenme_02",
+      "category": "beslenme",
+      "text": "A single meal cannot be the whole verdict you deliver about yourself."
+    },
+    {
+      "id": "v5_beslenme_03",
+      "category": "beslenme",
+      "text": "Preparing food can be a visible form of the care you offer yourself on an ordinary day."
+    },
+    {
+      "id": "v5_beslenme_04",
+      "category": "beslenme",
+      "text": "A table set with the means you have can still carry effort and thoughtfulness."
+    },
+    {
+      "id": "v5_beslenme_05",
+      "category": "beslenme",
+      "text": "Being curious about a new flavour opens a door to food beyond a list of rules."
+    },
+    {
+      "id": "v5_beslenme_06",
+      "category": "beslenme",
+      "text": "You need not punish yourself to earn the right to eat."
+    },
+    {
+      "id": "v5_beslenme_07",
+      "category": "beslenme",
+      "text": "When thinking about food routines, include your work hours, budget and tastes."
+    },
+    {
+      "id": "v5_beslenme_08",
+      "category": "beslenme",
+      "text": "Variety at the table can loosen the feeling that you must make the same choice each day."
+    },
+    {
+      "id": "v5_beslenme_09",
+      "category": "beslenme",
+      "text": "Someone else's plate cannot give you a definite rule for your own body."
+    },
+    {
+      "id": "v5_beslenme_10",
+      "category": "beslenme",
+      "text": "If one meal felt rushed, you can consider making more time for the next one."
+    },
+    {
+      "id": "v5_girisimcilik_01",
+      "category": "girisimcilik",
+      "text": "Listen to someone's problem before explaining your idea; that may be where what you build meets real life."
+    },
+    {
+      "id": "v5_girisimcilik_02",
+      "category": "girisimcilik",
+      "text": "Your first experiment need not carry your entire dream; make it clear enough to test one question."
+    },
+    {
+      "id": "v5_girisimcilik_03",
+      "category": "girisimcilik",
+      "text": "Hear people's praise and watch their use; the distance between what they say and do may tell you something."
+    },
+    {
+      "id": "v5_girisimcilik_04",
+      "category": "girisimcilik",
+      "text": "A changing idea does not discard your effort; what you learn may redraw the direction you first imagined."
+    },
+    {
+      "id": "v5_girisimcilik_05",
+      "category": "girisimcilik",
+      "text": "See the time and strain you can carry before starting; let your limits sit at the table with your excitement."
+    },
+    {
+      "id": "v5_girisimcilik_06",
+      "category": "girisimcilik",
+      "text": "You need not add every request to your product; remember whom you aim to help and with which problem."
+    },
+    {
+      "id": "v5_girisimcilik_07",
+      "category": "girisimcilik",
+      "text": "Write down what you do not know instead of hiding uncertainty; let it give your inquiry an honest starting point."
+    },
+    {
+      "id": "v5_girisimcilik_08",
+      "category": "girisimcilik",
+      "text": "Pause your defence while someone tries what you made; watching quietly may give you a question worth asking."
+    },
+    {
+      "id": "v5_girisimcilik_09",
+      "category": "girisimcilik",
+      "text": "Leave yourself room to live while building a venture; constant availability is only one possible way to work."
+    },
+    {
+      "id": "v5_girisimcilik_10",
+      "category": "girisimcilik",
+      "text": "Record what you learned when closing an experiment; its outcome may end while its lessons remain available."
+    },
+    {
+      "id": "v5_kariyer_01",
+      "category": "kariyer",
+      "text": "You have skills that may not fit a résumé: handling a hard conversation, learning and being dependable."
+    },
+    {
+      "id": "v5_kariyer_02",
+      "category": "kariyer",
+      "text": "A job interview is also your chance to learn the conditions; you are allowed to ask about your working life."
+    },
+    {
+      "id": "v5_kariyer_03",
+      "category": "kariyer",
+      "text": "When choosing a professional direction, consider the kind of day you want alongside what you do well."
+    },
+    {
+      "id": "v5_kariyer_04",
+      "category": "kariyer",
+      "text": "Ask for one example when seeking feedback; a concrete observation can be more useful than a broad judgment."
+    },
+    {
+      "id": "v5_kariyer_05",
+      "category": "kariyer",
+      "text": "You need not wait for a visible title to develop a skill; the time you give to learning travels with you."
+    },
+    {
+      "id": "v5_kariyer_06",
+      "category": "kariyer",
+      "text": "Someone else's promotion is not a grade on your life; the conditions along your paths can be very different."
+    },
+    {
+      "id": "v5_kariyer_07",
+      "category": "kariyer",
+      "text": "Discussing the limits of your role is compatible with professionalism; clear expectations give both sides room."
+    },
+    {
+      "id": "v5_kariyer_08",
+      "category": "kariyer",
+      "text": "A career change need not erase your past; look for the experience you can carry into your next kind of work."
+    },
+    {
+      "id": "v5_kariyer_09",
+      "category": "kariyer",
+      "text": "After a tiring day of job searching, let your view of yourself extend beyond the replies you received."
+    },
+    {
+      "id": "v5_kariyer_10",
+      "category": "kariyer",
+      "text": "Measure a job's fit by more than how it looks from outside; listen to what it is like to live within it."
+    },
+    {
+      "id": "v5_liderlik_01",
+      "category": "liderlik",
+      "text": "Make room for the person who speaks last in a meeting; the value of a thought can outlast its speed of arrival."
+    },
+    {
+      "id": "v5_liderlik_02",
+      "category": "liderlik",
+      "text": "Let your first response to a mistake leave the door open; it may shape whether the next truth reaches you."
+    },
+    {
+      "id": "v5_liderlik_03",
+      "category": "liderlik",
+      "text": "Saying you do not know makes room for others' knowledge; responsibility need not mean holding every answer."
+    },
+    {
+      "id": "v5_liderlik_04",
+      "category": "liderlik",
+      "text": "When assigning work, explain the outcome and available support; do not leave one person carrying all the uncertainty."
+    },
+    {
+      "id": "v5_liderlik_05",
+      "category": "liderlik",
+      "text": "When presenting a result, name who contributed what; shared work deserves more than a single name beneath it."
+    },
+    {
+      "id": "v5_liderlik_06",
+      "category": "liderlik",
+      "text": "Consider whom your decision will affect; the conditions of people outside the room also belong in your responsibility."
+    },
+    {
+      "id": "v5_liderlik_07",
+      "category": "liderlik",
+      "text": "Delay preparing your reply while listening to disagreement; first try to understand what the other person sees."
+    },
+    {
+      "id": "v5_liderlik_08",
+      "category": "liderlik",
+      "text": "When work runs late, ask about more than speed; look at how the load is shared and what support is missing."
+    },
+    {
+      "id": "v5_liderlik_09",
+      "category": "liderlik",
+      "text": "Explain your reasons when revising a mistaken decision; updating your view can be part of learning together."
+    },
+    {
+      "id": "v5_liderlik_10",
+      "category": "liderlik",
+      "text": "Your care for a team's limits teaches alongside your words; the way you work carries a message of its own."
+    },
+    {
+      "id": "v5_para_01",
+      "category": "para",
+      "text": "You can look at the numbers without dismissing money worries; let your feelings have a place beside the figures."
+    },
+    {
+      "id": "v5_para_02",
+      "category": "para",
+      "text": "Give yourself time before a purchase; wanting an item and making room for it in your life are different questions."
+    },
+    {
+      "id": "v5_para_03",
+      "category": "para",
+      "text": "Your income cannot measure your worth as a person; the conditions of your work extend beyond a number."
+    },
+    {
+      "id": "v5_para_04",
+      "category": "para",
+      "text": "Ask what a purchase brings you closer to; let your choices stay in conversation with the life you want to build."
+    },
+    {
+      "id": "v5_para_05",
+      "category": "para",
+      "text": "When looking at a budget, name the needs you want to make room for alongside the limits you face."
+    },
+    {
+      "id": "v5_para_06",
+      "category": "para",
+      "text": "You need not keep pace with other people's spending; your own circumstances deserve a voice in your decisions."
+    },
+    {
+      "id": "v5_para_07",
+      "category": "para",
+      "text": "If talking about money feels difficult, begin with one question; every detail need not be opened at once."
+    },
+    {
+      "id": "v5_para_08",
+      "category": "para",
+      "text": "When considering the full weight of an expense, you can include the time and attention it will ask of you."
+    },
+    {
+      "id": "v5_para_09",
+      "category": "para",
+      "text": "In financial strain, you can explore support without blaming yourself; not every condition is your choice."
+    },
+    {
+      "id": "v5_para_10",
+      "category": "para",
+      "text": "Organising a payment record adds a readable line to your money story; the whole tangle need not be settled at once."
+    },
+    {
+      "id": "v5_zaman_01",
+      "category": "zaman",
+      "text": "An empty space on your calendar can be a quiet way of leaving room for a need you cannot yet predict."
+    },
+    {
+      "id": "v5_zaman_02",
+      "category": "zaman",
+      "text": "When saying yes, consider where the hour will come from; the time you offer has a real place in your life."
+    },
+    {
+      "id": "v5_zaman_03",
+      "category": "zaman",
+      "text": "Let your day include more than completed tasks: the person you heard and the moment you kept for yourself."
+    },
+    {
+      "id": "v5_zaman_04",
+      "category": "zaman",
+      "text": "When rushing, ask which task is truly urgent; the loudest call does not always deserve the first place."
+    },
+    {
+      "id": "v5_zaman_05",
+      "category": "zaman",
+      "text": "Leave yourself breathing room between appointments; your day need not become one unbroken stretch of rushing."
+    },
+    {
+      "id": "v5_zaman_06",
+      "category": "zaman",
+      "text": "If someone you want to spend time with keeps being postponed, suggest a moment you could share."
+    },
+    {
+      "id": "v5_zaman_07",
+      "category": "zaman",
+      "text": "Every minute need not prove its usefulness; time spent looking out of a window also belongs to your life."
+    },
+    {
+      "id": "v5_zaman_08",
+      "category": "zaman",
+      "text": "A task may take longer than you expected; you can revise the plan around the time it actually needs."
+    },
+    {
+      "id": "v5_zaman_09",
+      "category": "zaman",
+      "text": "After a day that fell short, do not pile everything onto tomorrow; decide what can wait as well."
+    },
+    {
+      "id": "v5_zaman_10",
+      "category": "zaman",
+      "text": "Protecting your time may begin with a gentle sentence of refusal; you can learn to give that sentence a voice."
+    },
+    {
+      "id": "v5_basarisizlik_01",
+      "category": "basarisizlik",
+      "text": "An outcome you did not want can hurt. Make room for that feeling before searching for what it can teach you."
+    },
+    {
+      "id": "v5_basarisizlik_02",
+      "category": "basarisizlik",
+      "text": "An unsuccessful attempt may still contain something that worked; include that part when you review what happened."
+    },
+    {
+      "id": "v5_basarisizlik_03",
+      "category": "basarisizlik",
+      "text": "When examining a mistake, write what happened clearly before judging yourself; the details may offer direction."
+    },
+    {
+      "id": "v5_basarisizlik_04",
+      "category": "basarisizlik",
+      "text": "Include the conditions when reviewing an attempt; placing the entire outcome on your character would be unfair."
+    },
+    {
+      "id": "v5_basarisizlik_05",
+      "category": "basarisizlik",
+      "text": "Naming the method that did not work can be a valuable note to leave for your next attempt."
+    },
+    {
+      "id": "v5_basarisizlik_06",
+      "category": "basarisizlik",
+      "text": "A rejection cannot tell the whole story of your effort; if you can learn the reason, hear it as information."
+    },
+    {
+      "id": "v5_basarisizlik_07",
+      "category": "basarisizlik",
+      "text": "Finding someone with whom you can discuss a mistake openly may let it hold more than shame in your memory."
+    },
+    {
+      "id": "v5_basarisizlik_08",
+      "category": "basarisizlik",
+      "text": "You can ask for time before a new decision after disappointment; you do not owe anyone an immediate lesson."
+    },
+    {
+      "id": "v5_basarisizlik_09",
+      "category": "basarisizlik",
+      "text": "Before repeating an attempt, choose what you will change; experience becomes useful when it enters your decisions."
+    },
+    {
+      "id": "v5_basarisizlik_10",
+      "category": "basarisizlik",
+      "text": "You still deserve respect after a mistake others have seen; being visible does not diminish your humanity."
+    },
+    {
+      "id": "v5_basari_01",
+      "category": "basari",
+      "text": "Pause to look at what you achieved; moving straight to the next goal need not be the only way forward."
+    },
+    {
+      "id": "v5_basari_02",
+      "category": "basari",
+      "text": "Remember those who stood beside you as you share the result of your effort; shared time lives within the joy."
+    },
+    {
+      "id": "v5_basari_03",
+      "category": "basari",
+      "text": "You can acknowledge an achievement fully; luck and support do not make your own effort disappear."
+    },
+    {
+      "id": "v5_basari_04",
+      "category": "basari",
+      "text": "After work goes well, record what helped; alongside the joy, leave a trace that your future self can use."
+    },
+    {
+      "id": "v5_basari_05",
+      "category": "basari",
+      "text": "Let your definition of success include how you live; the life along the way matters beside the place you reach."
+    },
+    {
+      "id": "v5_basari_06",
+      "category": "basari",
+      "text": "Reaching a goal may not feel as you expected; your joy need not take the shape other people anticipate."
+    },
+    {
+      "id": "v5_basari_07",
+      "category": "basari",
+      "text": "Notice when a once-difficult task feels easier; growth sometimes appears in this quiet, ordinary form."
+    },
+    {
+      "id": "v5_basari_08",
+      "category": "basari",
+      "text": "Celebration need not be a grand event; a sentence shared with someone you love may be enough."
+    },
+    {
+      "id": "v5_basari_09",
+      "category": "basari",
+      "text": "Make room to rest after an achievement; what you accomplished does not leave you owing ever more."
+    },
+    {
+      "id": "v5_basari_10",
+      "category": "basari",
+      "text": "Claim the completion of work that matters to you; looking modest from outside does not make its meaning smaller."
+    },
+    {
+      "id": "v5_ask_01",
+      "category": "ask",
+      "text": "Love learns to ask how the other person feels, alongside trying to understand them."
+    },
+    {
+      "id": "v5_ask_02",
+      "category": "ask",
+      "text": "Let a life built together leave each person a window of their own."
+    },
+    {
+      "id": "v5_ask_03",
+      "category": "ask",
+      "text": "You do not have to prove you are right before you can explain that you feel hurt."
+    },
+    {
+      "id": "v5_ask_04",
+      "category": "ask",
+      "text": "Care can make itself known on an ordinary day, long after the grand words are spoken."
+    },
+    {
+      "id": "v5_ask_05",
+      "category": "ask",
+      "text": "Pause preparing your reply while listening to someone you love; you may hear something new."
+    },
+    {
+      "id": "v5_ask_06",
+      "category": "ask",
+      "text": "Closeness grows where a no can be heard as safely as a wish."
+    },
+    {
+      "id": "v5_ask_07",
+      "category": "ask",
+      "text": "Caring for a relationship includes protecting your own voice within it."
+    },
+    {
+      "id": "v5_ask_08",
+      "category": "ask",
+      "text": "Being able to say you are tired with ease matters as much as laughing together."
+    },
+    {
+      "id": "v5_ask_09",
+      "category": "ask",
+      "text": "Try not to measure love by comparison; learn together what way of relating suits you both."
+    },
+    {
+      "id": "v5_ask_10",
+      "category": "ask",
+      "text": "Loving someone does not make you responsible for being the sole answer to all their needs."
+    },
+    {
+      "id": "v5_ayrilik_01",
+      "category": "ayrilik",
+      "text": "After a relationship ends, you can slowly get to know the spaces it leaves in your day."
+    },
+    {
+      "id": "v5_ayrilik_02",
+      "category": "ayrilik",
+      "text": "Missing someone does not have to come with an instruction to return."
+    },
+    {
+      "id": "v5_ayrilik_03",
+      "category": "ayrilik",
+      "text": "When a shared future changes, allow time to grieve before imagining your own."
+    },
+    {
+      "id": "v5_ayrilik_04",
+      "category": "ayrilik",
+      "text": "When you want to revisit old messages, first ask what you need in that moment."
+    },
+    {
+      "id": "v5_ayrilik_05",
+      "category": "ayrilik",
+      "text": "The hours you feel well after a goodbye do not diminish the love you experienced."
+    },
+    {
+      "id": "v5_ayrilik_06",
+      "category": "ayrilik",
+      "text": "You do not have to set the timetable of your recovery by other people's stories."
+    },
+    {
+      "id": "v5_ayrilik_07",
+      "category": "ayrilik",
+      "text": "Leaving a habit behind can be hard; you can make a new evening routine for yourself."
+    },
+    {
+      "id": "v5_ayrilik_08",
+      "category": "ayrilik",
+      "text": "Protecting your boundaries after a breakup does not require explaining every feeling you have."
+    },
+    {
+      "id": "v5_ayrilik_09",
+      "category": "ayrilik",
+      "text": "As you try to understand what happened, you need not seek every answer from the same person."
+    },
+    {
+      "id": "v5_ayrilik_10",
+      "category": "ayrilik",
+      "text": "A relationship's ending can take up space in your life; other pages still carry your name."
+    },
+    {
+      "id": "v5_aile_01",
+      "category": "aile",
+      "text": "Being at the same table matters, and so does making sure every voice at it is heard."
+    },
+    {
+      "id": "v5_aile_02",
+      "category": "aile",
+      "text": "Showing love in a family also means leaving room for each person to change."
+    },
+    {
+      "id": "v5_aile_03",
+      "category": "aile",
+      "text": "When sharing a relative's burden, keep your own needs in the conversation too."
+    },
+    {
+      "id": "v5_aile_04",
+      "category": "aile",
+      "text": "Questioning an old family habit can be the beginning of a more considerate relationship."
+    },
+    {
+      "id": "v5_aile_05",
+      "category": "aile",
+      "text": "Closeness need not mean constant availability; the time you set aside for rest is yours too."
+    },
+    {
+      "id": "v5_aile_06",
+      "category": "aile",
+      "text": "Paying attention to a detail a child shares opens a door into their world."
+    },
+    {
+      "id": "v5_aile_07",
+      "category": "aile",
+      "text": "If family cannot offer the support you need, you can seek safe connections elsewhere too."
+    },
+    {
+      "id": "v5_aile_08",
+      "category": "aile",
+      "text": "Even words spoken with good intentions can hurt; you have a right to explain their impact."
+    },
+    {
+      "id": "v5_aile_09",
+      "category": "aile",
+      "text": "Time together becomes especially valuable in moments when everyone can be themselves."
+    },
+    {
+      "id": "v5_aile_10",
+      "category": "aile",
+      "text": "The person giving care needs care too; let help move through the family."
+    },
+    {
+      "id": "v5_arkadaslik_01",
+      "category": "arkadaslik",
+      "text": "Friendship can be the patience to stay beside someone without finding the right advice."
+    },
+    {
+      "id": "v5_arkadaslik_02",
+      "category": "arkadaslik",
+      "text": "You can send an honest hello to an old friend without finding the perfect opening."
+    },
+    {
+      "id": "v5_arkadaslik_03",
+      "category": "arkadaslik",
+      "text": "Making room for a friend's joy can bring a new light into the story you share."
+    },
+    {
+      "id": "v5_arkadaslik_04",
+      "category": "arkadaslik",
+      "text": "In a caring friendship, different opinions can sit at the same table with respect."
+    },
+    {
+      "id": "v5_arkadaslik_05",
+      "category": "arkadaslik",
+      "text": "Putting your screen down says something too when you are making time for someone."
+    },
+    {
+      "id": "v5_arkadaslik_06",
+      "category": "arkadaslik",
+      "text": "Asking what your friend needs helps shape your support to fit their life."
+    },
+    {
+      "id": "v5_arkadaslik_07",
+      "category": "arkadaslik",
+      "text": "Before reading every silence as distance, be curious about what your friend's days hold."
+    },
+    {
+      "id": "v5_arkadaslik_08",
+      "category": "arkadaslik",
+      "text": "Talking about boundaries in a friendship can help you sustain the bond more honestly."
+    },
+    {
+      "id": "v5_arkadaslik_09",
+      "category": "arkadaslik",
+      "text": "A walk together can make simple room for a conversation you have long postponed."
+    },
+    {
+      "id": "v5_arkadaslik_10",
+      "category": "arkadaslik",
+      "text": "If the effort in a friendship falls mostly to you, you can pause to say what you need."
+    },
+    {
+      "id": "v5_yalnizlik_01",
+      "category": "yalnizlik",
+      "text": "On a lonely evening, reaching for a familiar voice may not need a long explanation."
+    },
+    {
+      "id": "v5_yalnizlik_02",
+      "category": "yalnizlik",
+      "text": "Belonging sometimes takes root on ordinary days when you greet the same faces again."
+    },
+    {
+      "id": "v5_yalnizlik_03",
+      "category": "yalnizlik",
+      "text": "Within time spent alone, you can make room for an activity that keeps you company."
+    },
+    {
+      "id": "v5_yalnizlik_04",
+      "category": "yalnizlik",
+      "text": "You can feel lonely in a crowd too; the kind of connection you seek is worth noticing."
+    },
+    {
+      "id": "v5_yalnizlik_05",
+      "category": "yalnizlik",
+      "text": "Being the first to send a message makes open room for your wish to connect."
+    },
+    {
+      "id": "v5_yalnizlik_06",
+      "category": "yalnizlik",
+      "text": "You need not wait for big news to share something; a detail you noticed may be enough."
+    },
+    {
+      "id": "v5_yalnizlik_07",
+      "category": "yalnizlik",
+      "text": "You do not have to minimize your loneliness when you describe it; it deserves to be heard."
+    },
+    {
+      "id": "v5_yalnizlik_08",
+      "category": "yalnizlik",
+      "text": "To begin a new connection, you could try a setting devoted to a shared interest."
+    },
+    {
+      "id": "v5_yalnizlik_09",
+      "category": "yalnizlik",
+      "text": "Enjoying your own company and sometimes longing for someone can belong to the same life."
+    },
+    {
+      "id": "v5_yalnizlik_10",
+      "category": "yalnizlik",
+      "text": "You can be selective while seeking closeness; not every invitation offers a place that feels safe."
+    },
+    {
+      "id": "v5_affetmek_01",
+      "category": "affetmek",
+      "text": "If you are not ready to forgive, you can open other doors toward feeling better."
+    },
+    {
+      "id": "v5_affetmek_02",
+      "category": "affetmek",
+      "text": "Trying to understand your anger does not mean you approve of what was done to you."
+    },
+    {
+      "id": "v5_affetmek_03",
+      "category": "affetmek",
+      "text": "Even if you choose to forgive someone, whether to let them back into your life is your decision."
+    },
+    {
+      "id": "v5_affetmek_04",
+      "category": "affetmek",
+      "text": "You can want to see the weight of an apology reflected in the actions that follow."
+    },
+    {
+      "id": "v5_affetmek_05",
+      "category": "affetmek",
+      "text": "When facing your mistake, consider what you can repair; exhausting yourself cannot do that work."
+    },
+    {
+      "id": "v5_affetmek_06",
+      "category": "affetmek",
+      "text": "You cannot rewrite the past; you can choose which boundary will protect you from here."
+    },
+    {
+      "id": "v5_affetmek_07",
+      "category": "affetmek",
+      "text": "Before deciding about forgiveness, make time for what the hurt part of you has to say."
+    },
+    {
+      "id": "v5_affetmek_08",
+      "category": "affetmek",
+      "text": "If a hurt feels difficult to carry, you could try talking about it with someone you trust."
+    },
+    {
+      "id": "v5_affetmek_09",
+      "category": "affetmek",
+      "text": "Forgiving yourself while recognizing responsibility can open a more considerate path in your life."
+    },
+    {
+      "id": "v5_affetmek_10",
+      "category": "affetmek",
+      "text": "Still feeling anger does not take away your right to seek peace; you can look honestly at both."
+    },
+    {
+      "id": "v5_kaygi_01",
+      "category": "kaygi",
+      "text": "If your mind keeps returning to a possibility, you can remind yourself that it is a prediction."
+    },
+    {
+      "id": "v5_kaygi_02",
+      "category": "kaygi",
+      "text": "Putting a worry on paper can let you stand beside the thought and view it from a little distance."
+    },
+    {
+      "id": "v5_kaygi_03",
+      "category": "kaygi",
+      "text": "While waiting in uncertainty, you can choose when to check again and give the meantime another task."
+    },
+    {
+      "id": "v5_kaygi_04",
+      "category": "kaygi",
+      "text": "Ask yourself: What do I know right now, and what gap is my mind trying to fill?"
+    },
+    {
+      "id": "v5_kaygi_05",
+      "category": "kaygi",
+      "text": "Even on an anxious day, you can choose to sit beside someone or ask for support."
+    },
+    {
+      "id": "v5_kaygi_06",
+      "category": "kaygi",
+      "text": "When preparing for every possibility becomes tiring, you can look at just the next decision."
+    },
+    {
+      "id": "v5_kaygi_07",
+      "category": "kaygi",
+      "text": "Your unease may speak loudly; before answering it, notice one detail in your surroundings."
+    },
+    {
+      "id": "v5_kaygi_08",
+      "category": "kaygi",
+      "text": "You can notice a thought arriving and return to what you were doing without solving it at once."
+    },
+    {
+      "id": "v5_kaygi_09",
+      "category": "kaygi",
+      "text": "When you notice yourself seeking reassurance, ask which uncertainty feels difficult to sit with."
+    },
+    {
+      "id": "v5_kaygi_10",
+      "category": "kaygi",
+      "text": "You need not describe your anxiety perfectly to share it; start with the part that feels hard."
+    },
+    {
+      "id": "v5_stres_01",
+      "category": "stres",
+      "text": "When expectations multiply, discuss priorities before quietly trying to carry everything."
+    },
+    {
+      "id": "v5_stres_02",
+      "category": "stres",
+      "text": "When the day feels crowded, you can look at your calendar and choose one thing that can wait."
+    },
+    {
+      "id": "v5_stres_03",
+      "category": "stres",
+      "text": "Discussing the scope of a task early makes room to recognize pressure before it piles up."
+    },
+    {
+      "id": "v5_stres_04",
+      "category": "stres",
+      "text": "Name the event that started the tension when describing it; being understood need not mean explaining everything."
+    },
+    {
+      "id": "v5_stres_05",
+      "category": "stres",
+      "text": "When describing your workload, name the energy it asks of you as well as the number of tasks."
+    },
+    {
+      "id": "v5_stres_06",
+      "category": "stres",
+      "text": "Try not to fit a new task into a brief break; an empty minute is also a valid use of time."
+    },
+    {
+      "id": "v5_stres_07",
+      "category": "stres",
+      "text": "You need not wait until you are drained to share a task; discuss support at the start."
+    },
+    {
+      "id": "v5_stres_08",
+      "category": "stres",
+      "text": "Make clashing deadlines visible; let the conflict be discussed rather than fitting two days into one."
+    },
+    {
+      "id": "v5_stres_09",
+      "category": "stres",
+      "text": "At the end of a busy day, you can write down what remains and allow yourself to leave the desk."
+    },
+    {
+      "id": "v5_stres_10",
+      "category": "stres",
+      "text": "Noticing pressure can offer useful information about where your limits are being strained."
+    },
+    {
+      "id": "v5_minnettarlik_01",
+      "category": "minnettarlik",
+      "text": "Make your thanks specific; say which action made a difference to you."
+    },
+    {
+      "id": "v5_minnettarlik_02",
+      "category": "minnettarlik",
+      "text": "Behind a convenience you take for granted, there may be someone's quiet effort."
+    },
+    {
+      "id": "v5_minnettarlik_03",
+      "category": "minnettarlik",
+      "text": "Before turning a lovely moment into a photograph, you can try staying in it a little longer."
+    },
+    {
+      "id": "v5_minnettarlik_04",
+      "category": "minnettarlik",
+      "text": "Remembering a kindness can help you notice other colors in a difficult day."
+    },
+    {
+      "id": "v5_minnettarlik_05",
+      "category": "minnettarlik",
+      "text": "Gratitude need not silence what is missing; it makes room to honestly notice what is here too."
+    },
+    {
+      "id": "v5_minnettarlik_06",
+      "category": "minnettarlik",
+      "text": "You can remind someone who guided you of the words you still carry with you."
+    },
+    {
+      "id": "v5_minnettarlik_07",
+      "category": "minnettarlik",
+      "text": "Recalling an ordinary task you did together can make the unseen effort in a relationship visible."
+    },
+    {
+      "id": "v5_minnettarlik_08",
+      "category": "minnettarlik",
+      "text": "Choose a detail from your day: Which one are you glad to have in your life?"
+    },
+    {
+      "id": "v5_minnettarlik_09",
+      "category": "minnettarlik",
+      "text": "When thanking yourself, remember the care you kept giving as well as the results."
+    },
+    {
+      "id": "v5_minnettarlik_10",
+      "category": "minnettarlik",
+      "text": "When you notice something good, sharing it with someone can keep it in memory a little longer."
+    },
+    {
+      "id": "v5_simdiki_an_01",
+      "category": "simdiki_an",
+      "text": "To fully notice the taste of a bite, you can set your other task aside for a moment."
+    },
+    {
+      "id": "v5_simdiki_an_02",
+      "category": "simdiki_an",
+      "text": "Look for a line, shadow, or color you have not noticed before on the street you walk."
+    },
+    {
+      "id": "v5_simdiki_an_03",
+      "category": "simdiki_an",
+      "text": "Listen for where a fading sound disappears; the endings around you are as available to notice as the beginnings."
+    },
+    {
+      "id": "v5_simdiki_an_04",
+      "category": "simdiki_an",
+      "text": "Notice the surface of the chair supporting you; a concrete detail of where you are is already within reach."
+    },
+    {
+      "id": "v5_simdiki_an_05",
+      "category": "simdiki_an",
+      "text": "Let your eyes follow the work of your hands; the details of an ordinary movement may emerge."
+    },
+    {
+      "id": "v5_simdiki_an_06",
+      "category": "simdiki_an",
+      "text": "Rain can be more than a weather report; you can watch a single drop travel down the glass."
+    },
+    {
+      "id": "v5_simdiki_an_07",
+      "category": "simdiki_an",
+      "text": "Time spent waiting need not be entirely lost; you can notice the life continuing around you."
+    },
+    {
+      "id": "v5_simdiki_an_08",
+      "category": "simdiki_an",
+      "text": "While a song plays, try listening through this chorus without rushing on to something else."
+    },
+    {
+      "id": "v5_simdiki_an_09",
+      "category": "simdiki_an",
+      "text": "This moment need not be perfect; you can still connect with one real detail within it."
+    },
+    {
+      "id": "v5_simdiki_an_10",
+      "category": "simdiki_an",
+      "text": "When a conversation ends, notice the trace it leaves in you before moving to the next one."
+    },
+    {
+      "id": "v5_uyku_01",
+      "category": "uyku",
+      "text": "Leaving fewer tasks for the last hour of the evening can make room for the transition to night."
+    },
+    {
+      "id": "v5_uyku_02",
+      "category": "uyku",
+      "text": "You can note an unfinished thought and leave it to be considered again in the morning."
+    },
+    {
+      "id": "v5_uyku_03",
+      "category": "uyku",
+      "text": "Dimming the room as bedtime approaches can be a simple sign of leaving the day's pace behind."
+    },
+    {
+      "id": "v5_uyku_04",
+      "category": "uyku",
+      "text": "As you prepare to rest tonight, you can try asking no new achievement of yourself."
+    },
+    {
+      "id": "v5_uyku_05",
+      "category": "uyku",
+      "text": "Before moving to the next thing on your screen, ask where you want your evening to end."
+    },
+    {
+      "id": "v5_uyku_06",
+      "category": "uyku",
+      "text": "Try not to treat yourself harshly after a difficult night; your tiredness deserves extra care."
+    },
+    {
+      "id": "v5_uyku_07",
+      "category": "uyku",
+      "text": "Returning to the same quiet activity before bed can offer you a familiar corner of the evening."
+    },
+    {
+      "id": "v5_uyku_08",
+      "category": "uyku",
+      "text": "You do not have to carry a decision through the night if it can wait until morning."
+    },
+    {
+      "id": "v5_uyku_09",
+      "category": "uyku",
+      "text": "As the night grows quiet, you can pause judging your day and reserve your bed for rest."
+    },
+    {
+      "id": "v5_uyku_10",
+      "category": "uyku",
+      "text": "You can prepare a comfortable setting for the night without treating sleep as a race."
+    },
+    {
+      "id": "v5_karamsarlik_01",
+      "category": "karamsarlik",
+      "text": "When a thought paints everything dark, leave room for the details you do not yet know."
+    },
+    {
+      "id": "v5_karamsarlik_02",
+      "category": "karamsarlik",
+      "text": "Looking out from a difficult period, you need not paint your whole life in its colors."
+    },
+    {
+      "id": "v5_karamsarlik_03",
+      "category": "karamsarlik",
+      "text": "When you cannot see a good possibility, you could listen to what someone you trust can see."
+    },
+    {
+      "id": "v5_karamsarlik_04",
+      "category": "karamsarlik",
+      "text": "When enthusiasm fades, you need not wait for a burst of energy to revisit something you enjoy."
+    },
+    {
+      "id": "v5_karamsarlik_05",
+      "category": "karamsarlik",
+      "text": "A sentence describing the weight of one day need not become the title of your whole future."
+    },
+    {
+      "id": "v5_karamsarlik_06",
+      "category": "karamsarlik",
+      "text": "If hopeful words do not come, you can begin by expressing one honest need."
+    },
+    {
+      "id": "v5_karamsarlik_07",
+      "category": "karamsarlik",
+      "text": "Try adding one detail that does not support a negative judgment that feels certain."
+    },
+    {
+      "id": "v5_karamsarlik_08",
+      "category": "karamsarlik",
+      "text": "If watching the world's burdens leaves you tired, you can put a break between you and the news."
+    },
+    {
+      "id": "v5_karamsarlik_09",
+      "category": "karamsarlik",
+      "text": "Something not having changed yet does not mean you know every possible path to change."
+    },
+    {
+      "id": "v5_karamsarlik_10",
+      "category": "karamsarlik",
+      "text": "You can care for yourself without forcing a good mood; care does not have to wait for a feeling."
+    },
+    {
+      "id": "v5_huzur_01",
+      "category": "huzur",
+      "text": "Sitting in a simple corner can sometimes gather the attention you scattered throughout the day."
+    },
+    {
+      "id": "v5_huzur_02",
+      "category": "huzur",
+      "text": "You do not have to fill every space in your life; gaps can be part of its rhythm too."
+    },
+    {
+      "id": "v5_huzur_03",
+      "category": "huzur",
+      "text": "After an argument, you can pause the conversation rather than search for the final word."
+    },
+    {
+      "id": "v5_huzur_04",
+      "category": "huzur",
+      "text": "Other people do not have to decide what the quiet that feels good to you should look like."
+    },
+    {
+      "id": "v5_huzur_05",
+      "category": "huzur",
+      "text": "As you simplify a corner of your home, think about how you want to feel there."
+    },
+    {
+      "id": "v5_huzur_06",
+      "category": "huzur",
+      "text": "Some evenings need no grand event to remember; a sense of ease can be enough."
+    },
+    {
+      "id": "v5_huzur_07",
+      "category": "huzur",
+      "text": "A walk free from the feeling of catching up can remind you of your own pace."
+    },
+    {
+      "id": "v5_huzur_08",
+      "category": "huzur",
+      "text": "When voices rise in a conversation, you have a right to ask for space to regain calm."
+    },
+    {
+      "id": "v5_huzur_09",
+      "category": "huzur",
+      "text": "In seeking peace, you can also notice what needs to change in a routine that keeps you tense."
+    },
+    {
+      "id": "v5_huzur_10",
+      "category": "huzur",
+      "text": "Remember a place that lets you feel at ease; how could you bring part of that feeling into your day?"
+    },
+    {
+      "id": "v5_merak_01",
+      "category": "merak",
+      "text": "Noticing that you do not understand something is fertile ground for a good question."
+    },
+    {
+      "id": "v5_merak_02",
+      "category": "merak",
+      "text": "Look again at a familiar object: Who might have decided to shape it this way, and why?"
+    },
+    {
+      "id": "v5_merak_03",
+      "category": "merak",
+      "text": "When you find an answer, linger with the question and notice which new door it opens."
+    },
+    {
+      "id": "v5_merak_04",
+      "category": "merak",
+      "text": "Trying to understand an idea before agreeing with it gives your thinking more room."
+    },
+    {
+      "id": "v5_merak_05",
+      "category": "merak",
+      "text": "Following an unfamiliar word can lead you toward a subject you never expected."
+    },
+    {
+      "id": "v5_merak_06",
+      "category": "merak",
+      "text": "Ask an expert about more than the result; be curious about how they reached it."
+    },
+    {
+      "id": "v5_merak_07",
+      "category": "merak",
+      "text": "You need not reserve curiosity for useful things; being surprised can be worth your time too."
+    },
+    {
+      "id": "v5_merak_08",
+      "category": "merak",
+      "text": "Beside a thought you feel certain about, write what evidence could change your mind."
+    },
+    {
+      "id": "v5_merak_09",
+      "category": "merak",
+      "text": "Looking for a new detail along the same route is a way to rediscover a familiar world."
+    },
+    {
+      "id": "v5_merak_10",
+      "category": "merak",
+      "text": "Instead of rushing to answer a child's why, you can try exploring the question together."
+    },
+    {
+      "id": "v5_okumak_01",
+      "category": "okumak",
+      "text": "Pausing between a book's pages gives what you read time to speak with your own life."
+    },
+    {
+      "id": "v5_okumak_02",
+      "category": "okumak",
+      "text": "Beside a sentence that moves you, write a few words about why it made you pause."
+    },
+    {
+      "id": "v5_okumak_03",
+      "category": "okumak",
+      "text": "Without making reading a race, you can return to a paragraph you found difficult."
+    },
+    {
+      "id": "v5_okumak_04",
+      "category": "okumak",
+      "text": "While trying to understand a character, you can also try stepping outside your first judgment."
+    },
+    {
+      "id": "v5_okumak_05",
+      "category": "okumak",
+      "text": "The questions that keep living in your mind matter alongside the number of books you finish."
+    },
+    {
+      "id": "v5_okumak_06",
+      "category": "okumak",
+      "text": "You need not agree with every book; leave thoughts in the margin as if talking with the text."
+    },
+    {
+      "id": "v5_okumak_07",
+      "category": "okumak",
+      "text": "Reading a page aloud can let your ears hear a rhythm your eyes passed over quickly."
+    },
+    {
+      "id": "v5_okumak_08",
+      "category": "okumak",
+      "text": "If you have not read for a while, you can begin again with a page that truly interests you."
+    },
+    {
+      "id": "v5_okumak_09",
+      "category": "okumak",
+      "text": "When discussing a book with a friend, listen to the other world they saw in the same lines."
+    },
+    {
+      "id": "v5_okumak_10",
+      "category": "okumak",
+      "text": "Connecting something you read with an everyday event brings the idea off the shelf and into your life."
+    },
+    {
+      "id": "v5_hata_01",
+      "category": "hata",
+      "text": "Write a question beside a wrong answer: where did my thinking change direction?"
+    },
+    {
+      "id": "v5_hata_02",
+      "category": "hata",
+      "text": "Write the reason beside a correction in your notes; keep the change in your thinking alongside the right answer."
+    },
+    {
+      "id": "v5_hata_03",
+      "category": "hata",
+      "text": "Picking out the useful part of feedback means looking carefully at your own work."
+    },
+    {
+      "id": "v5_hata_04",
+      "category": "hata",
+      "text": "An erased line may still have shown you which route to set aside."
+    },
+    {
+      "id": "v5_hata_05",
+      "category": "hata",
+      "text": "Listening to someone affected by a mistake can show where repair might begin."
+    },
+    {
+      "id": "v5_hata_06",
+      "category": "hata",
+      "text": "You may not change a trial's result, but you can choose the question you bring to the next."
+    },
+    {
+      "id": "v5_hata_07",
+      "category": "hata",
+      "text": "A concrete change after an apology gives your words somewhere to stand."
+    },
+    {
+      "id": "v5_hata_08",
+      "category": "hata",
+      "text": "Where you notice a gap in your knowledge, the shape of what you can learn begins to appear."
+    },
+    {
+      "id": "v5_hata_09",
+      "category": "hata",
+      "text": "If the same error returns, examine your approach again without piling blame on yourself."
+    },
+    {
+      "id": "v5_hata_10",
+      "category": "hata",
+      "text": "A page covered in corrections carries traces of the problem you have been working on."
+    },
+    {
+      "id": "v5_aliskanlik_01",
+      "category": "aliskanlik",
+      "text": "To help a behaviour find room in your life, you can make its starting moment visible."
+    },
+    {
+      "id": "v5_aliskanlik_02",
+      "category": "aliskanlik",
+      "text": "Leaving a book where you can open it gives your intention an address."
+    },
+    {
+      "id": "v5_aliskanlik_03",
+      "category": "aliskanlik",
+      "text": "You can mark a missed day and return; the calendar need not become a judge."
+    },
+    {
+      "id": "v5_aliskanlik_04",
+      "category": "aliskanlik",
+      "text": "Notice the details that make a habit easier; sometimes the key is where things are placed."
+    },
+    {
+      "id": "v5_aliskanlik_05",
+      "category": "aliskanlik",
+      "text": "Finding the simplest version of a behaviour leaves a door open on busy days."
+    },
+    {
+      "id": "v5_aliskanlik_06",
+      "category": "aliskanlik",
+      "text": "If a routine does not fit, you can change its design without blaming yourself."
+    },
+    {
+      "id": "v5_aliskanlik_07",
+      "category": "aliskanlik",
+      "text": "Choose a clear sign that a habit is done; leave yourself a finish you can recognise at the end of the day."
+    },
+    {
+      "id": "v5_aliskanlik_08",
+      "category": "aliskanlik",
+      "text": "A reminder that suits you can help you find your intention again in a crowded day."
+    },
+    {
+      "id": "v5_aliskanlik_09",
+      "category": "aliskanlik",
+      "text": "The place and time you choose for a habit can be as concrete as the goal you write down."
+    },
+    {
+      "id": "v5_aliskanlik_10",
+      "category": "aliskanlik",
+      "text": "When sharing a habit with someone, say how you would like them to join you; let the support fit you too."
+    },
+    {
+      "id": "v5_sinav_01",
+      "category": "sinav",
+      "text": "Closing the book and writing what you recall can make your next starting point clearer."
+    },
+    {
+      "id": "v5_sinav_02",
+      "category": "sinav",
+      "text": "Mark a question you cannot solve; returning to it can be part of your study plan."
+    },
+    {
+      "id": "v5_sinav_03",
+      "category": "sinav",
+      "text": "Try explaining a topic with your own example; a pause in the sentence may reveal a question."
+    },
+    {
+      "id": "v5_sinav_04",
+      "category": "sinav",
+      "text": "An exam result records one part of your work; it does not write the whole story of your life."
+    },
+    {
+      "id": "v5_sinav_05",
+      "category": "sinav",
+      "text": "While adding up study hours, you can also notice a connection you truly understood."
+    },
+    {
+      "id": "v5_sinav_06",
+      "category": "sinav",
+      "text": "Show a classmate where you got stuck as you explain your question; your work together can begin there."
+    },
+    {
+      "id": "v5_sinav_07",
+      "category": "sinav",
+      "text": "Planning a rest break may ease the sense of unfinished business when you leave your desk."
+    },
+    {
+      "id": "v5_sinav_08",
+      "category": "sinav",
+      "text": "You can note what to return to tomorrow rather than wearing yourself out through the night."
+    },
+    {
+      "id": "v5_sinav_09",
+      "category": "sinav",
+      "text": "You can use a list of errors as a map for the next session rather than a record of punishment."
+    },
+    {
+      "id": "v5_sinav_10",
+      "category": "sinav",
+      "text": "When you open the question paper, read what is being asked; let a clear question guide the knowledge you bring."
+    }
+  ]
+}

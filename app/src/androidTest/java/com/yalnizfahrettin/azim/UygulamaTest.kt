@@ -1,8 +1,15 @@
 package com.yalnizfahrettin.azim
 
+import android.content.Intent
+import androidx.lifecycle.Lifecycle
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
+import com.yalnizfahrettin.azim.data.Depo
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 
@@ -49,6 +56,45 @@ class UygulamaTest {
         compose.onNodeWithText("Sende kalan sözler.").assertIsDisplayed(); shot("10-saved")
         compose.onNodeWithText("Keşfet").performClick()
         compose.onNodeWithText("İlhamını keşfet.").assertIsDisplayed(); shot("11-discover")
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        val demoDepo = Depo(instrumentation.targetContext)
+        val beforeDemo = runBlocking { withTimeout(5000) { demoDepo.acikGruplar.first() } }
+        assertFalse("The chosen collection must initially be locked", "cesaret" in beforeDemo)
+        assertFalse("The unrelated collection must initially be locked", "inanc" in beforeDemo)
+        compose.onNode(hasScrollToIndexAction()).performScrollToNode(hasText("Özgüven & Cesaret"))
+        compose.onNodeWithText("Özgüven & Cesaret").performClick()
+        compose.onNodeWithText("GEÇİCİ DEMO").assertIsDisplayed()
+        compose.onNodeWithText("Bu sürümde gerçek reklam yok.", substring = true).assertIsDisplayed()
+        shot("16-demo")
+        val activityBeforeDemo = compose.activity
+        compose.onNodeWithText("Demo bağlantısını aç").performClick()
+        // Check the actual Activity lifecycle on its main thread. The external browser
+        // is not controlled; no page interaction or browser shutdown is needed.
+        compose.waitUntil(15000) {
+            var leftApp = false
+            instrumentation.runOnMainSync {
+                leftApp = activityBeforeDemo.lifecycle.currentState != Lifecycle.State.RESUMED
+            }
+            leftApp
+        }
+        assertFalse("Leaving the app must not unlock before returning",
+            runBlocking { withTimeout(5000) { demoDepo.acikGruplar.first() } }.contains("cesaret"))
+        instrumentation.runOnMainSync {
+            instrumentation.targetContext.startActivity(
+                Intent(instrumentation.targetContext, MainActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            )
+        }
+        val afterDemo = runBlocking {
+            withTimeout(15000) { demoDepo.acikGruplar.first { "cesaret" in it } }
+        }
+        assertEquals("Only the selected collection may unlock", beforeDemo + "cesaret", afterDemo)
+        assertFalse("The unrelated collection must stay locked", "inanc" in afterDemo)
+        compose.waitUntil(10000) {
+            compose.onAllNodesWithText("50 söz · 5 seçili").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithText("50 söz · 5 seçili").assertIsDisplayed()
+        shot("17-demo-unlocked")
         compose.onNodeWithText("Yolculuk").performClick()
         compose.onNodeWithText("Kendi yolunda.").assertIsDisplayed(); shot("12-journey")
         compose.onNodeWithText("Bugün").performClick()

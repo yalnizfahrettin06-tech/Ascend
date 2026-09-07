@@ -27,7 +27,7 @@ fun BildirimOnizlemesi(dil: String) {
                 Text("  Ascend", color = Renk.metin, style = MaterialTheme.typography.labelLarge, modifier = Modifier.weight(1f))
                 Text(cevir(dil, "Önizleme", "Preview"), color = Renk.metinIkincil, style = MaterialTheme.typography.labelSmall)
             }
-            Text(cevir(dil, "Bugünün küçük adımı, yarının alışkanlığı.", "Today's small step is tomorrow's habit."), color = Renk.metin, style = MaterialTheme.typography.bodyLarge)
+            Text(com.yalnizfahrettin.azim.data.Sozler.kategoriden("motivasyon").first().metin(dil), color = Renk.metin, style = MaterialTheme.typography.bodyLarge)
             Text(cevir(dil, "Motivasyon  ·  Kaydet  ♡", "Motivation  ·  Save  ♡"), color = Renk.accent, style = MaterialTheme.typography.labelMedium)
         }
     }

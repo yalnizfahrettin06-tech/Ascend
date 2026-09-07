@@ -1,0 +1,2807 @@
+{
+  "schemaVersion": 1,
+  "locale": "tr",
+  "sourceCatalogVersion": "5.0.0",
+  "quotes": {
+    "v5_ozsefkat_01": {
+      "text": "Kırıldığım yerde kendimi azarlamak yerine neye ihtiyacım olduğunu dinliyorum.",
+      "sourceHash": "3f83922baa49b329fc1e589a62f4c90b2daff061f7ae62fee80e7ed42bb7e071"
+    },
+    "v5_ozsefkat_02": {
+      "text": "Yetişemediğim işler kadar, taşıdığım görünmez yükleri de hesaba katıyorum.",
+      "sourceHash": "10c4583e9402bb3b45dbc130aeb068a21aa934533e79d05bc23b96893446cdc4"
+    },
+    "v5_ozsefkat_03": {
+      "text": "Hatalarımla yüzleşirken kendimi inciten kelimeler kullanmamayı öğreniyorum.",
+      "sourceHash": "dfc70f3d82a81f495c8a9417f4e058d73f182e74e8465257d78740d271e5278c"
+    },
+    "v5_ozsefkat_04": {
+      "text": "Yorgun bedenime gösterdiğim özeni, zihnim karıştığında da kendimden esirgemiyorum.",
+      "sourceHash": "21520c79767cb3f2079019f3bca93014189f256fa8cc688b303e7813061ce365"
+    },
+    "v5_ozsefkat_05": {
+      "text": "İçimdeki sert sesi duyabiliyorum; ona katılmadan kendime eşlik edebilirim.",
+      "sourceHash": "9135f63acb2ebb54598df442a5ed4b4c3406d98f43beb40ef70cc74a166dfbd6"
+    },
+    "v5_ozsefkat_06": {
+      "text": "Geçmişte bilmediklerimi, o zamanki kendimi cezalandırmak için kullanmıyorum.",
+      "sourceHash": "7c01ca3f1a2e81fab7f0a77ef024c9f98442966b319d87242c71a873cab5a6a7"
+    },
+    "v5_ozsefkat_07": {
+      "text": "Dinlenmeye ayırdığım zamanı, kendime verdiğim bir bakım sözü olarak görüyorum.",
+      "sourceHash": "261f3e533fd9de4b03bc75c9f78a178367f590ca1366e343c182d1be215c5db8"
+    },
+    "v5_ozsefkat_08": {
+      "text": "İyi görünmeye çalışmadan, kırgın olduğumu kendime dürüstçe söyleyebiliyorum.",
+      "sourceHash": "3f003a3a882e3b008f95c1595a2828d86a46a9963902d51e6f4092695fc00585"
+    },
+    "v5_ozsefkat_09": {
+      "text": "Kendi hikâyemi anlatırken zorlandığım bölümlere de anlayışla yer veriyorum.",
+      "sourceHash": "4e2ffb4e890561aeedef8c1cdf32716af33383c9ff2c70bbd264efabad735ecf"
+    },
+    "v5_ozsefkat_10": {
+      "text": "Kendime duyduğum saygıyı, yetiştirdiğim işlerin sayısına bağlamamayı seçiyorum.",
+      "sourceHash": "b814fdc6317129efa12fe52e06b4fa85575d696dd90d38af4bcd861a8932d436"
+    },
+    "v5_ic_huzur_01": {
+      "text": "Bir sessizlik aralığında omuzlarımı fark ediyor, bedenime yeniden kulak veriyorum.",
+      "sourceHash": "7ec7aed1860c42e7458d5b597669cff27da25c4273af8dc887274a8e5b998808"
+    },
+    "v5_ic_huzur_02": {
+      "text": "İçim karışıkken de pencereye vuran ışığı görecek kadar durabilirim.",
+      "sourceHash": "58df57abdb4296eee3e0f6797c52d98caba1372533047d121a7f178ec75a62b0"
+    },
+    "v5_ic_huzur_03": {
+      "text": "Yanıtı henüz olmayan sorularımı, bu akşam bir süreliğine açık bırakabiliyorum.",
+      "sourceHash": "0857a9c16331f39181bc46f55ec08ec0fb1598aae70ef5c1c2c4d09549827246"
+    },
+    "v5_ic_huzur_04": {
+      "text": "Zihnim uzaklara gittiğinde, elimdeki fincanın sıcaklığına dikkatimi getirebilirim.",
+      "sourceHash": "db5471238315b67cd1e4f74f1d764021add65093c65f5262a0270e3ea2ba36e8"
+    },
+    "v5_ic_huzur_05": {
+      "text": "Günün sesleri arasından bana iyi gelen bir sessizlik köşesi seçiyorum.",
+      "sourceHash": "93bf763d0ef51a31e5b222b7629e7e29084a92ca171bdd4d1ef52c0829d9034d"
+    },
+    "v5_ic_huzur_06": {
+      "text": "Her duyguya hemen bir karar eklemeden, hissettiklerimi tanımayı öğreniyorum.",
+      "sourceHash": "db3c0d186779c0b8d31dedb6b559503d5502c64030ea5251a22229c47da64cbd"
+    },
+    "v5_ic_huzur_07": {
+      "text": "Acele etmediğim birkaç dakikayı, kendimle yeniden buluşmak için kullanıyorum.",
+      "sourceHash": "69b79ab87ed94710266f6b89e5c6abb9f783f6de6fa1645f7f6f221920eedb31"
+    },
+    "v5_ic_huzur_08": {
+      "text": "Çevremdeki gerginliği fark ederken kendi konuşma hızımı yavaşlatabilirim.",
+      "sourceHash": "f97c99f7e62965aa0a15e060b83e71e1f7e24e2225805364a7c555a9bc4a40a3"
+    },
+    "v5_ic_huzur_09": {
+      "text": "Tamamlanmamış bir günün içinde de kendime rahat bir köşe hazırlayabiliyorum.",
+      "sourceHash": "c16f3e34a5337d4348870ac229066b505390e5c1fe8b7b90ca50d9710c49a9a4"
+    },
+    "v5_ic_huzur_10": {
+      "text": "İçimde birikenleri adlandırdığımda, hangisine şimdi yer vereceğimi seçebilirim.",
+      "sourceHash": "f964a07f15e210def6f0604942b63f76715b1706d200a93de5f5637feb05261d"
+    },
+    "v5_kendine_guven_01": {
+      "text": "Bir karar verirken kendi deneyimimin de masada bir yeri olduğunu hatırlıyorum.",
+      "sourceHash": "a94f244648f137a254e904567274075076adbbee494b425c2df1e48a7f4b50cd"
+    },
+    "v5_kendine_guven_02": {
+      "text": "Bildiğim şeyleri küçültmeden, henüz öğrenmediklerimi açıkça kabul edebilirim.",
+      "sourceHash": "c4df9a09277b0f74453860971af73fb8c347c21a4315c6d6b2a72b0c45dc0255"
+    },
+    "v5_kendine_guven_03": {
+      "text": "Kendime verdiğim sözü tutamadığımda, onu daha gerçekçi biçimde yeniden kurabilirim.",
+      "sourceHash": "e0e6eadcc7142e72d9332620a67e7e6db1df1b35dc33d4ec30bfca10e556f6b3"
+    },
+    "v5_kendine_guven_04": {
+      "text": "Fikrimi değiştirdiğimde, yeni bilgiyi ciddiye alan yanımla gurur duyabilirim.",
+      "sourceHash": "610b8cbdd51f9eef5ca000d0baa99bbdaf7e9b5d492b8a780a911eb5b04c1fcd"
+    },
+    "v5_kendine_guven_05": {
+      "text": "Beni anlatan kelimeleri seçerken başkalarının etiketlerinden daha fazlasına sahibim.",
+      "sourceHash": "349362ae130393362b71a91d621b712cbd68e4231587ebbfa889aee196c18038"
+    },
+    "v5_kendine_guven_06": {
+      "text": "Bir şeyi ilk kez yaparken, acemiliğime rağmen orada bulunma hakkımı koruyorum.",
+      "sourceHash": "1fddce22bfbb4105773d7664e302b8b49ac426a8ae6112bbb97f44d3c80f2c9d"
+    },
+    "v5_kendine_guven_07": {
+      "text": "İçime sinmeyen bir kararı durdurup yeniden düşünmek için kendime güvenebilirim.",
+      "sourceHash": "7be07993152c9ca17401469fc23707c4fe11d15b0e5a31c7484892df4ecbc7c1"
+    },
+    "v5_kendine_guven_08": {
+      "text": "Daha önce aştığım güçlükleri, kendi becerilerime dair somut bir hatıra olarak saklıyorum.",
+      "sourceHash": "0d8c38d1cbe488e2a8639e5325ba260e6d44d2323690d4d4c4eea064bfa98914"
+    },
+    "v5_kendine_guven_09": {
+      "text": "Ne istediğimi anlamak için kendime sorular soruyor, yanıtlarıma değer veriyorum.",
+      "sourceHash": "40da852006c9a835f035b5d97e27a731666fe9e99174c353fbb297e8eeaf37a7"
+    },
+    "v5_kendine_guven_10": {
+      "text": "Seçimlerimin sorumluluğunu alırken, ihtiyaç duyduğum desteği de kabul edebilirim.",
+      "sourceHash": "eef455674d7807db75135a0dfa2ca7800a6f6fa772f9bd193a2433543c0b3a33"
+    },
+    "v5_motivasyon_01": {
+      "text": "Masandaki boş sayfa senden kusursuzluk beklemiyor; bir düşünceni görünür kılmanı bekliyor.",
+      "sourceHash": "4f72f1374a7f476a0428466f16b6e9994ece2ce12a8868738f955a05ae5455ab"
+    },
+    "v5_motivasyon_02": {
+      "text": "Seni bu işe çağıran nedeni hatırla. Başkalarının heyecanı söndüğünde sana o eşlik edebilir.",
+      "sourceHash": "1bfd5f9678d8179f2d8463d0faaede5fc308c1893a946427fb3aa360427b07bc"
+    },
+    "v5_motivasyon_03": {
+      "text": "Hevesin henüz gelmediyse işin merak ettiğin yanından başla; bazen istek çalışırken belirir.",
+      "sourceHash": "00dd0ed697ec614639e2627f76e09fd5ff1004ab6ce808e8263d283460639574"
+    },
+    "v5_motivasyon_04": {
+      "text": "Yapabildiğin bir şeyi birine anlat. Kendi ilerlemen, sesini duyduğunda daha gerçek gelebilir.",
+      "sourceHash": "dc9533dca317a59aa5d23ce564fe2597db1c857d6074798ae8bd483500e5b2bc"
+    },
+    "v5_motivasyon_05": {
+      "text": "İçinden geçen fikre bir yer ayır; sürekli ertelenen merak, hayatın kenarında beklemesin.",
+      "sourceHash": "528e177af0462c8119987df22f02aa5b8e770de54dabb2539e60009d3e2bbe53"
+    },
+    "v5_motivasyon_06": {
+      "text": "Sıradan bir salı, önem verdiğin bir işe emek vermek için yeterince anlamlı bir gündür.",
+      "sourceHash": "cc49404521ec3eb58b71f5b2866c211c62f3114b966eb70039b72eeb65cfd94a"
+    },
+    "v5_motivasyon_07": {
+      "text": "Hedefini düşününce yalnızca baskı hissediyorsan, içinde sana ait olan isteği yeniden ara.",
+      "sourceHash": "18fdbf702b5a00b605f93946614fc82a795221cc07888b974bf88ab8509a69ad"
+    },
+    "v5_motivasyon_08": {
+      "text": "Bir işi bitirmenin yanında onu yapmayı öğrenmenin de kendine özgü bir sevinci vardır.",
+      "sourceHash": "d6f786392c6bffff70f59673f312cb0d23a2e5cd5bfc96f6d7f07ef4721eaf0a"
+    },
+    "v5_motivasyon_09": {
+      "text": "Başlama isteğini besleyen ortamı kur: açık bir defter, erişilebilir bir araç, ayrılmış bir zaman.",
+      "sourceHash": "285aa7230b3ab513292cdbe379118ffb1ef20a9e11c717603dd9208b64c6a272"
+    },
+    "v5_motivasyon_10": {
+      "text": "Hayalinin tamamı uzağında olabilir; onunla ilgilenmek için bütün mesafeyi aşman gerekmez.",
+      "sourceHash": "c22dea192e8d0424072d8735565887c272ea0ce544a11c2178de710043dbe2b5"
+    },
+    "v5_azim_01": {
+      "text": "Aynı soruya yeniden döndüğünde farklı bir araç getir. Israr, öğrenmeye yer açtığında güçlenir.",
+      "sourceHash": "9035facec818c852798593ec3ad995449807e7d806367363d67d14b591ab1748"
+    },
+    "v5_azim_02": {
+      "text": "Kimsenin görmediği tekrarların da bir ağırlığı var; emeğinin tanığı her zaman kalabalık olmaz.",
+      "sourceHash": "59e7e985150d99df0cd2ae5fc353bae1961786b445d4cbf4ca821d8e78cb2bb8"
+    },
+    "v5_azim_03": {
+      "text": "Zor bir işi sürdürürken yardım istemek, verdiğin sözü daha taşınabilir hâle getirebilir.",
+      "sourceHash": "0382232f54356a88beda24176203d145d17c79d51f4550b699c1214c260f80d4"
+    },
+    "v5_azim_04": {
+      "text": "İlerlemen yavaşladığında yönteme bak. Daha sert davranmadan önce daha uygun bir yol ara.",
+      "sourceHash": "111c7f6976b6654037d78a18e239de1be763d7b90126f4b4ee4633d0514b15cb"
+    },
+    "v5_azim_05": {
+      "text": "Emek verdiğin şeyi düzenli olarak yokla: hâlâ değerlerinle buluşuyorsa ona yeniden yer aç.",
+      "sourceHash": "35048f926a8349309284c6ee9a891abd6def7dd3966b7efef60c0be5a6986e36"
+    },
+    "v5_azim_06": {
+      "text": "Bir beceriyi geliştirirken sıkıcı görünen bölüm de vardır. Orada merak edecek bir ayrıntı bul.",
+      "sourceHash": "b8b19189a7f7f23befe2bdfaa1b79160a2b8e9cf0ca800ed876d6b42cd221dca"
+    },
+    "v5_azim_07": {
+      "text": "Kararlılığın, takvimin her karesini doldurmanla ölçülmez; verdiğin aradan nasıl döndüğüne de bak.",
+      "sourceHash": "054d387448992ad8d3546e89240682c014fde0a5261e9d394b425ddc50649559"
+    },
+    "v5_azim_08": {
+      "text": "Zorlandığın yeri saklamadan çalış. Açıkça gördüğün bir engel için daha iyi destek arayabilirsin.",
+      "sourceHash": "d10817cc1cd46b2da1e366b693c2b2eaf6eab57814d3dde2dc436a79d91c38e2"
+    },
+    "v5_azim_09": {
+      "text": "Çabanın karşılığını hemen görememek ağır gelebilir. Beklerken kendine iyi davranmayı erteleme.",
+      "sourceHash": "0e7e4d198a6b2f4367abad7915f35f4f883cb79173b828368b6a4430b5be56bb"
+    },
+    "v5_azim_10": {
+      "text": "Bir hedefe sadık kalırken planını değiştirebilirsin; yönünü koruman için yolun donması gerekmez.",
+      "sourceHash": "425b37c181a05b5d096ad17a4a8af022c35b22ff3dc110d62436843e85091544"
+    },
+    "v5_pes_01": {
+      "text": "Vazgeçme kararından önce şu soruya yer aç: Beni durduran hedefin kendisi mi, bu koşullar mı?",
+      "sourceHash": "1fa84f0038381770acdae53e9bfa5335fa1d16ed1e257b3eb47c3302a6fe81e8"
+    },
+    "v5_pes_02": {
+      "text": "En zor anında verdiğin hükmü hemen kesinleştirme. Dinlenmiş hâlinin de bu kararda sözü olsun.",
+      "sourceHash": "a96a9cc3e7ea519d40a728909317fe0be0bb9fff2d00a9ba18ed77a0def67cd0"
+    },
+    "v5_pes_03": {
+      "text": "Yarım kalan dosyaya dönmek için eski coşkunu bulman gerekmiyor; kaldığın yeri görmen yeterli.",
+      "sourceHash": "72eded4eb0f79308ffc1c39251ad72fbcb42f581e63902497a11b2baa2e1df57"
+    },
+    "v5_pes_04": {
+      "text": "Bir kapının açılmaması, bütün denemelerini aynı kapının önünde geçirmeni gerektirmez.",
+      "sourceHash": "6d2df2c65d126f42a953ed044f1f040658c1119be2595555a9aa6c17c75fb191"
+    },
+    "v5_pes_05": {
+      "text": "Devam etmeyi seçiyorsan hangi desteğe ihtiyacın olduğunu söyle; yükün adı bilinsin.",
+      "sourceHash": "065090f318b7a5ea163f85d85738d8f8f06739c08d48c45d2ec5c2897b9d967f"
+    },
+    "v5_pes_06": {
+      "text": "Bir denemeyi bırakmak bütün emeğini değersizleştirmez. Öğrendiklerini yanına alabilirsin.",
+      "sourceHash": "9f34ca4b264e76d766519340f6a8a9cefc2d21bf7ce3d322755eb33a0d713db0"
+    },
+    "v5_pes_07": {
+      "text": "Zor bir haftanın ardından kararlarını tüm hayatına yayma; yalnızca bu haftanın yüküne bak.",
+      "sourceHash": "cfeaa69463d661fab850453264383e5a436ba0385a83ae5b3f58c78d6afde7e9"
+    },
+    "v5_pes_08": {
+      "text": "İçindeki itirazı dinle: bazen yeni bir yöntem, bazen daha adil koşullar istiyordur.",
+      "sourceHash": "08917c1ec4d8ff3f8690b7f21f2ff1aeabbf3f288b21bfa9adbd546abeda5c28"
+    },
+    "v5_pes_09": {
+      "text": "Birinin desteğini kabul etmek, tek başına taşıyamadığın hedefle bağını yeniden kurabilir.",
+      "sourceHash": "d88d3a6da1049f8f6c001a8b7149b74b114ec35d5a5a5a4a0adb7ac35442fce7"
+    },
+    "v5_pes_10": {
+      "text": "Henüz karar veremediysen kendine düşünme payı bırak. Her yorucu akşamın bir son olması gerekmez.",
+      "sourceHash": "5520a42b3c88aa5cd34a0cec47d4747779b20297236d5ab5ee40d616d0665fd0"
+    },
+    "v5_zorluk_sabir_01": {
+      "text": "Çözüm beklediğin yerde elindeki bilgiyi düzenle; belirsizliğin içinden seçebildiğin parçaya bak.",
+      "sourceHash": "6156317a5a213b30b354602b2465ff00250dbd267401e5a72818a5e5cd6b3818"
+    },
+    "v5_zorluk_sabir_02": {
+      "text": "Sabrın sınırı da dinlenilmeyi hak eder. Sürekli incindiğin yerde koşulları değiştirmeyi düşünebilirsin.",
+      "sourceHash": "47c41f0b9be646bf0c559124ca12eb6b5abd8d799552e408863db6ee12aca13e"
+    },
+    "v5_zorluk_sabir_03": {
+      "text": "Bir düğümü çözerken her çekiş işe yaramaz. Gevşetebileceğin yeri görmek için durabilirsin.",
+      "sourceHash": "bdd5b67cdc1c1e70a504192edf0731785d845880518dc24b126b9f4bae322bfc"
+    },
+    "v5_zorluk_sabir_04": {
+      "text": "Zor günün tamamını bir anda taşıma; önündeki saat için neye ihtiyaç duyduğunu sor.",
+      "sourceHash": "d45a42d49c612d59cc7fec2d315645e0fe41c9ccbed951340644b4895dda5177"
+    },
+    "v5_zorluk_sabir_05": {
+      "text": "Beklemek yoruyorsa bunu söyle. Sessizce dayanman, yaşadığın güçlüğün önemsiz olduğu anlamına gelmez.",
+      "sourceHash": "8c8f04885bc0d064e7834604482b78cb81c3627386b5306852b5e44d66d3a0ec"
+    },
+    "v5_zorluk_sabir_06": {
+      "text": "Sonucun gecikmesi sırasında kendine hayatı yasaklama; beklerken de güzel bir an yaşayabilirsin.",
+      "sourceHash": "b5bd0d9a00a3ab5c0ab075afe6e29534afb4d5b1b145304772158dd44dc55dd0"
+    },
+    "v5_zorluk_sabir_07": {
+      "text": "İçinden öfke geçerken de ölçülü bir yanıt seçebilirsin. Hissettiğinle yapacağın arasına zaman koy.",
+      "sourceHash": "98cd1d08d60301eed38e59334d99b38a477313be66eec5e8503706380d57bfb1"
+    },
+    "v5_zorluk_sabir_08": {
+      "text": "Zorlandığın konuda her gün yeni bir cevap bulamayabilirsin; bazı günler soruyu taşımak yeter.",
+      "sourceHash": "13c9f6f018aac457e90a28ba3c8c000fba5c53f6fbded63026f6a2a30ad1de70"
+    },
+    "v5_zorluk_sabir_09": {
+      "text": "Sabır gösterdiğin süreci ara sıra değerlendir. Değişen koşullar, verdiğin kararı yeniden düşünmene değer.",
+      "sourceHash": "c2b91b9d94d28ae1533651be24ac2c144420f3d782e3417c5db0cccf6882f65a"
+    },
+    "v5_zorluk_sabir_10": {
+      "text": "Yavaş çözülen bir mesele, yanında birinin oturmasıyla daha katlanılır olabilir; yakınlık isteyebilirsin.",
+      "sourceHash": "676589ff30f757139bfb032bb14622d2c65606db38c6d14162dc2e97d28d5cc9"
+    },
+    "v5_yorgunluk_sabir_01": {
+      "text": "Yorgun gözlerle aynı satırı okuyorsan kitabı kapatabilirsin; öğrenmen dinlenmeye de ihtiyaç duyar.",
+      "sourceHash": "f07781b018bd9df66d42ffc81c5249f44dd0f4228b1493cd0a342cc854a0ca80"
+    },
+    "v5_yorgunluk_sabir_02": {
+      "text": "Akşam kalan enerjini hesaplarken gün boyu taşıdığın görünmeyen işleri de hesaba kat.",
+      "sourceHash": "0ef285a98521c80faa7cfcda77f919db2a6aed6dcd1f996a02c32821bc2537f9"
+    },
+    "v5_yorgunluk_sabir_03": {
+      "text": "Bedeninin yavaşlama isteğiyle pazarlık yapmak zorunda değilsin; o isteği duyabilirsin.",
+      "sourceHash": "75ff8438aba8b0750bd7bf36e7167d3166f91befad99f1908df74a12d49d1a9f"
+    },
+    "v5_yorgunluk_sabir_04": {
+      "text": "Dinlenirken yarının işlerini zihninde çoğaltma. Bu aranın da kendine ait bir alanı olsun.",
+      "sourceHash": "24ee5cd401ecca2b722376ba07c4e1294d1bea4a75e788b0a523db1566c837ae"
+    },
+    "v5_yorgunluk_sabir_05": {
+      "text": "Yoğun bir günün sonunda daha az konuşmak isteyebilirsin. Yakınlarına bunu nazikçe anlat.",
+      "sourceHash": "73253adbd15c00dcec2df464e9a622c95f8f244eb66d33e2979e6213d5ef8b7a"
+    },
+    "v5_yorgunluk_sabir_06": {
+      "text": "Yapılacaklar listene bakarken kapasiteni de yanına koy; kâğıdın alanı senden geniş olabilir.",
+      "sourceHash": "074d73fd2bff642030bfbc7150a8210dddec14be75a6c69645cc0e701a919a67"
+    },
+    "v5_yorgunluk_sabir_07": {
+      "text": "Yorgunluğun seni sert konuşturduğunu fark ettiğinde konuşmaya ara vermek özenli bir seçimdir.",
+      "sourceHash": "1901b9afea856c985359b763f006d039a6299eae379b45be21be8846d5439675"
+    },
+    "v5_yorgunluk_sabir_08": {
+      "text": "Bir sandalyeye oturup omuzlarını bırakmak da günün meşru bir parçasıdır; boşluk doldurmak gerekmez.",
+      "sourceHash": "78a1fccbdc5ab0c44d42653997e3b2d9d31987a744cb1cf813d828c300dd4cc6"
+    },
+    "v5_yorgunluk_sabir_09": {
+      "text": "Enerjin azaldığında bir işi paylaşmayı teklif et. İhtiyacın, son noktaya gelmeden de duyulabilir.",
+      "sourceHash": "251621629cf4e22134be955cb720c006eacf7683eeeaee5bcc7e2d901c22ad70"
+    },
+    "v5_yorgunluk_sabir_10": {
+      "text": "Dinlenme zamanını kendine verdiğin sözlere ekle; tutulmaya değer sözlerin arasında o da var.",
+      "sourceHash": "b1b5181de4cef6e21e39229435817c5edef011dde8e9380819069887463bd18c"
+    },
+    "v5_tukenmislik_01": {
+      "text": "İşe bakınca yalnızca ağırlık hissediyorsan, bunu saklamak yerine güvendiğin biriyle konuşabilirsin.",
+      "sourceHash": "96a26e56fb8fbbbfb858675192183093af63bffac1cf3be83aa203001076e220"
+    },
+    "v5_tukenmislik_02": {
+      "text": "Uzun süredir taşıdığın iş yükünü görünür kıl. Sürekli fazlasını istemenin bir sınırı olmalı.",
+      "sourceHash": "474dbe126c8c574656aec5047db44e1a567d7290a0159f2e2c3b5ee10bbcd9de"
+    },
+    "v5_tukenmislik_03": {
+      "text": "İşin bütün alanını kapladığında hayatına geri çağırabileceğin bir ilişkiyi, uğraşı ya da sessizliği düşün.",
+      "sourceHash": "b9ed26424e4824928097cb9732bd3fac3bde5987841240553d459afac12b3b1b"
+    },
+    "v5_tukenmislik_04": {
+      "text": "Her isteğe yetişemediğinde değerin eksilmez. Üstlendiğin sorumlulukların yeniden konuşulması mümkün.",
+      "sourceHash": "98abaf646f9c3b28551373a535d11604a7589a4534eddb5316de7b2033fc512e"
+    },
+    "v5_tukenmislik_05": {
+      "text": "İşten uzaklaştığında suçluluk yükselse bile molaya hakkın var; dinlenmeyi bir sınava çevirme.",
+      "sourceHash": "a171fa8b26ffcf6a35febf011726cf7708dce28743632824147236f136f78da9"
+    },
+    "v5_tukenmislik_06": {
+      "text": "Seni zorlayan iş düzenini tek başına düzeltmek zorunda değilsin; paylaşılacak sorumlulukları adlandır.",
+      "sourceHash": "672c20d7fa45fc1aa149ff50c3b5a90e9564cf0b48c83a7a90f034c509826e15"
+    },
+    "v5_tukenmislik_07": {
+      "text": "İçinde heves bulamamak için kendini azarlama. Önce seni tüketen koşulların duyulmasına yer aç.",
+      "sourceHash": "bd6c2b558f0ed5a6e2ac7d1cc7b162e98916048e26c3a26af21f41c75c205456"
+    },
+    "v5_tukenmislik_08": {
+      "text": "İş günü bittikten sonra ulaşılabilirliğinin sınırını konuşmak, kendi zamanına sahip çıkmanın bir yoludur.",
+      "sourceHash": "6731cb237bec09d689ccd7a16979a2dacd91953560faa6f35f8f3b7eb5177dea"
+    },
+    "v5_tukenmislik_09": {
+      "text": "Toparlanmayı da bir performans hedefi yapma; ihtiyaçlarını fark etmek için acele etmen gerekmez.",
+      "sourceHash": "414de1189d54420388fb9a931130147c09d06c95c53b3568aa706c1a6b57c08e"
+    },
+    "v5_tukenmislik_10": {
+      "text": "Gücün uzun süredir yetmiyorsa profesyonel destek aramaya yer açabilirsin; bunu tek başına çözmen gerekmiyor.",
+      "sourceHash": "a4e89df78a9bb7869da81454a100105b045ffb03d228309c51cfee37eb80b537"
+    },
+    "v5_yeniden_01": {
+      "text": "Eski defterini açtığında kaldığın sayfaya mahkûm değilsin; yeni düşüncen için başka bir sayfa var.",
+      "sourceHash": "960df1d5d083379f623d4623fbd494badc3f7965b8822d777b55ffe6de57b407"
+    },
+    "v5_yeniden_02": {
+      "text": "Yeniden başlarken önceki denemenden bir bilgiyi yanına al. Bu kez tamamen yabancı bir yerde değilsin.",
+      "sourceHash": "d6990dafdfd33916a8d8df11eb32e7f1132b3875060012b25381e2c6fce5f479"
+    },
+    "v5_yeniden_03": {
+      "text": "Dönüşünü büyük bir duyuruya bağlama; sessizce başladığın iş de hayatında yer tutabilir.",
+      "sourceHash": "c73d82b75efdadeb24eeb1accc83bc0080554cc9579f09322a789f12d495fc21"
+    },
+    "v5_yeniden_04": {
+      "text": "Uzun bir aradan sonra eski hızına ulaşmak zorunda değilsin. Şimdiki koşullarınla tanış.",
+      "sourceHash": "cc3ff72b3ed36b63546b20d742e1f28730638186e5835f9cf5793633d10fc4e6"
+    },
+    "v5_yeniden_05": {
+      "text": "Yarım kalmış bir ilgine yeniden yer açarken, onu bıraktığın zamanki kişi olman gerekmiyor.",
+      "sourceHash": "5962bb386578a96a6d0a3be506044a242c0ce7ec589b538c2224f4d6ed5a2ace"
+    },
+    "v5_yeniden_06": {
+      "text": "Başlangıç için hayatının tamamen düzene girmesini bekleme; uygun bulduğun bir köşeden başlayabilirsin.",
+      "sourceHash": "9c52417e70e2e0c2266fc36d15c983c7da00de3050888662689dc60129981f10"
+    },
+    "v5_yeniden_07": {
+      "text": "Eski planını birebir canlandırmak yerine, işe yarayan kısmını yeni hayatına uyarlayabilirsin.",
+      "sourceHash": "c049882711cdc3760df424a7af0f5a34f1dd89027f51cc1c89a583f8dfc8e170"
+    },
+    "v5_yeniden_08": {
+      "text": "Dönmek istediğin yeri seçerken özlediğin şeyi açıkça adlandır; alışkanlıkla istek birbirine benzeyebilir.",
+      "sourceHash": "55a36b0097dde00277b83b8fc1542e416735773b8cd1e8450fe42432ba7107fd"
+    },
+    "v5_yeniden_09": {
+      "text": "Takvimde özel bir tarih aramadan da yeniden deneyebilirsin; bu kararın kendi anlamını taşır.",
+      "sourceHash": "6d1d4e08c211364d3ffb405dbfceaec1bc8218bb01f8df4302f9804ae88e74bf"
+    },
+    "v5_yeniden_10": {
+      "text": "Bir sayfanın kapanması seni boş bırakabilir. Yeni sayfayı hemen doldurmak zorunda değilsin.",
+      "sourceHash": "99977f23cd9edaebe2e16ccc7a20c95f26eb917912889ccea85f6b1d0d395258"
+    },
+    "v5_uzun_soluk_01": {
+      "text": "Aylar sürecek bir iş için, sürdürebileceğin bir tempo seç; planın içinde yaşamına da yer kalsın.",
+      "sourceHash": "6f9e112dc798e1e210df2299f39bffe850ae8b5ddd1067f8a2733dc8774fb6b7"
+    },
+    "v5_uzun_soluk_02": {
+      "text": "Uzak hedefin yanında yakın bir kontrol noktası belirle. Yolun nasıl gittiğini orada yeniden değerlendir.",
+      "sourceHash": "b6dc3105689604f01a915e6b86a2831f6be5299643d55e8cb76e36c895a3fdbf"
+    },
+    "v5_uzun_soluk_03": {
+      "text": "Uzun emek dönemlerinde değişmeyen günler olabilir; her tekrarın gösterişli görünmesi gerekmez.",
+      "sourceHash": "20dbb08d440a40751d419a16c5f648ec4006d25b5737c0c1e273599b631fa694"
+    },
+    "v5_uzun_soluk_04": {
+      "text": "Çalışmanı yarıda bırakırken döneceğin yeri not et; sonraki buluşmanız daha kolay başlayabilir.",
+      "sourceHash": "ff341ca68b1e4523fc4f7af7ef28e69a98db36eef6ede72689ae47127962d30b"
+    },
+    "v5_uzun_soluk_05": {
+      "text": "Bir hedefe aylar ayırırken onun hâlâ sana ait olup olmadığını sor; emeğin kararını esir almasın.",
+      "sourceHash": "038c857f95410bac97663d683934f34bddc50b3f27ca3157be20f32676e32959"
+    },
+    "v5_uzun_soluk_06": {
+      "text": "Sonucun uzağa yayılması, emeğini görmezden gelmeni gerektirmez; öğrendiklerini düzenli olarak kaydet.",
+      "sourceHash": "2ef955af1c7608e5937ca20fcb8cbaaecff71b746b5d33a9bbead898621a6605"
+    },
+    "v5_uzun_soluk_07": {
+      "text": "Uzun bir yol arkadaşlık ister; bazen bilgi, bazen cesaret, bazen yalnızca eşlik isteyebilirsin.",
+      "sourceHash": "bdf51a7bfdbfcfc77236c54a8b55308b6e45b51afb6c56a225cd4535a6fb076b"
+    },
+    "v5_uzun_soluk_08": {
+      "text": "Planında aksak günler için de alan olsun. Gerçek bir hayat, kusursuz çizilmiş bir takvime sığmaz.",
+      "sourceHash": "6ef6a2ad58b78af41116f8c14376ecd0b0337cd65cf0423f90bbf1b41bf57a25"
+    },
+    "v5_uzun_soluk_09": {
+      "text": "Yıllar içinde geliştirmek istediğin beceriye merakını da taşı; yalnızca bitiş çizgisine bakma.",
+      "sourceHash": "195d93554c76c47b251551ad8c2b2c91a2f171c3627487e6b16d53b0af484afc"
+    },
+    "v5_uzun_soluk_10": {
+      "text": "Kendini tüketerek koruduğun bir tempoyu yeniden görüşebilirsin; sürdürebilmek bazen azaltmayı ister.",
+      "sourceHash": "6b461c905e154018eae40c7454a79359ef007bb612b86c8211beb9a46df4d380"
+    },
+    "v5_umut_01": {
+      "text": "Şu anda göremediğin bir ihtimalin varlığına yer bırak; geleceğin bütün ayrıntıları henüz elinde değil.",
+      "sourceHash": "bedcc3a72ec25fca55ef0e7c296de8be227fe943175e754d14b838b41ca7ca08"
+    },
+    "v5_umut_02": {
+      "text": "İyi bir haber beklerken kendine kötü davranma; belirsizliğin içinde de özeni hak ediyorsun.",
+      "sourceHash": "8779de5a8a4a1cb593282dbf38c5fa9913d158bf5284a4650ed8b88fc7d49ba8"
+    },
+    "v5_umut_03": {
+      "text": "Pencereyi açıp dışarıdaki sesi duymak, zor bir günün dışında hâlâ hayat olduğunu hatırlatabilir.",
+      "sourceHash": "7b7f7909a5cc1e55eca0f558861377fc7334d4cd5b48c4efad28504f61b5947c"
+    },
+    "v5_umut_04": {
+      "text": "Umudun sönük olduğu bir akşamda onu zorla büyütme; güvendiğin bir sesin yanında kalabilirsin.",
+      "sourceHash": "ec5cb854451687459871cbf1f84964a642998804d8447e02c5777b958567cc80"
+    },
+    "v5_umut_05": {
+      "text": "Yarın için tek bir güzel ihtimal düşünmek yeterli olabilir; bütün geleceğe söz vermen gerekmiyor.",
+      "sourceHash": "84f7880c46c8d64e14f1613cc231b5c517630bd82b38cd8aa2e313de20d166ca"
+    },
+    "v5_umut_06": {
+      "text": "Henüz tanışmadığın insanlara, okumadığın sayfalara, denemediğin uğraşlara açık bir yer bırak.",
+      "sourceHash": "302646c2e07438491c79c193e252ca1daadcbba8715514d7d0c4591c86b0e8cb"
+    },
+    "v5_umut_07": {
+      "text": "Güç bir dönemin içindeyken güzel bir şeyden hoşlanman mümkün; acınla sevincin aynı güne sığabilir.",
+      "sourceHash": "315e6d033190cb54a11c2e15392572a7adb19fa4cea98b9de88790d65637c07c"
+    },
+    "v5_umut_08": {
+      "text": "Birinin sana uzattığı ilgiyi küçümseme; bazen ileriyi düşünebilmek, yanında biriyle kolaylaşır.",
+      "sourceHash": "355779354b7da615fa810172481f64e4be9b9dc7301293c2fda14a99559d456e"
+    },
+    "v5_umut_09": {
+      "text": "Beklediğin yol kapandıysa üzülmek için zamanın var. Yeni ihtimallere bakmak sonra da mümkün.",
+      "sourceHash": "fe108de1368937c61c39042504ac2c4faa27911fc574a4e3012b86fb9ea8fb3a"
+    },
+    "v5_umut_10": {
+      "text": "Gelecekten emin olmasan da ona özenle yaklaşabilirsin; umut bazen bu yaklaşımda kendine yer bulur.",
+      "sourceHash": "dc94a4a316bbdbe608e4d6e5b600cf47a45232bb476fc6cdcd6c4735a27c3ae8"
+    },
+    "v5_erteleme_01": {
+      "text": "Ertelediğin işi bir fiille tarif et: dosyayı aç, başlığı yaz, ilk soruyu oku. Başlangıç görünür olsun.",
+      "sourceHash": "e2c2fb8d6ff341f921847830ff621912a6d67578b946b3cbffa0fadd99265c18"
+    },
+    "v5_erteleme_02": {
+      "text": "Yapmaktan kaçındığın işin hangi kısmı seni zorluyor? Belirsizliği adlandırmak başlangıcı sadeleştirebilir.",
+      "sourceHash": "0461f8e2459e4a66abb3184fd9d22cc87f6b023c447080ae839ed3ad9fc635ad"
+    },
+    "v5_erteleme_03": {
+      "text": "İlk taslağın görevi üzerinde çalışabileceğin bir şey bırakmak; daha doğarken kusursuz olmak zorunda değil.",
+      "sourceHash": "1a11800fa0ea4af1a80dd92b08c5914c250420fe3cc3f1a86090902e048cc1cc"
+    },
+    "v5_erteleme_04": {
+      "text": "Başlamayı unutuyorsan işi bildiğin bir ana bağla: kahveni masaya koyduğunda belgeyi açabilirsin.",
+      "sourceHash": "1d63d64cb74a5f7febec1f9ea73cde313887c966ba323755d7e06c367127cbff"
+    },
+    "v5_erteleme_05": {
+      "text": "Bir işe ayıracağın süreyi önceden sınırla; başlamak, bütün akşamını ona vermeyi gerektirmesin.",
+      "sourceHash": "4871f4d5a21f568a96cbfb0259f1f7cdd7d995f9ee0eaed1acec95c4c079da48"
+    },
+    "v5_erteleme_06": {
+      "text": "Hazırlanmakla oyalanmak birbirine karıştığında, işin kendisine dokunan tek bir şey yap.",
+      "sourceHash": "1e22bb70c0a0693650be5411fed98b51326f70c7db94d0ac359ac89c3d3a8685"
+    },
+    "v5_erteleme_07": {
+      "text": "Aklında büyüyen telefon görüşmesi için ilk cümleni yaz; gerisini konuşmanın içinde bulabilirsin.",
+      "sourceHash": "c6a96f4afbe40aa331689354c62cd2a8b9d7069d9a1b26f52c4532b5fce5cb3a"
+    },
+    "v5_erteleme_08": {
+      "text": "İşi ertelediğin için kendini azarlamak yeni bir yük ekler. Başlama koşullarını biraz kolaylaştır.",
+      "sourceHash": "ca35497c0445a59063e3cb264d57553a8238804c18d1259fef6880c3cbeb4f38"
+    },
+    "v5_erteleme_09": {
+      "text": "Son ana bıraktığın görevden sonra yalnızca suç arama; neyin zorlaştırdığını da öğrenmeye çalış.",
+      "sourceHash": "77aad9f9e5e3b588a2991367bbb1983e5a61e3be150b5e2c8d81936941ab408b"
+    },
+    "v5_erteleme_10": {
+      "text": "Bitirecek zamanın yoksa ileride işine yarayacak bir hazırlık bırak; gereken malzemeyi bir araya getir.",
+      "sourceHash": "2663e12a7956877821b8f4b82351156e3f1f6637b57b99e937b006eb377008ad"
+    },
+    "v5_derin_odak_01": {
+      "text": "Önündeki çalışmaya bir soru ver. Ne aradığını bilmek, ayrıntılar arasında yönünü korumana yardım edebilir.",
+      "sourceHash": "25f12cbba95acdb19c25fe85c14ca6209534de0cf9db24544261b581c8d0bffd"
+    },
+    "v5_derin_odak_02": {
+      "text": "Ekrandaki gereksiz pencereleri kapat; düşüncenin aynı anda her yere yetişmesi gerekmiyor.",
+      "sourceHash": "a9ff40bb263d48ff8bb2da0b9c47805cb1c99dbf02ac15fd900772a3b0cdb0c1"
+    },
+    "v5_derin_odak_03": {
+      "text": "Bir paragrafı gerçekten anlamak için yavaşlayabilirsin; gözünün hızına yetişmek zorunda değilsin.",
+      "sourceHash": "168ad0d4423e69ff12604074afd7085c86e5d75309714b03f876bb5ffda7b675"
+    },
+    "v5_derin_odak_04": {
+      "text": "Aklına başka bir iş düştüğünde kenara not al. Unutmama çabasını kâğıda bırakıp geri dönebilirsin.",
+      "sourceHash": "e1c572a8fdb0730319996939ffd322b2194aa7a21fe02d97ed49ed8f20e12d81"
+    },
+    "v5_derin_odak_05": {
+      "text": "Odaklandığın sürenin bir sonu olsun; ne zaman duracağını bilmek o alanı korumayı kolaylaştırabilir.",
+      "sourceHash": "74edfbf8bbb8e641a46c0f0839fe8a36d47119e6e374b4882c3130343db289cc"
+    },
+    "v5_derin_odak_06": {
+      "text": "Zor bir düşünce hemen açılmayabilir. Cevabı aceleye getirmeden ona biraz kesintisiz zaman ver.",
+      "sourceHash": "246436fbab1319b2d4dbfdfbb14f00feea14c8c44f2335b04fecfee6faf7c73c"
+    },
+    "v5_derin_odak_07": {
+      "text": "Bu çalışma sırasında bitirmek istediğin parçayı seç; dikkatin için açık bir sınır çiz.",
+      "sourceHash": "cb79b0d6438d2fe24796a40b0fbe169d2a8ddf1a69ec2475e7182d1e327ccda5"
+    },
+    "v5_derin_odak_08": {
+      "text": "Bir işle derinleşirken çevrene neye ihtiyaç duyduğunu söyle; sessizlik bazen birlikte korunur.",
+      "sourceHash": "afc02f0d46fe7405439041a047c326eac760253f27b123986c7dfe7f8d0d452f"
+    },
+    "v5_derin_odak_09": {
+      "text": "Birbirine benzeyen iki fikri ayrı ayrı yaz; aralarındaki farkı aramak, düşüncene daha keskin bir yön verebilir.",
+      "sourceHash": "5125861775b1f113a64bd6c6eb42e9b42744a0c9d46cb793d837680da0510e74"
+    },
+    "v5_derin_odak_10": {
+      "text": "Dikkatin yorulduğunda kısa bir ara verip yeniden bakabilirsin; aynı yere zorla bakmak tek seçenek değil.",
+      "sourceHash": "dd927e0350ba8218b6ecb984c5e8eafa848de9bce3c549758579c537f064a846"
+    },
+    "v5_durtu_01": {
+      "text": "İlk isteğin geldiğinde ona hemen cevap vermeyebilirsin; aranızda seçimine ait bir boşluk var.",
+      "sourceHash": "0380434edc0bfc326163baa22576d80fb8ecfd49e4ec1dab7f218fa2c986710a"
+    },
+    "v5_durtu_02": {
+      "text": "Göndermeden önce mesajını bir kez daha oku; anlık öfkenin söylemek istediğini doğru taşıyor mu?",
+      "sourceHash": "397b6cd2beef1c40bb41f4efb1bb369611f1f3789f10f480d1445a9bf50987e5"
+    },
+    "v5_durtu_03": {
+      "text": "Elin otomatik olarak ekrana gittiğinde durup ne aradığını sor; bazen aradığın şey telefonda değildir.",
+      "sourceHash": "4d739fc1e92d24cc092e5b59bf083944f3bd40e23e70afdf60edacaa5aaf1e3d"
+    },
+    "v5_durtu_04": {
+      "text": "Her isteği bastırman gerekmiyor. Hangisini izlemek istediğine merakla bakmak da bir seçenek.",
+      "sourceHash": "250f3f5817c2c8f05b92b399341b6b66b62157f1f8c1a95b9d4fc5d98a9f2872"
+    },
+    "v5_durtu_05": {
+      "text": "Bir kararın yalnızca ilk heyecanını düşünme; sonrasında yaşayacağın akşama da zihninde yer aç.",
+      "sourceHash": "467c51d6d0a7ac6af5ac3f891ed6cc7375038b287ec371b2eb72aecc02bdccfe"
+    },
+    "v5_durtu_06": {
+      "text": "Aklından geçen sert cümleyi yazıp göndermeden bırakabilirsin; ifade etmekle iletmek ayrı seçimlerdir.",
+      "sourceHash": "b72ced3bf5e3e43deda4207873745024282de9d365d102d80abb0d4c5209b3a3"
+    },
+    "v5_durtu_07": {
+      "text": "Bir şeyi hemen istemen, ihtiyacının acil olduğu anlamına gelmeyebilir; kendine biraz gözlem zamanı ver.",
+      "sourceHash": "0096a58d8bde81f572ef60decedad5a3c2fed230ab6cb03346f36ecca8c76eec"
+    },
+    "v5_durtu_08": {
+      "text": "Dikkatini çeken her çağrının peşine düşmeden önce, yarım bıraktığın şeye bir kez bak.",
+      "sourceHash": "0d9b11987ada780bc4c0861f84132f3ece8140f2f72bfd69b86cced729420f5c"
+    },
+    "v5_durtu_09": {
+      "text": "Seçimlerini kolaylaştıran bir çevre kurabilirsin; her an kendinle mücadele etmen gerekmiyor.",
+      "sourceHash": "44c69d03368f0b58eb1a92355afcc0c54566bc34d086265362dfaa4dd1400622"
+    },
+    "v5_durtu_10": {
+      "text": "Bir dürtüyü fark etmiş olman, onun hikâyesine kapılmadan bakabileceğin bir an yaratır.",
+      "sourceHash": "9b74cabf4db9d0b509339638e5739bc14b8807501cece0b87b92e01d3eb42911"
+    },
+    "v5_rutin_01": {
+      "text": "Sabah kullandığın fincanın yanına defterini koy; yapmak istediğin şeyin gündelik hayatta bir yeri olsun.",
+      "sourceHash": "d093cf6c6453829ebc5742140c9a8e70bc2100fe8475ba03436f7aa6caf6ed0b"
+    },
+    "v5_rutin_02": {
+      "text": "İyi bir rutin, en coşkulu gününe göre kurulmak zorunda değil; sıradan gününde de karşılığı olsun.",
+      "sourceHash": "d199f358cfdb31aaa13fe1a1742253616d25b1786ea3566a109cd8f97e102acd"
+    },
+    "v5_rutin_03": {
+      "text": "Tekrar ettiğin işi ara sıra gözden geçir; bir zamanlar yararlı olan düzen artık sana dar gelebilir.",
+      "sourceHash": "172831463d2f5f753c47846350262624882e98a0e4b6489c272c21ea53c26858"
+    },
+    "v5_rutin_04": {
+      "text": "Bir günün boş kalması, öğrendiklerini elinden almaz. Bir sonraki uygun anda yeniden buluşabilirsiniz.",
+      "sourceHash": "cfb84743e22fc0ce67ee5523a759c4931413a49bafab49e44616bf5dcf21bba2"
+    },
+    "v5_rutin_05": {
+      "text": "Her sabah yeni bir karar vermek yoruyorsa, başlama yerini ve zamanını önceden belirle.",
+      "sourceHash": "dce982d9426db80b7be9be38378ffa2f86411168e9f8325174c464b3f0654a70"
+    },
+    "v5_rutin_06": {
+      "text": "Alışkanlığına hayatında yer açarken, onun sana ne kattığını da fark et; tekrarın bir anlamı olsun.",
+      "sourceHash": "2119dbe45d8962393d4ce87ef025d44a515d9908b0256a772c38b1a5867c4433"
+    },
+    "v5_rutin_07": {
+      "text": "Günün sonunda araçlarını yerine koymak, yarınki başlangıcına bırakabileceğin sessiz bir kolaylıktır.",
+      "sourceHash": "7282ff3f776a3b86df671e128f6e9e5ba29b2922ec7b5e00e66a0355bb89aa56"
+    },
+    "v5_rutin_08": {
+      "text": "Düzenin değiştiğinde kendini suçlamadan rutini de değiştir; hayatın yeni biçimi yeni bir yerleşim isteyebilir.",
+      "sourceHash": "7282da0f90d2048f4bf601dcd86c144f357e71a90746e5f78892625226e7d3d4"
+    },
+    "v5_rutin_09": {
+      "text": "Bir alışkanlık kurarken herkesten aynı sürede alışmayı bekleme; kendi deneyimini izlemeye değer.",
+      "sourceHash": "1e3fa26f59807c7571d66afb0ebbc6586f2dd22b89f819450d2e62719e09d57e"
+    },
+    "v5_rutin_10": {
+      "text": "Tekrarın içindeki ayrıntıları gör: elinin alıştığı hareket, kolaylaşan hazırlık, daha tanıdık bir başlangıç.",
+      "sourceHash": "dd203c540723bfde1d2d871581bf69bb8cef5163da9fc1f607b93535569d9896"
+    },
+    "v5_dagilma_01": {
+      "text": "Dikkatin başka yere kaydığında dönüş yolunu sade tut: son okuduğun cümleye yeniden bak.",
+      "sourceHash": "2fea0f67ef2853629eea838685eaf918e48efae553d6309b39d918091c79343c"
+    },
+    "v5_dagilma_02": {
+      "text": "Masanın üzerindeki her iş aynı anda çağırıyorsa, şu an ilgileneceğin birini önüne al.",
+      "sourceHash": "a49a39e171f222d6fa728f3dbc2a3d006fb740a648aeed58bfd66e467be7aeb9"
+    },
+    "v5_dagilma_03": {
+      "text": "Dağılan zihnine kızmadan önce çevrene bak; çok sayıda çağrı arasında kalmış olabilirsin.",
+      "sourceHash": "f0f9dcd0757a08322c2fa6e6382c80ea2445597328ee7780da957ca8a5690a73"
+    },
+    "v5_dagilma_04": {
+      "text": "Bir düşünce seni başka yere götürdüyse döndüğün anı fark et; o fark ediş de dikkatin bir parçasıdır.",
+      "sourceHash": "0d5c8707c93c705f6e709019e85eda44a5388f8864cf1d28b043eb6741066e9d"
+    },
+    "v5_dagilma_05": {
+      "text": "Bildirimleri uygun bir süre sessize alabilirsin; her haberin düşüncenin ortasına girmesi gerekmiyor.",
+      "sourceHash": "95cac8d4864a9ccbf22b0cd72ea6924bac7a387a682fa43c715c6825d119c3a4"
+    },
+    "v5_dagilma_06": {
+      "text": "Aklını meşgul eden işi bir notta bekletebilirsin; hatırlamak için onu sürekli zihninde taşımak gerekmez.",
+      "sourceHash": "ad669e9f31e5d1493cba50f2a56264014e1364ec98c73f7934df2c0472a234f1"
+    },
+    "v5_dagilma_07": {
+      "text": "Kesintiden sonra hemen eski hızını bekleme. Nerede kaldığını bulmak için kendine bir an ver.",
+      "sourceHash": "017238863ff7703611e1910547594c19b7a25018bc277f78eaed02045d0b224c"
+    },
+    "v5_dagilma_08": {
+      "text": "İki iş arasında sürekli gidip geldiğini fark edersen birini bitireceğin noktayı belirle.",
+      "sourceHash": "3528ed9f5c07a0895f87f1b3250c3db898c2a0bcb302781079bcd0159992b0eb"
+    },
+    "v5_dagilma_09": {
+      "text": "Zihnin çok doluyken öncelik seçmek güçleşebilir; bütün listeyi çözmeden yalnızca sıradakini belirle.",
+      "sourceHash": "0e03d7c984d23eaf8d0be8264c0801cc114ceda0b50fa5d23c4ce395492822b7"
+    },
+    "v5_dagilma_10": {
+      "text": "Dikkatini geri çağırırken sesin yumuşak olsun; kendinle kurduğun ilişki de çalışmanın içinde kalır.",
+      "sourceHash": "6259547946c0a8dd5a4b5496451ca6e69090949d00be1906ab0d5d1edf34e872"
+    },
+    "v5_ozguven_01": {
+      "text": "Söz almadan önce kusursuz bir cümle kurman gerekmiyor; anlaşılır bir düşünce yeter.",
+      "sourceHash": "e8379daf06ddf9bae6e5efebbe5487c5d0b405ce1afc196e92d5b04c420ba8cf"
+    },
+    "v5_ozguven_02": {
+      "text": "Bir toplantıda hazırladığın not, heyecanın arasından fikrine uzanan bir köprü olabilir.",
+      "sourceHash": "4e602788fe821533d6245fea354a015bfaa529a285b0a2a9b074a97fb8615ca4"
+    },
+    "v5_ozguven_03": {
+      "text": "Bir beceriyi görünür kılmanın yolu, bazen yaptığın işi saklamadan göstermektir.",
+      "sourceHash": "cf312c6931e13a2586954f3fbe01ff34c754de04fd890bd9f2e2639c8adb9d1b"
+    },
+    "v5_ozguven_04": {
+      "text": "Açıklama istemek, konuşmanın dışında kalmak yerine ona bilinçle katılmaktır.",
+      "sourceHash": "ee557744199b483f797e08bffbd07b4aacbc12737e17830d5a39cde1eb5cf21c"
+    },
+    "v5_ozguven_05": {
+      "text": "Övgüyü küçültmeden kabul et; emeğinin duyulmasına sen de izin verebilirsin.",
+      "sourceHash": "7781032c57befb19a36cc724e29c17dd8b8b526e011c955a2ceaa1d3c32b1856"
+    },
+    "v5_ozguven_06": {
+      "text": "Bir itirazı sakin bir gerekçeyle dile getirmek, sesine sağlam bir zemin kazandırır.",
+      "sourceHash": "d305e5a4200815eaba61a6ea08f438adcf49d5736d109d5cd0bcddfece2d81c5"
+    },
+    "v5_ozguven_07": {
+      "text": "Hazırlığını bir kez sesli prova etmek, söyleyeceklerinle arandaki mesafeyi azaltabilir.",
+      "sourceHash": "badd622805e6d01361fa676dd77ebb96d9bd0b4377d6d01b8c38d3c75547ea99"
+    },
+    "v5_ozguven_08": {
+      "text": "Yeteneğini anlatırken abartmana gerek yok; yaptığın bir örneği açıkça paylaş.",
+      "sourceHash": "642f9874c0b6684529a600745ccf0fa3e8ceaed6f0fb2b82f793abf5624ed861"
+    },
+    "v5_ozguven_09": {
+      "text": "Sınır koyduğun bir cümle kısa olabilir; saygın uzun açıklamalara bağlı değildir.",
+      "sourceHash": "d5380a5b09928f5a355a738a74b9dcf11758fa3418d9587625a4139980fd714b"
+    },
+    "v5_ozguven_10": {
+      "text": "Geri bildirimden işe yarayanı seçmek, kendini tanıma becerinin bir parçasıdır.",
+      "sourceHash": "cc14dd9a4e9e87d9ced9c0db4dd067dee8b22c4ea25a433c0470f7776893d592"
+    },
+    "v5_korku_01": {
+      "text": "Korkuna bir isim verdiğinde, sisin içinde tam olarak neye baktığını görmeye başlayabilirsin.",
+      "sourceHash": "37f12676d36feff59c175740373ca8811929944ecf762211d40853d9f00c696c"
+    },
+    "v5_korku_02": {
+      "text": "Bir tehlikeyi ciddiye almakla, her ihtimali tehlike saymak arasında düşünmeye yer var.",
+      "sourceHash": "94280a8906737d98469701c7e3a2b9de59030e0093447165c7762b76ba6bbb47"
+    },
+    "v5_korku_03": {
+      "text": "Cesaret bazen bir kapıdan geçmek, bazen güvenliğin için o kapıyı kapatmaktır.",
+      "sourceHash": "d6ae737c0b46442083800fe0b5e8940029dc30bfcc1f066ea80267e6d0c78275"
+    },
+    "v5_korku_04": {
+      "text": "Korktuğun işe bakarken, ihtiyaç duyacağın desteği de planın içine kat.",
+      "sourceHash": "037d8513dcbe3a55bd246b86f42d00b714bfc8498ec791cfe55df5bc29a98269"
+    },
+    "v5_korku_05": {
+      "text": "Henüz hazır hissetmiyorsan, önce neyi öğrenmenin seni hazırlayacağını araştır.",
+      "sourceHash": "49f7129759627553f29c18d3e58487cda8af7805388c64b6ce8a699ab86f23e3"
+    },
+    "v5_korku_06": {
+      "text": "İçindeki alarmı duy; ardından çevrene bakıp elindeki gerçek bilgileri topla.",
+      "sourceHash": "ac61e174a04b38c40edb83eca376d62a28c442e5a6f1b38cdf3f3c0f61264231"
+    },
+    "v5_korku_07": {
+      "text": "Zor bir konuşmanın ilk cümlesini yazmak, belirsizliğe çizilmiş bir sınır olabilir.",
+      "sourceHash": "47bf28a758794db7aa10a9d8c294c3b3454712cdb53e2e6ce8cabd227f747e8d"
+    },
+    "v5_korku_08": {
+      "text": "Korkunun yanında merak da durabilir: Bu deneyimde öğrenebileceğim ne var?",
+      "sourceHash": "5668ca62424b9674c1aad7b3500762e1ce42f15980b6e29dd052d1fa01bd7bf0"
+    },
+    "v5_korku_09": {
+      "text": "Çekindiğin bir denemeye, durabileceğin ve geri dönebileceğin güvenli bir alan seç.",
+      "sourceHash": "84122031de1149f66a7912f6a310fb1c41d8b3a9883e71f7b7687f6b276cbea7"
+    },
+    "v5_korku_10": {
+      "text": "Kalbin hızlı atarken de düşünmek için zaman isteyebilirsin; acele borcun yok.",
+      "sourceHash": "46e053dbfa4a186b6684ff6eceb27e457aca9701bc2928ad105d71df16456d22"
+    },
+    "v5_reddedilme_01": {
+      "text": "Bir yanıtın olumsuz gelmesi, anlattığın hikâyenin geri kalanını silmez.",
+      "sourceHash": "5552518af2fa3b68039930ed686833fc659479ee02c7393c8063d1757f4fef86"
+    },
+    "v5_reddedilme_02": {
+      "text": "Sana uygun olmayan bir yerden kabul almak, kendine uygun bir hayatın tek yolu olamaz.",
+      "sourceHash": "81ed5689d71c22b033d1f5d272d9e14f66a95a97ad8651a2296e3b0cabaa80b4"
+    },
+    "v5_reddedilme_03": {
+      "text": "Reddedilmenin acısını hemen ders çıkararak örtmek zorunda değilsin; önce üzülmeye yer ver.",
+      "sourceHash": "10c2562fa7601143d2e14c9e40b9d6dc2917baa94120647db395caeb5192880d"
+    },
+    "v5_reddedilme_04": {
+      "text": "Bir başvurunun sonucu, bütün yeteneklerinin eksiksiz bir değerlendirmesi değildir.",
+      "sourceHash": "cb4db1c1dd270899da101bc1228209313335d5f2b730919a1c986090cbeb2284"
+    },
+    "v5_reddedilme_05": {
+      "text": "Cevapsız kalan bir mesajın boşluğunu, kendin hakkında ağır hükümlerle doldurma.",
+      "sourceHash": "13aae3cf177b0b2dd006a8d99b812a08728008dfe8e1ff9843ea712c0099f784"
+    },
+    "v5_reddedilme_06": {
+      "text": "Birinin sınırını kabul etmek, kendi değerini bırakmanı gerektirmez.",
+      "sourceHash": "b8fdcf799f5ef9195f966d8e5e2ebaf6cfba59320da511554386eea5ac69cb9d"
+    },
+    "v5_reddedilme_07": {
+      "text": "Kapanan bir görüşmeden sonra notlarını toparla; deneyimin yanında kalabilir.",
+      "sourceHash": "04e25781ed03fd6e9da16f9e3b574081f6db4791fcc5e09e56cbbb0d324acd91"
+    },
+    "v5_reddedilme_08": {
+      "text": "Yeniden denemeden önce ne istediğini sor; her kapıyı tekrar çalmak zorunda değilsin.",
+      "sourceHash": "37e1e9e153d170b4f42ba63c55553410f1c3a34893d4c5914270c5190305e85b"
+    },
+    "v5_reddedilme_09": {
+      "text": "Bir hayal kırıklığını güvendiğin biriyle paylaşmak, yükün tek kişiye kalmasını önler.",
+      "sourceHash": "99c9dd54a0c342cbe13b96b6dc7cf0825f363a4ef0bee67f13194901a9a6caf2"
+    },
+    "v5_reddedilme_10": {
+      "text": "Kabul görme isteğin anlaşılır; kendine saygını bu bekleyişte askıya alma.",
+      "sourceHash": "05a0fdf512a619a6bd84e1ee370b8719128371e8c2e9fc5058038d2502735289"
+    },
+    "v5_risk_01": {
+      "text": "Bir ihtimali değerlendirirken, kazanacakların kadar göze alabileceklerini de yaz.",
+      "sourceHash": "a8e8491c0db4c8b47a4c246ef3cf775fd755c7c1f5c806efa49b2af0fc775243"
+    },
+    "v5_risk_02": {
+      "text": "Cesur bir kararın içinde hazırlık, bilgi ve gerektiğinde geri dönme payı bulunabilir.",
+      "sourceHash": "847fb112737da8341bb9ef40f7a034dfcf49af95c2580c11fa6f20e9586ee7b6"
+    },
+    "v5_risk_03": {
+      "text": "Denemeyi küçültmek bazen düşünceyi gerçek hayatla tanıştırmanın en akıllı yoludur.",
+      "sourceHash": "baa64c8ce69fb40128593fa6c30b19226d162410cb4ee78211efc6ea280f9df6"
+    },
+    "v5_risk_04": {
+      "text": "Bir karara hayır demek, enerjini daha anlamlı bir ihtimal için saklayabilir.",
+      "sourceHash": "e37adf8be2de0a03a01ff2ad7c6fa1d610b2e91eeeb13076310496c45d689b11"
+    },
+    "v5_risk_05": {
+      "text": "Heyecanını dinlerken, bu seçimin yarınki yükünü de dürüstçe hesaba kat.",
+      "sourceHash": "28d9ca994b1782b6d4df945d6c2f9172c4f407802394366ec39a83f37e3c3271"
+    },
+    "v5_risk_06": {
+      "text": "Geri alınabilir bir deneme, büyük bir belirsizliğin içinden bilgi çıkarabilir.",
+      "sourceHash": "dad5dc084befb46db8350ddd8526d01df156f46af5f2881e4c36d4646e6af1dd"
+    },
+    "v5_risk_07": {
+      "text": "Bir fırsatın acil sunulması, onu aceleyle kabul etmen gerektiği anlamına gelmez.",
+      "sourceHash": "a57956ac92c441ca15ffe6ecb7b3993be9bc604c744352cb7590341122bd9f3b"
+    },
+    "v5_risk_08": {
+      "text": "Sınırlarını önceden belirlemek, denemenin içinde ne zaman duracağını hatırlatır.",
+      "sourceHash": "c4af1d3b5ba2b8d08671082589fb93aaed441d935b7c0be543a1420f01274a44"
+    },
+    "v5_risk_09": {
+      "text": "Başkalarının alkışı geçtikten sonra da taşımak isteyeceğin bir karar ara.",
+      "sourceHash": "e9dfa60736650f6c912c69e34bfb951ca8a290b66e51662587d1921fb315c6a7"
+    },
+    "v5_risk_10": {
+      "text": "Bilinmeyene yönelirken yanına bir soru al: Yanılırsam neyi korumak isterim?",
+      "sourceHash": "708b3022ec435a27818015805ef9c906762467d0d22fc2832489e014f7aacac1"
+    },
+    "v5_utangaclik_01": {
+      "text": "Bir sohbete katılmak için en ilginç kişi olman gerekmiyor; merakın da yer açabilir.",
+      "sourceHash": "84a309bd9112c4ffbabdfe31c90b7350467cec2995139872cf0e3969f2cd71ff"
+    },
+    "v5_utangaclik_02": {
+      "text": "Sessiz başlaman, konuşmanın geri kalanında söyleyecek sözün olmadığı anlamına gelmez.",
+      "sourceHash": "c153796f81fc576d417fa315af70e49c24998a410e7fd9da3b49d88b9e29bb1c"
+    },
+    "v5_utangaclik_03": {
+      "text": "Tanışırken ortak bir ayrıntıyı fark etmek, ezberlenmiş cümlelerden daha doğal bir giriş olabilir.",
+      "sourceHash": "f172b3d7029960592f25724944dc333ba60ae886f05e20c685e0167a6b53a24c"
+    },
+    "v5_utangaclik_04": {
+      "text": "Kalabalık zor geliyorsa, önce tek bir kişiyle kurabileceğin rahat bir konuşma düşün.",
+      "sourceHash": "bfd69700969e2644ebd441829ce7ea00e379444d5b5c5dd88018fd311e308bd4"
+    },
+    "v5_utangaclik_05": {
+      "text": "Kızardığını fark ettiğinde de cümleni tamamlamaya hakkın var; kendine zaman tanı.",
+      "sourceHash": "f4671412f8763dbf01fbf86cf9c12d6168ac007224c771b0b37eec842fabdb4a"
+    },
+    "v5_utangaclik_06": {
+      "text": "Dinlediğini belli eden bir soru, sessizliğini sıcak bir temasa dönüştürebilir.",
+      "sourceHash": "f4738def8f5d4a433720faf8531d5d0f72f946a85d4df33fcaa038a134b7554a"
+    },
+    "v5_utangaclik_07": {
+      "text": "Herkese hemen açılmak zorunda değilsin; güvenin oluştuğu hızda paylaşabilirsin.",
+      "sourceHash": "bf9718ef8d1be67a07e4f27fe34d654b744d8fac0fdef797d9b32caddfce11bb"
+    },
+    "v5_utangaclik_08": {
+      "text": "Bir daveti kabul ederken, kendine rahat edeceğin bir kalış süresi belirleyebilirsin.",
+      "sourceHash": "2a977fb4a02f6f50945b0e391fe7e22640890d897fcfe7a2b097c6e4a59a3f2f"
+    },
+    "v5_utangaclik_09": {
+      "text": "Sohbetten sonra yalnızca takıldığın kelimeyi değil, kurduğun bağı da hatırla.",
+      "sourceHash": "0600c2393aa780c1c3d9dace6de5e6e2b958ba91554d7bd421fce53dbf8683c6"
+    },
+    "v5_utangaclik_10": {
+      "text": "Sakin bir sesle söylenen düşünce de konuşmanın yönünü değiştirebilir.",
+      "sourceHash": "8487403e481bfc2d7dbc7ec4988948746a6097051efe11595bb4301788bd8075"
+    },
+    "v5_marcus_01": {
+      "text": "Kalabalık bir sabahın içinde de adil davranmak için kendime küçük bir alan açabilirim.",
+      "sourceHash": "d6b45bfb52ce4768be7352d6830bf72d8c1ea6424fe5b639b4143ccd1eb61191"
+    },
+    "v5_marcus_02": {
+      "text": "İşim bittiğinde ardımda kalan karışıklığı da görüyorum; sorumluluğum, bana kolay gelen yerde sona ermiyor.",
+      "sourceHash": "99bd2026cb62d414ac0ef18f025b13bde78f6e6fdfb267307337de3e1e5d7117"
+    },
+    "v5_marcus_03": {
+      "text": "Tartışma bittiğinde, aynı hayatı paylaşmaya devam edeceğimiz gerçeği masada kalır.",
+      "sourceHash": "a7124948fd3fb309f1aaf953fe6d7a2eafeb9c27e1068b9649c7882913e299f3"
+    },
+    "v5_marcus_04": {
+      "text": "Birinin sertliğine cevap verirken, o sertliği bir başkasına taşımamayı deneyebilirim.",
+      "sourceHash": "2eb5af8804a34355db5d2bbee15ee27e9ffd336658b1055772ea04d59bb1faf1"
+    },
+    "v5_marcus_05": {
+      "text": "Planım aksadığında önce durumu göreyim; günün geri kalanına hükmü aceleyle vermeyeyim.",
+      "sourceHash": "0cc8f68d19dde49b11eb0ea5da5bf67b88c77f667383150c48f65c48b97041bf"
+    },
+    "v5_marcus_06": {
+      "text": "Akşamın dürüst muhasebesi için kendime saldırmam gerekmiyor; yaptığım işe açıkça bakmam yeter.",
+      "sourceHash": "28a3a8d8c5dc63e7ebf6fc4e352c797c03c7b7e78e6bbe2554a99a55b56dd186"
+    },
+    "v5_marcus_07": {
+      "text": "Yaptığım iyiliğin karşılığını beklerken, o iyiliği bir pazarlığa çevirmek istemiyorum.",
+      "sourceHash": "41efcba23f82d55168c53a5173798531705610c8faac9f299a48f1b6bb204822"
+    },
+    "v5_marcus_08": {
+      "text": "Geçici bir imkâna gösterilen özen, onu sonsuza kadar elimizde tutma çabasından farklıdır.",
+      "sourceHash": "80dc38b233ad1e9704c0da615e45242d98a713e2df49c9383a7c9982b7d053f7"
+    },
+    "v5_marcus_09": {
+      "text": "Bana düşen işi bitirirken, bu işin dokunduğu insanların da gününü düşünmek isterim.",
+      "sourceHash": "0db61c14c973c85bd158a7373b84eeb86dae5a825c692cdbc1186f6d8814d510"
+    },
+    "v5_marcus_10": {
+      "text": "İyi davranmakta zorlandığım bir gün, kendi ilkelerime yeniden dönmem için bir çağrı olabilir.",
+      "sourceHash": "3b04fb414bac729f2ac515c03385e2e53d5ee72fedb1ff97390c60bacbcc26bc"
+    },
+    "v5_seneca_01": {
+      "text": "Meşguldüm dediğim bir günün ardından, beni gerçekten neyin meşgul ettiğini kendimden saklamayayım.",
+      "sourceHash": "d3cb3ee46ee5c48c9f38a5f424ed0e6ce9f618c3dfaabfa6d88dd8f7f6499975"
+    },
+    "v5_seneca_02": {
+      "text": "Bir dostun yanında geçirdiğim zamanı yalnızca yapılacak işlerin arasına sıkıştırmak istemiyorum.",
+      "sourceHash": "f95b8242bbd99e39a0ff201ef990a39503968c6c3b9520c8028db46b40189312"
+    },
+    "v5_seneca_03": {
+      "text": "Takvim, neye yetiştiğimizin yanında hayatımızı neye verdiğimizin de kaydını tutar.",
+      "sourceHash": "f3e18b117f5cdd9129f38a7cf84b7cc2d2c845ee3efdf7d8eb4a6ef03aa5b574"
+    },
+    "v5_seneca_04": {
+      "text": "Okuduğum bir sayfayı hayatımda denemek, yeni bir kitap açmaktan daha çok şey öğretebilir.",
+      "sourceHash": "64eedf7f4f52e5dafaa0923e2abb034cddccd05efc1cf811ef04b3d30ce0da29"
+    },
+    "v5_seneca_05": {
+      "text": "Öfkeliyken yazdığım mesajı bekletmek, yarın onarmam gerekecek bir ilişkiye yer açabilir.",
+      "sourceHash": "14db71430bf06a4f9d5841bbd34b0283499f482df3e963b67af4e08c5bf916f2"
+    },
+    "v5_seneca_06": {
+      "text": "Bir şey satın almadan önce, ona duyduğum isteğin ne zaman başladığını düşünebilirim.",
+      "sourceHash": "b2d48c48dad1c177fade52d40c066b42f87a0546576343cb0da599baf4a0db88"
+    },
+    "v5_seneca_07": {
+      "text": "Gösterişli bir akşam silinirken, sade bir sofrada dikkatle dinlenen hikâye kalabilir.",
+      "sourceHash": "6cf19a5ae4a205520aac3d2765b1ff081310d3def428d140150c4481bf4d97cf"
+    },
+    "v5_seneca_08": {
+      "text": "Kaybettiğim saate kızarak geçireceğim dakikaları bugün farklı kullanmayı seçiyorum.",
+      "sourceHash": "526e9306c655e809c443f217f04068748890a5b31dc0b31334177cbc647ae2c4"
+    },
+    "v5_seneca_09": {
+      "text": "Bir dostun öğüdü, hayatımızın güç yanlarını da dinleyecek vakti varsa derinleşir.",
+      "sourceHash": "906cb42195bf7e0dd3af1202c62d0e3d6433665df514bc0da5ad14e571436b5e"
+    },
+    "v5_seneca_10": {
+      "text": "Günün sonunda yalnızca sonuçlarımı değil, beni gereksiz yere yoran isteklerimi de gözden geçirebilirim.",
+      "sourceHash": "33f1eea1bd99a6bd402e99a53394b8ad758b4abddf34fbb7973696672d4fc873"
+    },
+    "v5_epiktetos_01": {
+      "text": "Bir başvurunun yanıtını seçemem; yanıt beklerken kendime nasıl davranacağımı çalışabilirim.",
+      "sourceHash": "0aa4fcbc0f2d178333ccc37094446512907065e09de809d49202bd0b813871a4"
+    },
+    "v5_epiktetos_02": {
+      "text": "Kısa bir mesajın eksik tonunu öfkeyle tamamladığımda, henüz söylenmemiş bir söze cevap veririm.",
+      "sourceHash": "fc79e3f917e92cab4ca50051c35ee32dc7cd50c2c1b72164956a198d37ca4398"
+    },
+    "v5_epiktetos_03": {
+      "text": "Bir övgü, bütün kişiliğim için verilmiş diploma değil; belirli bir anda alınmış geri bildirimdir.",
+      "sourceHash": "6659989a2b01ad45780c8422e335f9505c6c8290ff115610475c1a34f9d1f8f1"
+    },
+    "v5_epiktetos_04": {
+      "text": "Randevuya hazırlanırken aksama payı bırakmak, yalnızca çantamı hazırlamaktan fazlasıdır.",
+      "sourceHash": "a02199258f4f6aca672f98fa3688ddf1c87d2ece7e7bc02df22d6ee6dfdfb422"
+    },
+    "v5_epiktetos_05": {
+      "text": "Bir hatırlatmayı hemen uygulayamasam da, bir sonraki uygun anda yeniden seçebilirim.",
+      "sourceHash": "0c3775dab0c70f7d49c7de122e4db3ea8d3b6ba5d2a0bca14d5c578e4ccea7e8"
+    },
+    "v5_epiktetos_06": {
+      "text": "Benden beklenen her rol, kendi değerlerimi kapıda bırakmamı gerektirmiyor.",
+      "sourceHash": "da345fd8e51f10fb3445da294c8e8086c907af03cc2d8506dd6beb081ce4d346"
+    },
+    "v5_epiktetos_07": {
+      "text": "Bir kararı anlatırken herkesin onayını almak yerine, gerekçemi açıkça ifade edebilirim.",
+      "sourceHash": "491ff1e1d518737a7181573f5100933c7ae26dd9937f47391e596b95e823d1ea"
+    },
+    "v5_epiktetos_08": {
+      "text": "Beni acele ettiren bir düşüncenin sesindeki kuvvet, dayandığı bilginin sağlamlığını göstermez.",
+      "sourceHash": "e51d7ac98aa325f7e3fe447a7247c46e05f807999d9001348969a331ff40dce5"
+    },
+    "v5_epiktetos_09": {
+      "text": "Söz verdiğim şey sonuç değilse, çabamı sonucun gölgesinde haksız yere küçültmeyeyim.",
+      "sourceHash": "f31487cf7f45167cdbdd37a9b3c7e6728558f017e4459b160b4d94e85c14db4e"
+    },
+    "v5_epiktetos_10": {
+      "text": "Kalabalığın beğenisini ölçmeden önce, yaptığım seçimin bana ait olup olmadığını yoklayabilirim.",
+      "sourceHash": "cf6078c9d871cb8f97b93f04983b2d76839802bfff96b9638d0e4a7ab580dd9e"
+    },
+    "v5_platon_01": {
+      "text": "Bir fikri savunmadan önce, onu hangi gerekçeyle doğru bulduğumu kendime anlatabilirim.",
+      "sourceHash": "408ab9d4335e7f7767399361c48d916deabbc7e93e21ce12790038de7b905d14"
+    },
+    "v5_platon_02": {
+      "text": "Sohbette anlamadığım bir kelimeyi sormak, anlamış gibi başımı sallamaktan daha iyi bir başlangıçtır.",
+      "sourceHash": "90cb580a1495a399ee5ace7697dd74f37e22311452fa0dfec100634668aae7c1"
+    },
+    "v5_platon_03": {
+      "text": "Bir konuda deneyimli oluşum, başka bir konuda öğrenmeye ihtiyacım olmadığı anlamına gelmez.",
+      "sourceHash": "6c914fc2077b840e4c6d2b409c05a438b61fdd70d69df6b6af7cfc737d0eac6f"
+    },
+    "v5_platon_04": {
+      "text": "Güzel kurulmuş bir cümlenin ikna gücü, taşıdığı gerekçenin sağlamlığıyla aynı şey değildir.",
+      "sourceHash": "b4ab4407b768b82a6de8838e79ef1307bb3dff17a69df94c3f8137351e2d27aa"
+    },
+    "v5_platon_05": {
+      "text": "Kendi cevabıma yönelttiğim dürüst bir soru, karşımdakinin susmasından daha öğretici olabilir.",
+      "sourceHash": "e7138c5c7c3303a9bdf100c6d2ee5e132d0ead1ae1db63b0fd99ded8d380c7ae"
+    },
+    "v5_platon_06": {
+      "text": "Bir kararın bana yararını hesaplarken, aynı kararın başkaları için adil olup olmadığını da sorayım.",
+      "sourceHash": "d6d626dfc6149970dbfa0dbd8222920cf6a1f3b99fa06ff98c21b815736251e0"
+    },
+    "v5_platon_07": {
+      "text": "Bugün karşılaştığım bir itirazı, düşüncemin henüz bakmadığım tarafına açılan kapı sayabilirim.",
+      "sourceHash": "18f09562b861a981afb96d198c06cb248e20b511dc375e87c52aff900a482342"
+    },
+    "v5_platon_08": {
+      "text": "Birlikte düşünmek için aynı fikirde başlamamız gerekmiyor; birbirimizi anlamaya razı olmamız yeter.",
+      "sourceHash": "ec06fd81817ce6d66c5964e287d120dfbd1ae108c1268c323f3bb613314b0cc5"
+    },
+    "v5_platon_09": {
+      "text": "Bilmediğim yerde durmak, bilgiye giden yolda kaybolduğum anlamına gelmez.",
+      "sourceHash": "c191d9233bcff94187dcf0db3111c2cf780a53b8410464260975b6806fce8fc4"
+    },
+    "v5_platon_10": {
+      "text": "Bir ekran olayın bir parçasını gösterir; düşünmek, görünmeyen bağlamı aramayı da içerir.",
+      "sourceHash": "9c568771e9fd03494c5d28ef73729d2cb2ad2a1474bf0bf818c06fbd96554996"
+    },
+    "v5_aristoteles_01": {
+      "text": "Kibar olmak, her konuşmada aynı cümleyi söylemekten çok, o kişinin ihtiyacını fark etmeyi ister.",
+      "sourceHash": "4449b65fbd564e33ac973c72a8a12153fcbfe923140f00e666f7ee4d7e1e3abc"
+    },
+    "v5_aristoteles_02": {
+      "text": "Güvenilir olmayı istemek, küçük bir sözü tutma zamanı geldiğinde gündelik bir işe dönüşür.",
+      "sourceHash": "1c04dda528c98fdb97ae71cb3215e0eac8341458de2ae8436ec2014441fb844d"
+    },
+    "v5_aristoteles_03": {
+      "text": "Bir arkadaşım için doğru yardım, benim en kolay sunabildiğim yardım olmayabilir.",
+      "sourceHash": "8c99cff479c8c2bbf84912dceb9a37ceb2846858927c8454e40f8d2299d89387"
+    },
+    "v5_aristoteles_04": {
+      "text": "Cesur bir kararın değeri yalnızca riskin büyüklüğünde değil, hangi amaca hizmet ettiğindedir.",
+      "sourceHash": "2d05d9e6f956d5e6bd9b0650782e0c1ac0c862a1a93d0194000b9cc263ac5c63"
+    },
+    "v5_aristoteles_05": {
+      "text": "Cömertliğim, yarın yerine getirmem gereken sorumlulukları da hesaba katabilir.",
+      "sourceHash": "e4edec8125e842e6591b9dd135660ece40f0f3df3427476865702e42da8424e7"
+    },
+    "v5_aristoteles_06": {
+      "text": "Her durumda susmakla her sözü söylemek arasında, yerini bulan bir dürüstlük arayabilirim.",
+      "sourceHash": "35fdc65a4911c5892f52afa38318776bb734881001e6c67e875f420b94a43d6d"
+    },
+    "v5_aristoteles_07": {
+      "text": "Bir davranışı yalnızca işe yaradığı için değil, ne tür bir insanı beslediği için de değerlendirebilirim.",
+      "sourceHash": "74760eab4528b6ed741a550f47a91ff2a0005cb1640d28c5d43fa9cc942c2170"
+    },
+    "v5_aristoteles_08": {
+      "text": "İyi bir alışkanlık, hayatın ayrıntıları değiştiğinde düşüncenin yerine geçmeye kalkmaz.",
+      "sourceHash": "08b0858c834c1f0e2f1f53ce9b416fd3cea4612de8e7a3a8cca9c6c52161fbfd"
+    },
+    "v5_aristoteles_09": {
+      "text": "Dostluk için ayırdığım düzenli vakit, birlikte iyi yaşama niyetimin somut bir parçasıdır.",
+      "sourceHash": "9f8ef19c3791d8d2d73405967ce6616a6a66326694220940b60c05eb773b5cfb"
+    },
+    "v5_aristoteles_10": {
+      "text": "Bugünkü kararımı verirken, kuralı ezberlemekle durumu anlamanın aynı şey olmadığını hatırlayabilirim.",
+      "sourceHash": "f3c36293479531175581b88087a71012446530a8ef339fdef9ff9e49e84a5e8e"
+    },
+    "v5_nietzsche_01": {
+      "text": "Hayran olduğum bir hayatı kopyalamadan önce, onun hangi bedelini gerçekten seçtiğimi sorabilirim.",
+      "sourceHash": "2253ba277b646b896bf9629b6fad59373c415e006a8e5955f2c89f8c360c689c"
+    },
+    "v5_nietzsche_02": {
+      "text": "Bana ait dediğim bir hedef, kendi sorularıma kapalı kaldığında eski bir buyruğa dönüşebilir.",
+      "sourceHash": "65ebfbf8f18bffa08a7cae457189c78cffb969a7c0ea852f9f7820ffac3e809b"
+    },
+    "v5_nietzsche_03": {
+      "text": "Sırf karşı çıkmak için yaşarken de, itiraz ettiğim şeyin çevresinde dönüyor olabilirim.",
+      "sourceHash": "2380ec9c20622468cfa44e2888146d4fc6656935e025ee022f2aa399bef75c83"
+    },
+    "v5_nietzsche_04": {
+      "text": "Yıllardır iyi saydığım bir şeyi, bugün hangi yaşama hizmet ettiğini düşünerek yeniden tartabilirim.",
+      "sourceHash": "9de3cb4c6b5e195ae37112474640783f2f0d575301aff56d4039894575325d84"
+    },
+    "v5_nietzsche_05": {
+      "text": "Bir eser ortaya koyarken, beğenilme isteğimle söylemek istediğim şeyin ayrıldığı yeri fark edebilirim.",
+      "sourceHash": "24a28034469ae8067c6427bcfcce016a968e725cc3793381c95784b5cc4f39a6"
+    },
+    "v5_nietzsche_06": {
+      "text": "Kendi ölçümü kurmak, yaptığım seçimin sorumluluğunu başkasının alkışına bırakamamaktır.",
+      "sourceHash": "ede560579d03bbc50649495f90c6515658ea59ddb1a98accbf49923f894f16f8"
+    },
+    "v5_nietzsche_07": {
+      "text": "Eskiden beni anlatan bir unvan, bugün denemediğim hayatların kapısında bekçi olmamalı.",
+      "sourceHash": "5e087ad8c666b4269d1092fcb6da35de4b942384b01b623eda9d223a6898640a"
+    },
+    "v5_nietzsche_08": {
+      "text": "Zor bir deneyimden hemen ders çıkarmak zorunda değilim; anlamına kendim karar vermek için vakit ayırabilirim.",
+      "sourceHash": "41e70a6d022cf062e4d795665db3288a6a44608edc2980fd7625d87edab90766"
+    },
+    "v5_nietzsche_09": {
+      "text": "Bir kalıptan ayrılırken, boşalan yere nasıl bir gündelik hayat kurmak istediğimi de düşünebilirim.",
+      "sourceHash": "8d877f34725fcdf1483f12ffc69b5259045f37c2c725a474b7dbcb8809427603"
+    },
+    "v5_nietzsche_10": {
+      "text": "Yalnız kaldığım bir akşam, içimde konuşan beklentilerden hangilerinin bana ait olduğunu dinleyebilirim.",
+      "sourceHash": "360d09c24936b78ef031ea002f74456cc78ffcc356fc8c761f968ddae0d4164c"
+    },
+    "v5_konfucyus_01": {
+      "text": "Saygı, konuşmanın başındaki selamdan sonra da karşımızdakine söz hakkı bırakarak sürer.",
+      "sourceHash": "00f1a5ad90fae509d8fba4e5cbaaa47e794b8f2e3d5b3c09ef2f06181c9bf20e"
+    },
+    "v5_konfucyus_02": {
+      "text": "Bugün öğrendiğim bir şeyi birlikte çalıştığım kişiye sabırla aktarmak, öğrenmemi tamamlayabilir.",
+      "sourceHash": "baf3acbfd189e6a52e4645ddd010968128b6641493c86337593c8f5feeac9de0"
+    },
+    "v5_konfucyus_03": {
+      "text": "Üstlendiğim işin sınırlarını açıkça söylemek, büyük bir vaatten daha güvenilir bir başlangıçtır.",
+      "sourceHash": "ade090dede7ad0d2f34799751450cee23273e34e739dfe7df66e5af4659694c8"
+    },
+    "v5_konfucyus_04": {
+      "text": "Yakınlarımla aynı fikirde olmasam da, itirazımın içinde onları dinlediğimi gösterebilirim.",
+      "sourceHash": "53ac788ad0d47e441a37a985d5a79adba505661d30b94e66adc053ead412a409"
+    },
+    "v5_konfucyus_05": {
+      "text": "Örnek olmak istediğim davranışı, kimseyi uyarmadan önce kendi masamda deneyebilirim.",
+      "sourceHash": "079984156b07f743587ab2bf69ce5a61dce4cb091c62d0d89225411e7631f31a"
+    },
+    "v5_konfucyus_06": {
+      "text": "Bir teşekkürün içtenliği, onu söylemek için karşımdakinin işini gerçekten fark etmeme bağlıdır.",
+      "sourceHash": "405cd3376b23f69491d3a6a8b83cf77b00f95ea3ca9d8b77a4dbe160f06be249"
+    },
+    "v5_konfucyus_07": {
+      "text": "Aileden öğrendiğim bir inceliği bugün başka birine taşımak, geçmişle bağ kurmanın bir yoludur.",
+      "sourceHash": "0702d58c0e51ab696a78fdf11ce41a09afb470622831dd11518207ff027e2c87"
+    },
+    "v5_konfucyus_08": {
+      "text": "Misafir olduğum bir yerde, nezaketimi kendi alışkanlığımı dayatmakla değil önce orayı tanımakla göstereyim.",
+      "sourceHash": "b364bdc285d6a0dd9cae645a9684d876b22fdb539ec79e6f161715e93832710c"
+    },
+    "v5_konfucyus_09": {
+      "text": "Bilgimi göstermek için konuştuğum anı fark edersem, yeniden öğrenmek için dinlemeyi seçebilirim.",
+      "sourceHash": "b7f00ebe76108ebe9f989ba0596bdd15af84a7206a8e14fcee74b5e171d28829"
+    },
+    "v5_konfucyus_10": {
+      "text": "Günün hesabını tutarken, bana güvenen birine karşı ne kadar özenli olduğumu da düşünebilirim.",
+      "sourceHash": "101d2c5d80de1192befcaa253197b16062be2b121cc91d142929bf2f0e4d6b1c"
+    },
+    "v5_machiavelli_01": {
+      "text": "Bir planı değerlendirirken, yalnızca iyi gittiğinde anlatacağım hikâyeyi değil, aksama ihtimalini de göreyim.",
+      "sourceHash": "31013ec57ea093d7cd62faa0ea5b3dbaafa64105d0529416996be8f9f694d9b4"
+    },
+    "v5_machiavelli_02": {
+      "text": "Yalnızca iyi haberleri kabul eden bir masa, kötü bir kararı fark etmekte geç kalabilir.",
+      "sourceHash": "4dedacd0099dfc1049cb563c98b6c9cd6f7f93096849ea696c6419bd8989b111"
+    },
+    "v5_machiavelli_03": {
+      "text": "Dünkü yöntemin bugünkü değeri, geçmişteki başarısından önce değişen koşullarla sınanır.",
+      "sourceHash": "793db8d7ffe28b26ee3979aea273cd2a70ce5a47df1f8e21bcf86a633b6ba1bd"
+    },
+    "v5_machiavelli_04": {
+      "text": "Hazırlık için sakin bir günü kullanmak, zor gün geldiğinde seçeneklerimi artırabilir.",
+      "sourceHash": "24e972215f8e4a63d2d390dd0cc5f1f14129fe842a4428eb36792184ec2afcca"
+    },
+    "v5_machiavelli_05": {
+      "text": "Bir sorumluluğu paylaşırken, kişinin güzel vaatleri kadar işi yapabilecek imkânlarını da konuşabilirim.",
+      "sourceHash": "8114f64df74f0459b51579dc4874ed9578a849480470083d8c2efb2495013b54"
+    },
+    "v5_machiavelli_06": {
+      "text": "Beklemenin de bir bedeli vardır; ertelenen kararın hesabı, hiçbir şey yapılmadığı için kapanmaz.",
+      "sourceHash": "0fc87cbbc025709bb77b9ad9759276b4d8f44766bda72bc4e009202b7a38170f"
+    },
+    "v5_machiavelli_07": {
+      "text": "Elimdeki desteğin geçici olabileceğini görmek, kurduğum düzeni daha dikkatle incelememi sağlar.",
+      "sourceHash": "89009f44b1f4043cf9826a88e312aa6aca6204e3c4db935eb20fa80d763e0474"
+    },
+    "v5_machiavelli_08": {
+      "text": "Geri bildirim istediğimde, duyması zor bir gerçeği söylemenin insanları cezalandırmayacağını gösterebilirim.",
+      "sourceHash": "1a021f68cd5efffe69f77f4857d9487d084d2cc92d67c0b8dd5f78d114fef7f6"
+    },
+    "v5_machiavelli_09": {
+      "text": "Bir değişikliği duyurmadan önce, onu uygulayacak insanların neye ihtiyaç duyacağını öğrenebilirim.",
+      "sourceHash": "9a779bba19ca1e28f0fdb5504d88de62d111770589d81ed5d1f5eecc571d479e"
+    },
+    "v5_machiavelli_10": {
+      "text": "Şansın payını kabul etmek, emek verdiğim işin hangi yanını güçlendirebileceğimi görmeme engel değil.",
+      "sourceHash": "c77cd2db38a02053bb2a938b6108a10f23846382a970ce3ec52dd75e68b50f8c"
+    },
+    "v5_mevlana_01": {
+      "text": "Bir sohbetin derinliği, söylediğimiz büyük sözlerden önce birbirimize ayırdığımız dikkatte başlar.",
+      "sourceHash": "e2f74d5e50d15713d7f06abd3d6a126e62fa6c4fbbadfdce628214af58f15193"
+    },
+    "v5_mevlana_02": {
+      "text": "Birinin yükünü dinlerken kendi cevabımı bekletmek, sevgimin aceleden vazgeçtiği küçük bir andır.",
+      "sourceHash": "7429cd3a6f28614a27e813b31b6fee650ab95952b81f8f03d7fdcf8fe05f9d22"
+    },
+    "v5_mevlana_03": {
+      "text": "Kalbimde büyütmek istediğim sevgiye, bugün sıradan bir işin içinde de emek verebilirim.",
+      "sourceHash": "ddf4ccbc6bf9ba2fbf6acac97cb8d8eda9c7a48b1dcc049966eb2003afaf60f0"
+    },
+    "v5_mevlana_04": {
+      "text": "Aynı masada farklı hikâyeler dinlemek, dünyayı gördüğüm pencerenin darlığını fark ettirir.",
+      "sourceHash": "2a392bbcb32f19f27f45a947c1c556108a0616ef0cba05e0ab6d97df6a15c4b7"
+    },
+    "v5_mevlana_05": {
+      "text": "İçimdeki kırgınlığı duyarken, onun sevdiğim her şeye cevap vermesine izin vermek zorunda değilim.",
+      "sourceHash": "4a30fc2759027d3b983647016621b5160bee661a35d314fc7d25a6b2b8beb8d5"
+    },
+    "v5_mevlana_06": {
+      "text": "Bir dostun yanında doldurmak zorunda kalmadığımız sessizlik de yakınlığın bir biçimidir.",
+      "sourceHash": "9f5ed0d4c60d980145ecb6061d5afb6f365c66c32ca47c59723c311184171a0c"
+    },
+    "v5_mevlana_07": {
+      "text": "Değişmek istediğim yerde kendimi suçlamakla oyalanmadan, küçük bir davranışı değiştirmeyi deneyebilirim.",
+      "sourceHash": "ad6b09027e1d97b715b8d6ebb6d7409f489817526cbf56d2c556712e27f1d3d0"
+    },
+    "v5_mevlana_08": {
+      "text": "Kusursuz görünmeye harcanan dikkat azaldığında, içimizde duymadığımız sorulara yer açılır.",
+      "sourceHash": "7cf98a98666a14415ff55ef0d92081f9ae63d0c99da63f04b57fb764685307ed"
+    },
+    "v5_mevlana_09": {
+      "text": "Bir insanı yalnızca ilk karşılaşmadaki haliyle tanımlamak, anlatılmamış hikâyesine kapıyı kapatır.",
+      "sourceHash": "0bcebf722cbd24c116fabff7c90481daaafe52c308f232ad1bde855ae846c065"
+    },
+    "v5_mevlana_10": {
+      "text": "Sevginin bugünkü işi büyük bir vaat olmayabilir; yorulan birine ayrılmış sakin bir dakika olabilir.",
+      "sourceHash": "8443a96d8e560b08a28a73982c6ad84705e2571c0b21f781ae2a8492c2cf42a7"
+    },
+    "v5_yunus_01": {
+      "text": "Birinin gönlünü gözetmek, konuşma bittiğinde onda nasıl bir iz bıraktığımı da düşünmektir.",
+      "sourceHash": "e9ef8d4a1b8befb37254bc01d6579201b23a7fb616b3653f517d05f531b2068a"
+    },
+    "v5_yunus_02": {
+      "text": "Sofraya bir tabak daha koymak, insan sevgisini günlük hayatın diline çevirebilir.",
+      "sourceHash": "c3fa8e4a9c2c9a308a8fe409aa59a0ad48859877ca1225b33ea3e2a75f257cf9"
+    },
+    "v5_yunus_03": {
+      "text": "Bilgimin insana değdiği yer, zorlanana küçük hissettirmeden yardım edebildiğim yerdir.",
+      "sourceHash": "14f11446d840bbe46ce5627a12d2e8a559e769a7848dd544717ad020ddf14e90"
+    },
+    "v5_yunus_04": {
+      "text": "Özür dilemek için süslü söz ararken, sade bir sorumluluk cümlesini geciktirmeyeyim.",
+      "sourceHash": "b6b3188cd1111da20f61423f4aecac4d9329009f33a050c4801db871a316acc2"
+    },
+    "v5_yunus_05": {
+      "text": "Bir insanın kıymetini üzerindeki giysiden okumaya çalışmak, asıl hikâyesini duymamı engeller.",
+      "sourceHash": "e19bc77c9f2f8827d3a66b25f83fdbf097098e5eb03f6a2e2eabd8a51065e2ee"
+    },
+    "v5_yunus_06": {
+      "text": "Bugün dilime gelen sert bir sözü yumuşatmak, uzak bir iyilik hayalinden daha yakınımdadır.",
+      "sourceHash": "863b5c1f26611f34a76f42d4b51423aeacd6991dc110eefd1f652d0f94329605"
+    },
+    "v5_yunus_07": {
+      "text": "Aynı sokakta yaşadığımız halde fark etmediğimiz insanlar, sevgimizin günlük sınırlarını gösterir.",
+      "sourceHash": "d5211157d464bd305af1d8c17ad0b0df8e0d68229f0b3f134e04040ab3214088"
+    },
+    "v5_yunus_08": {
+      "text": "Bir yardımın sonunda adımın anılmaması, o yardımın bir hayata değdiği gerçeğini azaltmaz.",
+      "sourceHash": "b94a29ce6ac1df1ac30245ed014b43576cdbc8ea71c8357151ce8e6853dbe36a"
+    },
+    "v5_yunus_09": {
+      "text": "Kendi kusuruyla karşılaşan insanın, başkasının hatasını anlatırken sesini alçaltma fırsatı vardır.",
+      "sourceHash": "7c5e1baccee994259d8ac0279520b0b2b1e7ae53201d2a4d7f298c1925337389"
+    },
+    "v5_yunus_10": {
+      "text": "Bir gönül almak için ayırdığım vakit, günün yapılacak işleri arasında kaybolmasın.",
+      "sourceHash": "e4e73b5d5a24af7d31bea79630c8d123e977248409075a07a83a68530ab38868"
+    },
+    "v5_sems_01": {
+      "text": "Beni yalnızca rahatlatan cevapların yanında, dürüstçe düşündüren bir soruya da yer açıyorum.",
+      "sourceHash": "9c63d6c2d720eb380afe1a797cc12f0cd74baf7378af38eacd8536838a95529a"
+    },
+    "v5_sems_02": {
+      "text": "Bir dostun sorusu canımı sıktığında, o sıkıntının ardındaki savunmayı da dinlemek isterim.",
+      "sourceHash": "fae4d43f344d6b33d64ddbf79948f772a72b5ba94525a05157c84b4b7f4d7720"
+    },
+    "v5_sems_03": {
+      "text": "İnancı anlatan söz ile onu taşıyan gündelik davranış arasındaki mesafe, içten bir soruyu hak eder.",
+      "sourceHash": "02163ea45b3da1ea681a49134bbe9e369aeb3e5d2075fc9b4a8e7ed2f6ab474a"
+    },
+    "v5_sems_04": {
+      "text": "İçten bir sohbet, bildiklerimi sergilediğim yerden bilmediklerimi açabildiğim yere ilerler.",
+      "sourceHash": "b9fa98acd40ee3e6a02419f2c5605140a511741ed076b1e4a19dc66a07b02a0f"
+    },
+    "v5_sems_05": {
+      "text": "Kendi niyetimi incelerken, başkasının kusurunu konuşmanın kolaylığına sığınmak istemiyorum.",
+      "sourceHash": "a0094679f3f034d1afa09936da954a6dddc8936ccc3f379e55ae6e8202ee7d33"
+    },
+    "v5_sems_06": {
+      "text": "Beni değiştiren bir karşılaşmanın değerini, yaşananları büyütüp başka bir hikâyeye çevirmeden de koruyabilirim.",
+      "sourceHash": "bf87168022eceff42bc06aea64ba1354f92ef8b658c820255c76c20877a20b26"
+    },
+    "v5_sems_07": {
+      "text": "Birine yakın olmak, onun her cevabını kendi sorularımın yerine koymamı gerektirmez.",
+      "sourceHash": "56efe82552e59456160956e263b8dc4fba5fa89bba77e57a9d7ef7478f794a98"
+    },
+    "v5_sems_08": {
+      "text": "Bir öğüt, hayatımda hiçbir davranışa dokunmuyorsa yalnızca belleğimde güzel bir cümle olarak kalır.",
+      "sourceHash": "44ef792c3271b802b76e810d1e4d58591aa7b46010c0ad0c320af1d75bea5f90"
+    },
+    "v5_sems_09": {
+      "text": "Haklı görünme telaşım azaldığında, bir konuşmanın içinde kendim hakkında daha çok şey duyabilirim.",
+      "sourceHash": "6d2d8a57c565654e186b08736b8ef16a4968bdceb30d19e852705b3517efcd19"
+    },
+    "v5_sems_10": {
+      "text": "İçimdeki arayışı canlı tutmak için her akşam yeni cevaplar bulmam gerekmiyor; dürüst kalmam yeter.",
+      "sourceHash": "e4c9c5050f0f4a7f0a1584e36361cac8b2625226c17cf9a54c67ad10f8ef601b"
+    },
+    "v5_hafiz_01": {
+      "text": "Kusursuz görünme telaşıyla unuttuğum neşenin, hayatımda yeniden oturacağı bir yer var.",
+      "sourceHash": "a2112b8b1cbb258c0b9b4145ecf8536477ac2c1697ff7232e2f2d515e92115ca"
+    },
+    "v5_hafiz_02": {
+      "text": "Bir bahçenin güzelliğini fark etmek için, hayatımdaki her sorunun çözülmesini beklemem gerekmiyor.",
+      "sourceHash": "e346e1a911a9a01f7da5cb81a5ab536b17e809c8a2027185bb3f9ad59bacd2b5"
+    },
+    "v5_hafiz_03": {
+      "text": "Başkalarını yargılarken takındığım ciddiyet, kendi eksiklerime karşı bir perde olmamalı.",
+      "sourceHash": "0affdb963eca1a57878017c0f56340e9fd9fdb661185e151144af859597cfeaf"
+    },
+    "v5_hafiz_04": {
+      "text": "Neşeli bir sofrada içten kalmak, ağır bir sözle erdemli görünmeye çalışmaktan daha yakınımda olabilir.",
+      "sourceHash": "550499be040f766525fc935e35926dbfecac8d3264ef46849f0bf8fca7096603"
+    },
+    "v5_hafiz_05": {
+      "text": "Sevdiğim bir yüzü seyrederken, güzelliği sahip olunacak bir şeye çevirmeden de yakın hissedebilirim.",
+      "sourceHash": "914724574b58659213a1f1fecfbe8a9a129a8d494a3190676a0e596fc08305f9"
+    },
+    "v5_hafiz_06": {
+      "text": "Bir şarkıya eşlik ederken sesimin güzelliğini tartmayı bırakıyorum; neşem her zaman bir değerlendirme istemiyor.",
+      "sourceHash": "9ab8e52c15fba7fabd88e082c8428c3fc1b1e1c3bc3d4a80a9507ebfc749b511"
+    },
+    "v5_hafiz_07": {
+      "text": "Kendime uygulamadığım bir ölçüyü, başkasının hayatı üzerinde kolayca kullanmak istemiyorum.",
+      "sourceHash": "2bc4d9d26d1916c9e030c29d0a55551a45ece411bab7112aeb9fb6946290529c"
+    },
+    "v5_hafiz_08": {
+      "text": "Bir insanın samimiyetini, saygın görünmek için seçtiği sözlerin dışında da arayabilirim.",
+      "sourceHash": "e859d1aaa8a18b7be5ab3e6b313ccc97ef895b5d52b76f7df657d0bdc23a65bc"
+    },
+    "v5_hafiz_09": {
+      "text": "Geçici bir güzelliği tutmaya uğraşmadan, bugün ona gerçekten baktığım bir an ayırabilirim.",
+      "sourceHash": "bf0bc5ea6ba0b38b02fc232f456f9a339407b9b4ab77af5a6cd8a4e05d5225cf"
+    },
+    "v5_hafiz_10": {
+      "text": "İçimdeki çelişkiyi başkalarının hayatına öğütler vererek örtmek yerine, kendime dürüstçe söyleyebilirim.",
+      "sourceHash": "31536c7978947e496c84887bc23ca8b741eacdbc5dec1b0fb1eca7ccf4f1cd85"
+    },
+    "v5_zen_01": {
+      "text": "Yıkanan fincanın üzerindeki su, yarınki işlerime yetişmeye çalışmaz; şu an elimdedir.",
+      "sourceHash": "23d04a971fe27f8de3a462feccec7253ae6f5bcafd26d2a25bfc7181f7d86a61"
+    },
+    "v5_zen_02": {
+      "text": "Pencereye düşen ışık değişirken, ona dün verdiğim adı bir an için bırakabilirim.",
+      "sourceHash": "6e310ac631eede3e74837f1620568e11a43385ffe0860ca372ce1380e9b2b61f"
+    },
+    "v5_zen_03": {
+      "text": "Oturduğum yerde düşüncelerimi susturmaya uğraşmadan, gelişlerini ve geçişlerini fark edebilirim.",
+      "sourceHash": "baa7a0311c1ec7bd7ffca6be80ddb9b88c6baa17ea98c91022d7ced740fdabd7"
+    },
+    "v5_zen_04": {
+      "text": "Masamı silmek, daha önemli bir anı beklediğim sırada hayatın dışında kalmaz.",
+      "sourceHash": "c20ec89a707b7076ae99e632946446d9ecfe12c45f4cfcca77758c86f7e5c3ed"
+    },
+    "v5_zen_05": {
+      "text": "Bir sesi duyduğumda hemen hoş ya da rahatsız edici diye ayırmadan, bir süre yalnızca dinleyebilirim.",
+      "sourceHash": "78ca276f68383379635b67cb048f85977610eb74122ce618b23635b5007d6a86"
+    },
+    "v5_zen_06": {
+      "text": "Yürürken vardığım yer kadar, ayağımın şimdi temas ettiği zemini de fark edebilirim.",
+      "sourceHash": "34e450173390ba8f2faf5a43aeecd7f164d34342853fb44ef45ca8ee117ccf60"
+    },
+    "v5_zen_07": {
+      "text": "Sessiz bir dakikanın var olmak için, sonrasında daha çok iş bitirdiğimi kanıtlaması gerekmiyor.",
+      "sourceHash": "28b84815dcbc263f459d76a828dfff7fdd1f8c1f71e0e050da3112ed7a053371"
+    },
+    "v5_zen_08": {
+      "text": "Bir öğünü yerken, onu hazırlayan ellerin ve yetiştiği toprağın bu anda buluştuğunu düşünebilirim.",
+      "sourceHash": "928c1bbf0380da6f525e84761e4ba3f9c10f992796d259117238afb0c380f1c9"
+    },
+    "v5_zen_09": {
+      "text": "Katladığım kumaşın kenarlarını birleştirirken, bu işi zihnimde bitirmeden ellerimde tamamlıyorum.",
+      "sourceHash": "81c37ad0d98e413f97ea907e0c360195e97ab05f4a3ab58d030814ad8edca361"
+    },
+    "v5_zen_10": {
+      "text": "Şu anı tamamlansın diye zorlamadan, içinde bulunduğum işi kendi ayrıntılarıyla karşılayabilirim.",
+      "sourceHash": "b2f58c1ebf1af32bbe787d69719b5c17bf39ae64d84904182b8534b2baf28d3e"
+    },
+    "v5_kuran_01": {
+      "text": "Bir haberi hemen yaymak yerine doğruluğunu araştırmaya ayırdığım vakit, insana duyduğum saygının parçasıdır.",
+      "sourceHash": "9c53199fd238867dd7951b2ca7762585acc88352694753539235c357e85ed9d2"
+    },
+    "v5_kuran_02": {
+      "text": "Bir insan hakkında bilmediğim yerleri kötü niyetle doldurmamak, bugün gösterebileceğim bir özendir.",
+      "sourceHash": "2c895face875955e4d0b27b2d0492f1b7e341134c28c3d7d50ac1cc09d920d96"
+    },
+    "v5_kuran_03": {
+      "text": "İnancımın gündelik hayattaki izini, bana bırakılan bir emanete gösterdiğim dikkatte arayabilirim.",
+      "sourceHash": "c5e5cf767ca81207b7a1c66f8f4e36f190753f5710134a2f9fac668c29a0c340"
+    },
+    "v5_kuran_04": {
+      "text": "Bir hatayı konuşurken insanın onurunu da korumak, hakikati söylemenin özen isteyen yanıdır.",
+      "sourceHash": "133d9c91dbd06b4ba0e75e925804b0a3c7eb2eacdf93bc99d9c8a38c8e388e60"
+    },
+    "v5_kuran_05": {
+      "text": "Bir komşuyu tanımak emek ister; onu hazır bir yargıyla tanımlamak bu emeğin yerini tutmaz.",
+      "sourceHash": "3aecf8ea850a0ea8bb2074501e456b87ca7e10e293547ee5616de8fe79568665"
+    },
+    "v5_kuran_06": {
+      "text": "Allah'a yönelişimi, bugün birinin hakkını gözettiğim küçük karardan ayrı düşünmek istemiyorum.",
+      "sourceHash": "905d137920d8550d80af4eff6cd842de7f7ad30736844790d214c040b4709f2d"
+    },
+    "v5_kuran_07": {
+      "text": "Bir yardımın sevinci, yardım alan kişinin mahremiyeti korununca da eksilmeden yaşanabilir.",
+      "sourceHash": "c1d94dae06ce2f3cc3ac124ba5e829ef05f9a98b88485e29929087a2fe4db48d"
+    },
+    "v5_kuran_08": {
+      "text": "Bir özrün samimiyetini, ardından atacağım onarıcı adımla desteklemek isterim.",
+      "sourceHash": "85e8da3891ebdd8fddabcdd7bc684a1588a7762891a25dcaf42f159e4f0f6230"
+    },
+    "v5_kuran_09": {
+      "text": "Dilimden çıkan bir sözün yükünü başkasına bırakmadan önce, o sözü yeniden tartabilirim.",
+      "sourceHash": "a18a01c4067482166f2924eb5f7780eccf29e6560254edfc5f14f29ac0f4adcb"
+    },
+    "v5_kuran_10": {
+      "text": "Bugünkü tefekkürüm, yalnızca kendimi değil, aynı hayatı paylaştığım insanları da kapsasın.",
+      "sourceHash": "503499b0225e121dd370c74778757af968d10d5dc0d270c1a22bbd60cc3564c2"
+    },
+    "v5_incil_01": {
+      "text": "Birinin ihtiyacını fark ettiğimde, yardımımı hak edip etmediğini tartmadan önce onu dinlemek isterim.",
+      "sourceHash": "85ac2a035eee46e1e111b6fc85dd77d50ba284fdcda03f4f2353802570e85dda"
+    },
+    "v5_incil_02": {
+      "text": "Merhamet bugün büyük bir konuşma istemeyebilir; acelem varken durup birini dinlememi isteyebilir.",
+      "sourceHash": "a64591396775c36015ab41d6ddfbcc270ac9b47051b0f66a5f84820fb1476805"
+    },
+    "v5_incil_03": {
+      "text": "Kimsenin bilmediği bir iyilik, gösterilmediği için eksik kalmış sayılmaz.",
+      "sourceHash": "5f0a202a5945388b1ef68ee8ba888748745eed7317437b7820be3e34aa2b3eab"
+    },
+    "v5_incil_04": {
+      "text": "Barış bazen ilk anlaşmada değil, aynı konuşmaya daha sakin bir sesle dönebilmekte başlar.",
+      "sourceHash": "dbeb2391c63e259afcffcbcd23abeb27027d39f4326062ef22ffbdb612c57ff3"
+    },
+    "v5_incil_05": {
+      "text": "Birine yakın davranmak için bütün hikâyesini benimkine benzetmem gerekmiyor.",
+      "sourceHash": "b9986aa933beea5152a8e9d4c24ce951d67d8eb359bbe08d54b942103ebf3e18"
+    },
+    "v5_incil_06": {
+      "text": "Başkalarının kusurunu konuştuğum bir akşamda, kendi payıma düşen özrü de hatırlayayım.",
+      "sourceHash": "14b01b7b57a09078bc995609b4964f2a29c84d636462e7b612100b41ac41126f"
+    },
+    "v5_incil_07": {
+      "text": "Yardım istemekte zorlanan birine, değerini açıklamak zorunda kalmayacağı bir alan açabilirim.",
+      "sourceHash": "d1c5e8ec7399b88a1597ff1b418cdc06ab8a2702afc179fc831d5ad7418e7e78"
+    },
+    "v5_incil_08": {
+      "text": "Dua için ayırdığım sessiz vakit, başkalarının beni nasıl gördüğü hesabından uzak kalabilir.",
+      "sourceHash": "83323d2e4c90531361c55d6d51be05a897b2f22120f260de60fc39901cc70b94"
+    },
+    "v5_incil_09": {
+      "text": "Kendi gündemini bekletebilen bir dinleyici, sevgiyi bugünün somut diliyle konuşur.",
+      "sourceHash": "7e3bb3eaeb1fa50178f9d4bec864fe90e4b17324acf9e2943081c73530f3b966"
+    },
+    "v5_incil_10": {
+      "text": "Bir sofrada dışarıda kalmış kişiyi fark etmek, merhamet üzerine düşüncemi davranışa dönüştürebilir.",
+      "sourceHash": "9631dfe04b33a529ef8d59d338238c5860b4307f0c31e3ed0ae2c60c869cc2ff"
+    },
+    "v5_tevrat_01": {
+      "text": "Bir işin ücretini zamanında ödemek, emeğe duyduğum saygıyı takvimde görünür kılar.",
+      "sourceHash": "0cb45d918422a0e13af9d3e0b567f474e6b6b79a5be43a9f6b904a2294f3f8e4"
+    },
+    "v5_tevrat_02": {
+      "text": "Paylaşmak baştan düşünülmüşse, yardıma ayrılan yer yalnızca geriye kalanlarla sınırlı değildir.",
+      "sourceHash": "c352e28488fe1516ece757367e0d549f9e003cb8bab0232a44851773849a5b75"
+    },
+    "v5_tevrat_03": {
+      "text": "Bir yabancının çekingenliğini gördüğümde, kendimi ilk kez bir yerde bulduğum günü hatırlayabilirim.",
+      "sourceHash": "7b83f7ebd84a7b7d82bf246110b87781ee6403b5c72581660cdf436b421a08e5"
+    },
+    "v5_tevrat_04": {
+      "text": "Adalet, bana yakın birinin davranışını değerlendirirken de aynı özeni göstermemi ister.",
+      "sourceHash": "8fe70b91f7694c98c9e201586334eaca956d80efeb9fe0d2f439e4a3436bdc68"
+    },
+    "v5_tevrat_05": {
+      "text": "Birine yardım etme imkânım olması, onun özel alanını dilediğimce açabileceğim anlamına gelmez.",
+      "sourceHash": "9abc2998c14b150afe124496295463cbd6dd8729afd8fffc527e9a584b88bc18"
+    },
+    "v5_tevrat_06": {
+      "text": "Ortak bir alanda bıraktığım engeli kaldırmak, tanımadığım insanların gününe gösterdiğim saygıdır.",
+      "sourceHash": "baae42bca4cbd53c0ddf316abd9ddb5ae3f3e67d090c5a7d769d5f144213b7bd"
+    },
+    "v5_tevrat_07": {
+      "text": "Emanet aldığım bir eşyayı geri verirken gösterdiğim özen, aramızdaki güveni de gözetir.",
+      "sourceHash": "a97fbb0eed7f68e971a09b0c0352761f56e4173f6bb26d68202c629c366e7405"
+    },
+    "v5_tevrat_08": {
+      "text": "Başkasının darlığından kazanç sağlama imkânı, o kazancı vicdan karşısında haklı kılmaz.",
+      "sourceHash": "3af8dd8375fe559de61a680452dcada3827e9b2664846e99e408196af385ac80"
+    },
+    "v5_tevrat_09": {
+      "text": "Komşumla yaşadığım anlaşmazlıkta, onun sözünü de duyabileceğimiz adil bir zemin arayabilirim.",
+      "sourceHash": "b8bd468ec4facf2851274cf0f6a9a446c30814050fa8e6d3bae82359bd5d9afb"
+    },
+    "v5_tevrat_10": {
+      "text": "Birinin hakkını gözettiğim küçük işlem, inancımın yalnızca özel hayatımda kalmadığını hatırlatır.",
+      "sourceHash": "fd868383efa223e333d796a8822b38705550a7c4d05551ed5fd2f830fc917a2a"
+    },
+    "v5_dua_01": {
+      "text": "Allahım, bugün aceleyle konuşacağım yerde karşımdakini duymak için bana sabır ver.",
+      "sourceHash": "5314373a90c203a4e698a19da1ae145a925903be4df2d764f24af0a9182f28bf"
+    },
+    "v5_dua_02": {
+      "text": "Allahım, bir hatamı gördüğümde onu saklamak yerine sorumluluğunu üstlenmeyi bana kolaylaştır.",
+      "sourceHash": "6554f320c171a9841e50e887e0958897743d9a7a5657e115376e1d617d1c25a0"
+    },
+    "v5_dua_03": {
+      "text": "Bugünkü duamda yalnızca istediğim sonucu değil, o yolda nasıl bir insan olmak istediğimi de anıyorum.",
+      "sourceHash": "5bbdd6acbeab5233295b5648218f13586f1091d00b14e2a76668063a221a3e6b"
+    },
+    "v5_dua_04": {
+      "text": "Allahım, yardıma ihtiyacım olduğunda bunu söyleyebilecek açıklığı ve uygun desteği bulmayı bana nasip et.",
+      "sourceHash": "2a4ac4ff48c1bc17b550258ba3bf140e1b15dcd77c31c6fb1b0ad6c5ec7912eb"
+    },
+    "v5_dua_05": {
+      "text": "Allahım, kimsenin görmediği bir işte de emeğe ve insana saygımı korumama yardım et.",
+      "sourceHash": "d8bbcf573b73dbb9b8a6a6615eb6e72c6b8d0518c62bd64d30e2891180d3230a"
+    },
+    "v5_dua_06": {
+      "text": "Dua etmek için kendimi eksiksiz anlatmayı beklemiyorum; bugün içimde olanla başlıyorum.",
+      "sourceHash": "5929f5951aec10c33e67e30a972b2ee78e7ca3a065b95c1a4a311b08ecdacfa3"
+    },
+    "v5_dua_07": {
+      "text": "Allahım, kırgınlığımı başkasını incitme gerekçesine çevirmeden taşıyabilmeme yardım et.",
+      "sourceHash": "f26d46b22f3b0d5a345c857a185f3b531029d52d24c6d9fb0aa1c63d8727b036"
+    },
+    "v5_dua_08": {
+      "text": "Allahım, değiştirebileceğim bir yanlışı fark ettiğimde, onu ertelemeye sığınmayayım.",
+      "sourceHash": "c309997ab95f656f6aeb483f4bbf9db85a50bd084344947a5c49f69f61b4da48"
+    },
+    "v5_dua_09": {
+      "text": "Bu akşam duamda, adını bilmediğim halde günümü kolaylaştıran insanların emeğini de anıyorum.",
+      "sourceHash": "85ef45f2277167dc0208ecf6ffecb21bb5b8857c9ad7bf1e3633f39546ba60f2"
+    },
+    "v5_dua_10": {
+      "text": "Allahım, verdiğim sözle yaptığım iş arasındaki boşluğu dürüstçe görüp azaltmama yardım et.",
+      "sourceHash": "2e74b7f051d529c2186ce7e47072be864cd9b629af8fd42d071f7d4fdd92befc"
+    },
+    "v5_sukur_01": {
+      "text": "Bugün soframdaki bir nimete şükrederken, ona emek veren insanları da hatırlıyorum.",
+      "sourceHash": "8fd6b7e5fdd4f7f21ec82b792eada42b1477adf661ebfb285acf9787b0e57548"
+    },
+    "v5_sukur_02": {
+      "text": "Şükrümün bir karşılığı, elimdeki bir imkânı başkasının gününü kolaylaştırmak için kullanmak olabilir.",
+      "sourceHash": "e94507f7ff60bcb49f1c1a9168046a63240e709f26c08b12c5f08b33b655c86a"
+    },
+    "v5_sukur_03": {
+      "text": "Bir nimeti fark etmek, henüz çözülmemiş derdimi inkâr etmemi gerektirmiyor.",
+      "sourceHash": "2c176c83968f6250633a10580baf3234b0e51bc5702b950e2ebe51462201d6fe"
+    },
+    "v5_sukur_04": {
+      "text": "Bana sunulan bir yardımı kabul edip teşekkür etmek, kendi değerimi küçültmez.",
+      "sourceHash": "b2535d713f12d697fe7d979fa4aae3b8bb7497cb8d98c0c1ba4edb7b04a39dea"
+    },
+    "v5_sukur_05": {
+      "text": "Eski bir eşyayı onarırken bana hâlâ eşlik edebilmesine seviniyorum; şükür, yeniyi beklemeden de dile gelir.",
+      "sourceHash": "b15a589ef249fb2a3cde970adb640eaaef4ed415d5de3edfc3d8ce095399e8c4"
+    },
+    "v5_sukur_06": {
+      "text": "Elimde olanı özenle kullanmak, dilimdeki teşekkürün gündelik hayatımda süren biçimidir.",
+      "sourceHash": "232aa7b2da6bff0a5f2e815a68c1aacbd6e48bd35002053deeea4cea6cc3536f"
+    },
+    "v5_sukur_07": {
+      "text": "Allah'a şükrederken, bir nimetin yalnızca bana ait bir başarı olmadığını da hatırlıyorum.",
+      "sourceHash": "36fa4e404ee3c5361954084993b130a0097cc3ee4850d878437732133bce40a3"
+    },
+    "v5_sukur_08": {
+      "text": "Bir dostun ilgisine alışmak kolaydır; onu her seferinde fark etmek şükre yeni bir anlam verir.",
+      "sourceHash": "aedd4a7733e2df73fc8099ba2277e4e9f7ca719991f30613e3ee494df34a648f"
+    },
+    "v5_sukur_09": {
+      "text": "Bugünkü iyiliği fark etmek için başkasının mahrumiyetini kendi tesellime çevirmem gerekmiyor.",
+      "sourceHash": "61cfa2b5d06e193f481a960adce1c1acc002e76bd73170b5fbd618ec5d5e2ea5"
+    },
+    "v5_sukur_10": {
+      "text": "Şükrümü paylaşırken, azı olan birinin sesini bastırmadan onun ihtiyacına da yer açmak isterim.",
+      "sourceHash": "2962cb05e079465ff1254369d7bceda06dcc1f0d55fc822daa26c97fc15d2f97"
+    },
+    "v5_antrenman_01": {
+      "text": "Ayakkabılarını giydiğin an, kendine ayırdığın zamanın da başlangıcı olabilir.",
+      "sourceHash": "1728da0d4d0ba3c7b24e7f6c6471be4c06ff1d7d523db1632071e0a88820c71b"
+    },
+    "v5_antrenman_02": {
+      "text": "Hareketin gösterişli olması gerekmez; sana uygun olması iyi bir başlangıçtır.",
+      "sourceHash": "2a62c2a4ddee7593a2771bbaef583b63404e7f542164e50dedeec5be3b7bb8b3"
+    },
+    "v5_antrenman_03": {
+      "text": "Bir hareketi özenle öğrenmek, rakamları hızla büyütmekten daha anlamlı gelebilir.",
+      "sourceHash": "a8806f41b5200c331715a417b9d4470a0e460c3a82f14f14b66c058e240922c2"
+    },
+    "v5_antrenman_04": {
+      "text": "Antrenmanın değerini, ertesi gün kendinle kurduğun ilişkiye de sor.",
+      "sourceHash": "332e2ff82a0d22d4939d5630d9ed5e0a551207209cf9aa033ca7d1a7ee6aaa44"
+    },
+    "v5_antrenman_05": {
+      "text": "Bedeninle yarışmak yerine onunla anlaşabileceğin bir tempo arayabilirsin.",
+      "sourceHash": "42c29f743eca2b8b95b0141cb011ddbf6f1a98dadde81434c827e1000d461b9a"
+    },
+    "v5_antrenman_06": {
+      "text": "Sevdiğin bir hareketi bulduğunda, takvimde ona yer açmak daha içten gelir.",
+      "sourceHash": "18a6b56b54831ccc1aabce197687ddc6fbaf1df7575c04440bd2db5e4130d332"
+    },
+    "v5_antrenman_07": {
+      "text": "Kaydına yalnız tekrar sayısını değil, neleri öğrendiğini de yazabilirsin.",
+      "sourceHash": "5f283a5a6e226ecf088248cbc1cca426d0b8637834e50d769621b1e45cdb4592"
+    },
+    "v5_antrenman_08": {
+      "text": "Salona gidemediğin bir gün, hareketle kurduğun bağın tamamını silmez.",
+      "sourceHash": "9348dc1c8012e1f87ec035c11852de506611b61f8541cfdba04233d935d6e47c"
+    },
+    "v5_antrenman_09": {
+      "text": "Isınmaya ayırdığın vakit, antrenmanının kapısında kendini karşılamaktır.",
+      "sourceHash": "508d9a579ac90b107046530c11a97e54b147f2f65e2f32139e166f007abf6611"
+    },
+    "v5_antrenman_10": {
+      "text": "Başkalarının temposunu izlerken kendi çalışma alanını daraltmamaya özen göster.",
+      "sourceHash": "7f6f3e5eba128e5f6c9473918ab6849d8d0170f6258ffb28a23bbdd1b3c4ca98"
+    },
+    "v5_dayaniklilik_01": {
+      "text": "Uzun bir parkurda, hangi hızda sürdürebildiğini bilmek de beceridir.",
+      "sourceHash": "4c6ebb14b43439ea150f5afa621d994f7c57d9381d14902c4e3c1b4aaa2e036b"
+    },
+    "v5_dayaniklilik_02": {
+      "text": "Bugünkü mesafeye bakarken, buraya gelmeni sağlayan hazırlığı da görebilirsin.",
+      "sourceHash": "6b45bab047567b47c2d5b815a1ed10d9b51029eafcaf6ee91f1eec39c68d6f3c"
+    },
+    "v5_dayaniklilik_03": {
+      "text": "Mola yerini planına yazmak, yolculuğunun tamamını düşünmektir.",
+      "sourceHash": "e1f40ea32f8037c4b14cf24ce713a85011c023a3767c673b94aa39229033018b"
+    },
+    "v5_dayaniklilik_04": {
+      "text": "Bir parkuru bitirmek kadar, ne zaman dönmen gerektiğini fark etmek de değerlidir.",
+      "sourceHash": "96d4dda980a01ef3d414d305990a51b9deb4f96a637039eac7f6d0419387fb65"
+    },
+    "v5_dayaniklilik_05": {
+      "text": "Tempo değiştiğinde emeğin kaybolmaz; koşullarla konuşmaya başlar.",
+      "sourceHash": "476335594a036cf3df1024bc7cdf4aba9066a1b7a12ca464afd8a1c9828cdc4d"
+    },
+    "v5_dayaniklilik_06": {
+      "text": "Dayanıklılığın bazen daha çok zorlamakta, bazen yükünü yeniden ayarlamakta görünür.",
+      "sourceHash": "cb2ab246ca27db97d6e1d68ba46642ff0bd2cda99e56a35dcfeb5d4a6486ddbd"
+    },
+    "v5_dayaniklilik_07": {
+      "text": "Önündeki yokuşu bütünüyle tartmak yerine, bulunduğun noktadan çevrene bakabilirsin.",
+      "sourceHash": "05152d7eed753a5c93ff7104a414bfa5e7c19f2993c3daa15d785b82da697904"
+    },
+    "v5_dayaniklilik_08": {
+      "text": "Kendi ritmini tanımak için her çalışmayı bir sınava çevirmen gerekmez.",
+      "sourceHash": "697869962f7f1bf2d6f80a9c571650b092d3e39f6a15427e10690830e1903491"
+    },
+    "v5_dayaniklilik_09": {
+      "text": "Bir önceki turun bilgisi, yeni turda yanında taşıyabileceğin bir rehberdir.",
+      "sourceHash": "97b6517041f40d925699b66344affbbac206a3896c603df928781c2c33027ab9"
+    },
+    "v5_dayaniklilik_10": {
+      "text": "Uzun yolun kaydı yalnız bitiş çizgisinde tutulmaz; aradaki özen de oradadır.",
+      "sourceHash": "ac47fea3571e9cb508389b9a16a08187db76d6043429c761abc96791762433df"
+    },
+    "v5_sakatlik_01": {
+      "text": "İyileşme takvimin, kendine verdiğin değerin ölçüsü olamaz.",
+      "sourceHash": "00f0864726d2dd385c53e17f8b681beb966167df0b5e47bbcfc81c66ee66a203"
+    },
+    "v5_sakatlik_02": {
+      "text": "Dönüş planında merak ettiğin bir şeyi, seni takip eden uzmana sorabilirsin.",
+      "sourceHash": "e79adf489b4538be91b5a9b9c1dab90b6003d8d2a8a5811a90207923e23c51ba"
+    },
+    "v5_sakatlik_03": {
+      "text": "Bedenindeki bir uyarıyı saklamamak, dönüş yoluna dürüstçe katılmaktır.",
+      "sourceHash": "cf643aa97f53ef40cdb46f35bb4f6ec35fc5196e16badb2482a569e2384cac41"
+    },
+    "v5_sakatlik_04": {
+      "text": "Eski performansını hatırlarken, şu anki ihtiyaçlarına da masada yer aç.",
+      "sourceHash": "868b0c55d407740d71c20b491173d2eb45ac953cc33e31051c9949706806b72f"
+    },
+    "v5_sakatlik_05": {
+      "text": "Beklemek zor geldiğinde, bu duyguyu da iyileşme sürecinde konuşabilirsin.",
+      "sourceHash": "0746d7837b78031f33b873f15757f17e3bb8536a89895cab4526dc1a14a11210"
+    },
+    "v5_sakatlik_06": {
+      "text": "Spora bağlılığın, yalnız sahada geçirdiğin dakikalardan oluşmaz.",
+      "sourceHash": "3a1c154fcd77486b8dac42ed6239af4634649a57cd66b7168dae0be80b599206"
+    },
+    "v5_sakatlik_07": {
+      "text": "Bir başkasının dönüş tarihi, senin bedenine verilmiş bir son tarih değildir.",
+      "sourceHash": "5fcdb6b15a9df2f2b90f95286b640e6b89c8e2e9fb175c67389f22633e1de2d8"
+    },
+    "v5_sakatlik_08": {
+      "text": "İlerleme kaydında, daha rahat yaptığın gündelik bir harekete de yer olabilir.",
+      "sourceHash": "e7b01304e28affead65eac163670ee0a3660e8ee533495728b6a5a0657f2dedc"
+    },
+    "v5_sakatlik_09": {
+      "text": "Yardımla kurulan bir dönüş planında, kendi soruların ve tercihlerin de önemlidir.",
+      "sourceHash": "b7d6cfae03e37660570ff2857259db8394c7cd0c932601c048728ab0425265b3"
+    },
+    "v5_sakatlik_10": {
+      "text": "Kendini hazır hissetmediğini söylemek, ekip içindeki sesini kullanmaktır.",
+      "sourceHash": "8f7b87818602e818ec14dd0a6ddbc6b8bd15f682910c6224b7be39a6c9c31e81"
+    },
+    "v5_sabah_rutini_01": {
+      "text": "Sabahına ilk giren şeyin bir talep değil, seçtiğin bir alışkanlık olmasına yer aç.",
+      "sourceHash": "be318292efd47dcb06a1293bd8b9d150b9475d5606f29f76a352b26fa940a9b3"
+    },
+    "v5_sabah_rutini_02": {
+      "text": "Perdeyi açarken, günün planına geçmeden bulunduğun odayı fark edebilirsin.",
+      "sourceHash": "ac1bf2ddfcdfd02240263f569056c67371444db3d2137197a577563ed9f9cc49"
+    },
+    "v5_sabah_rutini_03": {
+      "text": "Uyanma saatin sana bir karakter notu vermez; kendi koşullarında bir düzen arayabilirsin.",
+      "sourceHash": "6ab06ade960681ca43deebaa36b95f0351807681f6c8aaf11eefbeca920c13af"
+    },
+    "v5_sabah_rutini_04": {
+      "text": "Akşamdan hazırladığın bir eşya, sabahki kendine bıraktığın nazik bir kolaylıktır.",
+      "sourceHash": "b105069a9625962777c66d48e6897cbbc5bd2c241bd35f1cef2789c42edf8025"
+    },
+    "v5_sabah_rutini_05": {
+      "text": "İlk kahvenin yanında, gününden ne beklediğini tek cümleyle yazmayı deneyebilirsin.",
+      "sourceHash": "b461615706dc08beeabf252ba0dd4b76d9502b9041ab694ad0806d876a664935"
+    },
+    "v5_sabah_rutini_06": {
+      "text": "Sabah düzenin aksadığında, günün geri kalanını da iptal etmek zorunda değilsin.",
+      "sourceHash": "3684cc47485bdee10b21748a6b0f33497ea32a8eda30dd6c56fe4afa2d4544db"
+    },
+    "v5_sabah_rutini_07": {
+      "text": "Uyanır uyanmaz her haberi taşımadan önce, kendine bakacak bir aralık bırak.",
+      "sourceHash": "aadbac6229cc017193eb41f14e948bf5dc0bdb44188713a1739031c3b7e456c2"
+    },
+    "v5_sabah_rutini_08": {
+      "text": "Sabah telaşında bir işi azaltmak, bazen yeni bir alışkanlık eklemekten daha uygundur.",
+      "sourceHash": "91c03985375e440acba4e6350731dde5ce9e03e51dff21d276d6afbfc72af7f8"
+    },
+    "v5_sabah_rutini_09": {
+      "text": "Kendine ait bir başlangıç, başkasının kusursuz sabahını taklit etmek zorunda değildir.",
+      "sourceHash": "fb9afe1ea7ea1dd95379d994d7d56fa7db0136b5eaee469e385d326373247d60"
+    },
+    "v5_sabah_rutini_10": {
+      "text": "Gününü açarken bütün cevapları bilmen gerekmez; ilk ihtiyacını fark etmek yeterli olabilir.",
+      "sourceHash": "e350ca0563f04748637a09a649f54c87798427d256b6974a6411234a955b94d8"
+    },
+    "v5_beslenme_01": {
+      "text": "Sofrana otururken, bedeninin ihtiyaçlarını da konuşmaya dahil edebilirsin.",
+      "sourceHash": "64395d701d97c23476d8bec4a4b5a90652cf4d74a81e0c45f3e56626de34b50b"
+    },
+    "v5_beslenme_02": {
+      "text": "Bir öğün, kendin hakkında vereceğin bir hükmün tamamı olamaz.",
+      "sourceHash": "af5bbfa05f1899ba7a3da775e75efb18e1551bdbc85486c9b17027dd35162c0c"
+    },
+    "v5_beslenme_03": {
+      "text": "Yemek hazırlamak, kimi günlerde kendine gösterdiğin özenin görünür hâlidir.",
+      "sourceHash": "e8a90b541938ee9555195474ff9cda3cd7e0eee4f587db182d848faf9dfca276"
+    },
+    "v5_beslenme_04": {
+      "text": "Elindeki imkânlarla kurduğun sofra da emek ve dikkat taşıyabilir.",
+      "sourceHash": "d221925b3c2fa3e5fb492ad411044c78b18378ffb4b603f06332c8876399971e"
+    },
+    "v5_beslenme_05": {
+      "text": "Yeni bir tadı merak etmek, yemeğe kurallardan başka bir kapı da açar.",
+      "sourceHash": "39975cb7a3b8886f7bd1acc103035567640ab49e6bf5ef8b109fb58591e42bdb"
+    },
+    "v5_beslenme_06": {
+      "text": "Yemeği hak etmek için kendini cezalandırman gerekmez.",
+      "sourceHash": "963237e6dd482ba806320a2419d74b725975a8ee023fb2a362aea6f0898775e2"
+    },
+    "v5_beslenme_07": {
+      "text": "Beslenme düzenini düşünürken çalışma saatlerini, bütçeni ve zevklerini de hesaba kat.",
+      "sourceHash": "53b0092ef9e70b9bfc69af66900b865d9dbad5b7976f8a8b3e4401563f05706f"
+    },
+    "v5_beslenme_08": {
+      "text": "Sofradaki çeşitlilik, her gün aynı seçimi yapma zorunluluğunu gevşetebilir.",
+      "sourceHash": "ab6310d07f2426bd6d521e38922c381ec298b4f542ae2d846d2ef15754e8c7ec"
+    },
+    "v5_beslenme_09": {
+      "text": "Başkasının tabağına bakarak kendi bedenin için kesin bir kural çıkaramazsın.",
+      "sourceHash": "fa8bd2b036b34a191e943ce4e9cfb6f5d147a2ce81f755cead54634cd903f0ec"
+    },
+    "v5_beslenme_10": {
+      "text": "Bir öğünü aceleye getirdiysen, bir sonrakine daha fazla zaman ayırmayı düşünebilirsin.",
+      "sourceHash": "c3aa4db1bfb227c95bdda8e8bfeccad72b971b63e78ea41743833be54970c3c5"
+    },
+    "v5_girisimcilik_01": {
+      "text": "Fikrini anlatmadan önce birinin yaşadığı sorunu dinle; kuracağın şeyin hayatla buluştuğu yer orası olabilir.",
+      "sourceHash": "bad63ea43172f577d4f89d5f6e348ba0cee8fcfcc738208e436f6d101e8c9332"
+    },
+    "v5_girisimcilik_02": {
+      "text": "İlk denemeni bütün hayalini taşıyacak kadar büyütme; bir soruyu sınayacak kadar açık tut.",
+      "sourceHash": "5f62dbc35839295d1d1fbcfabe5ab0fcdc47cac651e63b1699235a63db8376fe"
+    },
+    "v5_girisimcilik_03": {
+      "text": "İnsanların övgüsünü duy, kullanımını da gözle. Söylenenle yaşananın arasındaki fark sana bir şey anlatabilir.",
+      "sourceHash": "5520bc7114b6af61850e02b5dbdc416ebb1bb9a23bef540683fb90413d4fba4a"
+    },
+    "v5_girisimcilik_04": {
+      "text": "Fikrinin değişmesi emeğini çöpe atmaz; öğrendiklerin bazen tasarladığın yönü yeniden çizer.",
+      "sourceHash": "7bceba96c00f1436ec4ded95d1c0ab07d0614e1c31bd8ec33c874015e565e6e7"
+    },
+    "v5_girisimcilik_05": {
+      "text": "Bir işe başlarken ayırabileceğin zamanı ve yükü açıkça gör; heyecanın yanında sınırların da masada olsun.",
+      "sourceHash": "8fef9bd46b1cfa0ce1e76edefd1a007b1beb794889fd611b824ec40979919422"
+    },
+    "v5_girisimcilik_06": {
+      "text": "Her talebi ürüne eklemek zorunda değilsin; kime hangi sorunda yardım etmek istediğini hatırla.",
+      "sourceHash": "707c95550b57bd7effc04d135b32ff56f397753800ce43a8105b36947a816c83"
+    },
+    "v5_girisimcilik_07": {
+      "text": "Belirsizliği saklamak yerine neyi bilmediğini yaz; araştırman için dürüst bir başlangıç noktası olsun.",
+      "sourceHash": "04bdc49b2fdd125f9ce4433e64cc4e65f3352004143ca58d2b243c706ee35624"
+    },
+    "v5_girisimcilik_08": {
+      "text": "Yaptığın şeyi birine kullandırırken savunmaya ara ver; sessizce izlediğin an sana yeni bir soru getirebilir.",
+      "sourceHash": "1815fd9083e4e288840514bbf1836f8252bd52a1ae2bc962a0ec00fe88041aaf"
+    },
+    "v5_girisimcilik_09": {
+      "text": "Bir işi kurarken kendine de yaşam alanı bırak; sürekli erişilebilir olman gereken tek çalışma biçimi yok.",
+      "sourceHash": "0aec7dcbcd8b98c50e78bc0997ed129b066bf4cb101b48e1a76a145764b65f8c"
+    },
+    "v5_girisimcilik_10": {
+      "text": "Bir denemeyi sonlandırırken öğrendiğini kaydet; sonuç kapanabilir, deneyimin anlatacakları kalabilir.",
+      "sourceHash": "30069841f44bb12c944a3d46b28caee4f1a90d8f7b4b881a71cac58eb5e94e61"
+    },
+    "v5_kariyer_01": {
+      "text": "Özgeçmişine sığmayan becerilerin de var; zor bir konuşmayı yürütmek, öğrenmek ve güvenilir olmak gibi.",
+      "sourceHash": "e11ad9d09f0508ac8d6fbd33786e26dcfb44d5e9f04d31540c826e0f5b41844f"
+    },
+    "v5_kariyer_02": {
+      "text": "Bir iş görüşmesinde sen de koşulları öğreniyorsun; çalışma hayatın hakkında soru sormaya hakkın var.",
+      "sourceHash": "6179f087fe7382f154a5d01273b8e4457fe29b444cdb88fa9a8a41eb79cda8e4"
+    },
+    "v5_kariyer_03": {
+      "text": "Mesleki yönünü seçerken iyi yaptıklarının yanında, nasıl bir gün yaşamak istediğini de düşün.",
+      "sourceHash": "dec2e122ddc81825092f1256ef8cdb6a4e445d7a0e346ed6acd2ac9a9290b12e"
+    },
+    "v5_kariyer_04": {
+      "text": "Geri bildirim isterken tek bir örnek sor; somut bir gözlem, genel bir yargıdan daha kullanışlı olabilir.",
+      "sourceHash": "6b15598c80bac87adf42586989b16ef5c25aad2cb1717b6c120283b06288826a"
+    },
+    "v5_kariyer_05": {
+      "text": "Bir becerini geliştirmek için görünür bir unvan bekleme; öğrenmeye ayırdığın zaman sana eşlik eder.",
+      "sourceHash": "79bfaf98bfefdd64aa6984553ac01ad917cd8fe870fbed749699f3b85c7acb19"
+    },
+    "v5_kariyer_06": {
+      "text": "Başkasının terfisini kendi hayatına verilmiş bir not gibi okuma; yolların koşulları birbirinden farklıdır.",
+      "sourceHash": "9ca06ab1583cf491d97e3bea53f3dad5d9eb4151e820cccd638f863e23d1b76a"
+    },
+    "v5_kariyer_07": {
+      "text": "Yaptığın işin sınırlarını konuşmak profesyonelliğine zarar vermez; açık beklentiler iki tarafa da yer açar.",
+      "sourceHash": "365194745407fe53e866ea0a0e0a2ce40e3b073d0a7242d65c6acba3c10854f3"
+    },
+    "v5_kariyer_08": {
+      "text": "Kariyerinde yön değiştirirken geçmişini silmen gerekmez; yeni işine taşıyabileceğin deneyimi ara.",
+      "sourceHash": "88b823a2ed0d74ee588d8b830901ed647f356ce65d3a53cf228c500fcf481d9b"
+    },
+    "v5_kariyer_09": {
+      "text": "İş aramanın yorucu bir gününden sonra kendini yalnızca gelen yanıtlara göre değerlendirme.",
+      "sourceHash": "e41c6c9ab66cc0e783cc8a6ff893135e792a86447b3978ce85e19fc4571a264a"
+    },
+    "v5_kariyer_10": {
+      "text": "Bir işin sana uygunluğunu yalnızca dışarıdan nasıl göründüğüyle ölçme; içinde nasıl yaşadığını da dinle.",
+      "sourceHash": "a6458da5ebbe0f2811dd3c601d6b815a881a84acefd7e46c82b5b968a929b602"
+    },
+    "v5_liderlik_01": {
+      "text": "Toplantıda en son konuşan kişiye de yer aç; düşüncenin değeri, söze giriş hızından büyük olabilir.",
+      "sourceHash": "903781a431e7ba66cc889a86d28e329bf5dbdb5448995f1bcf630985e5a9ff53"
+    },
+    "v5_liderlik_02": {
+      "text": "Bir hata duyduğunda ilk tepkin kapıyı kapatmasın; sonraki gerçeğin sana ulaşıp ulaşmayacağını etkileyebilir.",
+      "sourceHash": "c3750add7792b7c1b9bce292119f781acf8b8e828d4ad28cca8504fdeb93801b"
+    },
+    "v5_liderlik_03": {
+      "text": "Bilmiyorum diyebildiğin yerde başkalarının bilgisine alan açarsın; sorumluluk, her cevabı taşımayı gerektirmez.",
+      "sourceHash": "3090dcbad105e227ded828247ebbde95a91693b1e332522761c5d3e50f00f16e"
+    },
+    "v5_liderlik_04": {
+      "text": "Görev verirken beklediğin sonucu ve kullanılabilecek desteği anlat; belirsizliği tek kişiye yükleme.",
+      "sourceHash": "8c77fde5b065d94124103c0ddda618d1b50922b6cf4ca53f1aad8463f3b12b06"
+    },
+    "v5_liderlik_05": {
+      "text": "Bir işin sonucunu sunarken katkıların kime ait olduğunu belirt; ortak emeğin adı tek bir kişinin altında kaybolmasın.",
+      "sourceHash": "714ec5cbd3e8d3792555c907ae514a0fe7205964668a78707b2ebd521b17b189"
+    },
+    "v5_liderlik_06": {
+      "text": "Kararının kimleri etkileyeceğini düşün; masada olmayanların koşulları da sorumluluğunun içindedir.",
+      "sourceHash": "2008722d86537656fb94cc0ea7a0eaa04de3bacf07e613d18d4f3c397d85f709"
+    },
+    "v5_liderlik_07": {
+      "text": "Senden farklı düşünen birini dinlerken cevabını hazırlamayı ertele; önce ne gördüğünü anlamaya çalış.",
+      "sourceHash": "8c342add56adce21bda597f0ee8220085655148f55572a9000e8f80711f008bb"
+    },
+    "v5_liderlik_08": {
+      "text": "İşler yetişmediğinde yalnızca hızı sorma; yükün nasıl dağıldığına ve neyin eksik olduğuna da bak.",
+      "sourceHash": "e123cff1c95b72d52c899f5f8e6c6c748fab800392e2f2250e7c9b92255aa6ff"
+    },
+    "v5_liderlik_09": {
+      "text": "Yanlış bir kararından dönerken gerekçeni açıkla; fikrini güncellemek birlikte öğrenmenin bir parçası olabilir.",
+      "sourceHash": "82d00a284efb7dc95a5782285b72fd5a9d732db13e3fd68ec35f51039d8e19b9"
+    },
+    "v5_liderlik_10": {
+      "text": "Ekibinin sınırlarına gösterdiğin özen, söylediklerin kadar öğreticidir; çalışma biçimin de bir mesaj taşır.",
+      "sourceHash": "c544c1b50e495287833c06d7ab1560630f9c6ce3515d6f72b774395911dc3c00"
+    },
+    "v5_para_01": {
+      "text": "Parayla ilgili kaygını küçümsemeden rakamlara bakabilirsin; duyguların da hesabının yanında yer bulsun.",
+      "sourceHash": "006e6a1821f14a8331f4e6aa79ff7ce59bf76c289a01a4ce22be477ad90bbb64"
+    },
+    "v5_para_02": {
+      "text": "Bir alışverişten önce kendine zaman tanı; ürünü istemekle hayatında ona yer açmak farklı sorulardır.",
+      "sourceHash": "132eec139a4027030ae79b0a0fe4ee5f727ae98032c1355bb712dffefd5edd09"
+    },
+    "v5_para_03": {
+      "text": "Gelirin, bir insan olarak değerinin ölçüsü değildir; emeğinin koşulları bir rakamdan daha geniştir.",
+      "sourceHash": "21cd64617056a147acfb4226bd750c5f4fe7041494f723e660edc4b099ebd5bd"
+    },
+    "v5_para_04": {
+      "text": "Bir harcamanın seni neye yaklaştırdığını sor; seçimlerin, kurmak istediğin hayatla konuşabilsin.",
+      "sourceHash": "c7b8cf452a3346e0f0b3058927b15dfd8dda586591252f80c04e111c76057fda"
+    },
+    "v5_para_05": {
+      "text": "Bütçene bakarken yalnızca kısıtları görme; hangi ihtiyaçlarına alan açmak istediğini de adlandır.",
+      "sourceHash": "5d725b413405aa0f36f4fcb387dfe5f22d67362a3adda64288dca8b86ae4affd"
+    },
+    "v5_para_06": {
+      "text": "Başkalarının harcama temposuna yetişmek zorunda değilsin; kendi koşulların kendi kararlarında yer bulmalı.",
+      "sourceHash": "07d9602b65ddeeb88fe6161ddf662c6fe7e0e93cf8362e669d43d20f23d17096"
+    },
+    "v5_para_07": {
+      "text": "Para konuşmak zor geliyorsa tek bir soruyla başlayabilirsin; her ayrıntıyı bir anda açman gerekmiyor.",
+      "sourceHash": "cf821f4b1092cb6bc500f737e0ed6c32bfb8225953aca74ae806479c1d97b58e"
+    },
+    "v5_para_08": {
+      "text": "Bir masrafın gerçek yüküne bakarken ona ayıracağın zaman ve dikkati de hesaba katabilirsin.",
+      "sourceHash": "455f3101834351f910b92a7186b0da0b90f1876262267258f81b947e22223b2c"
+    },
+    "v5_para_09": {
+      "text": "Maddi sıkışıklıkta kendini suçlamadan destek yollarını araştırabilirsin; bütün koşullar senin seçimin değil.",
+      "sourceHash": "fe0c70b27ff7ab38eefb1ede0a35e01dcdda5df84e0da8e495c2c448a95a1923"
+    },
+    "v5_para_10": {
+      "text": "Bir ödeme kaydını düzenlemek, para hikâyene okunur bir satır ekler; karmaşayı bir oturuşta bitirmen gerekmez.",
+      "sourceHash": "69645fc038fef688aa8e123dbcfa8e5def07c525d3d26c8cb718ee3bcc90800c"
+    },
+    "v5_zaman_01": {
+      "text": "Takvimindeki boşluk bir kusur değildir; beklenmedik bir ihtiyaca yer bırakmanın sessiz biçimi olabilir.",
+      "sourceHash": "0c46b8c1770acdf18d30e7874cf03e49b0d117b239662f301cc6a157e5d66d26"
+    },
+    "v5_zaman_02": {
+      "text": "Bir şeye evet derken ona vereceğin saatin nereden geleceğini de düşün; zamanın somut bir karşılığı var.",
+      "sourceHash": "ba34901aaca7f9ff70ffa6e6617f04ede9a94579563cede943aa9a27814f6e98"
+    },
+    "v5_zaman_03": {
+      "text": "Günün sonunu yalnızca biten işlerle ölçme; dinlediğin insan ve kendine ayırdığın an da oradaydı.",
+      "sourceHash": "ccad1e632648d34f1e9afbeb87f5025b0eb55175536a90997858ab35c9c04868"
+    },
+    "v5_zaman_04": {
+      "text": "Acele ederken hangi işin gerçekten acil olduğunu sor; en yüksek ses her zaman en doğru sıra değildir.",
+      "sourceHash": "a7cc5615d1561ec8469e2884190ca5798f4fe4f210bb3957cab77a422cc7f90a"
+    },
+    "v5_zaman_05": {
+      "text": "Bir görüşmeden diğerine geçerken kendine nefes payı bırak; günün tek parça bir koşuya dönüşmesin.",
+      "sourceHash": "840a2c19c2c610ac898a62f92b787367894ed08869bb4cf320fc03f2d51f4423"
+    },
+    "v5_zaman_06": {
+      "text": "Zaman ayırmak istediğin kişiyi hep sonraya bırakıyorsan, birlikte geçirebileceğiniz bir an öner.",
+      "sourceHash": "d96314f8c408ee18738b0eaee1ece5b7ff67f1f812b61a406b489f672c92feea"
+    },
+    "v5_zaman_07": {
+      "text": "Her dakikanın faydasını kanıtlaman gerekmiyor; pencereden baktığın süre de yaşadığın hayatın içindedir.",
+      "sourceHash": "394afcc081836d0f45fd218de62e5f3de541e88dcfbadeade8de27355b7760c9"
+    },
+    "v5_zaman_08": {
+      "text": "Bir işi tahmininden uzun sürede yapman mümkün; planını gerçek süreye göre yeniden düzenleyebilirsin.",
+      "sourceHash": "adf2ca05972c4e1db6d5c01014b7e1b5ce86c73b03da38dee8c9eeeab55342b5"
+    },
+    "v5_zaman_09": {
+      "text": "Yetişmeyen bir günün ardından yarına her şeyi yığma; neyin bekleyebileceğine de karar ver.",
+      "sourceHash": "e443e8ef8d4d436572422c155dfa05620bd5d5e3b2e3a14e2fd5134c97341934"
+    },
+    "v5_zaman_10": {
+      "text": "Zamanını korumak bazen nazik bir hayır cümlesinde başlar; o cümleyi söylemeyi öğrenebilirsin.",
+      "sourceHash": "760d886ed7413a82f802458df84f61cdb2a768c1af63e880cbdf1b3db9eb84d3"
+    },
+    "v5_basarisizlik_01": {
+      "text": "Bir sonucun istediğin gibi olmaması acıtabilir. Öğreneceklerini aramadan önce bu duyguna yer aç.",
+      "sourceHash": "7a1826775d7b7c7c6f87c4802c99967f3d609e52ae57a019471c6512ee752c7b"
+    },
+    "v5_basarisizlik_02": {
+      "text": "Başarısız denemende işe yarayan bir parça da olabilir; değerlendirme yaparken onu karanlıkta bırakma.",
+      "sourceHash": "5ed246a630f8221ac5136dd69f3702a0a5cbec1c67e03cb5447ea83997614baa"
+    },
+    "v5_basarisizlik_03": {
+      "text": "Bir hatayı incelerken kim olduğunu yargılamak yerine ne olduğunu açıkça yaz; ayrıntı yol gösterebilir.",
+      "sourceHash": "639d8f5a2de868132d46dce7d817792ef3661e0dd1e54f3f2857e9318a5ab7a6"
+    },
+    "v5_basarisizlik_04": {
+      "text": "Denemeni gözden geçirirken koşulları da masaya koy; sonucu yalnızca karakterine yüklemek adil olmaz.",
+      "sourceHash": "f440163b457f2c1cfff96cae067ef2e3829641ca8c5974133033f8fa941503d1"
+    },
+    "v5_basarisizlik_05": {
+      "text": "İşe yaramayan yöntemin adını koymak, bir sonraki denemene bırakabileceğin değerli bir nottur.",
+      "sourceHash": "610ab3ca01fb9b7d785d9d1e1fdc966f28f88aaa308545f57ea14a61558379b7"
+    },
+    "v5_basarisizlik_06": {
+      "text": "Bir ret cevabı, emeğinin bütün hikâyesini anlatamaz; nedenini öğrenebiliyorsan bilgi olarak dinle.",
+      "sourceHash": "3dd4d2b3ce59da9fb42f65c53716abec0b470a4c1a5ac7139355e04823ddafaa"
+    },
+    "v5_basarisizlik_07": {
+      "text": "Hatanı saklamadan konuşabildiğin birini bulmak, onu yalnızca utançla hatırlamanın önüne geçebilir.",
+      "sourceHash": "4fb9295cf00dc785eccae24a0ffdcac9423ff29aa82f0469da2325e480733a60"
+    },
+    "v5_basarisizlik_08": {
+      "text": "Sonuç hayal kırıklığı yarattığında yeni karar için zaman isteyebilirsin; hemen bir ders sunman gerekmiyor.",
+      "sourceHash": "7a0ea28511c0e84e04c647ca6e13ef8624c5125fdc5cd9701144c25618a10b90"
+    },
+    "v5_basarisizlik_09": {
+      "text": "Bir denemeyi tekrarlamadan önce neyi değiştireceğini belirle; deneyim, kararına karıştığında işe yarar.",
+      "sourceHash": "df050ae91262c9aeedf4d863ba3bfadf181a7053c978d06242e4268ff2e68a11"
+    },
+    "v5_basarisizlik_10": {
+      "text": "Herkesin gördüğü bir hata sonrasında da saygıyı hak ediyorsun; görünür olmak insanlığını azaltmaz.",
+      "sourceHash": "23fecb4a9dea4f3b18a7dc68122f827d2c05ceda03eab3e823540cacfca9f9e4"
+    },
+    "v5_basari_01": {
+      "text": "Başardığın şeyin ardından durup ona bak; hemen yeni hedefe geçmek, sevincin tek yolu olmasın.",
+      "sourceHash": "3a50345c306556e3ca5bb252f24c79c7cfbc5921f7eed54d6b1efbc65ff2ddb5"
+    },
+    "v5_basari_02": {
+      "text": "Emeğinin sonucunu paylaşırken yanında olanları da hatırla; sevincin içinde birlikte geçirilen zaman var.",
+      "sourceHash": "40ca967f393ebe12898c56a0a5fe0840ddba4843a8455d169e4a817c2221e476"
+    },
+    "v5_basari_03": {
+      "text": "Bir başarıyı kendine kabul ettirmek için küçültme; şansın ve desteğin varlığı emeğini görünmez kılmaz.",
+      "sourceHash": "c1b84fe8a7b0ab0ce7646cc0060b1f27a4dbd0b664d7d64c8974808273776129"
+    },
+    "v5_basari_04": {
+      "text": "İyi giden bir işten sonra neyin işe yaradığını kaydet; sevincin yanında geleceğe bir iz de bırak.",
+      "sourceHash": "b7f63ef2c60edbc692ceff0ad02883b25f5cf343123eed20cd5b2847af05e5fb"
+    },
+    "v5_basari_05": {
+      "text": "Başarı tanımına nasıl yaşadığını da ekle; ulaştığın yerin yanında oraya varırkenki hayatın da önemli.",
+      "sourceHash": "b4e4f2703e283e933dda6c111f1776c8d39a23655f3de9453753cdc67e6c13c9"
+    },
+    "v5_basari_06": {
+      "text": "Bir hedefe ulaşınca farklı hissetmemen mümkün; sevincin başkalarının beklediği biçimde görünmek zorunda değil.",
+      "sourceHash": "fa98a1429502ab8dccfca04a486d759daccfb95e98236bf842505197a22b87b3"
+    },
+    "v5_basari_07": {
+      "text": "Uzun zamandır zor gelen bir işi daha rahat yaptığında bunu fark et; gelişme bazen böyle sessiz görünür.",
+      "sourceHash": "e23f6b7c900c9578bc7ba776189839baefea92be2ed884d5d2fa3e39824eadcf"
+    },
+    "v5_basari_08": {
+      "text": "Kutlamak için büyük bir tören gerekmiyor; sevdiğin biriyle paylaşacağın bir cümle de yeterli olabilir.",
+      "sourceHash": "9270981a04e65cfeced268fbc08588667c50f473cbbb05f6644f51cc9b23e521"
+    },
+    "v5_basari_09": {
+      "text": "Bir başarıdan sonra dinlenmeye alan aç; elde ettiğin sonuç seni sürekli daha fazlasına borçlandırmaz.",
+      "sourceHash": "a798d41f9d9dad71da8bdc12602ff34036768a42daf2211ba667c8579401a1c9"
+    },
+    "v5_basari_10": {
+      "text": "Kendin için anlamlı bir işi tamamladıysan ona sahip çık; dışarıdan küçük görünmesi anlamını küçültmez.",
+      "sourceHash": "48c2385182362893257dcec69a3fb6537a52fd3f02decd2a0f62fdd1dad1736f"
+    },
+    "v5_ask_01": {
+      "text": "Sevgi, karşındakinin ne hissettiğini tahmin etmek kadar, ona sormayı da öğrenir.",
+      "sourceHash": "9db18ceb29fb83f4f39ca1eee7342cb9983c7ded115dc8fa01d4660f136f2efd"
+    },
+    "v5_ask_02": {
+      "text": "Birlikte kurulan hayatın içinde, iki kişinin de kendine ait bir penceresi olsun.",
+      "sourceHash": "41c65a8e2480b7c043f6d3707ff659df765e617366e86995f18a98577a51f5f6"
+    },
+    "v5_ask_03": {
+      "text": "İncindiğini anlatabilmek için önce haklılığını kanıtlaman gerekmez.",
+      "sourceHash": "f332cbb42b25004dbbb7b68e5f707057905c96b2b8ef7fc5152fed89d8c30117"
+    },
+    "v5_ask_04": {
+      "text": "İlgi, büyük sözlerden sonra gelen sıradan bir günde de kendini gösterebilir.",
+      "sourceHash": "af7a1454a1ddc41bdaf927b2670729440ad390d5ec9cf49322f38a0a6f53a1d0"
+    },
+    "v5_ask_05": {
+      "text": "Sevdiğin insanı dinlerken, cevabını hazırlamaya ara ver; belki yeni bir şey duyarsın.",
+      "sourceHash": "63cbd750c9bc87ab2f3fafeb01e32b22f78be7b283b6c44b03c3f5ee59abb606"
+    },
+    "v5_ask_06": {
+      "text": "Yakınlık, bir isteğin kadar bir hayırın da güvenle duyulabildiği yerde büyür.",
+      "sourceHash": "f9552a5b11f0baf4bfeeebc3c8636619b0f42159f26432ec3c0af4eeac5e7140"
+    },
+    "v5_ask_07": {
+      "text": "Bir ilişkiye emek vermek, o ilişkinin içindeki kendi sesini korumayı da içerir.",
+      "sourceHash": "dfce4b6e843e17d2f6d38e6b617e3604e75329daeeeddda7af0f70c1ee05bcc0"
+    },
+    "v5_ask_08": {
+      "text": "Birlikte gülmek kadar, yorulduğunu rahatça söyleyebilmek de kıymetlidir.",
+      "sourceHash": "0a35612ac451958a8b2e10f42282d5d59d75cc55cdbce68ec6550b8afb027baa"
+    },
+    "v5_ask_09": {
+      "text": "Sevginin ritmini karşılaştırmalarla ölçme; ikinize iyi gelen dili birlikte öğrenin.",
+      "sourceHash": "2669014323142fffe1ba786580952e78efce31923222ac13ec01339cb0b1bb3e"
+    },
+    "v5_ask_10": {
+      "text": "Birini sevmek, onun bütün ihtiyaçlarının tek cevabı olma sorumluluğu yüklemez.",
+      "sourceHash": "8c9c4904d97a7192c800503344008f3f6d9e847bcbf5517e90107e9fa36c20b9"
+    },
+    "v5_ayrilik_01": {
+      "text": "Biten bir ilişkinin ardından, gününün boş kalan yerlerini yavaşça yeniden tanıyabilirsin.",
+      "sourceHash": "22e92308e2d78aed05050972d10e8b38072ba5025b04c715e8589710b783f661"
+    },
+    "v5_ayrilik_02": {
+      "text": "Özlemek, geri dönmen gerektiğine dair bir talimat taşımak zorunda değildir.",
+      "sourceHash": "0868688b1373f14429a504851369093102fc4e366e79711b4359baed3c216846"
+    },
+    "v5_ayrilik_03": {
+      "text": "Birlikte kurduğun gelecek değiştiğinde, kendi geleceğini düşünmek için yasına zaman tanı.",
+      "sourceHash": "54aa10f80bab667724bf44cd1859169c82c507278c45b54dba37c4be65a93645"
+    },
+    "v5_ayrilik_04": {
+      "text": "Eski mesajlara dönme isteği geldiğinde, önce o anda neye ihtiyaç duyduğunu sor.",
+      "sourceHash": "da2a919fd2e61184789007a0705a349f86524ab3df384d5386ff23537855ee5d"
+    },
+    "v5_ayrilik_05": {
+      "text": "Bir vedanın ardından iyi hissettiğin saatler, yaşadığın sevginin değerini azaltmaz.",
+      "sourceHash": "05cf1896d16796e24ed8c933835d579a1a89660e616135270a178b9a3b12e719"
+    },
+    "v5_ayrilik_06": {
+      "text": "Toparlanmanın takvimini başkalarının hikâyeleriyle belirlemek zorunda değilsin.",
+      "sourceHash": "6e03f067508ac0697b8449b78e048bcf3e4f7430a169907ce8ea665aab84dafc"
+    },
+    "v5_ayrilik_07": {
+      "text": "Bir alışkanlığı geride bırakmak zor gelebilir; kendine yeni bir akşam düzeni hazırlayabilirsin.",
+      "sourceHash": "1d026700a65e347824a706653ade111f7a259f3346906c0cbc2a25c87b3fb63d"
+    },
+    "v5_ayrilik_08": {
+      "text": "Ayrılıktan sonra sınırlarını korumak, içinden geçen her duyguyu açıklamanı gerektirmez.",
+      "sourceHash": "3dea45e8ae769c4cbd2d07ae4e703490850c9ff39e2ede9518ecb4bfa03e892e"
+    },
+    "v5_ayrilik_09": {
+      "text": "Olanları anlamaya çalışırken, bütün soruların cevabını aynı kişiden beklemeyebilirsin.",
+      "sourceHash": "8d3f1cc8e2032b58e0e195d511905512b824bd0a649d17105ea0e8fbcccd5fdd"
+    },
+    "v5_ayrilik_10": {
+      "text": "Bir ilişkinin bitişi hayatında yer tutabilir; yine de adını taşıyan başka sayfalar var.",
+      "sourceHash": "e9740f8705b8a2eaac6a6f306ba5cc7497e766b7ffebc059a4c121850869f1c3"
+    },
+    "v5_aile_01": {
+      "text": "Aynı sofrada bulunmak kadar, o sofrada herkesin sözünün duyulması da önemlidir.",
+      "sourceHash": "722ab527fae5d0a905daff90db85810fd01a5127e2e5d05603c25b75dbacc7a2"
+    },
+    "v5_aile_02": {
+      "text": "Aile içinde sevgi göstermek, birbirinin değişmesine alan bırakmayı da kapsar.",
+      "sourceHash": "60f6aa162045f42d116190fc2d2bbc87d6f3560c6f16044fb6e587eba4894a36"
+    },
+    "v5_aile_03": {
+      "text": "Bir yakınının yükünü paylaşırken kendi ihtiyaçlarını konuşmanın dışında bırakma.",
+      "sourceHash": "57e78dc2c28f456ed2d1427d3f0b0993c2a227643be4624be20e05226da844a4"
+    },
+    "v5_aile_04": {
+      "text": "Eski bir aile alışkanlığını sorgulamak, daha özenli bir ilişki kurmanın başlangıcı olabilir.",
+      "sourceHash": "a5e34374a03c030124774331e541137e00ab1b0564d1ea2919f43b128230c46a"
+    },
+    "v5_aile_05": {
+      "text": "Yakınlık, sürekli ulaşılabilir olmak zorunda değildir; dinlenmeye ayırdığın zaman da sana aittir.",
+      "sourceHash": "ad467eb0f5c8e05c4742d68708ebd97505a8c9f42787ebb0e879b3d1c0b01c61"
+    },
+    "v5_aile_06": {
+      "text": "Bir çocuğun anlattığı ayrıntıya dikkat vermek, onun dünyasına açılmış bir kapıdır.",
+      "sourceHash": "c24e7cf96cef7ec903200c8956613e34d43ff156820663e72118984c3fe70bc7"
+    },
+    "v5_aile_07": {
+      "text": "Aileden beklediğin desteği bulamadığında, güvenli bağları başka yerlerde de arayabilirsin.",
+      "sourceHash": "d36447c8e8312a31250bdb1f2f1aa7ac57255d6f71daeb29295af73ec00c99c9"
+    },
+    "v5_aile_08": {
+      "text": "İyi niyetle söylenmiş bir söz de incitebilir; etkisini anlatmaya hakkın var.",
+      "sourceHash": "46805eceb7a1a25ebf6658c2c00e8fa542b4c0cf3956650fdc383e4ae0b9220a"
+    },
+    "v5_aile_09": {
+      "text": "Birlikte geçirilen zamanın değeri, herkesin kendisi olabildiği anlarda belirginleşir.",
+      "sourceHash": "1d6f365613014d71c3de558308c75a644af3a010d4703b07e75837956c018365"
+    },
+    "v5_aile_10": {
+      "text": "Bakım veren kişinin de bakıma ihtiyacı vardır; yardımın aile içinde dolaşmasına izin ver.",
+      "sourceHash": "2d6bd13e08a091315b5b209efc2064bbbf223d6e3ae8893b15710540fd1a3897"
+    },
+    "v5_arkadaslik_01": {
+      "text": "Dostluk bazen doğru tavsiyeyi bulmadan, birinin yanında kalabilme sabrıdır.",
+      "sourceHash": "0e47de643fb6904d1ead07b1343c5ae53d31fa395cd673c8fb5b31cfdf8667ff"
+    },
+    "v5_arkadaslik_02": {
+      "text": "Uzun süredir konuşmadığın bir dosta, kusursuz bir giriş yerine içten bir selam gönderebilirsin.",
+      "sourceHash": "1f8176bcbbdd37e24b21474af4a84d3af9cff7eca8fb4132b46c220b53a55abd"
+    },
+    "v5_arkadaslik_03": {
+      "text": "Bir dostunun sevincine yer açmak, ortak hikâyenize yeni bir ışık ekleyebilir.",
+      "sourceHash": "f4886f3d5efebbbb424b20d506b86e0db871e58f2682ab950b0218286ba2d582"
+    },
+    "v5_arkadaslik_04": {
+      "text": "İyi bir arkadaşlıkta, farklı düşünceler de aynı masada saygıyla oturabilir.",
+      "sourceHash": "87d66c94d1a90f2f5f6de0a2cea024526374ef44685229c2b411c03febaf0867"
+    },
+    "v5_arkadaslik_05": {
+      "text": "Birine gerçekten zaman ayırırken, elindeki ekranı bırakmak da bir cümle kurar.",
+      "sourceHash": "18a3fca8db5743464db116db3f636562a13321672fed8ca363021f65cb6a24c1"
+    },
+    "v5_arkadaslik_06": {
+      "text": "Dostunun neye ihtiyacı olduğunu sormak, yardımını onun hayatına uygun hâle getirir.",
+      "sourceHash": "1d84325ea2c8d5dfaf99321c121d335dcd1b86cae64ec1312a38cbf08bb77165"
+    },
+    "v5_arkadaslik_07": {
+      "text": "Her sessizliği uzaklaşma saymadan önce, karşındaki insanın günlerine de merak göster.",
+      "sourceHash": "1e31938e5c6a5e14ec97bc59b83f6c889b24c6c8520a62f05239d91c9fa30435"
+    },
+    "v5_arkadaslik_08": {
+      "text": "Bir arkadaşlıkta sınır konuşmak, bağı daha dürüst biçimde sürdürmeye yardımcı olabilir.",
+      "sourceHash": "64321a94030eb966ebd4f1074e0bf14d8d46098743df263bad9af6b78a2d6fb6"
+    },
+    "v5_arkadaslik_09": {
+      "text": "Ortak bir yürüyüş, uzun zamandır ertelenen bir konuşmaya sade bir yer açabilir.",
+      "sourceHash": "e44132eda49221d5bef24ab767c4fb9b086ae7d9d8cfa73af62ebc99216e3d00"
+    },
+    "v5_arkadaslik_10": {
+      "text": "Dostlukta emek tek kişide birikiyorsa, neye ihtiyaç duyduğunu söylemek için durabilirsin.",
+      "sourceHash": "2b35c4d8d0db7910fd283d2f57d8818ac922417ff141d7ba56ea2e09b405abe0"
+    },
+    "v5_yalnizlik_01": {
+      "text": "Yalnız hissettiğin bir akşam, tanıdık bir sese ulaşmak için uzun bir açıklama gerekmeyebilir.",
+      "sourceHash": "73e2afb61226ea3c900c965e3cdc2b439da936a38dba00aae2220b1ad4944fdd"
+    },
+    "v5_yalnizlik_02": {
+      "text": "Bir yere ait olmak bazen aynı yüzlere yeniden selam verdiğin sıradan günlerde filizlenir.",
+      "sourceHash": "086169359bf36dd7cfd7621a15aa1e5e545d78f183a995dd38d2480bd940b674"
+    },
+    "v5_yalnizlik_03": {
+      "text": "Tek başına geçirdiğin zamanın içinde, sana eşlik eden bir uğraşa yer açabilirsin.",
+      "sourceHash": "14e386b98d421b39fa8729602159cfe7f52f6a09c27d7c1a3a45e0bc57273714"
+    },
+    "v5_yalnizlik_04": {
+      "text": "Kalabalıkta da yalnız hissedebilirsin; aradığın bağın niteliğini fark etmeye değer.",
+      "sourceHash": "6b05f53db875e76bc4b270836338c40de73478c636e7459334f9a6487da353df"
+    },
+    "v5_yalnizlik_05": {
+      "text": "Bir mesajı ilk gönderen olmak, ilişki kurma isteğine açıkça yer vermektir.",
+      "sourceHash": "11eb722007799c7c9e40162688019ac34bc40d75474883a2b984cda3d0d93aac"
+    },
+    "v5_yalnizlik_06": {
+      "text": "Paylaşacak bir şey ararken büyük bir haber bekleme; gördüğün bir ayrıntı da yeterli olabilir.",
+      "sourceHash": "43b582adfe763ab01c2aaa2cc8d9897bf46fa98f476737965f533c1250e5b18c"
+    },
+    "v5_yalnizlik_07": {
+      "text": "Yalnızlığını anlatırken onu küçültmek zorunda değilsin; duyulmayı hak eden bir deneyimdir.",
+      "sourceHash": "f58af74f0a79e6df6d7d14823686503cdd6aeadfe4a16fcfe3e6a0a1637b80fc"
+    },
+    "v5_yalnizlik_08": {
+      "text": "Yeni bir bağ kurmak için ortak bir ilgiye ayrılmış bir ortamı deneyebilirsin.",
+      "sourceHash": "ca4d120ced20563c27173f3f4f4f61aca0f2f9daa3cd6255e71ceae33218fe43"
+    },
+    "v5_yalnizlik_09": {
+      "text": "Kendinle baş başa kalmayı sevmek ve bazen birini özlemek aynı hayatta bulunabilir.",
+      "sourceHash": "4d7830310127d03418e47367bbefa88e9adab85e415693b4754ad3da393cced3"
+    },
+    "v5_yalnizlik_10": {
+      "text": "Yakınlık arayışında seçici olabilirsin; her davet kendini güvende hissettiren bir yer sunmaz.",
+      "sourceHash": "1eda8ac3d37018a25950bd25319cd6da95193dd243b23c4c2e384677252a9b60"
+    },
+    "v5_affetmek_01": {
+      "text": "Affetmeye hazır olmadığında, iyileşmek için kendine başka kapılar da açabilirsin.",
+      "sourceHash": "061b6706972ee23efbd14a3d3c048c9e741996f9f655716a57662257d19308ee"
+    },
+    "v5_affetmek_02": {
+      "text": "İçindeki öfkeyi anlamaya çalışmak, sana yapılanı onayladığın anlamına gelmez.",
+      "sourceHash": "e5d039e7e82cad0492760c2f6c43cd7b5a8b1f41fe3c2eaf0ea52ce8bbdfa251"
+    },
+    "v5_affetmek_03": {
+      "text": "Birini affetmeyi seçsen bile, hayatına yeniden alıp almamak sana ait bir karardır.",
+      "sourceHash": "997d4f45e32382b1887af47301abe5b69cc642f3ab51e14db47036a4b05d1aa7"
+    },
+    "v5_affetmek_04": {
+      "text": "Bir özrün ağırlığını, ardından gelen davranışlarda da görmeyi isteyebilirsin.",
+      "sourceHash": "e6606cddadfeebe346a7d3aeb5f8e01a44ac9df4ce717afaeb896e6c0ada0579"
+    },
+    "v5_affetmek_05": {
+      "text": "Kendi hatanla yüzleşirken, onarabileceğin zararı düşün; kendini tüketmek onarımın yerini tutmaz.",
+      "sourceHash": "a0db152560589ba898010ce48d45fad90efd1e0e1be19a74a033fafdc6d37956"
+    },
+    "v5_affetmek_06": {
+      "text": "Geçmişi yeniden yazamazsın; bundan sonra hangi sınırın seni koruyacağını seçebilirsin.",
+      "sourceHash": "287af46bf71ecf3c7cf14ccffc0c6bc146867f25aa8c8f543d98359704bfe964"
+    },
+    "v5_affetmek_07": {
+      "text": "Bağışlamak hakkında karar vermeden önce, incinen yanının anlatacaklarına zaman ayır.",
+      "sourceHash": "db1521867e3070ab03f16b2c9d12a590035ef117911d37dc57e59525d1a0692b"
+    },
+    "v5_affetmek_08": {
+      "text": "Bir kırgınlığı taşımakta zorlanıyorsan, onu güvendiğin biriyle konuşmayı deneyebilirsin.",
+      "sourceHash": "d9de5792380c22cfef18452aa907c0dea380fed92f36bc753eb952d050e14a41"
+    },
+    "v5_affetmek_09": {
+      "text": "Kendini affetmek, sorumluluğu görerek yaşamında daha özenli bir yön açabilir.",
+      "sourceHash": "07083fb664050afe6d898aa199a44141c815e1098f09b2f391bfa216be2e3102"
+    },
+    "v5_affetmek_10": {
+      "text": "İçinde hâlâ öfke olması, huzur arama hakkını elinden almaz; ikisine de dürüstçe bakabilirsin.",
+      "sourceHash": "a2904389cd3fc61d117765d83606935300525f8a7215ff30b65c342e5f7a805a"
+    },
+    "v5_kaygi_01": {
+      "text": "Zihnin bir ihtimali tekrar tekrar getiriyorsa, onun bir tahmin olduğunu hatırlatabilirsin.",
+      "sourceHash": "ec3c647b2cb7ea2c7975e4dd361b2d2b9d43b9b22aab5a5969e3059079eb54a0"
+    },
+    "v5_kaygi_02": {
+      "text": "Endişeni kâğıda döktüğünde, düşüncenin yanında durup ona biraz uzaktan bakabilirsin.",
+      "sourceHash": "f21a63257e3eb49784c15458616609a1fc3879a6df97bb8aba425cfd2aafaafe"
+    },
+    "v5_kaygi_03": {
+      "text": "Belirsiz bir bekleyişte, sıradaki kontrol zamanını seçip aradaki saate başka bir iş verebilirsin.",
+      "sourceHash": "7ae60c942f9910dbac5789a871df1f188b78742515071583ee3203e01ab66aca"
+    },
+    "v5_kaygi_04": {
+      "text": "Kendine sor: Şu anda bildiğim ne, zihnimin tamamlamaya çalıştığı boşluk ne?",
+      "sourceHash": "132e1c0c1221a40dc0afb438991b2cee97df7c70604c56c822d3b7bacadd764a"
+    },
+    "v5_kaygi_05": {
+      "text": "Kaygılı bir gün geçirirken de birinin yanında oturmayı veya yardım istemeyi seçebilirsin.",
+      "sourceHash": "9c39b130344a628ecc57373e7391fa104fb48c1ae51f0fff4fc001c4b3b2a37e"
+    },
+    "v5_kaygi_06": {
+      "text": "Her olasılığa hazırlanmaya çalışırken yorulduğunda, yalnızca sıradaki karara bakabilirsin.",
+      "sourceHash": "aea47bebac840ff80432b059a6f7f609261d59b3ee37a791126739f27a7180c0"
+    },
+    "v5_kaygi_07": {
+      "text": "İçindeki telaş yüksek sesle konuşabilir; yanıt vermeden önce çevrendeki bir ayrıntıyı fark et.",
+      "sourceHash": "9f99c3875b036b5a12fa6c52547f23ca349679fe827b13f51778a9e642438a69"
+    },
+    "v5_kaygi_08": {
+      "text": "Bir düşünceyi hemen çözmeye çalışmadan, geldiğini fark edip yaptığın işe dönebilirsin.",
+      "sourceHash": "95bd3cbbb917789fd3719808befc1bc9d8e5c949d4441b13e93aaf4a077ea195"
+    },
+    "v5_kaygi_09": {
+      "text": "Sürekli güvence aradığını fark ettiğinde, aslında hangi belirsizliğin zor geldiğini sorabilirsin.",
+      "sourceHash": "69f15e1cb7816aed61bf8e0f802b1a518d4826e5ba7306debd366ee6e7041ba7"
+    },
+    "v5_kaygi_10": {
+      "text": "Kaygını paylaşmak için onu kusursuz anlatman gerekmez; seni zorlayan yerden başlayabilirsin.",
+      "sourceHash": "3f486dbe23bb00c8f2daa5598a25a0c5b565084bbc3aa89d80fd9b6ff12e0294"
+    },
+    "v5_stres_01": {
+      "text": "Senden beklenenler çoğaldığında, hepsini sessizce taşımadan önce öncelikleri konuş.",
+      "sourceHash": "3c13734a9620a3ca98d525ef9f364e9912febd7bff8a55fb29165ed83dbf2971"
+    },
+    "v5_stres_02": {
+      "text": "Günün sıkıştığını hissettiğinde, takvimine bakıp ertelenebilecek bir şeyi seçebilirsin.",
+      "sourceHash": "4bfe9f66cf5560ed07e6ad00ea6f973fac818ec185511ebb211f3f105857e021"
+    },
+    "v5_stres_03": {
+      "text": "Bir işin sınırını baştan konuşmak, sonradan biriken baskıyı görünür kılar.",
+      "sourceHash": "a482de8d4030fa7df35236aa79442bb8ec7654c43fed0ef9e5a19f160cb585c6"
+    },
+    "v5_stres_04": {
+      "text": "Gerginliğini anlatırken onu başlatan olayı adlandır; anlaşılmak için her şeyi aynı anda açıklaman gerekmiyor.",
+      "sourceHash": "e0a58492f23e98ce8d3f90047704e2aa53c5c2a7f1c4fe1cc2eb5a05be739615"
+    },
+    "v5_stres_05": {
+      "text": "Omuzlarındaki yükü anlatırken yalnızca iş sayısını değil, senden istediği enerjiyi de söyle.",
+      "sourceHash": "527a7fbfe637ac8aa986e99708418499d5771778da8a0f786a9b2c37462403d9"
+    },
+    "v5_stres_06": {
+      "text": "Kısa bir molanın içinde yeni bir görev arama; boş kalan dakika da kullanılabilir bir zamandır.",
+      "sourceHash": "285948984a5251667681142b1d6e1b9b74e2a29ed9fc09251ceac8ec4fb1cc66"
+    },
+    "v5_stres_07": {
+      "text": "Bir işi paylaşmak için tükenmeyi beklemeyebilirsin; desteği planın başında konuş.",
+      "sourceHash": "834c1754d5558650058e45ac561885158ad4092cbf225d45ea9a419f3302e5f8"
+    },
+    "v5_stres_08": {
+      "text": "Birbiriyle çakışan teslim tarihlerini açıkça göster; tek bir günün içine iki gün sığdırman beklenmesin.",
+      "sourceHash": "1b0cf55328c72ce7b1c403fef3483e32ab7b655f2c7255ab5d999cade3a9689c"
+    },
+    "v5_stres_09": {
+      "text": "Yoğun bir günün sonunda, geride kalan işleri yazıp masadan kalkmana izin verebilirsin.",
+      "sourceHash": "ea209cfc2cd5cd4dcb6a386385cb00851ad776ef144fdff797c9abcd3331fa09"
+    },
+    "v5_stres_10": {
+      "text": "Baskıyı fark etmek, sınırlarının nerede zorlandığını gösteren yararlı bir bilgi olabilir.",
+      "sourceHash": "c79616b8d4ae5cb301737dd364f90c66fb33fb0e197dfa7638dd3fb36e20bafb"
+    },
+    "v5_minnettarlik_01": {
+      "text": "Teşekkürünü somut bir ayrıntıya bağla; hangi davranışın sana iyi geldiğini söyle.",
+      "sourceHash": "7f6abb8e297d07409b31ae1df388dabf1f453311afeb8e84a64a32b063f06734"
+    },
+    "v5_minnettarlik_02": {
+      "text": "Sıradan sandığın bir kolaylığın arkasında, birinin sessiz emeği bulunabilir.",
+      "sourceHash": "670b27caeaf93b422f55d241063ee971d51604adcc3455854d364e54b9341cb4"
+    },
+    "v5_minnettarlik_03": {
+      "text": "Güzel bir anı hemen fotoğrafa dönüştürmeden önce, içinde biraz daha kalmayı deneyebilirsin.",
+      "sourceHash": "bd21c8ffacb07ebf7cc6528a9cbf6e4a85f122c3c76a65b030899a05cca1d70c"
+    },
+    "v5_minnettarlik_04": {
+      "text": "Bir iyiliği hatırlamak, zor geçen günün başka renklerini de görmene yardımcı olabilir.",
+      "sourceHash": "d42616b6c2e7e0ab68b0133f6c64d471e6f133b516fcc525c51414da04e646e3"
+    },
+    "v5_minnettarlik_05": {
+      "text": "Minnettarlık, eksiklerini susturmanı istemez; elindekine de dürüstçe bakacak bir yer açar.",
+      "sourceHash": "6761c2997b86b0627c548cf186cc7a45f2db662731fc640c177d9aa0c5556f98"
+    },
+    "v5_minnettarlik_06": {
+      "text": "Sana yol gösteren birine, hâlâ yanında taşıdığın cümlesini hatırlatabilirsin.",
+      "sourceHash": "5d4795d58ad2b0c904010255bad95eab48018c8ecefd7324d53376571ae43681"
+    },
+    "v5_minnettarlik_07": {
+      "text": "Birlikte yapılan sıradan bir işi anmak, ilişkinin görünmez emeğini görünür kılabilir.",
+      "sourceHash": "158edd44c61b31aac9e691c1a6cae104f51ca988f6ea4bf9a37825f68a7772c8"
+    },
+    "v5_minnettarlik_08": {
+      "text": "Günün içinden bir ayrıntı seç: Hangisinin hayatında bulunmasına seviniyorsun?",
+      "sourceHash": "0a33ba8a3435049d170c4584385066c1f42d526136c56d26398a81ab6a43f4b6"
+    },
+    "v5_minnettarlik_09": {
+      "text": "Kendine teşekkür ederken yalnızca sonuçları sayma; sürdürdüğün özeni de hatırla.",
+      "sourceHash": "35ab6d3ce83c05606dc58e367edc9391f3acefffe3776ea44fc3376345ed1b4e"
+    },
+    "v5_minnettarlik_10": {
+      "text": "İyi gelen bir şeyi fark ettiğinde, onu başkasıyla paylaşarak hatırada biraz daha tutabilirsin.",
+      "sourceHash": "5e3467f80c8a810a02269abd12308cf3e1da4067cd8bac827c5f3c39a53d1c4a"
+    },
+    "v5_simdiki_an_01": {
+      "text": "Bir lokmanın tadını tam olarak duymak için, elindeki başka işi bir anlığına bırakabilirsin.",
+      "sourceHash": "8296b9f34864fe667c83a950bb2b9baf6f3b1160c47ed2270397e3e2456e277c"
+    },
+    "v5_simdiki_an_02": {
+      "text": "Yürüdüğün sokakta daha önce fark etmediğin bir çizgiye, gölgeye veya renge bak.",
+      "sourceHash": "5763fc49e595fa024e0d5bef2c039a7bd48b25c607e3f68ae3c9a6bac95bd89e"
+    },
+    "v5_simdiki_an_03": {
+      "text": "Uzaklaşan bir sesin nerede kaybolduğunu dinle; çevrende olup bitenin başlangıcı kadar sonu da fark edilmeye değer.",
+      "sourceHash": "8ae78bd9cd900cc4d68e427a45263e70fb336b3763e0b00377c0bf6263e7e5f1"
+    },
+    "v5_simdiki_an_04": {
+      "text": "Oturduğun sandalyenin seni taşıyan yüzeyini fark et; içinde bulunduğun yerin somut bir ayrıntısı hep burada.",
+      "sourceHash": "12104cea9b178296ea7b0f7599ea570bb744bcea71152e3d37030f0915c23544"
+    },
+    "v5_simdiki_an_05": {
+      "text": "Ellerinin yaptığı işe gözlerinle de eşlik et; sıradan bir hareketin ayrıntıları ortaya çıkabilir.",
+      "sourceHash": "65b4b65c263a4c905112e0a9ba8c1d68cd1e09c5648cba4a4c26a101da330ef6"
+    },
+    "v5_simdiki_an_06": {
+      "text": "Yağmuru yalnızca havanın durumu olarak geçme; bir damlanın camdaki yolunu izleyebilirsin.",
+      "sourceHash": "2909f000c3b00e1ee27b1abd3bb11f6fb2f11c6f6104db56ac9e18485fd85c15"
+    },
+    "v5_simdiki_an_07": {
+      "text": "Beklerken geçen zamanı bütünüyle kayıp sayma; çevrende devam eden hayatı fark edebilirsin.",
+      "sourceHash": "f48a8c754d3e320b01e8a404dc49412fb372656a0cdf67bd260ac17cbff6df12"
+    },
+    "v5_simdiki_an_08": {
+      "text": "Bir şarkı çalarken başka bir yere yetişmeden, yalnızca bu nakarat boyunca dinlemeyi dene.",
+      "sourceHash": "65e8fc6f520ca52304f8fcbc7317da5deaa4eb161653f720884caaee34ef2435"
+    },
+    "v5_simdiki_an_09": {
+      "text": "Şu anın kusursuz olması gerekmez; içindeki gerçek bir ayrıntıyla yine de temas kurabilirsin.",
+      "sourceHash": "30e91456c76b67a37b2cd62f844fbb84ffd6f101680842a68ee966a37751ffbf"
+    },
+    "v5_simdiki_an_10": {
+      "text": "Bir konuşma bittiğinde, yenisine geçmeden önce duyduklarının sende bıraktığı izi fark et.",
+      "sourceHash": "e5c2c51447606566d1b6616be253ef4f70db109973bd23dde4440353a55a1c46"
+    },
+    "v5_uyku_01": {
+      "text": "Akşamın son saatine daha az görev bırakmak, geceye geçişin için yer açabilir.",
+      "sourceHash": "76634c483ba9174fa6e6ff01a7af1e5ae0e1879a3215fd0e46534778189b01df"
+    },
+    "v5_uyku_02": {
+      "text": "Yarım kalan bir düşünceyi not edip, onu sabah yeniden ele almak üzere bırakabilirsin.",
+      "sourceHash": "5b1cace2fd84a6ff66989aad5bc47c1b53547bc71b7523bf478510e79338c51b"
+    },
+    "v5_uyku_03": {
+      "text": "Uykuya yaklaşırken odanın ışığını azaltmak, günün hızından ayrılmanın sade bir işareti olabilir.",
+      "sourceHash": "9799e4193ddf9f7c8fd26049fa42e0a74aa70de293be8b9cd86272884a0b0381"
+    },
+    "v5_uyku_04": {
+      "text": "Bu gece dinlenmeye hazırlanırken, kendinden yeni bir başarı beklememeyi deneyebilirsin.",
+      "sourceHash": "1132a99ac58c013977258f42d31b702a0d15bf9408e0d88d4327498b459f127e"
+    },
+    "v5_uyku_05": {
+      "text": "Ekrandaki bir sonraki içeriğe geçmeden önce, akşamı nerede bitirmek istediğini sor.",
+      "sourceHash": "a9f10831dcfa058664fb0d516ecc1126da524f16ece8900849760ec08ec440c7"
+    },
+    "v5_uyku_06": {
+      "text": "Bir gece zor geçti diye kendine sert davranma; yorgunluğun daha fazla özeni hak eder.",
+      "sourceHash": "ca07f834264e0ee492f73bd2f32ffbd2f399f2d2636c8f0651bdb80faec20cea"
+    },
+    "v5_uyku_07": {
+      "text": "Yatmadan önce aynı sakin uğraşa dönmek, sana tanıdık bir akşam köşesi sunabilir.",
+      "sourceHash": "040be31818ef5fbf6922c26c6a8222d38ec76b567fdd298d18f651bfd0d94f44"
+    },
+    "v5_uyku_08": {
+      "text": "Sabaha bırakılabilecek bir kararı gece boyunca taşımak zorunda değilsin.",
+      "sourceHash": "ddfbacc8d2429916d90bbec7409aad64307cd0a14c0423e8a902295977c816f1"
+    },
+    "v5_uyku_09": {
+      "text": "Gece sessizleşirken gününü yargılamaya ara verebilir, yatağını dinlenmeye ayırabilirsin.",
+      "sourceHash": "c898a9fc8989f5a55edf84cc72dcfa70a3ca5dfe37e3b2f9f4d0b4c41821040e"
+    },
+    "v5_uyku_10": {
+      "text": "Uykuya bir yarış gibi yaklaşmadan, kendin için rahat bir gece ortamı hazırlayabilirsin.",
+      "sourceHash": "3afde5cdf060c17b00836167d3536164e0059c4b68c4f74cf529f8a280c4a0b5"
+    },
+    "v5_karamsarlik_01": {
+      "text": "Her şeyi karanlık gösteren bir düşünce geldiğinde, henüz bilmediğin ayrıntılara da yer bırak.",
+      "sourceHash": "fb27427c9de563fee0f66c6a1f07bdb7c7e84284c2bd70327b4d07c6c0cff82d"
+    },
+    "v5_karamsarlik_02": {
+      "text": "Zor geçen bir dönemin içinden bakarken, hayatının tamamını aynı renkle boyamayabilirsin.",
+      "sourceHash": "48a6d2009fc24af3b4c6cd1824a06c02ebb2b7664031c08ae64baf227016d0b6"
+    },
+    "v5_karamsarlik_03": {
+      "text": "İyi bir ihtimal göremediğinde, güvendiğin birinin gördüklerini dinlemeyi deneyebilirsin.",
+      "sourceHash": "31a6a33cc436f015d8dff192596129ce34ee1bd72e03743a3a992a3957406540"
+    },
+    "v5_karamsarlik_04": {
+      "text": "Hevesin azaldığında, sevdiğin bir uğraşla yeniden temas etmek için büyük enerji beklemeyebilirsin.",
+      "sourceHash": "75de74e70165d8ce44ff0df3a384c97583a6cb3c939f5af00cf9f417b8d011e4"
+    },
+    "v5_karamsarlik_05": {
+      "text": "Bir günün ağırlığını anlatan cümleyi, bütün geleceğinin başlığı yapmak zorunda değilsin.",
+      "sourceHash": "e75a775660fca0ee93d7ae9db8db8255c9614b688ccb03167b19bd1286c74c4b"
+    },
+    "v5_karamsarlik_06": {
+      "text": "İçinden umutlu sözler gelmiyorsa, dürüst bir ihtiyacını söylemekle başlayabilirsin.",
+      "sourceHash": "8803c98addb830bf7a114d9b80cf832cbe725c4655ef248080eda49509232e29"
+    },
+    "v5_karamsarlik_07": {
+      "text": "Kesin görünen olumsuz bir yargıya, onu desteklemeyen tek bir ayrıntıyı da eklemeyi dene.",
+      "sourceHash": "164296b17c819eb29dc47ef37b58abc868915c1de8cdae3c9aa537759506e485"
+    },
+    "v5_karamsarlik_08": {
+      "text": "Dünyanın yükünü sürekli izlerken yorulduysan, haberlerle arana bir mola koyabilirsin.",
+      "sourceHash": "8cbd4d3244dd401342c2bca421e01809edf09e5abdf4e2d9b8e2d69865550d54"
+    },
+    "v5_karamsarlik_09": {
+      "text": "Bir şeyin henüz değişmemiş olması, değişim için bütün yolları bildiğin anlamına gelmez.",
+      "sourceHash": "35eb1dec4eb87ff7e39a7257adf2f652c46dd4e0759299dd4c17dced9733ac0f"
+    },
+    "v5_karamsarlik_10": {
+      "text": "Güzel hissetmeye zorlanmadan da kendine iyi bakabilirsin; bakımın duygunu beklemesi gerekmez.",
+      "sourceHash": "ace9ddab135e7672873449336e8e4b1fb32dd04b4d1283966a7b7d593c4ee75e"
+    },
+    "v5_huzur_01": {
+      "text": "Sade bir köşede oturmak bazen gün boyunca dağılmış dikkatini yanına toplar.",
+      "sourceHash": "b2a9910f7df515cd2fd34b68580ed818f3f8a5fbd0139d58358d352e4d24ee79"
+    },
+    "v5_huzur_02": {
+      "text": "Hayatındaki her boşluğu doldurmak zorunda değilsin; aralıklar da bir düzenin parçasıdır.",
+      "sourceHash": "001c8faefdc375e9cf79cd25bf8c8e73afdcfca5976773fa0694604b4712b2a7"
+    },
+    "v5_huzur_03": {
+      "text": "Bir tartışmanın ardından hemen son sözü aramak yerine, konuşmaya ara verebilirsin.",
+      "sourceHash": "9d6609ec765e35103dcf7da5b43505e669cc1560a3bcc3ccffb5a838c640adb7"
+    },
+    "v5_huzur_04": {
+      "text": "Sana iyi gelen sessizliğin biçimini başkaları belirlemek zorunda değil.",
+      "sourceHash": "72e7935caba58c3e0048f52bb3b65ea9ad8451ef070dde30e3adca6d1d7faf97"
+    },
+    "v5_huzur_05": {
+      "text": "Evinin bir köşesini sadeleştirirken, orada nasıl hissetmek istediğini düşün.",
+      "sourceHash": "308c72cf67199593538b37653506ad7985d14428e0e4cbd8de444869128d5f7a"
+    },
+    "v5_huzur_06": {
+      "text": "Bazı akşamların hatırlanacak büyük bir olaya ihtiyacı yoktur; sakinlik de yeterli olabilir.",
+      "sourceHash": "0b0c23e9f2a922e521c17171b96353fe8a7fc291ec53ba72a9211127f1046e0e"
+    },
+    "v5_huzur_07": {
+      "text": "Sürekli yetişme duygusundan uzak bir yürüyüş, sana kendi hızını yeniden hatırlatabilir.",
+      "sourceHash": "662f6676c078738495cf8d85e5d882cafc79d472186e0c73dd664ffbb71324b8"
+    },
+    "v5_huzur_08": {
+      "text": "Bir konuşmada sesler yükseldiğinde, sakin kalmak için mesafe istemeye hakkın var.",
+      "sourceHash": "520682e602d72190c50f547ff5c726d25910dc59ee1cef2be8587dfdb0621ee6"
+    },
+    "v5_huzur_09": {
+      "text": "Huzur ararken, seni sürekli geren bir düzenin değişmesi gereken yanlarını da görebilirsin.",
+      "sourceHash": "9692c7f03154155e4220f895d7c1571a34dd996ab35f40d959527471bf02f134"
+    },
+    "v5_huzur_10": {
+      "text": "Sana dinlenme hissi veren bir yeri hatırla; o hissin bir parçasını gününe nasıl taşıyabilirsin?",
+      "sourceHash": "0b77bcecb6dd137c686e2a042368b67dff8695b49b5534a9c99b276dc6e15b79"
+    },
+    "v5_merak_01": {
+      "text": "Bir şeyi anlamadığını fark etmek, iyi bir sorunun başlayabileceği verimli bir yerdir.",
+      "sourceHash": "ea32e1089d6edb7a2d5ac0479046bc8ec1db4f824cfd0941b07966431f22c8a1"
+    },
+    "v5_merak_02": {
+      "text": "Alıştığın bir nesneye yeniden bak: Onu bu biçimde yapmaya kim, neden karar vermiş olabilir?",
+      "sourceHash": "c828f3e59126092427e82e522db873a4e8d595b43a1b93a7f87e3b5db06e8d4b"
+    },
+    "v5_merak_03": {
+      "text": "Cevabı bulunca soruyu hemen bırakma; yanıtın hangi yeni kapıyı açtığını da izle.",
+      "sourceHash": "13e6f22a70f9006e165efe3cc9d93bff38ff5c42eef362870721d8d923beeb20"
+    },
+    "v5_merak_04": {
+      "text": "Bir fikre katılmadan önce onu anlamaya çalışmak, düşüncelerine daha geniş bir alan kazandırır.",
+      "sourceHash": "e9493600994a9bd555e3c5d898e4574dd59597d1f94eddcd255f1931ab150805"
+    },
+    "v5_merak_05": {
+      "text": "Bilmediğin bir kelimenin peşinden gitmek, hiç beklemediğin bir konuya yol açabilir.",
+      "sourceHash": "60d5d4745bcf9f1f42f48d09f1c7b9f2979fd1a2d9463858aae0599ff332dd59"
+    },
+    "v5_merak_06": {
+      "text": "Bir uzmana yalnızca sonucu sorma; o sonuca nasıl ulaştığını da merak et.",
+      "sourceHash": "744f0f17cb996c75ad620c040c871b4021adcbf382e75bfca72ec868e388c697"
+    },
+    "v5_merak_07": {
+      "text": "Merakını yalnızca faydalı görünen şeylere ayırma; şaşırmak da zamanına değer olabilir.",
+      "sourceHash": "81ffbe06151d4a59273e31e31ec58dc40ff4a36b8c69a6db929d61efa080f0da"
+    },
+    "v5_merak_08": {
+      "text": "Kesin bildiğin bir düşüncenin yanına, fikrini değiştirebilecek kanıtın ne olacağını yaz.",
+      "sourceHash": "0dbca721ae641fb5dca3f6b1d339b88ab82c4ae9966634db4bedc53ed0ab45ca"
+    },
+    "v5_merak_09": {
+      "text": "Aynı yolu yürürken yeni bir ayrıntı aramak, tanıdık dünyayı yeniden keşfetmektir.",
+      "sourceHash": "063041cdd5b89b461a2d7fff3094a05963004bebb4f90d73a440d40f11550fb1"
+    },
+    "v5_merak_10": {
+      "text": "Bir çocuğun neden sorusuna hemen cevap yetiştirmeden, birlikte araştırmayı deneyebilirsin.",
+      "sourceHash": "0e0a0e7450bfb206e3f639202f89339084d542e16976e3712bb245bc1919d945"
+    },
+    "v5_okumak_01": {
+      "text": "Bir kitabın sayfaları arasında durmak, okuduklarının kendi hayatınla konuşmasına zaman verir.",
+      "sourceHash": "7026a9661e8b17f4ee46f501a521078d2241d082ea118263af07cdfd4bde6a72"
+    },
+    "v5_okumak_02": {
+      "text": "Sana dokunan bir cümlenin yanına, neden orada durduğunu anlatan birkaç kelime yaz.",
+      "sourceHash": "7de49329a603235a47d2b572f828ba761469657fef4b5ec21ad7b940f284c02c"
+    },
+    "v5_okumak_03": {
+      "text": "Okuma hızını bir yarışa çevirmeden, zorlandığın bir paragrafı yeniden ziyaret edebilirsin.",
+      "sourceHash": "6529f8fde89e15db9d3b34dd491d9e8e5ac94888580f38349ccb2a8f934cfed6"
+    },
+    "v5_okumak_04": {
+      "text": "Bir karakteri anlamaya çalışırken, kendi ilk yargının dışına çıkmayı da deneyebilirsin.",
+      "sourceHash": "7b68b0b953f1fb0a0d3ebfc658b596f2b96e2498001faeed81863782de0ac77c"
+    },
+    "v5_okumak_05": {
+      "text": "Bitirdiğin kitapların sayısı kadar, zihninde yaşamaya devam eden sorular da kıymetlidir.",
+      "sourceHash": "fb95370fef92b0a6a42dcb0e52661de59b3dfb37d98b5f58124e0d3a2c4e2067"
+    },
+    "v5_okumak_06": {
+      "text": "Her kitaba katılman gerekmez; metinle konuşur gibi düşüncelerini kenarına bırakabilirsin.",
+      "sourceHash": "98ba3276d8d5359f568ff6350315b21f256e066c10b8f04fbdd28a2611e95a6b"
+    },
+    "v5_okumak_07": {
+      "text": "Bir sayfayı sesli okumak, gözünün hızla geçtiği bir ritmi kulağına duyurabilir.",
+      "sourceHash": "e1ca9f2367f21be2fd91595bcab154c896e0180e60bf73a33e6e864eadd6a25a"
+    },
+    "v5_okumak_08": {
+      "text": "Uzun zamandır okumuyorsan, ilgini gerçekten çeken bir sayfadan yeniden başlayabilirsin.",
+      "sourceHash": "952f0ab681794daa0bc6ec11df423a0842c43fb945cd03f37ea9853004389527"
+    },
+    "v5_okumak_09": {
+      "text": "Bir kitabı arkadaşınla konuşurken, onun aynı satırlarda gördüğü başka dünyayı dinle.",
+      "sourceHash": "6ac0fa941ecd40b450d942d5d2b28bc3c2bdb6e75a612841566e880fd1761169"
+    },
+    "v5_okumak_10": {
+      "text": "Okuduğun bir düşünceyi gündelik bir olayla ilişkilendirmek, onu raftan hayatına taşır.",
+      "sourceHash": "9f29489715c58f9b25741ab69f8e49c582e3d42807fa65e3bc75ecf585e12701"
+    },
+    "v5_hata_01": {
+      "text": "Yanlış cevabının yanına bir soru yaz: Düşüncem hangi noktada yön değiştirdi?",
+      "sourceHash": "e72704cdcc6f7d1d38c9db8b999cda2410a77443a589e3328b20d5009550c83f"
+    },
+    "v5_hata_02": {
+      "text": "Notundaki bir düzeltmenin nedenini yanına yaz; yalnızca doğru cevabı değil, değişen düşünceni de sakla.",
+      "sourceHash": "2d14fcf12ba60fc5d00ad546583c9d2b32781f05e8f1e8585b77ee2d12a2bec5"
+    },
+    "v5_hata_03": {
+      "text": "Geri bildirimde işine yarayan kısmı seçmek, kendi emeğine dikkatle bakmaktır.",
+      "sourceHash": "584ce198be4f42badc894f2b474624c7f266322c051385130dd3b61d6af60ce0"
+    },
+    "v5_hata_04": {
+      "text": "Sildiğin satır boşa gitmiş sayılmaz; hangi yolu eleyeceğini sana göstermiş olabilir.",
+      "sourceHash": "df24694ba77f86f1985fb62a9c0adc2675f9987765ca9ce2073dbae06620cea9"
+    },
+    "v5_hata_05": {
+      "text": "Hatanın etkilediği birine kulak vermek, düzeltmenin nereden başlayacağını gösterebilir.",
+      "sourceHash": "1423d70a8dfc71a835428fdb596e3f76085e9d8dabc45e2403e032dd6868eebd"
+    },
+    "v5_hata_06": {
+      "text": "Denemenin sonucunu değiştiremeyebilirsin; bir sonraki denemeye götürdüğün soruyu seçebilirsin.",
+      "sourceHash": "83f7168cea872a9e721f795164d5de77d956a9748cc1cd07981d5289c5f7cb09"
+    },
+    "v5_hata_07": {
+      "text": "Özürden sonra gelecek somut bir değişiklik, sözlerine dayanacak bir yer açar.",
+      "sourceHash": "53aaec206aab00501f09cacb54b501480230c6f59408d242c5bfeaf222c11f13"
+    },
+    "v5_hata_08": {
+      "text": "Bilmediğini fark ettiğin yerde, öğrenebileceğin şeyin sınırları görünmeye başlar.",
+      "sourceHash": "7be7ebc6c084cc6926788add1c2b19fdcb14c415bd9d2dd51ccf6cea3c0b7792"
+    },
+    "v5_hata_09": {
+      "text": "Aynı yanlış tekrar ediyorsa, kendine yüklenmeden kullandığın yolu yeniden incele.",
+      "sourceHash": "168c4f6f3a7adcbad5774aadb87066c99b8595e0c4c959a630743f85cdf9e136"
+    },
+    "v5_hata_10": {
+      "text": "Düzeltme işaretleriyle dolu bir sayfa, uğraştığın sorunun izlerini taşır.",
+      "sourceHash": "48f3a43a369e6f81bc6318dddae87e3aa2f3a81b46ffaf02a441f765367e38f8"
+    },
+    "v5_aliskanlik_01": {
+      "text": "Bir davranışın hayatında yer bulması için, başlayacağı anı görünür kılabilirsin.",
+      "sourceHash": "66f5cc60627094a068a16d005ede09b70fca14c809762b6fdfae1a16e6ce2885"
+    },
+    "v5_aliskanlik_02": {
+      "text": "Okuyacağın kitabı açabileceğin bir yerde bırakmak, niyetine bir adres vermektir.",
+      "sourceHash": "f97668d8391d52f95ef325e9f1076f0ad8ab8ac4b61a02d7d715e3bddf3c9588"
+    },
+    "v5_aliskanlik_03": {
+      "text": "Unuttuğun bir günü işaretleyip yoluna dönebilirsin; takvim bir yargıç olmak zorunda değil.",
+      "sourceHash": "c40274482f299cf73dbbb1d4e389948df9cb7a7080852a2f1d0c573dd315c6a0"
+    },
+    "v5_aliskanlik_04": {
+      "text": "Alışkanlığını kolaylaştıran ayrıntıları fark et; bazen anahtar, eşyaların yerindedir.",
+      "sourceHash": "8967802b55deb38935d6b38449be4c40230aae5605a9d2b836637e0bffe48784"
+    },
+    "v5_aliskanlik_05": {
+      "text": "Sürdürmek istediğin davranışın en sade hâlini bulmak, yoğun günlere bir kapı bırakır.",
+      "sourceHash": "6d11f026b7c517f43854139c50fed7ed783449c1ddb783aa1e41e6c78c2b5b39"
+    },
+    "v5_aliskanlik_06": {
+      "text": "Bir düzen sana uymuyorsa, kendini suçlamadan o düzenin tasarımını değiştirebilirsin.",
+      "sourceHash": "a8fb36b9f132d71cd9d2169d500f91c99f3f559d6d0dd168851069101c9a2c08"
+    },
+    "v5_aliskanlik_07": {
+      "text": "Bir alışkanlığın tamamlandığını anlayacağın ölçüyü seç; günün sonunda kendinle belirsiz bir pazarlık yapma.",
+      "sourceHash": "8bde6f8be9538d9cd13bee9ed72b6f20bfd3edeeabbfbef762aaca1c960f4b49"
+    },
+    "v5_aliskanlik_08": {
+      "text": "Kendine uygun bir hatırlatıcı, niyetini günün kalabalığında yeniden bulmana yardım edebilir.",
+      "sourceHash": "06c51bbafc657a3b62bb2a03a7d809fbfc06f6503f203080e31a27a3fc1f5e4f"
+    },
+    "v5_aliskanlik_09": {
+      "text": "Bir alışkanlık için seçtiğin yer ve zaman, en az yazdığın hedef kadar somut olabilir.",
+      "sourceHash": "b0dd3f03808dcf4aa61e6387c599f3510bfd66bcc1442acf839b9f5e34f363d1"
+    },
+    "v5_aliskanlik_10": {
+      "text": "Bir alışkanlığı biriyle paylaşırken sana nasıl eşlik etmesini istediğini söyle; destek de sana göre şekillensin.",
+      "sourceHash": "7a54bad658f500cd924de98e576fc5a59ab2f69783d7aa0d23eeca29e74ada23"
+    },
+    "v5_sinav_01": {
+      "text": "Kitabı kapatıp hatırladıklarını yazdığında, nereden devam edeceğini daha açık görebilirsin.",
+      "sourceHash": "68159928fc67bd1845e4a2d99acaeb2cb1e72cbea29ed7d63c1ac522c7a15c69"
+    },
+    "v5_sinav_02": {
+      "text": "Çözemediğin sorunun yanına bir işaret bırak; ona dönmek de çalışma planının parçasıdır.",
+      "sourceHash": "b14a6e8734cc9b7adba69d1687582e62ece4771eed5c95213d28d76317220546"
+    },
+    "v5_sinav_03": {
+      "text": "Bir konuyu kendi örneğinle anlatmayı dene; cümlenin takıldığı yer sana soru gösterebilir.",
+      "sourceHash": "876ce56bd705920c34fed85c3158ba88d588ee15a19f1f04873f568772cb9018"
+    },
+    "v5_sinav_04": {
+      "text": "Sınav sonucu emeğinin bir kaydını tutar; hayatının bütün hikâyesini yazmaz.",
+      "sourceHash": "e98561f4ff1eceef4b5b2d2bbad561c6db3c6f49f8d5fb5badfe3437c60b5055"
+    },
+    "v5_sinav_05": {
+      "text": "Çalışma saatlerini toplarken, gerçekten anladığın bir bağlantıya da dikkat edebilirsin.",
+      "sourceHash": "f25e107247e6066e018844981c1010f6879051e5db57ed4a5e75edf1d42b0472"
+    },
+    "v5_sinav_06": {
+      "text": "Bir arkadaşına sorunu anlatırken nerede takıldığını göster; birlikte çalışmanız o noktadan başlayabilir.",
+      "sourceHash": "2d10fc4dca41eebdb431dd9c64a1f7308531b95150c633594677bd36a2d322c4"
+    },
+    "v5_sinav_07": {
+      "text": "Dinlenme aralığını önceden belirlemek, masadan kalkarken yarım kalmışlık hissini azaltabilir.",
+      "sourceHash": "194a9781f8fa265d509f5a126d154858f90f9fb73fd0bc79837abeb1ab5f4d7a"
+    },
+    "v5_sinav_08": {
+      "text": "Gece boyunca kendini tüketmek yerine, yarın neye döneceğini not etmeyi seçebilirsin.",
+      "sourceHash": "38c6dc34744ef9b5db77a557aab2208a44b4e921fb9e58f2c58cad0b9aeb4206"
+    },
+    "v5_sinav_09": {
+      "text": "Yanlışların listesini ceza defteri gibi değil, sonraki çalışmanın haritası gibi kullanabilirsin.",
+      "sourceHash": "e50b64314f37d5349c016b073aed9a9bc1784f0dca2d63cf4c3108cc85c8f368"
+    },
+    "v5_sinav_10": {
+      "text": "Soru kâğıdını açtığında önce senden ne istendiğini oku; bildiklerine ulaşmak, soruyu doğru duymakla başlar.",
+      "sourceHash": "51ef9dce374a1eec739f83b468ef68cfd17dd82b95a9b81ce4c7bd7e054017fd"
+    }
+  }
+}

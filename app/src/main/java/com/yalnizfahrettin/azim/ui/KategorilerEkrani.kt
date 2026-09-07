@@ -19,10 +19,19 @@ import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 
 @Composable
-fun KilitDialog(grup: KategoriGrubu, dil: String, kapat: () -> Unit, hazir: Boolean, izle: () -> Unit) {
+fun KilitDialog(grup: KategoriGrubu, dil: String, kapat: () -> Unit, demoAc: () -> Unit, hata: String? = null) {
     AlertDialog(onDismissRequest = kapat, title = { Text(grup.ad(dil)) },
-        text = { Text(if (hazir) cevir(dil, "Bir reklam izleyerek bu koleksiyonu açabilirsin.", "Watch an ad to unlock this collection.") else cevir(dil, "Bu koleksiyon şu anda kilitli. Reklamla açma bu sürümde kullanılamıyor. Ücretsiz koleksiyonları keşfetmeye devam edebilirsin.", "This collection is locked. Ad unlocking is unavailable in this version. You can keep exploring free collections.")) },
-        confirmButton = { TextButton(onClick = if (hazir) izle else kapat) { Text(if (hazir) cevir(dil, "İzle", "Watch") else cevir(dil, "Tamam", "Done")) } })
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(cevir(dil, "GEÇİCİ DEMO", "TEMPORARY DEMO"), color = Renk.accent, style = MaterialTheme.typography.labelMedium)
+                Text(cevir(dil,
+                    "Bu sürümde gerçek reklam yok. Google.com tarayıcıda açılır. Uygulamaya geri döndüğünde yalnızca bu koleksiyon açılır.",
+                    "There is no real ad in this version. Google.com opens in your browser. When you return to the app, only this collection unlocks."))
+                hata?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+            }
+        },
+        confirmButton = { TextButton(onClick = demoAc) { Text(cevir(dil, "Demo bağlantısını aç", "Open demo link")) } },
+        dismissButton = { TextButton(onClick = kapat) { Text(cevir(dil, "Vazgeç", "Cancel")) } })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,6 +71,10 @@ fun KategorilerEkrani(secili: Set<String>, acikGruplar: Set<String>, dil: String
         Column(Modifier.fillMaxWidth().heightIn(max = 570.dp).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text(grup.ad(dil), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
             Text(cevir(dil, "Seçtiğin başlıklar akışına ve bildirimlerine katılır.", "Selected topics appear in your feed and reminders."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+            Text(if (grup.anahtar in setOf("filozoflar", "tasavvuf", "inanc"))
+                cevir(dil, "Bu kaynaklardan ilham alan özgün Ascend düşünceleri. Kişilerden doğrudan alıntı veya kutsal metin değildir.", "Original Ascend reflections inspired by these traditions. These are not direct quotations or sacred texts.")
+                else cevir(dil, "Her başlıkta 10 özgün Ascend sözü. Seçimlerini istediğin zaman değiştirebilirsin.", "10 original Ascend reflections in every topic. Change your choices at any time."),
+                color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
             grup.altlar.forEach { kat ->
                 val adet = Sozler.kategoriden(kat.anahtar).size
                 val secildi = kat.anahtar in secili

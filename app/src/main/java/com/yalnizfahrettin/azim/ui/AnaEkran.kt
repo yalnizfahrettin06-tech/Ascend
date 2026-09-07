@@ -94,7 +94,7 @@ fun AnaEkran(
                             Spacer(Modifier.height(18.dp))
                             Box(Modifier.size(28.dp, 1.dp).background(Color.White.copy(alpha = .65f)))
                             Spacer(Modifier.height(12.dp))
-                            Text(if (soz.yazar == "Ascend") cevir(dil, "Günlük olumlama", "Daily affirmation") else soz.imza(dil), color = Color.White, style = MaterialTheme.typography.bodySmall)
+                            Text(soz.sunumEtiketi(dil), color = Color.White, style = MaterialTheme.typography.bodySmall)
                             Spacer(Modifier.weight(1f))
                             Spacer(Modifier.height(40.dp))
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {

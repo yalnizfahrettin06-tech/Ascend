@@ -121,7 +121,7 @@ class AzimWidget : GlanceAppWidget() {
                 .forEach { id ->
                     updateAppWidgetState(ctx, id) { p ->
                         p[SOZ] = soz.metin(dil)
-                        p[YAZAR] = soz.yazar
+                        p[YAZAR] = soz.sunumEtiketi(dil)
                     }
                 }
             widget.updateAll(ctx)

@@ -1,6 +1,7 @@
 package com.yalnizfahrettin.azim.data
 
 import android.content.Context
+import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
@@ -18,13 +19,14 @@ import java.time.LocalDate
 private val Context.ds by preferencesDataStore("azim")
 
 /** Tek veri kapısı. Ekranlar DataStore'u doğrudan görmez. */
-class Depo(private val ctx: Context) {
+class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
 
     private object K {
         val SECILI = stringSetPreferencesKey("secili_kategoriler")
         val ACIK_GRUP = stringSetPreferencesKey("acik_gruplar")
         val FAVORI = stringSetPreferencesKey("favoriler")
         val GECMIS = stringSetPreferencesKey("gosterilen_gecmis")
+        val SON_BILDIRIM = stringPreferencesKey("son_bildirim_kimlik")
         val GUNLUK = intPreferencesKey("gunluk_adet")
         val BASLANGIC = intPreferencesKey("baslangic_saati")
         val BITIS = intPreferencesKey("bitis_saati")
@@ -49,46 +51,44 @@ class Depo(private val ctx: Context) {
         val IPUCU_KAPATILDI = stringPreferencesKey("ipucu_kapatildi")
     }
 
-    /** Geçmişte kaç söz hatırlanacak — havuzun yarısı kadarı yeterli. */
-    private val gecmisTavani get() = (Sozler.tumu().size / 2).coerceAtLeast(5)
-
     /** Seçili alt kategoriler. Eski düz anahtarlar okunurken göçürülür. */
-    val secili: Flow<Set<String>> = ctx.ds.data.map { p ->
+    val secili: Flow<Set<String>> = store.data.map { p ->
         val kayitli = p[K.SECILI]
         if (kayitli.isNullOrEmpty()) Kategoriler.varsayilanSecili
         else Kategoriler.gocur(kayitli).ifEmpty { Kategoriler.varsayilanSecili }
     }
 
     /** Açık gruplar — ücretsizler her zaman dahil. */
-    val acikGruplar: Flow<Set<String>> = ctx.ds.data.map {
+    val acikGruplar: Flow<Set<String>> = store.data.map {
         (it[K.ACIK_GRUP] ?: emptySet()) + Kategoriler.ucretsizGruplar
     }
 
     /** Açık alt kategoriler — gruptan türetilir. */
     val acik: Flow<Set<String>> = acikGruplar.map { Kategoriler.acikAltlar(it) }
-    val favoriler: Flow<Set<String>> = ctx.ds.data.map { it[K.FAVORI] ?: emptySet() }
-    val gecmis: Flow<Set<String>> = ctx.ds.data.map { it[K.GECMIS] ?: emptySet() }
-    val gunlukAdet: Flow<Int> = ctx.ds.data.map { it[K.GUNLUK] ?: 3 }
-    val baslangicSaati: Flow<Int> = ctx.ds.data.map { it[K.BASLANGIC] ?: 10 }
-    val bitisSaati: Flow<Int> = ctx.ds.data.map { it[K.BITIS] ?: 23 }
-    val tema: Flow<TemaModu> = ctx.ds.data.map {
+    val favoriler: Flow<Set<String>> = store.data.map { it[K.FAVORI] ?: emptySet() }
+    val sonBildirimKimlik: Flow<String?> = store.data.map { it[K.SON_BILDIRIM] }
+    val gecmis: Flow<Set<String>> = store.data.map { (it[K.GECMIS] ?: emptySet()).filter(Sozler::aktifKimlikMi).toSet() }
+    val gunlukAdet: Flow<Int> = store.data.map { it[K.GUNLUK] ?: 3 }
+    val baslangicSaati: Flow<Int> = store.data.map { it[K.BASLANGIC] ?: 10 }
+    val bitisSaati: Flow<Int> = store.data.map { it[K.BITIS] ?: 23 }
+    val tema: Flow<TemaModu> = store.data.map {
         runCatching { TemaModu.valueOf(it[K.TEMA] ?: "SISTEM") }.getOrDefault(TemaModu.SISTEM)
     }
-    val dinamikRenk: Flow<Boolean> = ctx.ds.data.map { it[K.DINAMIK] ?: false }
-    val haptikAcik: Flow<Boolean> = ctx.ds.data.map { it[K.HAPTIK] ?: true }
-    val dil: Flow<String> = ctx.ds.data.map { it[K.DIL] ?: "tr" }
-    val hatirlaticiAcik: Flow<Boolean> = ctx.ds.data.map { it[K.HATIRLATICI] ?: (it[K.ONBOARDING] ?: false) }
-    val onboardingBitti: Flow<Boolean> = ctx.ds.data.map { it[K.ONBOARDING] ?: false }
-    val seri: Flow<Int> = ctx.ds.data.map { it[K.SERI] ?: 0 }
-    val rekor: Flow<Int> = ctx.ds.data.map { it[K.REKOR] ?: 0 }
-    val gorulenToplam: Flow<Int> = ctx.ds.data.map { it[K.GORULEN] ?: 0 }
-    val kutlananKilometre: Flow<Int> = ctx.ds.data.map { it[K.KUTLANAN] ?: 0 }
-    val palet: Flow<Palet> = ctx.ds.data.map {
+    val dinamikRenk: Flow<Boolean> = store.data.map { it[K.DINAMIK] ?: false }
+    val haptikAcik: Flow<Boolean> = store.data.map { it[K.HAPTIK] ?: true }
+    val dil: Flow<String> = store.data.map { it[K.DIL] ?: "tr" }
+    val hatirlaticiAcik: Flow<Boolean> = store.data.map { it[K.HATIRLATICI] ?: (it[K.ONBOARDING] ?: false) }
+    val onboardingBitti: Flow<Boolean> = store.data.map { it[K.ONBOARDING] ?: false }
+    val seri: Flow<Int> = store.data.map { it[K.SERI] ?: 0 }
+    val rekor: Flow<Int> = store.data.map { it[K.REKOR] ?: 0 }
+    val gorulenToplam: Flow<Int> = store.data.map { it[K.GORULEN] ?: 0 }
+    val kutlananKilometre: Flow<Int> = store.data.map { it[K.KUTLANAN] ?: 0 }
+    val palet: Flow<Palet> = store.data.map {
         runCatching { Palet.valueOf(it[K.PALET] ?: "KUM") }.getOrDefault(Palet.KUM)
     }
 
     /** Son 7 günün aktiflik durumu — pazartesiden bugüne. */
-    val haftalikAktiflik: Flow<List<Boolean>> = ctx.ds.data.map { p ->
+    val haftalikAktiflik: Flow<List<Boolean>> = store.data.map { p ->
         val gunler = p[K.AKTIF_GUNLER] ?: emptySet()
         val bugun = LocalDate.now()
         (6 downTo 0).map { bugun.minusDays(it.toLong()).toString() in gunler }
@@ -99,7 +99,7 @@ class Depo(private val ctx: Context) {
      * "tarih|kimlik" biçiminde saklanır; okurken bugüne göre süzülür,
      * böylece ayrı bir temizlik işine gerek kalmaz.
      */
-    val bugunGelenler: Flow<List<String>> = ctx.ds.data.map { p ->
+    val bugunGelenler: Flow<List<String>> = store.data.map { p ->
         val bugun = LocalDate.now().toString()
         (p[K.BUGUN_GELEN] ?: emptySet())
             .filter { it.startsWith("$bugun|") }
@@ -110,7 +110,7 @@ class Depo(private val ctx: Context) {
      * Son 7 günün gelen sözleri, tarihe göre gruplanmış.
      * Haftalık şeritte bir güne dokununca o günün sözlerini göstermek için.
      */
-    val gunlukGelenler: Flow<Map<String, List<String>>> = ctx.ds.data.map { p ->
+    val gunlukGelenler: Flow<Map<String, List<String>>> = store.data.map { p ->
         (p[K.BUGUN_GELEN] ?: emptySet())
             .mapNotNull { kayit ->
                 val tarih = kayit.substringBefore("|")
@@ -121,7 +121,7 @@ class Depo(private val ctx: Context) {
     }
 
     /** Bugün kaç söz görüldü — günün ilerleme halkası için. */
-    val bugunGorulen: Flow<Int> = ctx.ds.data.map { p ->
+    val bugunGorulen: Flow<Int> = store.data.map { p ->
         val kayit = p[K.BUGUN_GORULEN] ?: return@map 0
         val bugun = LocalDate.now().toString()
         if (kayit.substringBefore("|") == bugun) {
@@ -134,7 +134,7 @@ class Depo(private val ctx: Context) {
      * Planlayici her planlama turunda saatleri buraya yazar; ekran
      * yalnızca gelecekte kalan ilkini okur.
      */
-    val sonrakiBildirim: Flow<String?> = ctx.ds.data.map { p ->
+    val sonrakiBildirim: Flow<String?> = store.data.map { p ->
         val simdi = java.time.LocalDateTime.now()
         (p[K.PLANLI_SAATLER] ?: emptySet())
             .mapNotNull { runCatching { java.time.LocalDateTime.parse(it) }.getOrNull() }
@@ -144,22 +144,22 @@ class Depo(private val ctx: Context) {
     }
 
     /** Keşif ipucu bugün kapatıldı mı? */
-    val ipucuKapatildi: Flow<Boolean> = ctx.ds.data.map {
+    val ipucuKapatildi: Flow<Boolean> = store.data.map {
         it[K.IPUCU_KAPATILDI] == LocalDate.now().toString()
     }
 
-    suspend fun planliSaatleriYaz(saatler: List<java.time.LocalDateTime>) = ctx.ds.edit { p ->
+    suspend fun planliSaatleriYaz(saatler: List<java.time.LocalDateTime>) = store.edit { p ->
         p[K.PLANLI_SAATLER] = saatler.map { it.toString() }.toSet()
     }
 
-    suspend fun ipucunuKapat() = ctx.ds.edit {
+    suspend fun ipucunuKapat() = store.edit {
         it[K.IPUCU_KAPATILDI] = LocalDate.now().toString()
     }
 
-    suspend fun paletAyarla(pl: Palet) = ctx.ds.edit { it[K.PALET] = pl.name }
+    suspend fun paletAyarla(pl: Palet) = store.edit { it[K.PALET] = pl.name }
 
     /** Bildirimle gelen sözü günün listesine yazar. */
-    suspend fun bugunGeldi(kimlik: String) = ctx.ds.edit { p ->
+    suspend fun bugunGeldi(kimlik: String) = store.edit { p ->
         val bugun = LocalDate.now()
         val esik = bugun.minusDays(6)
         // Son 7 günü sakla — haftalık şeride dokunma bu veriyi okuyor.
@@ -170,7 +170,7 @@ class Depo(private val ctx: Context) {
         p[K.BUGUN_GELEN] = (mevcut + "$bugun|$kimlik").toSet()
     }
 
-    suspend fun kategoriSec(anahtar: String) = ctx.ds.edit { p ->
+    suspend fun kategoriSec(anahtar: String) = store.edit { p ->
         val s = Kategoriler.gocur(p[K.SECILI] ?: Kategoriler.varsayilanSecili).toMutableSet()
         if (!s.add(anahtar)) s.remove(anahtar)
         // En az bir kategori kalmalı, yoksa bildirim havuzu boşalır.
@@ -178,27 +178,27 @@ class Depo(private val ctx: Context) {
     }
 
     /** Grup kilidini açar ve altlarını seçime ekler. */
-    suspend fun grupAc(grupAnahtari: String) = ctx.ds.edit { p ->
+    suspend fun grupAc(grupAnahtari: String) = store.edit { p ->
         p[K.ACIK_GRUP] = (p[K.ACIK_GRUP] ?: emptySet()) + grupAnahtari
         val altlar = Kategoriler.grupBul(grupAnahtari)?.altlar?.map { it.anahtar } ?: emptyList()
         p[K.SECILI] = (p[K.SECILI] ?: emptySet()) + altlar
     }
 
-    suspend fun favoriDegistir(kimlik: String) = ctx.ds.edit { p ->
+    suspend fun favoriDegistir(kimlik: String) = store.edit { p ->
         val f = (p[K.FAVORI] ?: emptySet()).toMutableSet()
         if (!f.add(kimlik)) f.remove(kimlik)
         p[K.FAVORI] = f
     }
 
-    /** Gösterilen sözü geçmişe yazar; tavan aşılırsa geçmişi sıfırlar. */
-    suspend fun gosterildi(kimlik: String) = ctx.ds.edit { p ->
+    /** Cycle history and daily read counts have separate lifetimes. */
+    suspend fun gosterildi(kimlik: String) = store.edit { p ->
+        val g = (p[K.GECMIS] ?: emptySet()).filter(Sozler::aktifKimlikMi).toMutableSet()
+        if (Sozler.aktifKimlikMi(kimlik)) g.add(kimlik)
+        p[K.GECMIS] = g
         val tarih = LocalDate.now().toString()
         val okunan = (p[K.OKUNAN] ?: emptySet()).filter { it.startsWith("$tarih|") }.toSet()
         if ("$tarih|$kimlik" in okunan) return@edit
         p[K.OKUNAN] = okunan + "$tarih|$kimlik"
-        val g = (p[K.GECMIS] ?: emptySet()).toMutableSet()
-        g.add(kimlik)
-        p[K.GECMIS] = if (g.size > gecmisTavani) setOf(kimlik) else g
         p[K.GORULEN] = (p[K.GORULEN] ?: 0) + 1
 
         // Günün ilerleme halkası için: tarih değiştiyse sıfırdan başla.
@@ -210,15 +210,15 @@ class Depo(private val ctx: Context) {
         p[K.BUGUN_GORULEN] = "$bugun|$sayi"
     }
 
-    suspend fun gunlukAdetAyarla(n: Int) = ctx.ds.edit { it[K.GUNLUK] = n.coerceIn(1, 7) }
-    suspend fun saatAraligiAyarla(bas: Int, bit: Int) = ctx.ds.edit {
+    suspend fun gunlukAdetAyarla(n: Int) = store.edit { it[K.GUNLUK] = n.coerceIn(1, 7) }
+    suspend fun saatAraligiAyarla(bas: Int, bit: Int) = store.edit {
         it[K.BASLANGIC] = bas.coerceIn(0, 23); it[K.BITIS] = bit.coerceIn(bas.coerceIn(0, 23) + 1, 24)
     }
-    suspend fun temaAyarla(t: TemaModu) = ctx.ds.edit { it[K.TEMA] = t.name }
-    suspend fun dinamikRenkAyarla(a: Boolean) = ctx.ds.edit { it[K.DINAMIK] = a }
-    suspend fun haptikAyarla(a: Boolean) = ctx.ds.edit { it[K.HAPTIK] = a }
-    suspend fun dilAyarla(d: String) = ctx.ds.edit { it[K.DIL] = d }
-    suspend fun onboardingKaydet(secili: Set<String>, adet: Int, bas: Int, bit: Int, hatirlat: Boolean) = ctx.ds.edit {
+    suspend fun temaAyarla(t: TemaModu) = store.edit { it[K.TEMA] = t.name }
+    suspend fun dinamikRenkAyarla(a: Boolean) = store.edit { it[K.DINAMIK] = a }
+    suspend fun haptikAyarla(a: Boolean) = store.edit { it[K.HAPTIK] = a }
+    suspend fun dilAyarla(d: String) = store.edit { it[K.DIL] = d }
+    suspend fun onboardingKaydet(secili: Set<String>, adet: Int, bas: Int, bit: Int, hatirlat: Boolean) = store.edit {
         it[K.SECILI] = Baslangic.dogrula(secili)
         it[K.GUNLUK] = adet.coerceIn(1, 7)
         it[K.BASLANGIC] = bas.coerceIn(0, 23)
@@ -226,19 +226,22 @@ class Depo(private val ctx: Context) {
         it[K.HATIRLATICI] = hatirlat
         it[K.ONBOARDING] = true
     }
-    suspend fun hatirlaticiAyarla(acik: Boolean) = ctx.ds.edit { it[K.HATIRLATICI] = acik }
-    suspend fun bildirimGecmisineEkle(kimlik: String) = ctx.ds.edit {
-        it[K.GECMIS] = ((it[K.GECMIS] ?: emptySet()) + kimlik).toList().takeLast(gecmisTavani).toSet()
+    suspend fun hatirlaticiAyarla(acik: Boolean) = store.edit { it[K.HATIRLATICI] = acik }
+    suspend fun bildirimGecmisineEkle(kimlik: String, yeniTurKategorileri: Set<String> = emptySet()) = store.edit {
+        val onceki = (it[K.GECMIS] ?: emptySet()).filter(Sozler::aktifKimlikMi)
+            .filterNot { id -> Sozler.kimlikten(id)?.kategori in yeniTurKategorileri }
+        it[K.GECMIS] = (onceki + kimlik).filter(Sozler::aktifKimlikMi).toSet()
+        it[K.SON_BILDIRIM] = kimlik
     }
-    suspend fun kategorileriAyarla(s: Set<String>) = ctx.ds.edit {
+    suspend fun kategorileriAyarla(s: Set<String>) = store.edit {
         if (s.isNotEmpty()) it[K.SECILI] = s
     }
-    suspend fun kilometreKutlandi(gun: Int) = ctx.ds.edit { it[K.KUTLANAN] = gun }
-    suspend fun degerlendirmeSoruldu() = ctx.ds.edit { it[K.DEGERLENDIRME] = true }
-    suspend fun degerlendirmeSorulduMu() = ctx.ds.data.first()[K.DEGERLENDIRME] ?: false
+    suspend fun kilometreKutlandi(gun: Int) = store.edit { it[K.KUTLANAN] = gun }
+    suspend fun degerlendirmeSoruldu() = store.edit { it[K.DEGERLENDIRME] = true }
+    suspend fun degerlendirmeSorulduMu() = store.data.first()[K.DEGERLENDIRME] ?: false
 
     /** Gün başına bir kez; seriyi ilerletir veya sıfırlar. */
-    suspend fun seriyiTazele() = ctx.ds.edit { p ->
+    suspend fun seriyiTazele() = store.edit { p ->
         val bugun = LocalDate.now()
         val son = p[K.SON_GUN]?.let { runCatching { LocalDate.parse(it) }.getOrNull() }
         val yeni = when {

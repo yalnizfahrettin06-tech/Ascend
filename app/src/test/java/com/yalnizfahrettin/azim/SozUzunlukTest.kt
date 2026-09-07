@@ -13,30 +13,31 @@ import org.junit.Test
 /** Bildirim okunabilirliğinin bekçisi — her dil için ayrı ayrı. */
 class SozUzunlukTest {
 
-    /*
-     * POLİTİKA DEĞİŞTİ (bildirim raporu):
-     * Uzun sözler artık havuzdan ELENMİYOR — bildirimde kısaltılıp tamamı
-     * uygulamada açılıyor. Bu yüzden test artık "hiçbir söz uzun olmasın"
-     * demiyor; "kısaltma her koşulda sınırın altında bir metin üretsin"
-     * diyor. Asıl güvence bu.
-     */
+    // The v5 catalogue must fit completely in both languages. Truncation remains
+    // a legacy helper, not a way to make oversized current content pass validation.
     @Test
-    fun `bildirim metni her dilde siniri asmaz`() {
+    fun `guncel metinler her dilde kirk ile yuz yirmi karakter arasinda`() {
         val asanlar = Sozler.tumu().flatMap { s ->
-            listOf("tr", "en").map { it to s.bildirimMetni(it) }
-        }.filter { it.second.length > Sozler.BILDIRIM_SINIRI }
+            listOf("tr", "en").map { Triple(s.kimlik, it, s.metin(it)) }
+        }.filter { it.third.length !in 40..120 }
         assertTrue(
-            "Kısaltmadan sonra bile sınırı aşanlar:\n" +
-                asanlar.joinToString("\n") { "${it.first} ${it.second.length} kr — ${it.second}" },
+            "Güncel katalogda uzunluk sınırını aşan metinler:\n" +
+                asanlar.joinToString("\n") { "${it.first} ${it.second} ${it.third.length} kr — ${it.third}" },
             asanlar.isEmpty(),
         )
     }
 
     @Test
-    fun `kisa sozler kisaltilmadan gecer`() {
-        val kisa = Sozler.tumu().filter { !it.kisaltilirMi("tr") }
-        assertTrue("Test için kısa söz bulunamadı", kisa.isNotEmpty())
-        kisa.forEach { assertEquals(it.tr, it.bildirimMetni("tr")) }
+    fun `yedi yuz guncel sozun tamami her iki dilde kisaltilmadan gecer`() {
+        val tumu = Sozler.tumu()
+        assertEquals("Güncel katalog eksik", 700, tumu.size)
+        tumu.forEach { soz ->
+            listOf("tr", "en").forEach { dil ->
+                assertTrue("${soz.kimlik} $dil bildirime uygun değil", soz.bildirimeUygun(dil))
+                assertFalse("${soz.kimlik} $dil kısaltma istiyor", soz.kisaltilirMi(dil))
+                assertEquals("${soz.kimlik} $dil metni kesildi", soz.metin(dil), soz.bildirimMetni(dil))
+            }
+        }
     }
 
     @Test
@@ -66,16 +67,6 @@ class SozUzunlukTest {
             it.tr.length > Sozler.HAVUZ_TAVANI || it.en.length > Sozler.HAVUZ_TAVANI
         }
         assertTrue("Havuz tavanını (${Sozler.HAVUZ_TAVANI}) aşan söz var", asanlar.isEmpty())
-    }
-
-    @Test
-    fun `sozlerin cogu ideal sinirin altinda`() {
-        val tum = Sozler.tumu()
-        val idealde = tum.count { it.tr.length <= Sozler.IDEAL_SINIR }
-        assertTrue(
-            "En az %60'ı ${Sozler.IDEAL_SINIR} altında olmalı ($idealde/${tum.size})",
-            idealde * 100 / tum.size >= 60,
-        )
     }
 
     /** Rapor 5.1: İngilizce arayüz + Türkçe içerik çelişkisi geri gelmesin. */

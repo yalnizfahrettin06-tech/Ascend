@@ -1,6 +1,5 @@
 package com.yalnizfahrettin.azim.ui
 
-import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
@@ -266,27 +265,30 @@ fun Uygulama(
         }
     }
 
+    var demoHatasi by rememberSaveable { mutableStateOf<String?>(null) }
+    val demoBaslat = rememberDemoReklam(
+        acildi = { grupAnahtari ->
+            kapsam.launch {
+                try {
+                    depo.grupAc(grupAnahtari)
+                    snackbar.showSnackbar(cevir(dil, "Demo tamamlandı. Seçtiğin koleksiyon açıldı.", "Demo complete. Your selected collection is unlocked."))
+                } catch (_: java.io.IOException) {
+                    snackbar.showSnackbar(cevir(dil, "Koleksiyon kaydedilemedi. Lütfen yeniden dene.", "The collection could not be saved. Please try again."))
+                }
+            }
+        },
+        hata = { demoHatasi = cevir(dil, "Tarayıcı açılamadı. Koleksiyon kilitli kaldı; yeniden deneyebilirsin.", "The browser could not open. The collection is still locked; you can try again.") },
+    )
     val acilanGrup = kilitGrup
     if (acilanGrup != null) {
-        val basariMetni = stringResource(R.string.kategori_acildi)
-        val reklamYok = stringResource(R.string.asc_reklam_yok)
+        LaunchedEffect(acilanGrup.anahtar) { demoHatasi = null }
         KilitDialog(
             grup = acilanGrup, dil = dil,
-            kapat = { kilitGrup = null },
-            hazir = reklam.hazir,
-            izle = {
-                val act = ctx as? Activity
-                kilitGrup = null
-                if (act == null) return@KilitDialog
-                reklam.oduluGoster(act) { odulKazanildi ->
-                    if (odulKazanildi) {
-                        kapsam.launch {
-                            depo.grupAc(acilanGrup.anahtar)
-                            snackbar.showSnackbar(basariMetni)
-                        }
-                    }
-                    if (!odulKazanildi) kapsam.launch { snackbar.showSnackbar(reklamYok) }
-                }
+            kapat = { kilitGrup = null; demoHatasi = null },
+            hata = demoHatasi,
+            demoAc = {
+                demoHatasi = null
+                if (demoBaslat(acilanGrup.anahtar)) kilitGrup = null
             },
         )
     }

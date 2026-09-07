@@ -15,9 +15,8 @@ data class Kategori(
 /**
  * Kategori grubu — kilit birimi.
  *
- * 60 alt kategoriyi tek tek reklamla açtırmak işkenceye dönerdi.
- * Bir reklam = bir grubun tamamı, ömür boyu. Kullanıcı için adil,
- * teklif olarak da net: "bir reklam, bir dünya".
+ * Access is stored per group. The current preview uses an explicitly labelled
+ * browser demo; production rewarded advertising is not connected.
  */
 data class KategoriGrubu(
     val anahtar: String,
@@ -88,9 +87,9 @@ object Kategoriler {
             Triple("zen", "Zen", "Zen"),
         ),
         g("inanc", "İnanç", "Faith", ucretsiz = false,
-            Triple("kuran", "Kur'an", "Quran"),
-            Triple("incil", "İncil", "Bible"),
-            Triple("tevrat", "Tevrat", "Torah"),
+            Triple("kuran", "Kur'an üzerine düşünceler", "Reflections on the Quran"),
+            Triple("incil", "İncil üzerine düşünceler", "Reflections on the Bible"),
+            Triple("tevrat", "Tevrat üzerine düşünceler", "Reflections on the Torah"),
             Triple("dua", "Dua", "Prayer"),
             Triple("sukur", "Şükür", "Gratitude in Faith"),
         ),
