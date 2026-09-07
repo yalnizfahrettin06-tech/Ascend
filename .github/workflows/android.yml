@@ -26,7 +26,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
-      - name: Restore stable test signing key
+      - name: Use stable test signing key if configured
         env:
           TEST_KEYSTORE: ${{ secrets.ASCEND_TEST_KEYSTORE_B64 }}
         run: |
@@ -74,9 +74,7 @@ jobs:
           arch: x86_64
           profile: pixel_2
           disable-animations: true
-          script: |
-            bash gradlew :app:connectedDebugAndroidTest --no-daemon --max-workers=2
-            adb pull /sdcard/Android/data/com.yalnizfahrettin.azim.debug/files/screenshots screenshots
+          script: bash .github/scripts/ui-tests.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:

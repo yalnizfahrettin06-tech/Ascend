@@ -3,6 +3,8 @@ package com.yalnizfahrettin.azim.ui
 import androidx.compose.material3.Switch
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -127,11 +129,11 @@ fun AyarlarEkrani(
             AyarSatiri(
                 stringResource(R.string.dinamik_renk),
                 stringResource(R.string.dinamik_renk_alt),
-            ) { Anahtar(dinamikRenk, dinamikSec) }
+            ) { Anahtar(dinamikRenk, dinamikSec, stringResource(R.string.dinamik_renk)) }
         }
 
         BolumBasligi(stringResource(R.string.bildirimler))
-        AyarSatiri(stringResource(R.string.asc_hatirlaticilar), null) { Anahtar(hatirlaticiAcik, hatirlaticiSec) }
+        AyarSatiri(stringResource(R.string.asc_hatirlaticilar), null) { Anahtar(hatirlaticiAcik, hatirlaticiSec, stringResource(R.string.asc_hatirlaticilar)) }
         if (hatirlaticiAcik && !bildirimIzni) {
             val ctx = LocalContext.current
             Text(stringResource(R.string.asc_bildirim_engelli), color = Renk.metinIkincil, modifier = Modifier.padding(horizontal = Olcu.xl))
@@ -148,7 +150,7 @@ fun AyarlarEkrani(
         Spacer(Modifier.height(Olcu.lg))
         AcilirPencereBlogu()
 
-        AyarSatiri(stringResource(R.string.haptik), null) { Anahtar(haptik, haptikSec) }
+        AyarSatiri(stringResource(R.string.haptik), null) { Anahtar(haptik, haptikSec, stringResource(R.string.haptik)) }
 
 
         BolumBasligi(stringResource(R.string.hakkinda))
@@ -301,8 +303,8 @@ private fun PencereOrnegi(modifier: Modifier, etiket: String, satirSayisi: Int, 
 
 /** Açma/kapama anahtarı — Material3 Switch yerine marka diliyle. */
 @Composable
-private fun Anahtar(acik: Boolean, degistir: (Boolean) -> Unit) {
-    Switch(checked = acik, onCheckedChange = degistir)
+private fun Anahtar(acik: Boolean, degistir: (Boolean) -> Unit, etiket: String) {
+    Switch(checked = acik, onCheckedChange = degistir, modifier = Modifier.semantics { contentDescription = etiket })
 }
 
 @Composable

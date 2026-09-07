@@ -23,13 +23,13 @@ class OnboardingTest {
     private fun click(id: Int) = compose.onNodeWithText(label(id)).performClick()
     private fun screenshot(name: String) {
         compose.waitForIdle()
-        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
-        val file = File(ctx.getExternalFilesDir(null), "screenshots/$name.png")
-        file.parentFile?.mkdirs()
-        InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot().let { image ->
-            file.outputStream().use { image.compress(Bitmap.CompressFormat.PNG, 100, it) }
-            image.recycle()
+        val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
+        fun shell(command: String) {
+            android.os.ParcelFileDescriptor.AutoCloseInputStream(automation.executeShellCommand(command)).use { it.readBytes() }
         }
+        // Gradle uninstalls the app after testing, so app-scoped files would be deleted.
+        shell("mkdir -p /sdcard/Download/ascend-screenshots")
+        shell("screencap -p /sdcard/Download/ascend-screenshots/$name.png")
     }
     @Test fun skipRemindersCompletesWithSelectionAndNoOptIn() {
         var completed = false

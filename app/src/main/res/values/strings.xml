@@ -6,12 +6,12 @@
 
     <string name="nav_ana">Bugün</string>
     <string name="nav_kategori">Keşfet</string>
-    <string name="nav_favori">Favori</string>
+    <string name="nav_favori">Kaydedilen</string>
     <string name="nav_istatistik">Yolculuk</string>
 
     <string name="ayarlar">Ayarlar</string>
-    <string name="favoriye_ekle">Favorilere ekle</string>
-    <string name="favoriden_cikar">Favorilerden çıkar</string>
+    <string name="favoriye_ekle">Kaydet</string>
+    <string name="favoriden_cikar">Kaydedilenlerden çıkar</string>
     <string name="kopyala">Kopyala</string>
     <string name="paylas">Paylaş</string>
     <string name="yeni_soz">Yeni söz</string>
@@ -26,7 +26,7 @@
     <string name="vazgec">Vazgeç</string>
     <string name="izle">İzle</string>
 
-    <string name="favoriler_baslik">Favoriler</string>
+    <string name="favoriler_baslik">Kaydedilenler</string>
     <string name="favori_bos_baslik">Henüz favorin yok</string>
     <string name="favori_bos_alt">Beğendiğin sözleri kalp ile buraya ekleyebilirsin.</string>
 

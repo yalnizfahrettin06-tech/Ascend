@@ -49,6 +49,8 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
     buildFeatures { compose = true; buildConfig = true }
+    // Both supported languages must remain available for the in-app language picker.
+    bundle { language { enableSplit = false } }
     packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
 }
 
