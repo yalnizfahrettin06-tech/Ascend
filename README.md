@@ -4,6 +4,10 @@ Motivasyon, olumlama, azim, odak ve felsefeden sözleri gününe taşıyan Andro
 
 ## Telefonuna APK indir
 
+**[Ascend 4.0 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v4.0.0-preview.1)** — ön sürüm sayfasındaki `Ascend-4.0.0-test.apk` dosyasını seç.
+
+Yeni bir derleme oluşturmak için:
+
 1. [Actions → Ascend APK](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) sayfasını aç.
 2. Başarılı çalışmayı seç. İstersen **Run workflow** ile yeni derleme başlat.
 3. **Artifacts → Ascend-4.0.0-test-APK** dosyasını indir ve ZIP içindeki APK’yı telefonunda aç.
@@ -24,9 +28,11 @@ GitHub’dan artifact indirmek için oturum açman gerekir. APK geliştirme imza
 ## Güncel raporlar
 
 - [Ayrıntılı ürün ve tasarım raporu](docs/05-ASCEND-4-TASARIM-RAPORU.md)
+- [Gerçek uygulama ekranları](docs/08-ASCEND-4-EKRANLAR.md)
+- [Doğrulama ve bilinen sınırlar](docs/07-ASCEND-4-DOGRULAMA.md)
 - [Özgün arka planların üretim kaydı](docs/06-GORSEL-ISTEMLERI.md)
 
-`01`–`04` numaralı belgeler önceki 3.0 sürümünün tarihsel inceleme ve ekranlarıdır. 4.0 görünümünü temsil etmezler. Güncel doğrulama sonuçları teslim belgesine eklenir; Actions durumunu yukarıdaki bağlantıdan izleyebilirsin.
+`01`–`04` numaralı belgeler önceki 3.0 sürümünün tarihsel inceleme ve ekranlarıdır. 4.0 görünümünü temsil etmezler. 4.0 için 30 temel test ve 9 Android cihaz testi geçti. Güncel sonuçlar doğrulama belgesindedir.
 
 ## Geliştirme
 
