@@ -70,7 +70,7 @@ object Kategoriler {
             Triple("risk", "Risk Almak", "Taking Risks"),
             Triple("utangaclik", "Utangaçlık", "Shyness"),
         ),
-        g("filozoflar", "Filozoflar", "Philosophers", ucretsiz = false,
+        g("filozoflar", "Filozoflar", "Philosophers", ucretsiz = true,
             Triple("marcus", "Marcus Aurelius", "Marcus Aurelius"),
             Triple("seneca", "Seneca", "Seneca"),
             Triple("epiktetos", "Epiktetos", "Epictetus"),
@@ -148,7 +148,7 @@ object Kategoriler {
             .flatMap { it.altlar }.map { it.anahtar }.toSet()
 
     /** Kurulumda seçili gelen alt kategoriler. */
-    val varsayilanSecili: Set<String> = setOf("ozsefkat", "ic_huzur")
+    val varsayilanSecili: Set<String> = setOf("motivasyon", "ozsefkat", "marcus")
 
     /**
      * Eski düz kategori anahtarlarından yeni alt kategorilere göç.

@@ -65,7 +65,7 @@ fun Uygulama(
     val tema by depo.tema.collectAsStateWithLifecycle(TemaModu.SISTEM)
     val dinamik by depo.dinamikRenk.collectAsStateWithLifecycle(false)
     val haptik by depo.haptikAcik.collectAsStateWithLifecycle(true)
-    val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.BORDO)
+    val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.KUM)
     val haftalik by depo.haftalikAktiflik.collectAsStateWithLifecycle(List(7) { false })
     val bugunGelenler by depo.bugunGelenler.collectAsStateWithLifecycle(emptyList())
     val gunlukGelenler by depo.gunlukGelenler.collectAsStateWithLifecycle(emptyMap())
@@ -105,6 +105,7 @@ fun Uygulama(
     // Onboarding is committed atomically before any system permission request.
     if (onboardingBitti == false) {
         Onboarding(dil = dil, kaydediliyor = kaydediliyor, hata = kayitHatasi,
+            bildirimIzni = bildirimIzni, izinIste = izinIste,
             bitir = { secilenler, adet, b, bt, hatirlat ->
                 if (!kaydediliyor) {
                     kaydediliyor = true
@@ -148,45 +149,6 @@ fun Uygulama(
     // Kilometre taşı kontrolü (rapor 4.1)
     LaunchedEffect(seri, kutlanan) {
         Kilometre.yeniEsik(seri, kutlanan)?.let { kutlamaGunu = it }
-    }
-
-    // --- PAYLAŞIM STÜDYOSU ---
-    val paylasilan = paylasilanSoz
-    if (paylasilan != null) {
-        val baslik = stringResource(R.string.paylas_baslik)
-        PaylasimEkrani(
-            soz = paylasilan,
-            dil = dil,
-            geri = { paylasilanSoz = null },
-            paylas = { ayar ->
-                PaylasimKarti.paylas(
-                    ctx, paylasilan.metin(dil), paylasilan.yazar, baslik, ayar,
-                )
-            },
-            videoPaylas = { ayar, saniye, ilerleme, bitti ->
-                kapsam.launch {
-                    val sonuc = com.yalnizfahrettin.azim.paylas.VideoUretici.uret(
-                        ctx, paylasilan.metin(dil), paylasilan.yazar, ayar, saniye, ilerleme,
-                    )
-                    bitti(sonuc.uri != null)
-                    if (sonuc.uri != null) {
-                        val niyet = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
-                            type = "video/mp4"
-                            putExtra(android.content.Intent.EXTRA_STREAM, sonuc.uri)
-                            addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                        }
-                        ctx.startActivity(android.content.Intent.createChooser(niyet, baslik))
-                    } else {
-                        // Cihaz kodlayıcısı yoksa sessizce görsele düş —
-                        // kullanıcı asla kırık bir çıktıyla karşılaşmasın.
-                        PaylasimKarti.paylas(
-                            ctx, paylasilan.metin(dil), paylasilan.yazar, baslik, ayar,
-                        )
-                    }
-                }
-            },
-        )
-        return
     }
 
     if (ayarlardaMi) {
@@ -280,11 +242,12 @@ fun Uygulama(
                         cikar = { kapsam.launch { depo.favoriDegistir(it) } },
                         oku = { soz -> akis = listOf(soz) + akis.filterNot { it.kimlik == soz.kimlik }; indeks = 0; sekme = Sekme.ANA },
                         kesfet = { sekme = Sekme.ANA },
+                        paylas = { paylasilanSoz = it },
                     )
 
                     Sekme.ISTATISTIK -> IstatistikEkrani(
                         seri = seri, rekor = rekor, gorulen = gorulen,
-                        favoriSayisi = favoriler.size, acikKategori = acik.size,
+                        favoriSayisi = favoriler.size, acikKategori = acik.size, haftalik = haftalik,
                     )
                 }
             }
@@ -292,6 +255,8 @@ fun Uygulama(
         }
         AltNav(sekme) { sekme = it }
     }
+
+    paylasilanSoz?.let { soz -> PaylasimEkrani(soz, dil, geri = { paylasilanSoz = null }) }
 
     kutlamaGunu?.let { gun ->
         KilometreKutlamasi(gun) {

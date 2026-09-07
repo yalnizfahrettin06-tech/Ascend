@@ -1,126 +1,56 @@
 package com.yalnizfahrettin.azim.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.yalnizfahrettin.azim.R
-import com.yalnizfahrettin.azim.core.AzimIkon
-import com.yalnizfahrettin.azim.core.Olcu
-import com.yalnizfahrettin.azim.core.Renk
-import com.yalnizfahrettin.azim.core.Yaricap
+import androidx.compose.ui.unit.sp
+import com.yalnizfahrettin.azim.core.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
-/*
- * İSTATİSTİK
- *
- * Eskisinde etiket yazımı tutarsızdı: "Bugün", "favoriler", "Gün", "En çok"
- * yan yana duruyordu ve sayılar accent renkteydi — hiçbiri diğerinden daha
- * önemli olmadığı halde hepsi bağırıyordu.
- *
- * Burada sayılar nötr ve büyük, etiketler küçük ve sönük; accent yalnızca
- * seri alevinde. Ekran boşken de dolu gibi görünsün diye kutular kalıyor,
- * "Henüz veri yok" gibi ayrı bir boş durum bloğu gerekmiyor.
- */
 @Composable
-fun IstatistikEkrani(
-    seri: Int,
-    rekor: Int,
-    gorulen: Int,
-    favoriSayisi: Int,
-    acikKategori: Int,
-) {
-    Column(
-        Modifier
-            .fillMaxSize()
-            .background(Renk.zemin).statusBarsPadding()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = Olcu.xl),
-    ) {
-        Spacer(Modifier.height(Olcu.xxl))
-        Text(
-            stringResource(R.string.istatistik_baslik),
-            style = MaterialTheme.typography.headlineSmall,
-            color = Renk.metin,
-        )
-        Spacer(Modifier.height(Olcu.lg))
-        Text(stringResource(R.string.asc_yolculuk_alt), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyLarge)
-        Spacer(Modifier.height(Olcu.xl))
-
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(Yaricap.lg))
-                .background(Renk.yuzey)
-                .border(1.dp, Renk.kenarlik, RoundedCornerShape(Yaricap.lg))
-                .padding(Olcu.xl),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(
-                AzimIkon.Alev, null,
-                tint = Renk.accent, modifier = Modifier.size(28.dp),
-            )
-            Spacer(Modifier.width(Olcu.lg))
-            Column {
-                Row(verticalAlignment = Alignment.Bottom) {
-                    Text(
-                        "$seri",
-                        style = MaterialTheme.typography.displaySmall,
-                        color = Renk.metin,
-                    )
-                    Spacer(Modifier.width(Olcu.xs))
-                    Text(
-                        stringResource(R.string.gun),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Renk.metinIkincil,
-                        modifier = Modifier.padding(bottom = 6.dp),
-                    )
-                }
-                Text(
-                    "${stringResource(R.string.en_uzun_seri)}: $rekor",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Renk.metinSonuk,
-                )
+fun IstatistikEkrani(seri: Int, rekor: Int, gorulen: Int, favoriSayisi: Int, acikKategori: Int, haftalik: List<Boolean> = List(7) { false }) {
+    val dil = LocalConfiguration.current.locales[0].language
+    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding().verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        Text(cevir(dil, "Kendi yolunda.", "Your own path."), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
+        Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(26.dp))) {
+            AtmosferResmi(Atmosfer.ORMAN, Modifier.matchParentSize(), .3f)
+            Column(Modifier.fillMaxWidth().padding(28.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(AzimIkon.Alev, null, Modifier.size(28.dp), tint = Color(0xFFE5C49A))
+                Text("$seri", color = Color.White, fontSize = 64.sp, fontFamily = LoraSerif)
+                Text(cevir(dil, "gündür buradasın", "days in a row"), color = Color.White)
+                Spacer(Modifier.height(18.dp))
+                Text(cevir(dil, "Her dönüş, kendine ayırdığın bir an.", "Each visit is a moment for yourself."), color = Color.White, style = MaterialTheme.typography.bodySmall)
             }
         }
-
-        Spacer(Modifier.height(Olcu.lg))
-        Row(Modifier.fillMaxWidth()) {
-            SayiKutusu(Modifier.weight(1f), gorulen, stringResource(R.string.toplam_gorulen))
-            Spacer(Modifier.width(Olcu.md))
-            SayiKutusu(Modifier.weight(1f), favoriSayisi, stringResource(R.string.favori_sayisi))
+        KucukBaslik(cevir(dil, "Son 7 gün", "The last 7 days"))
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            repeat(7) { i ->
+                val aktif = haftalik.getOrElse(i) { false }
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Box(Modifier.size(36.dp).background(if (aktif) Renk.accentZemin else Renk.yuzey, CircleShape), contentAlignment = Alignment.Center) {
+                        if (aktif) Icon(AzimIkon.Tik, null, Modifier.size(18.dp), tint = Renk.accent) else Text("·", color = Renk.metinIkincil)
+                    }
+                    Text(LocalDate.now().minusDays((6 - i).toLong()).format(DateTimeFormatter.ofPattern("EE", Locale.forLanguageTag(dil))), style = MaterialTheme.typography.labelSmall, color = Renk.metinIkincil, modifier = Modifier.padding(top = 6.dp))
+                }
+            }
         }
-        Spacer(Modifier.height(Olcu.md))
-        Row(Modifier.fillMaxWidth()) {
-            SayiKutusu(Modifier.weight(1f), acikKategori, stringResource(R.string.acik_kategori))
-            Spacer(Modifier.width(Olcu.md))
-            Spacer(Modifier.weight(1f))
+        listOf(listOf(gorulen to cevir(dil, "Okunan söz", "Quotes read"), favoriSayisi to cevir(dil, "Kaydedilen", "Saved")), listOf(rekor to cevir(dil, "En uzun seri", "Longest streak"), acikKategori to cevir(dil, "Açık başlık", "Open topics"))).forEach { satir ->
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                satir.forEach { (sayi, baslik) -> Surface(Modifier.weight(1f), color = Renk.yuzey, shape = RoundedCornerShape(20.dp)) {
+                    Column(Modifier.padding(20.dp)) { Text("$sayi", color = Renk.metin, fontSize = 28.sp); Text(baslik, color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall) }
+                } }
+            }
         }
-        Spacer(Modifier.height(Olcu.x5))
-    }
-}
-
-@Composable
-private fun SayiKutusu(modifier: Modifier, deger: Int, etiket: String) {
-    Column(
-        modifier
-            .clip(RoundedCornerShape(Yaricap.md))
-            .background(Renk.yuzey)
-            .border(1.dp, Renk.kenarlik, RoundedCornerShape(Yaricap.md))
-            .padding(Olcu.lg),
-    ) {
-        Text("$deger", style = MaterialTheme.typography.headlineSmall, color = Renk.metin)
-        Spacer(Modifier.height(Olcu.xs))
-        Text(etiket, style = MaterialTheme.typography.labelSmall, color = Renk.metinSonuk)
     }
 }

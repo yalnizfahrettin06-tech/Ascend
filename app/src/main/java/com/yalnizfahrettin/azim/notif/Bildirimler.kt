@@ -90,8 +90,7 @@ object Bildirimler {
 
         // Kısaltılan sözlerde gövde de kısaltılmış hali — toplu ve genişletilmiş
         // görünüm arasında tutarsızlık olmasın, ikisi de aynı metni göstersin.
-        val govde = soz.bildirimMetni(dil)
-        val kisaltildi = soz.kisaltilirMi(dil)
+        val govde = soz.metin(dil)
 
         val genisMetin = buildString {
             append(govde)

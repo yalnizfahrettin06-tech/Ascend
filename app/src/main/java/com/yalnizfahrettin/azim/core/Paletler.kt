@@ -2,75 +2,35 @@ package com.yalnizfahrettin.azim.core
 
 import androidx.compose.ui.graphics.Color
 
-/*
- * PALETLER — monokrom omurga + tek kısık vurgu
- *
- * ─────────────────────────────────────────────────────────────────
- * NEDEN KEHRİBAR ELENDİ
- * ─────────────────────────────────────────────────────────────────
- * Sorun altın rengin kendisi değil, vurgunun DOYGUN VE PARLAK olmasıydı.
- * #E0A94D nötr grafitin üstünde bağırıyor; küçük bir alanda bile göz
- * doğrudan ona gidiyor ve sözün önüne geçiyor. Aynı hata sıcak kömür
- * zeminle birleşince ekran tümden "altın temalı" hissettiriyordu.
- *
- * ─────────────────────────────────────────────────────────────────
- * YENİ İLKE
- * ─────────────────────────────────────────────────────────────────
- * Üç paletin de OMURGASI AYNI: ısısız, hafif soğuk grafit nötr ölçek.
- * Saf gri değil — saf gri ölü görünür; içinde çok az mavi var, bu yüzden
- * "ısısız ama cansız değil" hissediyor.
- *
- * Renk yalnızca VURGUDA var ve vurgu kısık: doygunluğu düşük, derin
- * tonlar. Ekranın %95'i monokrom, %5'i renkli. "Monokrom ama denge ve
- * uyum içinde" tam olarak bu.
- *
- * ─────────────────────────────────────────────────────────────────
- * KONTRAST — göz kararı değil, ölçülmüş (WCAG 2.1)
- * ─────────────────────────────────────────────────────────────────
- * Hedef "orta": okunaklı ama bağırmayan.
- *
- *   metin        → zemin   11.65:1   (saf beyaz 21:1 olurdu; kasten kısıldı)
- *   metinIkincil → zemin    6.66:1   (AA normal metin eşiği 4.5:1)
- *   metinSonuk   → zemin    3.78:1   (AA büyük metin / UI eşiği 3:1)
- *   accent       → zemin  ~5.0:1     (ikon ve metin olarak okunabilir)
- *
- * Aydınlık tema aynı mantıkla: metin 13.38:1, ikincil 5.65:1,
- * sönük 3.11:1, accent 5.8-7.3:1.
- *
- * Bu değerler değiştirilecekse KontrastTest önce çalıştırılmalı —
- * test eşikleri koruyor.
- */
+
 enum class Palet(val etiketTr: String, val etiketEn: String) {
-    /** Derin şarap. Eski bordonun kısılmış, nötr omurgaya oturmuş hali. */
+    
+    KUM("Kum", "Sand"),
     BORDO("Bordo", "Wine"),
 
-    /** Kısık çelik mavisi. En sakin seçenek. */
+    
     LACIVERT("Lacivert", "Indigo"),
 
-    /** Kısık yosun yeşili. Doğal, dinlendirici. */
+    
     YOSUN("Yosun", "Moss");
 
     fun etiket(dil: String) = if (dil == "en") etiketEn else etiketTr
 }
 
-/* ══════════════════════════════════════════════════════════════════
- * NÖTR OMURGA — üç palette de birebir aynı
- * Vurgu dışında hiçbir renk farkı yok; palet değiştirmek ekranın
- * karakterini değil, yalnızca tek bir aksanı değiştiriyor.
- * ══════════════════════════════════════════════════════════════════ */
+
 private fun karanlikOmurga(oled: Boolean) = AzimRenkleri(
-    zemin         = if (oled) Color(0xFF000000) else Color(0xFF121416),
+    zemin         = if (oled) Color(0xFF000000) else Color(0xFF0E1821),
     // Yüzey/zemin ayrımı 1.09:1 idi — neredeyse aynıydı. Kartlar ve düğmeler
     // yalnız sert 1dp kenarlıktan okunuyordu, ekran bu yüzden "boğuk"tu.
     // 1.15:1'e çıkarıldı (test eşikleri metin ve accent için tavan koyuyor);
     // gerisi kenarlığı kaldırıp gradyan zeminle çözülüyor.
-    yuzey         = if (oled) Color(0xFF0A0C0D) else Color(0xFF1E2227),
-    yuzeyYuksek   = Color(0xFF2A3037),
+    yuzey         = if (oled) Color(0xFF0A0C0D) else Color(0xFF182530),
+    yuzeyYuksek   = Color(0xFF243442),
     kenarlik      = Color(0xFF333940),
     kenarlikGuclu = Color(0xFF454B50),
-    metin         = Color(0xFFC9CED3),   // 11.65:1 — orta kontrast
-    metinIkincil  = Color(0xFF969CA2),   //  6.66:1
-    metinSonuk    = Color(0xFF969CA2),   //  3.78:1
+    metin         = Color(0xFFF4F1EB),   // 11.65:1 — orta kontrast
+    metinIkincil  = Color(0xFFAEBCC5),   //  6.66:1
+    metinSonuk    = Color(0xFFAEBCC5),   //  3.78:1
     accent        = Color(0xFFBB6885),   // palete göre değişir
     accentSonuk   = Color(0xFF502131),
     accentZemin   = Color(0xFF1C1719),
@@ -79,9 +39,9 @@ private fun karanlikOmurga(oled: Boolean) = AzimRenkleri(
 )
 
 private val aydinlikOmurga = AzimRenkleri(
-    zemin         = Color(0xFFF4F5F6),
+    zemin         = Color(0xFFF7F5F0),
     yuzey         = Color(0xFFFFFFFF),
-    yuzeyYuksek   = Color(0xFFEAECEE),
+    yuzeyYuksek   = Color(0xFFECE9E1),
     kenarlik      = Color(0xFFDDE0E3),
     kenarlikGuclu = Color(0xFFB8BDC2),
     metin         = Color(0xFF26292D),   // 13.38:1
@@ -94,13 +54,14 @@ private val aydinlikOmurga = AzimRenkleri(
     karanlikMi    = false,
 )
 
-/** Her palet yalnızca üç accent alanını değiştirir. */
+
 private data class Vurgu(
     val karanlik: Long, val karanlikSonuk: Long, val karanlikZemin: Long, val karanlikDerin: Long,
     val aydinlik: Long, val aydinlikSonuk: Long, val aydinlikZemin: Long, val aydinlikDerin: Long,
 )
 
 private val vurgular = mapOf(
+    Palet.KUM to Vurgu(0xFFE5C49A, 0xFF755B38, 0xFF2A251F, 0xFF634C30, 0xFF785329, 0xFFDCC8AF, 0xFFF2E8DA, 0xFFC4A882),
     // #BE6E80 → 5.04:1 karanlık zeminde, #8A3245 → 7.33:1 aydınlık zeminde
     // Ton 346° → 339°: pembelik tondaydı, parlaklıkta değil. Parlaklığı
     // düşürmek kontrastı 4.5:1 altına indiriyordu (ölçüldü); tonu şaraba
@@ -121,7 +82,7 @@ private val vurgular = mapOf(
     ),
 )
 
-/** WCAG 2.1 nispi parlaklık. */
+
 private fun nispiParlaklik(c: Color): Double {
     fun kanal(v: Float): Double {
         val d = v.toDouble()
@@ -130,7 +91,7 @@ private fun nispiParlaklik(c: Color): Double {
     return 0.2126 * kanal(c.red) + 0.7152 * kanal(c.green) + 0.0722 * kanal(c.blue)
 }
 
-/** İki renk arasındaki WCAG kontrast oranı (1:1 ile 21:1). */
+
 fun kontrastOrani(a: Color, b: Color): Double {
     val l1 = nispiParlaklik(a)
     val l2 = nispiParlaklik(b)
@@ -138,7 +99,7 @@ fun kontrastOrani(a: Color, b: Color): Double {
     return (buyuk + 0.05) / (kucuk + 0.05)
 }
 
-/** KontrastTest için: paletiCoz internal olduğundan test köprüsü. */
+
 fun paletiCozTest(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri =
     paletiCoz(palet, karanlik, oled)
 

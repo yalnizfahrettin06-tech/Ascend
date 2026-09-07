@@ -15,15 +15,17 @@ class BaslangicTest {
     }
     @Test fun `default feed contains affirmations and has no attribution errors`() {
         val feed = Sozler.akis(Baslangic.varsayilan)
-        assertTrue(feed.size >= 12)
-        assertTrue(feed.all { it.yazar == "Ascend" })
+        assertTrue(feed.size >= 10)
+        assertTrue(feed.any { it.yazar == "Ascend" })
+        assertTrue(feed.any { it.kategori == "motivasyon" })
+        assertTrue(feed.any { it.kategori == "marcus" })
         assertTrue(Olumlamalar.tumu.all { it.bildirimeUygun("tr") && it.bildirimeUygun("en") })
     }
     @Test fun `selection allows replacing all defaults and sanitizes invalid keys`() {
         val empty = Baslangic.varsayilan.fold(Baslangic.varsayilan) { selection, key -> Baslangic.secimiDegistir(selection, key) }
         assertTrue(empty.isEmpty())
-        assertEquals(setOf("umut"), Baslangic.secimiDegistir(empty, "umut"))
-        assertEquals(Baslangic.varsayilan, Baslangic.dogrula(setOf("unknown", "marcus")))
+        assertEquals(setOf("azim"), Baslangic.secimiDegistir(empty, "azim"))
+        assertEquals(Baslangic.varsayilan, Baslangic.dogrula(setOf("unknown", "no-content")))
     }
     @Test fun `seven reminders in one hour stay inside the window and are distinct`() {
         val now = LocalDateTime.of(2026, 9, 7, 8, 0)

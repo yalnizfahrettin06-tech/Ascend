@@ -1,54 +1,56 @@
 package com.yalnizfahrettin.azim
 
-import android.graphics.Bitmap
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Rule
 import org.junit.Test
-import java.io.File
 
-/** Exercises real routing, persistence and localized resources, beyond isolated screens. */
+fun ekranKaydet(name: String) {
+    Thread.sleep(500)
+    val ui = InstrumentationRegistry.getInstrumentation().uiAutomation
+    fun shell(command: String) { android.os.ParcelFileDescriptor.AutoCloseInputStream(ui.executeShellCommand(command)).use { it.readBytes() } }
+    shell("mkdir -p /sdcard/Download/ascend-screenshots")
+    shell("screencap -p /sdcard/Download/ascend-screenshots/$name.png")
+}
+
 class UygulamaTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
-    private fun screenshot(name: String) {
-        compose.waitForIdle()
-        val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
-        fun shell(command: String) {
-            android.os.ParcelFileDescriptor.AutoCloseInputStream(automation.executeShellCommand(command)).use { it.readBytes() }
-        }
-        // Gradle uninstalls the app after testing, so app-scoped files would be deleted.
-        shell("mkdir -p /sdcard/Download/ascend-screenshots")
-        shell("screencap -p /sdcard/Download/ascend-screenshots/$name.png")
-    }
-    @Test fun onboardingNavigationSavedContentAndLanguage() {
-        compose.waitUntil(10000) { compose.onAllNodesWithText("Bana göre düzenle").fetchSemanticsNodes().isNotEmpty() }
-        screenshot("07-gercek-karsilama-tr")
-        compose.onNodeWithText("Bana göre düzenle").performClick()
-        screenshot("08-gercek-niyetler-tr")
-        compose.onNodeWithText("Devam").performClick()
-        screenshot("09-gercek-hatirlatici-tr")
+    private fun shot(name: String) { compose.waitForIdle(); ekranKaydet(name) }
+    @Test fun realNavigationShareAndLanguage() {
+        compose.waitUntil(15000) { compose.onAllNodesWithText("Kendi yolunu oluştur →").fetchSemanticsNodes().isNotEmpty() }
+        shot("01-welcome")
+        compose.onNodeWithText("Kendi yolunu oluştur →").performClick(); shot("02-topics")
+        compose.onNodeWithText("Devam").performClick(); shot("03-schedule")
+        compose.onNodeWithText("Devam").performClick(); shot("04-permission")
+        compose.onNodeWithText("Samsung: Ayrıntılı görünüm").performScrollTo().performClick()
+        compose.onNodeWithText("Görünüm ayarlarını aç ↗").performScrollTo(); shot("05-detailed-notification-guide")
         compose.onNodeWithText("Şimdilik bildirimsiz devam et").performClick()
-        compose.waitUntil(10000) { compose.onAllNodesWithText("Bugün kendin için").fetchSemanticsNodes().isNotEmpty() }
-        screenshot("10-gercek-bugun-tr")
+        compose.waitUntil(15000) { compose.onAllNodesWithText("Senin için").fetchSemanticsNodes().isNotEmpty() }
+        shot("06-home")
         compose.onNodeWithText("Kaydet").performScrollTo().performClick()
+        compose.onNodeWithText("Paylaş").performClick()
+        compose.waitUntil(10000) { compose.onAllNodesWithTag("share-preview").fetchSemanticsNodes().isNotEmpty() }
+        shot("07-share-image")
+        compose.onNodeWithText("Video").performScrollTo().performClick()
+        compose.onNodeWithText("45s").performScrollTo().performClick(); shot("08-share-video")
+        compose.onNodeWithContentDescription("Kâğıt").performScrollTo().performClick()
+        compose.onNodeWithText("Görsel").performClick()
+        compose.onNodeWithText("Galeriye kaydet").performClick()
+        compose.waitUntil(20000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
+        shot("09-gallery-saved")
+        compose.onNodeWithContentDescription("Kapat").performClick()
         compose.onNodeWithText("Kaydedilen").performClick()
-        compose.onNodeWithText("Kaydedilenler").assertIsDisplayed()
-        screenshot("11-gercek-kaydedilenler-tr")
+        compose.onNodeWithText("Sende kalan sözler.").assertIsDisplayed(); shot("10-saved")
         compose.onNodeWithText("Keşfet").performClick()
-        compose.onNodeWithText("Sana iyi gelen konular").assertIsDisplayed()
-        screenshot("12-gercek-kesfet-tr")
+        compose.onNodeWithText("İlhamını keşfet.").assertIsDisplayed(); shot("11-discover")
         compose.onNodeWithText("Yolculuk").performClick()
-        compose.onNodeWithText("Yolculuğun").assertIsDisplayed()
-        screenshot("13-gercek-yolculuk-tr")
+        compose.onNodeWithText("Kendi yolunda.").assertIsDisplayed(); shot("12-journey")
         compose.onNodeWithText("Bugün").performClick()
-        compose.onNodeWithContentDescription("Ayarlar").performClick()
-        screenshot("14-gercek-ayarlar-tr")
+        compose.onNodeWithContentDescription("Ayarlar").performScrollTo().performClick()
         compose.onNodeWithText("English").performScrollTo().performClick()
         compose.waitUntil(5000) { compose.onAllNodesWithText("Settings").fetchSemanticsNodes().isNotEmpty() }
-        compose.onNodeWithText("Settings").assertIsDisplayed()
-        screenshot("15-gercek-settings-en")
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
-        compose.onNodeWithText("A moment for yourself").assertExists()
+        compose.onNodeWithText("For you").assertExists(); shot("13-home-english")
     }
 }

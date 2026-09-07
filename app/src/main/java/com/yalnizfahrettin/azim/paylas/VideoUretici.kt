@@ -8,29 +8,19 @@ import android.media.MediaMuxer
 import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.CancellationException
 import java.io.File
 
-/*
- * VİDEO ÜRETİCİ
- *
- * FFmpeg KULLANILMIYOR. Android'in kendi donanım kodlayıcısı (MediaCodec)
- * ve kapsayıcısı (MediaMuxer) cihazda zaten var, H.264 için lisanslı ve
- * ek indirme gerektirmiyor. FFmpeg ikilisi taşımak APK'yı onlarca MB
- * şişirir ve lisans riski doğurur.
- *
- * ⚠️ CİHAZ TESTİ GEREKİYOR: kodlayıcı davranışı üreticiye göre değişir ve
- * emülatörde doğrulanamaz. Hata durumunda üretim sessizce başarısız olur
- * ve çağıran taraf görsel paylaşıma düşer — kullanıcı hiçbir zaman kırık
- * bir çıktıyla karşılaşmaz.
- */
+
 object VideoUretici {
 
-    /** Video çözünürlüğü karttan düşük tutuluyor: düşük segment cihazlarda 1080p kodlama düşebiliyor. */
+    
     private const val TABAN = 720
     private const val KARE_HIZI = 30
     private const val ANAHTAR_ARALIK = 1
 
-    data class Sonuc(val uri: android.net.Uri?)
+    data class Sonuc(val uri: android.net.Uri?, val hata: String? = null)
 
     suspend fun uret(
         ctx: Context,
@@ -40,15 +30,19 @@ object VideoUretici {
         saniye: Int,
         ilerleme: (Float) -> Unit = {},
     ): Sonuc = withContext(Dispatchers.Default) {
+        require(saniye in listOf(5, 10, 30, 45))
+        val islem = kotlin.coroutines.coroutineContext
         val (g, y) = boyut(ayar.format)
         val toplamKare = saniye * KARE_HIZI
 
         var kodlayici: MediaCodec? = null
         var kapsayici: MediaMuxer? = null
         var egl: EglOrtam? = null
-        val dosya = File(File(ctx.cacheDir, "paylasim").apply { mkdirs() }, "ascend.mp4")
+        val dosya = File(File(ctx.cacheDir, "paylasim").apply { mkdirs() }, "ascend-${java.util.UUID.randomUUID()}.mp4")
 
+        var zemin: android.graphics.Bitmap? = null
         try {
+            zemin = KartCizici.zeminYukle(ctx, ayar.zemin)
             val bicim = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, g, y).apply {
                 setInteger(
                     MediaFormat.KEY_COLOR_FORMAT,
@@ -64,19 +58,23 @@ object VideoUretici {
             egl = EglOrtam(kodlayici.createInputSurface())
             kodlayici.start()
 
-            kapsayici = MediaMuxer(dosya.absolutePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+            val muxer = MediaMuxer(dosya.absolutePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+            kapsayici = muxer
             var iz = -1
             var basladi = false
             val bilgi = MediaCodec.BufferInfo()
 
             fun bosalt(sonMu: Boolean) {
+                val sonTarih = android.os.SystemClock.elapsedRealtime() + 15_000
                 while (true) {
+                    islem.ensureActive()
+                    check(android.os.SystemClock.elapsedRealtime() < sonTarih) { "Encoder timed out" }
                     val indeks = kodlayici.dequeueOutputBuffer(bilgi, if (sonMu) 10_000 else 0)
                     when {
                         indeks == MediaCodec.INFO_TRY_AGAIN_LATER -> if (!sonMu) return else continue
                         indeks == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
-                            iz = kapsayici.addTrack(kodlayici.outputFormat)
-                            kapsayici.start()
+                            iz = muxer.addTrack(kodlayici.outputFormat)
+                            muxer.start()
                             basladi = true
                         }
                         indeks >= 0 -> {
@@ -86,7 +84,7 @@ object VideoUretici {
                             ) {
                                 tampon.position(bilgi.offset)
                                 tampon.limit(bilgi.offset + bilgi.size)
-                                kapsayici.writeSampleData(iz, tampon, bilgi)
+                                muxer.writeSampleData(iz, tampon, bilgi)
                             }
                             kodlayici.releaseOutputBuffer(indeks, false)
                             if (bilgi.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0) return
@@ -96,32 +94,41 @@ object VideoUretici {
             }
 
             for (kare in 0 until toplamKare) {
+                islem.ensureActive()
                 val t = kare.toFloat() / toplamKare
                 // Kelime kelime beliriş ilk %45'te tamamlanır; sonrası okuma süresi.
                 val acilim = (t / 0.45f).coerceIn(0f, 1f)
                 // Ken Burns: fotoğraf zeminde çok yavaş yakınlaşma.
                 val yakinlik = 1f + 0.06f * t
 
-                val bmp = KartCizici.ciz(ctx, metin, yazar, ayar, g, y, acilim, yakinlik)
+                val bmp = KartCizici.ciz(ctx, metin, yazar, ayar, g, y, acilim, yakinlik, zemin)
                 egl.ciz(bmp, g, y)
                 egl.zamanDamgasi(kare * 1_000_000_000L / KARE_HIZI)
-                egl.gonder()
+                check(egl.gonder()) { "Encoder surface failed" }
                 bmp.recycle()
 
                 bosalt(false)
-                ilerleme(t)
+                if (kare % KARE_HIZI == 0) ilerleme(t)
             }
 
             kodlayici.signalEndOfInputStream()
             bosalt(true)
 
+            muxer.stop()
+            muxer.release()
+            kapsayici = null
+            ilerleme(1f)
             Sonuc(
                 FileProvider.getUriForFile(ctx, "${ctx.packageName}.fileprovider", dosya)
             )
+        } catch (e: CancellationException) {
+            dosya.delete()
+            throw e
         } catch (e: Exception) {
-            // Kodlayıcı yoksa veya cihaz desteklemiyorsa: sessizce başarısız.
-            Sonuc(null)
+            dosya.delete()
+            Sonuc(null, e.message)
         } finally {
+            zemin?.recycle()
             runCatching { egl?.kapat() }
             runCatching { kodlayici?.stop() }
             runCatching { kodlayici?.release() }
@@ -130,7 +137,7 @@ object VideoUretici {
         }
     }
 
-    /** Kart formatını video çözünürlüğüne indirger; kenarlar çift sayı olmalı. */
+    
     private fun boyut(format: KartFormat): Pair<Int, Int> = when (format) {
         KartFormat.KARE -> TABAN to TABAN
         KartFormat.STORY -> TABAN to (TABAN * 16 / 9 / 2 * 2)

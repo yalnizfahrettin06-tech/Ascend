@@ -39,11 +39,12 @@ object KartCizici {
         acilim: Float = 1f,
         /** Ken Burns yakınlaşması; 1f = yakınlaşma yok. */
         yakinlik: Float = 1f,
+        zeminBitmap: Bitmap? = null,
     ): Bitmap {
         val bmp = Bitmap.createBitmap(genislik, yukseklik, Bitmap.Config.ARGB_8888)
         val tuval = Canvas(bmp)
 
-        zeminiCiz(ctx, tuval, genislik, yukseklik, ayar, yakinlik)
+        zeminiCiz(ctx, tuval, genislik, yukseklik, ayar, yakinlik, zeminBitmap)
 
         val lora = yukle(ctx, "lora.ttf", Typeface.SERIF)
         val loraItalik = Typeface.create(lora, Typeface.ITALIC)
@@ -66,6 +67,9 @@ object KartCizici {
         } else {
             Layout.Alignment.ALIGN_NORMAL
         }
+        fun tamYukseklik() = StaticLayout.Builder.obtain(metin, 0, metin.length, sozBoya, icGenislik)
+            .setLineSpacing(genislik * 0.016f, 1f).build().height
+        while (tamYukseklik() > yukseklik * .62f && sozBoya.textSize > genislik * .023f) sozBoya.textSize *= .95f
         val duzen = StaticLayout.Builder
             .obtain(gorunen, 0, gorunen.length, sozBoya, icGenislik)
             .setAlignment(hiza)
@@ -148,6 +152,7 @@ object KartCizici {
         y: Int,
         ayar: PaylasimAyari,
         yakinlik: Float,
+        zeminBitmap: Bitmap?,
     ) {
         when (val z = ayar.zemin) {
             is KartZemin.Duz -> tuval.drawColor(z.renk.toInt())
@@ -162,12 +167,8 @@ object KartCizici {
                 tuval.drawRect(0f, 0f, g.toFloat(), y.toFloat(), boya)
             }
 
-            is KartZemin.Foto -> {
-                val foto = runCatching {
-                    ctx.contentResolver.openInputStream(z.uri)?.use {
-                        android.graphics.BitmapFactory.decodeStream(it)
-                    }
-                }.getOrNull()
+            is KartZemin.Foto, is KartZemin.Sahne -> {
+                val foto = zeminBitmap ?: zeminYukle(ctx, z)
                 if (foto == null) {
                     tuval.drawColor(0xFF121416.toInt())
                 } else {
@@ -180,7 +181,7 @@ object KartCizici {
                         postTranslate((g - en) / 2f, (y - boy) / 2f)
                     }
                     tuval.drawBitmap(foto, matris, Paint(Paint.FILTER_BITMAP_FLAG))
-                    foto.recycle()
+                    if (zeminBitmap == null) foto.recycle()
                     // Okunurluk katmanı
                     tuval.drawColor(Color.argb((ayar.karartma * 255).toInt(), 0, 0, 0))
                 }
@@ -188,8 +189,25 @@ object KartCizici {
         }
     }
 
+    /** Bound photo decoding and load once per video export, not once per frame. */
+    fun zeminYukle(ctx: Context, z: KartZemin): Bitmap? = when (z) {
+        is KartZemin.Sahne -> android.graphics.BitmapFactory.decodeResource(ctx.resources, z.kaynak)
+        is KartZemin.Foto -> {
+            val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            ctx.contentResolver.openInputStream(z.uri)?.use { android.graphics.BitmapFactory.decodeStream(it, null, bounds) }
+            val options = android.graphics.BitmapFactory.Options().apply {
+                inSampleSize = 1
+                while (bounds.outWidth / inSampleSize > 2048 || bounds.outHeight / inSampleSize > 2048) inSampleSize *= 2
+            }
+            ctx.contentResolver.openInputStream(z.uri)?.use { android.graphics.BitmapFactory.decodeStream(it, null, options) }
+                ?: error("Photo cannot be read")
+        }
+        else -> null
+    }
+
+    private val fonts = java.util.concurrent.ConcurrentHashMap<String, Typeface>()
     private fun yukle(ctx: Context, ad: String, yedek: Typeface): Typeface =
-        runCatching { Typeface.createFromAsset(ctx.assets, ad) }.getOrDefault(yedek)
+        fonts.getOrPut(ad) { runCatching { Typeface.createFromAsset(ctx.assets, ad) }.getOrDefault(yedek) }
 
     private fun androidx.compose.ui.graphics.Color.toArgb(): Int =
         android.graphics.Color.argb(

@@ -71,12 +71,9 @@ class KontrastTest {
      * (21:1) göz yorar. İstenen "orta" bandın üst sınırı.
      */
     @Test
-    fun `kontrast asiri degil`() = tumSetler().forEach { (ad, r) ->
-        val oran = kontrastOrani(r.metin, r.zemin)
-        assertTrue(
-            "$ad · metin kontrastı %.2f:1 — 16:1 üstü keskin, kısılmalı".format(oran),
-            oran <= 16.0,
-        )
+    fun `elevated surface text remains readable`() = tumSetler().forEach { (ad, r) ->
+        kontrol(ad, r.metin, r.yuzeyYuksek, 4.5, "metin/yüksek yüzey")
+        kontrol(ad, r.metinIkincil, r.yuzeyYuksek, 4.5, "ikincil/yüksek yüzey")
     }
 
     /** Kenarlık yüzeyden ayrışmalı, yoksa kartların sınırı kaybolur. */

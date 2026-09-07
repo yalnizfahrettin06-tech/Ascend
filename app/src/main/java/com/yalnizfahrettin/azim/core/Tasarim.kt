@@ -20,21 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.R
 
-/*
- * TEK TASARIM KAYNAĞI.
- *
- * Eski projede iki ayrı AzimTheme vardı (ui/Theme.kt ve ui/theme/Theme.kt);
- * biri ölüydü. Burada tek bir dosya var ve tüm renk/ölçü kararları buradan çıkar.
- *
- * ACCENT KURALI — eski sürümün en büyük görsel problemi accent rengin
- * (bordo/gül) aynı anda nav, kart kenarlığı, checkbox, başlık ve istatistikte
- * "ana karakter" olmasıydı. Bu palette accent SADECE üç yerde kullanılır:
- *   1) aktif alt navigasyon öğesi
- *   2) birincil eylem (favori dolu kalp, seri alevi)
- *   3) ilerleme çubuğunun dolu kısmı
- * Geri kalan her vurgu nötr ölçekten (metinIkincil / kenarlikGuclu / yuzeyYuksek)
- * beslenir. "Biraz daha belirgin" ihtiyacı accent istemez, bir ton yukarı ister.
- */
+
 
 @Immutable
 data class AzimRenkleri(
@@ -49,26 +35,13 @@ data class AzimRenkleri(
     val accent: Color,
     val accentSonuk: Color,
     val accentZemin: Color,
-    /**
-     * Derin şarap — kontrast şartına TABİ DEĞİL.
-     *
-     * accent tek başınayken hem okunması gereken yerlerde (ikon, metin) hem
-     * okunması gerekmeyen yerlerde (dolgu, çizgi, halka zemini) kullanılıyordu;
-     * bu yüzden en zayıf halka olan okunabilirlik tüm sistemi rehin alıyor ve
-     * accent bir türlü koyulaşamıyordu. Ayrıldı: burası gerçekten koyu olabilir.
-     */
+    
     val accentDerin: Color,
     val karanlikMi: Boolean,
 )
 
 
-/*
- * ÖLÇÜ — katı 4/8 ızgarası.
- * Eski DpSpacing'de xs/sm/md yanında s5,s6,s7,s14,s18,s22,s26,s34 gibi
- * 14 adet "isim verilmiş magic number" vardı ve ızgara zaten kırıktı.
- * Burada sadece ızgaraya oturan 9 değer var. Ara değer gerekiyorsa
- * bu bir tasarım hatasıdır, yeni token değil.
- */
+
 object Olcu {
     val xs = 4.dp
     val sm = 8.dp
@@ -81,12 +54,7 @@ object Olcu {
     val x5 = 48.dp
 }
 
-/*
- * YARIÇAP — yumuşatıldı.
- * Önceki set (8/12/16) köşeleri sert bırakıyordu; küçük yüzeylerde
- * neredeyse dik görünüyordu. Yeni set bir kademe yukarı:
- * dokunulabilir her yüzey artık belirgin şekilde yuvarlak.
- */
+
 object Yaricap {
     val sm = 12.dp
     val md = 18.dp
@@ -101,12 +69,12 @@ val LoraSerif = FontFamily(
     Font(R.font.lora_italic, FontWeight.Normal, FontStyle.Italic),
 )
 
-/* Sözler serif, arayüz sistem sans. Karışım kasıtlı: içerik ile kabuk ayrılır. */
+
 val AzimTipografi = Typography(
-    headlineLarge = TextStyle(fontFamily = LoraSerif, fontSize = 32.sp, lineHeight = 40.sp),
+    headlineLarge = TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 28.sp, lineHeight = 34.sp),
     displaySmall = TextStyle(
         fontFamily = LoraSerif, fontWeight = FontWeight.Normal,
-        fontSize = 30.sp, lineHeight = 44.sp,
+        fontSize = 27.sp, lineHeight = 36.sp,
     ),
     headlineSmall = TextStyle(
         fontFamily = LoraSerif, fontWeight = FontWeight.Normal,
@@ -122,19 +90,15 @@ val AzimTipografi = Typography(
     ),
 )
 
-val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.BORDO, karanlik = true, oled = false) }
+val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.KUM, karanlik = true, oled = false) }
 
 enum class TemaModu { SISTEM, AYDINLIK, KARANLIK, OLED }
 
-/**
- * @param dinamik Android 12+ duvar kağıdı renklerini kullan (rapor 2.7).
- *   Yalnız Material3 şemasını etkiler; Azim'in kendi nötr ölçeği korunur ki
- *   marka kimliği duvar kağıdına göre dağılmasın.
- */
+
 @Composable
 fun AzimTema(
     modu: TemaModu = TemaModu.SISTEM,
-    palet: Palet = Palet.BORDO,
+    palet: Palet = Palet.KUM,
     dinamik: Boolean = false,
     icerik: @Composable () -> Unit,
 ) {
@@ -152,11 +116,15 @@ fun AzimTema(
         else androidx.compose.material3.dynamicLightColorScheme(ctx)
     } else if (renk.karanlikMi) {
         darkColorScheme(
+            secondary = renk.accent, secondaryContainer = renk.accentZemin, onSecondaryContainer = renk.metin,
+            surfaceVariant = renk.yuzeyYuksek, onSurfaceVariant = renk.metinIkincil,
             primary = renk.accent, background = renk.zemin, surface = renk.yuzey,
             onPrimary = if (renk.karanlikMi) Color(0xFF121416) else Color.White, onBackground = renk.metin, onSurface = renk.metin,
         )
     } else {
         lightColorScheme(
+            secondary = renk.accent, secondaryContainer = renk.accentZemin, onSecondaryContainer = renk.metin,
+            surfaceVariant = renk.yuzeyYuksek, onSurfaceVariant = renk.metinIkincil,
             primary = renk.accent, background = renk.zemin, surface = renk.yuzey,
             onPrimary = if (renk.karanlikMi) Color(0xFF121416) else Color.White, onBackground = renk.metin, onSurface = renk.metin,
         )
@@ -166,18 +134,7 @@ fun AzimTema(
     }
 }
 
-/**
- * Ana ekranın zemini — düz renk DEĞİL.
- *
- * Düz siyah bir tuval "boğuk ve hissiz" duruyordu. Referans uygulamaların
- * canlı hissetmesinin sebebi arka planın hep hafif bir derinlik taşıması.
- * Burada iki katman var: üstten aşağı açılan çok hafif bir dikey gradyan ve
- * en üstte accent'in neredeyse görünmez bir izi. İkisi de o kadar kısık ki
- * fark edilmiyor — ama düz zeminle yan yana konunca fark açık.
- *
- * Eski sürümün "aurora" hatasından farkı: bu HAREKETSİZ. Animasyon yok,
- * dikkat dağıtmıyor, yalnız derinlik veriyor.
- */
+
 @Composable
 fun zeminFircasi(): Brush {
     val r = LocalAzimRenk.current
@@ -188,7 +145,7 @@ fun zeminFircasi(): Brush {
     )
 }
 
-/** Üst köşedeki çok sönük accent izi — markanın nefesi. */
+
 @Composable
 fun accentIzi(): Brush {
     val r = LocalAzimRenk.current
@@ -197,6 +154,6 @@ fun accentIzi(): Brush {
     )
 }
 
-/** Kısayol: `Renk.metinIkincil` */
+
 val Renk: AzimRenkleri
     @Composable get() = LocalAzimRenk.current

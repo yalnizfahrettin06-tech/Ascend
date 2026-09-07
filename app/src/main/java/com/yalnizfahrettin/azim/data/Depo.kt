@@ -84,7 +84,7 @@ class Depo(private val ctx: Context) {
     val gorulenToplam: Flow<Int> = ctx.ds.data.map { it[K.GORULEN] ?: 0 }
     val kutlananKilometre: Flow<Int> = ctx.ds.data.map { it[K.KUTLANAN] ?: 0 }
     val palet: Flow<Palet> = ctx.ds.data.map {
-        runCatching { Palet.valueOf(it[K.PALET] ?: "BORDO") }.getOrDefault(Palet.BORDO)
+        runCatching { Palet.valueOf(it[K.PALET] ?: "KUM") }.getOrDefault(Palet.KUM)
     }
 
     /** Son 7 günün aktiflik durumu — pazartesiden bugüne. */

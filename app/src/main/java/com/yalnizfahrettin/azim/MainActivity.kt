@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
             val tema by depo.tema.collectAsStateWithLifecycle(TemaModu.SISTEM)
             val dinamik by depo.dinamikRenk.collectAsStateWithLifecycle(false)
             val haptik by depo.haptikAcik.collectAsStateWithLifecycle(true)
-            val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.BORDO)
+            val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.KUM)
             val dil by depo.dil.collectAsStateWithLifecycle("tr")
             val base = LocalContext.current
             val configuration = LocalConfiguration.current
@@ -122,6 +122,7 @@ class MainActivity : ComponentActivity() {
     private fun bildirimIzniniIste() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             bildirimIzni = Bildirimler.izinVarMi(this)
+            if (!bildirimIzni) com.yalnizfahrettin.azim.notif.TeslimatYardimi.bildirimAyarlariniAc(this)
             return
         }
         val durum = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)

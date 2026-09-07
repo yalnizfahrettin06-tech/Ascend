@@ -38,12 +38,13 @@ sealed interface KartZemin {
     data class Duz(val renk: Long) : KartZemin
     data class Gradyan(val ust: Long, val alt: Long) : KartZemin
     data class Foto(val uri: Uri) : KartZemin
+    data class Sahne(val kaynak: Int) : KartZemin
 }
 
 data class PaylasimAyari(
-    val format: KartFormat = KartFormat.KARE,
+    val format: KartFormat = KartFormat.STORY,
     val yazi: KartYazi = KartYazi.LORA,
-    val zemin: KartZemin = HazirZeminler.duzler.first(),
+    val zemin: KartZemin = KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.scene_summit),
     /** Fotoğraf üzerindeki karartma; metin okunurluğu için. */
     val karartma: Float = 0.45f,
     val yaziOlcegi: Float = 1f,
@@ -84,7 +85,7 @@ object HazirZeminler {
     fun metinRengi(zemin: KartZemin): Color = when (zemin) {
         is KartZemin.Duz -> if (aydinlikMi(zemin.renk)) Color(0xFF1A1D20) else Color(0xFFF2F5F8)
         is KartZemin.Gradyan -> if (aydinlikMi(zemin.ust)) Color(0xFF1A1D20) else Color(0xFFF2F5F8)
-        is KartZemin.Foto -> Color(0xFFF6F7F8) // karartma katmanı hep koyu
+        is KartZemin.Foto, is KartZemin.Sahne -> Color(0xFFF6F7F8) // karartma katmanı hep koyu
     }
 
     private fun aydinlikMi(renk: Long): Boolean {

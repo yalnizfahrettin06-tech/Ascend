@@ -4,6 +4,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -48,7 +50,7 @@ fun BildirimPlani(
     havuzaGit: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier.fillMaxWidth().padding(horizontal = Olcu.xl)) {
+    Column(modifier.fillMaxWidth()) {
 
         // --- adet ---
         Text(
@@ -57,26 +59,11 @@ fun BildirimPlani(
             color = Renk.metin,
         )
         Spacer(Modifier.height(Olcu.md))
-        FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            (1..7).forEach { n ->
-                val aktif = n == adet
-                Box(
-                    Modifier
-                        .size(width = 48.dp, height = 48.dp)
-                        .clip(RoundedCornerShape(Yaricap.md))
-                        .background(if (aktif) Renk.accentZemin else Renk.yuzey)
-                        .selectable(selected = aktif, role = Role.RadioButton, onClick = { adetDegisti(n) }),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(
-                        "$n",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = if (aktif) Renk.accent else Renk.metinIkincil,
-                    )
-                }
-            }
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            androidx.compose.material3.Slider(value = adet.toFloat(), onValueChange = { adetDegisti(it.roundToInt()) },
+                valueRange = 1f..7f, steps = 5, modifier = Modifier.weight(1f).semantics { contentDescription = "Notification count" })
+            Text("$adet", color = Renk.accent, style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 16.dp))
         }
-
         Spacer(Modifier.height(Olcu.xxl))
 
         // --- saat aralığı ---

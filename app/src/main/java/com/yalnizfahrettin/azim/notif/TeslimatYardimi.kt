@@ -32,6 +32,14 @@ object TeslimatYardimi {
         return baslat(ctx, niyet) || uygulamaAyarlariniAc(ctx)
     }
 
+    fun kanalAyarlariniAc(ctx: Context): Boolean = baslat(ctx,
+        Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+            .putExtra(Settings.EXTRA_APP_PACKAGE, ctx.packageName)
+            .putExtra(Settings.EXTRA_CHANNEL_ID, Bildirimler.KANAL)) || bildirimAyarlariniAc(ctx)
+
+    fun genelBildirimAyarlariniAc(ctx: Context): Boolean =
+        baslat(ctx, Intent("android.settings.NOTIFICATION_SETTINGS")) || bildirimAyarlariniAc(ctx)
+
     private fun uygulamaAyarlariniAc(ctx: Context): Boolean = baslat(
         ctx,
         Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)

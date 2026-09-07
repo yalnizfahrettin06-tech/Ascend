@@ -27,6 +27,7 @@ import java.util.Locale
  */
 class Seslendirici(ctx: Context, private val dil: String) {
 
+    private val main = android.os.Handler(android.os.Looper.getMainLooper())
     private var motor: TextToSpeech? = null
     var hazir by mutableStateOf(false)
         private set
@@ -36,6 +37,11 @@ class Seslendirici(ctx: Context, private val dil: String) {
     init {
         motor = TextToSpeech(ctx.applicationContext) { durum ->
             if (durum != TextToSpeech.SUCCESS) return@TextToSpeech
+            motor?.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
+                override fun onStart(id: String?) {}
+                override fun onDone(id: String?) { main.post { konusuyor = false } }
+                @Deprecated("Platform callback") override fun onError(id: String?) { main.post { konusuyor = false } }
+            })
             val yerel = if (dil == "en") Locale.ENGLISH else Locale("tr", "TR")
             val sonuc = motor?.setLanguage(yerel)
             hazir = sonuc != TextToSpeech.LANG_MISSING_DATA &&
