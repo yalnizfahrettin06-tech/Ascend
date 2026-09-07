@@ -122,9 +122,11 @@ object Bildirimler {
             )
             .build()
 
-        return runCatching {
+        return try {
             NotificationManagerCompat.from(ctx).notify(soz.kimlik.hashCode(), bildirim)
             true
-        }.getOrDefault(false)
+        } catch (_: SecurityException) {
+            false
+        }
     }
 }

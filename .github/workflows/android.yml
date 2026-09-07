@@ -26,6 +26,14 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
+      - name: Restore stable test signing key
+        env:
+          TEST_KEYSTORE: ${{ secrets.ASCEND_TEST_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$TEST_KEYSTORE" ]; then
+            mkdir -p "$HOME/.android"
+            printf '%s' "$TEST_KEYSTORE" | base64 --decode > "$HOME/.android/debug.keystore"
+          fi
       - name: Build APK, run unit tests and lint
         run: bash gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v4
