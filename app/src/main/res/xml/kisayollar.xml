@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="yeni_soz"
+        android:enabled="true"
+        android:icon="@drawable/ic_kisayol_soz"
+        android:shortcutShortLabel="@string/yeni_soz"
+        android:shortcutLongLabel="@string/yeni_soz">
+        <intent
+            android:action="com.yalnizfahrettin.azim.YENI_SOZ"
+            android:targetPackage="com.yalnizfahrettin.azim"
+            android:targetClass="com.yalnizfahrettin.azim.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="favoriler"
+        android:enabled="true"
+        android:icon="@drawable/ic_kisayol_kalp"
+        android:shortcutShortLabel="@string/favoriler_baslik"
+        android:shortcutLongLabel="@string/favoriler_baslik">
+        <intent
+            android:action="com.yalnizfahrettin.azim.FAVORILER"
+            android:targetPackage="com.yalnizfahrettin.azim"
+            android:targetClass="com.yalnizfahrettin.azim.MainActivity" />
+    </shortcut>
+</shortcuts>

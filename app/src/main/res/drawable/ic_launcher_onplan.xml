@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Serif "A": gövde, çapraz kollar ve tırnaklar (Lora'nın karakterine yakın) -->
+    <path android:fillColor="#FFE8C3CB"
+        android:pathData="M54,29.5 L45.5,29.5 L31.5,72 L38.5,72 L41.9,61 L66.1,61 L69.5,72 L76.5,72 L62.5,29.5 Z M44,54.2 L54,39.5 L64,54.2 Z"/>
+    <!-- Alt çizgi: accent vurgusu -->
+    <path android:fillColor="#FFC25468"
+        android:pathData="M36,77 h36 v4.5 h-36 z"/>
+</vector>

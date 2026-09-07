@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Azim" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/zemin</item>
+    </style>
+
+    <!-- Marka anı: lacivert zemin + AZİM işareti (rapor 1.3) -->
+    <style name="Theme.Azim.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/zemin</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="windowSplashScreenAnimationDuration">400</item>
+        <item name="postSplashScreenTheme">@style/Theme.Azim</item>
+    </style>
+</resources>

@@ -1,0 +1,2 @@
+-keep class com.yalnizfahrettin.azim.notif.** { *; }
+-dontwarn kotlinx.**
