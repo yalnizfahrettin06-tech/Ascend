@@ -35,7 +35,7 @@ Workflow: **Ascend APK**. `main` kod değişikliğinde, pull request’te veya e
 
 `build` işi JDK 17 üzerinde debug APK, JVM testleri ve Android lint çalıştırır. Kontroller geçerse `Ascend-3.0.0-test-APK` çıktısı yüklenir. Test/lint raporları başarısızlıkta da saklanır.
 
-`ui-tests` işi build başarılı olduktan sonra Android 35 x86_64 emülatörde Compose testlerini çalıştırır. Onboarding ekranları ve büyük yazı görünümü için görüntüler alınır. Bunlar gerçek Android görüntüleridir; tasarım maketi diye sunulmaz. Başarısız testte görüntü indirme adımına ulaşılamaması mümkündür; XML/HTML test raporları yine saklanır.
+`ui-tests` işi build başarılı olduktan sonra Android 35 x86_64 emülatörde Compose testlerini çalıştırır. Onboarding ekranları ve büyük yazı görünümü için görüntüler alınır. Bunlar gerçek Android görüntüleridir; tasarım maketi diye sunulmaz. Test betiği başarısızlıkta da görüntüleri almayı dener ve asıl test çıkış kodunu korur. Görüntüler uygulama kaldırıldıktan sonra da korunacak ortak emülatör klasörüne yazılır.
 
 Her iş 25 dakika ile sınırlıdır. Çıktılar 7 gün saklanır. Standart `ubuntu-latest` kullanılır. Public depoda standart runner çalışması ücretsizdir; büyük runner ve depolama ayrı kurallara tabidir. Mevcut hesabın faturalama bütçesi değiştirilmedi. [GitHub Actions ücretlendirmesi](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
 
@@ -88,4 +88,30 @@ Bu maddeler tamamlanmış gibi işaretlenmez. Teslimatın hedefi çalışan, inc
 
 ## 10. Nihai kanıt kaydı
 
-Son çalışma ve çıktı bağlantıları, tamamlanan test sayıları ve görüntü inceleme sonucu doğrulama bitiminde bu bölüme eklenir.
+Son doğrulama: 7 Eylül 2026. Kod revizyonu: `50898e6`.
+
+| Kontrol | Sonuç |
+|---|---|
+| GitHub build işi | Başarılı |
+| Debug APK | Derlendi, imza doğrulaması geçti |
+| JVM testleri | 30 geçti, 0 başarısız |
+| Android UI testleri | 7 geçti, 0 başarısız |
+| Android lint | 0 hata, 72 uyarı; kontrol geçti |
+| Dil kaynağı denetimi | 107 kullanılan string referansı iki dilde mevcut; 37 yeni anahtar iki dilde tamam |
+| Kimlik | `com.yalnizfahrettin.azim.debug`, sürüm `3.0.0`, kod `12` |
+| Android desteği | minimum API 26, hedef API 35 |
+| APK büyüklüğü | 12.724.090 bayt; yaklaşık 12,1 MiB |
+| Görsel kanıt | 15 çekim incelendi; erken alınan boş test çekimi dışlandı; 11 seçilmiş görüntü galeride |
+| Kaynak taraması | Erişim tokenı / sabit release imza parolası bulunmadı |
+
+- [Başarılı çalışma ve tüm işler](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34156282949)
+- [APK artifact](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34156282949/artifacts/10031103369)
+- [JVM testleri ve lint raporları](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34156282949/artifacts/10031103781)
+- [UI testleri ve ham ekran görüntüleri](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34156282949/artifacts/10031190088)
+- [İncelenen ekran galerisi](04-EKRAN-GORUNTULERI.md)
+
+Görüntü incelemesinde ana Türkçe akışın başlıkları, CTA’ları ve navigasyonu okunur; 2× yazıda içeriğin kaydırılması gerekirken alt eylemler görünür kalır. Yalıtılmış test Activity’sinin ilk ekran çekimi compositor çiziminden erken alındığı için boştu; bunu uygulama ekranı veya başarı kanıtı olarak kullanmadık. Türkçe gerçek Activity karşılama görüntüsü doğru üretildi. Bu inceleme TalkBack, bütün ekran boyutları veya bütün renk kombinasyonları için tam uygunluk belgesi değildir.
+
+APK SHA-256: `3fcccddefd682058a0c216ff2f178b0b9da6590a2bca05570d39a9c75eea96f2`.
+
+Bu son kayıt sonrası yalnız rapor ve görüntü dosyaları eklenmiştir; doğrulanmış uygulama kodu değiştirilmemiştir.

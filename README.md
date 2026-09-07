@@ -22,7 +22,14 @@ GitHub’dan artifact indirmek için oturum açman gerekir. APK geliştirme imza
 
 ## Raporlar
 
-Ayrıntılı analiz, onboarding tasarımı ve entegrasyon/doğrulama raporları `docs/` klasörüne eklenir. Kod içindeki eski sürümlere atıf yapan yorumlar tarihsel kaynak notlarıdır; doğrulanmış ürün araştırması sayılmaz.
+- [24 bulguyla ayrıntılı UI/UX incelemesi](docs/01-UI-UX-INCELEME.md)
+- [Onboarding tasarımı ve kabul ölçütleri](docs/02-ONBOARDING-TASARIMI.md)
+- [Entegrasyon, APK ve doğrulama](docs/03-ENTEGRASYON-VE-DOGRULAMA.md)
+- [Gerçek Android ekranları](docs/04-EKRAN-GORUNTULERI.md)
+
+Son doğrulamada 30 JVM testi ve 7 Android UI testi geçti; lint 0 hatayla tamamlandı. [Doğrulanmış APK çalışması](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34156282949).
+
+ Kod içindeki eski sürümlere atıf yapan yorumlar tarihsel kaynak notlarıdır; doğrulanmış ürün araştırması sayılmaz.
 
 ## Geliştirme
 
