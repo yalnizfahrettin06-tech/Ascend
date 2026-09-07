@@ -67,7 +67,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit) {
     LaunchedEffect(ayar, soz, dil) {
         onizleme = null
         try {
-            val bmp = withContext(Dispatchers.Default) { KartCizici.ciz(ctx, soz.metin(dil), soz.yazar, ayar, 480, (480 / ayar.format.oran).toInt()) }
+            val bmp = withContext(Dispatchers.Default) { KartCizici.ciz(ctx, soz.metin(dil), soz.imza(dil), ayar, 480, (480 / ayar.format.oran).toInt()) }
             onizleme = bmp
             hata = null
         } catch (e: CancellationException) { throw e }
@@ -96,9 +96,9 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit) {
         islem = kapsam.launch {
             try {
                 val uri = if (videoMu) {
-                    val sonuc = VideoUretici.uret(ctx, soz.metin(dil), soz.yazar, secim, sure) { oran -> ilerleme = oran }
+                    val sonuc = VideoUretici.uret(ctx, soz.metin(dil), soz.imza(dil), secim, sure) { oran -> ilerleme = oran }
                     sonuc.uri ?: error(sonuc.hata ?: "Video export failed")
-                } else MedyaDeposu.gorsel(ctx, soz.metin(dil), soz.yazar, secim)
+                } else MedyaDeposu.gorsel(ctx, soz.metin(dil), soz.imza(dil), secim)
                 if (galeri) {
                     if (Build.VERSION.SDK_INT >= 29) {
                         MedyaDeposu.galeriyeKaydet(ctx, uri, videoMu)

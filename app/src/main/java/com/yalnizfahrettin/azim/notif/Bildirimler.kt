@@ -70,7 +70,7 @@ object Bildirimler {
             append(govde)
             if (soz.yazar.isNotBlank()) {
                 append("\n\n— ")
-                append(soz.yazar)
+                append(soz.imza(dil))
             }
         }
 

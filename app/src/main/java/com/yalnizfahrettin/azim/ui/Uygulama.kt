@@ -84,7 +84,8 @@ fun Uygulama(
     var ayarlardaMi by rememberSaveable { mutableStateOf(false) }
     var kilitGrup by remember { mutableStateOf<com.yalnizfahrettin.azim.data.KategoriGrubu?>(null) }
     var acilacakGrup by remember { mutableStateOf<String?>(null) }
-    var paylasilanSoz by remember { mutableStateOf<Soz?>(null) }
+    var paylasilanKimlik by rememberSaveable { mutableStateOf<String?>(null) }
+    val paylasilanSoz = paylasilanKimlik?.let { Sozler.kimlikten(it) }
     // Akış: pager'ın gezineceği söz listesi
     var akis by remember { mutableStateOf<List<Soz>>(emptyList()) }
     var indeks by remember { mutableIntStateOf(0) }
@@ -95,7 +96,7 @@ fun Uygulama(
     var kayitHatasi by remember { mutableStateOf<String?>(null) }
     val hataMetni = stringResource(R.string.asc_kayit_hata)
     BackHandler(ayarlardaMi || paylasilanSoz != null || sekme != Sekme.ANA) {
-        when { paylasilanSoz != null -> paylasilanSoz = null; ayarlardaMi -> ayarlardaMi = false; else -> sekme = Sekme.ANA }
+        when { paylasilanSoz != null -> paylasilanKimlik = null; ayarlardaMi -> ayarlardaMi = false; else -> sekme = Sekme.ANA }
     }
     LaunchedEffect(acilisSekmesi) { acilisSekmesi?.let { sekme = it } }
     if (onboardingBitti == null) {
@@ -213,7 +214,7 @@ fun Uygulama(
                             }
                         },
                         favoriDegistir = { s2 -> kapsam.launch { depo.favoriDegistir(s2.kimlik) } },
-                        paylas = { s2 -> paylasilanSoz = s2 },
+                        paylas = { s2 -> paylasilanKimlik = s2.kimlik },
                         sozSecildi = { s2 ->
                             val yer = akis.indexOfFirst { it.kimlik == s2.kimlik }
                             if (yer >= 0) indeks = yer else {
@@ -242,7 +243,7 @@ fun Uygulama(
                         cikar = { kapsam.launch { depo.favoriDegistir(it) } },
                         oku = { soz -> akis = listOf(soz) + akis.filterNot { it.kimlik == soz.kimlik }; indeks = 0; sekme = Sekme.ANA },
                         kesfet = { sekme = Sekme.ANA },
-                        paylas = { paylasilanSoz = it },
+                        paylas = { paylasilanKimlik = it.kimlik },
                     )
 
                     Sekme.ISTATISTIK -> IstatistikEkrani(
@@ -256,7 +257,7 @@ fun Uygulama(
         AltNav(sekme) { sekme = it }
     }
 
-    paylasilanSoz?.let { soz -> PaylasimEkrani(soz, dil, geri = { paylasilanSoz = null }) }
+    paylasilanSoz?.let { soz -> PaylasimEkrani(soz, dil, geri = { paylasilanKimlik = null }) }
 
     kutlamaGunu?.let { gun ->
         KilometreKutlamasi(gun) {

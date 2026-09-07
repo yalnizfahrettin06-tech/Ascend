@@ -12,8 +12,10 @@ data class Soz(
     val en: String,
     val yazar: String,
     val kategori: String,
+    val uyarlama: Boolean = false,
 ) {
     fun metin(dil: String): String = if (dil == "en") en else tr
+    fun imza(dil: String): String = if (uyarlama) "$yazar · ${if (dil == "en") "adapted" else "uyarlama"}" else yazar
 
     /** Kimlik: dilden bağımsız, geçmiş takibi ve favoriler için. */
     val kimlik: String get() = "$kategori:${tr.hashCode()}"
@@ -222,7 +224,17 @@ object Sozler {
             "Success is where preparation meets opportunity.", "Seneca", "basari"),
     )
 
-    private val icerik by lazy { Olumlamalar.tumu + havuz }
+    // Short adaptations, not verbatim quotations. Source: Meditations IV,
+    // sections 2, 3, 17, 20 and 24; George Long public-domain translation:
+    // https://classics.mit.edu/Antoninus/meditations.4.four.html
+    private val felsefeBaslangici = listOf(
+        Soz("Yaptığın şeye bir amaç ver.", "Give your actions a purpose.", "Marcus Aurelius", "marcus", uyarlama = true),
+        Soz("Kendi içine dön; orada yeniden sakinleşebilirsin.", "Return within yourself; there you can find calm again.", "Marcus Aurelius", "marcus", uyarlama = true),
+        Soz("Elindeyken, bugün iyi bir şey yap.", "While you can, do something good today.", "Marcus Aurelius", "marcus", uyarlama = true),
+        Soz("Güzel olanın değeri, aldığı övgüye bağlı değildir.", "The value of beauty does not depend on praise.", "Marcus Aurelius", "marcus", uyarlama = true),
+        Soz("Gereksiz olanı azalt; gerekli olana yer aç.", "Let go of the unnecessary; make room for what matters.", "Marcus Aurelius", "marcus", uyarlama = true),
+    )
+    private val icerik by lazy { Olumlamalar.tumu + havuz + felsefeBaslangici }
 
     fun tumu(): List<Soz> = icerik
 

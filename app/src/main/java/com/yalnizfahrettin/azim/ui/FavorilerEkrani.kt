@@ -40,7 +40,7 @@ fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, 
                 AtmosferResmi(Atmosfer.grup(Kategoriler.bul(soz.kategori)?.grup), Modifier.matchParentSize(), .4f)
                 Column(Modifier.padding(22.dp)) {
                     Text(soz.metin(dil), color = Color.White, fontFamily = LoraSerif, fontSize = 21.sp, lineHeight = 30.sp, modifier = Modifier.clickable { oku(soz) })
-                    Text(soz.yazar, color = Color.White, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 12.dp))
+                    Text(soz.imza(dil), color = Color.White, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 12.dp))
                     Row(Modifier.fillMaxWidth().padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
                         TextButton(onClick = { paylas(soz) }) { Icon(AzimIkon.Paylas, null, tint = Color.White, modifier = Modifier.size(18.dp)); Text(cevir(dil, "  Paylaş", "  Share"), color = Color.White) }
                         Spacer(Modifier.weight(1f))
