@@ -35,7 +35,7 @@ data class AzimRenkleri(
     val accent: Color,
     val accentSonuk: Color,
     val accentZemin: Color,
-    
+
     val accentDerin: Color,
     val karanlikMi: Boolean,
 )

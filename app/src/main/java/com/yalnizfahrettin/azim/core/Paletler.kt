@@ -4,14 +4,14 @@ import androidx.compose.ui.graphics.Color
 
 
 enum class Palet(val etiketTr: String, val etiketEn: String) {
-    
+
     KUM("Kum", "Sand"),
     BORDO("Bordo", "Wine"),
 
-    
+
     LACIVERT("Lacivert", "Indigo"),
 
-    
+
     YOSUN("Yosun", "Moss");
 
     fun etiket(dil: String) = if (dil == "en") etiketEn else etiketTr

@@ -15,7 +15,7 @@ import java.io.File
 
 object VideoUretici {
 
-    
+
     private const val TABAN = 720
     private const val KARE_HIZI = 30
     private const val ANAHTAR_ARALIK = 1
@@ -137,7 +137,7 @@ object VideoUretici {
         }
     }
 
-    
+
     private fun boyut(format: KartFormat): Pair<Int, Int> = when (format) {
         KartFormat.KARE -> TABAN to TABAN
         KartFormat.STORY -> TABAN to (TABAN * 16 / 9 / 2 * 2)

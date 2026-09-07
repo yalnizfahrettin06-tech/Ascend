@@ -12,31 +12,7 @@ import com.yalnizfahrettin.azim.R
 import com.yalnizfahrettin.azim.data.Kategoriler
 import com.yalnizfahrettin.azim.data.Soz
 
-/*
- * BİLDİRİM OKUNABİLİRLİĞİ — tasarım kararı
- *
- * Problem: gelen sözün tamamı okunamıyor.
- *
- * Araştırma bulguları:
- *  - Toplu (collapsed) bildirimde gövde tek satıra kırpılır. Stok Android'de
- *    ~90 karakter, Samsung One UI / MIUI gibi kabuklarda ~45-50 karakter.
- *  - NotificationCompat.BigTextStyle genişletilmiş alanda 5120 karaktere
- *    kadar çok satırlı metin gösterir.
- *  - Bildirimi programatik olarak "zorla açık" göstermenin API'si YOK.
- *    setCustomContentView ile özel görünüm denenebilir ama Android 12+
- *    bunları yeniden dekore eder ve toplu görünüm yüksekliği yine sabittir.
- *
- * Sonuç: tek başına "bildirimi büyütmek" güvenilir değil. İki önlem birlikte:
- *
- *  1) YAPI  — her bildirim BigTextStyle ile kurulur. Başlık kısa (kategori adı),
- *     gövde sözün kendisi. Genişletince söz + yazar tam görünür.
- *  2) İÇERİK — söz havuzuna 120 karakterlik tavan konur (Sozler.BILDIRIM_SINIRI)
- *     ve bir birim testi bunu zorlar. Böylece genişletilmiş görünümde asla
- *     kırpılma olmaz, çoğu cihazda toplu görünümde bile söz tam okunur.
- *
- * Ek: setVisibility(PUBLIC) kilit ekranında da metnin görünmesini sağlar —
- * bildirimlerin çoğu kilit ekranında okunduğu için bu kritik.
- */
+
 object Bildirimler {
 
     const val KANAL = "azim_sozler"
@@ -55,9 +31,8 @@ object Bildirimler {
         val kanal = NotificationChannel(
             KANAL,
             ctx.getString(R.string.kanal_ad),
-            // DEFAULT: bildirim gölgeliğe düşer, ekranı basmaz.
-            // Saatte bir motivasyon sözü için HIGH (heads-up) rahatsız edicidir.
-            NotificationManager.IMPORTANCE_DEFAULT,
+            // Only new channels opt into pop-up alerts; existing user choices are preserved.
+            NotificationManager.IMPORTANCE_HIGH,
         ).apply {
             description = ctx.getString(R.string.kanal_aciklama)
             enableVibration(true)
@@ -88,8 +63,7 @@ object Bildirimler {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
 
-        // Kısaltılan sözlerde gövde de kısaltılmış hali — toplu ve genişletilmiş
-        // görünüm arasında tutarsızlık olmasın, ikisi de aynı metni göstersin.
+        // The expanded notification must contain the complete quote.
         val govde = soz.metin(dil)
 
         val genisMetin = buildString {
@@ -111,7 +85,7 @@ object Bildirimler {
             )
             .setContentIntent(pi)
             .setAutoCancel(true)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) // kilit ekranında da tam metin
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .addAction(

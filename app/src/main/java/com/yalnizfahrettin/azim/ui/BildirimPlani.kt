@@ -59,9 +59,10 @@ fun BildirimPlani(
             color = Renk.metin,
         )
         Spacer(Modifier.height(Olcu.md))
+        val adetEtiketi = stringResource(R.string.gunluk_adet)
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             androidx.compose.material3.Slider(value = adet.toFloat(), onValueChange = { adetDegisti(it.roundToInt()) },
-                valueRange = 1f..7f, steps = 5, modifier = Modifier.weight(1f).semantics { contentDescription = "Notification count" })
+                valueRange = 1f..7f, steps = 5, modifier = Modifier.weight(1f).semantics { contentDescription = adetEtiketi })
             Text("$adet", color = Renk.accent, style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 16.dp))
         }
         Spacer(Modifier.height(Olcu.xxl))

@@ -49,7 +49,7 @@ import com.yalnizfahrettin.azim.core.Yaricap
  * özelleştirmeleri kaldırıldı: kombinasyon uzayı test edilemiyordu ve
  * kullanıcının ilgilendiği şey söz, kartın fontu değil.
  */
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun AyarlarEkrani(
     tema: TemaModu,
@@ -73,6 +73,7 @@ fun AyarlarEkrani(
     seciliKategoriSayisi: Int,
     geri: () -> Unit,
 ) {
+    var kurulum by remember { mutableStateOf(false) }
     Column(
         Modifier
             .fillMaxSize()
@@ -146,9 +147,10 @@ fun AyarlarEkrani(
             seciliKategoriSayisi = seciliKategoriSayisi,
             adetDegisti = adetSec,
             araligiDegisti = saatSec,
+            modifier = Modifier.padding(horizontal = 20.dp),
         )
         Spacer(Modifier.height(Olcu.lg))
-        AcilirPencereBlogu()
+        androidx.compose.material3.OutlinedButton(onClick = { kurulum = true }, modifier = Modifier.padding(horizontal = 20.dp).fillMaxWidth().heightIn(min = 52.dp)) { Text(cevir(dil, "Ayrıntılı bildirim kurulumu", "Detailed notification setup")) }
 
         AyarSatiri(stringResource(R.string.haptik), null) { Anahtar(haptik, haptikSec, stringResource(R.string.haptik)) }
 
@@ -163,6 +165,16 @@ fun AyarlarEkrani(
         }
         Spacer(Modifier.height(Olcu.x5))
     }
+    if (kurulum) androidx.compose.material3.ModalBottomSheet(onDismissRequest = { kurulum = false }, containerColor = Renk.zemin,
+        sheetState = androidx.compose.material3.rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
+        Column(Modifier.fillMaxWidth().fillMaxHeight(.9f).verticalScroll(rememberScrollState()).padding(24.dp)) {
+            KucukBaslik(cevir(dil, "Bildirim kurulumu", "Notification setup"))
+            Spacer(Modifier.height(16.dp))
+            BildirimKurulumu(dil, bildirimIzni) { hatirlaticiSec(true) }
+            androidx.compose.material3.TextButton(onClick = { kurulum = false }, modifier = Modifier.fillMaxWidth()) { Text(cevir(dil, "Tamam", "Done")) }
+        }
+    }
+
 }
 
 @OptIn(ExperimentalLayoutApi::class)

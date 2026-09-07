@@ -18,6 +18,13 @@ import androidx.compose.ui.unit.dp
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 
+@Composable
+fun KilitDialog(grup: KategoriGrubu, dil: String, kapat: () -> Unit, hazir: Boolean, izle: () -> Unit) {
+    AlertDialog(onDismissRequest = kapat, title = { Text(grup.ad(dil)) },
+        text = { Text(if (hazir) cevir(dil, "Bir reklam izleyerek bu koleksiyonu açabilirsin.", "Watch an ad to unlock this collection.") else cevir(dil, "Bu koleksiyon şu anda kilitli. Reklamla açma bu sürümde kullanılamıyor. Ücretsiz koleksiyonları keşfetmeye devam edebilirsin.", "This collection is locked. Ad unlocking is unavailable in this version. You can keep exploring free collections.")) },
+        confirmButton = { TextButton(onClick = if (hazir) izle else kapat) { Text(if (hazir) cevir(dil, "İzle", "Watch") else cevir(dil, "Tamam", "Done")) } })
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KategorilerEkrani(secili: Set<String>, acikGruplar: Set<String>, dil: String, sec: (String) -> Unit,
