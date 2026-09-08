@@ -78,7 +78,7 @@ class AzimWidget : GlanceAppWidget() {
         ) {
             if (soz.isBlank()) {
                 Text(
-                    "AZİM",
+                    "ASCEND",
                     style = TextStyle(
                         color = ColorProvider(Color(0xFF9FADBC)),
                         fontFamily = FontFamily.Serif,

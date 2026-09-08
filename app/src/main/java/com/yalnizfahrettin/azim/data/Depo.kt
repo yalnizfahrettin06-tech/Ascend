@@ -3,6 +3,7 @@ package com.yalnizfahrettin.azim.data
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -13,6 +14,8 @@ import com.yalnizfahrettin.azim.core.Palet
 import com.yalnizfahrettin.azim.core.TemaModu
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 
@@ -24,6 +27,10 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     private object K {
         val SECILI = stringSetPreferencesKey("secili_kategoriler")
         val ACIK_GRUP = stringSetPreferencesKey("acik_gruplar")
+        val ACIK_KATEGORI = stringSetPreferencesKey("kazanilan_kategoriler")
+        val ERISIM_SURUMU = intPreferencesKey("erisim_surumu")
+        val PRO_DEMO = booleanPreferencesKey("pro_demo_acik")
+        val ARKA_PLAN = stringPreferencesKey("ana_arka_plan")
         val FAVORI = stringSetPreferencesKey("favoriler")
         val GECMIS = stringSetPreferencesKey("gosterilen_gecmis")
         val SON_BILDIRIM = stringPreferencesKey("son_bildirim_kimlik")
@@ -51,20 +58,46 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val IPUCU_KAPATILDI = stringPreferencesKey("ipucu_kapatildi")
     }
 
-    /** Seçili alt kategoriler. Eski düz anahtarlar okunurken göçürülür. */
-    val secili: Flow<Set<String>> = store.data.map { p ->
-        val kayitli = p[K.SECILI]
-        if (kayitli.isNullOrEmpty()) Kategoriler.varsayilanSecili
-        else Kategoriler.gocur(kayitli).ifEmpty { Kategoriler.varsayilanSecili }
+    /** Every entitlement read begins after the atomic, idempotent migration. */
+    private val erisimVerisi: Flow<Preferences> = flow {
+        store.edit { erisimiGocur(it) }
+        emitAll(store.data)
     }
 
-    /** Açık gruplar — ücretsizler her zaman dahil. */
-    val acikGruplar: Flow<Set<String>> = store.data.map {
-        (it[K.ACIK_GRUP] ?: emptySet()) + Kategoriler.ucretsizGruplar
+    val secili: Flow<Set<String>> = erisimVerisi.map { p ->
+        Erisim.guvenliSecim(p[K.SECILI] ?: Kategoriler.varsayilanSecili, etkinErisim(p))
     }
 
-    /** Açık alt kategoriler — gruptan türetilir. */
-    val acik: Flow<Set<String>> = acikGruplar.map { Kategoriler.acikAltlar(it) }
+    /** Effective category access, including the explicitly enabled Pro demo. */
+    val acik: Flow<Set<String>> = erisimVerisi.map(::etkinErisim)
+    val proDemo: Flow<Boolean> = erisimVerisi.map { it[K.PRO_DEMO] ?: false }
+    val arkaPlan: Flow<String?> = store.data.map { it[K.ARKA_PLAN] }
+
+    suspend fun arkaPlanAyarla(ad: String?) = store.edit { p ->
+        if (ad == null) p.remove(K.ARKA_PLAN) else p[K.ARKA_PLAN] = ad
+    }
+
+    /** Compatibility view only: a group is open when every category in it is open. */
+    val acikGruplar: Flow<Set<String>> = acik.map { kategoriler ->
+        Kategoriler.gruplar.filter { grup -> grup.altlar.all { it.anahtar in kategoriler } }
+            .map { it.anahtar }.toSet()
+    }
+
+    private fun etkinErisim(p: Preferences): Set<String> =
+        Erisim.acikKategoriler(p[K.ACIK_KATEGORI] ?: emptySet(), p[K.PRO_DEMO] ?: false)
+
+    private fun erisimiGocur(p: MutablePreferences) {
+        if ((p[K.ERISIM_SURUMU] ?: 0) >= Erisim.SURUM) return
+        val eskiSecim = p[K.SECILI] ?: Kategoriler.varsayilanSecili
+        // Persist before onboarding is first completed, so a new v6 install is never
+        // mistaken for an existing v5 user by a later collector or process restart.
+        p[K.ACIK_KATEGORI] = if (p[K.ONBOARDING] == true) {
+            Erisim.eskiKazanilanlar(p[K.ACIK_GRUP] ?: emptySet(), eskiSecim)
+        } else emptySet()
+        p[K.PRO_DEMO] = false
+        p[K.SECILI] = Erisim.guvenliSecim(eskiSecim, etkinErisim(p))
+        p[K.ERISIM_SURUMU] = Erisim.SURUM
+    }
     val favoriler: Flow<Set<String>> = store.data.map { it[K.FAVORI] ?: emptySet() }
     val sonBildirimKimlik: Flow<String?> = store.data.map { it[K.SON_BILDIRIM] }
     val gecmis: Flow<Set<String>> = store.data.map { (it[K.GECMIS] ?: emptySet()).filter(Sozler::aktifKimlikMi).toSet() }
@@ -171,17 +204,30 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     }
 
     suspend fun kategoriSec(anahtar: String) = store.edit { p ->
-        val s = Kategoriler.gocur(p[K.SECILI] ?: Kategoriler.varsayilanSecili).toMutableSet()
+        erisimiGocur(p)
+        val acik = etkinErisim(p)
+        if (anahtar !in acik) return@edit
+        val s = Erisim.guvenliSecim(p[K.SECILI] ?: emptySet(), acik).toMutableSet()
         if (!s.add(anahtar)) s.remove(anahtar)
         // En az bir kategori kalmalı, yoksa bildirim havuzu boşalır.
         if (s.isNotEmpty()) p[K.SECILI] = s
     }
 
-    /** Grup kilidini açar ve altlarını seçime ekler. */
-    suspend fun grupAc(grupAnahtari: String) = store.edit { p ->
-        p[K.ACIK_GRUP] = (p[K.ACIK_GRUP] ?: emptySet()) + grupAnahtari
-        val altlar = Kategoriler.grupBul(grupAnahtari)?.altlar?.map { it.anahtar } ?: emptyList()
-        p[K.SECILI] = (p[K.SECILI] ?: emptySet()) + altlar
+    /** A completed demo reward grants and selects precisely the requested category. */
+    suspend fun kategoriAc(anahtar: String) = store.edit { p ->
+        erisimiGocur(p)
+        if (Kategoriler.bul(anahtar) == null) return@edit
+        p[K.ACIK_KATEGORI] = (p[K.ACIK_KATEGORI] ?: emptySet()) + anahtar
+        p[K.SECILI] = Erisim.guvenliSecim((p[K.SECILI] ?: emptySet()) + anahtar, etkinErisim(p))
+    }
+
+    /** Demo only: no purchase, payment or subscription state is represented here. */
+    suspend fun proDemoAyarla(acik: Boolean) = store.edit { p ->
+        erisimiGocur(p)
+        p[K.PRO_DEMO] = acik
+        // Enabling never subscribes the user to additional notification topics.
+        // Revoking preserves individual rewards and grandfathered v5 access.
+        p[K.SECILI] = Erisim.guvenliSecim(p[K.SECILI] ?: emptySet(), etkinErisim(p))
     }
 
     suspend fun favoriDegistir(kimlik: String) = store.edit { p ->
@@ -219,6 +265,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     suspend fun haptikAyarla(a: Boolean) = store.edit { it[K.HAPTIK] = a }
     suspend fun dilAyarla(d: String) = store.edit { it[K.DIL] = d }
     suspend fun onboardingKaydet(secili: Set<String>, adet: Int, bas: Int, bit: Int, hatirlat: Boolean) = store.edit {
+        erisimiGocur(it)
         it[K.SECILI] = Baslangic.dogrula(secili)
         it[K.GUNLUK] = adet.coerceIn(1, 7)
         it[K.BASLANGIC] = bas.coerceIn(0, 23)
@@ -234,7 +281,9 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         it[K.SON_BILDIRIM] = kimlik
     }
     suspend fun kategorileriAyarla(s: Set<String>) = store.edit {
-        if (s.isNotEmpty()) it[K.SECILI] = s
+        erisimiGocur(it)
+        val izinli = Kategoriler.gocur(s).intersect(etkinErisim(it))
+        if (izinli.isNotEmpty()) it[K.SECILI] = izinli
     }
     suspend fun kilometreKutlandi(gun: Int) = store.edit { it[K.KUTLANAN] = gun }
     suspend fun degerlendirmeSoruldu() = store.edit { it[K.DEGERLENDIRME] = true }

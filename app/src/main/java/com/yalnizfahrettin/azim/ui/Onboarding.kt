@@ -11,6 +11,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +31,8 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
     var adet by rememberSaveable { mutableIntStateOf(3) }
     var bas by rememberSaveable { mutableIntStateOf(9) }
     var bit by rememberSaveable { mutableIntStateOf(21) }
-    val scroll = rememberScrollState()
+    // Each step owns its scroll position, so a long permission page cannot shift the next title.
+    val scroll = key(adim) { rememberScrollState() }
     val ctx = androidx.compose.ui.platform.LocalContext.current
     val view = androidx.compose.ui.platform.LocalView.current
     val renk = Renk
@@ -53,10 +56,12 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
                 Text("ASCEND", fontSize = 18.sp, letterSpacing = 4.sp, color = if (adim == 0) Color.White else Renk.metin, modifier = Modifier.weight(1f))
                 Text("0${adim + 1} / 04", fontSize = 12.sp, color = if (adim == 0) Color.White else Renk.metinIkincil)
             }
-            if (adim > 0) Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            if (adim > 0) Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp).testTag("onboarding-progress"), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 repeat(4) { i -> Box(Modifier.weight(1f).height(3.dp).background(if (i <= adim) Renk.accent else Renk.kenarlik, RoundedCornerShape(4.dp))) }
             }
-            Column(Modifier.weight(1f).verticalScroll(scroll).padding(horizontal = 24.dp, vertical = if (adim == 0) 8.dp else 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Column(Modifier.weight(1f).padding(top = if (adim == 0) 0.dp else 16.dp)
+                .clipToBounds().verticalScroll(scroll).testTag("onboarding-scroll")
+                .padding(horizontal = 24.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 when (adim) {
                     0 -> {
                         Spacer(Modifier.height(36.dp))
@@ -66,7 +71,7 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
                         Spacer(Modifier.height(135.dp))
                         Surface(color = Color(0xD91A2630), shape = RoundedCornerShape(20.dp)) {
                             Row(Modifier.padding(18.dp), horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-                                Icon(AzimIkon.Alev, null, tint = Color(0xFFE5C49A))
+                                Icon(AzimIkon.Dag, null, tint = Color(0xFFE5C49A))
                                 Column {
                                     Text(cevir(dil, "Gün içinde yanında", "With you throughout the day"), color = Color.White, fontWeight = FontWeight.Medium)
                                     Text(cevir(dil, "Seçtiğin konular, senin belirlediğin saatler.", "Your topics. Your schedule."), color = Color(0xFFD4DEE4), style = MaterialTheme.typography.bodySmall)
@@ -77,17 +82,17 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
                     1 -> {
                         OnboardingBaslik(cevir(dil, "Sana ne ilham versin?", "What inspires you?"), cevir(dil, "Akışını ve bildirimlerini birlikte seçelim.", "Shape your feed and your reminders."))
                         Baslangic.konular.chunked(2).forEach { cift ->
-                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                                 cift.forEach { key ->
                                     val kat = Kategoriler.bul(key)!!
                                     val aktif = key in secili
-                                    Box(Modifier.weight(1f).clip(RoundedCornerShape(22.dp)).border(if (aktif) 2.dp else 0.dp, if (aktif) Renk.accent else Color.Transparent, RoundedCornerShape(22.dp)).toggleable(aktif, role = Role.Checkbox) { secili = Baslangic.secimiDegistir(secili, key) }) {
-                                        AtmosferResmi(Atmosfer.grup(kat.grup), Modifier.matchParentSize(), .28f)
+                                    Box(Modifier.weight(1f).fillMaxHeight().clip(RoundedCornerShape(22.dp)).border(if (aktif) 2.dp else 0.dp, if (aktif) Renk.accent else Color.Transparent, RoundedCornerShape(22.dp)).toggleable(aktif, role = Role.Checkbox) { secili = Baslangic.secimiDegistir(secili, key) }) {
+                                        KategoriGorseli(kat.anahtar, Modifier.matchParentSize())
                                         Column(Modifier.fillMaxWidth().heightIn(min = 132.dp).padding(14.dp)) {
                                             if (aktif) Icon(AzimIkon.Tik, cevir(dil, "Seçili", "Selected"), Modifier.size(20.dp).align(Alignment.End), tint = Color.White)
                                             else Box(Modifier.size(20.dp).align(Alignment.End).border(1.5.dp, Color.White, androidx.compose.foundation.shape.CircleShape))
                                             Spacer(Modifier.height(42.dp))
-                                            Text(baslangicAdi(key, dil), color = Color.White, fontWeight = FontWeight.Medium, fontSize = 15.sp)
+                                            Text(kat.ad(dil), color = Color.White, fontWeight = FontWeight.Medium, fontSize = 15.sp)
                                         }
                                     }
                                 }
@@ -96,10 +101,8 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
                         Text(if (secili.isEmpty()) cevir(dil, "En az bir konu seç.", "Choose at least one topic.") else cevir(dil, "${secili.size} konu seçili · Sonra değiştirebilirsin", "${secili.size} topics selected · Change them anytime"), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
                     }
                     2 -> {
-                        OnboardingBaslik(cevir(dil, "Günün ritmini sen seç.", "Set your daily rhythm."), cevir(dil, "Bir sabah dürtüsü, öğlen bir nefes, akşam yeni bir bakış.", "A morning spark, a midday pause, an evening perspective."))
-                        BildirimOnizlemesi(dil)
-                        Spacer(Modifier.height(4.dp))
-                        BildirimPlani(adet, bas, bit, secili.size, { adet = it }, { b, s -> bas = b; bit = s }, modifier = Modifier)
+                        OnboardingBaslik(cevir(dil, "Günün ritmini sen seç.", "Set your daily rhythm."), cevir(dil, "Ne sıklıkta, hangi saatlerde? Sana uyan bir plan oluştur.", "How often, and when? Make a plan that fits your day."))
+                        BildirimPlani(adet, bas, bit, secili.size, { adet = it }, { b, s -> bas = b; bit = s }, dil = dil)
                     }
                     3 -> {
                         OnboardingBaslik(cevir(dil, "İlhamı kaçırma.", "Let inspiration find you."), cevir(dil, "İzni aç, sözleri bildirimde rahatça oku.", "Enable notifications and make room for the whole quote."))
@@ -121,14 +124,7 @@ fun Onboarding(dil: String, kaydediliyor: Boolean = false, hata: String? = null,
     }
 }
 
-fun baslangicAdi(key: String, dil: String) = when (key) {
-    "motivasyon" -> cevir(dil, "Motivasyon", "Motivation")
-    "ozsefkat" -> cevir(dil, "Olumlamalar", "Affirmations")
-    "marcus" -> cevir(dil, "Felsefe", "Philosophy")
-    "derin_odak" -> cevir(dil, "Odak", "Focus")
-    "azim" -> cevir(dil, "Azim", "Persistence")
-    else -> cevir(dil, "İç huzur", "Inner peace")
-}
+fun baslangicAdi(key: String, dil: String) = Kategoriler.bul(key)?.ad(dil) ?: key
 
 @Composable
 private fun OnboardingBaslik(baslik: String, alt: String) {

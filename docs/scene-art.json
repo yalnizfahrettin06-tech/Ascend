@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "generator": "image_gen.imagegen",
+  "purpose": "Original full-screen scene backgrounds for Ascend home and Pro sharing",
+  "interpretation": "AI-generated editorial illustrations, not documentary photographs of verified historical sites.",
+  "processing": {
+    "resize": "Proportional Lanczos thumbnail, no creative retouching or cropping",
+    "maximumSize": [
+      1080,
+      1440
+    ],
+    "format": "RGB WebP",
+    "quality": 88,
+    "pillowVersion": "12.3.0",
+    "metadata": "No local source paths or image metadata are bundled"
+  },
+  "count": 19,
+  "scenes": [
+    {
+      "id": "arena",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an antique bronze gladiator helmet and round shield resting on sand in an empty monumental Roman arena, spectacular warm shafts of light, solemn courage, no combat",
+      "asset": "app/src/main/res/drawable-nodpi/scene_arena.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "02d08574b8aa50a9651ea4eec621b3234196210e268a3c842d31d1d39138797c",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 211548,
+      "sha256": "5ee2ab846c2e8ae13e8678feb27fd7119f69868afe28613235f82e8d006f9cad"
+    },
+    {
+      "id": "kale",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an imposing medieval stone castle high on a rocky hill at golden sunrise, teal valley mist and a winding approach path, resilience and protection",
+      "asset": "app/src/main/res/drawable-nodpi/scene_kale.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "156218398c15b176f3317b943d76afe1e461b224911205ad0ca27072dc7ada42",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 294728,
+      "sha256": "20fea51eb227b0c8d363a433bb2a54852407dfdd13ee798bf8b40881bcb47385"
+    },
+    {
+      "id": "hisar",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a dramatic remote mountain fortress with crenellated stone ramparts above clouds, a deep blue dusk sky and a few warm torchlights, inner strength",
+      "asset": "app/src/main/res/drawable-nodpi/scene_hisar.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "018aab23ea53a770458c5ed2a0d2cd9f981183959f7f618c6b5facb8e7fba3c2",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 221776,
+      "sha256": "8efa3d7817f065c5739ec5e8e80a14e2b0d9c3b7a9c0edf5096200697ee3b58b"
+    },
+    {
+      "id": "sovalye",
+      "prompt": "Create one original premium dark fantasy cinematic photograph-like illustration for a quote app background. Portrait 3:4. A solitary armored medieval knight with a worn deep burgundy cloak stands at the lower right of a misty ruined castle courtyard, sword sheathed, looking toward a distant dark mountain. Detailed steel and rain-worn stone, subtle silver moonlight, dark teal and charcoal shadows, refined painterly realism. Quiet bravery rather than combat. Keep the middle and upper middle spacious, dark and low-detail so white quotation text can be added later. No text, letters, logos, borders, watermark, gore or violence. One scene, not a collage.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_sovalye.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "df33fea44738cbfea7650d70a2971974fbc2f11076f52235bb1412d3bf5c0776",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 187184,
+      "sha256": "8ff090b47bd3ba72de6571c969423c8a7ed690251f6f83b032b0e3178e54d541"
+    },
+    {
+      "id": "cadi",
+      "prompt": "Create one original premium dark fantasy cinematic photograph-like illustration for a quote app background. Portrait 3:4. An adult mysterious witch in a modest long charcoal cloak and pointed wide brim hat stands at the lower left edge of a moonlit ancient forest, holding a small antique lantern with muted turquoise glow. Twisted trees frame deep midnight mist, subtle moss and muted burgundy foliage, sophisticated atmospheric realism, serene introspective mood, no horror or jump scare. Middle and upper middle spacious, dark low-contrast mist for later white quote text. No text, letters, symbols, logos, borders, watermark or collage.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_cadi.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "485431e048594477aa042a7ed0e6dd07798abd81e73ef77a6ab0177b7fc8e5e4",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 198014,
+      "sha256": "9256212801eec4fcb48035b6a58f387b943854d63d71e213652167343b03b928"
+    },
+    {
+      "id": "bordo_doku",
+      "prompt": "Create one original premium tactile abstract material background for a minimalist inspirational quote app. Portrait 3:4 full bleed. Rich dark burgundy, oxblood and muted wine tones in delicately hand-troweled mineral plaster, very subtle fibrous paper grain and broad soft irregular pigment layers. Sophisticated matte finish, slight side lighting, fine genuine-looking tactile variation, restrained dark-to-mid tonal depth. Not flat solid color, not generic smooth digital gradient. No identifiable objects, no folds, no gold streaks, no metallic gloss, no text, typography, icons, logo, borders or vignette. Center especially quiet and dark enough for crisp white quote typography added later.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_bordo_doku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "1b578fc574842e8c72155b8499a5f51e945fb1fbf1b82757e8f4c88a42e7dfcd",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 355636,
+      "sha256": "4c866c07ca5eacc44547ebd36a327891cac797ec560ffeeffa2049fd0ff38041"
+    },
+    {
+      "id": "turkuaz_doku",
+      "prompt": "Create one original premium tactile abstract material background for a minimalist inspirational quote app. Portrait 3:4 full bleed. Deep turquoise, muted petrol teal and sea-green hues in softly weathered limewash plaster with subtle mineral pigment clouds, fine handmade paper fibers and soft stone grain. Restrained sophisticated matte material texture, varied painterly layers but calm and low contrast. Not flat solid color, not generic smooth digital gradient. No identifiable objects, no gold streaks, no metallic gloss, no text, typography, icons, logo, borders or vignette. Center especially quiet, deep teal for later crisp white quote typography.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_turkuaz_doku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "0dba99e152e8f8c6eba5389a3a0b6ed0417dc15cb4184255280f3831baf2997e",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 337858,
+      "sha256": "9908c089caafd96a7003efe9ab082f3f7e11360ebed144b6bf081132a894858b"
+    },
+    {
+      "id": "grafit_doku",
+      "prompt": "Create one original premium tactile abstract material background for a minimalist inspirational quote app. Portrait 3:4 full bleed, quiet dark center for white quote text added later, restrained matte finish, fine irregular real material grain and gentle side light, low contrast and no harsh highlights. It must visibly have texture, not flat solid color or a smooth digital gradient. No text, objects, symbols, icons, logo, watermark, border or collage. Material and palette: Deep graphite charcoal and smoke grey hand-burnished slate with fine mineral dust, softly layered broad brush-like stone bands and subtle rough paper fibers. Elegant monochrome.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_grafit_doku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "5636387b73076ce4de0334bd729afa5821fd32e02b0f41abff5a621ead09b3f7",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 413628,
+      "sha256": "4889d29c5ba30eee52a0ed0bde02e06bc986f313366bba0572a3fafaf53debce"
+    },
+    {
+      "id": "lacivert_doku",
+      "prompt": "Create one original premium tactile abstract material background for a minimalist inspirational quote app. Portrait 3:4 full bleed, quiet dark center for white quote text added later, restrained matte finish, fine irregular real material grain and gentle side light, low contrast and no harsh highlights. It must visibly have texture, not flat solid color or a smooth digital gradient. No text, objects, symbols, icons, logo, watermark, border or collage. Material and palette: Dark midnight blue and muted indigo painted linen, tiny visible woven fibers under broad quiet cloudy pigment layers, luxurious tactile weathering. No fabric folds.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_lacivert_doku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "a97702021c0362aee6683a47dc43876c2c3445cf933acde7c92a010bd3441cc1",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 567272,
+      "sha256": "9f8cdc4b7156c3f80c4059beec5b680cc830052dd7bdb1bcfbe23967c617dc7e"
+    },
+    {
+      "id": "ametist_doku",
+      "prompt": "Create one original premium tactile abstract material background for a minimalist inspirational quote app. Portrait 3:4 full bleed, quiet dark center for white quote text added later, restrained matte finish, fine irregular real material grain and gentle side light, low contrast and no harsh highlights. It must visibly have texture, not flat solid color or a smooth digital gradient. No text, objects, symbols, icons, logo, watermark, border or collage. Material and palette: Deep amethyst, dusty plum and soft aubergine limewash plaster, broad soft-edged pigment mottling, tiny chalk mineral grains, refined velvety matte surface.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_ametist_doku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "588c94d9cc5a3404796a38dda76438373bf48a31a4be7124eb7fa87eee9e0f8f",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 362568,
+      "sha256": "ed2a583091cc8cbf9566215cf70c6714dc7e5eebddc2a17129793992d2a0d140"
+    },
+    {
+      "id": "zeytin_doku",
+      "prompt": "Create one original premium tactile abstract material background for a minimalist inspirational quote app. Portrait 3:4 full bleed, quiet dark center for white quote text added later, restrained matte finish, fine irregular real material grain and gentle side light, low contrast and no harsh highlights. It must visibly have texture, not flat solid color or a smooth digital gradient. No text, objects, symbols, icons, logo, watermark, border or collage. Material and palette: Dark olive and moss green handmade cotton paper, gently uneven fibers, muted earthy pigment wash and subtle organic tonal clouds, calm natural surface.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_zeytin_doku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "7d8e112080d662f952a1ef7be2e065075e21234cd2eefde0a18cd34d42105b85",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 412678,
+      "sha256": "41d38dd1d5872a035d7f3ea7e095762f02dcb38e4ededefb298561d81e892c53"
+    },
+    {
+      "id": "bakir_doku",
+      "prompt": "Create one original premium tactile abstract material background for a minimalist inspirational quote app. Portrait 3:4 full bleed, quiet dark center for white quote text added later, restrained matte finish, fine irregular real material grain and gentle side light, low contrast and no harsh highlights. It must visibly have texture, not flat solid color or a smooth digital gradient. No text, objects, symbols, icons, logo, watermark, border or collage. Material and palette: Muted dark copper, burnt sienna and smoked terracotta mineral plaster, layered hand-trowel traces, fine earthen grain and subtle warm clay variation, completely matte, no metallic shine or bright veins.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_bakir_doku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "03310c962f3878008cf600df11a9db93da649b0a77d1967271e01bcbd828ca8d",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 484678,
+      "sha256": "a9a122fd76c3ced6e5f09ccd3c8302ced37995d45be3d8fc19c94bc36239a0e8"
+    },
+    {
+      "id": "kar_muhafizi",
+      "prompt": "Create one original premium dark fantasy cinematic realistic illustration for an inspirational quote app. Portrait 3:4. A single adult medieval knight, authentic worn armor and modest cloak, peaceful resolute atmosphere, detailed natural materials, subtle moonlight or muted warm light, deep charcoal and teal shadows. Keep the central and upper central area spacious with dark low contrast atmosphere for white quote typography added later; place the knight in the lower third off center. No text, logos, recognizable fictional franchises, watermark, borders, collage, graphic violence or battle. Scene: A knight in dark steel and weathered ivory cloak at the lower left of a snow-covered mountain pass, a narrow path disappearing into vast cold fog, distant icy peaks, sparse drifting snow, austere blue-grey dawn.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_kar_muhafizi.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "c79cd20d4b8939d8c2c0c99cc53bb35874d83569693850b3d3c3897c54c0727d",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 167388,
+      "sha256": "7937fe058d0f55a4ecb8dccd997894cb28f296b76fc507739761efebf375352f"
+    },
+    {
+      "id": "atli_yolcu",
+      "prompt": "Create one original premium dark fantasy cinematic realistic illustration for an inspirational quote app. Portrait 3:4. A single adult medieval knight, authentic worn armor and modest cloak, peaceful resolute atmosphere, detailed natural materials, subtle moonlight or muted warm light, deep charcoal and teal shadows. Keep the central and upper central area spacious with dark low contrast atmosphere for white quote typography added later; place the knight in the lower third off center. No text, logos, recognizable fictional franchises, watermark, borders, collage, graphic violence or battle. Scene: A cloaked knight riding one black horse slowly across an ancient stone bridge, viewed from behind at lower right, sweeping dark misty valley and tiny distant castle, subdued amber sunset through clouds. Anatomically coherent horse, quiet solitary journey.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_atli_yolcu.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "02036295148f49a634536ee6607362103f4988a5bc3c3684ee6133620be513da",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 162838,
+      "sha256": "43ec45d705a1f168426433b5142ccc16bf5d10dc4c3c659eb276c5cb83435fe4"
+    },
+    {
+      "id": "orman_muhafizi",
+      "prompt": "Create one original premium dark fantasy cinematic realistic illustration for an inspirational quote app. Portrait 3:4. A single adult medieval knight, authentic worn armor and modest cloak, peaceful resolute atmosphere, detailed natural materials, subtle moonlight or muted warm light, deep charcoal and teal shadows. Keep the central and upper central area spacious with dark low contrast atmosphere for white quote typography added later; place the knight in the lower third off center. No text, logos, recognizable fictional franchises, watermark, borders, collage, graphic violence or battle. Scene: A knight with a muted forest-green cloak holding a plain round shield rests near the lower right edge of an ancient moss forest; colossal trunks frame a softly glowing path, deep jade mist in center, ferns and rain droplets.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_orman_muhafizi.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "dd3de064e40022a9c3dc2c7ddb84e06661974c65380275d8b862193947ecfa8f",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 232556,
+      "sha256": "2374a180649a6aedbd9f8754dcb27615d8c027295723b42d11e3b0c0c8fc8c6c"
+    },
+    {
+      "id": "tas_salon",
+      "prompt": "Create one original premium dark fantasy cinematic realistic illustration for an inspirational quote app. Portrait 3:4. A single adult medieval knight, authentic worn armor and modest cloak, peaceful resolute atmosphere, detailed natural materials, subtle moonlight or muted warm light, deep charcoal and teal shadows. Keep the central and upper central area spacious with dark low contrast atmosphere for white quote typography added later; place the knight in the lower third off center. No text, logos, recognizable fictional franchises, watermark, borders, collage, graphic violence or battle. Scene: A knight seated thoughtfully at the lower left beside a towering gothic stone arch in an abandoned great hall, resting closed helmet at their side, soft dusty moonbeams and vast dark vaulted space above, worn marble floor, faded burgundy cloth.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_tas_salon.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "86a717114a1a674362d279fe93a5561702585763529b031c80695d347ce5d436",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 176184,
+      "sha256": "9de7b2d406b7436893ce41a609582ccdce444be972f363f5c8f5579b2ebcb651"
+    },
+    {
+      "id": "col_yolcusu",
+      "prompt": "Create one original premium dark fantasy cinematic realistic illustration for an inspirational quote app. Portrait 3:4. A single adult medieval knight, authentic worn armor and modest cloak, peaceful resolute atmosphere, detailed natural materials, subtle moonlight or muted warm light, deep charcoal and teal shadows. Keep the central and upper central area spacious with dark low contrast atmosphere for white quote typography added later; place the knight in the lower third off center. No text, logos, recognizable fictional franchises, watermark, borders, collage, graphic violence or battle. Scene: A lone knight in weathered bronze-dark armor and a sand-colored cloak crossing silent desert dunes at lower right, enormous dark violet twilight sky over muted copper sand, small ruined fortress far on the horizon, subtle blowing sand.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_col_yolcusu.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "ca38abf1baf7704bd42ac2221f88bf0265d72b1b930f398cb9c6231b3626413b",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 84324,
+      "sha256": "27d1de78870c6888d2d0c7c91efd55c37e568861770fe97b39e129cd9390064a"
+    },
+    {
+      "id": "kiyi_nobeti",
+      "prompt": "Create one original premium dark fantasy cinematic realistic illustration for an inspirational quote app. Portrait 3:4. A single adult medieval knight, authentic worn armor and modest cloak, peaceful resolute atmosphere, detailed natural materials, subtle moonlight or muted warm light, deep charcoal and teal shadows. Keep the central and upper central area spacious with dark low contrast atmosphere for white quote typography added later; place the knight in the lower third off center. No text, logos, recognizable fictional franchises, watermark, borders, collage, graphic violence or battle. Scene: A knight in a charcoal cloak on a rocky coastal headland at lower left, gazing toward a moonlit sea and distant lighthouse, heavy storm clouds, subdued silver water reflection, weathered shield placed nearby, quiet sea mist.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_kiyi_nobeti.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "fedcb215d54215abf8d574ec88f5d0c95008f28545569246f03c412ceb8f9b4e",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 159658,
+      "sha256": "be45b71ab575801d4821b0691149e7a164b350c667db88a41873ff42020982c5"
+    },
+    {
+      "id": "kale_nobeti",
+      "prompt": "Create one original premium dark fantasy cinematic realistic illustration for an inspirational quote app. Portrait 3:4. A single adult medieval knight, authentic worn armor and modest cloak, peaceful resolute atmosphere, detailed natural materials, subtle moonlight or muted warm light, deep charcoal and teal shadows. Keep the central and upper central area spacious with dark low contrast atmosphere for white quote typography added later; place the knight in the lower third off center. No text, logos, recognizable fictional franchises, watermark, borders, collage, graphic violence or battle. Scene: A knight in dark plate armor and deep red cloak at lower right guarding an ancient castle battlement, one small torch off the edge provides warm copper rim light, midnight clouds above a deep dark valley, quiet ashless ember glow, imposing layered stone towers.",
+      "asset": "app/src/main/res/drawable-nodpi/scene_kale_nobeti.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "d634e663aaa7709224c5f603a1c67a751202713eeccf207d06ed1650e4443291",
+      "size": [
+        1080,
+        1440
+      ],
+      "bytes": 166494,
+      "sha256": "fc5fdc5b854f13943aaacab620e9b4871f6b92be15925bc87ff84888896526a0"
+    }
+  ]
+}

@@ -88,15 +88,13 @@ class KatalogTest {
             assertEquals(currentIds, pool.map { it.kimlik }.toSet())
             assertTrue(pool.none { it.arsiv })
         }
-        listOf(selected, emptySet<String>()).forEach { selection ->
-            val feed = Sozler.akis(selection, archiveIds)
-            assertEquals(currentIds, feed.map { it.kimlik }.toSet())
-            assertTrue(feed.none { it.arsiv })
-            val random = Sozler.rastgele(selection, archiveIds)
-            assertNotNull(random)
-            assertTrue(random!!.kimlik in currentIds)
-            assertFalse(random.arsiv)
-        }
+        val feed = Sozler.akis(selected, archiveIds)
+        assertEquals(currentIds, feed.map { it.kimlik }.toSet())
+        assertTrue(feed.none { it.arsiv })
+        val random = Sozler.rastgele(selected, archiveIds)
+        assertNotNull(random)
+        assertTrue(random!!.kimlik in currentIds)
+        assertFalse(random.arsiv)
         selected.forEach { category ->
             assertTrue("Archive leaked into $category", Sozler.kategoriden(category).none { it.arsiv })
         }
@@ -170,6 +168,8 @@ class KatalogTest {
         listOf(emptySet<String>(), setOf("unknown-category"), setOf("filozoflar")).forEach { invalid ->
             assertTrue(Sozler.bildirimHavuzu(invalid, "en").isEmpty())
             assertNull(Sozler.bildirimSec(invalid, "en", emptySet(), null))
+            assertTrue("An empty or invalid selection must not expose paid feed content", Sozler.akis(invalid).isEmpty())
+            assertNull("An empty or invalid widget selection must not expose paid content", Sozler.rastgele(invalid))
         }
         val mixed = requireNotNull(
             Sozler.bildirimSec(setOf("unknown-category", "motivasyon"), "en", emptySet(), null),

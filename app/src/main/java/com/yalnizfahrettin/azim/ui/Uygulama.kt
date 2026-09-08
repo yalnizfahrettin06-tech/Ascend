@@ -50,6 +50,8 @@ fun Uygulama(
     val secili by depo.secili.collectAsStateWithLifecycle(emptySet())
     val acik by depo.acik.collectAsStateWithLifecycle(emptySet())
     val acikGruplar by depo.acikGruplar.collectAsStateWithLifecycle(emptySet())
+    val arkaPlan by depo.arkaPlan.collectAsStateWithLifecycle(null)
+    val proDemo by remember(depo) { depo.proDemo.map { it as Boolean? } }.collectAsStateWithLifecycle(null)
     val favoriler by depo.favoriler.collectAsStateWithLifecycle(emptySet())
     val gecmis by depo.gecmis.collectAsStateWithLifecycle(emptySet())
     val seri by depo.seri.collectAsStateWithLifecycle(0)
@@ -81,8 +83,11 @@ fun Uygulama(
 
     var sekme by rememberSaveable { mutableStateOf(acilisSekmesi ?: Sekme.ANA) }
     var ayarlardaMi by rememberSaveable { mutableStateOf(false) }
-    var kilitGrup by remember { mutableStateOf<com.yalnizfahrettin.azim.data.KategoriGrubu?>(null) }
-    var acilacakGrup by remember { mutableStateOf<String?>(null) }
+    var kilitKategori by remember { mutableStateOf<com.yalnizfahrettin.azim.data.Kategori?>(null) }
+    var proGoster by rememberSaveable { mutableStateOf(false) }
+    var proKaydediliyor by remember { mutableStateOf(false) }
+    var proHata by remember { mutableStateOf<String?>(null) }
+    var acilacakGrup by rememberSaveable { mutableStateOf<String?>(null) }
     var paylasilanKimlik by rememberSaveable { mutableStateOf<String?>(null) }
     val paylasilanSoz = paylasilanKimlik?.let { Sozler.kimlikten(it) }
     // Akış: pager'ın gezineceği söz listesi
@@ -99,7 +104,7 @@ fun Uygulama(
         when { paylasilanSoz != null -> paylasilanKimlik = null; ayarlardaMi -> ayarlardaMi = false; else -> sekme = Sekme.ANA }
     }
     LaunchedEffect(acilisSekmesi) { acilisSekmesi?.let { sekme = it } }
-    if (onboardingBitti == null) {
+    if (onboardingBitti == null || proDemo == null) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
         return
     }
@@ -126,19 +131,24 @@ fun Uygulama(
     }
 
     // Akışı bir kez kur: seçili kategorilerden karıştırılmış liste.
-    LaunchedEffect(secili, onboardingBitti) {
+    LaunchedEffect(secili, acik, onboardingBitti) {
         if (secili.isNotEmpty()) {
             val mevcut = akis.getOrNull(indeks)
-            val yeni = Sozler.akis(secili, gecmis)
-            akis = if (mevcut != null && mevcut.kategori in secili) listOf(mevcut) + yeni.filterNot { it.kimlik == mevcut.kimlik } else yeni
+            val yeni = Sozler.akis(secili.intersect(acik), gecmis)
+            akis = if (mevcut != null && mevcut.kategori in secili && mevcut.kategori in acik) listOf(mevcut) + yeni.filterNot { it.kimlik == mevcut.kimlik } else yeni
             indeks = 0
         }
         depo.seriyiTazele()
     }
 
-    // Bildirimden gelindiyse o sözü akışın başına al.
-    LaunchedEffect(acilistakiKimlik) {
+    // Consume this launch request once; changing entitlements must not replay it.
+    var acilisTuketildi by rememberSaveable(acilistakiKimlik) { mutableStateOf(false) }
+    LaunchedEffect(acilistakiKimlik, acik, favoriler, gunlukGelenler) {
+        if (acilisTuketildi || acik.isEmpty()) return@LaunchedEffect
         val hedef = acilistakiKimlik?.let { Sozler.kimlikten(it) } ?: return@LaunchedEffect
+        val arsiv = hedef.kimlik in favoriler || gunlukGelenler.values.any { hedef.kimlik in it }
+        if (hedef.kategori !in acik && !arsiv) return@LaunchedEffect
+        acilisTuketildi = true
         val yer = akis.indexOfFirst { it.kimlik == hedef.kimlik }
         if (yer >= 0) indeks = yer else {
             akis = listOf(hedef) + akis
@@ -188,6 +198,7 @@ fun Uygulama(
             ) { s ->
                 when (s) {
                     Sekme.ANA -> AnaEkran(
+                        secilenAtmosfer = arkaPlan, atmosferSec = { ad -> kapsam.launch { depo.arkaPlanAyarla(ad) } },
                         sozler = akis,
                         aktifIndeks = indeks,
                         favoriler = favoriler,
@@ -201,6 +212,7 @@ fun Uygulama(
                         gunlukHedef = gunlukAdet,
                         sonrakiBildirim = sonrakiBildirim,
                         hatirlaticiAcik = hatirlaticiAcik, bildirimIzni = bildirimIzni,
+                        seciliKonular = secili, haptikAcik = haptik, konulariDuzenle = { acilacakGrup = null; sekme = Sekme.KATEGORI },
                         oneri = oneri,
                         bugunPlanlanan = gunlukAdet,
                         dil = dil,
@@ -224,16 +236,16 @@ fun Uygulama(
                         kesfeGit = { grup ->
                             sekme = Sekme.KATEGORI
                             acilacakGrup = grup.anahtar
-                            if (grup.anahtar !in acikGruplar) kilitGrup = grup
+                            // Families only filter discovery; categories unlock individually.
                         },
                         ipucunuKapat = { kapsam.launch { depo.ipucunuKapat() } },
                         ayarlaraGit = { ayarlardaMi = true },
                     )
 
                     Sekme.KATEGORI -> KategorilerEkrani(
-                        secili = secili, acikGruplar = acikGruplar, dil = dil,
-                        sec = { kapsam.launch { depo.kategoriSec(it) } },
-                        kilidiAc = { kilitGrup = it },
+                        secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },
+                        sec = { kapsam.launch { depo.kategoriSec(it); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
+                        kilidiAc = { kilitKategori = it },
                         acilacakGrup = acilacakGrup,
                     )
 
@@ -257,7 +269,7 @@ fun Uygulama(
         AltNav(sekme) { sekme = it }
     }
 
-    paylasilanSoz?.let { soz -> PaylasimEkrani(soz, dil, geri = { paylasilanKimlik = null }) }
+    paylasilanSoz?.let { soz -> PaylasimEkrani(soz = soz, dil = dil, geri = { paylasilanKimlik = null }, pro = proDemo == true, proAc = { proGoster = true }) }
 
     kutlamaGunu?.let { gun ->
         KilometreKutlamasi(gun) {
@@ -271,26 +283,49 @@ fun Uygulama(
         acildi = { grupAnahtari ->
             kapsam.launch {
                 try {
-                    depo.grupAc(grupAnahtari)
-                    snackbar.showSnackbar(cevir(dil, "Demo tamamlandı. Seçtiğin koleksiyon açıldı.", "Demo complete. Your selected collection is unlocked."))
+                    depo.kategoriAc(grupAnahtari)
+                    Planlayici.yenidenKur(ctx)
+                    AzimWidget.tazele(ctx)
+                    snackbar.showSnackbar(cevir(dil, "Demo tamamlandı. Seçtiğin kategori açıldı.", "Demo complete. Your selected topic is unlocked."))
                 } catch (_: java.io.IOException) {
-                    snackbar.showSnackbar(cevir(dil, "Koleksiyon kaydedilemedi. Lütfen yeniden dene.", "The collection could not be saved. Please try again."))
+                    snackbar.showSnackbar(cevir(dil, "Kategori kaydedilemedi. Lütfen yeniden dene.", "The topic could not be saved. Please try again."))
                 }
             }
         },
-        hata = { demoHatasi = cevir(dil, "Tarayıcı açılamadı. Koleksiyon kilitli kaldı; yeniden deneyebilirsin.", "The browser could not open. The collection is still locked; you can try again.") },
+        hata = { demoHatasi = cevir(dil, "Tarayıcı açılamadı. Kategori kilitli kaldı; yeniden deneyebilirsin.", "The browser could not open. The topic is still locked; you can try again.") },
     )
-    val acilanGrup = kilitGrup
+    val acilanGrup = kilitKategori
     if (acilanGrup != null) {
         LaunchedEffect(acilanGrup.anahtar) { demoHatasi = null }
         KilitDialog(
-            grup = acilanGrup, dil = dil,
-            kapat = { kilitGrup = null; demoHatasi = null },
+            kategori = acilanGrup, dil = dil,
+            proAc = { kilitKategori = null; proGoster = true },
+            kapat = { kilitKategori = null; demoHatasi = null },
             hata = demoHatasi,
             demoAc = {
                 demoHatasi = null
-                if (demoBaslat(acilanGrup.anahtar)) kilitGrup = null
+                if (demoBaslat(acilanGrup.anahtar)) kilitKategori = null
             },
         )
     }
+    if (proGoster) ProEkrani(
+        dil = dil, acik = proDemo == true, kaydediliyor = proKaydediliyor, hata = proHata,
+        kapat = { proGoster = false; proHata = null },
+        degistir = { etkin ->
+            if (!proKaydediliyor) {
+                proKaydediliyor = true; proHata = null
+                kapsam.launch {
+                    try {
+                        depo.proDemoAyarla(etkin)
+                        Planlayici.yenidenKur(ctx)
+                        AzimWidget.tazele(ctx)
+                        proGoster = false
+                    } catch (_: java.io.IOException) {
+                        proHata = cevir(dil, "Değişiklik kaydedilemedi. Yeniden dene.", "Could not save this change. Try again.")
+                    } finally { proKaydediliyor = false }
+                }
+            }
+        },
+    )
+
 }

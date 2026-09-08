@@ -34,9 +34,9 @@ class OnboardingTest {
         start()
         Baslangic.varsayilan.forEach { compose.onNodeWithText(baslangicAdi(it,"en")).performClick() }
         compose.onNodeWithText("Continue").assertIsNotEnabled()
-        compose.onNodeWithText("Focus").performClick(); next()
+        compose.onNodeWithText("Deep Focus").performScrollTo().performClick(); next()
         compose.onNodeWithContentDescription("Back").performClick()
-        compose.onNodeWithText("Focus").assertIsOn()
+        compose.onNodeWithText("Deep Focus").assertIsOn()
         compose.onNodeWithText("Continue").assertIsEnabled()
     }
     @Test fun permissionRequestDoesNotCompleteOnboardingUntilExplicitStart() {
@@ -53,11 +53,11 @@ class OnboardingTest {
     @Test fun recreationRestoresStepAndTopicChoice() {
         val restoration = StateRestorationTester(compose)
         restoration.setContent { AzimTema { Onboarding("en") { _,_,_,_,_ -> } } }
-        start(); compose.onNodeWithText("Focus").performClick(); next()
+        start(); compose.onNodeWithText("Deep Focus").performScrollTo().performClick(); next()
         restoration.emulateSavedInstanceStateRestore()
         compose.onNodeWithText("Set your daily rhythm.").assertExists()
         compose.onNodeWithContentDescription("Back").performClick()
-        compose.onNodeWithText("Focus").assertIsOn()
+        compose.onNodeWithText("Deep Focus").assertIsOn()
     }
     @Test fun largeTextCanReachNotificationSetupAndSkip() {
         compose.setContent { AzimTema(modu = TemaModu.KARANLIK) {

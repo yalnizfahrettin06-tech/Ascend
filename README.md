@@ -1,50 +1,46 @@
 # Ascend
 
-Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir. Ascend 5.0, 70 kategorinin tamamına 700 yeni söz ve gelecekteki çeviriler için tek İngilizce kaynak getirir.
+Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir.
 
-## Telefonuna APK indir
+## 6.0 yenilikleri
 
-**[Ascend 5.0 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v5.0.0-preview.1)** — ön sürüm sayfasındaki `Ascend-5.0.0-test.apk` dosyasını seç.
+- A harfi ve dağı birleştiren uygulama simgesi, yumuşak alt gezinme ve yenilenen Yolculuk.
+- Her birinin kendine ait görseli olan **70 ayrı kategori**, kategori başına 10 özgün söz. Koleksiyonlar yalnız keşfetme filtresidir.
+- Ana ekranda ve Keşfet'te açıkça listelenen seçili bildirim konuları.
+- Yeni bildirim planlayıcısı: günlük 1–7 hatırlatma, başlangıç/bitiş saati kartları ve gerçek yaklaşık gönderim saatleri.
+- Ayrıntılı Android bildirim izni, Samsung görünüm rehberi, kanal ayarı ve deneme bildirimi.
+- Dağ, orman ve deniz yanında arena, kale, dağ hisarı, şövalye, cadı, yedi dokulu renk ve sekiz şövalye sahnesi dahil **23 ana ekran sahnesi**.
+- Paylaşımda Zirve, Gece ve Kâğıt ücretsiz. Diğer arka planlar, fotoğraf, biçim/yazı düzenleme ve 5/10/30/45 saniyelik video Pro.
+- **Pro demosu** tüm kategorileri ve paylaşım araçlarını açar. Ödeme alınmaz ve abonelik başlatılmaz. Demo kapatılabilir; bildirim konuları kullanıcı seçimine bağlıdır.
+- Yeni kurulumda 6 ücretsiz kategori. Geçici reklam demosu Google.com'u açar; dönüşte yalnız seçilen kategori açılır. Gerçek reklam bağlı değildir.
+- Önceki kullanıcıların açık kategorileri, kaydedilmiş sözleri ve geçmişi uygulama içi geçişte korunur.
 
-Yeni bir derleme oluşturmak için:
+## APK ve doğrulama
 
-1. [Actions → Ascend APK](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) sayfasını aç.
-2. Başarılı çalışmayı seç. İstersen **Run workflow** ile yeni derleme başlat.
-3. **Artifacts → Ascend-5.0.0-test-APK** dosyasını indir ve ZIP içindeki APK’yı telefonunda aç.
+6.0 değişiklikleri derleme ve cihaz doğrulamasına hazırlanıyor. Güncel sonuçlar [6.0 test raporuna](docs/13-ASCEND-6-TEST-PLANI.md) işlenir. Önceki doğrulanmış sürüm: [5.0 test APK](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v5.0.0-preview.1).
 
-GitHub’dan artifact indirmek için oturum açman gerekir. APK geliştirme imzasıyla üretilen test sürümüdür; mağazaya yükleme paketi değildir. Paket adı `.debug` ile bittiği için mevcut Azim sürümüyle yan yana kurulabilir. Farklı Actions çalışmaları farklı geliştirme imzaları oluşturabilir; güncelleme imza hatası verirse eski test sürümünün kaldırılması gerekir ve o test sürümünün verileri silinir. Kalıcı güncelleme için sabit imzalama anahtarı sonraki yayın adımıdır.
+[Actions → Ascend APK](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) başarılı çalışmasında **Artifacts → Ascend-6.0.0-test-APK** paketini indir. Artifact indirmek için GitHub oturumu gerekir.
 
-## 5.0 içeriği ve çeviri kaynağı
+APK geliştirme imzalı test sürümüdür; mağazaya yükleme paketi değildir. Paket adı `.debug` ile bittiği için eski Azim ile yan yana kurulabilir. Farklı Actions çalışmaları farklı geliştirme imzaları oluşturabilir. Güncelleme imza hatası verirse eski test sürümünün kaldırılması gerekir ve o test sürümünün verileri silinir. Kalıcı güncelleme için sabit imzalama anahtarı gerekir.
 
-- 12 koleksiyon, 70 kategori, her kategoride 10 yeni söz: 700 İngilizce özgün metin ve 700 Türkçe çeviri.
-- **[Tek İngilizce ana kaynak](content/source.en.json)**; sabit kimliklere bağlı ayrı **[Türkçe çeviri](content/translations/tr.json)**.
+## İngilizce ana kaynak
+
+- [Tek İngilizce kaynak](content/source.en.json): 700 özgün metin ve sabit kimlikler.
+- [Türkçe çeviri](content/translations/tr.json) ve [English translation guide](content/README.md).
 - İngilizce değiştiğinde gözden geçirilmemiş çeviriyi durduran kaynak parmak izi kontrolü.
-- **[English translation guide](content/README.md)**: yeni dil şablonu oluşturma, kimlikler ve editoryal kurallar. Bu sürümde uygulama dilleri Türkçe ve İngilizce; başka diller henüz entegre edilmedi.
-- Felsefe ve inanç kategorilerinde açık özgün düşünce etiketi; kişilere veya kutsal metinlere uydurma atıf yok.
-- Eski kaydedilmiş sözleri çözen ayrı arşiv; yeni akış ve bildirimler yalnız yeni katalogdan beslenir.
-- Seçili bildirim havuzunu tamamlayan tekrar düzeni; tur sınırında hemen aynı sözü göndermeme.
-- Kilitli koleksiyonlarda açıkça etiketli geçici demo: Google.com açılır, uygulamaya dönünce seçilen koleksiyon açılır. Gerçek ödüllü reklam henüz bağlı değildir.
+- Uygulama dilleri Türkçe ve İngilizce; diğer diller henüz entegre edilmedi.
+- Felsefe ve inanç metinleri özgün düşünceler olarak etiketlenir; kişilere veya kutsal metinlere uydurma atıf yapılmaz.
+- Eski kaydedilmiş sözler ayrı arşivden çözülür; yeni akış ve bildirimler yeni katalogdan beslenir.
 
-## Görsel deneyim
+## Raporlar
 
-- Dört özgün manzara üzerinde kaydırılan söz kartları; konu filtreleri ve arka plan seçimi.
-- Motivasyon, olumlama ve felsefeyi birlikte sunan başlangıç içeriği.
-- Dört adımlı onboarding: karşılama, konular, sıklık/saat aralığı, bildirim kurulumu.
-- Android izni, Samsung kısa/ayrıntılı görünüm rehberi, kanal ayarı ve deneme bildirimi.
-- Görsel koleksiyonlar, arama, kaydedilen sözlerden doğrudan paylaşım ve yenilenen yolculuk ekranı.
-- Story/kare/yatay PNG; 5/10/30/45 saniyelik H.264 video; fotoğraf, yazı ve arka plan seçimi.
-- Paylaşım seçicisi, galeriye kaydetme, üretim ilerlemesi, iptal ve açık hata durumları.
-- GitHub üzerinde APK, JVM testleri, lint ve Android emülatöründe gerçek UI/medya testleri.
+- [6.0 UI/UX, kategori ve erişim araştırması](docs/12-ASCEND-6-UI-UX-VE-ERISIM.md)
+- [6.0 doğrulama ve kabul planı](docs/13-ASCEND-6-TEST-PLANI.md)
+- [Kategori görselleri ve üretim kaydı](docs/category-art.json)
+- [Yeni sahnelerin üretim kaydı](docs/scene-art.json)
+- [5.0 içerik araştırması](docs/09-ASCEND-5-ICERIK-RAPORU.md)
 
-## Güncel raporlar
-
-- [Ayrıntılı ürün ve tasarım raporu](docs/05-ASCEND-4-TASARIM-RAPORU.md)
-- [5.0 ayrıntılı içerik ve araştırma raporu](docs/09-ASCEND-5-ICERIK-RAPORU.md)
-- [5.0 doğrulama ve bilinen sınırlar](docs/10-ASCEND-5-DOGRULAMA.md)
-- [5.0 gerçek uygulama ekranları](docs/11-ASCEND-5-EKRANLAR.md)
-- [Özgün arka planların üretim kaydı](docs/06-GORSEL-ISTEMLERI.md)
-
-`01`–`04` numaralı belgeler 3.0, `05`–`08` numaralı belgeler 4.0 sürümünün tarihsel kayıtlarıdır. Güncel 5.0 kapsamı ve doğrulama sonuçları `09`–`11` numaralı belgelerdedir.
+01–11 numaralı belgeler önceki sürümlerin tarihsel kayıtlarıdır.
 
 ## Geliştirme
 
@@ -52,12 +48,13 @@ JDK 17 ve Android SDK 35:
 
 ```sh
 python tools/icerik_derle.py --check
+python tools/check_category_art.py
 bash gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --max-workers=2
 bash gradlew :app:connectedDebugAndroidTest --max-workers=2
 ```
 
-Sürüm imzası gerektiğinde `ASCEND_KEYSTORE_PATH`, `ASCEND_STORE_PASSWORD`, `ASCEND_KEY_ALIAS`, `ASCEND_KEY_PASSWORD` ortam değişkenleri kullanılır. İmza yokken release çıktısı imzasızdır. Erişim tokenları ve imzalama anahtarları depoya eklenmez. Uygulama kimliği ve DataStore anahtarları yükseltme uyumluluğu için korunur.
+Sürüm imzası için `ASCEND_KEYSTORE_PATH`, `ASCEND_STORE_PASSWORD`, `ASCEND_KEY_ALIAS`, `ASCEND_KEY_PASSWORD` kullanılır. İmza yokken release çıktısı imzasızdır. Tokenlar ve imzalama anahtarları depoya eklenmez. Uygulama kimliği ve DataStore anahtarları uyumluluk için korunur.
 
 ## Actions kullanımı
 
-Public depolarda standart GitHub sunucularında çalışma ücretsizdir. Büyük sunucular ücretlidir; artifact ve önbellek için ayrı saklama sınırları bulunur. Bu akış standart `ubuntu-latest`, 25 dakikalık iş zaman aşımı, 7 günlük çıktı saklama ve aynı dal için eski çalışmayı iptal etme kullanır. [GitHub ücretlendirme belgesi](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+Public depolarda standart GitHub sunucularında çalışma ücretsizdir. Büyük sunucular ücretlidir; artifact ve önbellek için ayrı saklama sınırları bulunur. Akış standart `ubuntu-latest`, 25 dakikalık iş zaman aşımı, 7 günlük çıktı saklama ve aynı dal için eski çalışmayı iptal etme kullanır. [GitHub ücretlendirme belgesi](https://docs.github.com/en/billing/concepts/product-billing/github-actions).

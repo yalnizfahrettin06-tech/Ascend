@@ -1,7 +1,7 @@
 package com.yalnizfahrettin.azim.data
 
 /**
- * Alt kategori. Kilit GRUP seviyesindedir — tek tek açılmaz.
+ * Her kategori bağımsız bir erişim ve bildirim seçimi birimidir.
  */
 data class Kategori(
     val anahtar: String,
@@ -13,10 +13,10 @@ data class Kategori(
 }
 
 /**
- * Kategori grubu — kilit birimi.
+ * Konuları düzenleyen görsel aile. Yeni erişim kategori seviyesinde saklanır.
  *
- * Access is stored per group. The current preview uses an explicitly labelled
- * browser demo; production rewarded advertising is not connected.
+ * The historical free flag is retained only to migrate previous entitlements.
+ * It must not be used as a current access check; use Depo.acik instead.
  */
 data class KategoriGrubu(
     val anahtar: String,
@@ -141,10 +141,10 @@ object Kategoriler {
     fun bul(anahtar: String): Kategori? = tumAltlar.firstOrNull { it.anahtar == anahtar }
     fun grupBul(anahtar: String): KategoriGrubu? = gruplar.firstOrNull { it.anahtar == anahtar }
 
-    /** Bir grup açıksa altlarının hepsi açıktır. */
+    /** Expands explicit legacy group grants; current screens must use Depo.acik. */
     fun acikAltlar(acikGruplar: Set<String>): Set<String> =
-        gruplar.filter { it.anahtar in acikGruplar || it.ucretsiz }
-            .flatMap { it.altlar }.map { it.anahtar }.toSet()
+        gruplar.filter { it.anahtar in acikGruplar }
+            .flatMap { it.altlar }.map { it.anahtar }.toSet() + Erisim.ucretsizKategoriler
 
     /** Kurulumda seçili gelen alt kategoriler. */
     val varsayilanSecili: Set<String> = setOf("motivasyon", "ozsefkat", "marcus")

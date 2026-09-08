@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.test.platform.app.InstrumentationRegistry
 import com.yalnizfahrettin.azim.data.Depo
+import com.yalnizfahrettin.azim.data.Erisim
 import com.yalnizfahrettin.azim.data.Sozler
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
@@ -30,14 +31,24 @@ class KatalogDepoTest {
     }
 
     @Test fun historyKeepsTheWholeCatalogAndFiltersLegacyIds() = isolated { depo, seed ->
+        depo.proDemoAyarla(true)
+        depo.kategorileriAyarla(Erisim.tumKategoriler)
+        assertEquals(70, depo.secili.first().size)
+        assertEquals(700, Sozler.bildirimHavuzu(depo.secili.first(), "en").size)
         val ids = Sozler.tumu().map { it.kimlik }
         seed(ids.dropLast(1).toSet() + "old-category:123")
         depo.bildirimGecmisineEkle(ids.last())
         assertEquals(ids.toSet(), depo.gecmis.first())
         assertEquals(ids.last(), depo.sonBildirimKimlik.first())
+        // Entitlement revocation changes future selections, never erases prior history.
+        depo.proDemoAyarla(false)
+        assertEquals(Erisim.ucretsizKategoriler, depo.secili.first())
+        assertEquals(ids.toSet(), depo.gecmis.first())
     }
 
     @Test fun newCycleClearsOnlySelectedCategoriesAndRereadingRestoresHistory() = isolated { depo, seed ->
+        depo.kategoriAc("merak")
+        depo.kategorileriAyarla(setOf("motivasyon"))
         val category = Sozler.kategoriden("motivasyon")
         val first = category[0].kimlik
         val second = category[1].kimlik

@@ -59,13 +59,14 @@ object Sozler {
         return BildirimSecimi(soz, tur)
     }
     fun rastgele(secili: Set<String>, gecmis: Set<String> = emptySet()): Soz? {
-        val uygun = icerik.filter { it.kategori in secili }.ifEmpty { icerik }
+        val uygun = icerik.filter { it.kategori in secili }
         return uygun.filterNot { it.kimlik in gecmis }.randomOrNull() ?: uygun.randomOrNull()
     }
     /** Archived records only resolve an existing saved ID; never enter the new catalogue. */
     fun kimlikten(kimlik: String): Soz? = kimlikDizini[kimlik] ?: EskiSozler.kimlikler[kimlik]
     fun akis(secili: Set<String>, gecmis: Set<String> = emptySet()): List<Soz> {
-        val uygun = icerik.filter { it.kategori in secili }.ifEmpty { icerik }
+        // A loading, empty or invalid selection must never expose the whole paid catalogue.
+        val uygun = icerik.filter { it.kategori in secili }
         val (gorulmus, yeni) = uygun.partition { it.kimlik in gecmis }
         return yeni.shuffled() + gorulmus.shuffled()
     }

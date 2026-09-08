@@ -38,6 +38,58 @@ private fun ImageVector.Builder.dolgu(blok: PathBuilder.() -> Unit) =
 
 object AzimIkon {
 
+    // The summit, compass, bookmark and trail share one rounded 24 dp grid.
+    val Dag = ikon("dag") {
+        cizgi {
+            moveTo(3f, 20f); lineTo(12f, 4f); lineTo(21f, 20f); close()
+            moveTo(7.5f, 12f); lineTo(10f, 14f); lineTo(12f, 11.5f)
+            lineTo(14f, 14f); lineTo(16.5f, 12f)
+        }
+    }
+    val DagDolu = ikon("dag_dolu") {
+        cizgi { moveTo(3f, 20f); lineTo(12f, 4f); lineTo(21f, 20f); close() }
+        dolgu {
+            moveTo(7.5f, 12f); lineTo(10f, 14f); lineTo(12f, 11.5f)
+            lineTo(14f, 14f); lineTo(16.5f, 12f); lineTo(21f, 20f)
+            horizontalLineTo(3f); close()
+        }
+    }
+    val Ayrac = ikon("ayrac") {
+        cizgi {
+            moveTo(7f, 3.5f); horizontalLineTo(17f)
+            curveTo(18.1f, 3.5f, 19f, 4.4f, 19f, 5.5f)
+            verticalLineTo(21f); lineTo(12f, 17f); lineTo(5f, 21f); verticalLineTo(5.5f)
+            curveTo(5f, 4.4f, 5.9f, 3.5f, 7f, 3.5f); close()
+        }
+    }
+    val AyracDolu = ikon("ayrac_dolu") {
+        dolgu {
+            moveTo(7f, 3.5f); horizontalLineTo(17f)
+            curveTo(18.1f, 3.5f, 19f, 4.4f, 19f, 5.5f)
+            verticalLineTo(21f); lineTo(12f, 17f); lineTo(5f, 21f); verticalLineTo(5.5f)
+            curveTo(5f, 4.4f, 5.9f, 3.5f, 7f, 3.5f); close()
+        }
+    }
+    val Patika = ikon("patika") {
+        cizgi {
+            moveTo(5f, 20f); horizontalLineTo(13.5f)
+            curveTo(20f, 20f, 20f, 13.5f, 13.5f, 13.5f)
+            horizontalLineTo(10.5f)
+            curveTo(4f, 13.5f, 4f, 7f, 10.5f, 7f)
+            horizontalLineTo(16f)
+            moveTo(14f, 4f); lineTo(17f, 7f); lineTo(14f, 10f)
+        }
+    }
+    val Kitap = ikon("kitap") {
+        cizgi {
+            moveTo(12f, 6f); verticalLineTo(21f)
+            moveTo(12f, 6f); curveTo(9f, 3.5f, 5f, 3.5f, 3f, 4f)
+            verticalLineTo(18f); curveTo(6.5f, 17.5f, 9f, 18f, 12f, 21f)
+            curveTo(15f, 18f, 17.5f, 17.5f, 21f, 18f); verticalLineTo(4f)
+            curveTo(19f, 3.5f, 15f, 3.5f, 12f, 6f)
+        }
+    }
+
     val Ev = ikon("ev") {
         cizgi {
             moveTo(3f, 10.5f); lineTo(12f, 3.5f); lineTo(21f, 10.5f)

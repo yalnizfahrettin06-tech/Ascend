@@ -1,0 +1,1140 @@
+{
+  "schemaVersion": 1,
+  "generator": "image_gen.imagegen",
+  "purpose": "Original illustrative category photographs for Ascend",
+  "interpretation": "AI-generated editorial illustrations; not verified historical portraits or photographs of specific real sites.",
+  "processing": {
+    "resize": "Proportional Lanczos thumbnail, no creative retouching or cropping",
+    "maximumSize": [
+      512,
+      683
+    ],
+    "format": "RGB WebP",
+    "quality": 82,
+    "pillowVersion": "12.3.0",
+    "metadata": "No local source paths or image metadata are bundled"
+  },
+  "count": 70,
+  "categories": [
+    {
+      "category": "ozsefkat",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a ceramic cup held gently in two hands beside a soft ivory blanket, morning window light, self-kindness and warmth",
+      "asset": "app/src/main/res/drawable-nodpi/category_ozsefkat.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "d57cc1a46981ee2c86550e7b7a3df00aea2f06e4b413d9a398c21373d9ffb167",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 47098,
+      "sha256": "fdda385559c9769b6d29da91594ab2ab54631cf988db9a9cb599841c7ac1b6d4"
+    },
+    {
+      "category": "ic_huzur",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: smooth round stones stacked beside a perfectly still misty turquoise alpine lake, tranquil simplicity",
+      "asset": "app/src/main/res/drawable-nodpi/category_ic_huzur.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "96388962b7df6a2f857a46bb49c2fab313b93a740889c1b35740703dbda927ab",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 56136,
+      "sha256": "98f4a06095c54c7b3580023131bfab352675597cd11401637c44b8f33f216cb4"
+    },
+    {
+      "category": "kendine_guven",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a small sturdy tree rooted firmly in sunlit coastal rock, self trust",
+      "asset": "app/src/main/res/drawable-nodpi/category_kendine_guven.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "b519f43270301d539958b50cdf3e6690d81fae68b3ad055fdcf403d69e601d83",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 75616,
+      "sha256": "56ec286e2009b6c2437330be5267c24fd62f0806cbb7c55b9fd9b5c6263c7be4"
+    },
+    {
+      "category": "motivasyon",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a winding sunlit ridge path leading toward glowing distant mountain peaks at dawn, invitation to begin",
+      "asset": "app/src/main/res/drawable-nodpi/category_motivasyon.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "cddb4e97759015a2ffa8edaa92242d0a4638d06a4fa58bd6536a0d72cbe7d10d",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 75542,
+      "sha256": "9e8a199a50f7969f2767062cdd8aa0bb6ca09210c3da9807dca7eace2f3b8646"
+    },
+    {
+      "category": "azim",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a steep stone staircase climbing a green mountainside in early golden light, patient persistence",
+      "asset": "app/src/main/res/drawable-nodpi/category_azim.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "b969d2bb32c4f33a829c4ee9a5a7b019ffd4ff45799b589e5a81bba50264a140",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 84264,
+      "sha256": "fc2832bf0d70504b3e34e0258eb1d42411d866afa692f478d8762bcc6c3ff0df"
+    },
+    {
+      "category": "pes",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a tiny green sapling growing through a crack in dark rough rock after rain, refusal to give up",
+      "asset": "app/src/main/res/drawable-nodpi/category_pes.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "a6b6fa422fb4c81f5da67967ca3549b9f0ae654d587f65f44ad4567286db32c1",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 47986,
+      "sha256": "a86e01225b06ea987e98b1daed3d7418baf42063cc1322d3318e7a27e13dd6ee"
+    },
+    {
+      "category": "zorluk_sabir",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a weathered coastal lighthouse standing steady above breaking waves under clearing clouds",
+      "asset": "app/src/main/res/drawable-nodpi/category_zorluk_sabir.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "aa1a19c2acc3ed7fe78d1e7f94519a3370c52cceae822a4744e52bcab1d0cd62",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 65006,
+      "sha256": "74887c3014eba29f4e365df4d03924edffa5bb0789a3d53215805a41449ebd1c"
+    },
+    {
+      "category": "yorgunluk_sabir",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a pair of worn hiking boots resting beside a wooden mountain shelter bench in evening light",
+      "asset": "app/src/main/res/drawable-nodpi/category_yorgunluk_sabir.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "c1614ab309ef42021e4221fc5f26e84e84a2fb60f16d99c285e298266951d51e",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 67832,
+      "sha256": "dc3cf05ccb812fa56ee2681bc14b66d1a4ff866ced6f7713656db4bf8f6e8de6"
+    },
+    {
+      "category": "tukenmislik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an empty hammock gently hanging in a shady olive grove, restorative unhurried stillness",
+      "asset": "app/src/main/res/drawable-nodpi/category_tukenmislik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "2ef69aaed041801c1aa292c342a60afa8a7d34077d62443adc1bd51fcb88bec8",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 104940,
+      "sha256": "7b4dbc1d8a9450943d2077bae8a74a80cdd613a48c42f4475efed508fda81c88"
+    },
+    {
+      "category": "yeniden",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an old wooden door opening toward a fresh sunlit garden path, a new beginning",
+      "asset": "app/src/main/res/drawable-nodpi/category_yeniden.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "253954b6a39268cef645a706a7d30e0dbfe397143cf8c90baf3eb0469b9855ce",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 82398,
+      "sha256": "583ab25e865b525bcdba7cb1f06f866944ec04bd66547595abe05401d25ba08c"
+    },
+    {
+      "category": "uzun_soluk",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a long curving trail across several layers of blue distant hills toward the horizon",
+      "asset": "app/src/main/res/drawable-nodpi/category_uzun_soluk.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "a5e717a7dfe9ac02caa6c2166fb62cbae003123b6e841de183858b83ee14281e",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 68716,
+      "sha256": "7a7787284243cda641e7c98de6e2d7a28574b74652ed4f936ca7077297c33dc0"
+    },
+    {
+      "category": "umut",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: the first thin golden sunrise breaking through dark storm clouds above a quiet valley",
+      "asset": "app/src/main/res/drawable-nodpi/category_umut.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "be4879a7811f78ae3a749deab4b0a7591f75d576ac91862cd08abe3a9f6a06fb",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 39398,
+      "sha256": "7f80cb0f826afb8112718c70d5d747dd38acf2d259cc50ad701349bb6a8ceafa"
+    },
+    {
+      "category": "erteleme",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a sharpened pencil placed diagonally on a single blank cream page at a tidy wooden desk",
+      "asset": "app/src/main/res/drawable-nodpi/category_erteleme.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "c42d116356647ce54f947322bd0361415b3bfc99edcb06aa0510503ce5296aad",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 30496,
+      "sha256": "5e48f403d2d4ad74b0a28b76f7e55c3418f076d01b679e35b06581905d5080ee"
+    },
+    {
+      "category": "derin_odak",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a narrow shaft of sunlight illuminating one fern on a dark peaceful forest floor",
+      "asset": "app/src/main/res/drawable-nodpi/category_derin_odak.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "b2d136383c3b0a8db7b1651c24d6f9ea4ed5bb01f77368e4693db66cd45c7924",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 48866,
+      "sha256": "0b6c1ce9bb3ea2f402f54d5ed3421b769ced4a4f5dfdca3bb414cb234ec72618"
+    },
+    {
+      "category": "durtu",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a poised kingfisher sitting motionless on a river branch, patient restraint",
+      "asset": "app/src/main/res/drawable-nodpi/category_durtu.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "f8b317798cb44d79a9f786dc0859673ddc780325141cf08ca5ffcba858e10afa",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 44720,
+      "sha256": "61935929aafe1a644ca203e8fe27870002853d09011fa7a428861ce760ae3268"
+    },
+    {
+      "category": "rutin",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a row of simple handmade ceramic cups neatly arranged on a warm wooden shelf in morning light",
+      "asset": "app/src/main/res/drawable-nodpi/category_rutin.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "7d3bac20d53c960a552c41a5fd723c653a785215921c96ed32aaff8e6ee01aa7",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 26904,
+      "sha256": "d158527706691c4a8aa52206753b68d4649c2555d68320057fef7f060cd5db94"
+    },
+    {
+      "category": "dagilma",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a single crisp white flower in sharp focus against a softly blurred meadow",
+      "asset": "app/src/main/res/drawable-nodpi/category_dagilma.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "c8a5d8ca94f0c13698a8b87b3bbb4bdf193cc2d9375486d5b3d793ffbd6418d7",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 35788,
+      "sha256": "4e735735f312d12d13d20c5b09864a419563d8ec0ccc8cfc1a76f6f35cff419e"
+    },
+    {
+      "category": "ozguven",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a lone mountain climber standing upright on a wide secure ridge, viewed from behind, distant landscape",
+      "asset": "app/src/main/res/drawable-nodpi/category_ozguven.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "5835b2f5f0d15f33de94f7e9ec24c7b36432c69762c1b2ffe395f81aab2f96c9",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 62444,
+      "sha256": "46ede1c3e08d6268babcc3f63977b564e1b8242702dcef0fd3294bc32875f4ca"
+    },
+    {
+      "category": "korku",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a small wooden footbridge crossing a misty ravine toward a sunlit forest",
+      "asset": "app/src/main/res/drawable-nodpi/category_korku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "e404b3f4bc45a7b16184411bdf2950f05a89ad65c60a773a4ff2e7a9c7a96969",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 91824,
+      "sha256": "70429217ffeb95f83c5c1ee58a714808a524dfeaf0c470d51d9fd75238037528"
+    },
+    {
+      "category": "reddedilme",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a small folded paper boat moving away from a closed stone arch along clear water",
+      "asset": "app/src/main/res/drawable-nodpi/category_reddedilme.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "a98dabeb111883c190506ed0fc98c0de3b5b40eb458d99f90cf7bb91200f3d5c",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 49578,
+      "sha256": "923e5c1fdba5852cbcee10ff7761348e2de2d205470e92f9f9403984d7dfaa0a"
+    },
+    {
+      "category": "risk",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a fork in a rugged highland trail with one path climbing toward golden open sky",
+      "asset": "app/src/main/res/drawable-nodpi/category_risk.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "1e228bcc05c00e8753abbd89a99eecca7f53a74cdc04494913e4ef6ab9fdcc88",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 73368,
+      "sha256": "d1581c6838bca4fd219afb01b1298c255d48d10b90be10166f58efb860daccb9"
+    },
+    {
+      "category": "utangaclik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a single pale wildflower emerging from deep shade into a gentle pool of sunlight",
+      "asset": "app/src/main/res/drawable-nodpi/category_utangaclik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "d89aca56ddaf93374074f66eff73ebd94bdf61f4533e5ba9e4355887708b120f",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 34270,
+      "sha256": "73c52cd8209483adab525c7083e885ec0e04b02948dcec091abbbe3a509b1567"
+    },
+    {
+      "category": "marcus",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a dignified antique Roman marble bust inspired by Marcus Aurelius in a sunlit stone courtyard, original photograph of a generic sculpture",
+      "asset": "app/src/main/res/drawable-nodpi/category_marcus.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "82e20ea69353fe8109de4f850b0b87a5e830b67f9d58d443af29d2adb0906c17",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 56814,
+      "sha256": "7c66559b2a426ded63707d02531a065e610c1bc051b3d619795a694873bfd817"
+    },
+    {
+      "category": "seneca",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a Roman writing desk with a closed wax tablet and a small bronze oil lamp beside a stone window",
+      "asset": "app/src/main/res/drawable-nodpi/category_seneca.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "2f41cc21e32409c5f1d6ae38ae459ecc8cadf275e1f1dd142d279ad1f43c754f",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 48066,
+      "sha256": "85d3e6737bdda69d47c92bb8a36f5815e484aeba523317d247a094609e07c779"
+    },
+    {
+      "category": "epiktetos",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a simple weathered clay bowl on a stone ledge in a sparse Greek courtyard, quiet inner freedom",
+      "asset": "app/src/main/res/drawable-nodpi/category_epiktetos.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "cce9e09c089d403d0fc63fffca3489132a88c890e067926822c0d6a02e7aa459",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 58858,
+      "sha256": "3197c4cac0843e89e7484cc4092c1155a23a0d2ec59834cff573b830a943a3e8"
+    },
+    {
+      "category": "platon",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: sunbeams entering the mouth of a dark limestone cave and illuminating rough stone",
+      "asset": "app/src/main/res/drawable-nodpi/category_platon.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "031b434db186b3ee3ee336480752c6fbdb47f15232dc23a4a2fa9981ce1ba896",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 56682,
+      "sha256": "f1aca2457f862693312179d95a53c7ceab0edcf42a5f13ea14a99f2783a78129"
+    },
+    {
+      "category": "aristoteles",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an ancient olive tree beside a classical Greek colonnade in soft afternoon light",
+      "asset": "app/src/main/res/drawable-nodpi/category_aristoteles.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "3b78f5e782add81a194da745d1732a53ac370b6c8ad58ec035f67417a8579b7f",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 106364,
+      "sha256": "f5ade61aa3516bec58124fb22b6f3993f5f4845a9be405eb740f73cf3e24b4c3"
+    },
+    {
+      "category": "nietzsche",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a solitary alpine walker on a rocky high ridge under a vast dramatic open sky",
+      "asset": "app/src/main/res/drawable-nodpi/category_nietzsche.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "f70d7119853251ab0b9da92e703b7dd916bd5c75dba063e8605ca0ed4dfdc73b",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 72540,
+      "sha256": "5c907458a94ac53b4611a43d7d9431fcd069b11e5b576965246fa9b48ada1f12"
+    },
+    {
+      "category": "konfucyus",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a quiet traditional Chinese courtyard with bamboo shadows across a simple wooden doorway",
+      "asset": "app/src/main/res/drawable-nodpi/category_konfucyus.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "41b986fa7a3118511fbd97c54fa196613565eb52b78eea8a1994692e90e5373f",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 71022,
+      "sha256": "749e53b785d5f21ebdf9bccbdd8e621299a3db817699780d3012d8c3b7286cc0"
+    },
+    {
+      "category": "machiavelli",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a Renaissance Florentine stone tower seen across rooftops at warm sunset",
+      "asset": "app/src/main/res/drawable-nodpi/category_machiavelli.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "e49feb87c62c77c31613f7bc2bf89f88a8df53995f841a5d05d69248934682f2",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 46418,
+      "sha256": "54a94d634f00aed3cf0391ccc3179d21af1f6bd5438d4fe3c1becb2d0031d37b"
+    },
+    {
+      "category": "mevlana",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an empty circular Sufi courtyard with warm light entering through a graceful arched doorway, no religious text",
+      "asset": "app/src/main/res/drawable-nodpi/category_mevlana.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "2befd634efa6e1d89a1b18a1df00294782387535b2f83b63f2595fe74e429a8d",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 56900,
+      "sha256": "af22a45b7b878358dc37d6441575e56fac314755f55918d94e77399085f191d1"
+    },
+    {
+      "category": "yunus",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a humble Anatolian village path bordered by wildflowers and old stone houses",
+      "asset": "app/src/main/res/drawable-nodpi/category_yunus.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "9d4374496c9c8de1802708887feaabd018ac6e86e8d256dbb98f493c94203135",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 112040,
+      "sha256": "8ae5d15dd9a312b16e85c95932c9461c4e971bccb10130a87545e1170ee1a9d4"
+    },
+    {
+      "category": "sems",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: sunlight spilling through a patterned wooden window onto a single copper bowl",
+      "asset": "app/src/main/res/drawable-nodpi/category_sems.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "fd3728dbf3e26ccdfee6a4a460772119223cb8314aa8824ca29d597be92148b8",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 49664,
+      "sha256": "241a423168c389abab9490b4455ba902f8751d21a939ca42f6ea4669fd65ceb3"
+    },
+    {
+      "category": "hafiz",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a fragrant Persian rose garden beside a small turquoise tiled fountain, no inscriptions",
+      "asset": "app/src/main/res/drawable-nodpi/category_hafiz.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "1ce3ecaec4ca9e7eb1a097dbc826bfea31a3753f802424b362f693b0eb72a308",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 111892,
+      "sha256": "996410c8ba9cfae74e9000ff6726338e7c7bf84f1f83b0262bfcb057fdf00260"
+    },
+    {
+      "category": "zen",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: raked pale sand circling one dark stone in a peaceful Japanese Zen garden",
+      "asset": "app/src/main/res/drawable-nodpi/category_zen.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "c20bb0b7bcd04ee94008bf78349a2da3d6dba81ce29a21ea1ea3a7b7aa6c9a38",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 78360,
+      "sha256": "e9b560b30b0f5e7377b2a1b1c1f2831e912949b574804de1c63d12c192df77eb"
+    },
+    {
+      "category": "kuran",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a quiet mosque courtyard with turquoise arch and reflected light, no people, no calligraphy or scripture",
+      "asset": "app/src/main/res/drawable-nodpi/category_kuran.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "819f66a469f1d191d3224ccb14c36304a59634cc9c0015b3126ff92d3ac07c3c",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 75728,
+      "sha256": "25ce4ff27c531753a8694b97b6076d812c3372e6b310d854dc98ce29b96e6fa0"
+    },
+    {
+      "category": "incil",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a simple wooden cross lit by a narrow window inside a serene stone chapel, no inscriptions",
+      "asset": "app/src/main/res/drawable-nodpi/category_incil.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "015e1715ce1b10d5fc974308b030923352e815d5bd311b312f86b74f27b605d7",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 43544,
+      "sha256": "373b3d467cae1429c6b5e42e74a415ffd7e4ba9d5a26d69e7c9dc556d9756402"
+    },
+    {
+      "category": "tevrat",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a pair of closed parchment scrolls resting in an understated wooden cabinet, no visible writing",
+      "asset": "app/src/main/res/drawable-nodpi/category_tevrat.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "fdb50a9f340feea6780589a647f322ffdcca58208511f01c089b775418ff5218",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 32428,
+      "sha256": "57efc287760acb2b4338768d08621b01c1a8ad14ed5b4b1b298e0710210480ff"
+    },
+    {
+      "category": "dua",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: two gently cupped open hands in soft light with a calm out of focus sky background",
+      "asset": "app/src/main/res/drawable-nodpi/category_dua.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "da3633fb58011d59e30eb07ac6ca1aef399376d6093ad46aa1aaf20962c44407",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 14948,
+      "sha256": "efec546b6f0b8c84afb4981c11ca5be26e613bb7041f195cd21a3b5dcbfd5b54"
+    },
+    {
+      "category": "sukur",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a rustic basket of ripe figs and bread on a sunlit table, grateful abundance",
+      "asset": "app/src/main/res/drawable-nodpi/category_sukur.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "dd932160f4457594f6b1c6d7045ef71516819da37db95ef29142dfce93eeb3ff",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 70882,
+      "sha256": "95d6159585fc2b62e5b93073cef3fdda10285614a0e0241c5c79963d2410bc3d"
+    },
+    {
+      "category": "antrenman",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a pair of dark training shoes and a folded gym towel on a wood floor with warm morning light",
+      "asset": "app/src/main/res/drawable-nodpi/category_antrenman.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "c1a2e95c551a9b87a6acee278bcc2af7f42d8ecc520762c86621a77b9b5df19e",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 43622,
+      "sha256": "f6de138e5b609c0ddd463d480b943b5612ed3a20c82a7b42930edb500144879d"
+    },
+    {
+      "category": "dayaniklilik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a distant runner following a long coastal trail above a teal sea at dawn",
+      "asset": "app/src/main/res/drawable-nodpi/category_dayaniklilik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "4525a4629f90ee3064974d89d3e2cb3bde38640f3cfb4dd815e683fb30f9175c",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 70364,
+      "sha256": "06d34e8776583e4a33f6f75ee6334743e33e9bffe1c93bdf4d406ff621482796"
+    },
+    {
+      "category": "sakatlik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a quiet empty indoor swimming pool with gently lit turquoise water, gradual return to movement",
+      "asset": "app/src/main/res/drawable-nodpi/category_sakatlik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "b588b60fb48269f17e5e7de0597c4c55a391829026566fbf2c5da18149aa3f78",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 54900,
+      "sha256": "218236c59a180258e6ca42a6a4f891fdc50e03adcf9b82362fa69b1b15747341"
+    },
+    {
+      "category": "sabah_rutini",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a glass of water beside an open curtain as sunlight enters a peaceful bedroom",
+      "asset": "app/src/main/res/drawable-nodpi/category_sabah_rutini.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "dd3b38dde9c18bf0fd37fb2169eaaf1bfd441c571807142c0f94aec2197aa844",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 37708,
+      "sha256": "5a7072945172a2d3f8d5a860245b9d6f7a22e4c34bf477bbd7a67b545a3b7170"
+    },
+    {
+      "category": "beslenme",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a beautifully simple ceramic bowl with colorful fresh vegetables on a natural stone table",
+      "asset": "app/src/main/res/drawable-nodpi/category_beslenme.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "93007b9a6dd994180828c07340a1cb714d8738f755568afe08fb7b6f0c93a018",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 61558,
+      "sha256": "e5fc90555089cf74157790a6f55ebcd5e337281ecb403f681d1c36b644d5c7b8"
+    },
+    {
+      "category": "girisimcilik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a tiny bright workshop with a handmade prototype of a wooden object on a workbench, no writing",
+      "asset": "app/src/main/res/drawable-nodpi/category_girisimcilik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "8cf15f76eba351267e2db17b0d1639584359119a212cff028fc45c21ff40b841",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 54668,
+      "sha256": "5a35b141d4e84095c073647a8d236ba9265c1b5bd6930d66f23020f3a90cee29"
+    },
+    {
+      "category": "kariyer",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a modern sunlit staircase ascending through an airy professional building",
+      "asset": "app/src/main/res/drawable-nodpi/category_kariyer.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "297e030cc1c69e8b66196876f51fe30f19ffcf4d88a6a694381b86650de6d95c",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 51916,
+      "sha256": "0418dabc99861f761085fa171fdc0c496f43a1d92058b9f5018120b6ed13fa81"
+    },
+    {
+      "category": "liderlik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a formation of migrating birds over a wide blue lake with one leading bird",
+      "asset": "app/src/main/res/drawable-nodpi/category_liderlik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "8414cde3e48877506440bd034c109a70bbb02c96d327f6c8a6be1e6e769ffe85",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 45326,
+      "sha256": "9605f7f439946c1e3786a8c1700a6ae5bfd4da0e40846db4de81cb98f16e5f9b"
+    },
+    {
+      "category": "para",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a few plain copper coins beside a small growing plant in a terracotta pot, no symbols readable",
+      "asset": "app/src/main/res/drawable-nodpi/category_para.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "7bacba167180a2deaa72c518abde402d3ad52443bf6d0d31a98725409e8bdd62",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 32676,
+      "sha256": "4ada0de02bd7262898314a12f9c2847d39e62e96f64c5e4184c306a47cff2530"
+    },
+    {
+      "category": "zaman",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a minimalist hourglass on a warm wooden table beside soft afternoon window shadows",
+      "asset": "app/src/main/res/drawable-nodpi/category_zaman.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "0784f72c9154c53fe577197dfc92d09c073fb9617428e90b83ad10f66968f700",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 32664,
+      "sha256": "01d5b7790bcc44bce6369693aa79c3981e4f188c3bb4e5e1e824ef8e8e27c45d"
+    },
+    {
+      "category": "basarisizlik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a repaired ceramic vessel with a subtle golden kintsugi seam on a dark wood shelf",
+      "asset": "app/src/main/res/drawable-nodpi/category_basarisizlik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "fd45f5fddab4e2ba458d5824ed1888663871b4e99cddb4a5a42604b377a6884b",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 30052,
+      "sha256": "673c4d9d53256b48e8a4ca3e9a52d7d085136f8ad561d89407a2b9654c6195da"
+    },
+    {
+      "category": "basari",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a modest stone cairn on a mountain summit in clear golden morning light",
+      "asset": "app/src/main/res/drawable-nodpi/category_basari.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "0d848787c86729d3d14a216327886a0f5ddc1ac5e6085a704dcb2b48537cb075",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 69898,
+      "sha256": "578ddac60a23f1ae69fc28050e8986a05b8455712f0acd4457ba954fafefb43a"
+    },
+    {
+      "category": "ask",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: two graceful swans facing one another on a still rose gold lake at dawn",
+      "asset": "app/src/main/res/drawable-nodpi/category_ask.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "064338809502fed3b80be59de07c02804673cb9da5aa257eae1d495e277a1502",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 27172,
+      "sha256": "e1a6713aeb4b426dc0f163738f63b590889816231a6ab05629ba4319f461c6c7"
+    },
+    {
+      "category": "ayrilik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: two sets of footprints separating along a quiet wet sandy beach toward different horizons",
+      "asset": "app/src/main/res/drawable-nodpi/category_ayrilik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "fd0b93fab1e36fa0a72737125d81a6b9b942cd1fc616e04408ed8adb7f060635",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 47000,
+      "sha256": "a1c55023c18dd0a2777a1535d4bb11b279a1a99f6e16f1025d30234172cf0567"
+    },
+    {
+      "category": "aile",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: several differently sized ceramic bowls nestled together on a warm rustic kitchen table",
+      "asset": "app/src/main/res/drawable-nodpi/category_aile.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "bbe51e80d90e183436970b41f93982e1f192b7acf8495b4d2b226f3e4af79298",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 38628,
+      "sha256": "fc9bb604f44dae4caf4b46800dbb9acfa3147d08de2863107541293dfc66274a"
+    },
+    {
+      "category": "arkadaslik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: two empty wooden chairs angled together under a leafy garden tree",
+      "asset": "app/src/main/res/drawable-nodpi/category_arkadaslik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "3741843e23adc86b54e99f1ddf683d921e3affb1c7fbc95fd988de8a942da9aa",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 104752,
+      "sha256": "265d2fae23c8a041a71ee4c0cc4f963d72034b0e7c565d5af6d9a61e6256f006"
+    },
+    {
+      "category": "yalnizlik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a warmly illuminated single window in a small coastal cottage at blue hour",
+      "asset": "app/src/main/res/drawable-nodpi/category_yalnizlik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "1409c186ebc1af3003abf01f40abe403154d4b1b45396e3f27c646759eb6b85e",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 49844,
+      "sha256": "e767473d63005297ac61c27d15dbd053c70112add826393d05e8466ba75b0121"
+    },
+    {
+      "category": "affetmek",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a gently opening hand releasing a dry autumn leaf over a calm stream",
+      "asset": "app/src/main/res/drawable-nodpi/category_affetmek.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "3cfdfeaa9e104ddbc71fb52e2f2de07d033a8ea4841ff077741d4fa27ce0f648",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 47020,
+      "sha256": "7333cc284d3c1913897973c6dfd25ce19233b69272963027f7f5e6049aca90ff"
+    },
+    {
+      "category": "kaygi",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a safe small sailboat at anchor on a sheltered misty lake with a soft horizon",
+      "asset": "app/src/main/res/drawable-nodpi/category_kaygi.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "81a3737314609c34026444c607133d7e6a12d1048a0b3dcb401d9283ab1de95f",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 22458,
+      "sha256": "e8ad4cae64570225c630904c52852bf86eee5f6a1169d6b8a07cf9925a539926"
+    },
+    {
+      "category": "stres",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a quiet cascade flowing over smooth mossy stones in a green woodland",
+      "asset": "app/src/main/res/drawable-nodpi/category_stres.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "42506796969510e99b47e48ff51cce59778ab8b96b193883baae520587fa7547",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 95410,
+      "sha256": "1213a0dacb74b1c7f9fe2ca7ca60197d654dd1273acd97f3d2e74b4ee2f57b05"
+    },
+    {
+      "category": "minnettarlik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: morning dew sparkling on a fresh green leaf in warm sunlight, appreciating small things",
+      "asset": "app/src/main/res/drawable-nodpi/category_minnettarlik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "774fa68f68c170fadd752d1267f8adba0066c61cb6a907eb7c7699aa5ab1a703",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 45122,
+      "sha256": "a48839fa5278db5b00b57f0ff6e2ef225275249d19be2535f121e361b7edba31"
+    },
+    {
+      "category": "simdiki_an",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a single drop falling into clear still water, delicate concentric ripples",
+      "asset": "app/src/main/res/drawable-nodpi/category_simdiki_an.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "c43e4a22d988cd0d113acb66b4bc1f9d2a6bea0a8047e8a20be0bb24eb4de2dd",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 19574,
+      "sha256": "31aa1fe17690f57f49972e954dbe59b693ed9eefc0285ef0433f421b9d2c4086"
+    },
+    {
+      "category": "uyku",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a deep blue night sky with a slender crescent moon above sleeping pine trees",
+      "asset": "app/src/main/res/drawable-nodpi/category_uyku.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "3d8ba59e417c3d00a66b000ff0e1279912263855b0beb847dcde0ffe72fe5ff3",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 35828,
+      "sha256": "1bbb7e4598c376b5dcd7654097b8be567140cd5110ef8b52c689be6d0bede853"
+    },
+    {
+      "category": "karamsarlik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a small patch of bright blue sky opening above a rain washed gray landscape",
+      "asset": "app/src/main/res/drawable-nodpi/category_karamsarlik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "d25e556d11859d22db67acb184a74d1e30a9db1da3b5e943a8a0fa5473063357",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 49046,
+      "sha256": "730a15f88ca9b5c220c0803011d8f3a1c8609428183cba3566aacc66f51595f9"
+    },
+    {
+      "category": "huzur",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a secluded white sandy cove with glassy turquoise water and soft palm shadows",
+      "asset": "app/src/main/res/drawable-nodpi/category_huzur.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "517016b46ed64f9c3fc6c3ea80ebdace4dd84c8716b0d1695e29342a0c518d6d",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 74446,
+      "sha256": "4e372ac61fcf924a934485c2ccfe3c867ac3163b92a8b381f3c733a8965542a9"
+    },
+    {
+      "category": "merak",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a small antique brass magnifying glass beside an intricate fern specimen on a wooden desk",
+      "asset": "app/src/main/res/drawable-nodpi/category_merak.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "49e284b0dd587fb0078a4db1c3205413569ef6024e10660579856c7d49bd126d",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 47316,
+      "sha256": "b996a93ef2bbd2fe3a5e9b990d5dc67564ef8bd5d82f6f9604dba15798b31821"
+    },
+    {
+      "category": "okumak",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an open book with pages softly out of focus in a comfortable sunlit library nook, no readable text",
+      "asset": "app/src/main/res/drawable-nodpi/category_okumak.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "268386957b78abddf2239243c652fdf946d986f6edc1e640bfa56a87b6cb2084",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 38920,
+      "sha256": "0342e9c0c25351d732a963c9355d73c5900fa99a6707cf3929ffd62cb7dac548"
+    },
+    {
+      "category": "hata",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: an artist worktable with a ceramic piece being carefully reshaped beside clay scraps",
+      "asset": "app/src/main/res/drawable-nodpi/category_hata.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "0e9861a452679e9b40d394242c7ee16b4dde6571ad21d5a5d50dbb9c1336438f",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 44608,
+      "sha256": "58012710d2f2c6f5a1bc76fdc85f854772d620e5787239eec6aa14e9978ac9b0"
+    },
+    {
+      "category": "aliskanlik",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a slowly growing ivy vine tracing a natural repeating pattern up a warm stone wall",
+      "asset": "app/src/main/res/drawable-nodpi/category_aliskanlik.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "e9dd26af16637bf544b2ea4df16d623119c9a7cdc50f1cc806ee6077a0967e2e",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 89124,
+      "sha256": "0818833581de779e2862fca4d642205f53afd802e0ce26fbac8411b78b8bb10a"
+    },
+    {
+      "category": "sinav",
+      "prompt": "Create one original premium editorial photograph for an Android inspiration app category cover. Portrait 3:4, photorealistic, cinematic natural lighting, subtle deep teal shadows and warm muted golden highlights, rich real textures, quiet refined composition, main recognizable subject centered with room at lower quarter for UI text added later. No text, letters, watermark, borders, typography or UI. Do not make a collage. Subject: a simple wooden study desk with neatly stacked books and a warm reading lamp, no visible writing",
+      "asset": "app/src/main/res/drawable-nodpi/category_sinav.webp",
+      "sourceSize": [
+        1086,
+        1448
+      ],
+      "sourceSha256": "e6e9ecdbc68f8a2b8b9528ca35d74f292a96f58df4d1e1a28ec9fa50f4af3537",
+      "size": [
+        512,
+        683
+      ],
+      "bytes": 40358,
+      "sha256": "46766068302c4fcaae16c46a356f789273aa1f87e7891dc88cd5c11057756109"
+    }
+  ]
+}

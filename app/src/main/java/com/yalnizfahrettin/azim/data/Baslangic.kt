@@ -7,5 +7,5 @@ object Baslangic {
         if (anahtar !in konular) secili
         else if (anahtar in secili) secili - anahtar else secili + anahtar
     fun dogrula(secili: Set<String>): Set<String> =
-        secili.intersect(Kategoriler.acikAltlar(Kategoriler.ucretsizGruplar)).ifEmpty { varsayilan }
+        secili.intersect(Erisim.ucretsizKategoriler).ifEmpty { varsayilan }
 }
