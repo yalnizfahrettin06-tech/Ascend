@@ -115,7 +115,9 @@ fun AnaEkran(
                         shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
                         if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp))
-                            Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"), fontSize = 12.sp, lineHeight = 15.sp)
+                            Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"),
+                                modifier = Modifier.fillMaxWidth(), fontSize = 12.sp, lineHeight = 15.sp,
+                                letterSpacing = 0.sp, textAlign = TextAlign.Center)
                         } else {
                             Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp))
                             Spacer(Modifier.width(7.dp))
@@ -125,7 +127,8 @@ fun AnaEkran(
                     Button(onClick = { paylas(aktif) }, modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-share"), shape = RoundedCornerShape(16.dp), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
                         if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Icon(AzimIkon.Paylas, null, Modifier.size(19.dp))
-                            Text(cevir(dil, "Paylaş", "Share"), fontSize = 12.sp, lineHeight = 15.sp)
+                            Text(cevir(dil, "Paylaş", "Share"), modifier = Modifier.fillMaxWidth(),
+                                fontSize = 12.sp, lineHeight = 15.sp, letterSpacing = 0.sp, textAlign = TextAlign.Center)
                         } else {
                             Icon(AzimIkon.Paylas, null, Modifier.size(19.dp)); Spacer(Modifier.width(7.dp))
                             Text(cevir(dil, "Paylaş", "Share"), fontSize = 13.sp)

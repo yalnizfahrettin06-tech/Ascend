@@ -76,8 +76,13 @@ fun Onboarding(
             }, modifier = Modifier.testTag("onboarding-skip")) { Text(cevir(dil, "Atla", "Skip")) }
             else Spacer(Modifier.width(12.dp))
         }
-        LinearProgressIndicator(progress = { (step + 1f) / (PersonalPlan.LAST_STEP + 1) }, modifier = Modifier.fillMaxWidth()
-            .padding(horizontal = 24.dp).height(2.dp).testTag("onboarding-progress"), color = Renk.metin, trackColor = Renk.kenarlik)
+        // Material's indicator expands its screen-reader bounds beyond its painted height.
+        // Keep a distinct physical row so layout tests measure the visible divider, while
+        // retaining the indicator's accessible progress semantics unchanged.
+        Box(Modifier.fillMaxWidth().padding(horizontal = 24.dp).height(2.dp).testTag("onboarding-progress")) {
+            LinearProgressIndicator(progress = { (step + 1f) / (PersonalPlan.LAST_STEP + 1) },
+                modifier = Modifier.fillMaxSize(), color = Renk.metin, trackColor = Renk.kenarlik)
+        }
         AnimatedContent(step, transitionSpec = { fadeIn(tween(180)) togetherWith fadeOut(tween(100)) },
             modifier = Modifier.weight(1f).fillMaxWidth().clipToBounds(), label = "onboarding-step") { shownStep ->
             Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).testTag("onboarding-scroll")

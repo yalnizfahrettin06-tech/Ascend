@@ -45,7 +45,9 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
                 ) {
                     Box(Modifier.width(18.dp).height(2.dp).background(if (etkin) renk else Color.Transparent, RoundedCornerShape(1.dp)))
                     Icon(ikonlar[index], null, Modifier.size(22.dp), tint = renk)
-                    Text(etiketler[index], color = renk, fontSize = 11.sp, lineHeight = 14.sp,
+                    Text(etiketler[index], modifier = Modifier.fillMaxWidth(), color = renk,
+                        fontSize = 11.sp, lineHeight = 14.sp, letterSpacing = 0.sp,
+                        maxLines = 2, softWrap = true,
                         fontWeight = if (etkin) FontWeight.SemiBold else FontWeight.Normal, textAlign = TextAlign.Center)
                 }
             }

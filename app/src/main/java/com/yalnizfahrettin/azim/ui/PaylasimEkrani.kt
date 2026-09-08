@@ -15,6 +15,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.listSaver
@@ -27,9 +29,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.painterResource
@@ -54,6 +58,7 @@ private val ayarSaver = listSaver<PaylasimAyari, String>(save = { a ->
 @Composable
 fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false, proAc: () -> Unit = {}) {
     val ctx = LocalContext.current
+    val focusManager = LocalFocusManager.current
     val kapsam = rememberCoroutineScope()
     var ayar by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(PaylasimAyari()) }
     var video by rememberSaveable { mutableStateOf(false) }
@@ -195,6 +200,8 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                 }
                 if (etkinZeminFiltresi == PaylasimZeminFiltresi.KOLEKSIYON) {
                     OutlinedTextField(value = gorselArama, onValueChange = { gorselArama = it }, singleLine = true,
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                        keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
                         placeholder = { Text(cevir(dil, "Görsel ara", "Search artwork")) },
                         modifier = Modifier.fillMaxWidth().testTag("share-library-search"), shape = RoundedCornerShape(16.dp))
                     Text(cevir(dil, "${gorunenZeminler.size} görsel", "${gorunenZeminler.size} artworks"),

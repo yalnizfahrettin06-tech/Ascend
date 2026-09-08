@@ -85,7 +85,8 @@ fun IstatistikEkrani(
             if (buyukYazi) Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                 olcumler.forEach { (sayi, baslik) ->
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text(baslik, Modifier.weight(1f), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+                        Text(baslik, Modifier.weight(1f).fillMaxWidth(), color = Renk.metinIkincil,
+                            style = MaterialTheme.typography.bodySmall, letterSpacing = 0.sp)
                         Text(sayilar.format(sayi), color = Renk.metin, fontSize = 24.sp)
                     }
                 }

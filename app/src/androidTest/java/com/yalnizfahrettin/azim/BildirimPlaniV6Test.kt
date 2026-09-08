@@ -85,9 +85,12 @@ class BildirimPlaniV6Test {
         compose.onNodeWithText("Which hours work for you?").assertIsDisplayed()
         val progress = compose.onNodeWithTag("onboarding-progress").fetchSemanticsNode().boundsInRoot
         val viewport = compose.onNodeWithTag("onboarding-scroll").fetchSemanticsNode().boundsInRoot
-        assertTrue("The scrolling content must not overlap the progress row", viewport.top >= progress.bottom)
+        assertTrue("The scrolling content must not overlap the visible progress row: viewport=$viewport, progress=$progress", viewport.top >= progress.bottom)
         compose.onNodeWithTag("reminder-preview-times").performScrollTo()
         val scrolledViewport = compose.onNodeWithTag("onboarding-scroll").fetchSemanticsNode().boundsInRoot
-        assertTrue(scrolledViewport.top >= progress.bottom)
+        val fixedProgress = compose.onNodeWithTag("onboarding-progress").fetchSemanticsNode().boundsInRoot
+        assertEquals("The progress row must remain fixed while its sibling scrolls", progress, fixedProgress)
+        assertTrue("The scrolled viewport must stay below the visible progress row: viewport=$scrolledViewport, progress=$fixedProgress", scrolledViewport.top >= fixedProgress.bottom)
+        ekranKaydet("03-v7-onboarding-hours")
     }
 }

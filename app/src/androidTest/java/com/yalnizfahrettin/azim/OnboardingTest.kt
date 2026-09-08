@@ -23,8 +23,11 @@ class OnboardingTest {
             assertEquals(Kategoriler.varsayilanSecili, selected); assertEquals(3, count)
             assertEquals(9, start); assertEquals(21, end); assertFalse(enabled); done = true
         } } }
+        compose.onNodeWithText("Build your path").assertIsDisplayed()
+        ekranKaydet("01-v7-onboarding-welcome")
         compose.onNodeWithTag("onboarding-quick-start").performClick()
         compose.onNodeWithText("Your starting point.").assertIsDisplayed()
+        ekranKaydet("04-v7-onboarding-plan")
         next(); next()
         compose.onNodeWithTag("onboarding-finish-without-reminders").performClick()
         compose.runOnIdle { assertTrue(done) }
@@ -52,6 +55,7 @@ class OnboardingTest {
         compose.runOnIdle { assertEquals("Ada", draft.name); assertEquals(3, draft.step); assertEquals(setOf("affirmation"), draft.answer("format")) }
         restoration.emulateSavedInstanceStateRestore()
         compose.onNodeWithTag("onboarding-question-goal").assertIsDisplayed()
+        ekranKaydet("02-v7-onboarding-question")
         compose.onNodeWithTag("onboarding-back").performClick()
         compose.onNodeWithTag("onboarding-option-format-affirmation").assertIsSelected()
         compose.onNodeWithTag("onboarding-skip").performClick()
@@ -77,6 +81,8 @@ class OnboardingTest {
         var requests = 0; var done = false
         compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 19), bildirimIzni = permission,
             izinIste = { requests++; permission = true }) { _,_,_,_,enabled -> assertTrue(enabled); done = true } } }
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+        ekranKaydet("05-v7-onboarding-permission")
         next()
         compose.runOnIdle { assertEquals(1, requests); assertFalse(done) }
         compose.onNodeWithText("Start Ascend").assertIsDisplayed(); next()
