@@ -4,7 +4,7 @@
 
 **Hedef:** Ascend 6.0.0 / versionCode 15
 
-**Durum:** Kabul planı. Bu dosyanın oluşturulması testlerin geçtiği anlamına gelmez. Son commit, Actions çalışması, test sayıları, görsel değerlendirme ve APK bilgileri çalıştırma sonrasında en alttaki sonuç alanına kaydedilmelidir.
+**Durum:** GitHub Actions üzerinde APK, 48 JVM ve 26 Android testi geçti; lint hatası yok. Gerçek ekranlar ve dışa aktarılan medya incelendi. Fiziksel Samsung/OEM, animasyon hissi ve eski APK üzerine uyumlu imzayla güncelleme ayrıca doğrulanmalıdır.
 
 ## 1. Doğrulama ortamı ve kanıt düzeni
 
@@ -168,21 +168,31 @@ Teslim kapısı, aşağıdaki kritik durumlar çözülmeden tamamlanmaz:
 
 Kullanılmayan eski kaynaklar gibi düşük etkili uyarılar sonucu ayrı açıklanabilir. Bir uyarının bulunması otomatik başarısızlık değildir; bir testin yeşil olması da görsel hatayı kabul edilebilir yapmaz.
 
-### Son çalıştırma kaydı — henüz doldurulmadı
+### Son çalıştırma kaydı — doğrulandı
 
 | Kanıt | Sonuç |
 |---|---|
-| Test edilen commit | Bekleniyor |
-| GitHub Actions çalışması | Bekleniyor |
-| APK sürümü / paket / boyut | Bekleniyor |
-| APK SHA-256 / imza doğrulaması | Bekleniyor |
-| İçerik ve 70 görsel doğrulaması | Bekleniyor |
-| JVM testleri: geçen / hatalı / atlanan | Bekleniyor |
-| Android testleri: geçen / hatalı / atlanan | Bekleniyor |
-| Lint: hata / uyarı, önemli bulgular | Bekleniyor |
-| Gerçek ekran ve medya kanıtı | Bekleniyor |
+| Test edilen commit | `b8d2d6ff6621ee896d1d03c4101aeae9dcaedc8b` |
+| GitHub Actions çalışması | [Başarılı çalışma 34229375936](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34229375936) |
+| APK sürümü / paket / boyut | 6.0.0 (15) · `com.yalnizfahrettin.azim.debug` · 30,223,088 bayt |
+| APK SHA-256 / imza doğrulaması | `74bb4c86054892cd873d3201dd959fcc348bacdf718631aba8b9424572011fcc` · apksigner doğrulandı |
+| İçerik ve görsel doğrulaması | 700 EN + 700 TR; 70 kategori ve 19 yeni sahne benzersiz; 23 sahne kaynağı mevcut |
+| JVM testleri: geçen / hatalı / atlanan | 48 / 0 / 0 |
+| Android testleri: geçen / hatalı / atlanan | 26 / 0 / 0 |
+| Lint: hata / uyarı, önemli bulgular | 0 / 141; ayrıntı aşağıda |
+| Gerçek ekran ve medya kanıtı | 28 ekran; 1080×1920 galeri PNG; H.264 MP4 ve dört sürenin Android testi |
 | Animasyon açık gözlem | Ayrı kanıt gerekiyor; CI animasyonları kapatır. |
 | Fiziksel Samsung/OEM, gerçek paylaşım hedefi | Ayrı cihaz gözlemi gerekiyor. |
 | Eski APK üzerine veri koruyan kurulum | Sabit/uyumlu imzayla ayrıca doğrulanmalı. |
 
 Bu alanlar doldurulmadan rapor “tüm testler geçti”, “bütün cihazlar doğrulandı” veya “mağazaya hazır” ifadesine dönüştürülmez.
+
+## 10. Çalıştırma değerlendirmesi
+
+İlk çalışmada 320 dp / 2× yazı ölçeğinde alt menü etiketi taşması yakalandı; kolon ölçümü ve dar ekran boşlukları düzeltildi. Sonraki çalışmada testin yatay kart atası yerine dış dikey alana gerçek kaydırmalar göndermesi sağlandı. Son çalışmada aynı görünürlük, taşma, tıklama ve geri çağrı koşulları korunarak bütün testler geçti.
+
+Lint uyarıları: OldTargetApi: 1, UnusedAttribute: 3, GradleDependency: 13, ModifierParameter: 1, PluralsCandidate: 19, ObsoleteSdkInt: 1, UnusedResources: 103. Kullanılmayan tarihsel kaynaklar, yeni SDK/bağımlılık önerileri ve çoğul metin tavsiyeleri teslimi durduran hata değildir; mağaza hazırlığında ayrıca ele alınmalıdır.
+
+Gerçek görsel gözlem: normal TR/EN ana ekran, plan, izin rehberi, kategori ayrıntısı, Pro demosu, doku seçici, şövalye paylaşımı ve büyük yazı ekranları incelendi. Uzun sayfalardaki devam içeriğine kaydırma ile ulaşılır; geçici bildirim çubuğu kısa süre alt içerik üstünde görünebilir. Ekranlar bütün fiziksel cihazları veya animasyon kalitesini kanıtlamaz.
+
+Kalıcı geliştirme imzası yapılandırılmadığından, önceki test APK’sı ile imza uyuşmazlığı olabilir. Eski test sürümünü kaldırmak verilerini siler. DataStore geçiş testlerinin başarılı olması bu kaldırma işleminin veri koruduğu anlamına gelmez.

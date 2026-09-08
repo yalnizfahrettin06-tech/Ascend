@@ -17,7 +17,7 @@ Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe t
 
 ## APK ve doğrulama
 
-6.0 değişiklikleri derleme ve cihaz doğrulamasına hazırlanıyor. Güncel sonuçlar [6.0 test raporuna](docs/13-ASCEND-6-TEST-PLANI.md) işlenir. Önceki doğrulanmış sürüm: [5.0 test APK](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v5.0.0-preview.1).
+**[Ascend 6.0 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v6.0.0-preview.1)** — sürüm sayfasından `Ascend-6.0.0-test.apk` dosyasını seç. 48 JVM ve 26 Android testi geçti; lint hatası yok. [Doğrulama ve sınırlar](docs/13-ASCEND-6-TEST-PLANI.md) · [Gerçek ekranlar](docs/14-ASCEND-6-EKRANLAR.md).
 
 [Actions → Ascend APK](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) başarılı çalışmasında **Artifacts → Ascend-6.0.0-test-APK** paketini indir. Artifact indirmek için GitHub oturumu gerekir.
 
