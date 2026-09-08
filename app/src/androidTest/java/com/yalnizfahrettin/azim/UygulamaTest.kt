@@ -1,6 +1,5 @@
 package com.yalnizfahrettin.azim
 
-import android.content.Intent
 import androidx.lifecycle.Lifecycle
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -73,17 +72,26 @@ class UygulamaTest {
         compose.waitUntil(15000) {
             var leftApp = false
             instrumentation.runOnMainSync {
-                leftApp = activityBeforeDemo.lifecycle.currentState != Lifecycle.State.RESUMED
+                leftApp = activityBeforeDemo.lifecycle.currentState == Lifecycle.State.CREATED
             }
             leftApp
         }
         assertFalse("Leaving the app must not unlock before returning",
             runBlocking { withTimeout(5000) { demoDepo.acikGruplar.first() } }.contains("cesaret"))
-        instrumentation.runOnMainSync {
-            instrumentation.targetContext.startActivity(
-                Intent(instrumentation.targetContext, MainActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            )
+        // Return as the system launcher would. A background app's own startActivity
+        // can be ignored while Chrome is still starting on Android 15.
+        val returnCommand = "am start -W --activity-reorder-to-front -n " +
+            instrumentation.targetContext.packageName + "/" + MainActivity::class.java.name
+        val returnResult = android.os.ParcelFileDescriptor.AutoCloseInputStream(
+            instrumentation.uiAutomation.executeShellCommand(returnCommand)
+        ).use { String(it.readBytes()) }
+        assertFalse("System return failed: $returnResult", returnResult.contains("Error:"))
+        compose.waitUntil(15000) {
+            var resumed = false
+            instrumentation.runOnMainSync {
+                resumed = activityBeforeDemo.lifecycle.currentState == Lifecycle.State.RESUMED
+            }
+            resumed
         }
         val afterDemo = runBlocking {
             withTimeout(15000) { demoDepo.acikGruplar.first { "cesaret" in it } }

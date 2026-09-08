@@ -13,3 +13,4 @@ captures/
 *.aab
 .env
 *.pem
+__pycache__/
