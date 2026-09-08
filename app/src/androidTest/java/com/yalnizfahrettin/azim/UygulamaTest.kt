@@ -114,6 +114,8 @@ class UygulamaTest {
         compose.onNodeWithText("English").performScrollTo().performClick()
         compose.waitUntil(5000) { compose.onAllNodesWithText("Settings").fetchSemanticsNodes().isNotEmpty() }
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
-        compose.onNodeWithText("For you").assertExists(); shot("15-home-english")
+        compose.onNodeWithText("For you").assertExists()
+        compose.onNodeWithText("Demo tamamlandı. Seçtiğin koleksiyon açıldı.").assertDoesNotExist()
+        shot("15-home-english")
     }
 }

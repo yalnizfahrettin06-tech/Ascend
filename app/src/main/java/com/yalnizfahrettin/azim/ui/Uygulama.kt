@@ -90,6 +90,7 @@ fun Uygulama(
     var indeks by remember { mutableIntStateOf(0) }
     var kutlamaGunu by remember { mutableStateOf<Int?>(null) }
     val snackbar = remember { SnackbarHostState() }
+    LaunchedEffect(dil) { snackbar.currentSnackbarData?.dismiss() }
 
     var kaydediliyor by remember { mutableStateOf(false) }
     var kayitHatasi by remember { mutableStateOf<String?>(null) }
