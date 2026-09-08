@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.glance.appwidget.state.updateAppWidgetState
 import com.yalnizfahrettin.azim.data.Depo
 import com.yalnizfahrettin.azim.data.Sozler
+import com.yalnizfahrettin.azim.data.PersonalPlan
 import kotlinx.coroutines.flow.first
 
 /*
@@ -69,7 +70,7 @@ class AzimWidget : GlanceAppWidget() {
         Column(
             modifier = GlanceModifier
                 .fillMaxSize()
-                .background(ColorProvider(Color(0xFF131920)))
+                .background(ColorProvider(Color(0xFF141414)))
                 .cornerRadius(16.dp)
                 .padding(16.dp)
                 .clickable(actionRunCallback<YenileEylemi>()),
@@ -114,7 +115,8 @@ class AzimWidget : GlanceAppWidget() {
             val depo = Depo(ctx)
             val dil = depo.dil.first()
             val secili = depo.secili.first()
-            val soz = Sozler.rastgele(secili) ?: return
+            val soz = PersonalPlan.notification(depo.personalProfile.first(), secili, depo.acik.first(),
+                dil, depo.gecmis.first(), depo.sonBildirimKimlik.first())?.soz ?: return
             val widget = AzimWidget()
             androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
                 .getGlanceIds(AzimWidget::class.java)

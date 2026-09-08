@@ -42,7 +42,7 @@ jobs:
           bash gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-6.0.0-test-APK
+          name: Ascend-7.0.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -56,7 +56,6 @@ jobs:
           retention-days: 7
 
   ui-tests:
-    needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:

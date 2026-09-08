@@ -15,7 +15,8 @@ import org.junit.Test
  * eşikleri koruyor: biri renk değerlerini "biraz daha güzel dursun" diye
  * değiştirirse ve okunabilirlik düşerse derleme kırılır.
  *
- * Hedef "orta kontrast": okunaklı ama bağırmayan.
+ * Monochrome and optional legacy palettes must meet the same readability floor.
+ * High contrast is allowed; WCAG does not define a maximum contrast ratio.
  */
 class KontrastTest {
 
@@ -66,10 +67,7 @@ class KontrastTest {
         kontrol(ad, r.accent, r.yuzey, 4.5, "accent/yüzey")
     }
 
-    /**
-     * Kontrast YETERLİ olmalı ama AŞIRI da olmamalı — saf beyaz/siyah
-     * (21:1) göz yorar. İstenen "orta" bandın üst sınırı.
-     */
+    /** Labels also remain readable in elevated surfaces such as choice rows. */
     @Test
     fun `elevated surface text remains readable`() = tumSetler().forEach { (ad, r) ->
         kontrol(ad, r.metin, r.yuzeyYuksek, 4.5, "metin/yüksek yüzey")

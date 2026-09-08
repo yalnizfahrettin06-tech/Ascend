@@ -11,6 +11,9 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -57,6 +60,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     var saniye by rememberSaveable { mutableIntStateOf(10) }
     var arac by rememberSaveable { mutableStateOf(false) }
     var zeminFiltresi by rememberSaveable { mutableStateOf(PaylasimZeminFiltresi.UCRETSIZ.name) }
+    var gorselArama by rememberSaveable { mutableStateOf("") }
     var onizleme by remember { mutableStateOf<Bitmap?>(null) }
     var hazirlaniyor by remember { mutableStateOf(false) }
     var ilerleme by remember { mutableFloatStateOf(0f) }
@@ -71,7 +75,11 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     val gorunenVideo = video && pro
     val zeminler = remember(dil, soz.kategori) { paylasimZeminleri(dil, soz.kategori) }
     val etkinZeminFiltresi = PaylasimZeminFiltresi.valueOf(zeminFiltresi)
-    val gorunenZeminler = remember(zeminler, etkinZeminFiltresi) { zeminler.filter(etkinZeminFiltresi::kapsar) }
+    val gorunenZeminler = remember(zeminler, etkinZeminFiltresi, gorselArama) {
+        zeminler.filter { z -> etkinZeminFiltresi.kapsar(z) &&
+            (etkinZeminFiltresi != PaylasimZeminFiltresi.KOLEKSIYON || gorselArama.isBlank() ||
+                z.ad.contains(gorselArama, ignoreCase = true) || z.anahtar.contains(gorselArama, ignoreCase = true)) }
+    }
     val sheet = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     fun durdur() { islem?.cancel() }
     BackHandler { if (hazirlaniyor) durdur() else geri() }
@@ -185,7 +193,24 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                         )
                     }
                 }
-                key(zeminFiltresi) {
+                if (etkinZeminFiltresi == PaylasimZeminFiltresi.KOLEKSIYON) {
+                    OutlinedTextField(value = gorselArama, onValueChange = { gorselArama = it }, singleLine = true,
+                        placeholder = { Text(cevir(dil, "Görsel ara", "Search artwork")) },
+                        modifier = Modifier.fillMaxWidth().testTag("share-library-search"), shape = RoundedCornerShape(16.dp))
+                    Text(cevir(dil, "${gorunenZeminler.size} görsel", "${gorunenZeminler.size} artworks"),
+                        color = Renk.metinIkincil, modifier = Modifier.testTag("share-library-count"))
+                    if (gorunenZeminler.isEmpty()) Text(cevir(dil, "Bu aramada görsel yok.", "No artwork matches your search."), color = Renk.metinIkincil)
+                    else LazyVerticalGrid(columns = GridCells.Fixed(3), modifier = Modifier.fillMaxWidth().height(280.dp).testTag("share-artwork-grid"),
+                        verticalArrangement = Arrangement.spacedBy(14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        items(gorunenZeminler, key = { it.anahtar }) { z ->
+                            Box(contentAlignment = Alignment.TopCenter) {
+                                PaylasimZeminSecenegi(z, gorunenAyar.zemin == z.zemin, dil, hazirlaniyor) {
+                                    if (!pro) proAc() else ayar = gorunenAyar.copy(zemin = z.zemin)
+                                }
+                            }
+                        }
+                    }
+                } else key(zeminFiltresi) {
                     LazyRow(Modifier.fillMaxWidth().testTag("share-background-options"), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         items(gorunenZeminler, key = { it.anahtar }) { z ->
                             PaylasimZeminSecenegi(z, gorunenAyar.zemin == z.zemin, dil, hazirlaniyor) {
@@ -282,6 +307,7 @@ private enum class PaylasimZeminFiltresi(val tr: String, val en: String) {
     MANZARA("Manzaralar", "Scenery"),
     EFSANE("Efsaneler", "Legends"),
     DOKU("Dokular", "Textures"),
+    KOLEKSIYON("Koleksiyon", "Collection"),
     RENKLER("Renkler", "Colors");
 
     fun ad(dil: String) = if (dil == "en") en else tr
@@ -290,18 +316,18 @@ private enum class PaylasimZeminFiltresi(val tr: String, val en: String) {
         MANZARA -> zemin.grup == AtmosferGrubu.MANZARA
         EFSANE -> zemin.grup == AtmosferGrubu.EFSANE
         DOKU -> zemin.grup == AtmosferGrubu.DOKU
+        KOLEKSIYON -> zemin.anahtar.startsWith("topic-")
         RENKLER -> zemin.zemin is KartZemin.Duz || zemin.zemin is KartZemin.Gradyan
     }
 }
 
-// 37 curated backgrounds, the quote's own topic artwork and a separate photo picker.
+// Every former category cover is now available for any quote in the share studio.
 private fun paylasimZeminleri(dil: String, kategori: String): List<PaylasimZemini> = buildList {
     add(PaylasimZemini("summit", PaylasimErisimi.ucretsizZeminler[0], cevir(dil, "Zirve", "Summit"), AtmosferGrubu.MANZARA))
     add(PaylasimZemini("night", PaylasimErisimi.ucretsizZeminler[1], cevir(dil, "Gece", "Night")))
     add(PaylasimZemini("paper", PaylasimErisimi.ucretsizZeminler[2], cevir(dil, "Kâğıt", "Paper")))
-    val konuGorseli = KartZemin.Sahne(KategoriResimleri.kaynak(kategori))
-    if (PaylasimErisimi.zeminProMu(konuGorseli) && Atmosfer.entries.none { it.res == konuGorseli.kaynak }) {
-        add(PaylasimZemini("topic", konuGorseli, cevir(dil, "Konu görseli", "Topic artwork"), AtmosferGrubu.MANZARA))
+    Kategoriler.tumAltlar.forEach { konu ->
+        add(PaylasimZemini("topic-${konu.anahtar}", KartZemin.Sahne(KategoriResimleri.kaynak(konu.anahtar)), konu.ad(dil)))
     }
     Atmosfer.entries.filter { it != Atmosfer.ZIRVE }.forEach { a ->
         add(PaylasimZemini(a.name.lowercase(), KartZemin.Sahne(a.res), a.ad(dil), a.grup))

@@ -56,11 +56,14 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val BUGUN_GORULEN = stringPreferencesKey("bugun_gorulen")   // "tarih|adet"
         val PLANLI_SAATLER = stringSetPreferencesKey("planli_saatler")
         val IPUCU_KAPATILDI = stringPreferencesKey("ipucu_kapatildi")
+        val PERSONAL_PROFILE = stringPreferencesKey("personal_profile_v1")
+        val ONBOARDING_DRAFT = stringPreferencesKey("onboarding_draft_v1")
+        val VISUAL_V7 = booleanPreferencesKey("visual_v7_applied")
     }
 
     /** Every entitlement read begins after the atomic, idempotent migration. */
     private val erisimVerisi: Flow<Preferences> = flow {
-        store.edit { erisimiGocur(it) }
+        store.edit { erisimiGocur(it); gorseliGocur(it) }
         emitAll(store.data)
     }
 
@@ -71,6 +74,33 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     /** Effective category access, including the explicitly enabled Pro demo. */
     val acik: Flow<Set<String>> = erisimVerisi.map(::etkinErisim)
     val proDemo: Flow<Boolean> = erisimVerisi.map { it[K.PRO_DEMO] ?: false }
+    val personalProfile: Flow<PersonalProfile?> = store.data.map { p -> p[K.PERSONAL_PROFILE]?.let(PersonalProfile::decode) }
+    val onboardingDraft: Flow<PersonalProfile> = store.data.map { PersonalProfile.decode(it[K.ONBOARDING_DRAFT]) }
+
+    suspend fun saveOnboardingDraft(profile: PersonalProfile) = store.edit { it[K.ONBOARDING_DRAFT] = profile.encode() }
+
+    /** One atomic commit: answers change recommendations, never paid access. */
+    suspend fun completePersonalPlan(profile: PersonalProfile, reminders: Boolean) = store.edit { p ->
+        erisimiGocur(p)
+        gorseliGocur(p)
+        val safe = PersonalProfile.decode(profile.encode()).copy(step = 0)
+        p[K.PERSONAL_PROFILE] = safe.encode()
+        p[K.SECILI] = PersonalPlan.initialCategories(safe, etkinErisim(p))
+        p[K.GUNLUK] = safe.dailyCount
+        p[K.BASLANGIC] = safe.startHour
+        p[K.BITIS] = safe.endHour
+        p[K.HATIRLATICI] = reminders
+        p[K.ONBOARDING] = true
+        p.remove(K.ONBOARDING_DRAFT)
+    }
+
+    private fun gorseliGocur(p: MutablePreferences) {
+        if (p[K.VISUAL_V7] == true) return
+        p[K.PALET] = Palet.MONO.name
+        p[K.DINAMIK] = false
+        p.remove(K.ARKA_PLAN)
+        p[K.VISUAL_V7] = true
+    }
     val arkaPlan: Flow<String?> = store.data.map { it[K.ARKA_PLAN] }
 
     suspend fun arkaPlanAyarla(ad: String?) = store.edit { p ->
@@ -117,7 +147,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     val gorulenToplam: Flow<Int> = store.data.map { it[K.GORULEN] ?: 0 }
     val kutlananKilometre: Flow<Int> = store.data.map { it[K.KUTLANAN] ?: 0 }
     val palet: Flow<Palet> = store.data.map {
-        runCatching { Palet.valueOf(it[K.PALET] ?: "KUM") }.getOrDefault(Palet.KUM)
+        runCatching { Palet.valueOf(it[K.PALET] ?: "MONO") }.getOrDefault(Palet.MONO)
     }
 
     /** Son 7 günün aktiflik durumu — pazartesiden bugüne. */

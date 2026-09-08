@@ -92,7 +92,7 @@ val AzimTipografi = Typography(
     ),
 )
 
-val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.KUM, karanlik = true, oled = false) }
+val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.MONO, karanlik = true, oled = false) }
 
 enum class TemaModu { SISTEM, AYDINLIK, KARANLIK, OLED }
 
@@ -100,7 +100,7 @@ enum class TemaModu { SISTEM, AYDINLIK, KARANLIK, OLED }
 @Composable
 fun AzimTema(
     modu: TemaModu = TemaModu.SISTEM,
-    palet: Palet = Palet.KUM,
+    palet: Palet = Palet.MONO,
     dinamik: Boolean = false,
     icerik: @Composable () -> Unit,
 ) {

@@ -32,9 +32,10 @@ import java.util.Locale
 class ResponsiveV6Test {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
 
-    private fun textFits(text: String) {
+    private fun textFits(text: String, ancestorTag: String? = null) {
         val layouts = mutableListOf<TextLayoutResult>()
-        compose.onNodeWithText(text, useUnmergedTree = true)
+        val matcher = if (ancestorTag == null) hasText(text) else hasText(text) and hasAnyAncestor(hasTestTag(ancestorTag))
+        compose.onNode(matcher, useUnmergedTree = true)
             .performSemanticsAction(SemanticsActions.GetTextLayoutResult) { it(layouts) }
         assertTrue("Expected a real text layout for $text", layouts.isNotEmpty())
         val layout = layouts.single()
@@ -51,7 +52,7 @@ class ResponsiveV6Test {
     private fun navigationFits() {
         val root = compose.onNodeWithTag("responsive-root").fetchSemanticsNode().boundsInRoot
         val content = compose.onNodeWithTag("responsive-content").fetchSemanticsNode().boundsInRoot
-        val bounds = Sekme.entries.map { tab ->
+        val bounds = listOf(Sekme.ANA, Sekme.KATEGORI, Sekme.ISTATISTIK).map { tab ->
             val node = compose.onNodeWithTag("nav-${tab.rota}")
             node.assertIsDisplayed().assertHasClickAction()
             node.fetchSemanticsNode().boundsInRoot
@@ -64,24 +65,7 @@ class ResponsiveV6Test {
         bounds.zipWithNext().forEach { (left, right) ->
             assertTrue("Adjacent tab touch targets must not overlap", left.right <= right.left)
         }
-        listOf("Bugün", "Keşfet", "Kaydedilen", "Yolculuk").forEach(::textFits)
-    }
-
-    private fun reachHomeAction(node: SemanticsNodeInteraction, screenshot: String): SemanticsNodeInteraction {
-        // The quote lives inside a horizontal pager. Scroll it as a user would,
-        // rather than sending ScrollTo to that nearest (horizontal) ancestor.
-        repeat(12) {
-            if (node.isDisplayed()) {
-                ekranKaydet(screenshot)
-                return node.assertIsDisplayed()
-            }
-            compose.onNodeWithTag("home-content").performTouchInput {
-                swipeUp(startY = height * .8f, endY = height * .2f, durationMillis = 400)
-            }
-            compose.waitForIdle()
-        }
-        ekranKaydet(screenshot)
-        return node.assertIsDisplayed()
+        listOf("Bugün" to "nav-ana", "Keşfet" to "nav-kategori", "Senin" to "nav-istatistik").forEach { (text, tag) -> textFits(text, tag) }
     }
 
     @Test fun narrowViewportWithDoubleTextKeepsHomeActionsAndJourneyReachable() {
@@ -143,30 +127,34 @@ class ResponsiveV6Test {
         compose.waitForIdle()
         ekranKaydet("22-nav-before-check")
         navigationFits()
-        val save = compose.onNode(hasText("Kaydet") and hasAnyAncestor(hasTestTag("active-quote")))
-        reachHomeAction(save, "22-save-after-swipes").assertHasClickAction().performClick()
-        compose.runOnIdle { assertTrue(saved); assertEquals(1, saveCalls) }
-        val share = compose.onNode(hasText("Paylaş") and hasAnyAncestor(hasTestTag("active-quote")))
-        reachHomeAction(share, "22-share-after-swipes").assertHasClickAction().performClick()
-        compose.runOnIdle { assertEquals(1, shareCalls) }
-        textFits("Kaydedildi")
+        // Primary actions must be visible before any vertical gesture.
+        val save = compose.onNodeWithTag("home-save")
+        val share = compose.onNodeWithTag("home-share")
+        save.assertIsDisplayed().assertHasClickAction()
+        share.assertIsDisplayed().assertHasClickAction()
+        textFits("Kaydet")
         textFits("Paylaş")
-        val saveBounds = compose.onNode(hasText("Kaydedildi") and hasAnyAncestor(hasTestTag("active-quote"))).fetchSemanticsNode().boundsInRoot
+        save.performClick()
+        compose.runOnIdle { assertTrue(saved); assertEquals(1, saveCalls) }
+        share.assertIsDisplayed().performClick()
+        compose.runOnIdle { assertEquals(1, shareCalls) }
+        textFits("Kayıtlı")
+        textFits("Paylaş")
+        val saveBounds = save.fetchSemanticsNode().boundsInRoot
         val shareBounds = share.fetchSemanticsNode().boundsInRoot
         assertTrue("Save and Share targets must not overlap", saveBounds.right <= shareBounds.left)
         navigationFits()
         ekranKaydet("22-home-large-text")
 
         compose.onNodeWithTag("nav-istatistik").performClick()
-        compose.onNodeWithText("Kendi yolunda.").assertIsDisplayed()
+        compose.onNodeWithTag("profile-saved").assertIsDisplayed().assertHasClickAction()
+        compose.onNodeWithTag("profile-plan").assertIsDisplayed().assertHasClickAction()
         compose.onNodeWithTag("journey-week").performScrollTo()
         compose.onNodeWithText("Haftanın izi").assertIsDisplayed()
         compose.onNodeWithText("Okunan söz").performScrollTo().assertIsDisplayed()
         textFits("Okunan söz")
-        compose.onNodeWithText("Biriktirdiğin söz").performScrollTo().assertIsDisplayed()
-        textFits("Biriktirdiğin söz")
-        compose.onNodeWithText("Açık kategori").performScrollTo().assertIsDisplayed()
-        textFits("Açık kategori")
+        compose.onNodeWithText("Açık konu").performScrollTo().assertIsDisplayed()
+        textFits("Açık konu")
         compose.onNodeWithText("En uzun seri · gün").performScrollTo().assertIsDisplayed()
         textFits("En uzun seri · gün")
         navigationFits()

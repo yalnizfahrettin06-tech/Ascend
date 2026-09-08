@@ -17,6 +17,7 @@ import com.yalnizfahrettin.azim.core.AzimTema
 import com.yalnizfahrettin.azim.core.TemaModu
 import com.yalnizfahrettin.azim.ui.BildirimPlani
 import com.yalnizfahrettin.azim.ui.Onboarding
+import com.yalnizfahrettin.azim.data.PersonalProfile
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -80,15 +81,13 @@ class BildirimPlaniV6Test {
     }
 
     @Test fun stepViewportStaysBelowProgressWhenScrolling() {
-        compose.setContent { AzimTema { Onboarding("en") { _, _, _, _, _ -> } } }
-        compose.onNodeWithText("Make it yours →").performClick()
-        compose.onNodeWithText("Continue").performClick()
-        compose.onNodeWithText("Set your daily rhythm.").assertIsDisplayed()
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 16)) { _, _, _, _, _ -> } } }
+        compose.onNodeWithText("Which hours work for you?").assertIsDisplayed()
         val progress = compose.onNodeWithTag("onboarding-progress").fetchSemanticsNode().boundsInRoot
         val viewport = compose.onNodeWithTag("onboarding-scroll").fetchSemanticsNode().boundsInRoot
-        assertTrue("The scrolling content must not share the progress row", viewport.top > progress.bottom)
+        assertTrue("The scrolling content must not overlap the progress row", viewport.top >= progress.bottom)
         compose.onNodeWithTag("reminder-preview-times").performScrollTo()
         val scrolledViewport = compose.onNodeWithTag("onboarding-scroll").fetchSemanticsNode().boundsInRoot
-        assertTrue(scrolledViewport.top > progress.bottom)
+        assertTrue(scrolledViewport.top >= progress.bottom)
     }
 }

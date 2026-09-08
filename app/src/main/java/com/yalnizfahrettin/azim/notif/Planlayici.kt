@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.*
 import com.yalnizfahrettin.azim.data.Depo
 import com.yalnizfahrettin.azim.data.Sozler
+import com.yalnizfahrettin.azim.data.PersonalPlan
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
@@ -70,12 +71,15 @@ class SozWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, p
         if (saat < depo.baslangicSaati.first() || saat >= depo.bitisSaati.first()) return@withLock Result.success()
         val secili = depo.secili.first()
         val dil = depo.dil.first()
-        val secim = Sozler.bildirimSec(secili, dil, depo.gecmis.first(), depo.sonBildirimKimlik.first()) ?: return@withLock Result.success()
+        val profil = depo.personalProfile.first()
+        val erisim = depo.acik.first()
+        val havuz = PersonalPlan.effectiveCategories(profil, secili, erisim)
+        val secim = PersonalPlan.notification(profil, secili, erisim, dil, depo.gecmis.first(), depo.sonBildirimKimlik.first()) ?: return@withLock Result.success()
         val soz = secim.soz
         if (Bildirimler.goster(applicationContext, soz, dil)) {
             // Replanning can cancel this worker after Android accepted the notification.
             withContext(NonCancellable) {
-                depo.bildirimGecmisineEkle(soz.kimlik, if (secim.yeniTur) secili else emptySet())
+                depo.bildirimGecmisineEkle(soz.kimlik, if (secim.yeniTur) havuz else emptySet())
                 depo.bugunGeldi(soz.kimlik)
             }
         }

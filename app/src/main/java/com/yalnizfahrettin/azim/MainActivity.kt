@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
             val tema by depo.tema.collectAsStateWithLifecycle(TemaModu.SISTEM)
             val dinamik by depo.dinamikRenk.collectAsStateWithLifecycle(false)
             val haptik by depo.haptikAcik.collectAsStateWithLifecycle(true)
-            val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.KUM)
+            val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.MONO)
             val dil by depo.dil.collectAsStateWithLifecycle("tr")
             val base = LocalContext.current
             val configuration = LocalConfiguration.current

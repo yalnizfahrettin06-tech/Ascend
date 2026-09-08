@@ -16,58 +16,85 @@ import org.junit.Assert.*
 
 class OnboardingTest {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
-    private fun next() = compose.onNodeWithText("Continue").performClick()
-    private fun start() = compose.onNodeWithText("Make it yours →").performClick()
-    @Test fun skipKeepsBalancedSelectionAndDoesNotOptIn() {
+    private fun next() = compose.onNodeWithTag("onboarding-next").performClick()
+    @Test fun quickStartUsesRealFreePlanAndNeverOptsIn() {
         var done = false
         compose.setContent { AzimTema { Onboarding("en") { selected, count, start, end, enabled ->
-            assertEquals(Baslangic.varsayilan, selected); assertEquals(3, count)
+            assertEquals(Kategoriler.varsayilanSecili, selected); assertEquals(3, count)
             assertEquals(9, start); assertEquals(21, end); assertFalse(enabled); done = true
         } } }
-        start(); next(); next()
-        compose.onNodeWithText("Start Ascend").assertIsNotEnabled()
-        compose.onNodeWithText("Continue without reminders").performClick()
+        compose.onNodeWithTag("onboarding-quick-start").performClick()
+        compose.onNodeWithText("Your starting point.").assertIsDisplayed()
+        next(); next()
+        compose.onNodeWithTag("onboarding-finish-without-reminders").performClick()
         compose.runOnIdle { assertTrue(done) }
     }
-    @Test fun usersCanReplaceAllDefaultsAndBackPreservesSelection() {
-        compose.setContent { AzimTema { Onboarding("en") { _,_,_,_,_ -> } } }
-        start()
-        Baslangic.varsayilan.forEach { compose.onNodeWithText(baslangicAdi(it,"en")).performClick() }
-        compose.onNodeWithText("Continue").assertIsNotEnabled()
-        compose.onNodeWithText("Deep Focus").performScrollTo().performClick(); next()
-        compose.onNodeWithContentDescription("Back").performClick()
-        compose.onNodeWithText("Deep Focus").assertIsOn()
-        compose.onNodeWithText("Continue").assertIsEnabled()
+    @Test fun everyQuestionCanBeSkippedAndFooterStaysAccessible() {
+        var final: PersonalProfile? = null
+        compose.setContent { AzimTema { Onboarding("en", finishProfile = { profile, _ -> final = profile }) { _, _, _, _, _ -> } } }
+        next()
+        compose.onNodeWithTag("onboarding-skip").performClick()
+        PersonalPlan.questions.forEach { question ->
+            compose.onNodeWithTag("onboarding-question-${question.id}").assertIsDisplayed()
+            compose.onNodeWithTag("onboarding-skip").performClick()
+        }
+        compose.onNodeWithTag("reminder-count").assertExists()
+        repeat(4) { next() }
+        compose.onNodeWithTag("onboarding-finish-without-reminders").performClick()
+        compose.runOnIdle { assertNotNull(final); assertTrue(final!!.answers.isEmpty()) }
     }
-    @Test fun permissionRequestDoesNotCompleteOnboardingUntilExplicitStart() {
-        var permission by mutableStateOf(false)
-        var requests = 0
-        var done = false
-        compose.setContent { AzimTema { Onboarding("en", bildirimIzni = permission, izinIste = { requests++; permission = true }) { _,_,_,_,enabled -> assertTrue(enabled); done = true } } }
-        start(); next(); next()
-        compose.onNodeWithText("Allow notifications").performScrollTo().performClick()
-        compose.runOnIdle { assertEquals(1,requests); assertFalse(done) }
-        compose.onNodeWithText("Start Ascend").performClick()
-        compose.runOnIdle { assertTrue(done) }
-    }
-    @Test fun recreationRestoresStepAndTopicChoice() {
+    @Test fun backAndRecreationPreserveAnswersAndSavedDraftStep() {
+        var draft = PersonalProfile()
         val restoration = StateRestorationTester(compose)
-        restoration.setContent { AzimTema { Onboarding("en") { _,_,_,_,_ -> } } }
-        start(); compose.onNodeWithText("Deep Focus").performScrollTo().performClick(); next()
+        restoration.setContent { AzimTema { Onboarding("en", draftChanged = { draft = it }) { _,_,_,_,_ -> } } }
+        next(); compose.onNodeWithTag("onboarding-name").performTextInput("Ada")
+        next(); compose.onNodeWithTag("onboarding-option-format-affirmation").performClick(); next()
+        compose.runOnIdle { assertEquals("Ada", draft.name); assertEquals(3, draft.step); assertEquals(setOf("affirmation"), draft.answer("format")) }
         restoration.emulateSavedInstanceStateRestore()
-        compose.onNodeWithText("Set your daily rhythm.").assertExists()
-        compose.onNodeWithContentDescription("Back").performClick()
-        compose.onNodeWithText("Deep Focus").assertIsOn()
+        compose.onNodeWithTag("onboarding-question-goal").assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-back").performClick()
+        compose.onNodeWithTag("onboarding-option-format-affirmation").assertIsSelected()
+        compose.onNodeWithTag("onboarding-skip").performClick()
+        compose.runOnIdle { assertTrue(draft.answer("format").isEmpty()) }
     }
-    @Test fun largeTextCanReachNotificationSetupAndSkip() {
+    @Test fun suppliedPersistentDraftResumesWithoutReplayingWelcome() {
+        val draft = PersonalProfile(step = 5).choose("format", "reflection").choose("tone", "thoughtful")
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = draft) { _,_,_,_,_ -> } } }
+        compose.onNodeWithTag("onboarding-question-tone").assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-option-tone-thoughtful").assertIsSelected()
+        compose.onNodeWithTag("onboarding-back").performClick()
+        compose.onNodeWithTag("onboarding-question-energy").assertIsDisplayed()
+    }
+    @Test fun planPreviewUsesActualEarnedOrProAccess() {
+        val profile = PersonalProfile(step = 17).choose("goal", "action")
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = profile, previewAccess = Erisim.tumKategoriler) { _,_,_,_,_ -> } } }
+        compose.onNodeWithText("Topics in your plan").assertIsDisplayed()
+        compose.onNodeWithText("Procrastination", substring = true).assertExists()
+        compose.onNodeWithText("These topics unlock separately.", substring = true).assertDoesNotExist()
+    }
+    @Test fun permissionRequestDoesNotCompleteUntilExplicitStart() {
+        var permission by mutableStateOf(false)
+        var requests = 0; var done = false
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 19), bildirimIzni = permission,
+            izinIste = { requests++; permission = true }) { _,_,_,_,enabled -> assertTrue(enabled); done = true } } }
+        next()
+        compose.runOnIdle { assertEquals(1, requests); assertFalse(done) }
+        compose.onNodeWithText("Start Ascend").assertIsDisplayed(); next()
+        compose.runOnIdle { assertTrue(done) }
+    }
+    @Test fun largeTextCanReachPermissionHelpAndAlwaysFinishWithoutPermission() {
+        var done = false
         compose.setContent { AzimTema(modu = TemaModu.KARANLIK) {
             val density = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(density.density, 2f)) { Onboarding("en") { _,_,_,_,_ -> } }
+            CompositionLocalProvider(LocalDensity provides Density(density.density, 2f)) {
+                Onboarding("en", initialDraft = PersonalProfile(step = 19)) { _,_,_,_,enabled -> assertFalse(enabled); done = true }
+            }
         } }
-        start(); next(); next()
-        compose.onNodeWithText("Continue without reminders").assertIsDisplayed()
-        compose.onNodeWithText("Samsung: Detailed pop-up").performScrollTo().performClick()
-        compose.onNodeWithText("Open appearance settings ↗").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-finish-without-reminders").assertIsDisplayed()
+        compose.onNodeWithText("Notification appearance and device settings").performScrollTo().performClick()
+        compose.onNodeWithText("Got it").performClick()
         ekranKaydet("14-large-text-notifications")
+        compose.onNodeWithTag("onboarding-finish-without-reminders").performClick()
+        compose.runOnIdle { assertTrue(done) }
     }
 }

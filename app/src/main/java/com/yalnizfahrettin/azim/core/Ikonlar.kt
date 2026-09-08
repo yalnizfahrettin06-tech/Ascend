@@ -38,22 +38,31 @@ private fun ImageVector.Builder.dolgu(blok: PathBuilder.() -> Unit) =
 
 object AzimIkon {
 
-    // The summit, compass, bookmark and trail share one rounded 24 dp grid.
-    val Dag = ikon("dag") {
+    // Ascend's single rising line: a small pause before the next step upward.
+    val Yukselis = ikon("ascend") {
+        cizgi { moveTo(3f, 19f); lineTo(10f, 12f); lineTo(14f, 15f); lineTo(21f, 4f) }
+    }
+    val Kisi = ikon("senin") {
         cizgi {
-            moveTo(3f, 20f); lineTo(12f, 4f); lineTo(21f, 20f); close()
-            moveTo(7.5f, 12f); lineTo(10f, 14f); lineTo(12f, 11.5f)
-            lineTo(14f, 14f); lineTo(16.5f, 12f)
+            moveTo(12f, 12f); arcTo(4f, 4f, 0f, true, true, 12f, 4f)
+            arcTo(4f, 4f, 0f, true, true, 12f, 12f)
+            moveTo(4f, 21f); curveTo(4f, 13f, 20f, 13f, 20f, 21f)
         }
     }
-    val DagDolu = ikon("dag_dolu") {
-        cizgi { moveTo(3f, 20f); lineTo(12f, 4f); lineTo(21f, 20f); close() }
-        dolgu {
-            moveTo(7.5f, 12f); lineTo(10f, 14f); lineTo(12f, 11.5f)
-            lineTo(14f, 14f); lineTo(16.5f, 12f); lineTo(21f, 20f)
-            horizontalLineTo(3f); close()
+    val Ara = ikon("ara") {
+        cizgi {
+            moveTo(10.5f, 17f); arcTo(6.5f, 6.5f, 0f, true, true, 10.5f, 4f)
+            arcTo(6.5f, 6.5f, 0f, true, true, 10.5f, 17f)
+            moveTo(15f, 15f); lineTo(21f, 21f)
         }
     }
+    val Ileri = ikon("ileri") {
+        cizgi { moveTo(9f, 5f); lineTo(16f, 12f); lineTo(9f, 19f) }
+    }
+
+    // Compatibility names keep older feature screens on the current identity.
+    val Dag = Yukselis
+    val DagDolu = Yukselis
     val Ayrac = ikon("ayrac") {
         cizgi {
             moveTo(7f, 3.5f); horizontalLineTo(17f)

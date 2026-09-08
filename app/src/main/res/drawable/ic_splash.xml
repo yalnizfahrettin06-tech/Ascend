@@ -1,11 +1,8 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="120dp" android:height="120dp"
     android:viewportWidth="108" android:viewportHeight="108">
-    <!-- A summit and an A, inside the adaptive icon's central safe circle. -->
-    <path android:fillColor="#E5C79E" android:fillType="evenOdd"
-        android:pathData="M54,28 L77,75 H66.8 L61.3,62 H46.7 L41.2,75 H31 Z M54,43 L49.6,54 H58.4 Z"/>
-    <path android:fillColor="#CBA477"
-        android:pathData="M54,28 L77,75 H66.8 L54,43 Z"/>
-    <path android:fillColor="#F7E8CE"
-        android:pathData="M54,28 L60.5,41.3 L56.7,39.5 L54,35.8 L51.3,39.5 L47.5,41.3 Z"/>
+    <!-- One rising line, including a pause, within the adaptive icon safe area. -->
+    <path android:strokeColor="@color/accent" android:strokeWidth="6.5"
+        android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M34,73 L49,58 L58,64 L74,35"/>
 </vector>

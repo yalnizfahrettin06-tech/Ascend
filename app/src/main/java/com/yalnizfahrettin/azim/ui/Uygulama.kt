@@ -28,6 +28,9 @@ import com.yalnizfahrettin.azim.core.TemaModu
 import com.yalnizfahrettin.azim.data.Depo
 import com.yalnizfahrettin.azim.data.Soz
 import com.yalnizfahrettin.azim.data.Sozler
+import com.yalnizfahrettin.azim.data.PersonalProfile
+import com.yalnizfahrettin.azim.data.PersonalPlan
+import com.yalnizfahrettin.azim.data.MomentFeed
 import com.yalnizfahrettin.azim.notif.Planlayici
 import com.yalnizfahrettin.azim.paylas.PaylasimKarti
 import com.yalnizfahrettin.azim.widget.AzimWidget
@@ -48,6 +51,8 @@ fun Uygulama(
 
     val onboardingBitti by remember(depo) { depo.onboardingBitti.map { it as Boolean? } }.collectAsStateWithLifecycle(null)
     val secili by depo.secili.collectAsStateWithLifecycle(emptySet())
+    val profil by depo.personalProfile.collectAsStateWithLifecycle(null)
+    val taslak by remember(depo) { depo.onboardingDraft.map { it as PersonalProfile? } }.collectAsStateWithLifecycle(null)
     val acik by depo.acik.collectAsStateWithLifecycle(emptySet())
     val acikGruplar by depo.acikGruplar.collectAsStateWithLifecycle(emptySet())
     val arkaPlan by depo.arkaPlan.collectAsStateWithLifecycle(null)
@@ -66,7 +71,7 @@ fun Uygulama(
     val tema by depo.tema.collectAsStateWithLifecycle(TemaModu.SISTEM)
     val dinamik by depo.dinamikRenk.collectAsStateWithLifecycle(false)
     val haptik by depo.haptikAcik.collectAsStateWithLifecycle(true)
-    val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.KUM)
+    val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.MONO)
     val haftalik by depo.haftalikAktiflik.collectAsStateWithLifecycle(List(7) { false })
     val bugunGelenler by depo.bugunGelenler.collectAsStateWithLifecycle(emptyList())
     val gunlukGelenler by depo.gunlukGelenler.collectAsStateWithLifecycle(emptyMap())
@@ -83,6 +88,10 @@ fun Uygulama(
 
     var sekme by rememberSaveable { mutableStateOf(acilisSekmesi ?: Sekme.ANA) }
     var ayarlardaMi by rememberSaveable { mutableStateOf(false) }
+    var planGoster by rememberSaveable { mutableStateOf(false) }
+    var planDuzenle by rememberSaveable { mutableStateOf(false) }
+    var duzenlemeBaslangici by remember { mutableStateOf<PersonalProfile?>(null) }
+    var ihtiyac by rememberSaveable { mutableStateOf<String?>(null) }
     var kilitKategori by remember { mutableStateOf<com.yalnizfahrettin.azim.data.Kategori?>(null) }
     var proGoster by rememberSaveable { mutableStateOf(false) }
     var proKaydediliyor by remember { mutableStateOf(false) }
@@ -101,17 +110,44 @@ fun Uygulama(
     var kayitHatasi by remember { mutableStateOf<String?>(null) }
     val hataMetni = stringResource(R.string.asc_kayit_hata)
     BackHandler(ayarlardaMi || paylasilanSoz != null || sekme != Sekme.ANA) {
-        when { paylasilanSoz != null -> paylasilanKimlik = null; ayarlardaMi -> ayarlardaMi = false; else -> sekme = Sekme.ANA }
+        when { paylasilanSoz != null -> paylasilanKimlik = null; ayarlardaMi -> ayarlardaMi = false; sekme == Sekme.FAVORI -> sekme = Sekme.ISTATISTIK; else -> sekme = Sekme.ANA }
     }
     LaunchedEffect(acilisSekmesi) { acilisSekmesi?.let { sekme = it } }
     if (onboardingBitti == null || proDemo == null) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
         return
     }
-    // Onboarding is committed atomically before any system permission request.
-    if (onboardingBitti == false) {
+    // Drafts resume locally; completing setup commits answers and the reminder choice atomically.
+    if (onboardingBitti == false || planDuzenle) {
+        if (taslak == null) {
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
+            return
+        }
         Onboarding(dil = dil, kaydediliyor = kaydediliyor, hata = kayitHatasi,
             bildirimIzni = bildirimIzni, izinIste = izinIste,
+            initialDraft = if (planDuzenle) duzenlemeBaslangici ?: taslak!! else taslak!!,
+            editing = planDuzenle, previewAccess = acik,
+            onCancel = { planDuzenle = false; duzenlemeBaslangici = null; kayitHatasi = null },
+            draftChanged = { yeni ->
+                kapsam.launch {
+                    try { depo.saveOnboardingDraft(yeni) }
+                    catch (_: java.io.IOException) { kayitHatasi = hataMetni }
+                }
+            },
+            finishProfile = { yeni, hatirlat ->
+                if (!kaydediliyor) {
+                    kaydediliyor = true; kayitHatasi = null
+                    kapsam.launch {
+                        try {
+                            depo.completePersonalPlan(yeni, hatirlat)
+                            planDuzenle = false; duzenlemeBaslangici = null; ihtiyac = null
+                            Planlayici.yenidenKur(ctx)
+                            AzimWidget.tazele(ctx)
+                        } catch (_: java.io.IOException) { kayitHatasi = hataMetni }
+                        finally { kaydediliyor = false }
+                    }
+                }
+            },
             bitir = { secilenler, adet, b, bt, hatirlat ->
                 if (!kaydediliyor) {
                     kaydediliyor = true
@@ -131,11 +167,10 @@ fun Uygulama(
     }
 
     // Akışı bir kez kur: seçili kategorilerden karıştırılmış liste.
-    LaunchedEffect(secili, acik, onboardingBitti) {
+    LaunchedEffect(secili, acik, profil, ihtiyac, onboardingBitti) {
         if (secili.isNotEmpty()) {
-            val mevcut = akis.getOrNull(indeks)
-            val yeni = Sozler.akis(secili.intersect(acik), gecmis)
-            akis = if (mevcut != null && mevcut.kategori in secili && mevcut.kategori in acik) listOf(mevcut) + yeni.filterNot { it.kimlik == mevcut.kimlik } else yeni
+            val yeni = MomentFeed.apply(PersonalPlan.feed(profil, secili, acik, gecmis), ihtiyac)
+            akis = yeni
             indeks = 0
         }
         depo.seriyiTazele()
@@ -198,6 +233,8 @@ fun Uygulama(
             ) { s ->
                 when (s) {
                     Sekme.ANA -> AnaEkran(
+                        kullaniciAdi = profil?.name.orEmpty(), planAc = { planGoster = true },
+                        ihtiyac = ihtiyac, ihtiyacSec = { ihtiyac = it },
                         secilenAtmosfer = arkaPlan, atmosferSec = { ad -> kapsam.launch { depo.arkaPlanAyarla(ad) } },
                         sozler = akis,
                         aktifIndeks = indeks,
@@ -250,6 +287,7 @@ fun Uygulama(
                     )
 
                     Sekme.FAVORI -> FavorilerEkrani(
+                        onBack = { sekme = Sekme.ISTATISTIK },
                         favoriler = favoriler.mapNotNull { Sozler.kimlikten(it) },
                         dil = dil,
                         cikar = { kapsam.launch { depo.favoriDegistir(it) } },
@@ -261,6 +299,10 @@ fun Uygulama(
                     Sekme.ISTATISTIK -> IstatistikEkrani(
                         seri = seri, rekor = rekor, gorulen = gorulen,
                         favoriSayisi = favoriler.size, acikKategori = acik.size, haftalik = haftalik,
+                        name = profil?.name.orEmpty(),
+                        planOzeti = profil?.let { PersonalPlan.summary(it, dil).take(2).joinToString(" · ") }.orEmpty(),
+                        onFavoriler = { sekme = Sekme.FAVORI }, onPlan = { planGoster = true },
+                        onSettings = { ayarlardaMi = true },
                     )
                 }
             }
@@ -270,6 +312,23 @@ fun Uygulama(
     }
 
     paylasilanSoz?.let { soz -> PaylasimEkrani(soz = soz, dil = dil, geri = { paylasilanKimlik = null }, pro = proDemo == true, proAc = { proGoster = true }) }
+    if (planGoster) KisiselPlanPaneli(
+        profil = profil, secili = secili, acik = acik, dil = dil,
+        adet = gunlukAdet, bas = bas, bit = bit, bildirimAcik = hatirlaticiAcik && bildirimIzni,
+        kapat = { planGoster = false },
+        duzenle = {
+            val yeni = (profil ?: PersonalProfile()).copy(step = 0, dailyCount = gunlukAdet, startHour = bas, endHour = bit)
+            duzenlemeBaslangici = yeni
+            kapsam.launch {
+                try { depo.saveOnboardingDraft(yeni) }
+                catch (_: java.io.IOException) { kayitHatasi = hataMetni }
+            }
+            planGoster = false; planDuzenle = true
+        },
+        konular = { planGoster = false; acilacakGrup = null; sekme = Sekme.KATEGORI },
+        ayarlar = { planGoster = false; ayarlardaMi = true },
+        proAc = { planGoster = false; proGoster = true },
+    )
 
     kutlamaGunu?.let { gun ->
         KilometreKutlamasi(gun) {

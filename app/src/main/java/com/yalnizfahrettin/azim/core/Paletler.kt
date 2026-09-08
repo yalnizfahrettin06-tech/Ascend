@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 
 enum class Palet(val etiketTr: String, val etiketEn: String) {
-
+    MONO("Mürekkep", "Ink"),
     KUM("Kum", "Sand"),
     BORDO("Bordo", "Wine"),
 
@@ -104,6 +104,20 @@ fun paletiCozTest(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri 
     paletiCoz(palet, karanlik, oled)
 
 internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri {
+    if (palet == Palet.MONO) return if (karanlik) AzimRenkleri(
+        zemin = if (oled) Color.Black else Color(0xFF111111),
+        yuzey = Color(0xFF1C1C1B), yuzeyYuksek = Color(0xFF282827),
+        kenarlik = Color(0xFF414140), kenarlikGuclu = Color(0xFF777773),
+        metin = Color(0xFFF7F7F2), metinIkincil = Color(0xFFBBBBB6), metinSonuk = Color(0xFFBBBBB6),
+        accent = Color(0xFFEFEFEB), accentSonuk = Color(0xFF777773),
+        accentZemin = Color(0xFF282827), accentDerin = Color(0xFF414140), karanlikMi = true,
+    ) else AzimRenkleri(
+        zemin = Color(0xFFFAFAF7), yuzey = Color(0xFFF2F2EE), yuzeyYuksek = Color(0xFFE8E8E3),
+        kenarlik = Color(0xFFD4D4CF), kenarlikGuclu = Color(0xFF8B8B86),
+        metin = Color(0xFF141414), metinIkincil = Color(0xFF5B5B57), metinSonuk = Color(0xFF5B5B57),
+        accent = Color(0xFF141414), accentSonuk = Color(0xFF8B8B86),
+        accentZemin = Color(0xFFE8E8E3), accentDerin = Color(0xFFD4D4CF), karanlikMi = false,
+    )
     val v = vurgular.getValue(palet)
     return if (karanlik) {
         karanlikOmurga(oled).copy(

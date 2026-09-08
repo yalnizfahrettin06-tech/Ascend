@@ -1,28 +1,21 @@
 package com.yalnizfahrettin.azim.ui
 
 import androidx.compose.foundation.*
-import androidx.compose.animation.animateContentSize
-import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -32,11 +25,9 @@ import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
-@OptIn(ExperimentalLayoutApi::class)
+/** Primary actions remain visible. Only the quote scrolls when large text needs more room. */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnaEkran(
     sozler: List<Soz>, aktifIndeks: Int, favoriler: Set<String>, seri: Int,
@@ -48,135 +39,148 @@ fun AnaEkran(
     ipucunuKapat: () -> Unit, ayarlaraGit: () -> Unit,
     secilenAtmosfer: String? = null, atmosferSec: (String?) -> Unit = {},
     seciliKonular: Set<String> = emptySet(), konulariDuzenle: () -> Unit = {}, haptikAcik: Boolean = true,
+    kullaniciAdi: String = "", planAc: () -> Unit = {}, ihtiyac: String? = null, ihtiyacSec: (String?) -> Unit = {},
 ) {
-    var filtre by rememberSaveable { mutableStateOf<String?>(null) }
-    val konular = remember(sozler) { Kategoriler.tumAltlar.filter { k -> sozler.any { it.kategori == k.anahtar } } }
-    val haptik = LocalHapticFeedback.current
-    val ikiSutunEylem = LocalDensity.current.fontScale > 1.3f || LocalConfiguration.current.screenWidthDp < 360
-    LaunchedEffect(konular) { if (filtre != null && konular.none { it.anahtar == filtre }) filtre = null }
-    val liste = remember(sozler, filtre) { sozler.filter { filtre == null || it.kategori == filtre }.ifEmpty { sozler } }
-    val pager = rememberPagerState { liste.size.coerceAtLeast(1) }
+    val pager = rememberPagerState { sozler.size.coerceAtLeast(1) }
     val kapsam = rememberCoroutineScope()
     val mesaj = remember { SnackbarHostState() }
     val pano = LocalClipboardManager.current
     val ses = rememberSeslendirici(dil)
-    var temaSecimi by remember { mutableStateOf(false) }
-    LaunchedEffect(filtre) { pager.scrollToPage(0) }
+    val haptik = LocalHapticFeedback.current
+    var araclar by remember { mutableStateOf(false) }
+    var ihtiyaclar by rememberSaveable { mutableStateOf(false) }
+    val buyukYazi = LocalDensity.current.fontScale > 1.35f
+    val darEylemler = buyukYazi || LocalConfiguration.current.screenWidthDp < 360
     LaunchedEffect(aktifIndeks, sozler) {
-        val hedef = sozler.getOrNull(aktifIndeks) ?: return@LaunchedEffect
-        val yer = liste.indexOfFirst { it.kimlik == hedef.kimlik }
-        if (yer >= 0 && yer != pager.currentPage) pager.scrollToPage(yer)
+        if (sozler.isNotEmpty() && aktifIndeks in sozler.indices && pager.currentPage != aktifIndeks) pager.scrollToPage(aktifIndeks)
     }
-    val aktif = liste.getOrNull(pager.settledPage)
-    LaunchedEffect(aktif?.kimlik) {
-        aktif?.let { soz -> sozler.indexOfFirst { it.kimlik == soz.kimlik }.takeIf { it >= 0 }?.let(indeksDegisti) }
-        ses.durdur()
-    }
+    val aktif = sozler.getOrNull(pager.settledPage)
+    LaunchedEffect(aktif?.kimlik) { if (aktif != null) indeksDegisti(pager.settledPage); ses.durdur() }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
-        Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content").verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(Modifier.fillMaxWidth().padding(start = 22.dp, end = 20.dp, top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text("ASCEND", fontSize = 21.sp, letterSpacing = 4.sp, fontWeight = FontWeight.Medium, color = Renk.metin)
-                    Text(LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM, EEEE", Locale.forLanguageTag(dil))), style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
+        Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content").padding(horizontal = 24.dp)) {
+            Row(Modifier.fillMaxWidth().heightIn(min = 60.dp), verticalAlignment = Alignment.CenterVertically) {
+                Icon(AzimIkon.Yukselis, if (buyukYazi) "Ascend" else null, Modifier.size(28.dp), tint = Renk.metin)
+                Spacer(Modifier.width(10.dp))
+                if (buyukYazi) Spacer(Modifier.weight(1f))
+                else Text("ascend", color = Renk.metin, fontSize = 20.sp, fontWeight = FontWeight.Medium, letterSpacing = 1.sp, modifier = Modifier.weight(1f))
+                TextButton(onClick = planAc, modifier = Modifier.testTag("home-plan")) {
+                    Text(cevir(dil, "Planım", "My plan"), color = Renk.metin, fontSize = 13.sp)
+                    Text("  ↗", color = Renk.metin)
                 }
-                YuvarlakIkon(AzimIkon.Ayarlar, cevir(dil, "Ayarlar", "Settings"), ayarlaraGit)
             }
-            LazyRow(contentPadding = PaddingValues(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                item { FilterChip(selected = filtre == null, onClick = { filtre = null }, label = { Text(cevir(dil, "Senin için", "For you")) }, shape = RoundedCornerShape(50)) }
-                items(konular, key = { it.anahtar }) { k -> FilterChip(selected = filtre == k.anahtar, onClick = { filtre = k.anahtar }, label = { Text(k.ad(dil)) }, shape = RoundedCornerShape(50)) }
+            TextButton(onClick = { ihtiyaclar = true }, modifier = Modifier.align(Alignment.CenterHorizontally).testTag("home-moment")) {
+                Text(ihtiyacAdi(ihtiyac, dil), color = Renk.metinIkincil, fontSize = 13.sp)
+                Text("  ⌄", color = Renk.metinIkincil)
             }
-            if (liste.isEmpty()) {
-                Text(cevir(dil, "Akışın için bir konu seç.", "Choose a topic for your feed."), Modifier.padding(24.dp), color = Renk.metin)
-                Button(onClick = konulariDuzenle, modifier = Modifier.padding(horizontal = 20.dp)) { Text(cevir(dil, "Konuları keşfet", "Explore topics")) }
+            if (sozler.isEmpty()) {
+                Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                    Text(cevir(dil, "Biraz yer açalım.", "Make a little room."), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
+                    Text(cevir(dil, "Bu tercihlere uygun açık bir konu yok. Planını değiştirebilir veya yeni bir konu açabilirsin.", "No unlocked topic matches these preferences. Adjust your plan or unlock another topic."), color = Renk.metinIkincil, textAlign = TextAlign.Center, modifier = Modifier.padding(vertical = 16.dp))
+                    Button(onClick = planAc) { Text(cevir(dil, "Planımı düzenle", "Edit my plan")) }
+                    TextButton(onClick = konulariDuzenle) { Text(cevir(dil, "Konuları keşfet", "Explore topics")) }
+                }
             } else {
-                HorizontalPager(pager, contentPadding = PaddingValues(horizontal = 20.dp), pageSpacing = 12.dp, key = { liste[it].kimlik }) { sayfa ->
-                    val soz = liste[sayfa]
-                    val atmosfer = secilenAtmosfer?.let { runCatching { Atmosfer.valueOf(it) }.getOrNull() } ?: Atmosfer.grup(Kategoriler.bul(soz.kategori)?.grup)
-                    Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(28.dp)).testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")) {
-                        AtmosferResmi(atmosfer, Modifier.matchParentSize(), karartma = .30f)
-                        Column(Modifier.fillMaxWidth().heightIn(min = 424.dp).padding(22.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                                Text(Kategoriler.bul(soz.kategori)?.ad(dil)?.uppercase(Locale.forLanguageTag(dil)) ?: cevir(dil, "GÜNÜN İLHAMI", "DAILY INSPIRATION"), color = Color.White, fontSize = 10.sp, letterSpacing = 2.sp, modifier = Modifier.weight(1f))
-                                IconButton(onClick = { temaSecimi = true }, modifier = Modifier.size(48.dp)) { Icon(AzimIkon.Izgara, cevir(dil, "Arka planı değiştir", "Change background"), tint = Color.White, modifier = Modifier.size(20.dp)) }
-                            }
-                            Spacer(Modifier.height(24.dp))
-                            Text(soz.metin(dil), color = Color.White, fontFamily = LoraSerif, fontSize = if (soz.metin(dil).length > 160) 23.sp else 27.sp, lineHeight = 36.sp, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
-                            Spacer(Modifier.height(18.dp))
-                            Box(Modifier.size(28.dp, 1.dp).background(Color.White.copy(alpha = .65f)))
-                            Spacer(Modifier.height(12.dp))
-                            Text(soz.sunumEtiketi(dil), color = Color.White, style = MaterialTheme.typography.bodySmall)
-                            Spacer(Modifier.weight(1f))
-                            Spacer(Modifier.height(40.dp))
-                            FlowRow(Modifier.fillMaxWidth(), maxItemsInEachRow = if (ikiSutunEylem) 2 else 4,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                KartEylemi(if (soz.kimlik in favoriler) AzimIkon.KalpDolu else AzimIkon.Kalp, cevir(dil, if (soz.kimlik in favoriler) "Kaydedildi" else "Kaydet", if (soz.kimlik in favoriler) "Saved" else "Save"), Modifier.weight(1f)) { if (haptikAcik) haptik.performHapticFeedback(HapticFeedbackType.TextHandleMove); favoriDegistir(soz) }
-                                KartEylemi(AzimIkon.Paylas, cevir(dil, "Paylaş", "Share"), Modifier.weight(1f)) { paylas(soz) }
-                                KartEylemi(if (ses.konusuyor) AzimIkon.SesDur else AzimIkon.Ses, cevir(dil, if (ses.konusuyor) "Durdur" else "Dinle", if (ses.konusuyor) "Stop" else "Listen"), Modifier.weight(1f)) {
-                                    if (ses.hazir) ses.degistir(soz.metin(dil)) else kapsam.launch { mesaj.showSnackbar(cevir(dil, "Bu dil için cihazın ses paketi hazır değil.", "Your device voice for this language is not ready.")) }
-                                }
-                                KartEylemi(AzimIkon.Kopyala, cevir(dil, "Kopyala", "Copy"), Modifier.weight(1f)) { pano.setText(AnnotatedString(soz.metin(dil))); kapsam.launch { mesaj.showSnackbar(cevir(dil, "Söz kopyalandı", "Quote copied")) } }
-                            }
+                HorizontalPager(state = pager, modifier = Modifier.weight(1f).fillMaxWidth().testTag("quote-pager"), key = { sozler[it].kimlik }) { sayfa ->
+                    val soz = sozler[sayfa]
+                    Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
+                        .verticalScroll(rememberScrollState()).padding(horizontal = 6.dp, vertical = 20.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                        Text(Kategoriler.bul(soz.kategori)?.ad(dil).orEmpty(), color = Renk.metinIkincil, fontSize = 12.sp, letterSpacing = .5.sp, textAlign = TextAlign.Center)
+                        Spacer(Modifier.height(if (buyukYazi) 16.dp else 28.dp))
+                        Text(soz.metin(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = 29.sp, lineHeight = 40.sp, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
+                        Spacer(Modifier.height(24.dp))
+                        Box(Modifier.width(24.dp).height(1.dp).background(Renk.kenarlikGuclu))
+                        Spacer(Modifier.height(14.dp))
+                        Text(soz.sunumEtiketi(dil), color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center)
+                    }
+                }
+            }
+            if (aktif != null) {
+                Row(Modifier.fillMaxWidth().heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage(pager.currentPage - 1) } }, enabled = pager.currentPage > 0, modifier = Modifier.testTag("quote-previous")) {
+                        Icon(AzimIkon.Geri, cevir(dil, "Önceki söz", "Previous quote"), modifier = Modifier.size(20.dp), tint = if (pager.currentPage > 0) Renk.metin else Renk.kenarlikGuclu)
+                    }
+                    Text(cevir(dil, "Bir söz. Bir adım.", "One thought. One step."), color = Renk.metinIkincil, fontSize = 11.sp, textAlign = TextAlign.Center, modifier = Modifier.weight(1f))
+                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1).coerceAtMost(sozler.lastIndex)) } }, enabled = pager.currentPage < sozler.lastIndex, modifier = Modifier.testTag("quote-next")) {
+                        Text("→", color = Renk.metin, fontSize = 24.sp, modifier = Modifier.semantics { contentDescription = cevir(dil, "Sonraki söz", "Next quote") })
+                    }
+                }
+                Row(Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                    val kayitli = aktif.kimlik in favoriler
+                    OutlinedButton(onClick = { if (haptikAcik) haptik.performHapticFeedback(HapticFeedbackType.TextHandleMove); favoriDegistir(aktif) },
+                        modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-save").semantics {
+                            selected = kayitli
+                            contentDescription = cevir(dil, if (kayitli) "Kaydedilenlerden çıkar" else "Sözü kaydet", if (kayitli) "Remove from saved" else "Save quote")
+                        },
+                        shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
+                        if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp))
+                            Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"), fontSize = 12.sp, lineHeight = 15.sp)
+                        } else {
+                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp))
+                            Spacer(Modifier.width(7.dp))
+                            Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"), fontSize = 13.sp)
+                        }
+                    }
+                    Button(onClick = { paylas(aktif) }, modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-share"), shape = RoundedCornerShape(16.dp), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
+                        if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                            Icon(AzimIkon.Paylas, null, Modifier.size(19.dp))
+                            Text(cevir(dil, "Paylaş", "Share"), fontSize = 12.sp, lineHeight = 15.sp)
+                        } else {
+                            Icon(AzimIkon.Paylas, null, Modifier.size(19.dp)); Spacer(Modifier.width(7.dp))
+                            Text(cevir(dil, "Paylaş", "Share"), fontSize = 13.sp)
+                        }
+                    }
+                    Box {
+                        IconButton(onClick = { araclar = true }, modifier = Modifier.testTag("home-more")) {
+                            Text("···", color = Renk.metin, fontSize = 26.sp, modifier = Modifier.semantics { contentDescription = cevir(dil, "Diğer araçlar", "More tools") })
+                        }
+                        DropdownMenu(expanded = araclar, onDismissRequest = { araclar = false }) {
+                            DropdownMenuItem(text = { Text(cevir(dil, if (ses.konusuyor) "Sesi durdur" else "Sesli dinle", if (ses.konusuyor) "Stop reading" else "Listen")) }, onClick = {
+                                araclar = false
+                                if (ses.hazir) ses.degistir(aktif.metin(dil))
+                                else kapsam.launch { mesaj.showSnackbar(cevir(dil, "Cihazında bu dilin ses paketi hazır değil.", "Your device voice for this language is not ready.")) }
+                            }, leadingIcon = { Icon(AzimIkon.Ses, null) })
+                            DropdownMenuItem(text = { Text(cevir(dil, "Metni kopyala", "Copy text")) }, onClick = {
+                                araclar = false; pano.setText(AnnotatedString(aktif.metin(dil)))
+                                kapsam.launch { mesaj.showSnackbar(cevir(dil, "Söz kopyalandı", "Quote copied")) }
+                            }, leadingIcon = { Icon(AzimIkon.Kopyala, null) })
+                            DropdownMenuItem(text = { Text(cevir(dil, "Bildirim ayarları", "Reminder settings")) }, onClick = { araclar = false; ayarlaraGit() })
                         }
                     }
                 }
-                Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                    TextButton(onClick = { kapsam.launch { pager.animateScrollToPage(pager.currentPage - 1) } }, enabled = pager.currentPage > 0) { Text(cevir(dil, "Önceki", "Previous")) }
-                    Text("${pager.currentPage + 1} / ${liste.size}  ·  ${cevir(dil, "Kaydır", "Swipe")}", modifier = Modifier.weight(1f), textAlign = TextAlign.Center, style = MaterialTheme.typography.labelMedium, color = Renk.metinIkincil)
-                    TextButton(onClick = { kapsam.launch { pager.animateScrollToPage(pager.currentPage + 1) } }, enabled = pager.currentPage < liste.lastIndex) { Text(cevir(dil, "Sonraki", "Next")) }
-                }
             }
-            SeciliKonular(seciliKonular, dil, konulariDuzenle, Modifier.padding(horizontal = 20.dp))
-            Surface(onClick = ayarlaraGit, color = Renk.yuzey, shape = RoundedCornerShape(22.dp), modifier = Modifier.padding(horizontal = 20.dp).fillMaxWidth()) {
-                Row(Modifier.padding(18.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-                    Surface(color = Renk.accentZemin, shape = CircleShape) { Icon(AzimIkon.Ses, null, Modifier.padding(12.dp).size(22.dp), tint = Renk.accent) }
-                    Column(Modifier.weight(1f)) {
-                        Text(cevir(dil, "Gününe yayılan ilham", "Inspiration throughout your day"), color = Renk.metin, style = MaterialTheme.typography.titleSmall)
-                        Text(when { !hatirlaticiAcik -> cevir(dil, "Bildirimlerini kişiselleştir", "Personalize reminders"); !bildirimIzni -> cevir(dil, "Bildirim izni gerekli", "Notification permission needed"); sonrakiBildirim != null -> cevir(dil, "Sıradaki $sonrakiBildirim · Günde $bugunPlanlanan söz", "Next $sonrakiBildirim · $bugunPlanlanan quotes a day"); else -> cevir(dil, "Günde $bugunPlanlanan söz · Planın açık", "$bugunPlanlanan quotes a day · Plan is on") }, color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
-                    }
-                    Text("↗", color = Renk.accent, fontSize = 24.sp)
-                }
-            }
-            Row(Modifier.fillMaxWidth().padding(horizontal = 22.dp), verticalAlignment = Alignment.CenterVertically) {
-                KucukBaslik(cevir(dil, "Biraz da keşfet", "A little more inspiration"), Modifier.weight(1f))
-                TextButton(onClick = konulariDuzenle) { Text(cevir(dil, "Tümü", "See all")) }
-            }
-            LazyRow(contentPadding = PaddingValues(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                items(Kategoriler.gruplar.filter { it.anahtar in setOf("azim", "filozoflar", "olumlamalar", "disiplin") }) { g ->
-                    Box(Modifier.width(156.dp).height(150.dp).clip(RoundedCornerShape(22.dp)).clickable { kesfeGit(g) }) {
-                        AtmosferResmi(Atmosfer.grup(g.anahtar), Modifier.matchParentSize())
-                        Column(Modifier.align(Alignment.BottomStart).padding(16.dp)) {
-                            Text(kisaGrupAdi(g, dil), color = Color.White, fontWeight = FontWeight.SemiBold)
-                            Text(cevir(dil, "Koleksiyonu aç →", "Open collection →"), color = Color.White, style = MaterialTheme.typography.labelSmall)
-                        }
-                    }
-                }
-            }
-            if (bugunGelenler.isNotEmpty()) {
-                KucukBaslik(cevir(dil, "Bugün gelen sözler", "Today's reminders"), Modifier.padding(horizontal = 22.dp))
-                bugunGelenler.forEach { soz -> TextButton(onClick = { filtre = null; sozSecildi(soz) }, modifier = Modifier.padding(horizontal = 16.dp)) { Text(soz.metin(dil), textAlign = TextAlign.Start) } }
-            }
-            Spacer(Modifier.height(16.dp))
+            Text(when {
+                kullaniciAdi.isNotBlank() -> cevir(dil, "$kullaniciAdi, kendi hızında.", "$kullaniciAdi, at your own pace.")
+                hatirlaticiAcik && bildirimIzni && sonrakiBildirim != null -> cevir(dil, "Sıradaki küçük hatırlatma · $sonrakiBildirim", "Your next reminder · $sonrakiBildirim")
+                else -> cevir(dil, "Kendi hızında.", "At your own pace.")
+            }, color = Renk.metinIkincil, fontSize = 10.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp))
         }
         SnackbarHost(mesaj, Modifier.align(Alignment.BottomCenter))
     }
-    if (temaSecimi) AtmosferSecici(
-        dil = dil,
-        secili = secilenAtmosfer?.let { runCatching { Atmosfer.valueOf(it) }.getOrNull() },
-        otomatik = Atmosfer.grup(Kategoriler.bul(aktif?.kategori.orEmpty())?.grup),
-        sec = { atmosferSec(it?.name); temaSecimi = false },
-        kapat = { temaSecimi = false },
-    )
-}
-
-@Composable
-private fun KartEylemi(ikon: ImageVector, ad: String, modifier: Modifier = Modifier, tikla: () -> Unit) {
-    Column(modifier.heightIn(min = 64.dp).animateContentSize().clip(RoundedCornerShape(14.dp)).clickable(role = Role.Button, onClick = tikla).padding(vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Icon(ikon, null, Modifier.size(24.dp), tint = Color.White)
-        Spacer(Modifier.height(6.dp))
-        Text(ad, color = Color.White, fontSize = 11.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+    if (ihtiyaclar) ModalBottomSheet(onDismissRequest = { ihtiyaclar = false }, containerColor = Renk.zemin) {
+        Column(Modifier.fillMaxWidth().navigationBarsPadding().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 12.dp)) {
+            Text(cevir(dil, "Şu an sana ne iyi gelir?", "What would help right now?"), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
+            Text(cevir(dil, "Yalnız bu anın akışını değiştirir. Bildirim planın aynı kalır.", "Only changes this moment's feed. Your reminder plan stays the same."), color = Renk.metinIkincil, modifier = Modifier.padding(top = 12.dp, bottom = 16.dp))
+            listOf<String?>(null, "calm", "action", "focus", "perspective").forEach { key ->
+                TextButton(onClick = { ihtiyacSec(key); ihtiyaclar = false }, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("moment-${key ?: "plan"}").semantics { selected = key == ihtiyac }) {
+                    Text(ihtiyacAdi(key, dil), Modifier.weight(1f), textAlign = TextAlign.Start, color = Renk.metin)
+                    if (key == ihtiyac) Icon(AzimIkon.Tik, null, Modifier.size(18.dp), tint = Renk.metin)
+                }
+                HorizontalDivider(color = Renk.kenarlik)
+            }
+            Spacer(Modifier.height(20.dp))
+        }
     }
 }
 
+fun ihtiyacAdi(key: String?, dil: String): String = when (key) {
+    "calm" -> cevir(dil, "Biraz sakinlik", "A little calm")
+    "action" -> cevir(dil, "Harekete geçmek", "Take a step")
+    "focus" -> cevir(dil, "Yeniden odaklanmak", "Find my focus")
+    "perspective" -> cevir(dil, "Yeni bir bakış", "A fresh perspective")
+    else -> cevir(dil, "Sana göre · Şimdi", "For you · Right now")
+}
 fun kisaGrupAdi(g: KategoriGrubu, dil: String) = when (g.anahtar) {
     "azim" -> cevir(dil, "Motivasyon", "Motivation")
     "olumlamalar" -> cevir(dil, "Olumlamalar", "Affirmations")
