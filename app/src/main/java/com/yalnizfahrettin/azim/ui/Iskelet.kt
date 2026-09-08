@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -36,8 +37,11 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
     val etiketler = listOf(R.string.nav_ana, R.string.nav_kategori, R.string.nav_favori, R.string.nav_istatistik)
     val ikonlar = listOf(AzimIkon.Dag, AzimIkon.Kesfet, AzimIkon.Ayrac, AzimIkon.Patika)
     val etkinIkonlar = listOf(AzimIkon.DagDolu, AzimIkon.Kesfet, AzimIkon.AyracDolu, AzimIkon.Patika)
-    Box(Modifier.fillMaxWidth().background(Renk.zemin).navigationBarsPadding().padding(horizontal = 16.dp, vertical = 8.dp)) {
+    val buyukYazi = LocalDensity.current.fontScale > 1.3f
+    BoxWithConstraints(Modifier.fillMaxWidth().background(Renk.zemin).navigationBarsPadding()) {
+        val disBosluk = if (maxWidth < 360.dp) 8.dp else 16.dp
         Surface(
+            modifier = Modifier.padding(horizontal = disBosluk, vertical = 8.dp),
             color = Renk.yuzey,
             shape = RoundedCornerShape(28.dp),
             border = BorderStroke(1.dp, Renk.kenarlik.copy(alpha = .6f)),
@@ -64,7 +68,8 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
                     ) {
                         Icon(if (etkin) etkinIkonlar[index] else ikonlar[index], null, Modifier.size(23.dp).scale(olcek), tint = renk)
                         Text(
-                            stringResource(etiketler[index]), color = renk, fontSize = 11.sp,
+                            stringResource(etiketler[index]), modifier = Modifier.fillMaxWidth(),
+                            color = renk, fontSize = 11.sp, minLines = if (buyukYazi) 2 else 1,
                             lineHeight = 14.sp, letterSpacing = 0.sp,
                             fontWeight = if (etkin) FontWeight.SemiBold else FontWeight.Medium,
                             textAlign = TextAlign.Center,

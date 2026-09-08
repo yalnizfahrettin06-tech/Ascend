@@ -37,7 +37,15 @@ class ResponsiveV6Test {
         compose.onNodeWithText(text, useUnmergedTree = true)
             .performSemanticsAction(SemanticsActions.GetTextLayoutResult) { it(layouts) }
         assertTrue("Expected a real text layout for $text", layouts.isNotEmpty())
-        assertFalse("The complete label must fit: $text", layouts.single().hasVisualOverflow)
+        val layout = layouts.single()
+        assertFalse(
+            "The complete label must fit: label=$text, " +
+                "size=${layout.size.width}x${layout.size.height}, " +
+                "paragraph=${layout.multiParagraph.width}x${layout.multiParagraph.height}, " +
+                "lineCount=${layout.lineCount}, " +
+                "overflowW=${layout.didOverflowWidth}, overflowH=${layout.didOverflowHeight}",
+            layout.hasVisualOverflow,
+        )
     }
 
     private fun navigationFits() {
@@ -115,6 +123,8 @@ class ResponsiveV6Test {
                 }
             }
         }
+        compose.waitForIdle()
+        ekranKaydet("22-nav-before-check")
         navigationFits()
         val save = compose.onNode(hasText("Kaydet") and hasAnyAncestor(hasTestTag("active-quote")))
         save.performScrollTo().assertIsDisplayed().assertHasClickAction().performClick()
