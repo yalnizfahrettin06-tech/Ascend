@@ -17,7 +17,14 @@
 
 ## Bulut doğrulaması
 
-Bu kayıt yazılırken v7 bulut derlemesi ve Android testleri henüz tamamlanmamıştır. Sonuç, kaynak kimliği ve APK bağlantısı burada güncellenecektir.
+- [Son bulut çalışması](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34272724247): başarılı.
+- Derlenen ve test edilen kaynak: `72427f22de45ab7f743d643b81b06cff4438b2dc`.
+- 64 JVM birim testi ve 37 Android testi geçti; başarısız veya atlanan test yok.
+- Lint hatası yok; 144 uyarı bulunmaktadır. Bu sonuç uyarısız derleme olarak sunulmaz.
+- Android 35 emülatöründe 28 ekran kaydı alındı. Karşılama, tek soru, plan önizlemesi ve ana arayüz görüntüleri görsel olarak incelendi.
+- İlk çalışmanın büyük yazı etiketi ve paylaşım aramasının klavye eylemi sorunları düzeltildi. Onboarding yerleşim testi, ilerleme göstergesinin genişletilmiş erişilebilirlik alanı yerine gerçek 2 dp satırını ölçer; erişilebilirlik korunur.
+- [Ascend 7.0 test APK](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v7.0.0-preview.1): sürüm `7.0.0`, kod `16`, geliştirme imzası doğrulandı.
+- APK SHA-256: `df75b0f08edc8b3fd3ce03fa11aa2f328b2731c7352cfc7b32dcc16f33abf887`.
 
 Kontroller; katalog ve erişim kuralları, kişiselleştirme/dışlama/tekrar davranışı, taslak ve profil saklama, onboarding gezinmesi, küçük ekran ve büyük yazı, plan düzenleme, Pro kapıları, kategori demosu, gerçek PNG ve 5/10/30/45 saniyelik video dışa aktarmayı kapsar.
 

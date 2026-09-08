@@ -19,9 +19,9 @@ Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe t
 
 ## APK ve doğrulama
 
-**7.0.0 için bulut derlemesi ve Android doğrulaması bekleniyor.** Bu sürümün APK ve test sonuçları henüz doğrulanmış olarak sunulmuyor. Güncel durum: [7.0 doğrulama kaydı](docs/16-ASCEND-7-DOGRULAMA.md).
+**[Ascend 7.0 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v7.0.0-preview.1/Ascend-7.0.0-test.apk)** — 64 birim ve 37 Android testi geçti. APK üretildi ve geliştirme imzası doğrulandı. [7.0 doğrulama kaydı](docs/16-ASCEND-7-DOGRULAMA.md).
 
-[Actions → Ascend APK](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) içindeki 7.0.0 derlemesi başarılı olduğunda **Artifacts → Ascend-7.0.0-test-APK** paketi indirilebilir. Artifact indirmek için GitHub oturumu gerekir.
+[Başarılı bulut çalışmasında](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34272724247) **Artifacts → Ascend-7.0.0-test-APK** paketi de bulunur. Artifact indirmek için GitHub oturumu gerekir; yukarıdaki sürüm dosyası doğrudan indirilebilir.
 
 Önceki sürüm: [Ascend 6.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v6.0.0-preview.1) (`Ascend-6.0.0-test.apk`). 6.0 için kaydedilen 48 JVM ve 26 Android testi sonucu yalnız o sürüme aittir: [doğrulama](docs/13-ASCEND-6-TEST-PLANI.md) · [ekranlar](docs/14-ASCEND-6-EKRANLAR.md).
 
