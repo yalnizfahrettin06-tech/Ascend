@@ -67,6 +67,23 @@ class ResponsiveV6Test {
         listOf("Bugün", "Keşfet", "Kaydedilen", "Yolculuk").forEach(::textFits)
     }
 
+    private fun reachHomeAction(node: SemanticsNodeInteraction, screenshot: String): SemanticsNodeInteraction {
+        // The quote lives inside a horizontal pager. Scroll it as a user would,
+        // rather than sending ScrollTo to that nearest (horizontal) ancestor.
+        repeat(12) {
+            if (node.isDisplayed()) {
+                ekranKaydet(screenshot)
+                return node.assertIsDisplayed()
+            }
+            compose.onNodeWithTag("home-content").performTouchInput {
+                swipeUp(startY = height * .8f, endY = height * .2f, durationMillis = 400)
+            }
+            compose.waitForIdle()
+        }
+        ekranKaydet(screenshot)
+        return node.assertIsDisplayed()
+    }
+
     @Test fun narrowViewportWithDoubleTextKeepsHomeActionsAndJourneyReachable() {
         val quote = Sozler.kategoriden("motivasyon").first()
         val week = listOf(false, true, false, false, true, true, true)
@@ -127,10 +144,10 @@ class ResponsiveV6Test {
         ekranKaydet("22-nav-before-check")
         navigationFits()
         val save = compose.onNode(hasText("Kaydet") and hasAnyAncestor(hasTestTag("active-quote")))
-        save.performScrollTo().assertIsDisplayed().assertHasClickAction().performClick()
+        reachHomeAction(save, "22-save-after-swipes").assertHasClickAction().performClick()
         compose.runOnIdle { assertTrue(saved); assertEquals(1, saveCalls) }
         val share = compose.onNode(hasText("Paylaş") and hasAnyAncestor(hasTestTag("active-quote")))
-        share.performScrollTo().assertIsDisplayed().assertHasClickAction().performClick()
+        reachHomeAction(share, "22-share-after-swipes").assertHasClickAction().performClick()
         compose.runOnIdle { assertEquals(1, shareCalls) }
         textFits("Kaydedildi")
         textFits("Paylaş")

@@ -73,7 +73,7 @@ fun AnaEkran(
         ses.durdur()
     }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
-        Column(Modifier.fillMaxSize().statusBarsPadding().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content").verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(Modifier.fillMaxWidth().padding(start = 22.dp, end = 20.dp, top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text("ASCEND", fontSize = 21.sp, letterSpacing = 4.sp, fontWeight = FontWeight.Medium, color = Renk.metin)
