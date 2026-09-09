@@ -267,7 +267,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     },
                     shape = RoundedCornerShape(50), border = BorderStroke(1.dp, Renk.kenarlik),
                 ) {
-                    Text("+", modifier = Modifier.padding(end = 10.dp))
+                    Icon(AzimIkon.Arti, null, Modifier.padding(end = 10.dp).size(22.dp))
                     Text(cevir(dil, "Kendi fotoğrafını seç", "Choose your own photo"), Modifier.weight(1f), textAlign = TextAlign.Start)
                     Spacer(Modifier.width(8.dp))
                     ProRozeti()

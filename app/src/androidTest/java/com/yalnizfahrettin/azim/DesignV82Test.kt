@@ -24,7 +24,7 @@ import org.junit.Test
 
 class DesignV82Test {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
-    private fun shot(name: String) { compose.waitForIdle(); ekranKaydet("v82-" + name) }
+    private fun shot(name: String) { compose.waitForIdle(); ekranKaydet("v83-" + name) }
 
     @Test fun collectionSearchDetailAndRecreationPreservePositionAndSelection() {
         val restoration = StateRestorationTester(compose)
@@ -35,6 +35,9 @@ class DesignV82Test {
         }
         compose.onNodeWithTag("collection-olumlamalar").assertIsDisplayed()
         shot("collections")
+        compose.onNodeWithTag("category-grid").performScrollToIndex(3)
+        compose.onNodeWithTag("category-search").assertIsDisplayed()
+        compose.onNodeWithTag("category-grid").performScrollToIndex(0)
         compose.onNodeWithTag("collection-olumlamalar").performClick()
         compose.onNodeWithTag("category-count").assertTextEquals("3 konu")
         compose.onNodeWithTag("category-search").performTextInput("MARCUS")
@@ -59,6 +62,7 @@ class DesignV82Test {
     @Test fun typographyMatrixKeepsFullQuotesAndPlanSourcesReachable() {
         var scale by mutableFloatStateOf(1f)
         var screen by mutableIntStateOf(0)
+        var width by mutableIntStateOf(411)
         var dark by mutableStateOf(false)
         // Exact content shown in the v8.1 baseline on the same Pixel 2 device.
         val quote = Sozler.kategoriden("azim").first { it.metin("tr").startsWith("Çabanın karşılığını") }
@@ -66,12 +70,12 @@ class DesignV82Test {
             val original = LocalDensity.current
             val config = Configuration(LocalConfiguration.current).apply {
                 setLocale(java.util.Locale.forLanguageTag("tr"))
-                screenWidthDp = if (scale >= 1.5f) 320 else 411
+                screenWidthDp = width
             }
             CompositionLocalProvider(LocalDensity provides Density(original.density, scale), LocalConfiguration provides config) {
                 AzimTema(modu = if (dark) TemaModu.KARANLIK else TemaModu.AYDINLIK) {
                     Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.TopCenter) {
-                        Column(Modifier.width(if (scale >= 1.5f) 320.dp else 411.dp).fillMaxHeight()) {
+                        Column(Modifier.width(width.dp).fillMaxHeight()) {
                             Box(Modifier.weight(1f)) {
                                 when (screen) {
                                     0 -> AnaEkran(listOf(quote), 0, emptySet(), 0, List(7) { false },
@@ -79,6 +83,10 @@ class DesignV82Test {
                                         {}, {}, {}, {}, {}, {}, {})
                                     1 -> KategorilerEkrani(setOf("ozsefkat"), Erisim.ucretsizKategoriler, "tr", {}, {}, false, {})
                                     2 -> Onboarding("tr", initialDraft = PersonalProfile(step = 17)) { _,_,_,_,_ -> }
+                                    4 -> Onboarding("tr", initialDraft = PersonalProfile(step = 18)) { _,_,_,_,_ -> }
+                                    5 -> Onboarding("tr", initialDraft = PersonalProfile(step = 19)) { _,_,_,_,_ -> }
+                                    6 -> Onboarding("tr", initialDraft = PersonalProfile(step = 15)) { _,_,_,_,_ -> }
+                                    7 -> Onboarding("tr", initialDraft = PersonalProfile(step = 16)) { _,_,_,_,_ -> }
                                     else -> Onboarding("tr") { _,_,_,_,_ -> }
                                 }
                             }
@@ -89,7 +97,7 @@ class DesignV82Test {
             }
         }
         for (value in listOf(1f, 1.3f, 1.5f, 2f)) {
-            compose.runOnIdle { scale = value; screen = 0 }
+            compose.runOnIdle { scale = value; width = if (value >= 1.5f) 320 else 411; screen = 0 }
             compose.onNodeWithTag("home-save").assertIsDisplayed()
             compose.onNodeWithTag("home-share").assertIsDisplayed()
             compose.onNodeWithTag("nav-ana").assertIsDisplayed()
@@ -109,9 +117,20 @@ class DesignV82Test {
             assertTrue("The full source must be above the footer", source.bottom <= footer.top)
             shot("plan-source-" + value)
         }
-        compose.runOnIdle { scale = 1f; screen = 3 }
+        compose.runOnIdle { scale = 1f; width = 411; screen = 3 }
         shot("welcome-tr")
-        compose.runOnIdle { dark = true; screen = 1 }
+        for ((view, name) in listOf(4 to "access-tr", 5 to "permission-tr", 6 to "frequency-tr", 7 to "hours-tr")) {
+            compose.runOnIdle { screen = view }
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+            shot(name)
+        }
+        for (narrow in listOf(320, 360)) {
+            compose.runOnIdle { width = narrow; screen = 0 }
+            compose.onNodeWithTag("home-save").assertIsDisplayed()
+            compose.onNodeWithTag("home-share").assertIsDisplayed()
+            shot("home-width-" + narrow)
+        }
+        compose.runOnIdle { dark = true; width = 411; screen = 1 }
         shot("library-dark")
     }
 }

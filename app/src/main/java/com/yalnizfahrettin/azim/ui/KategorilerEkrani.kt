@@ -2,6 +2,8 @@ package com.yalnizfahrettin.azim.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.ui.platform.LocalConfiguration
@@ -65,6 +67,8 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     var detayKey by rememberSaveable { mutableStateOf<String?>(null) }
     var alanlarAcik by rememberSaveable { mutableStateOf(false) }
     val odak = LocalFocusManager.current
+    val searchInteraction = remember { MutableInteractionSource() }
+    val searchFocused by searchInteraction.collectIsFocusedAsState()
     val collectionScroll = rememberLazyListState()
     val allScroll = rememberLazyListState()
     val selectedScroll = rememberLazyListState()
@@ -93,7 +97,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
         grupKey != null -> groupScroll
         else -> allScroll
     }
-    val columns = if (LocalConfiguration.current.screenWidthDp < 360 || LocalDensity.current.fontScale > 1.2f) 1 else 2
+    val columns = if (LocalConfiguration.current.screenWidthDp < 360 || LocalDensity.current.fontScale > 1.3f) 1 else 2
     fun chooseView(value: String) { odak.clearFocus(); arama = ""; grupKey = null; gorunum = value }
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
         MarkaBasligi(sutun = true) {
@@ -103,13 +107,14 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 Text(cevir(dil, "Sözlere açılan bir kütüphane", "A library of perspectives"), fontSize = 11.sp, lineHeight = 17.sp)
             }
         }
-        LazyColumn(Modifier.fillMaxSize().testTag("category-grid"), state = scroll,
-            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp)) {
-            item(key = "controls") {
-                Column {
+        Column(Modifier.padding(horizontal = 24.dp, vertical = 8.dp)) {
                     TextField(arama, { arama = it },
                         placeholder = { Text(cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers"), fontSize = 14.sp) },
-                        modifier = Modifier.fillMaxWidth().testTag("category-search").semantics {
+                        interactionSource = searchInteraction,
+                        modifier = Modifier.fillMaxWidth().border(
+                            if (searchFocused) 1.5.dp else 1.dp,
+                            if (searchFocused) Renk.accent else Color.Transparent, RoundedCornerShape(14.dp))
+                            .testTag("category-search").semantics {
                             contentDescription = cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers")
                         }, singleLine = true, shape = RoundedCornerShape(14.dp),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -120,6 +125,11 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         trailingIcon = { if (arama.isNotEmpty()) IconButton(onClick = { arama = "" }, modifier = Modifier.testTag("category-clear-search")) {
                             Icon(AzimIkon.Kapat, cevir(dil, "Aramayı temizle", "Clear search"))
                         } })
+        }
+        LazyColumn(Modifier.weight(1f).fillMaxWidth().testTag("category-grid"), state = scroll,
+            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp)) {
+            item(key = "controls") {
+                Column {
                     LazyRow(horizontalArrangement = Arrangement.spacedBy(20.dp), modifier = Modifier.padding(top = 8.dp).selectableGroup()) {
                         items(listOf("collections", "all", "selected")) { view ->
                             Column(Modifier.heightIn(min = 52.dp).testTag("category-filter-" + view)
@@ -129,7 +139,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                                     "collections" -> cevir(dil, "Koleksiyonlar", "Collections")
                                     "selected" -> cevir(dil, "Seçtiklerim", "Selected")
                                     else -> cevir(dil, "Tüm konular", "All topics")
-                                }, color = if (gorunum == view && query.isBlank()) Renk.accent else Renk.metinIkincil,
+                                }, color = if (gorunum == view && query.isBlank()) Renk.metin else Renk.metinIkincil,
                                     fontSize = 13.sp, lineHeight = 20.sp,
                                     fontWeight = if (gorunum == view) FontWeight.SemiBold else FontWeight.Normal)
                                 Spacer(Modifier.height(6.dp))
@@ -139,13 +149,14 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         }
                     }
                     Row(Modifier.fillMaxWidth().heightIn(min = 48.dp)
-                        .clip(RoundedCornerShape(12.dp)).background(Renk.accentZemin)
+                        .clip(RoundedCornerShape(12.dp)).background(Renk.yuzey)
                         .clickable(role = Role.Button) { chooseView("selected") }
                         .testTag("category-selection-summary").padding(horizontal = 12.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text(cevir(dil, "Bildirimlerin için " + secili.size + " konu seçili", secili.size.toString() + " topics selected for reminders"),
-                            color = Renk.accent, fontSize = 12.sp, lineHeight = 18.sp, modifier = Modifier.weight(1f))
-                        Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.accent)
+                        Icon(AzimIkon.Bildirim, null, Modifier.size(20.dp), tint = Renk.accent)
+                        Text(cevir(dil, secili.size.toString() + " konu bildirimlerinde", secili.size.toString() + " topics in your reminders"),
+                            color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp, modifier = Modifier.weight(1f))
+                        Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
                     }
                     if (!bildirimAcik && gorunum == "selected") Text(
                         cevir(dil, "Konuların kayıtlı. Bildirim teslimatı şu anda kapalı; Planım’dan açabilirsin.",
@@ -344,23 +355,30 @@ private fun kategoriDurumu(acik: Boolean, secili: Boolean, dil: String): String 
 
 @Composable
 private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    val index = Kategoriler.gruplar.indexOf(group)
-    val surface = if (index % 3 == 0) Renk.accentZemin else if (index % 3 == 1) Renk.yuzey else Renk.yuzeyYuksek
     Surface(onClick = onClick, modifier = modifier.testTag("collection-" + group.anahtar),
-        color = surface, shape = RoundedCornerShape(18.dp)) {
-        Column(Modifier.padding(16.dp).heightIn(min = 146.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Box(Modifier.width(24.dp).height(2.dp).background(Renk.accent))
-            Text(group.ad(dil), fontFamily = LoraSerif, fontSize = 21.sp, lineHeight = 28.sp,
+        color = Renk.yuzey, shape = RoundedCornerShape(20.dp), border = BorderStroke(1.dp, Renk.kenarlik.copy(alpha = .5f))) {
+        Column(Modifier.padding(16.dp).heightIn(min = 128.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Icon(koleksiyonIkonu(group.anahtar), null, Modifier.size(20.dp), tint = Renk.accent)
+            Text(group.ad(dil), fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 26.sp,
                 color = Renk.metin, modifier = Modifier.semantics { heading() })
             Text(koleksiyonOzeti(group.anahtar, dil), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
             Spacer(Modifier.weight(1f))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(cevir(dil, group.altlar.size.toString() + " konu", group.altlar.size.toString() + " topics"),
                     color = Renk.metinIkincil, fontSize = 11.sp, modifier = Modifier.weight(1f))
-                Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.accent)
+                Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
             }
         }
     }
+}
+
+private fun koleksiyonIkonu(key: String) = when (key) {
+    "olumlamalar", "iliskiler" -> AzimIkon.Kalp
+    "azim", "cesaret" -> AzimIkon.Yukselis
+    "disiplin", "is" -> AzimIkon.Kesfet
+    "filozoflar", "inanc" -> AzimIkon.Kitap
+    "zihin", "tasavvuf" -> AzimIkon.Yaprak
+    else -> AzimIkon.Patika
 }
 
 private fun koleksiyonOzeti(key: String, dil: String): String {

@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.Renk
+import com.yalnizfahrettin.azim.core.AzimIkon
 import com.yalnizfahrettin.azim.notif.BildirimZamanlari
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -97,7 +98,7 @@ fun BildirimPlani(
                 color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
         }
 
-        Surface(color = Renk.accentZemin, shape = RoundedCornerShape(20.dp)) {
+        Surface(color = Renk.yuzey, shape = RoundedCornerShape(20.dp)) {
             Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(cevir(dil, "Günün planı", "Your daily plan"), color = Renk.metin,
                     style = MaterialTheme.typography.labelLarge)
@@ -143,7 +144,7 @@ private fun AdetKontrolu(adet: Int, dil: String, degisti: (Int) -> Unit, modifie
         AdetDugmesi("−", cevir(dil, "Bildirim sayısını azalt", "Fewer reminders"), adet > 1) { degisti(adet - 1) }
         Box(Modifier.width(44.dp).testTag("reminder-count"), contentAlignment = Alignment.Center) {
             AnimatedContent(adet, transitionSpec = { fadeIn(tween(140)) togetherWith fadeOut(tween(100)) }, label = "reminder-count") { deger ->
-                Text("$deger", color = Renk.accent, fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.Medium)
+                Text("$deger", color = Renk.metin, fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.Medium)
             }
         }
         AdetDugmesi("+", cevir(dil, "Bildirim sayısını artır", "More reminders"), adet < 7) { degisti(adet + 1) }
@@ -155,10 +156,7 @@ private fun AdetDugmesi(metin: String, aciklama: String, etkin: Boolean, tikla: 
     val renk = if (etkin) Renk.metin else Renk.metinSonuk
     OutlinedIconButton(onClick = tikla, enabled = etkin, modifier = Modifier.size(52.dp).semantics { contentDescription = aciklama }, shape = CircleShape,
         border = androidx.compose.foundation.BorderStroke(1.dp, if (etkin) Renk.kenarlikGuclu else Renk.kenarlik)) {
-        Canvas(Modifier.size(18.dp)) {
-            drawLine(renk, Offset(0f, size.height / 2), Offset(size.width, size.height / 2), 2.dp.toPx(), StrokeCap.Round)
-            if (metin == "+") drawLine(renk, Offset(size.width / 2, 0f), Offset(size.width / 2, size.height), 2.dp.toPx(), StrokeCap.Round)
-        }
+        Icon(if (metin == "+") AzimIkon.Arti else AzimIkon.Eksi, null, Modifier.size(24.dp), tint = renk)
     }
 }
 

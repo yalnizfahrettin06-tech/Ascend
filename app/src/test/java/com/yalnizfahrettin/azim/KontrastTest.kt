@@ -21,9 +21,9 @@ import org.junit.Test
  */
 class KontrastTest {
 
-    @Test fun `brand captions survive the decorative column overlay`() = tumSetler().forEach { (ad, r) ->
-        kontrol(ad, r.markaUstu, r.marka, 7.0, "brand header")
-        kontrol(ad, r.markaUstu, r.markaUstu.copy(alpha = .12f).compositeOver(r.marka), 4.5, "brand ornament")
+    @Test fun `open headers and ink actions remain readable`() = tumSetler().forEach { (ad, r) ->
+        kontrol(ad, r.zemin, r.metin, 7.0, "ink button label")
+        kontrol(ad, r.metin, r.metin.copy(alpha = .035f).compositeOver(r.zemin), 7.0, "open header ornament")
     }
 
     private fun tumSetler(): List<Pair<String, AzimRenkleri>> =

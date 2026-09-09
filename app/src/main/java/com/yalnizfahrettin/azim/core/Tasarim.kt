@@ -119,7 +119,7 @@ fun AzimTema(
     val base = if (renk.karanlikMi) darkColorScheme() else lightColorScheme()
     val onAccent = if (renk.karanlikMi) Color(0xFF121416) else Color.White
     val m3 = base.copy(
-        primary = renk.accent, onPrimary = onAccent,
+        primary = renk.metin, onPrimary = renk.zemin,
         primaryContainer = renk.accentZemin, onPrimaryContainer = renk.metin,
         secondary = renk.accent, onSecondary = onAccent,
         secondaryContainer = renk.accentZemin, onSecondaryContainer = renk.metin,

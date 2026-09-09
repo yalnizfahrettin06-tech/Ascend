@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
  * 14 tanesini kullanıyor. Kütüphane hem APK'yı hem derlemeyi gereksiz
  * şişiriyordu (zayıf makinede dex adımı bellek yetmediği için düşüyordu).
  *
- * Buradaki ikonlar elle çizildi: 24x24 viewport, 2dp çizgi, yuvarlatılmış
+ * Buradaki ikonlar elle çizildi: 24x24 viewport, 1.75dp çizgi, yuvarlatılmış
  * uçlar — tek görsel dil. "Dolu" varyantlar aktif durum için.
  */
 private fun ikon(ad: String, ciz: ImageVector.Builder.() -> Unit): ImageVector =
@@ -27,7 +27,7 @@ private fun ikon(ad: String, ciz: ImageVector.Builder.() -> Unit): ImageVector =
 
 private fun ImageVector.Builder.cizgi(blok: PathBuilder.() -> Unit) = path(
     stroke = SolidColor(Color.Black),
-    strokeLineWidth = 2f,
+    strokeLineWidth = 1.75f,
     strokeLineCap = StrokeCap.Round,
     strokeLineJoin = StrokeJoin.Round,
     pathBuilder = blok,
@@ -170,16 +170,61 @@ object AzimIkon {
 
     val Ayarlar = ikon("ayarlar") {
         cizgi {
-            moveTo(12f, 15.2f)
-            arcTo(3.2f, 3.2f, 0f, true, false, 12f, 8.8f)
-            arcTo(3.2f, 3.2f, 0f, false, false, 12f, 15.2f)
-            close()
-            moveTo(12f, 2.6f); lineTo(13.4f, 5.2f); lineTo(16.3f, 4.6f); lineTo(16.6f, 7.6f)
-            lineTo(19.3f, 8.8f); lineTo(17.8f, 11.3f); lineTo(19.3f, 13.8f); lineTo(16.6f, 15f)
-            lineTo(16.3f, 18f); lineTo(13.4f, 17.4f); lineTo(12f, 20f); lineTo(10.6f, 17.4f)
-            lineTo(7.7f, 18f); lineTo(7.4f, 15f); lineTo(4.7f, 13.8f); lineTo(6.2f, 11.3f)
-            lineTo(4.7f, 8.8f); lineTo(7.4f, 7.6f); lineTo(7.7f, 4.6f); lineTo(10.6f, 5.2f)
-            close()
+            moveTo(4f, 7f); horizontalLineTo(7f)
+            moveTo(11f, 7f); horizontalLineTo(20f)
+            moveTo(4f, 17f); horizontalLineTo(13f)
+            moveTo(17f, 17f); horizontalLineTo(20f)
+            moveTo(9f, 9f); arcTo(2f, 2f, 0f, true, true, 9f, 5f)
+            arcTo(2f, 2f, 0f, true, true, 9f, 9f); close()
+            moveTo(15f, 19f); arcTo(2f, 2f, 0f, true, true, 15f, 15f)
+            arcTo(2f, 2f, 0f, true, true, 15f, 19f); close()
+        }
+    }
+
+    val Sonraki = ikon("sonraki") {
+        cizgi { moveTo(5f, 12f); horizontalLineTo(19f); moveTo(13f, 6f); lineTo(19f, 12f); lineTo(13f, 18f) }
+    }
+    val Disari = ikon("disari") {
+        cizgi { moveTo(6f, 18f); lineTo(18f, 6f); moveTo(7f, 6f); horizontalLineTo(18f); verticalLineTo(17f) }
+    }
+    val Asagi = ikon("asagi") {
+        cizgi { moveTo(6f, 9f); lineTo(12f, 15f); lineTo(18f, 9f) }
+    }
+    val Arti = ikon("arti") {
+        cizgi { moveTo(5f, 12f); horizontalLineTo(19f); moveTo(12f, 5f); verticalLineTo(19f) }
+    }
+    val Eksi = ikon("eksi") {
+        cizgi { moveTo(5f, 12f); horizontalLineTo(19f) }
+    }
+    val Daha = ikon("daha") {
+        dolgu {
+            listOf(5f, 12f, 19f).forEach { x ->
+                moveTo(x, 13.5f); arcTo(1.5f, 1.5f, 0f, true, true, x, 10.5f)
+                arcTo(1.5f, 1.5f, 0f, true, true, x, 13.5f); close()
+            }
+        }
+    }
+    val Bildirim = ikon("bildirim") {
+        cizgi {
+            moveTo(5f, 17f); curveTo(7f, 14f, 6f, 12f, 7f, 8f)
+            curveTo(8f, 3f, 16f, 3f, 17f, 8f)
+            curveTo(18f, 12f, 17f, 14f, 19f, 17f); close()
+            moveTo(10f, 20f); curveTo(11f, 21f, 13f, 21f, 14f, 20f)
+            moveTo(12f, 3f); verticalLineTo(4f)
+        }
+    }
+    val Saat = ikon("saat") {
+        cizgi {
+            moveTo(12f, 21f); arcTo(9f, 9f, 0f, true, true, 12f, 3f)
+            arcTo(9f, 9f, 0f, true, true, 12f, 21f); close()
+            moveTo(12f, 7f); verticalLineTo(12f); lineTo(16f, 14f)
+        }
+    }
+    val Yaprak = ikon("yaprak") {
+        cizgi {
+            moveTo(6f, 18f); curveTo(0f, 9f, 10f, 3f, 20f, 4f)
+            curveTo(21f, 14f, 15f, 22f, 6f, 18f); close()
+            moveTo(4f, 21f); lineTo(15f, 10f)
         }
     }
 

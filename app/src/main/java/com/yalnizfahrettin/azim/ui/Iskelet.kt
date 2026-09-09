@@ -32,13 +32,13 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
     val etiketler = listOf(cevir(dil, "Bugün", "Today"), cevir(dil, "Keşfet", "Explore"), cevir(dil, "Senin", "You"))
     val ikonlar = listOf(AzimIkon.Yukselis, AzimIkon.Kesfet, AzimIkon.Kisi)
     Column(Modifier.fillMaxWidth().background(Renk.zemin).navigationBarsPadding()) {
-        Box(Modifier.fillMaxWidth().height(1.dp).background(Renk.kenarlik.copy(alpha = .55f)))
+        Box(Modifier.fillMaxWidth().height(1.dp).background(Renk.kenarlik.copy(alpha = .3f)))
         Row(Modifier.fillMaxWidth().selectableGroup().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
             sekmeler.forEachIndexed { index, sekme ->
                 val etkin = secili == sekme || (sekme == Sekme.ISTATISTIK && secili == Sekme.FAVORI)
-                val renk by animateColorAsState(if (etkin) Renk.accent else Renk.metinIkincil, tween(150), label = "navigation-ink")
+                val renk by animateColorAsState(if (etkin) Renk.metin else Renk.metinIkincil, tween(150), label = "navigation-ink")
                 Column(
-                    Modifier.weight(1f).heightIn(min = 68.dp).testTag("nav-${sekme.rota}")
+                    Modifier.weight(1f).heightIn(min = 76.dp).testTag("nav-${sekme.rota}")
                         .selectable(selected = etkin, role = Role.Tab, onClick = { if (secili != sekme) secildi(sekme) })
                         .padding(horizontal = 6.dp, vertical = 8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -46,7 +46,7 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
                     Box(Modifier.width(22.dp).height(2.dp).background(if (etkin) Renk.accent else Color.Transparent, RoundedCornerShape(1.dp)))
                     Icon(ikonlar[index], null, Modifier.size(24.dp), tint = renk)
                     Text(etiketler[index], modifier = Modifier.fillMaxWidth(), color = renk,
-                        fontSize = 11.sp, lineHeight = 14.sp, letterSpacing = 0.sp,
+                        fontSize = 12.sp, lineHeight = 16.sp, letterSpacing = 0.sp,
                         maxLines = 2, softWrap = true,
                         fontWeight = if (etkin) FontWeight.SemiBold else FontWeight.Normal, textAlign = TextAlign.Center)
                 }

@@ -53,14 +53,14 @@ internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenk
         },
         accentDerin = Color(0xFF494146), karanlikMi = true,
     ) else AzimRenkleri(
-        zemin = Color.White, yuzey = Color(0xFFF8F5F6), yuzeyYuksek = Color(0xFFF1ECEE),
-        kenarlik = Color(0xFFE6DDE0), kenarlikGuclu = Color(0xFF82777D),
-        metin = Color(0xFF211D1F), metinIkincil = Color(0xFF655D61), metinSonuk = Color(0xFF655D61),
+        zemin = Color(0xFFFCFAF8), yuzey = Color(0xFFF7F4F3), yuzeyYuksek = Color(0xFFF0ECE9),
+        kenarlik = Color(0xFFE8E1E3), kenarlikGuclu = Color(0xFF82777D),
+        metin = Color(0xFF242022), metinIkincil = Color(0xFF6E676A), metinSonuk = Color(0xFF6E676A),
         accent = accent, accentSonuk = Color(0xFF82777D),
         accentZemin = when (secim) {
             Palet.BORDO -> Color(0xFFF5ECEF)
             Palet.MONO -> Color(0xFFF1EFF0)
-            else -> Color(0xFFF4EAED)
+            else -> Color(0xFFF5EFF0)
         },
         accentDerin = Color(0xFFE6DDE0), karanlikMi = false,
     )

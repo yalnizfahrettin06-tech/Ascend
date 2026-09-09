@@ -29,25 +29,36 @@ import com.yalnizfahrettin.azim.core.*
 
 enum class KlasikMotif { BUST, COLUMN, ARCH }
 
-/** Compact, opaque brand surface. Its ornament never participates in measurement. */
+/** Shared, non-interactive summary chip. Editing happens in the explicit plan controls. */
 @Composable
-fun MarkaBasligi(modifier: Modifier = Modifier, sutun: Boolean = false, content: @Composable RowScope.() -> Unit) {
-    Box(modifier.fillMaxWidth().background(Renk.marka).clipToBounds()) {
+fun PlanKonuEtiketi(label: String) {
+    Row(Modifier.background(Renk.yuzey, androidx.compose.foundation.shape.RoundedCornerShape(12.dp))
+        .padding(horizontal = 12.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Box(Modifier.width(2.dp).height(12.dp).background(Renk.accent, androidx.compose.foundation.shape.CircleShape))
+        Text(label, color = Renk.metin, fontSize = 13.sp, lineHeight = 20.sp)
+    }
+}
+
+/** An open paper header; the ornament never participates in measurement. */
+@Composable
+fun MarkaBasligi(modifier: Modifier = Modifier, sutun: Boolean = false,
+    yatayBosluk: androidx.compose.ui.unit.Dp = 24.dp, content: @Composable RowScope.() -> Unit) {
+    Box(modifier.fillMaxWidth().background(Renk.zemin).clipToBounds()) {
         if (sutun) Box(Modifier.matchParentSize()) {
             Image(painterResource(R.drawable.art_laurel_column), null,
                 Modifier.align(Alignment.CenterEnd).requiredSize(140.dp).offset(x = 24.dp, y = (-20).dp),
-                contentScale = ContentScale.Fit, alpha = .12f, colorFilter = ColorFilter.tint(Renk.markaUstu))
+                contentScale = ContentScale.Fit, alpha = .035f, colorFilter = ColorFilter.tint(Renk.metin))
         }
-        CompositionLocalProvider(LocalContentColor provides Renk.markaUstu) {
-            Row(Modifier.fillMaxWidth().heightIn(min = 68.dp).padding(horizontal = 24.dp, vertical = 8.dp),
+        CompositionLocalProvider(LocalContentColor provides Renk.metin) {
+            Row(Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(horizontal = yatayBosluk, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically, content = content)
         }
     }
 }
 
-/** Decorative only. A neutral tonal floor protects ink even in overlapping art.
- * At the maximum .55 opacity, each layer can darken white by at most .165.
- * Body and secondary labels are placed on their own opaque reading surface.
+/** Decorative only. The bust is capped at 9%; architecture keeps a neutral tonal
+ * floor. Body and secondary labels have their own opaque reading surface.
  */
 @Composable
 fun KlasikGorsel(motif: KlasikMotif, modifier: Modifier = Modifier, opacity: Float = .16f) {
@@ -56,7 +67,7 @@ fun KlasikGorsel(motif: KlasikMotif, modifier: Modifier = Modifier, opacity: Flo
         KlasikMotif.COLUMN -> R.drawable.art_laurel_column
         KlasikMotif.ARCH -> R.drawable.art_marble_arch
     }
-    val matrix = ColorMatrix(floatArrayOf(
+    val matrix = if (motif == KlasikMotif.BUST) ColorMatrix() else ColorMatrix(floatArrayOf(
         .3f, 0f, 0f, 0f, 178.5f,
         0f, .3f, 0f, 0f, 178.5f,
         0f, 0f, .3f, 0f, 178.5f,
@@ -66,6 +77,8 @@ fun KlasikGorsel(motif: KlasikMotif, modifier: Modifier = Modifier, opacity: Flo
         .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
         .drawWithContent {
             drawContent()
+            drawRect(Brush.horizontalGradient(0f to Color.Transparent, .15f to Color.White,
+                .8f to Color.White, 1f to Color.Transparent), blendMode = BlendMode.DstIn)
             val imageHeight = minOf(size.height, size.width * 1.5f)
             val imageTop = (size.height - imageHeight) / 2f
             drawRect(Brush.verticalGradient(listOf(Color.White, Color.Transparent),
@@ -84,7 +97,7 @@ fun KlasikGorsel(motif: KlasikMotif, modifier: Modifier = Modifier, opacity: Flo
         }
     Image(painterResource(source), contentDescription = null, modifier = modifier.then(softEdge),
         contentScale = ContentScale.Fit,
-        alpha = if (Renk.karanlikMi) opacity.coerceIn(0f, .07f) else opacity.coerceIn(0f, .55f),
+        alpha = opacity.coerceIn(0f, if (Renk.karanlikMi) .07f else if (motif == KlasikMotif.BUST) .09f else .55f),
         colorFilter = if (Renk.karanlikMi) null else ColorFilter.colorMatrix(matrix))
 }
 

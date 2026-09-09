@@ -62,9 +62,7 @@ fun KisiselPlanPaneli(
                     color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.testTag("plan-priorities-empty"))
             } else FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 oncelikli.forEach { kategori ->
-                    Surface(color = Renk.zemin, border = BorderStroke(1.dp, Renk.kenarlik), shape = RoundedCornerShape(50)) {
-                        Text(kategori.ad(dil), color = Renk.metin, fontSize = 12.sp, modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp))
-                    }
+                    PlanKonuEtiketi(kategori.ad(dil))
                 }
             }
             Text(cevir(dil, "${oncelikli.size} öncelikli konu · ${etkin.size} açık konu planına uygun",
@@ -108,7 +106,8 @@ fun KisiselPlanPaneli(
 private fun PlanBolumu(sira: String, baslik: String) {
     HorizontalDivider(Modifier.padding(top = 24.dp, bottom = 20.dp), color = Renk.kenarlik)
     Row(Modifier.padding(bottom = 16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(sira, color = Renk.metinIkincil, style = MaterialTheme.typography.labelMedium)
+        Icon(when (sira) { "01" -> AzimIkon.Bildirim; "02" -> AzimIkon.Saat; else -> AzimIkon.Kesfet },
+            null, Modifier.size(20.dp), tint = Renk.accent)
         Text(baslik, color = Renk.metin, fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 30.sp, modifier = Modifier.weight(1f))
     }
 }

@@ -49,7 +49,7 @@ fun BildirimKurulumu(dil: String, izin: Boolean, izinIste: () -> Unit) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     Box(Modifier.size(36.dp).background(Renk.accentZemin, CircleShape), contentAlignment = Alignment.Center) {
                         if (izin) Icon(AzimIkon.Tik, null, Modifier.size(20.dp), tint = Renk.accent)
-                        else Text("01", style = MaterialTheme.typography.labelLarge, color = Renk.accent)
+                        else Icon(AzimIkon.Bildirim, null, Modifier.size(20.dp), tint = Renk.accent)
                     }
                     Text(cevir(dil, "Bildirim izni", "Notification permission"), fontWeight = FontWeight.SemiBold, color = Renk.metin,
                         modifier = Modifier.weight(1f).semantics { heading() })
@@ -60,9 +60,9 @@ fun BildirimKurulumu(dil: String, izin: Boolean, izinIste: () -> Unit) {
             }
         }
         BildirimOnizlemesi(dil)
-        Surface(color = Renk.accentZemin, shape = RoundedCornerShape(20.dp)) {
+        Surface(color = Renk.yuzey, shape = RoundedCornerShape(20.dp)) {
             Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text(cevir(dil, "02  Sözü ayrıntılı gör", "02  See the whole quote"), color = Renk.metin, fontWeight = FontWeight.SemiBold)
+                Text(cevir(dil, "Sözü ayrıntılı gör", "See the whole quote"), color = Renk.metin, fontWeight = FontWeight.SemiBold)
                 Text(cevir(dil, "Bildirimi aşağı doğru genişlettiğinde tam metni okuyabilirsin. Açılır pencereyi de cihazından ayarlayabilirsin.", "Expand a notification to read the full text. You can also adjust pop-ups in device settings."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
                 TextButton(onClick = { detay = !detay }) { Text(cevir(dil, "Samsung: Ayrıntılı görünüm", "Samsung: Detailed pop-up")) }
                 if (detay) {

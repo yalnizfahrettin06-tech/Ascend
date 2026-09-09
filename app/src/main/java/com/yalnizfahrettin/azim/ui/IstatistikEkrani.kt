@@ -38,7 +38,7 @@ fun IstatistikEkrani(
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()
         .verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-        MarkaBasligi {
+        MarkaBasligi(yatayBosluk = 0.dp) {
             Text(if (name.isBlank()) cevir(dil, "Senin", "You") else name,
                 fontFamily = LoraSerif, fontSize = 28.sp, lineHeight = 36.sp, modifier = Modifier.weight(1f))
             IconButton(onClick = onSettings, modifier = Modifier.size(48.dp).testTag("profile-settings")) {
