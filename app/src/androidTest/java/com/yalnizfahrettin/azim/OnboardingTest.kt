@@ -7,6 +7,9 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.StateRestorationTester
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 import com.yalnizfahrettin.azim.ui.*
@@ -50,8 +53,28 @@ class OnboardingTest {
         var draft = PersonalProfile()
         val restoration = StateRestorationTester(compose)
         restoration.setContent { AzimTema { Onboarding("en", draftChanged = { draft = it }) { _,_,_,_,_ -> } } }
-        next(); compose.onNodeWithTag("onboarding-name").performTextInput("Ada")
-        next(); compose.onNodeWithTag("onboarding-option-format-affirmation").performClick(); next()
+        next()
+        val footerBeforeIme = compose.onNodeWithTag("onboarding-next").fetchSemanticsNode().boundsInRoot
+        compose.onNodeWithTag("onboarding-name").performTextInput("Ada")
+        // Android's IME animates outside Compose's test clock and moves the footer.
+        // This test covers the footer route; the separate Done test covers IME navigation.
+        compose.waitUntil(5_000) {
+            compose.runOnUiThread {
+                ViewCompat.getRootWindowInsets(compose.activity.window.decorView)
+                    ?.isVisible(WindowInsetsCompat.Type.ime()) == true
+            }
+        }
+        closeSoftKeyboard()
+        compose.waitUntil(5_000) {
+            val imeHidden = compose.runOnUiThread {
+                ViewCompat.getRootWindowInsets(compose.activity.window.decorView)
+                    ?.isVisible(WindowInsetsCompat.Type.ime()) == false
+            }
+            imeHidden && compose.onNodeWithTag("onboarding-next").fetchSemanticsNode().boundsInRoot == footerBeforeIme
+        }
+        next()
+        compose.onNodeWithTag("onboarding-question-format").assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-option-format-affirmation").performClick(); next()
         compose.runOnIdle { assertEquals("Ada", draft.name); assertEquals(3, draft.step); assertEquals(setOf("affirmation"), draft.answer("format")) }
         restoration.emulateSavedInstanceStateRestore()
         compose.onNodeWithTag("onboarding-question-goal").assertIsDisplayed()

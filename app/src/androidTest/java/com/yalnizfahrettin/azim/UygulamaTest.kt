@@ -103,6 +103,9 @@ class UygulamaTest {
 
     private fun waitForHome() {
         compose.waitUntil(15000) { compose.onAllNodesWithTag("active-quote").fetchSemanticsNodes().isNotEmpty() }
+        // Recreation can compose the page before Android returns input focus.
+        // A coordinate click during that window is dropped by the platform.
+        compose.waitUntil(15000) { compose.runOnUiThread { compose.activity.hasWindowFocus() } }
         compose.waitForIdle()
     }
 
@@ -188,6 +191,7 @@ class UygulamaTest {
         val original = runBlocking { demoDepo.personalProfile.first() }
         val selected = runBlocking { demoDepo.secili.first() }
         compose.onNodeWithTag("home-moment").performClick()
+        compose.waitUntil(10000) { compose.onAllNodesWithTag("moment-calm").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithTag("moment-calm").performScrollTo().performClick()
         compose.onNodeWithTag("home-moment").assertTextContains("Biraz sakinlik", substring = true)
         compose.onNodeWithTag("active-quote").assertIsDisplayed()
@@ -195,6 +199,7 @@ class UygulamaTest {
         assertEquals("Momentary calm must not replace reminder topics", selected, runBlocking { demoDepo.secili.first() })
         shot("19-moment-calm")
         compose.onNodeWithTag("home-moment").performClick()
+        compose.waitUntil(10000) { compose.onAllNodesWithTag("moment-plan").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithTag("moment-plan").performClick()
         compose.onNodeWithTag("home-moment").assertTextContains("Sana göre", substring = true)
     }
