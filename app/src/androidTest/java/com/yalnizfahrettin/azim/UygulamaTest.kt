@@ -109,6 +109,20 @@ class UygulamaTest {
         compose.waitForIdle()
     }
 
+    private fun recordTouchState(tag: String, label: String) {
+        val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
+        android.util.Log.i("AscendTouch", "$label: active package=${automation.rootInActiveWindow?.packageName}")
+        compose.onNodeWithTag(tag).printToLog("AscendTouch")
+    }
+
+    private inline fun <T> withTouchEvidence(label: String, block: () -> T): T = try {
+        block()
+    } catch (failure: Throwable) {
+        recordTouchState("home-content", label)
+        ekranKaydet("failure-$label")
+        throw failure
+    }
+
     private fun openShare() {
         compose.onNodeWithTag("home-share").assertIsDisplayed().performClick()
         compose.waitUntil(15000) { compose.onAllNodesWithTag("share-preview").fetchSemanticsNodes().isNotEmpty() }
@@ -149,8 +163,11 @@ class UygulamaTest {
             .forEach { compose.onNodeWithTag(it).assertIsDisplayed().assertHasClickAction() }
         compose.onNodeWithTag("nav-favori").assertDoesNotExist()
         shot("06-home")
+        recordTouchState("home-save", "before-save")
         compose.onNodeWithTag("home-save").performClick()
-        val saved = runBlocking { withTimeout(5000) { demoDepo.favoriler.first { it.size == 1 }.single() } }
+        val saved = withTouchEvidence("save") {
+            runBlocking { withTimeout(5000) { demoDepo.favoriler.first { it.size == 1 }.single() } }
+        }
         compose.onNodeWithTag("home-save").assertIsSelected()
         compose.onNodeWithTag("nav-istatistik").performClick()
         compose.onNodeWithTag("profile-saved").assertIsDisplayed().performClick()
@@ -190,8 +207,11 @@ class UygulamaTest {
     @Test fun momentChoiceChangesOnlyTheCurrentFeed() {
         val original = runBlocking { demoDepo.personalProfile.first() }
         val selected = runBlocking { demoDepo.secili.first() }
+        recordTouchState("home-moment", "before-moment")
         compose.onNodeWithTag("home-moment").performClick()
-        compose.waitUntil(10000) { compose.onAllNodesWithTag("moment-calm").fetchSemanticsNodes().isNotEmpty() }
+        withTouchEvidence("moment") {
+            compose.waitUntil(10000) { compose.onAllNodesWithTag("moment-calm").fetchSemanticsNodes().isNotEmpty() }
+        }
         compose.onNodeWithTag("moment-calm").performScrollTo().performClick()
         compose.onNodeWithTag("home-moment").assertTextContains("Biraz sakinlik", substring = true)
         compose.onNodeWithTag("active-quote").assertIsDisplayed()
