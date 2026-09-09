@@ -8,8 +8,8 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.StateRestorationTester
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.test.espresso.Espresso.closeSoftKeyboard
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 import com.yalnizfahrettin.azim.ui.*
@@ -64,7 +64,10 @@ class OnboardingTest {
                     ?.isVisible(WindowInsetsCompat.Type.ime()) == true
             }
         }
-        closeSoftKeyboard()
+        compose.runOnUiThread {
+            WindowCompat.getInsetsController(compose.activity.window, compose.activity.window.decorView)
+                .hide(WindowInsetsCompat.Type.ime())
+        }
         compose.waitUntil(5_000) {
             val imeHidden = compose.runOnUiThread {
                 ViewCompat.getRootWindowInsets(compose.activity.window.decorView)
