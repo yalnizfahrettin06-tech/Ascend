@@ -166,7 +166,10 @@ class UygulamaTest {
         recordTouchState("home-save", "before-save")
         compose.onNodeWithTag("home-save").performClick()
         val saved = withTouchEvidence("save") {
-            runBlocking { withTimeout(5000) { demoDepo.favoriler.first { it.size == 1 }.single() } }
+            // Yield to Compose's clock while the click launches the DataStore write.
+            // Blocking on a future emission can prevent that frame from advancing.
+            compose.waitUntil(10000) { runBlocking { demoDepo.favoriler.first().size == 1 } }
+            runBlocking { demoDepo.favoriler.first().single() }
         }
         compose.onNodeWithTag("home-save").assertIsSelected()
         compose.onNodeWithTag("nav-istatistik").performClick()

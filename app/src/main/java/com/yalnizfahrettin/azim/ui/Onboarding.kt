@@ -188,7 +188,7 @@ private fun PlanSection(step: Int, dil: String) {
 @Composable
 private fun ColumnScope.PlanWelcome(dil: String) {
     Box(Modifier.fillMaxWidth()) {
-        KlasikGorsel(KlasikMotif.COLUMN, Modifier.matchParentSize().offset(x = 100.dp), opacity = .35f)
+        KlasikGorsel(KlasikMotif.COLUMN, Modifier.matchParentSize().offset(x = 100.dp, y = (-40).dp), opacity = .35f)
         Column(Modifier.padding(vertical = 20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             PlanTitle(cevir(dil, "Kendi hızında. Bir adım yukarı.", "At your pace. One step higher."),
                 cevir(dil, "Bazen bir olumlama. Bazen yeni bir bakış. Sana eşlik edecek sözleri birlikte bulalım.",

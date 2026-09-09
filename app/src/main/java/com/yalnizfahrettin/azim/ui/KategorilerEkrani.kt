@@ -283,6 +283,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         Text(Kategoriler.grupBul(kat.grup)?.ad(dil).orEmpty(), color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp)
                         Text(kat.ad(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = 27.sp, lineHeight = 35.sp,
                             modifier = Modifier.semantics { heading() })
+                        Text(koleksiyonOzeti(kat.grup, dil), color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 20.sp)
                     }
                     IconButton(onClick = { detayKey = null }, modifier = Modifier.testTag("category-detail-close")) {
                         Icon(AzimIkon.Kapat, cevir(dil, "Konuya göz atmayı kapat", "Close topic"), Modifier.size(20.dp))

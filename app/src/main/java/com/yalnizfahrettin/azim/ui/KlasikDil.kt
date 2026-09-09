@@ -35,7 +35,7 @@ fun MarkaBasligi(modifier: Modifier = Modifier, sutun: Boolean = false, content:
     Box(modifier.fillMaxWidth().background(Renk.marka).clipToBounds()) {
         if (sutun) Box(Modifier.matchParentSize()) {
             Image(painterResource(R.drawable.art_laurel_column), null,
-                Modifier.align(Alignment.CenterEnd).requiredSize(140.dp).offset(x = 24.dp, y = 28.dp),
+                Modifier.align(Alignment.CenterEnd).requiredSize(140.dp).offset(x = 24.dp, y = (-20).dp),
                 contentScale = ContentScale.Fit, alpha = .12f, colorFilter = ColorFilter.tint(Renk.markaUstu))
         }
         CompositionLocalProvider(LocalContentColor provides Renk.markaUstu) {
@@ -71,7 +71,17 @@ fun KlasikGorsel(motif: KlasikMotif, modifier: Modifier = Modifier, opacity: Flo
             drawRect(Brush.verticalGradient(listOf(Color.White, Color.Transparent),
                 startY = imageTop + imageHeight * .72f, endY = imageTop + imageHeight),
                 blendMode = BlendMode.DstIn)
-        } else Modifier
+        } else Modifier.graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+        .drawWithContent {
+            drawContent()
+            val imageWidth = minOf(size.width, size.height / 1.5f)
+            val left = (size.width - imageWidth) / 2f
+            drawRect(Brush.horizontalGradient(0f to Color.Transparent, .18f to Color.White,
+                .85f to Color.White, 1f to Color.Transparent, startX = left, endX = left + imageWidth),
+                blendMode = BlendMode.DstIn)
+            drawRect(Brush.verticalGradient(.0f to Color.White, .8f to Color.White, 1f to Color.Transparent),
+                blendMode = BlendMode.DstIn)
+        }
     Image(painterResource(source), contentDescription = null, modifier = modifier.then(softEdge),
         contentScale = ContentScale.Fit,
         alpha = if (Renk.karanlikMi) opacity.coerceIn(0f, .07f) else opacity.coerceIn(0f, .55f),

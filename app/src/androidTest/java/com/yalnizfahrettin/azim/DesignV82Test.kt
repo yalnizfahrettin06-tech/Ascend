@@ -64,7 +64,10 @@ class DesignV82Test {
         val quote = Sozler.kategoriden("azim").first { it.metin("tr").startsWith("Çabanın karşılığını") }
         compose.setContent {
             val original = LocalDensity.current
-            val config = Configuration(LocalConfiguration.current).apply { screenWidthDp = if (scale >= 1.5f) 320 else 411 }
+            val config = Configuration(LocalConfiguration.current).apply {
+                setLocale(java.util.Locale.forLanguageTag("tr"))
+                screenWidthDp = if (scale >= 1.5f) 320 else 411
+            }
             CompositionLocalProvider(LocalDensity provides Density(original.density, scale), LocalConfiguration provides config) {
                 AzimTema(modu = if (dark) TemaModu.KARANLIK else TemaModu.AYDINLIK) {
                     Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.TopCenter) {
@@ -112,4 +115,3 @@ class DesignV82Test {
         shot("library-dark")
     }
 }
-
