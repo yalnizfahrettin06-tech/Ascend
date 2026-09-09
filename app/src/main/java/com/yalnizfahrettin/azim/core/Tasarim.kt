@@ -73,7 +73,7 @@ val LoraSerif = FontFamily(
 
 
 val AzimTipografi = Typography(
-    headlineLarge = TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 28.sp, lineHeight = 34.sp),
+    headlineLarge = TextStyle(fontFamily = LoraSerif, fontWeight = FontWeight.Normal, fontSize = 30.sp, lineHeight = 39.sp),
     displaySmall = TextStyle(
         fontFamily = LoraSerif, fontWeight = FontWeight.Normal,
         fontSize = 27.sp, lineHeight = 36.sp,
@@ -92,15 +92,15 @@ val AzimTipografi = Typography(
     ),
 )
 
-val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.MONO, karanlik = true, oled = false) }
+val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.MERMER, karanlik = false, oled = false) }
 
 enum class TemaModu { SISTEM, AYDINLIK, KARANLIK, OLED }
 
 
 @Composable
 fun AzimTema(
-    modu: TemaModu = TemaModu.SISTEM,
-    palet: Palet = Palet.MONO,
+    modu: TemaModu = TemaModu.AYDINLIK,
+    palet: Palet = Palet.MERMER,
     dinamik: Boolean = false,
     icerik: @Composable () -> Unit,
 ) {
@@ -112,25 +112,31 @@ fun AzimTema(
     }
     val renk = paletiCoz(palet, karanlik, oled = modu == TemaModu.OLED)
     val ctx = androidx.compose.ui.platform.LocalContext.current
-    val dinamikDestekli = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S
-    val m3 = if (dinamik && dinamikDestekli) {
-        if (renk.karanlikMi) androidx.compose.material3.dynamicDarkColorScheme(ctx)
-        else androidx.compose.material3.dynamicLightColorScheme(ctx)
-    } else if (renk.karanlikMi) {
-        darkColorScheme(
-            secondary = renk.accent, secondaryContainer = renk.accentZemin, onSecondaryContainer = renk.metin,
-            surfaceVariant = renk.yuzeyYuksek, onSurfaceVariant = renk.metinIkincil,
-            primary = renk.accent, background = renk.zemin, surface = renk.yuzey,
-            onPrimary = if (renk.karanlikMi) Color(0xFF121416) else Color.White, onBackground = renk.metin, onSurface = renk.metin,
-        )
-    } else {
-        lightColorScheme(
-            secondary = renk.accent, secondaryContainer = renk.accentZemin, onSecondaryContainer = renk.metin,
-            surfaceVariant = renk.yuzeyYuksek, onSurfaceVariant = renk.metinIkincil,
-            primary = renk.accent, background = renk.zemin, surface = renk.yuzey,
-            onPrimary = if (renk.karanlikMi) Color(0xFF121416) else Color.White, onBackground = renk.metin, onSurface = renk.metin,
-        )
-    }
+    // Keep the serialized dynamic preference for compatibility; wallpaper colors
+    // cannot override the deliberately restricted v8 palette.
+    val base = if (renk.karanlikMi) darkColorScheme() else lightColorScheme()
+    val onAccent = if (renk.karanlikMi) Color(0xFF121416) else Color.White
+    val m3 = base.copy(
+        primary = renk.accent, onPrimary = onAccent,
+        primaryContainer = renk.accentZemin, onPrimaryContainer = renk.metin,
+        secondary = renk.accent, onSecondary = onAccent,
+        secondaryContainer = renk.accentZemin, onSecondaryContainer = renk.metin,
+        tertiary = renk.accent, onTertiary = onAccent,
+        tertiaryContainer = renk.accentZemin, onTertiaryContainer = renk.metin,
+        background = renk.zemin, onBackground = renk.metin,
+        surface = renk.yuzey, onSurface = renk.metin,
+        surfaceVariant = renk.yuzeyYuksek, onSurfaceVariant = renk.metinIkincil,
+        surfaceTint = Color.Transparent,
+        outline = renk.kenarlikGuclu, outlineVariant = renk.kenarlik,
+        inverseSurface = renk.metin, inverseOnSurface = renk.zemin,
+        inversePrimary = renk.accentZemin,
+        surfaceBright = renk.zemin, surfaceDim = renk.yuzeyYuksek,
+        surfaceContainerLowest = renk.zemin, surfaceContainerLow = renk.yuzey,
+        surfaceContainer = renk.yuzey, surfaceContainerHigh = renk.yuzeyYuksek,
+        surfaceContainerHighest = renk.yuzeyYuksek,
+        error = if (renk.karanlikMi) Color(0xFFE0BAC8) else Color(0xFF743A4B),
+        onError = onAccent, errorContainer = renk.accentZemin, onErrorContainer = renk.metin,
+    )
     val view = androidx.compose.ui.platform.LocalView.current
     val activity = generateSequence(ctx) { (it as? android.content.ContextWrapper)?.baseContext }.filterIsInstance<android.app.Activity>().firstOrNull()
     SideEffect { activity?.let {
@@ -140,7 +146,11 @@ fun AzimTema(
         isAppearanceLightNavigationBars = !renk.karanlikMi
     } } }
     CompositionLocalProvider(LocalAzimRenk provides renk) {
-        MaterialTheme(colorScheme = m3, typography = AzimTipografi, content = icerik)
+        MaterialTheme(colorScheme = m3, typography = AzimTipografi, shapes = androidx.compose.material3.Shapes(
+            small = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
+            medium = androidx.compose.foundation.shape.RoundedCornerShape(16.dp),
+            large = androidx.compose.foundation.shape.RoundedCornerShape(24.dp),
+        ), content = icerik)
     }
 }
 

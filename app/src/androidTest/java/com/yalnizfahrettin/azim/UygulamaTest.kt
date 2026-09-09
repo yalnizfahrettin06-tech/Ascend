@@ -14,6 +14,7 @@ import com.yalnizfahrettin.azim.data.Kategoriler
 import com.yalnizfahrettin.azim.data.PersonalProfile
 import com.yalnizfahrettin.azim.data.Sozler
 import com.yalnizfahrettin.azim.core.TemaModu
+import com.yalnizfahrettin.azim.core.Palet
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
@@ -32,7 +33,7 @@ fun ekranKaydet(name: String) {
 
 class UygulamaTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
-    private fun shot(name: String) { compose.waitForIdle(); ekranKaydet(name) }
+    private fun shot(name: String) { compose.waitForIdle(); ekranKaydet(name.replaceFirst("-", "-v8-")) }
     private fun closeProIfOpen() {
         compose.waitForIdle()
         if (compose.onAllNodesWithTag("pro-close").fetchSemanticsNodes().isNotEmpty()) {
@@ -92,6 +93,7 @@ class UygulamaTest {
                 demoDepo.completePersonalPlan(PersonalProfile(), false)
                 demoDepo.dilAyarla("tr")
                 demoDepo.temaAyarla(TemaModu.AYDINLIK)
+                demoDepo.paletAyarla(Palet.MERMER)
                 demoDepo.favoriler.first().forEach { demoDepo.favoriDegistir(it) }
             }
         }
@@ -156,6 +158,7 @@ class UygulamaTest {
         shot("11-discover")
         compose.onNodeWithTag("nav-istatistik").performClick()
         compose.onNodeWithTag("profile-plan").assertIsDisplayed()
+        shot("12-profile")
         compose.onNodeWithTag("journey-week").performScrollTo().assertIsDisplayed()
         shot("12-journey")
     }
@@ -318,6 +321,8 @@ class UygulamaTest {
         compose.onNodeWithTag("nav-istatistik").performClick()
         compose.onNodeWithTag("profile-settings").performClick()
         compose.onNodeWithText("Karanlık").performScrollTo().performClick()
+        runBlocking { withTimeout(5000) { demoDepo.tema.first { it == TemaModu.KARANLIK } } }
+        shot("28-settings-dark")
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
         compose.onNodeWithTag("nav-ana").performClick()
         waitForHome()
@@ -332,5 +337,28 @@ class UygulamaTest {
         compose.onNodeWithTag("home-moment").assertTextContains("For you", substring = true)
         compose.onNodeWithText("Demo tamamlandı.", substring = true).assertDoesNotExist()
         shot("15-home-english")
+    }
+
+    @Test fun appearanceChoicesStayInTheNewPaletteAndPersistAcrossRecreation() {
+        compose.onNodeWithTag("nav-istatistik").performClick()
+        compose.onNodeWithTag("profile-settings").performClick()
+        compose.onNodeWithText("Mermer").performScrollTo().assertIsSelected()
+        compose.onNodeWithText("Mürekkep").assertExists()
+        compose.onNodeWithText("Bordo").assertExists()
+        listOf("Kum", "Lacivert", "Yosun", "Duvar kağıdı renkleri").forEach {
+            compose.onNodeWithText(it).assertDoesNotExist()
+        }
+        shot("27-settings-light")
+        compose.onNodeWithText("Mürekkep").performScrollTo().performClick()
+        runBlocking { withTimeout(5000) { demoDepo.palet.first { it == Palet.MONO } } }
+        compose.onNodeWithText("Mürekkep").assertIsSelected()
+        compose.onNodeWithText("Bordo").performClick()
+        runBlocking { withTimeout(5000) { demoDepo.palet.first { it == Palet.BORDO } } }
+        compose.activityRule.scenario.recreate()
+        compose.waitUntil(10000) { compose.onAllNodesWithText("Ayarlar").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithText("Bordo").performScrollTo().assertIsSelected()
+        compose.onNodeWithText("Mermer").performClick()
+        runBlocking { withTimeout(5000) { demoDepo.palet.first { it == Palet.MERMER } } }
+        compose.onNodeWithText("Mermer").assertIsSelected()
     }
 }

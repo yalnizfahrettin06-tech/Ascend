@@ -24,10 +24,10 @@ class OnboardingTest {
             assertEquals(9, start); assertEquals(21, end); assertFalse(enabled); done = true
         } } }
         compose.onNodeWithText("Build your path").assertIsDisplayed()
-        ekranKaydet("01-v7-onboarding-welcome")
+        ekranKaydet("01-v8-onboarding-welcome")
         compose.onNodeWithTag("onboarding-quick-start").performClick()
         compose.onNodeWithText("Your starting point.").assertIsDisplayed()
-        ekranKaydet("04-v7-onboarding-plan")
+        ekranKaydet("04-v8-onboarding-plan")
         next(); next()
         compose.onNodeWithTag("onboarding-finish-without-reminders").performClick()
         compose.runOnIdle { assertTrue(done) }
@@ -55,7 +55,7 @@ class OnboardingTest {
         compose.runOnIdle { assertEquals("Ada", draft.name); assertEquals(3, draft.step); assertEquals(setOf("affirmation"), draft.answer("format")) }
         restoration.emulateSavedInstanceStateRestore()
         compose.onNodeWithTag("onboarding-question-goal").assertIsDisplayed()
-        ekranKaydet("02-v7-onboarding-question")
+        ekranKaydet("02-v8-onboarding-question")
         compose.onNodeWithTag("onboarding-back").performClick()
         compose.onNodeWithTag("onboarding-option-format-affirmation").assertIsSelected()
         compose.onNodeWithTag("onboarding-skip").performClick()
@@ -82,7 +82,7 @@ class OnboardingTest {
         compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 19), bildirimIzni = permission,
             izinIste = { requests++; permission = true }) { _,_,_,_,enabled -> assertTrue(enabled); done = true } } }
         compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
-        ekranKaydet("05-v7-onboarding-permission")
+        ekranKaydet("05-v8-onboarding-permission")
         next()
         compose.runOnIdle { assertEquals(1, requests); assertFalse(done) }
         compose.onNodeWithText("Start Ascend").assertIsDisplayed(); next()
@@ -102,5 +102,31 @@ class OnboardingTest {
         ekranKaydet("14-large-text-notifications")
         compose.onNodeWithTag("onboarding-finish-without-reminders").performClick()
         compose.runOnIdle { assertTrue(done) }
+    }
+    @Test fun nameKeyboardDoneSavesDraftAndMovesToFirstQuestion() {
+        var draft = PersonalProfile(step = 1)
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = draft, draftChanged = { draft = it }) { _,_,_,_,_ -> } } }
+        compose.onNodeWithTag("onboarding-name").performTextInput("Çağrı")
+        compose.onNodeWithTag("onboarding-name").performImeAction()
+        compose.onNodeWithTag("onboarding-question-format").assertIsDisplayed()
+        compose.runOnIdle { assertEquals("Çağrı", draft.name); assertEquals(2, draft.step) }
+    }
+    @Test fun multipleChoicesExposeCheckboxStatesAndSurviveRecreationAtLargeText() {
+        var draft = PersonalProfile(step = 8)
+        val restoration = StateRestorationTester(compose)
+        restoration.setContent { AzimTema {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(density.density, 2f)) {
+                Onboarding("en", initialDraft = draft, draftChanged = { draft = it }) { _,_,_,_,_ -> }
+            }
+        } }
+        compose.onNodeWithTag("onboarding-option-context-work").performScrollTo().assertIsOff().performClick().assertIsOn()
+        compose.onNodeWithTag("onboarding-option-context-study").performScrollTo().performClick().assertIsOn()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+        restoration.emulateSavedInstanceStateRestore()
+        compose.onNodeWithTag("onboarding-option-context-work").performScrollTo().assertIsOn().performClick().assertIsOff()
+        compose.onNodeWithTag("onboarding-selection-count").performScrollTo().assertTextEquals("1 selected · Choose more than one")
+        compose.runOnIdle { assertEquals(setOf("study"), draft.answer("context")) }
+        ekranKaydet("24-v8-large-text-question")
     }
 }

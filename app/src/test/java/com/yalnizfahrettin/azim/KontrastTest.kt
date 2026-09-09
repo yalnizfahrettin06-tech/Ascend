@@ -1,6 +1,7 @@
 package com.yalnizfahrettin.azim
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import com.yalnizfahrettin.azim.core.AzimRenkleri
 import com.yalnizfahrettin.azim.core.Palet
 import com.yalnizfahrettin.azim.core.kontrastOrani
@@ -15,7 +16,7 @@ import org.junit.Test
  * eşikleri koruyor: biri renk değerlerini "biraz daha güzel dursun" diye
  * değiştirirse ve okunabilirlik düşerse derleme kırılır.
  *
- * Monochrome and optional legacy palettes must meet the same readability floor.
+ * Marble, ink, wine and decoded legacy palettes share one readability floor.
  * High contrast is allowed; WCAG does not define a maximum contrast ratio.
  */
 class KontrastTest {
@@ -72,6 +73,46 @@ class KontrastTest {
     fun `elevated surface text remains readable`() = tumSetler().forEach { (ad, r) ->
         kontrol(ad, r.metin, r.yuzeyYuksek, 4.5, "metin/yüksek yüzey")
         kontrol(ad, r.metinIkincil, r.yuzeyYuksek, 4.5, "ikincil/yüksek yüzey")
+    }
+
+    /** Decorative rules may be quiet; outlines identifying controls must meet 3:1. */
+    @Test
+    fun `interactive outlines remain visible on every opaque surface`() = tumSetler().forEach { (ad, r) ->
+        listOf("paper" to r.zemin, "surface" to r.yuzey, "elevated" to r.yuzeyYuksek,
+            "selected" to r.accentZemin).forEach { (surface, background) ->
+            kontrol(ad, r.kenarlikGuclu, background, 3.0, "control outline/$surface")
+        }
+    }
+
+    /** Chips, captions and plan summaries use opaque reading surfaces, never bare art. */
+    @Test
+    fun `secondary and accent labels meet AA on their reading surfaces`() = tumSetler().forEach { (ad, r) ->
+        listOf("paper" to r.zemin, "surface" to r.yuzey, "elevated" to r.yuzeyYuksek,
+            "selected" to r.accentZemin).forEach { (surface, background) ->
+            kontrol(ad, r.metinIkincil, background, 4.5, "secondary label/$surface")
+            kontrol(ad, r.accent, background, 4.5, "accent label/$surface")
+        }
+    }
+
+    /** Stress the published two-layer art budget, independent of any particular bitmap. */
+    @Test
+    fun `primary ink remains readable over two worst case light art layers`() {
+        // A single art layer retains at least .835 of white; this deliberately
+        // conservative two-layer floor also covers anti-aliased overlapping edges.
+        val floor = .835f * .835f
+        val darkestAllowedArt = Color(floor, floor, floor)
+        tumSetler().filterNot { it.second.karanlikMi }.forEach { (ad, r) ->
+            kontrol(ad, r.metin, darkestAllowedArt, 4.5, "primary ink/two art layers")
+        }
+    }
+
+    @Test
+    fun `primary text remains readable under the dark art opacity budget`() {
+        val brightestArt = Color.White.copy(alpha = .07f)
+        tumSetler().filter { it.second.karanlikMi }.forEach { (ad, r) ->
+            val twoLayers = brightestArt.compositeOver(brightestArt.compositeOver(r.zemin))
+            kontrol(ad, r.metin, twoLayers, 4.5, "primary text/two dark-mode art layers")
+        }
     }
 
     /** Kenarlık yüzeyden ayrışmalı, yoksa kartların sınırı kaybolur. */

@@ -2,7 +2,7 @@
     android:width="108dp" android:height="108dp"
     android:viewportWidth="108" android:viewportHeight="108">
     <!-- One rising line, including a pause, within the adaptive icon safe area. -->
-    <path android:strokeColor="#FAFAF7" android:strokeWidth="6.5"
+    <path android:strokeColor="#161916" android:strokeWidth="6.5"
         android:strokeLineCap="round" android:strokeLineJoin="round"
         android:pathData="M34,73 L49,58 L58,64 L74,35"/>
 </vector>

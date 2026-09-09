@@ -59,6 +59,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val PERSONAL_PROFILE = stringPreferencesKey("personal_profile_v1")
         val ONBOARDING_DRAFT = stringPreferencesKey("onboarding_draft_v1")
         val VISUAL_V7 = booleanPreferencesKey("visual_v7_applied")
+        val VISUAL_V8 = booleanPreferencesKey("visual_v8_applied")
     }
 
     /** Every entitlement read begins after the atomic, idempotent migration. */
@@ -95,11 +96,18 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     }
 
     private fun gorseliGocur(p: MutablePreferences) {
-        if (p[K.VISUAL_V7] == true) return
-        p[K.PALET] = Palet.MONO.name
+        if (p[K.VISUAL_V8] == true) return
+        val previous = p[K.PALET]?.let { runCatching { Palet.valueOf(it) }.getOrNull() }
+        // New paper default; explicit monochrome/wine and night choices survive.
+        p[K.PALET] = when (previous) {
+            Palet.MONO, Palet.BORDO -> previous.name
+            else -> Palet.MERMER.name
+        }
+        if (p[K.TEMA] == null) p[K.TEMA] = TemaModu.AYDINLIK.name
         p[K.DINAMIK] = false
         p.remove(K.ARKA_PLAN)
         p[K.VISUAL_V7] = true
+        p[K.VISUAL_V8] = true
     }
     val arkaPlan: Flow<String?> = store.data.map { it[K.ARKA_PLAN] }
 
@@ -134,8 +142,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     val gunlukAdet: Flow<Int> = store.data.map { it[K.GUNLUK] ?: 3 }
     val baslangicSaati: Flow<Int> = store.data.map { it[K.BASLANGIC] ?: 10 }
     val bitisSaati: Flow<Int> = store.data.map { it[K.BITIS] ?: 23 }
-    val tema: Flow<TemaModu> = store.data.map {
-        runCatching { TemaModu.valueOf(it[K.TEMA] ?: "SISTEM") }.getOrDefault(TemaModu.SISTEM)
+    val tema: Flow<TemaModu> = erisimVerisi.map {
+        runCatching { TemaModu.valueOf(it[K.TEMA] ?: "AYDINLIK") }.getOrDefault(TemaModu.AYDINLIK)
     }
     val dinamikRenk: Flow<Boolean> = store.data.map { it[K.DINAMIK] ?: false }
     val haptikAcik: Flow<Boolean> = store.data.map { it[K.HAPTIK] ?: true }
@@ -146,8 +154,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     val rekor: Flow<Int> = store.data.map { it[K.REKOR] ?: 0 }
     val gorulenToplam: Flow<Int> = store.data.map { it[K.GORULEN] ?: 0 }
     val kutlananKilometre: Flow<Int> = store.data.map { it[K.KUTLANAN] ?: 0 }
-    val palet: Flow<Palet> = store.data.map {
-        runCatching { Palet.valueOf(it[K.PALET] ?: "MONO") }.getOrDefault(Palet.MONO)
+    val palet: Flow<Palet> = erisimVerisi.map {
+        runCatching { Palet.valueOf(it[K.PALET] ?: "MERMER") }.getOrDefault(Palet.MERMER)
     }
 
     /** Son 7 günün aktiflik durumu — pazartesiden bugüne. */

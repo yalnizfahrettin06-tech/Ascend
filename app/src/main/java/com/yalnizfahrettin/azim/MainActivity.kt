@@ -64,10 +64,10 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch { AzimWidget.tazele(applicationContext) }
 
         setContent {
-            val tema by depo.tema.collectAsStateWithLifecycle(TemaModu.SISTEM)
+            val tema by depo.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
             val dinamik by depo.dinamikRenk.collectAsStateWithLifecycle(false)
             val haptik by depo.haptikAcik.collectAsStateWithLifecycle(true)
-            val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.MONO)
+            val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.MERMER)
             val dil by depo.dil.collectAsStateWithLifecycle("tr")
             val base = LocalContext.current
             val configuration = LocalConfiguration.current

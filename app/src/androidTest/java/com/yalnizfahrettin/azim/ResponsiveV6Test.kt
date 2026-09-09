@@ -65,6 +65,7 @@ class ResponsiveV6Test {
         bounds.zipWithNext().forEach { (left, right) ->
             assertTrue("Adjacent tab touch targets must not overlap", left.right <= right.left)
         }
+        compose.onNodeWithTag("nav-favori").assertDoesNotExist()
         listOf("Bugün" to "nav-ana", "Keşfet" to "nav-kategori", "Senin" to "nav-istatistik").forEach { (text, tag) -> textFits(text, tag) }
     }
 
@@ -125,7 +126,7 @@ class ResponsiveV6Test {
             }
         }
         compose.waitForIdle()
-        ekranKaydet("22-nav-before-check")
+        ekranKaydet("22-v8-nav-before-check")
         navigationFits()
         // Primary actions must be visible before any vertical gesture.
         val save = compose.onNodeWithTag("home-save")
@@ -134,6 +135,7 @@ class ResponsiveV6Test {
         share.assertIsDisplayed().assertHasClickAction()
         textFits("Kaydet")
         textFits("Paylaş")
+        textFits(quote.metin("tr"), "active-quote")
         save.performClick()
         compose.runOnIdle { assertTrue(saved); assertEquals(1, saveCalls) }
         share.assertIsDisplayed().performClick()
@@ -144,7 +146,7 @@ class ResponsiveV6Test {
         val shareBounds = share.fetchSemanticsNode().boundsInRoot
         assertTrue("Save and Share targets must not overlap", saveBounds.right <= shareBounds.left)
         navigationFits()
-        ekranKaydet("22-home-large-text")
+        ekranKaydet("22-v8-home-large-text")
 
         compose.onNodeWithTag("nav-istatistik").performClick()
         compose.onNodeWithTag("profile-saved").assertIsDisplayed().assertHasClickAction()
@@ -158,6 +160,6 @@ class ResponsiveV6Test {
         compose.onNodeWithText("En uzun seri · gün").performScrollTo().assertIsDisplayed()
         textFits("En uzun seri · gün")
         navigationFits()
-        ekranKaydet("23-journey-large-text")
+        ekranKaydet("23-v8-journey-large-text")
     }
 }

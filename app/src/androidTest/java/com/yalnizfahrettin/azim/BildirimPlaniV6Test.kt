@@ -91,6 +91,6 @@ class BildirimPlaniV6Test {
         val fixedProgress = compose.onNodeWithTag("onboarding-progress").fetchSemanticsNode().boundsInRoot
         assertEquals("The progress row must remain fixed while its sibling scrolls", progress, fixedProgress)
         assertTrue("The scrolled viewport must stay below the visible progress row: viewport=$scrolledViewport, progress=$fixedProgress", scrolledViewport.top >= fixedProgress.bottom)
-        ekranKaydet("03-v7-onboarding-hours")
+        ekranKaydet("03-v8-onboarding-hours")
     }
 }

@@ -2,136 +2,58 @@ package com.yalnizfahrettin.azim.core
 
 import androidx.compose.ui.graphics.Color
 
-
+/** Legacy names remain decodable; they resolve to the neutral v8 architecture. */
 enum class Palet(val etiketTr: String, val etiketEn: String) {
-    MONO("Mürekkep", "Ink"),
-    KUM("Kum", "Sand"),
-    BORDO("Bordo", "Wine"),
-
-
-    LACIVERT("Lacivert", "Indigo"),
-
-
-    YOSUN("Yosun", "Moss");
-
+    MERMER("Mermer", "Marble"), MONO("Mürekkep", "Ink"), BORDO("Bordo", "Wine"),
+    KUM("Kum", "Sand"), LACIVERT("Lacivert", "Indigo"), YOSUN("Yosun", "Moss");
     fun etiket(dil: String) = if (dil == "en") etiketEn else etiketTr
 }
 
-
-private fun karanlikOmurga(oled: Boolean) = AzimRenkleri(
-    zemin         = if (oled) Color(0xFF000000) else Color(0xFF0E1821),
-    // Yüzey/zemin ayrımı 1.09:1 idi — neredeyse aynıydı. Kartlar ve düğmeler
-    // yalnız sert 1dp kenarlıktan okunuyordu, ekran bu yüzden "boğuk"tu.
-    // 1.15:1'e çıkarıldı (test eşikleri metin ve accent için tavan koyuyor);
-    // gerisi kenarlığı kaldırıp gradyan zeminle çözülüyor.
-    yuzey         = if (oled) Color(0xFF0A0C0D) else Color(0xFF182530),
-    yuzeyYuksek   = Color(0xFF243442),
-    kenarlik      = Color(0xFF333940),
-    kenarlikGuclu = Color(0xFF454B50),
-    metin         = Color(0xFFF4F1EB),   // 11.65:1 — orta kontrast
-    metinIkincil  = Color(0xFFAEBCC5),   //  6.66:1
-    metinSonuk    = Color(0xFFAEBCC5),   //  3.78:1
-    accent        = Color(0xFFC17892),   // palete göre değişir
-    accentSonuk   = Color(0xFF502131),
-    accentZemin   = Color(0xFF1C1719),
-    accentDerin   = Color(0xFF421A28),
-    karanlikMi    = true,
-)
-
-private val aydinlikOmurga = AzimRenkleri(
-    zemin         = Color(0xFFF7F5F0),
-    yuzey         = Color(0xFFFFFFFF),
-    yuzeyYuksek   = Color(0xFFECE9E1),
-    kenarlik      = Color(0xFFDDE0E3),
-    kenarlikGuclu = Color(0xFFB8BDC2),
-    metin         = Color(0xFF26292D),   // 13.38:1
-    metinIkincil  = Color(0xFF5C6268),   //  5.65:1
-    metinSonuk    = Color(0xFF5C6268),   //  3.11:1
-    accent        = Color(0xFF842A49),
-    accentSonuk   = Color(0xFFD9BCC3),
-    accentZemin   = Color(0xFFF6EEF0),
-    accentDerin   = Color(0xFFC9A0AB),
-    karanlikMi    = false,
-)
-
-
-private data class Vurgu(
-    val karanlik: Long, val karanlikSonuk: Long, val karanlikZemin: Long, val karanlikDerin: Long,
-    val aydinlik: Long, val aydinlikSonuk: Long, val aydinlikZemin: Long, val aydinlikDerin: Long,
-)
-
-private val vurgular = mapOf(
-    Palet.KUM to Vurgu(0xFFE5C49A, 0xFF755B38, 0xFF2A251F, 0xFF634C30, 0xFF785329, 0xFFDCC8AF, 0xFFF2E8DA, 0xFFC4A882),
-    // #BE6E80 → 5.04:1 karanlık zeminde, #8A3245 → 7.33:1 aydınlık zeminde
-    // Ton 346° → 339°: pembelik tondaydı, parlaklıkta değil. Parlaklığı
-    // düşürmek kontrastı 4.5:1 altına indiriyordu (ölçüldü); tonu şaraba
-    // çekmek pembeliği alıp okunabilirliği koruyor. Derin tonlar ayrı.
-    Palet.BORDO to Vurgu(
-        0xFFC17892, 0xFF502131, 0xFF1C1719, 0xFF421A28,
-        0xFF842A49, 0xFFD9BCC3, 0xFFF6EEF0, 0xFFC9A0AB,
-    ),
-    // #6688AE → 5.01:1 / #3B5F87 → 6.06:1
-    Palet.LACIVERT to Vurgu(
-        0xFF7597BC, 0xFF2C3D50, 0xFF161A1F, 0xFF1E3047,
-        0xFF3B5F87, 0xFFB9C8D9, 0xFFEDF1F6, 0xFF9DB3CA,
-    ),
-    // #639277 → 5.19:1 / #2F6B4F → 5.77:1
-    Palet.YOSUN to Vurgu(
-        0xFF75A086, 0xFF2B4034, 0xFF141A17, 0xFF1B2E23,
-        0xFF2F6B4F, 0xFFB5CFC0, 0xFFEBF3EE, 0xFF97BFA8,
-    ),
-)
-
+fun guncelPalet(palet: Palet): Palet = when (palet) {
+    Palet.KUM, Palet.LACIVERT, Palet.YOSUN -> Palet.MERMER
+    else -> palet
+}
 
 private fun nispiParlaklik(c: Color): Double {
     fun kanal(v: Float): Double {
         val d = v.toDouble()
-        return if (d <= 0.03928) d / 12.92 else Math.pow((d + 0.055) / 1.055, 2.4)
+        return if (d <= .04045) d / 12.92 else Math.pow((d + .055) / 1.055, 2.4)
     }
-    return 0.2126 * kanal(c.red) + 0.7152 * kanal(c.green) + 0.0722 * kanal(c.blue)
+    return .2126 * kanal(c.red) + .7152 * kanal(c.green) + .0722 * kanal(c.blue)
 }
-
 
 fun kontrastOrani(a: Color, b: Color): Double {
-    val l1 = nispiParlaklik(a)
-    val l2 = nispiParlaklik(b)
-    val (buyuk, kucuk) = if (l1 > l2) l1 to l2 else l2 to l1
-    return (buyuk + 0.05) / (kucuk + 0.05)
+    val l1 = nispiParlaklik(a); val l2 = nispiParlaklik(b)
+    return (maxOf(l1, l2) + .05) / (minOf(l1, l2) + .05)
 }
 
-
-fun paletiCozTest(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri =
-    paletiCoz(palet, karanlik, oled)
+fun paletiCozTest(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri = paletiCoz(palet, karanlik, oled)
 
 internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri {
-    if (palet == Palet.MONO) return if (karanlik) AzimRenkleri(
-        zemin = if (oled) Color.Black else Color(0xFF111111),
-        yuzey = Color(0xFF1C1C1B), yuzeyYuksek = Color(0xFF282827),
-        kenarlik = Color(0xFF414140), kenarlikGuclu = Color(0xFF777773),
-        metin = Color(0xFFF7F7F2), metinIkincil = Color(0xFFBBBBB6), metinSonuk = Color(0xFFBBBBB6),
-        accent = Color(0xFFEFEFEB), accentSonuk = Color(0xFF777773),
-        accentZemin = Color(0xFF282827), accentDerin = Color(0xFF414140), karanlikMi = true,
-    ) else AzimRenkleri(
-        zemin = Color(0xFFFAFAF7), yuzey = Color(0xFFF2F2EE), yuzeyYuksek = Color(0xFFE8E8E3),
-        kenarlik = Color(0xFFD4D4CF), kenarlikGuclu = Color(0xFF8B8B86),
-        metin = Color(0xFF141414), metinIkincil = Color(0xFF5B5B57), metinSonuk = Color(0xFF5B5B57),
-        accent = Color(0xFF141414), accentSonuk = Color(0xFF8B8B86),
-        accentZemin = Color(0xFFE8E8E3), accentDerin = Color(0xFFD4D4CF), karanlikMi = false,
-    )
-    val v = vurgular.getValue(palet)
-    return if (karanlik) {
-        karanlikOmurga(oled).copy(
-            accent = Color(v.karanlik),
-            accentSonuk = Color(v.karanlikSonuk),
-            accentZemin = Color(v.karanlikZemin),
-            accentDerin = Color(v.karanlikDerin),
-        )
-    } else {
-        aydinlikOmurga.copy(
-            accent = Color(v.aydinlik),
-            accentSonuk = Color(v.aydinlikSonuk),
-            accentZemin = Color(v.aydinlikZemin),
-            accentDerin = Color(v.aydinlikDerin),
-        )
+    val secim = guncelPalet(palet)
+    val accent = if (karanlik) when (secim) {
+        Palet.BORDO -> Color(0xFFE0BAC8)
+        Palet.MONO -> Color(0xFFF2F2F2)
+        else -> Color(0xFFBDCCBF)
+    } else when (secim) {
+        Palet.BORDO -> Color(0xFF643B48)
+        Palet.MONO -> Color(0xFF161916)
+        else -> Color(0xFF3E4B40)
     }
+    return if (karanlik) AzimRenkleri(
+        zemin = if (oled) Color.Black else Color(0xFF111312),
+        yuzey = Color(0xFF1B1D1C), yuzeyYuksek = Color(0xFF282B29),
+        kenarlik = Color(0xFF414541), kenarlikGuclu = Color(0xFF909790),
+        metin = Color(0xFFF5F6F5), metinIkincil = Color(0xFFC1C7C1), metinSonuk = Color(0xFFC1C7C1),
+        accent = accent, accentSonuk = Color(0xFF909790),
+        accentZemin = if (secim == Palet.BORDO) Color(0xFF32252A) else Color(0xFF28312A),
+        accentDerin = Color(0xFF414541), karanlikMi = true,
+    ) else AzimRenkleri(
+        zemin = Color.White, yuzey = Color(0xFFF7F8F7), yuzeyYuksek = Color(0xFFEEF1EE),
+        kenarlik = Color(0xFFD4D8D4), kenarlikGuclu = Color(0xFF777E77),
+        metin = Color(0xFF161916), metinIkincil = Color(0xFF484E49), metinSonuk = Color(0xFF484E49),
+        accent = accent, accentSonuk = Color(0xFF777E77),
+        accentZemin = if (secim == Palet.BORDO) Color(0xFFF5ECEF) else Color(0xFFF0F3F0),
+        accentDerin = Color(0xFFD4D8D4), karanlikMi = false,
+    )
 }

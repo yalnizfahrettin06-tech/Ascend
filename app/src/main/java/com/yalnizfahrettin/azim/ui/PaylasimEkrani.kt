@@ -14,7 +14,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.*
@@ -29,10 +31,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,6 +63,7 @@ private val ayarSaver = listSaver<PaylasimAyari, String>(save = { a ->
 fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false, proAc: () -> Unit = {}) {
     val ctx = LocalContext.current
     val focusManager = LocalFocusManager.current
+    val buyukYazi = LocalDensity.current.fontScale > 1.35f
     val kapsam = rememberCoroutineScope()
     var ayar by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(PaylasimAyari()) }
     var video by rememberSaveable { mutableStateOf(false) }
@@ -105,6 +110,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     }
     LaunchedEffect(gorunenAyar, soz, dil) {
         onizleme = null
+        hata = null
         try {
             val bmp = withContext(Dispatchers.Default) { KartCizici.ciz(ctx, soz.metin(dil), soz.imza(dil), gorunenAyar, 480, (480 / gorunenAyar.format.oran).toInt()) }
             onizleme = bmp
@@ -173,20 +179,38 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     }
     ModalBottomSheet(onDismissRequest = { if (hazirlaniyor) durdur() else geri() }, sheetState = sheet, containerColor = Renk.zemin, dragHandle = null) {
         Column(Modifier.fillMaxWidth().fillMaxHeight(.94f)) {
-            Row(Modifier.fillMaxWidth().padding(start = 24.dp, end = 12.dp, top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth().padding(start = 24.dp, end = 12.dp, top = 12.dp, bottom = 10.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    KucukBaslik(cevir(dil, "Paylaşım stüdyosu", "Share studio"))
-                    Text(cevir(dil, "Bir söz, senin dokunuşun.", "A quote, with your touch."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+                    Text(cevir(dil, "SENİN DOKUNUŞUN", "YOUR PERSONAL TOUCH"), color = Renk.metinIkincil,
+                        fontSize = 10.sp, lineHeight = 14.sp, letterSpacing = 1.sp)
+                    Text(cevir(dil, "Paylaşım stüdyosu", "Share studio"), color = Renk.metin, fontFamily = LoraSerif,
+                        fontSize = 24.sp, lineHeight = 30.sp, modifier = Modifier.padding(top = 5.dp))
                 }
                 if (pro) TextButton(onClick = proAc, enabled = !hazirlaniyor) { ProRozeti(metin = "PRO DEMO") }
-                IconButton(onClick = { if (hazirlaniyor) durdur() else geri() }) { Icon(AzimIkon.Kapat, cevir(dil, "Kapat", "Close"), tint = Renk.metin) }
-            }
-            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 12.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(14.dp)) {
-                Box(Modifier.height(if (gorunenAyar.format == KartFormat.STORY) 278.dp else 225.dp).fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    onizleme?.let { bmp -> Image(bmp.asImageBitmap(), cevir(dil, "Paylaşılacak kart önizlemesi", "Export card preview"), Modifier.fillMaxHeight().aspectRatio(gorunenAyar.format.oran).clip(RoundedCornerShape(18.dp)).border(1.dp, Renk.kenarlik, RoundedCornerShape(18.dp)).testTag("share-preview"), contentScale = ContentScale.Fit) } ?: CircularProgressIndicator()
+                IconButton(onClick = { if (hazirlaniyor) durdur() else geri() }, modifier = Modifier.size(48.dp).testTag("share-close")) {
+                    Icon(AzimIkon.Kapat, if (hazirlaniyor) cevir(dil, "Hazırlamayı iptal et", "Cancel preparation") else cevir(dil, "Kapat", "Close"), Modifier.size(22.dp), tint = Renk.metin)
                 }
+            }
+            HorizontalDivider(Modifier.padding(horizontal = 24.dp), color = Renk.kenarlik)
+            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Box(Modifier.height(if (gorunenAyar.format == KartFormat.STORY) 298.dp else 245.dp).fillMaxWidth()
+                    .background(Renk.yuzey, RoundedCornerShape(18.dp)).padding(12.dp), contentAlignment = Alignment.Center) {
+                    if (onizleme != null) {
+                        Image(onizleme!!.asImageBitmap(), cevir(dil, "Paylaşılacak kart önizlemesi", "Export card preview"),
+                            Modifier.fillMaxHeight().aspectRatio(gorunenAyar.format.oran).clip(RoundedCornerShape(12.dp))
+                                .border(1.dp, Renk.kenarlik, RoundedCornerShape(12.dp)).testTag("share-preview"), contentScale = ContentScale.Fit)
+                    } else if (hata != null) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                            Icon(AzimIkon.Izgara, null, Modifier.size(28.dp), tint = Renk.metinIkincil)
+                            Text(cevir(dil, "Önizleme açılamadı.\nBaşka bir arka plan seç.", "Preview unavailable.\nChoose another background."),
+                                color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
+                        }
+                    } else CircularProgressIndicator(Modifier.size(26.dp), strokeWidth = 2.dp, color = Renk.metin)
+                }
+                Text(cevir(dil, "Önizleme", "Preview") + " · " + gorunenAyar.format.etiket(dil), color = Renk.metinIkincil,
+                    style = MaterialTheme.typography.bodySmall, modifier = Modifier.testTag("share-preview-caption"))
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(cevir(dil, "Arka plan", "Background"), color = Renk.metin, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                    PaylasimBolumBasligi("01", cevir(dil, "Arka plan", "Background"), Modifier.weight(1f))
                     Text(cevir(dil, "3 ücretsiz seçenek", "3 free options"), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f), textAlign = TextAlign.End)
                 }
                 LazyRow(Modifier.fillMaxWidth().testTag("share-background-filters"), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -200,14 +224,19 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                 }
                 if (etkinZeminFiltresi == PaylasimZeminFiltresi.KOLEKSIYON) {
                     OutlinedTextField(value = gorselArama, onValueChange = { gorselArama = it }, singleLine = true,
+                        enabled = !hazirlaniyor,
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                         keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
                         placeholder = { Text(cevir(dil, "Görsel ara", "Search artwork")) },
-                        modifier = Modifier.fillMaxWidth().testTag("share-library-search"), shape = RoundedCornerShape(16.dp))
+                        leadingIcon = { Icon(AzimIkon.Ara, null, Modifier.size(20.dp)) },
+                        trailingIcon = { if (gorselArama.isNotEmpty()) IconButton(onClick = { gorselArama = "" }, enabled = !hazirlaniyor) {
+                            Icon(AzimIkon.Kapat, cevir(dil, "Aramayı temizle", "Clear search"), Modifier.size(20.dp))
+                        } },
+                        modifier = Modifier.fillMaxWidth().testTag("share-library-search"), shape = RoundedCornerShape(50))
                     Text(cevir(dil, "${gorunenZeminler.size} görsel", "${gorunenZeminler.size} artworks"),
-                        color = Renk.metinIkincil, modifier = Modifier.testTag("share-library-count"))
+                        color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall, modifier = Modifier.fillMaxWidth().testTag("share-library-count"))
                     if (gorunenZeminler.isEmpty()) Text(cevir(dil, "Bu aramada görsel yok.", "No artwork matches your search."), color = Renk.metinIkincil)
-                    else LazyVerticalGrid(columns = GridCells.Fixed(3), modifier = Modifier.fillMaxWidth().height(280.dp).testTag("share-artwork-grid"),
+                    else LazyVerticalGrid(columns = GridCells.Adaptive(if (buyukYazi) 122.dp else 84.dp), modifier = Modifier.fillMaxWidth().height(310.dp).testTag("share-artwork-grid"),
                         verticalArrangement = Arrangement.spacedBy(14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(gorunenZeminler, key = { it.anahtar }) { z ->
                             Box(contentAlignment = Alignment.TopCenter) {
@@ -232,23 +261,32 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                 OutlinedButton(
                     onClick = { if (pro) fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) else proAc() },
                     enabled = !hazirlaniyor, contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
-                    modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("share-background-photo").semantics { contentDescription = cevir(dil, "Fotoğraf seç", "Choose photo"); stateDescription = "Pro" },
-                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("share-background-photo").semantics {
+                        contentDescription = cevir(dil, "Fotoğraf seç", "Choose photo")
+                        stateDescription = if (pro) cevir(dil, "Pro demosunda kullanılabilir", "Available with Pro demo") else cevir(dil, "Pro gerekli", "Requires Pro")
+                    },
+                    shape = RoundedCornerShape(50), border = BorderStroke(1.dp, Renk.kenarlik),
                 ) {
                     Text("+", modifier = Modifier.padding(end = 10.dp))
                     Text(cevir(dil, "Kendi fotoğrafını seç", "Choose your own photo"), Modifier.weight(1f), textAlign = TextAlign.Start)
                     Spacer(Modifier.width(8.dp))
                     ProRozeti()
                 }
+                HorizontalDivider(Modifier.padding(top = 4.dp), color = Renk.kenarlik)
+                PaylasimBolumBasligi("02", cevir(dil, "Paylaşım türü", "Share format"), Modifier.fillMaxWidth())
                 SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
                     listOf(false, true).forEachIndexed { index, v ->
                         SegmentedButton(
                             selected = gorunenVideo == v,
                             onClick = { if (v && !pro) proAc() else video = v },
                             enabled = !hazirlaniyor, shape = SegmentedButtonDefaults.itemShape(index, 2),
-                            modifier = Modifier.heightIn(min = 50.dp).testTag(if (v) "share-video" else "share-image"),
+                            modifier = Modifier.heightIn(min = if (buyukYazi) 78.dp else 54.dp).testTag(if (v) "share-video" else "share-image")
+                                .semantics { if (v && !pro) stateDescription = cevir(dil, "Pro gerekli", "Requires Pro") },
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            if (buyukYazi) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                Text(if (v) "Video" else cevir(dil, "Görsel", "Image"))
+                                if (v) ProRozeti()
+                            } else Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                 Text(if (v) "Video" else cevir(dil, "Görsel", "Image"))
                                 if (v) ProRozeti()
                             }
@@ -257,14 +295,23 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                 }
                 if (gorunenVideo) {
                     Text(cevir(dil, "Süre · Yazı yavaşça belirir · Sessiz", "Duration · Text reveal · Silent"), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        listOf(5, 10, 30, 45).forEach { s -> FilterChip(selected = saniye == s, onClick = { saniye = s }, enabled = !hazirlaniyor, label = { Text("${s}s") }, modifier = Modifier.weight(1f).testTag("share-duration-$s")) }
+                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        listOf(5, 10, 30, 45).forEach { s -> FilterChip(selected = saniye == s, onClick = { saniye = s }, enabled = !hazirlaniyor,
+                            label = { Text("${s}s") }, shape = RoundedCornerShape(50),
+                            modifier = Modifier.widthIn(min = 64.dp).heightIn(min = 48.dp).testTag("share-duration-$s")
+                                .semantics { contentDescription = cevir(dil, "$s saniye", "$s seconds") }) }
                     }
                 }
                 OutlinedButton(
                     onClick = { if (pro) arac = !arac else proAc() }, enabled = !hazirlaniyor,
-                    modifier = Modifier.fillMaxWidth().heightIn(min = 50.dp).testTag("share-advanced"),
-                    shape = RoundedCornerShape(16.dp), contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("share-advanced").semantics {
+                        stateDescription = when {
+                            !pro -> cevir(dil, "Pro gerekli", "Requires Pro")
+                            arac -> cevir(dil, "Araçlar açık", "Tools expanded")
+                            else -> cevir(dil, "Araçlar kapalı", "Tools collapsed")
+                        }
+                    },
+                    shape = RoundedCornerShape(50), border = BorderStroke(1.dp, Renk.kenarlik), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                 ) {
                     Icon(AzimIkon.Ayarlar, null, Modifier.size(18.dp))
                     Spacer(Modifier.width(10.dp))
@@ -273,37 +320,65 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     if (pro) Text(if (arac) "  −" else "  +")
                 }
                 if (arac && pro) {
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) { KartFormat.entries.forEach { f -> FilterChip(selected = ayar.format == f, onClick = { ayar = ayar.copy(format = f) }, enabled = !hazirlaniyor, label = { Text(f.etiket(dil)) }) } }
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) { KartYazi.entries.forEach { y -> FilterChip(selected = ayar.yazi == y, onClick = { ayar = ayar.copy(yazi = y) }, enabled = !hazirlaniyor, label = { Text(y.etiket(dil)) }) } }
-                    Text(cevir(dil, "Yazı boyutu", "Text size"), color = Renk.metin)
+                    HorizontalDivider(color = Renk.kenarlik)
+                    PaylasimBolumBasligi("03", cevir(dil, "İnce ayarlar", "The finer details"), Modifier.fillMaxWidth())
+                    Text(cevir(dil, "Kart boyutu", "Card size"), color = Renk.metin, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.fillMaxWidth())
+                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        KartFormat.entries.forEach { f -> FilterChip(selected = ayar.format == f, onClick = { ayar = ayar.copy(format = f) }, enabled = !hazirlaniyor,
+                            label = { Text(f.etiket(dil)) }, shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp)) }
+                    }
+                    Text(cevir(dil, "Yazı stili", "Type style"), color = Renk.metin, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.fillMaxWidth())
+                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        KartYazi.entries.forEach { y -> FilterChip(selected = ayar.yazi == y, onClick = { ayar = ayar.copy(yazi = y) }, enabled = !hazirlaniyor,
+                            label = { Text(y.etiket(dil)) }, shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp)) }
+                    }
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text(cevir(dil, "Yazı boyutu", "Text size"), color = Renk.metin, modifier = Modifier.weight(1f))
+                        Text("${(ayar.yaziOlcegi * 100).toInt()}%", color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
+                    }
                     Slider(ayar.yaziOlcegi, { ayar = ayar.copy(yaziOlcegi = it) }, valueRange = .8f..1.3f, enabled = !hazirlaniyor, modifier = Modifier.semantics { contentDescription = cevir(dil, "Yazı boyutu", "Text size") })
                     if (ayar.zemin is KartZemin.Sahne || ayar.zemin is KartZemin.Foto) {
-                        Text(cevir(dil, "Arka plan karartması", "Background dimming"), color = Renk.metin)
+                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Text(cevir(dil, "Arka plan karartması", "Background dimming"), color = Renk.metin, modifier = Modifier.weight(1f))
+                            Text("${(ayar.karartma * 100).toInt()}%", color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
+                        }
                         Slider(ayar.karartma, { ayar = ayar.copy(karartma = it) }, valueRange = .25f.. .75f, enabled = !hazirlaniyor, modifier = Modifier.semantics { contentDescription = cevir(dil, "Arka plan karartması", "Background dimming") })
                     }
-                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(cevir(dil, "Hizalama", "Alignment"), color = Renk.metin, modifier = Modifier.weight(1f))
+                    Text(cevir(dil, "Hizalama", "Alignment"), color = Renk.metin, modifier = Modifier.fillMaxWidth())
+                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         KartHizalama.entries.forEach { h ->
                             FilterChip(selected = ayar.hizalama == h, onClick = { ayar = ayar.copy(hizalama = h) }, enabled = !hazirlaniyor,
-                                label = { Text(if (h == KartHizalama.ORTA) cevir(dil, "Orta", "Center") else cevir(dil, "Sol", "Left")) })
+                                label = { Text(if (h == KartHizalama.ORTA) cevir(dil, "Orta", "Center") else cevir(dil, "Sol", "Left")) },
+                                shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp))
                         }
                     }
                 }
             }
+            HorizontalDivider(Modifier.padding(horizontal = 24.dp), color = Renk.kenarlik)
             Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                durum?.let { Text(it, color = Renk.accent, modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Polite }) }
-                hata?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Assertive }) }
+                durum?.let { Text(it, color = Renk.accent, style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Polite }) }
+                hata?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.heightIn(max = 112.dp).verticalScroll(rememberScrollState()).padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Assertive }) }
                 if (hazirlaniyor) {
                     if (gorunenVideo) LinearProgressIndicator(progress = { ilerleme }, modifier = Modifier.fillMaxWidth())
                     else LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                     Text(if (gorunenVideo) cevir(dil, "Video hazırlanıyor · ${(ilerleme * 100).toInt()}%", "Preparing video · ${(ilerleme * 100).toInt()}%") else cevir(dil, "Görsel hazırlanıyor", "Preparing image"), Modifier.padding(8.dp), color = Renk.metin)
                     TextButton(onClick = ::durdur) { Text(cevir(dil, "İptal", "Cancel")) }
                 } else {
-                    Button(onClick = { uret(false) }, enabled = onizleme != null, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp), shape = RoundedCornerShape(18.dp)) { Icon(AzimIkon.Paylas, null, Modifier.size(19.dp)); Spacer(Modifier.width(8.dp)); Text(cevir(dil, "Paylaş", "Share")) }
+                    Button(onClick = { uret(false) }, enabled = onizleme != null, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("share-export"), shape = RoundedCornerShape(50)) { Icon(AzimIkon.Paylas, null, Modifier.size(19.dp)); Spacer(Modifier.width(8.dp)); Text(cevir(dil, "Paylaş", "Share")) }
                     TextButton(onClick = { uret(true) }, enabled = onizleme != null, modifier = Modifier.heightIn(min = 48.dp)) { Text(if (Build.VERSION.SDK_INT >= 29) cevir(dil, "Galeriye kaydet", "Save to gallery") else cevir(dil, "Dosyaya kaydet", "Save to file")) }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun PaylasimBolumBasligi(sira: String, baslik: String, modifier: Modifier = Modifier) {
+    Row(modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text(sira, color = Renk.metinIkincil, fontSize = 10.sp, lineHeight = 14.sp, modifier = Modifier.clearAndSetSemantics {})
+        Text(baslik, color = Renk.metin, fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 29.sp, modifier = Modifier.weight(1f))
     }
 }
 
@@ -352,27 +427,32 @@ private fun paylasimZeminleri(dil: String, kategori: String): List<PaylasimZemin
 @Composable
 private fun PaylasimZeminSecenegi(z: PaylasimZemini, secili: Boolean, dil: String, mesgul: Boolean, sec: () -> Unit) {
     val proSecenek = PaylasimErisimi.zeminProMu(z.zemin)
+    val buyukYazi = LocalDensity.current.fontScale > 1.35f
     Column(
-        Modifier.width(66.dp).clip(RoundedCornerShape(15.dp))
-            .clickable(enabled = !mesgul, role = Role.RadioButton, onClick = sec)
+        Modifier.width(if (buyukYazi) 114.dp else 88.dp).clip(RoundedCornerShape(12.dp))
+            .selectable(selected = secili, enabled = !mesgul, role = Role.RadioButton, onClick = sec)
             .semantics {
-                contentDescription = if (z.anahtar == "topic") cevir(dil, "Konu görseli · PRO", "Topic artwork · PRO") else z.ad
-                selected = secili
-                if (proSecenek) stateDescription = cevir(dil, "Pro arka planı", "Pro background")
+                contentDescription = z.ad
+                stateDescription = if (proSecenek) cevir(dil, "Pro arka planı", "Pro background") else cevir(dil, "Ücretsiz arka plan", "Free background")
             }
             .testTag("share-background-${z.anahtar}").padding(2.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Box(Modifier.size(62.dp).clip(RoundedCornerShape(14.dp)).border(if (secili) 2.dp else 1.dp, if (secili) Renk.accent else Renk.kenarlik, RoundedCornerShape(14.dp))) {
+        Box(Modifier.fillMaxWidth().aspectRatio(.78f).clip(RoundedCornerShape(10.dp))
+            .border(if (secili) 2.dp else 1.dp, if (secili) Renk.metin else Renk.kenarlik, RoundedCornerShape(10.dp))) {
             when (val zemin = z.zemin) {
                 is KartZemin.Sahne -> Image(painterResource(zemin.kaynak), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop)
                 is KartZemin.Duz -> Box(Modifier.matchParentSize().background(Color(zemin.renk)))
                 is KartZemin.Gradyan -> Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color(zemin.ust), Color(zemin.alt)))))
                 is KartZemin.Foto -> Unit
             }
-            if (proSecenek) Surface(color = Renk.zemin.copy(alpha = .94f), shape = RoundedCornerShape(7.dp), modifier = Modifier.align(Alignment.BottomEnd).padding(3.dp)) { ProRozeti() }
+            if (proSecenek) Surface(color = Renk.zemin, shape = RoundedCornerShape(5.dp), modifier = Modifier.align(Alignment.BottomStart).padding(5.dp)) { ProRozeti() }
+            if (secili) Surface(color = Renk.metin, shape = CircleShape, modifier = Modifier.align(Alignment.TopEnd).padding(5.dp).size(23.dp)) {
+                Box(contentAlignment = Alignment.Center) { Icon(AzimIkon.Tik, null, Modifier.size(14.dp), tint = Renk.zemin) }
+            }
         }
-        Text(z.ad, color = if (secili) Renk.accent else Renk.metinIkincil, fontSize = 11.sp, lineHeight = 14.sp, textAlign = TextAlign.Center)
+        Text(z.ad, color = if (secili) Renk.metin else Renk.metinIkincil, fontSize = 11.sp, lineHeight = 15.sp,
+            fontWeight = if (secili) FontWeight.Medium else FontWeight.Normal, textAlign = TextAlign.Center)
     }
 }

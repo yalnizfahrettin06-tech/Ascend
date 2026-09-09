@@ -1,0 +1,17 @@
+{
+  "method": "Built-in imagegen; original alpha retained. Deployment conversion to WebP quality 87 only.",
+  "assets": [
+    {
+      "file": "art_roman_bust.webp",
+      "prompt": "Use case: historical-scene. Asset type: production decorative bitmap for the Ascend Android reading app, NOT a UI mockup. Create one portrait 2:3 composition of a classical Roman white marble bust, an idealized anonymous thoughtful young adult face in three-quarter profile looking gently left, wavy sculpted hair, head and upper neck/shoulder only, museum-quality fine marble detail, natural elegant anatomy. The bust should occupy the RIGHT half and be cropped naturally at the right edge; generous completely empty transparent space on the LEFT for app text. The top of the hair is near the top-right, the face centered around the upper-middle right. Very soft studio light, restrained neutral gray shadows, pure white marble, low visual contrast, sophisticated editorial art direction. Background must be genuinely transparent alpha, including all empty space; no background plane, no scenery, no pedestal rectangle, no cast shadow outside the sculpture. No text, no lettering, no UI, no border, no watermarks, no warm tint, no yellow, no gold, no blue, no orange. Preserve sculptural definition so the app can fade the art to 15-30% opacity. New original work, no recognizable modern person."
+    },
+    {
+      "file": "art_laurel_column.webp",
+      "prompt": "Use case: historical-scene. Production decorative bitmap cutout for a premium white-paper reading app, no UI. One graceful classical Roman fluted white marble column fragment in the LOWER LEFT corner with a slender carved marble laurel sprig leaning gently upward beside it. Portrait 2:3 canvas, asymmetric corner ornament, column cropped by the left and bottom edges, leaves reaching toward center but occupying only lower-left third. Most of canvas is empty genuinely transparent alpha. Fine realistic marble grain, soft neutral gray relief shadows, restrained light contrast, pure white marble, refined museum editorial aesthetic. White on transparent, not metallic, no colored pigment, no background plane or scenery, no exterior drop shadow. No text, no labels, no watermarks, no frame, no yellow/gold/blue/orange or cream tint. Original believable sculpture, graceful small detail, not ornate baroque decoration. This art will be faded behind app whitespace."
+    },
+    {
+      "file": "art_marble_arch.webp",
+      "prompt": "Create one isolated decorative architectural asset for an elegant white editorial mobile app named Ascend. A small ancient Roman WHITE MARBLE arched doorway with three ascending marble steps, no building around it, a quietly uplifting open arch. Delicate realistic chisel and stone grain, restrained neoclassical museum sculpture. Front view with a slight perspective, arch centered in lower half of a 1024 by 1536 portrait canvas with generous empty transparent space above and around it. Pure neutral white and subtle neutral gray only: no yellow, gold, blue, orange, sepia, cream or colored light. Soft neutral studio daylight, no hard cast shadow. Entire background must be transparent alpha; no rectangular backdrop, scenery, text, lettering, logo, border, frame or UI. Beautiful natural stone detail, understated visual. Preserve silhouette with soft edges, lower steps visible. This will be used at a faint opacity on white behind whitespace in onboarding."
+    }
+  ]
+}
