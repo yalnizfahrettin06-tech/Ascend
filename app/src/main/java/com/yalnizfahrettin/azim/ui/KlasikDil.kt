@@ -6,6 +6,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
@@ -36,7 +42,17 @@ fun KlasikGorsel(motif: KlasikMotif, modifier: Modifier = Modifier, opacity: Flo
         0f, 0f, .3f, 0f, 178.5f,
         0f, 0f, 0f, 1f, 0f,
     ))
-    Image(painterResource(source), contentDescription = null, modifier = modifier,
+    val softEdge = if (motif == KlasikMotif.BUST) Modifier
+        .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+        .drawWithContent {
+            drawContent()
+            val imageHeight = minOf(size.height, size.width * 1.5f)
+            val imageTop = (size.height - imageHeight) / 2f
+            drawRect(Brush.verticalGradient(listOf(Color.White, Color.Transparent),
+                startY = imageTop + imageHeight * .72f, endY = imageTop + imageHeight),
+                blendMode = BlendMode.DstIn)
+        } else Modifier
+    Image(painterResource(source), contentDescription = null, modifier = modifier.then(softEdge),
         contentScale = ContentScale.Fit,
         alpha = if (Renk.karanlikMi) opacity.coerceIn(0f, .07f) else opacity.coerceIn(0f, .55f),
         colorFilter = if (Renk.karanlikMi) null else ColorFilter.colorMatrix(matrix))

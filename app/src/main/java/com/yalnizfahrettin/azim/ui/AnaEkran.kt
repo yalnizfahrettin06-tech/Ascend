@@ -42,7 +42,13 @@ fun AnaEkran(
     seciliKonular: Set<String> = emptySet(), konulariDuzenle: () -> Unit = {}, haptikAcik: Boolean = true,
     kullaniciAdi: String = "", planAc: () -> Unit = {}, ihtiyac: String? = null, ihtiyacSec: (String?) -> Unit = {},
 ) {
-    val pager = rememberPagerState { sozler.size.coerceAtLeast(1) }
+    // A feed replacement must replace its count, keys and page content together.
+    // Updating the count of an existing pager while a lazy layout still holds the
+    // preceding key provider can otherwise address a page outside that old list.
+    val feed = remember(sozler) { sozler.toList() }
+    val pager = key(feed) {
+        rememberPagerState(initialPage = aktifIndeks.coerceIn(0, feed.lastIndex.coerceAtLeast(0))) { feed.size }
+    }
     val kapsam = rememberCoroutineScope()
     val mesaj = remember { SnackbarHostState() }
     val pano = LocalClipboardManager.current
@@ -52,20 +58,25 @@ fun AnaEkran(
     var ihtiyaclar by rememberSaveable { mutableStateOf(false) }
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     val darEylemler = buyukYazi || LocalConfiguration.current.screenWidthDp < 360
-    LaunchedEffect(aktifIndeks, sozler) {
-        if (sozler.isNotEmpty() && aktifIndeks in sozler.indices && pager.currentPage != aktifIndeks) pager.scrollToPage(aktifIndeks)
+    LaunchedEffect(pager, aktifIndeks) {
+        if (feed.isNotEmpty()) {
+            val hedef = aktifIndeks.coerceIn(feed.indices)
+            if (pager.currentPage != hedef) pager.scrollToPage(hedef)
+        }
     }
-    val aktif = sozler.getOrNull(pager.settledPage)
-    LaunchedEffect(aktif?.kimlik) { if (aktif != null) indeksDegisti(pager.settledPage); ses.durdur() }
-    BoxWithConstraints(Modifier.fillMaxSize().background(Renk.zemin)) {
-        // The two pieces occupy opposite corners. Ink may cross marble; labels
-        // and action controls have opaque paper beneath them.
-        KlasikGorsel(KlasikMotif.BUST,
-            Modifier.align(Alignment.TopEnd).offset(x = 56.dp, y = (-32).dp)
-                .width(maxWidth * .76f).height(maxHeight * .78f), opacity = .55f)
-        KlasikGorsel(KlasikMotif.COLUMN,
-            Modifier.align(Alignment.BottomStart).offset(x = (-52).dp, y = 42.dp)
-                .width(maxWidth * .52f).height(maxHeight * .5f), opacity = .5f)
+    val aktif = feed.getOrNull(pager.settledPage)
+    LaunchedEffect(pager, aktif?.kimlik) { if (aktif != null) indeksDegisti(pager.settledPage); ses.durdur() }
+    Box(Modifier.fillMaxSize().background(Renk.zemin)) {
+        // Only decoration needs measurement-time subcomposition. The pager and
+        // its state stay in the same composition, even while a feed is replaced.
+        BoxWithConstraints(Modifier.matchParentSize()) {
+            KlasikGorsel(KlasikMotif.BUST,
+                Modifier.align(Alignment.TopEnd).offset(x = 56.dp, y = (-32).dp)
+                    .width(maxWidth * .76f).height(maxHeight * .78f), opacity = .55f)
+            KlasikGorsel(KlasikMotif.COLUMN,
+                Modifier.align(Alignment.BottomStart).offset(x = (-52).dp, y = 42.dp)
+                    .width(maxWidth * .52f).height(maxHeight * .5f), opacity = .5f)
+        }
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content").padding(horizontal = 24.dp)) {
             Row(Modifier.fillMaxWidth().heightIn(min = 60.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.Yukselis, if (buyukYazi) "Ascend" else null, Modifier.size(28.dp), tint = Renk.metin)
@@ -81,7 +92,7 @@ fun AnaEkran(
                 Text(ihtiyacAdi(ihtiyac, dil), color = Renk.metinIkincil, fontSize = 13.sp)
                 Text("  ⌄", color = Renk.metinIkincil)
             }
-            if (sozler.isEmpty()) {
+            if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Text(cevir(dil, "Biraz yer açalım.", "Make a little room."), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
                     Text(cevir(dil, "Bu tercihlere uygun açık bir konu yok. Planını değiştirebilir veya yeni bir konu açabilirsin.", "No unlocked topic matches these preferences. Adjust your plan or unlock another topic."), color = Renk.metinIkincil, textAlign = TextAlign.Center, modifier = Modifier.padding(vertical = 16.dp))
@@ -89,8 +100,10 @@ fun AnaEkran(
                     TextButton(onClick = konulariDuzenle) { Text(cevir(dil, "Konuları keşfet", "Explore topics")) }
                 }
             } else {
-                HorizontalPager(state = pager, modifier = Modifier.weight(1f).fillMaxWidth().testTag("quote-pager"), key = { sozler[it].kimlik }) { sayfa ->
-                    val soz = sozler[sayfa]
+                HorizontalPager(state = pager, modifier = Modifier.weight(1f).fillMaxWidth().testTag("quote-pager"),
+                    key = { sayfa -> feed.getOrNull(sayfa)?.kimlik ?: sayfa }) { sayfa ->
+                    // Discard an obsolete prefetch slot, not the active feed.
+                    val soz = feed.getOrNull(sayfa) ?: return@HorizontalPager
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
                         .verticalScroll(rememberScrollState()).padding(vertical = 20.dp),
                         horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Center) {
@@ -112,11 +125,13 @@ fun AnaEkran(
             }
             if (aktif != null) {
                 Row(Modifier.fillMaxWidth().background(Renk.zemin).heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage(pager.currentPage - 1) } }, enabled = pager.currentPage > 0, modifier = Modifier.testTag("quote-previous")) {
+                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage - 1).coerceAtLeast(0)) } }, enabled = pager.currentPage > 0, modifier = Modifier.testTag("quote-previous")) {
                         Icon(AzimIkon.Geri, cevir(dil, "Önceki söz", "Previous quote"), modifier = Modifier.size(20.dp), tint = if (pager.currentPage > 0) Renk.metin else Renk.kenarlikGuclu)
                     }
-                    Text(cevir(dil, "Bir söz. Bir adım.", "One thought. One step."), color = Renk.metinIkincil, fontSize = 13.sp, fontFamily = LoraSerif, textAlign = TextAlign.Center, modifier = Modifier.weight(1f))
-                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1).coerceAtMost(sozler.lastIndex)) } }, enabled = pager.currentPage < sozler.lastIndex, modifier = Modifier.testTag("quote-next")) {
+                    Text(if (buyukYazi) cevir(dil, "Bir adım.", "One step.") else cevir(dil, "Bir söz. Bir adım.", "One thought. One step."),
+                        color = Renk.metinIkincil, fontSize = if (buyukYazi) 11.sp else 13.sp, lineHeight = 18.sp,
+                        fontFamily = LoraSerif, textAlign = TextAlign.Center, modifier = Modifier.weight(1f))
+                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1).coerceAtMost(feed.lastIndex)) } }, enabled = pager.currentPage < feed.lastIndex, modifier = Modifier.testTag("quote-next")) {
                         Text("→", color = Renk.metin, fontSize = 24.sp, modifier = Modifier.semantics { contentDescription = cevir(dil, "Sonraki söz", "Next quote") })
                     }
                 }

@@ -187,8 +187,8 @@ private fun PlanSection(step: Int, dil: String) {
 
 @Composable
 private fun ColumnScope.PlanWelcome(dil: String) {
-    Box(Modifier.fillMaxWidth().height(160.dp)) {
-        KlasikGorsel(KlasikMotif.BUST, Modifier.align(Alignment.CenterEnd).size(184.dp), opacity = .5f)
+    Box(Modifier.fillMaxWidth().height(124.dp)) {
+        KlasikGorsel(KlasikMotif.BUST, Modifier.align(Alignment.CenterEnd).size(148.dp), opacity = .5f)
         Column(Modifier.align(Alignment.BottomStart).padding(bottom = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Icon(AzimIkon.Yukselis, null, Modifier.size(58.dp), tint = Renk.metin)
             Box(Modifier.width(36.dp).height(1.dp).background(Renk.accent))
