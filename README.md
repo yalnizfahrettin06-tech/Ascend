@@ -2,6 +2,18 @@
 
 Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir.
 
+## 8.2 — Bordo ve mermer kütüphane
+
+Kullanıcının tasarım raporuna göre Keşfet, gerçek koleksiyonlar ve sade konu listeleri etrafında yeniden düzenlendi. Ortak bordo başlıklar, dengelenmiş ana ekran eylemleri ve 20 adımın tamamında tutarlı onboarding dili kullanılır.
+
+- **Koleksiyonlar / Tüm konular / Seçtiklerim:** Genel Türkçe arama, bağımsız erişim filtreleri, kaydırma ve geri dönüş durumunun korunması.
+- **Konuya göz atmak seçim değildir:** Açık konu tüm sözlerini gösterir; kilitli konu iki sözlük önizlemeyi korur. Bildirim seçimi açık bir anahtarla yapılır.
+- **Açık okuma yüzeyi:** Tek büst, eş ağırlıklı Kaydet/Paylaş, doğru anlamlı “Sana göre”, bordo aktif navigasyon.
+- **Onboarding:** Tek sütun motifi, bordo seçim durumu, taşmadan akan plan konu etiketleri, kalan erişim/izin adımlarının açıklaması.
+- İçerik kimlikleri, İngilizce ana katalog, 3 ücretsiz paylaşım arka planı, mevcut erişimler ve ödeme almayan demo aynı kalır.
+
+[Madde madde uygulama ve doğrulama raporu](docs/20-ASCEND-8.2-TASARIM-UYGULAMA.md)
+
 ## 8.1 yenilikleri
 
 - Kategori, söz ve kaynak tek bir okuma bütünü: daha dengeli boşluklar ve metin uzunluğuna uyarlanan serif dizgi.
@@ -45,9 +57,9 @@ Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe t
 
 ## APK ve doğrulama
 
-**[Ascend 8.1 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v8.1.0-preview.1/Ascend-8.1.0-test.apk)** — dosya başarılı bulut derlemesinin ardından sürüm sayfasında yayımlanır.
+**[Ascend 8.2 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v8.2.0-preview.1/Ascend-8.2.0-test.apk)**
 
-[Güncel bulut çalışmaları](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) içinde **Artifacts → Ascend-8.1.0-test-APK** bulunur. Kullanıcının isteğiyle APK üretiminden sonra uzun emülatör/görsel inceleme turu beklenmez; sonuçlar çalışma sayfasında ayrı gösterilir.
+[Güncel bulut çalışmaları](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) içinde **Artifacts → Ascend-8.2.0-test-APK** bulunur. Son tasarım raporundaki yazı boyutu ve ekran karşılaştırmaları aynı bulut çalışmasında üretilir. Sonuçlar uygulama raporunda kaydedilir.
 
 Önceki sürüm: [Ascend 8.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v8.0.0-preview.1). O sürümün 68 birim ve 42 Android testi: [8.0 doğrulama](docs/18-ASCEND-8-DOGRULAMA.md).
 

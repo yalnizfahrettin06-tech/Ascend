@@ -17,7 +17,7 @@ Altın, sarı, mavi, turuncu ve yeşilimsi arayüz vurguları eklenmedi. Paylaş
 | Kapsam, mevcut kazanımlar | 3 sekme, söz içeriği, kayıtlar, bildirim planı, erişim sınırları ve ikon korunur | Uygulama, veri göçü ve erişim regresyon testleri |
 | Marka mimarisi | Ortak MarkaBasligi; opak bordo yüzey ve açık başlık, ölçümü büyütmeyen dekor katmanı | KlasikDil, Tasarim, Paletler |
 | Renk ve kontrast | Yeşilimsi nötrler kaldırıldı; 18 palet/mod kombinasyonunda metin, kontrol sınırı, seçili yüzey, dekor altı ve marka kontrastı ölçülür | KontrastTest |
-| Tipografi | Mevcut Lora + sistem sans korunur; Türkçe karakter desteği mevcut. Newsreader + Inter alternatifleri yeni bir indirme/bağımlılık eklemek için yeterli üstünlük sunmuyor | Tasarim; gerçek TextLayoutResult testleri |
+| Tipografi | Mevcut Lora + sistem sans korunur; normal ve italik TTF cmap tablolarında İıŞşĞğÇçÖöÜü kapsamı doğrulandı. Newsreader + Inter alternatifleri yeni bir indirme/bağımlılık eklemek için yeterli üstünlük sunmuyor | Tasarim; gerçek TextLayoutResult testleri |
 | Keşfet üst alanı | Bordo başlık, genel arama, Koleksiyonlar / Tüm konular / Seçtiklerim, dokunulabilir bildirim özeti | KategorilerEkrani |
 | Keşfet satış ağırlığı | PRO DEMO başlık rozeti kaldırıldı. Kilitli konu içindeki mevcut demo açıklaması korunur | KategorilerEkrani; kilit diyaloğu |
 | Koleksiyonlar | Mevcut 12 gerçek grup; kısa açıklama, gerçek konu sayısı, hafif değişen açık yüzeyler, 2 sütun / dar veya büyük yazıda 1 sütun | KoleksiyonKarti |
@@ -51,9 +51,33 @@ Kilitli konuya doğrudan “Pro” etiketi konmadı: mevcut erişim modeli o kon
 - [NN/g — Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/): İkincil erişim ve koleksiyon filtrelerini tek filtre paneline taşıma; başlangıçta temel görünümleri sunma kararı.
 - [Android — Window Insets](https://developer.android.com/develop/ui/compose/system/insets): Sistem çubukları, klavye ve alt navigasyonun kapladığı alanın okunabilir bölgeden ayrılması.
 - [Android — Semantics](https://developer.android.com/develop/ui/compose/accessibility/semantics): Salt çizilen işaret yerine gerçek seçili/anahtar durumlarının sunulması.
-- Kullanıcının sunduğu rapordaki Newsreader/Inter önerisi değerlendirildi. Mevcut Lora ailesi değiştirilmeden, UI sans metniyle rol ayrımı sürdürülür. Bir font ailesi değişikliğinin kendiliğinden okunabilirlik kanıtı olmadığı kabul edilir.
+- [Newsreader](https://productiontype.com/font/newsreader) ve [Inter](https://github.com/rsms/inter) kaynakları incelendi; kullanıcının raporundaki font önerisi değerlendirildi. Mevcut Lora ailesi değiştirilmeden, UI sans metniyle rol ayrımı sürdürülür. Bir font ailesi değişikliğinin kendiliğinden okunabilirlik kanıtı olmadığı kabul edilir.
+
+## Önce / sonra
+
+Aşağıdaki dosyalar emülatörün değiştirilmemiş 1080 × 1920 ekran kayıtlarıdır. Aynı Pixel 2 boyutunda önce 8.1, sonra 8.2 gösterilir. Ana ekranın söz metni aynıdır; sayaç farkı yukarıdaki test verisi açıklamasına tabidir. Keşfet aynı 70 konuyu başlangıçta artık koleksiyonlarla sunar. Karşılama aynı başlangıç adımıdır; bu tasarımda metnin hiyerarşisi de değişmiştir.
+
+| Ekran | Önce | Sonra |
+|---|---|---|
+| Bugün | ![8.1 Bugün](assets/v82/home-before.png) | ![8.2 Bugün](assets/v82/home-after.png) |
+| Keşfet | ![8.1 Keşfet](assets/v82/discover-before.png) | ![8.2 Keşfet](assets/v82/discover-after.png) |
+| Başlangıç | ![8.1 başlangıç](assets/v82/welcome-before.png) | ![8.2 başlangıç](assets/v82/welcome-after.png) |
+
+[%200 yazıda planın kaynak ve devam bölümü](assets/v82/plan-large-text.png). Büyük yazıda düzenin aynı görünmesi yerine içeriğin kaydırılarak tamamına ulaşılması korunur.
+
+## Sonraki ürün çalışmasına ayrılan öneri
+
+20 adım bu sürümde korunur. İleride bildirim adedi ve saat aralığı tek bir “Günün ritmi” adımında birleştirilebilir; erişim açıklaması izin adımına kısa bir bilgilendirme olarak taşınabilir. Önce tamamlama ve terk etme noktaları ölçülmelidir. Bu öneriler mevcut yanıtları veya sayacı değiştirmek için kullanılmadı.
 
 ## Derleme sonrası kanıt
 
-Bu bölüm son GitHub çalışmasının sonucu ve incelenen ekranlar ile tamamlanacaktır.
+Kaynak commit: **ebde05473dddca08923f0a9918b38113c1474517**. [GitHub çalışması](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34393534028). Sürüm 8.2.0, versionCode 19. APK build işi başarılı; **72 birim testi, 0 hata, 0 atlama**; lint, içerik ve görsel katalog kontrolleri başarılı.
+
+Android 15 Pixel 2 emülatöründe ilk çalıştırma **45 arayüz testinden 44'ünü geçti**. Yeni tasarım matrisi, Türkçe arama, filtre/geri dönüş, bildirim seçimi, onboarding ve ana gezinme kontrolleri geçti. `knightPngAndVideoDurationSurviveRecreation` testi, ekran yeniden oluşturulduktan sonra paylaşım önizlemesini 15 saniyede bulamadı. Aynı test önceki 8.2 commitinde geçmişti; kesin neden doğrulanmadı. Başarısız işin ikinci denemesinde emülatör bağlantısı kesildi (`device emulator-5554 not found`); tam arayüz test seti başarılı ilan edilmez. Kullanıcının APK sonrası teslimi uzatmama tercihiyle başka test döngüsü başlatılmadı. Bu nedenle çıktı **test / önizleme APK'sıdır**.
+
+Son kaynakta gerçek kayıtları açılarak incelenen ekranlar: Bugün, Keşfet, başlangıç, plan özeti, Senin; ayrıca %100/%130/%150/%200 dizgi matrisi ve koyu Keşfet kayıtları üretildi. %200 plan kaynağı ve ana ekranın erişilebilir eylemleri otomatik ölçümlerle kontrol edildi. Bu kayıtlar fiziksel cihazda elle kullanım, TalkBack ile uçtan uca deneyim, üç düğmeli sistem navigasyonu veya mağaza yayını doğrulaması değildir; bu kontroller yapılmadı.
+
+APK SHA-256: `864B934B4BD55E1B4A610FA8926AC57EA6912FC692DF082C290EA618C0E569A1`.
+
+[Ascend 8.2 test APK](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v8.2.0-preview.1/Ascend-8.2.0-test.apk).
 
