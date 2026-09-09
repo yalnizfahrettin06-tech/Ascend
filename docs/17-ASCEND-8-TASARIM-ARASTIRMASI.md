@@ -20,7 +20,7 @@ Ascend'in 20 ekranlık, atlanabilir ve kaldığı yerden devam eden gerçek kiş
 | Duvar kâğıdı rengi | Dinamik renk devre dışı | Sistem duvar kâğıdından mavi/turuncu/altın türemesini önler |
 | İlk kurulum | Aydınlık | Yeni tasarım ilk açılışta görünür |
 | Önceden seçilmiş görünüm | Açıkça seçilmiş Mürekkep/Bordo ve tema modu korunur; karanlıkta nötr kömür omurga | Kullanıcının okuma tercihi kaybolmaz; lacivert yüzeye dönülmez |
-| Ana söz | Sola hizalı serif, yaklaşık 32 sp / 40 sp satır yüksekliği | Referanstaki editoryal hiyerarşi; gerçek metin korunur |
+| Ana söz | Sola hizalı serif, yaklaşık 32 sp / 43 sp satır yüksekliği | Referanstaki editoryal hiyerarşi; gerçek metin korunur |
 | Dekorasyon | Üst sağ büst, alt sol sütun/yaprak; erişilebilirlik ağacından çıkarılmış | Bilgi taşımayan görsel ayrıntılar ekran okuyucuyu bölmez |
 | Alt gezinme | Bugün / Keşfet / Senin; düz beyaz yüzey, çizgi + ikon + etiket | Mevcut üç durak korunur; büyük kapsül ve renkli kart yok |
 | Hareket | Kısa durum geçişleri; sürekli hareket yok | Söz okunurken dikkat sabit kalır |
@@ -35,7 +35,7 @@ Ascend'in 20 ekranlık, atlanabilir ve kaldığı yerden devam eden gerçek kiş
 - Android Compose dokümanı etkileşim alanlarının en az 48 dp olmasını önerir. Dekoratif görseller için açıklamanın boş bırakılması, işlevli ikonlar için anlamlı yerelleştirilmiş açıklama kullanılması gerekir. Görsel ikon küçük olabilir; dokunma hedefi küçülmez. [Android — Accessibility API defaults](https://developer.android.com/develop/ui/compose/accessibility/api-defaults)
 - Android 14, yüzde 200'e kadar yazı ölçeklemeyi destekler. Tasarım bu tercihi sabit boyutla bastırmaz; uzun Türkçe seçenekler, İngilizce metin ve dar ekran birlikte kontrol edilir. [Android 14 — Font scaling](https://developer.android.com/about/versions/14/features#non-linear-font-scaling)
 
-Bu eşikler ve platform özellikleri kaynak desteklidir. Renkler, opaklık sınırları, 32/40 tipografi oranı ve klasik figürlerin yerleşimi; kullanıcının referansına göre alınmış Ascend tasarım kararlarıdır. Başka bir ürünün dönüşüm oranını artırdığı iddiası veya kullanıcı araştırması sonucu olarak sunulmaz.
+Bu eşikler ve platform özellikleri kaynak desteklidir. Renkler, opaklık sınırları, 32/43 tipografi oranı ve klasik figürlerin yerleşimi; kullanıcının referansına göre alınmış Ascend tasarım kararlarıdır. Başka bir ürünün dönüşüm oranını artırdığı iddiası veya kullanıcı araştırması sonucu olarak sunulmaz.
 
 ## 4. Referansın ayrıntılı okunması
 
@@ -159,7 +159,7 @@ Aşağıdaki değerler tasarımın başlangıç aralıklarıdır. Nihai ekran ge
 
 | Kullanım | Önerilen rol | Başlangıç ölçüsü |
 |---|---|---|
-| Ana söz | Lora serif, normal ağırlık, sola hizalı | 32 sp / 40 sp; uzun ve dar düzen için kontrollü varyant |
+| Ana söz | Lora serif, normal ağırlık, sola hizalı | 32 sp / 43 sp; uzun ve dar düzen için kontrollü varyant |
 | Onboarding/sayfa başlığı | Aynı serif ailesi | 28–32 sp / 36–40 sp |
 | Marka sözcüğü | Serif, normal ağırlık | 24–28 sp; yapay harf aralığı yok |
 | Gövde/yanıt seçeneği | Sans serif | 15–16 sp / 22–24 sp |

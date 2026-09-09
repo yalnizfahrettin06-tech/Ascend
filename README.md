@@ -2,7 +2,23 @@
 
 Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir.
 
-## 7.0 yenilikleri
+## 8.0 yenilikleri
+
+- **Mermer ve mürekkep:** beyaz zemin, siyah serif yazılar, ince konturlar ve soluk Roma büstü, sütun ve kemer ayrıntıları.
+- Ana ekran, 20 adımlı onboarding, Keşfet, Senin, kişisel plan, Kaydedilenler, ayarlar, Pro ve paylaşım stüdyosu aynı tasarım diliyle yenilendi.
+- Yeni kurulumda aydınlık Mermer; Mürekkep/Bordo ve nötr gece seçenekleri. Eski sıcak/mavi arayüz paletleri güvenli biçimde taşınır; duvar kâğıdı renkleri görünümü değiştirmez.
+- Ana işlemler kaydırmadan erişilir. Yüzde 200 yazıda uzun söz kendi alanında kayar; kontroller ve üç sekme görünür kalır.
+- 700 İngilizce kaynak metin, bağlı Türkçe çeviriler, 70 kategori, 107 paylaşım arka planı ve mevcut haklar korunur.
+
+<p>
+<img src="docs/screenshots-v8/home.png" width="230" alt="Ascend 8 ana ekran: beyaz zemin, serif söz ve soluk Roma büstü">
+<img src="docs/screenshots-v8/onboarding.png" width="230" alt="Ascend 8 kişisel başlangıçta tek soru">
+<img src="docs/screenshots-v8/discover.png" width="230" alt="Ascend 8 sade kategori keşfi">
+</p>
+
+[Tasarım araştırması ve mimari kararlar](docs/17-ASCEND-8-TASARIM-ARASTIRMASI.md) · [Doğrulama kaydı](docs/18-ASCEND-8-DOGRULAMA.md)
+
+## Korunan ürün özellikleri
 
 - Yükselen çizgiyle kurulan siyah/beyaz kimlik, sade ana ekran ve **Bugün / Keşfet / Senin** olmak üzere üç ana bölüm.
 - **20 ekranlık kişisel başlangıç:** 13 tercih sorusu, isteğe bağlı isim, bildirim düzeni, kişisel plan, erişim açıklaması ve izin adımı. Sorular atlanabilir; ilerleme kaydedilir ve plan sonradan düzenlenebilir. Hızlı başlangıç da sunulur.
@@ -19,9 +35,11 @@ Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe t
 
 ## APK ve doğrulama
 
-**[Ascend 7.0 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v7.0.0-preview.1/Ascend-7.0.0-test.apk)** — 64 birim ve 37 Android testi geçti. APK üretildi ve geliştirme imzası doğrulandı. [7.0 doğrulama kaydı](docs/16-ASCEND-7-DOGRULAMA.md).
+**[Ascend 8.0 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v8.0.0-preview.1/Ascend-8.0.0-test.apk)** — 68 birim ve 42 Android testi geçti. APK üretildi ve geliştirme imzası doğrulandı. [8.0 doğrulama kaydı](docs/18-ASCEND-8-DOGRULAMA.md).
 
-[Başarılı bulut çalışmasında](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34272724247) **Artifacts → Ascend-7.0.0-test-APK** paketi de bulunur. Artifact indirmek için GitHub oturumu gerekir; yukarıdaki sürüm dosyası doğrudan indirilebilir.
+[Başarılı bulut çalışmasında](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34373832269) **Artifacts → Ascend-8.0.0-test-APK** paketi de bulunur. Artifact indirmek için GitHub oturumu gerekir; yukarıdaki sürüm dosyası doğrudan indirilebilir.
+
+Önceki sürüm: [Ascend 7.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v7.0.0-preview.1). O sürümün 64 birim ve 37 Android testi: [7.0 doğrulama](docs/16-ASCEND-7-DOGRULAMA.md).
 
 Önceki sürüm: [Ascend 6.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v6.0.0-preview.1) (`Ascend-6.0.0-test.apk`). 6.0 için kaydedilen 48 JVM ve 26 Android testi sonucu yalnız o sürüme aittir: [doğrulama](docs/13-ASCEND-6-TEST-PLANI.md) · [ekranlar](docs/14-ASCEND-6-EKRANLAR.md).
 
@@ -38,6 +56,9 @@ APK geliştirme imzalı test sürümüdür; mağazaya yükleme paketi değildir.
 
 ## Raporlar
 
+- [8.0 ayrıntılı tasarım araştırması](docs/17-ASCEND-8-TASARIM-ARASTIRMASI.md)
+- [8.0 doğrulama ve APK kaydı](docs/18-ASCEND-8-DOGRULAMA.md)
+- [Klasik dekor üretim kaydı](content/classical-art-provenance.json)
 - [7.0 rakip araştırması, kişisel başlangıç ve tasarım kararları](docs/15-ASCEND-7-ARASTIRMA-VE-TASARIM.md)
 - [7.0 doğrulama kaydı ve sınırlar](docs/16-ASCEND-7-DOGRULAMA.md)
 - [6.0 UI/UX, kategori ve erişim araştırması](docs/12-ASCEND-6-UI-UX-VE-ERISIM.md)
@@ -46,7 +67,7 @@ APK geliştirme imzalı test sürümüdür; mağazaya yükleme paketi değildir.
 - [Yeni sahnelerin üretim kaydı](docs/scene-art.json)
 - [5.0 içerik araştırması](docs/09-ASCEND-5-ICERIK-RAPORU.md)
 
-01–14 numaralı belgeler önceki sürümlerin tarihsel kayıtlarıdır.
+01–16 numaralı belgeler önceki sürümlerin tarihsel kayıtlarıdır.
 
 ## Geliştirme
 
