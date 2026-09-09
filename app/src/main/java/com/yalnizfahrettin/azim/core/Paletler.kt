@@ -2,7 +2,7 @@ package com.yalnizfahrettin.azim.core
 
 import androidx.compose.ui.graphics.Color
 
-/** Legacy names remain decodable; they resolve to the neutral v8 architecture. */
+/** Legacy names remain decodable; all palettes retain the paper-and-ink base. */
 enum class Palet(val etiketTr: String, val etiketEn: String) {
     MERMER("Mermer", "Marble"), MONO("Mürekkep", "Ink"), BORDO("Bordo", "Wine"),
     KUM("Kum", "Sand"), LACIVERT("Lacivert", "Indigo"), YOSUN("Yosun", "Moss");
@@ -34,11 +34,11 @@ internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenk
     val accent = if (karanlik) when (secim) {
         Palet.BORDO -> Color(0xFFE0BAC8)
         Palet.MONO -> Color(0xFFF2F2F2)
-        else -> Color(0xFFBDCCBF)
+        else -> Color(0xFFDBB6C0)
     } else when (secim) {
         Palet.BORDO -> Color(0xFF643B48)
         Palet.MONO -> Color(0xFF161916)
-        else -> Color(0xFF3E4B40)
+        else -> Color(0xFF713C49)
     }
     return if (karanlik) AzimRenkleri(
         zemin = if (oled) Color.Black else Color(0xFF111312),
@@ -46,14 +46,22 @@ internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenk
         kenarlik = Color(0xFF414541), kenarlikGuclu = Color(0xFF909790),
         metin = Color(0xFFF5F6F5), metinIkincil = Color(0xFFC1C7C1), metinSonuk = Color(0xFFC1C7C1),
         accent = accent, accentSonuk = Color(0xFF909790),
-        accentZemin = if (secim == Palet.BORDO) Color(0xFF32252A) else Color(0xFF28312A),
+        accentZemin = when (secim) {
+            Palet.BORDO -> Color(0xFF32252A)
+            Palet.MONO -> Color(0xFF282B29)
+            else -> Color(0xFF302529)
+        },
         accentDerin = Color(0xFF414541), karanlikMi = true,
     ) else AzimRenkleri(
         zemin = Color.White, yuzey = Color(0xFFF7F8F7), yuzeyYuksek = Color(0xFFEEF1EE),
         kenarlik = Color(0xFFD4D8D4), kenarlikGuclu = Color(0xFF777E77),
         metin = Color(0xFF161916), metinIkincil = Color(0xFF484E49), metinSonuk = Color(0xFF484E49),
         accent = accent, accentSonuk = Color(0xFF777E77),
-        accentZemin = if (secim == Palet.BORDO) Color(0xFFF5ECEF) else Color(0xFFF0F3F0),
+        accentZemin = when (secim) {
+            Palet.BORDO -> Color(0xFFF5ECEF)
+            Palet.MONO -> Color(0xFFF0F1F0)
+            else -> Color(0xFFF7EEF0)
+        },
         accentDerin = Color(0xFFD4D8D4), karanlikMi = false,
     )
 }

@@ -2,7 +2,17 @@
 
 Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir.
 
-## 8.0 yenilikleri
+## 8.1 yenilikleri
+
+- Kategori, söz ve kaynak tek bir okuma bütünü: daha dengeli boşluklar ve metin uzunluğuna uyarlanan serif dizgi.
+- Ana ekranda tek slogan, sade söz sayacı ve tek heykel motifi.
+- Keşfet'te kısa başlık, daha erken başlayan ince kategori listesi ve çerçevesiz filtreler.
+- Her satır kategori içeriğine gider; bildirim seçimi kategori içindeki ayrı anahtarla yapılır. Demo erişimi kazanmak artık kendiliğinden bildirim seçmez.
+- Beyaz/siyah temelde sınırlı bordo vurgular; bordo zemin üzerinde yaprak sarılı Roma sütunu ikonu.
+
+[Estetik değerlendirme ve uygulanan kararlar](docs/19-ASCEND-8.1-ESTETIK-DUZENLEME.md) · [İkon üretim kaydı](content/launcher-v81-provenance.json)
+
+## 8.0 tasarım temeli
 
 - **Mermer ve mürekkep:** beyaz zemin, siyah serif yazılar, ince konturlar ve soluk Roma büstü, sütun ve kemer ayrıntıları.
 - Ana ekran, 20 adımlı onboarding, Keşfet, Senin, kişisel plan, Kaydedilenler, ayarlar, Pro ve paylaşım stüdyosu aynı tasarım diliyle yenilendi.
@@ -35,9 +45,11 @@ Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe t
 
 ## APK ve doğrulama
 
-**[Ascend 8.0 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v8.0.0-preview.1/Ascend-8.0.0-test.apk)** — 68 birim ve 42 Android testi geçti. APK üretildi ve geliştirme imzası doğrulandı. [8.0 doğrulama kaydı](docs/18-ASCEND-8-DOGRULAMA.md).
+**[Ascend 8.1 test APK’sını indir](https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v8.1.0-preview.1/Ascend-8.1.0-test.apk)** — dosya başarılı bulut derlemesinin ardından sürüm sayfasında yayımlanır.
 
-[Başarılı bulut çalışmasında](https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/34373832269) **Artifacts → Ascend-8.0.0-test-APK** paketi de bulunur. Artifact indirmek için GitHub oturumu gerekir; yukarıdaki sürüm dosyası doğrudan indirilebilir.
+[Güncel bulut çalışmaları](https://github.com/yalnizfahrettin06-tech/Ascend/actions/workflows/android.yml) içinde **Artifacts → Ascend-8.1.0-test-APK** bulunur. Kullanıcının isteğiyle APK üretiminden sonra uzun emülatör/görsel inceleme turu beklenmez; sonuçlar çalışma sayfasında ayrı gösterilir.
+
+Önceki sürüm: [Ascend 8.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v8.0.0-preview.1). O sürümün 68 birim ve 42 Android testi: [8.0 doğrulama](docs/18-ASCEND-8-DOGRULAMA.md).
 
 Önceki sürüm: [Ascend 7.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v7.0.0-preview.1). O sürümün 64 birim ve 37 Android testi: [7.0 doğrulama](docs/16-ASCEND-7-DOGRULAMA.md).
 
@@ -56,6 +68,7 @@ APK geliştirme imzalı test sürümüdür; mağazaya yükleme paketi değildir.
 
 ## Raporlar
 
+- [8.1 estetik düzenleme ve kararlar](docs/19-ASCEND-8.1-ESTETIK-DUZENLEME.md)
 - [8.0 ayrıntılı tasarım araştırması](docs/17-ASCEND-8-TASARIM-ARASTIRMASI.md)
 - [8.0 doğrulama ve APK kaydı](docs/18-ASCEND-8-DOGRULAMA.md)
 - [Klasik dekor üretim kaydı](content/classical-art-provenance.json)
@@ -67,7 +80,7 @@ APK geliştirme imzalı test sürümüdür; mağazaya yükleme paketi değildir.
 - [Yeni sahnelerin üretim kaydı](docs/scene-art.json)
 - [5.0 içerik araştırması](docs/09-ASCEND-5-ICERIK-RAPORU.md)
 
-01–16 numaralı belgeler önceki sürümlerin tarihsel kayıtlarıdır.
+01–18 numaralı belgeler önceki sürümlerin tarihsel kayıtlarıdır.
 
 ## Geliştirme
 

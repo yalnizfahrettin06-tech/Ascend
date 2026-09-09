@@ -19,7 +19,9 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,7 +58,8 @@ fun AnaEkran(
     val haptik = LocalHapticFeedback.current
     var araclar by remember { mutableStateOf(false) }
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
-    val darEylemler = buyukYazi || LocalConfiguration.current.screenWidthDp < 360
+    val darEkran = LocalConfiguration.current.screenWidthDp < 360
+    val darEylemler = buyukYazi || darEkran
     LaunchedEffect(pager, aktifIndeks) {
         if (feed.isNotEmpty()) {
             val hedef = aktifIndeks.coerceIn(feed.indices)
@@ -72,12 +75,9 @@ fun AnaEkran(
             KlasikGorsel(KlasikMotif.BUST,
                 Modifier.align(Alignment.TopEnd).offset(x = 56.dp, y = (-32).dp)
                     .width(maxWidth * .76f).height(maxHeight * .78f), opacity = .55f)
-            KlasikGorsel(KlasikMotif.COLUMN,
-                Modifier.align(Alignment.BottomStart).offset(x = (-52).dp, y = 42.dp)
-                    .width(maxWidth * .52f).height(maxHeight * .5f), opacity = .5f)
         }
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content").padding(horizontal = 24.dp)) {
-            Row(Modifier.fillMaxWidth().heightIn(min = 60.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth().heightIn(min = 52.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.Yukselis, if (buyukYazi) "Ascend" else null, Modifier.size(28.dp), tint = Renk.metin)
                 Spacer(Modifier.width(10.dp))
                 if (buyukYazi) Spacer(Modifier.weight(1f))
@@ -100,22 +100,38 @@ fun AnaEkran(
                     key = { sayfa -> feed.getOrNull(sayfa)?.kimlik ?: sayfa }) { sayfa ->
                     // Discard an obsolete prefetch slot, not the active feed.
                     val soz = feed.getOrNull(sayfa) ?: return@HorizontalPager
+                    val metin = soz.metin(dil)
+                    val kisa = metin.length <= 80
+                    val uzun = metin.length > 150
+                    // Short thoughts can breathe at a larger size; longer passages
+                    // use the full measure instead of forcing isolated trailing words.
+                    val yaziBoyutu = when {
+                        buyukYazi -> if (kisa) 30 else if (uzun) 26 else 28
+                        darEkran -> if (kisa) 33 else if (uzun) 28 else 30
+                        else -> if (kisa) 36 else if (uzun) 30 else 33
+                    }
+                    val satirYuksekligi = yaziBoyutu + if (uzun) 9 else 10
+                    val metinGenisligi = if (kisa && !darEkran && !buyukYazi) .94f else 1f
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
-                        .verticalScroll(rememberScrollState()).padding(vertical = 20.dp),
+                        .verticalScroll(rememberScrollState()).padding(vertical = 24.dp),
                         horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Center) {
-                        Row(Modifier.background(Renk.zemin).padding(vertical = 4.dp),
+                        Row(Modifier.background(Renk.zemin).padding(vertical = 2.dp),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                            Box(Modifier.width(26.dp).height(1.dp).background(Renk.metinIkincil))
+                            Box(Modifier.width(22.dp).height(1.dp).background(Renk.accent))
                             Text(Kategoriler.bul(soz.kategori)?.ad(dil).orEmpty(), color = Renk.metinIkincil,
                                 fontSize = 12.sp, lineHeight = 18.sp, letterSpacing = 0.sp)
                         }
-                        Spacer(Modifier.height(if (buyukYazi) 16.dp else 28.dp))
-                        Text(soz.metin(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = if (buyukYazi) 28.sp else 32.sp, lineHeight = if (buyukYazi) 38.sp else 43.sp, letterSpacing = (-.65).sp, textAlign = TextAlign.Start, modifier = Modifier.semantics { heading() })
-                        Spacer(Modifier.height(24.dp))
+                        Spacer(Modifier.height(12.dp))
+                        Text(metin, color = Renk.metin, fontFamily = LoraSerif,
+                            fontSize = yaziBoyutu.sp, lineHeight = satirYuksekligi.sp,
+                            letterSpacing = (if (kisa) -.6 else -.4).sp, textAlign = TextAlign.Start,
+                            style = TextStyle(lineBreak = if (kisa) LineBreak.Heading else LineBreak.Paragraph),
+                            modifier = Modifier.widthIn(max = 560.dp).fillMaxWidth(metinGenisligi).semantics { heading() })
+                        Spacer(Modifier.height(16.dp))
                         Text(soz.sunumEtiketi(dil), color = Renk.metinIkincil, fontSize = 11.sp,
-                            lineHeight = 17.sp, letterSpacing = .8.sp,
-                            modifier = Modifier.background(Renk.zemin).padding(vertical = 3.dp))
+                            lineHeight = 17.sp, letterSpacing = .6.sp,
+                            modifier = Modifier.background(Renk.zemin).padding(vertical = 2.dp))
                     }
                 }
             }
@@ -124,9 +140,12 @@ fun AnaEkran(
                     IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage - 1).coerceAtLeast(0)) } }, enabled = pager.currentPage > 0, modifier = Modifier.testTag("quote-previous")) {
                         Icon(AzimIkon.Geri, cevir(dil, "Önceki söz", "Previous quote"), modifier = Modifier.size(20.dp), tint = if (pager.currentPage > 0) Renk.metin else Renk.kenarlikGuclu)
                     }
-                    Text(if (buyukYazi) cevir(dil, "Bir adım.", "One step.") else cevir(dil, "Bir söz. Bir adım.", "One thought. One step."),
-                        color = Renk.metinIkincil, fontSize = if (buyukYazi) 11.sp else 13.sp, lineHeight = 18.sp,
-                        fontFamily = LoraSerif, textAlign = TextAlign.Center, modifier = Modifier.weight(1f))
+                    Text("${pager.settledPage + 1} / ${feed.size}",
+                        color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp,
+                        letterSpacing = .5.sp, textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f).testTag("quote-position").clearAndSetSemantics {
+                            contentDescription = cevir(dil, "${feed.size} sözden ${pager.settledPage + 1}.", "Quote ${pager.settledPage + 1} of ${feed.size}.")
+                        })
                     IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1).coerceAtMost(feed.lastIndex)) } }, enabled = pager.currentPage < feed.lastIndex, modifier = Modifier.testTag("quote-next")) {
                         Text("→", color = Renk.metin, fontSize = 24.sp, modifier = Modifier.semantics { contentDescription = cevir(dil, "Sonraki söz", "Next quote") })
                     }

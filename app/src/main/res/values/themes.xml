@@ -6,10 +6,10 @@
         <item name="android:windowBackground">@color/zemin</item>
     </style>
 
-    <!-- Ascend: system-aware ink and paper with the rising line mark. -->
+    <!-- Ascend: burgundy Roman column launcher and white app surface. -->
     <style name="Theme.Azim.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/zemin</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
         <item name="windowSplashScreenAnimationDuration">400</item>
         <item name="postSplashScreenTheme">@style/Theme.Azim</item>
     </style>

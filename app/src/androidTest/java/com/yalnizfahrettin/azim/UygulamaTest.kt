@@ -299,6 +299,44 @@ class UygulamaTest {
         compose.onNodeWithTag("share-filter-ucretsiz").performScrollTo().assertIsSelected()
     }
 
+    @Test fun browsingTopicsKeepsRemindersUntilTheDetailSwitchChanges() {
+        val original = runBlocking { demoDepo.secili.first() }
+        val originalProfile = runBlocking { demoDepo.personalProfile.first() }
+        val unlocked = runBlocking { demoDepo.acik.first() }
+        val chosen = Kategoriler.tumAltlar.first { it.anahtar in original }.anahtar
+        val other = Kategoriler.tumAltlar.first { it.anahtar in unlocked && it.anahtar !in original }.anahtar
+        compose.onNodeWithTag("nav-kategori").performClick()
+        compose.onNodeWithTag("category-count").assertTextEquals("70 konu")
+        compose.onNodeWithTag("category-filter-selected").performClick().assertIsSelected()
+        compose.onNodeWithTag("category-count").assertTextEquals("${original.size} konu")
+        compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-$chosen"))
+        compose.onNodeWithTag("category-$chosen").performClick()
+        compose.onNodeWithTag("category-reminder-$chosen").assertIsOn()
+        assertEquals("Opening a selected topic must not deselect it", original, runBlocking { demoDepo.secili.first() })
+        compose.onNodeWithTag("category-detail-close").performClick()
+
+        compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-filter-open"))
+        compose.onNodeWithTag("category-filter-open").performClick().assertIsSelected()
+        compose.onNodeWithTag("category-count").assertTextEquals("${unlocked.size} konu")
+        compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-$other"))
+        compose.onNodeWithTag("category-$other").performClick()
+        compose.onNodeWithTag("category-reminder-$other").assertIsOff()
+        val lastQuote = Sozler.kategoriden(other).last()
+        compose.onNodeWithTag("category-detail").performScrollToNode(hasTestTag("category-quote-${lastQuote.kimlik}"))
+        compose.onNodeWithTag("category-quote-${lastQuote.kimlik}").assertTextEquals(lastQuote.metin("tr"))
+        assertEquals("Reading every unlocked quote must not subscribe to reminders", original, runBlocking { demoDepo.secili.first() })
+        compose.onNodeWithTag("category-detail").performScrollToNode(hasTestTag("category-reminder-$other"))
+        compose.onNodeWithTag("category-reminder-$other").performClick()
+        compose.waitUntil(10000) { runBlocking { other in demoDepo.secili.first() } }
+        compose.onNodeWithTag("category-reminder-$other").assertIsOn()
+        assertEquals("The explicit switch adds exactly one topic", original + other, runBlocking { demoDepo.secili.first() })
+        compose.onNodeWithTag("category-reminder-$other").performClick()
+        compose.waitUntil(10000) { runBlocking { other !in demoDepo.secili.first() } }
+        assertEquals(original, runBlocking { demoDepo.secili.first() })
+        assertEquals("Browsing and manual topics must preserve personal answers", originalProfile,
+            runBlocking { demoDepo.personalProfile.first() })
+    }
+
     @Test fun externalDemoUnlocksOnlyTheChosenIndividualCategoryOnReturn() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val beforeDemo = runBlocking { demoDepo.acik.first() }
@@ -308,7 +346,9 @@ class UygulamaTest {
         compose.onNodeWithTag("nav-kategori").performClick()
         compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-ozguven"))
         compose.onNodeWithTag("category-ozguven").performClick()
-        compose.onNodeWithText("10 özgün söz · Bir göz at").assertIsDisplayed()
+        compose.onNodeWithTag("category-detail-access").assertTextEquals("10 özgün söz · 2 sözlük önizleme")
+        assertEquals("Browsing a locked preview must not change reminder topics", selectionBeforeDemo,
+            runBlocking { demoDepo.secili.first() })
         shot("21-category-detail")
         compose.onNodeWithText("Bu kategoriyi aç · Demo").performScrollTo().performClick()
         compose.onNodeWithText("GEÇİCİ DEMO").assertIsDisplayed()
@@ -334,11 +374,11 @@ class UygulamaTest {
         val afterDemo = runBlocking { withTimeout(15000) { demoDepo.acik.first { "ozguven" in it } } }
         assertEquals("Only the chosen individual topic may unlock", beforeDemo + "ozguven", afterDemo)
         assertFalse("A neighbouring topic must stay locked", "korku" in afterDemo)
-        assertEquals("Only the rewarded topic may join reminders", selectionBeforeDemo + "ozguven",
-            runBlocking { withTimeout(10000) { demoDepo.secili.first { "ozguven" in it } } })
+        assertEquals("Unlocking access must leave reminder topics unchanged", selectionBeforeDemo,
+            runBlocking { demoDepo.secili.first() })
         compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-ozguven"))
         compose.onNodeWithTag("category-ozguven")
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Bildirimlerinde seçili"))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Açık · Bildirimde değil"))
         shot("17-demo-unlocked")
     }
 

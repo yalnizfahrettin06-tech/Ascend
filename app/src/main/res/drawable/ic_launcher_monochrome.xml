@@ -1,8 +1,10 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp" android:height="108dp"
     android:viewportWidth="108" android:viewportHeight="108">
-    <!-- One rising line, including a pause, within the adaptive icon safe area. -->
-    <path android:strokeColor="#FFFFFF" android:strokeWidth="6.5"
+    <!-- Recognizable column silhouette for Android themed launcher icons. -->
+    <path android:fillColor="#FFFFFF" android:pathData="M37,24 L71,24 L71,29 L37,29 Z M42,39 L66,39 L64,75 L44,75 Z M40,77 L68,77 L68,81 L40,81 Z M37,82 L71,82 L71,86 L37,86 Z"/>
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4"
         android:strokeLineCap="round" android:strokeLineJoin="round"
-        android:pathData="M34,73 L49,58 L58,64 L74,35"/>
+        android:pathData="M45,38 C33,41 31,29 40,30 C47,30 47,37 42,36 M63,38 C75,41 77,29 68,30 C61,30 61,37 66,36 M45,34 L63,34"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M65,51 C75,45 75,54 65,57 Z M44,65 C34,58 34,68 44,71 Z"/>
 </vector>

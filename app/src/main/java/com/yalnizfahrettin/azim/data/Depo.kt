@@ -251,12 +251,12 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         if (s.isNotEmpty()) p[K.SECILI] = s
     }
 
-    /** A completed demo reward grants and selects precisely the requested category. */
-    suspend fun kategoriAc(anahtar: String) = store.edit { p ->
+    /** Access can be granted without changing the notification selection. */
+    suspend fun kategoriAc(anahtar: String, bildirimlereEkle: Boolean = true) = store.edit { p ->
         erisimiGocur(p)
         if (Kategoriler.bul(anahtar) == null) return@edit
         p[K.ACIK_KATEGORI] = (p[K.ACIK_KATEGORI] ?: emptySet()) + anahtar
-        p[K.SECILI] = Erisim.guvenliSecim((p[K.SECILI] ?: emptySet()) + anahtar, etkinErisim(p))
+        if (bildirimlereEkle) p[K.SECILI] = Erisim.guvenliSecim((p[K.SECILI] ?: emptySet()) + anahtar, etkinErisim(p))
     }
 
     /** Demo only: no purchase, payment or subscription state is represented here. */

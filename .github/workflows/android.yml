@@ -34,15 +34,15 @@ jobs:
             mkdir -p "$HOME/.android"
             printf '%s' "$TEST_KEYSTORE" | base64 --decode > "$HOME/.android/debug.keystore"
           fi
-      - name: Build APK, run unit tests and lint
+      - name: Check sources, tests and lint; build APK
         run: |
           python tools/icerik_derle.py --check
           python tools/check_category_art.py
           python tools/check_scene_art.py
-          bash gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --no-daemon --max-workers=2
+          bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-8.0.0-test-APK
+          name: Ascend-8.1.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error

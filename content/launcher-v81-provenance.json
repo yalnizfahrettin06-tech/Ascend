@@ -1,0 +1,9 @@
+{
+  "version": "8.1.0",
+  "kind": "launcher artwork",
+  "tool": "Built-in image_gen",
+  "prompt": "Use case: logo-brand. Create one polished Android launcher icon artwork, 1024x1024 square. Full-bleed deep burgundy red background, approximately #713C49, with a very subtle matte stone/paper texture. Center a single elegant antique Roman white marble column, frontal view, simple recognizable Ionic capital, fluted shaft and modest plinth. A thin vine with just a few small muted dark sage-green leaves spirals gently around the shaft, subordinate to the column, not a wreath and not covering the capital. The white marble column is the strong recognizable silhouette; leaves are quiet details. Refined softly sculpted illustration, restrained depth and gentle directional lighting, clear at tiny app icon scale, not photographic clutter. All important artwork entirely within the central 58% of the square; column including base at most 58% of canvas height, centered, leaving generous burgundy margin for Android adaptive masks. No text, letters, rising graph, gold, yellow, orange, blue, extra objects, frame, rounded corners, mockup, watermark or border. Fill the whole square with the burgundy background.",
+  "output": "app/src/main/res/drawable-nodpi/art_launcher_column.webp",
+  "processing": "Mechanical resize to 768x768 and WebP quality 92 only. Android inset drawable applies 6dp layout inset. No raster compositing or retouching.",
+  "monochrome": "Repo-native VectorDrawable silhouette for Android themed icons."
+}

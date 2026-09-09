@@ -1,8 +1,6 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp" android:height="108dp"
-    android:viewportWidth="108" android:viewportHeight="108">
-    <!-- One rising line, including a pause, within the adaptive icon safe area. -->
-    <path android:strokeColor="#161916" android:strokeWidth="6.5"
-        android:strokeLineCap="round" android:strokeLineJoin="round"
-        android:pathData="M34,73 L49,58 L58,64 L74,35"/>
-</vector>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Six dp inset keeps the column inside the adaptive icon safe zone. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android" android:inset="6dp">
+    <bitmap android:src="@drawable/art_launcher_column"
+        android:gravity="fill" android:filter="true"/>
+</inset>

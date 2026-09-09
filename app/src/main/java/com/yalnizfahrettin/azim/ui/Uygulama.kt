@@ -342,7 +342,7 @@ fun Uygulama(
         acildi = { grupAnahtari ->
             kapsam.launch {
                 try {
-                    depo.kategoriAc(grupAnahtari)
+                    depo.kategoriAc(grupAnahtari, bildirimlereEkle = false)
                     Planlayici.yenidenKur(ctx)
                     AzimWidget.tazele(ctx)
                     snackbar.showSnackbar(cevir(dil, "Demo tamamlandı. Seçtiğin kategori açıldı.", "Demo complete. Your selected topic is unlocked."))
