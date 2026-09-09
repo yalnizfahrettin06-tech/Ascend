@@ -36,32 +36,32 @@ internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenk
         Palet.MONO -> Color(0xFFF2F2F2)
         else -> Color(0xFFDBB6C0)
     } else when (secim) {
-        Palet.BORDO -> Color(0xFF643B48)
-        Palet.MONO -> Color(0xFF161916)
-        else -> Color(0xFF713C49)
+        Palet.BORDO -> Color(0xFF5A2032)
+        Palet.MONO -> Color(0xFF211D1F)
+        else -> Color(0xFF6C2932)
     }
     return if (karanlik) AzimRenkleri(
-        zemin = if (oled) Color.Black else Color(0xFF111312),
-        yuzey = Color(0xFF1B1D1C), yuzeyYuksek = Color(0xFF282B29),
-        kenarlik = Color(0xFF414541), kenarlikGuclu = Color(0xFF909790),
-        metin = Color(0xFFF5F6F5), metinIkincil = Color(0xFFC1C7C1), metinSonuk = Color(0xFFC1C7C1),
-        accent = accent, accentSonuk = Color(0xFF909790),
+        zemin = if (oled) Color.Black else Color(0xFF141214),
+        yuzey = Color(0xFF1F1B1D), yuzeyYuksek = Color(0xFF2C272A),
+        kenarlik = Color(0xFF494146), kenarlikGuclu = Color(0xFF9B9297),
+        metin = Color(0xFFF8F5F6), metinIkincil = Color(0xFFCBC3C7), metinSonuk = Color(0xFFCBC3C7),
+        accent = accent, accentSonuk = Color(0xFF9B9297),
         accentZemin = when (secim) {
             Palet.BORDO -> Color(0xFF32252A)
-            Palet.MONO -> Color(0xFF282B29)
+            Palet.MONO -> Color(0xFF2C272A)
             else -> Color(0xFF302529)
         },
-        accentDerin = Color(0xFF414541), karanlikMi = true,
+        accentDerin = Color(0xFF494146), karanlikMi = true,
     ) else AzimRenkleri(
-        zemin = Color.White, yuzey = Color(0xFFF7F8F7), yuzeyYuksek = Color(0xFFEEF1EE),
-        kenarlik = Color(0xFFD4D8D4), kenarlikGuclu = Color(0xFF777E77),
-        metin = Color(0xFF161916), metinIkincil = Color(0xFF484E49), metinSonuk = Color(0xFF484E49),
-        accent = accent, accentSonuk = Color(0xFF777E77),
+        zemin = Color.White, yuzey = Color(0xFFF8F5F6), yuzeyYuksek = Color(0xFFF1ECEE),
+        kenarlik = Color(0xFFE6DDE0), kenarlikGuclu = Color(0xFF82777D),
+        metin = Color(0xFF211D1F), metinIkincil = Color(0xFF655D61), metinSonuk = Color(0xFF655D61),
+        accent = accent, accentSonuk = Color(0xFF82777D),
         accentZemin = when (secim) {
             Palet.BORDO -> Color(0xFFF5ECEF)
-            Palet.MONO -> Color(0xFFF0F1F0)
-            else -> Color(0xFFF7EEF0)
+            Palet.MONO -> Color(0xFFF1EFF0)
+            else -> Color(0xFFF4EAED)
         },
-        accentDerin = Color(0xFFD4D8D4), karanlikMi = false,
+        accentDerin = Color(0xFFE6DDE0), karanlikMi = false,
     )
 }

@@ -216,6 +216,7 @@ fun Uygulama(
         return
     }
 
+    val tabState = androidx.compose.runtime.saveable.rememberSaveableStateHolder()
     Column(Modifier.fillMaxSize()) {
         Box(Modifier.weight(1f)) {
             // Sekme geçişleri artık yönlü kayma + soluklaşma (rapor 2.3)
@@ -231,6 +232,7 @@ fun Uygulama(
                 },
                 label = "sekme",
             ) { s ->
+                tabState.SaveableStateProvider(s.rota) {
                 when (s) {
                     Sekme.ANA -> AnaEkran(
                         kullaniciAdi = profil?.name.orEmpty(), planAc = { planGoster = true },
@@ -283,7 +285,7 @@ fun Uygulama(
                         secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },
                         sec = { kapsam.launch { depo.kategoriSec(it); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
                         kilidiAc = { kilitKategori = it },
-                        acilacakGrup = acilacakGrup,
+                        acilacakGrup = acilacakGrup, bildirimAcik = hatirlaticiAcik && bildirimIzni,
                     )
 
                     Sekme.FAVORI -> FavorilerEkrani(
@@ -304,6 +306,7 @@ fun Uygulama(
                         onFavoriler = { sekme = Sekme.FAVORI }, onPlan = { planGoster = true },
                         onSettings = { ayarlardaMi = true },
                     )
+                }
                 }
             }
             SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter))

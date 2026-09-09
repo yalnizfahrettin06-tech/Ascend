@@ -38,12 +38,11 @@ fun IstatistikEkrani(
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()
         .verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            EditoryalBaslik(cevir(dil, "03 / SENİN ALANIN", "03 / YOUR SPACE"), if (name.isBlank()) cevir(dil, "Senin", "You") else name,
-                modifier = Modifier.weight(1f))
-            OutlinedIconButton(onClick = onSettings, modifier = Modifier.padding(top = 16.dp).size(48.dp).testTag("profile-settings"),
-                border = BorderStroke(1.dp, Renk.kenarlik)) {
-                Icon(AzimIkon.Ayarlar, cevir(dil, "Ayarlar", "Settings"), Modifier.size(22.dp), tint = Renk.metin)
+        MarkaBasligi {
+            Text(if (name.isBlank()) cevir(dil, "Senin", "You") else name,
+                fontFamily = LoraSerif, fontSize = 28.sp, lineHeight = 36.sp, modifier = Modifier.weight(1f))
+            IconButton(onClick = onSettings, modifier = Modifier.size(48.dp).testTag("profile-settings")) {
+                Icon(AzimIkon.Ayarlar, cevir(dil, "Ayarlar", "Settings"), Modifier.size(22.dp))
             }
         }
         Surface(onClick = onPlan, color = Renk.zemin, border = BorderStroke(1.dp, Renk.kenarlik),
@@ -97,14 +96,7 @@ fun IstatistikEkrani(
                 olcumler.forEach { (sayi, baslik) -> YolculukSayaci(sayilar.format(sayi), baslik, Modifier.weight(1f)) }
             }
         }
-        Box(Modifier.fillMaxWidth().heightIn(min = 130.dp)) {
-            KlasikGorsel(KlasikMotif.COLUMN, Modifier.align(Alignment.BottomEnd).width(105.dp).height(150.dp), opacity = .14f)
-            Column(Modifier.align(Alignment.CenterStart).padding(end = 72.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Box(Modifier.width(28.dp).height(1.dp).background(Renk.accent))
-                Text(cevir(dil, "Kendi yolun.\nKendi hızın.", "Your path.\nYour pace."), color = Renk.metinIkincil,
-                    fontFamily = LoraSerif, fontStyle = FontStyle.Italic, fontSize = 20.sp, lineHeight = 28.sp)
-            }
-        }
+
     }
 }
 

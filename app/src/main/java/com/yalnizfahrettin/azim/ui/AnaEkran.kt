@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalDensity
@@ -76,17 +77,20 @@ fun AnaEkran(
                 Modifier.align(Alignment.TopEnd).offset(x = 56.dp, y = (-32).dp)
                     .width(maxWidth * .76f).height(maxHeight * .78f), opacity = .55f)
         }
-        Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content").padding(horizontal = 24.dp)) {
-            Row(Modifier.fillMaxWidth().heightIn(min = 52.dp), verticalAlignment = Alignment.CenterVertically) {
-                Icon(AzimIkon.Yukselis, if (buyukYazi) "Ascend" else null, Modifier.size(28.dp), tint = Renk.metin)
+        Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content")) {
+            MarkaBasligi {
+                Icon(AzimIkon.Yukselis, if (buyukYazi) "Ascend" else null, Modifier.size(26.dp))
                 Spacer(Modifier.width(10.dp))
                 if (buyukYazi) Spacer(Modifier.weight(1f))
-                else Text("ascend", color = Renk.metin, fontSize = 29.sp, fontFamily = LoraSerif, fontWeight = FontWeight.Normal, letterSpacing = (-.7).sp, modifier = Modifier.weight(1f))
-                TextButton(onClick = planAc, modifier = Modifier.clip(RoundedCornerShape(24.dp)).background(Renk.zemin).testTag("home-plan")) {
-                    Text(cevir(dil, "Planım", "My plan"), color = Renk.metin, fontSize = 13.sp)
-                    Text("  ↗", color = Renk.metin)
+                else Text("ascend", fontSize = 29.sp, fontFamily = LoraSerif,
+                    letterSpacing = (-.7).sp, modifier = Modifier.weight(1f))
+                TextButton(onClick = planAc, modifier = Modifier.heightIn(min = 48.dp).testTag("home-plan"),
+                    colors = ButtonDefaults.textButtonColors(contentColor = Renk.markaUstu)) {
+                    Text(cevir(dil, "Planım", "My plan"), fontSize = 13.sp)
+                    Text("  ↗")
                 }
             }
+            Column(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 24.dp)) {
             AnlikIhtiyacSecimi(ihtiyac, dil, ihtiyacSec, Modifier.align(Alignment.Start))
             if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
@@ -114,7 +118,7 @@ fun AnaEkran(
                     val metinGenisligi = if (kisa && !darEkran && !buyukYazi) .94f else 1f
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
                         .verticalScroll(rememberScrollState()).padding(vertical = 24.dp),
-                        horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Center) {
+                        horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.spacedBy(0.dp, BiasAlignment.Vertical(-.18f))) {
                         Row(Modifier.background(Renk.zemin).padding(vertical = 2.dp),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -169,7 +173,9 @@ fun AnaEkran(
                             Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"), fontSize = 13.sp)
                         }
                     }
-                    Button(onClick = { paylas(aktif) }, modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-share"), shape = RoundedCornerShape(100.dp), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
+                    OutlinedButton(onClick = { paylas(aktif) }, modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-share"), shape = RoundedCornerShape(100.dp), border = BorderStroke(1.dp, Renk.kenarlikGuclu),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Renk.metin),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
                         if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Icon(AzimIkon.Paylas, null, Modifier.size(19.dp))
                             Text(cevir(dil, "Paylaş", "Share"), modifier = Modifier.fillMaxWidth(),
@@ -198,11 +204,7 @@ fun AnaEkran(
                     }
                 }
             }
-            Text(when {
-                kullaniciAdi.isNotBlank() -> cevir(dil, "$kullaniciAdi, kendi hızında.", "$kullaniciAdi, at your own pace.")
-                hatirlaticiAcik && bildirimIzni && sonrakiBildirim != null -> cevir(dil, "Sıradaki küçük hatırlatma · $sonrakiBildirim", "Your next reminder · $sonrakiBildirim")
-                else -> cevir(dil, "Kendi hızında.", "At your own pace.")
-            }, color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().background(Renk.zemin).padding(top = 4.dp, bottom = 12.dp))
+            }
         }
         SnackbarHost(mesaj, Modifier.align(Alignment.BottomCenter))
     }
@@ -243,7 +245,7 @@ fun ihtiyacAdi(key: String?, dil: String): String = when (key) {
     "action" -> cevir(dil, "Harekete geçmek", "Take a step")
     "focus" -> cevir(dil, "Yeniden odaklanmak", "Find my focus")
     "perspective" -> cevir(dil, "Yeni bir bakış", "A fresh perspective")
-    else -> cevir(dil, "Sana göre · Şimdi", "For you · Right now")
+    else -> cevir(dil, "Sana göre", "For you")
 }
 fun kisaGrupAdi(g: KategoriGrubu, dil: String) = when (g.anahtar) {
     "azim" -> cevir(dil, "Motivasyon", "Motivation")

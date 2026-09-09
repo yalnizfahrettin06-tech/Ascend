@@ -81,20 +81,20 @@ fun Onboarding(
     }
     val question = PersonalPlan.questions.getOrNull(step - 2)
     Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding().imePadding().testTag("onboarding-root")) {
-        Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().background(Renk.marka).padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             if (step > 0 || editing) IconButton(onClick = { if (step > 0) move(step - 1) else onCancel() }, enabled = !kaydediliyor,
-                modifier = Modifier.testTag("onboarding-back")) { Icon(AzimIkon.Geri, cevir(dil, "Geri", "Back"), tint = Renk.metin) }
+                modifier = Modifier.testTag("onboarding-back")) { Icon(AzimIkon.Geri, cevir(dil, "Geri", "Back"), tint = Renk.markaUstu) }
             else Spacer(Modifier.width(12.dp))
             Box(Modifier.weight(1f)) {
-                if (largeText) Icon(AzimIkon.Yukselis, "Ascend", Modifier.size(24.dp), tint = Renk.metin)
+                if (largeText) Icon(AzimIkon.Yukselis, "Ascend", Modifier.size(24.dp), tint = Renk.markaUstu)
                 else Text("ascend", fontFamily = LoraSerif, fontSize = 24.sp, fontWeight = FontWeight.Normal,
-                    letterSpacing = (-0.5).sp, color = Renk.metin)
+                    letterSpacing = (-0.5).sp, color = Renk.markaUstu)
             }
-            Text("${step + 1} / ${PersonalPlan.LAST_STEP + 1}", style = MaterialTheme.typography.labelSmall, color = Renk.metinIkincil)
+            Text("${step + 1} / ${PersonalPlan.LAST_STEP + 1}", style = MaterialTheme.typography.labelSmall, color = Renk.markaUstu)
             if (step == 1 || question != null) TextButton(enabled = !kaydediliyor, onClick = {
                 focus.clearFocus(); keyboard?.hide()
                 update((if (step == 1) profile.copy(name = "") else profile.skip(question!!.id)).copy(step = step + 1))
-            }, modifier = Modifier.testTag("onboarding-skip")) { Text(cevir(dil, "Atla", "Skip")) }
+            }, modifier = Modifier.testTag("onboarding-skip")) { Text(cevir(dil, "Atla", "Skip"), color = Renk.markaUstu) }
             else Spacer(Modifier.width(12.dp))
         }
         // Material's indicator expands its screen-reader bounds beyond its painted height.
@@ -102,7 +102,7 @@ fun Onboarding(
         // retaining the indicator's accessible progress semantics unchanged.
         Box(Modifier.fillMaxWidth().padding(horizontal = 24.dp).height(2.dp).testTag("onboarding-progress")) {
             LinearProgressIndicator(progress = { (step + 1f) / (PersonalPlan.LAST_STEP + 1) },
-                modifier = Modifier.fillMaxSize(), color = Renk.metin, trackColor = Renk.kenarlik)
+                modifier = Modifier.fillMaxSize(), color = Renk.accent, trackColor = Renk.kenarlik)
         }
         AnimatedContent(step, transitionSpec = { fadeIn(tween(180)) togetherWith fadeOut(tween(100)) },
             modifier = Modifier.weight(1f).fillMaxWidth().clipToBounds(), label = "onboarding-step") { shownStep ->
@@ -187,23 +187,20 @@ private fun PlanSection(step: Int, dil: String) {
 
 @Composable
 private fun ColumnScope.PlanWelcome(dil: String) {
-    Box(Modifier.fillMaxWidth().height(124.dp)) {
-        KlasikGorsel(KlasikMotif.BUST, Modifier.align(Alignment.CenterEnd).size(148.dp), opacity = .5f)
-        Column(Modifier.align(Alignment.BottomStart).padding(bottom = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Icon(AzimIkon.Yukselis, null, Modifier.size(58.dp), tint = Renk.metin)
-            Box(Modifier.width(36.dp).height(1.dp).background(Renk.accent))
+    Box(Modifier.fillMaxWidth()) {
+        KlasikGorsel(KlasikMotif.COLUMN, Modifier.matchParentSize().offset(x = 100.dp), opacity = .35f)
+        Column(Modifier.padding(vertical = 20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            PlanTitle(cevir(dil, "Kendi hızında. Bir adım yukarı.", "At your pace. One step higher."),
+                cevir(dil, "Bazen bir olumlama. Bazen yeni bir bakış. Sana eşlik edecek sözleri birlikte bulalım.",
+                    "Sometimes an affirmation. Sometimes a new perspective. Let’s find the words that meet you where you are."))
         }
     }
-    PlanTitle(cevir(dil, "Kendi hızında.\nBir adım yukarı.", "At your pace.\nOne step higher."),
-        cevir(dil, "Bazen bir olumlama. Bazen yeni bir bakış. Sana eşlik edecek sözleri birlikte bulalım.", "Sometimes an affirmation. Sometimes a new perspective. Let’s find the words that meet you where you are."))
-    Spacer(Modifier.height(4.dp))
     HorizontalDivider(color = Renk.kenarlik)
-    Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-        Text("20", fontFamily = LoraSerif, fontSize = 28.sp, color = Renk.metin)
-        Text(cevir(dil, "küçük adım\nsana göre bir başlangıç", "small steps\na beginning that fits you"), color = Renk.metinIkincil,
-            style = MaterialTheme.typography.bodySmall)
-    }
-    Text(cevir(dil, "Her soruyu atlayabilirsin. Hesap gerekmez; yanıtların uygulamada saklanır.", "Skip any question. No account needed; your answers are saved in the app."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+    Text(cevir(dil, "20 küçük adım · Sana göre bir başlangıç", "20 small steps · A beginning that fits you"),
+        color = Renk.accent, style = MaterialTheme.typography.bodyMedium)
+    Text(cevir(dil, "Her soruyu atlayabilirsin. Hesap gerekmez; yanıtların uygulamada saklanır.",
+        "Skip any question. No account needed; your answers are saved in the app."),
+        color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
 }
 
 @Composable
@@ -215,19 +212,19 @@ private fun PlanTitle(title: String, description: String, modifier: Modifier = M
 
 @Composable
 private fun PlanChoice(label: String, selected: Boolean, tag: String, role: Role = Role.RadioButton, onClick: () -> Unit) {
-    val fill by animateColorAsState(if (selected) Renk.yuzey else Renk.zemin, tween(140), label = "choice-fill")
+    val fill by animateColorAsState(if (selected) Renk.accentZemin else Renk.zemin, tween(140), label = "choice-fill")
     val markShape = if (role == Role.Checkbox) RoundedCornerShape(5.dp) else CircleShape
     val interaction = if (role == Role.Checkbox) Modifier.toggleable(selected, role = role, onValueChange = { onClick() })
         else Modifier.selectable(selected, role = role, onClick = onClick)
     Row(Modifier.fillMaxWidth().heightIn(min = 60.dp).clip(RoundedCornerShape(14.dp)).background(fill)
-        .border(if (selected) 1.5.dp else 1.dp, if (selected) Renk.metin else Renk.kenarlik, RoundedCornerShape(14.dp))
+        .border(if (selected) 1.5.dp else 1.dp, if (selected) Renk.accent else Renk.kenarlik, RoundedCornerShape(14.dp))
         .then(interaction).testTag(tag).padding(horizontal = 16.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(label, Modifier.weight(1f), color = Renk.metin, fontSize = 16.sp, lineHeight = 23.sp,
             fontWeight = if (selected) FontWeight.Medium else FontWeight.Normal)
-        Box(Modifier.size(22.dp).clip(markShape).then(if (selected) Modifier.background(Renk.metin)
+        Box(Modifier.size(22.dp).clip(markShape).then(if (selected) Modifier.background(Renk.accent)
             else Modifier.border(1.dp, Renk.metinIkincil, markShape)), contentAlignment = Alignment.Center) {
-            if (selected) Icon(AzimIkon.Tik, null, Modifier.size(16.dp), tint = Renk.zemin)
+            if (selected) Icon(AzimIkon.Tik, null, Modifier.size(16.dp), tint = MaterialTheme.colorScheme.onPrimary)
         }
     }
 }
@@ -286,10 +283,11 @@ private fun PlanHours(profile: PersonalProfile, dil: String, select: (Int) -> Un
     Text(cevir(dil, "Yaklaşık saatler. Cihazın güç tasarrufu teslimatı geciktirebilir.", "Approximate times. Device power saving can delay delivery."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun PlanPreview(profile: PersonalProfile, dil: String, access: Set<String>) {
     PlanTitle(cevir(dil, "İşte senin başlangıç çizgin.", "Your starting point."),
-        cevir(dil, "Yanıtların bu planı oluşturdu. İstediğin zaman yeniden şekillendirebilirsin.", "Your answers shaped this plan. Change it whenever you need."))
+        cevir(dil, "Başlangıç tercihlerin hazır. Sonraki iki adımda erişim seçeneklerini ve bildirim iznini göreceksin.", "Your starting preferences are ready. Next, review access options and notification permission."))
     PersonalPlan.summary(profile, dil).dropLast(1).take(4).forEachIndexed { index, line ->
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
             Text("0${index + 1}", color = Renk.accent, fontFamily = LoraSerif, fontSize = 17.sp)
@@ -299,16 +297,21 @@ private fun PlanPreview(profile: PersonalProfile, dil: String, access: Set<Strin
     val starters = PersonalPlan.initialCategories(profile, access)
     HorizontalDivider(color = Renk.kenarlik)
     Text(cevir(dil, "Planındaki konular", "Topics in your plan"), fontFamily = LoraSerif, fontSize = 22.sp, color = Renk.metin)
-    Text(starters.joinToString(" · ") { Kategoriler.bul(it)?.ad(dil) ?: it }, color = Renk.metinIkincil)
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.testTag("onboarding-plan-topics")) {
+        starters.forEach { key ->
+            Text(Kategoriler.bul(key)?.ad(dil) ?: key, color = Renk.accent, fontSize = 13.sp, lineHeight = 20.sp,
+                modifier = Modifier.background(Renk.accentZemin, RoundedCornerShape(12.dp)).padding(horizontal = 12.dp, vertical = 8.dp))
+        }
+    }
     PersonalPlan.feed(profile, starters, access).firstOrNull()?.let { sample ->
         Surface(color = Renk.yuzey, shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
             Box(Modifier.fillMaxWidth()) {
-                KlasikGorsel(KlasikMotif.ARCH, Modifier.align(Alignment.BottomEnd).size(160.dp), opacity = .11f)
                 Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     Text(cevir(dil, "İLK SÖZÜN", "YOUR FIRST WORDS"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.5.sp)
                     Text(sample.metin(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = 25.sp, lineHeight = 34.sp)
                     Box(Modifier.width(28.dp).height(1.dp).background(Renk.accent))
-                    Text(sample.sunumEtiketi(dil), color = Renk.metinIkincil, style = MaterialTheme.typography.labelSmall)
+                    Text(sample.sunumEtiketi(dil), color = Renk.metinIkincil, style = MaterialTheme.typography.labelSmall, modifier = Modifier.testTag("onboarding-preview-source"))
                 }
             }
         }
@@ -335,7 +338,7 @@ private fun PlanAccess(dil: String) {
         }
         if (index < lines.lastIndex) HorizontalDivider(color = Renk.kenarlik)
     }
-    Text(cevir(dil, "Pro'yu daha sonra Keşfet bölümünden deneyebilirsin.", "Try the Pro demo later from Explore."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+    Text(cevir(dil, "Pro demosuna daha sonra kilitli bir konunun içinden ulaşabilirsin.", "Find the Pro demo later inside any locked topic."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
 }
 
 @Composable

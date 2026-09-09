@@ -218,7 +218,7 @@ object PersonalPlan {
             add(when (profile.answer("discovery").firstOrNull()) {
                 "none" -> text("Sadece planındaki konular", "Only the topics in your plan")
                 "wide" -> text("Yeni konulara daha çok yer", "More room for new topics")
-                else -> text("Planın ağırlıkta; arada yeni bir bakış", "Your plan comes first, with occasional discovery")
+                else -> text("Seçtiğin konular öncelikli; açık konulardan yeni sözler de gelir", "Selected topics have priority; other unlocked topics also appear")
             })
             label("avoid").takeIf(String::isNotBlank)?.let { add(text("Gösterilmez: $it", "Excluded: $it")) }
             add(text("Yanıtların uygulamada saklanır; istediğin zaman değiştirilebilir.", "Your answers are saved in the app and can be changed anytime."))

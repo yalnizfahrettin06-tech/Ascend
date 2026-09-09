@@ -36,7 +36,7 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
         Row(Modifier.fillMaxWidth().selectableGroup().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
             sekmeler.forEachIndexed { index, sekme ->
                 val etkin = secili == sekme || (sekme == Sekme.ISTATISTIK && secili == Sekme.FAVORI)
-                val renk by animateColorAsState(if (etkin) Renk.metin else Renk.metinIkincil, tween(150), label = "navigation-ink")
+                val renk by animateColorAsState(if (etkin) Renk.accent else Renk.metinIkincil, tween(150), label = "navigation-ink")
                 Column(
                     Modifier.weight(1f).heightIn(min = 68.dp).testTag("nav-${sekme.rota}")
                         .selectable(selected = etkin, role = Role.Tab, onClick = { if (secili != sekme) secildi(sekme) })

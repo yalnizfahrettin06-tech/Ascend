@@ -306,6 +306,7 @@ class UygulamaTest {
         val chosen = Kategoriler.tumAltlar.first { it.anahtar in original }.anahtar
         val other = Kategoriler.tumAltlar.first { it.anahtar in unlocked && it.anahtar !in original }.anahtar
         compose.onNodeWithTag("nav-kategori").performClick()
+        compose.onNodeWithTag("category-filter-all").performClick()
         compose.onNodeWithTag("category-count").assertTextEquals("70 konu")
         compose.onNodeWithTag("category-filter-selected").performClick().assertIsSelected()
         compose.onNodeWithTag("category-count").assertTextEquals("${original.size} konu")
@@ -315,8 +316,12 @@ class UygulamaTest {
         assertEquals("Opening a selected topic must not deselect it", original, runBlocking { demoDepo.secili.first() })
         compose.onNodeWithTag("category-detail-close").performClick()
 
-        compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-filter-open"))
-        compose.onNodeWithTag("category-filter-open").performClick().assertIsSelected()
+        compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-filter-all"))
+        compose.onNodeWithTag("category-filter-all").performClick()
+        compose.onNodeWithTag("category-group-filter").performClick()
+        compose.onNodeWithTag("category-filter-open-access").performClick().assertIsSelected()
+        compose.onNodeWithTag("category-filters").performScrollToNode(hasTestTag("category-apply-filters"))
+        compose.onNodeWithTag("category-apply-filters").performClick()
         compose.onNodeWithTag("category-count").assertTextEquals("${unlocked.size} konu")
         compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-$other"))
         compose.onNodeWithTag("category-$other").performClick()
@@ -344,6 +349,8 @@ class UygulamaTest {
         assertFalse("The chosen topic must initially be locked", "ozguven" in beforeDemo)
         assertFalse("A neighbouring topic must initially be locked", "korku" in beforeDemo)
         compose.onNodeWithTag("nav-kategori").performClick()
+        compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-filter-all"))
+        compose.onNodeWithTag("category-filter-all").performClick()
         compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-ozguven"))
         compose.onNodeWithTag("category-ozguven").performClick()
         compose.onNodeWithTag("category-detail-access").assertTextEquals("10 özgün söz · 2 sözlük önizleme")
@@ -376,9 +383,11 @@ class UygulamaTest {
         assertFalse("A neighbouring topic must stay locked", "korku" in afterDemo)
         assertEquals("Unlocking access must leave reminder topics unchanged", selectionBeforeDemo,
             runBlocking { demoDepo.secili.first() })
+        compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-filter-all"))
+        compose.onNodeWithTag("category-filter-all").performClick()
         compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-ozguven"))
         compose.onNodeWithTag("category-ozguven")
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Açık · Bildirimde değil"))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Erişime açık"))
         shot("17-demo-unlocked")
     }
 

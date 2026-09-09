@@ -40,6 +40,8 @@ data class AzimRenkleri(
 
     val accentDerin: Color,
     val karanlikMi: Boolean,
+    val marka: Color = Color(0xFF6C2932),
+    val markaUstu: Color = Color(0xFFFFF9F5),
 )
 
 

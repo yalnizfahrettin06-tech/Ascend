@@ -4,6 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -24,6 +28,22 @@ import com.yalnizfahrettin.azim.R
 import com.yalnizfahrettin.azim.core.*
 
 enum class KlasikMotif { BUST, COLUMN, ARCH }
+
+/** Compact, opaque brand surface. Its ornament never participates in measurement. */
+@Composable
+fun MarkaBasligi(modifier: Modifier = Modifier, sutun: Boolean = false, content: @Composable RowScope.() -> Unit) {
+    Box(modifier.fillMaxWidth().background(Renk.marka).clipToBounds()) {
+        if (sutun) Box(Modifier.matchParentSize()) {
+            Image(painterResource(R.drawable.art_laurel_column), null,
+                Modifier.align(Alignment.CenterEnd).requiredSize(140.dp).offset(x = 24.dp, y = 28.dp),
+                contentScale = ContentScale.Fit, alpha = .12f, colorFilter = ColorFilter.tint(Renk.markaUstu))
+        }
+        CompositionLocalProvider(LocalContentColor provides Renk.markaUstu) {
+            Row(Modifier.fillMaxWidth().heightIn(min = 68.dp).padding(horizontal = 24.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically, content = content)
+        }
+    }
+}
 
 /** Decorative only. A neutral tonal floor protects ink even in overlapping art.
  * At the maximum .55 opacity, each layer can darken white by at most .165.

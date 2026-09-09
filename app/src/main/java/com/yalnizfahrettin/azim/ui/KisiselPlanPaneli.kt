@@ -31,7 +31,7 @@ fun KisiselPlanPaneli(
             .navigationBarsPadding().padding(horizontal = 24.dp, vertical = 8.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 EditoryalBaslik(cevir(dil, "SANA AİT BİR YÖN", "A DIRECTION OF YOUR OWN"),
-                    cevir(dil, "Kendi yolun.", "Your own path."), modifier = Modifier.weight(1f))
+                    cevir(dil, "Planım", "My plan"), modifier = Modifier.weight(1f))
                 IconButton(onClick = kapat, modifier = Modifier.size(48.dp).testTag("plan-close")) {
                     Icon(AzimIkon.Kapat, cevir(dil, "Kapat", "Close"), Modifier.size(22.dp), tint = Renk.metin)
                 }
@@ -40,7 +40,6 @@ fun KisiselPlanPaneli(
                 else cevir(dil, "Seçimlerin yön verir. Planın değişebilir.", "Your choices guide the way. Your plan can change."),
                 color = Renk.metinIkincil, modifier = Modifier.padding(top = 12.dp), style = MaterialTheme.typography.bodyMedium)
             Box(Modifier.fillMaxWidth().padding(top = 20.dp, bottom = 16.dp)) {
-                KlasikGorsel(KlasikMotif.ARCH, Modifier.align(Alignment.CenterEnd).width(100.dp).height(150.dp), opacity = .12f)
                 Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     profil?.let {
                         PersonalPlan.summary(it, dil).forEach { line ->

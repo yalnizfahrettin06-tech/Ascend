@@ -21,6 +21,11 @@ import org.junit.Test
  */
 class KontrastTest {
 
+    @Test fun `brand captions survive the decorative column overlay`() = tumSetler().forEach { (ad, r) ->
+        kontrol(ad, r.markaUstu, r.marka, 7.0, "brand header")
+        kontrol(ad, r.markaUstu, r.markaUstu.copy(alpha = .12f).compositeOver(r.marka), 4.5, "brand ornament")
+    }
+
     private fun tumSetler(): List<Pair<String, AzimRenkleri>> =
         Palet.entries.flatMap { p ->
             listOf(
