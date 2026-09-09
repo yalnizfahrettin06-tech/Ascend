@@ -55,10 +55,6 @@ fun AnaEkran(
     val ses = rememberSeslendirici(dil)
     val haptik = LocalHapticFeedback.current
     var araclar by remember { mutableStateOf(false) }
-    var ihtiyaclar by rememberSaveable { mutableStateOf(false) }
-    LaunchedEffect(ihtiyaclar) {
-        if (com.yalnizfahrettin.azim.BuildConfig.DEBUG) android.util.Log.d("AscendTouch", "Moment expanded=$ihtiyaclar")
-    }
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     val darEylemler = buyukYazi || LocalConfiguration.current.screenWidthDp < 360
     LaunchedEffect(pager, aktifIndeks) {
@@ -91,13 +87,7 @@ fun AnaEkran(
                     Text("  ↗", color = Renk.metin)
                 }
             }
-            TextButton(onClick = {
-                if (com.yalnizfahrettin.azim.BuildConfig.DEBUG) android.util.Log.d("AscendTouch", "Moment click")
-                ihtiyaclar = true
-            }, modifier = Modifier.align(Alignment.Start).clip(RoundedCornerShape(24.dp)).background(Renk.zemin).testTag("home-moment")) {
-                Text(ihtiyacAdi(ihtiyac, dil), color = Renk.metinIkincil, fontSize = 13.sp)
-                Text("  ⌄", color = Renk.metinIkincil)
-            }
+            AnlikIhtiyacSecimi(ihtiyac, dil, ihtiyacSec, Modifier.align(Alignment.Start))
             if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Text(cevir(dil, "Biraz yer açalım.", "Make a little room."), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
@@ -197,10 +187,23 @@ fun AnaEkran(
         }
         SnackbarHost(mesaj, Modifier.align(Alignment.BottomCenter))
     }
-    if (ihtiyaclar) ModalBottomSheet(onDismissRequest = {
-        if (com.yalnizfahrettin.azim.BuildConfig.DEBUG) android.util.Log.d("AscendTouch", "Moment dismiss")
-        ihtiyaclar = false
-    }, containerColor = Renk.zemin) {
+}
+
+/** Keeps the transient chooser independent of pager feed replacements. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun AnlikIhtiyacSecimi(
+    ihtiyac: String?, dil: String, ihtiyacSec: (String?) -> Unit, modifier: Modifier = Modifier,
+) {
+    var ihtiyaclar by rememberSaveable { mutableStateOf(false) }
+    TextButton(
+        onClick = { ihtiyaclar = true },
+        modifier = modifier.clip(RoundedCornerShape(24.dp)).background(Renk.zemin).testTag("home-moment"),
+    ) {
+        Text(ihtiyacAdi(ihtiyac, dil), color = Renk.metinIkincil, fontSize = 13.sp)
+        Text("  ⌄", color = Renk.metinIkincil)
+    }
+    if (ihtiyaclar) ModalBottomSheet(onDismissRequest = { ihtiyaclar = false }, containerColor = Renk.zemin) {
         Column(Modifier.fillMaxWidth().navigationBarsPadding().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 12.dp)) {
             Text(cevir(dil, "Şu an sana ne iyi gelir?", "What would help right now?"), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
             Text(cevir(dil, "Yalnız bu anın akışını değiştirir. Bildirim planın aynı kalır.", "Only changes this moment's feed. Your reminder plan stays the same."), color = Renk.metinIkincil, modifier = Modifier.padding(top = 12.dp, bottom = 16.dp))
