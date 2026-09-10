@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -109,6 +110,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
             durdur()
             ayar = PaylasimErisimi.ucretsizAyar(ayar)
             video = false
+            kaynakSekmesi = "background"
             arac = false
             zeminFiltresi = PaylasimZeminFiltresi.UCRETSIZ.name
             bekleyenUri = null
@@ -214,7 +216,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                         }, modifier = Modifier.align(Alignment.TopEnd).padding(4.dp).background(Renk.zemin.copy(alpha = .82f), CircleShape)
                             .semantics { selected = themeKey in temaFavorileri }) {
                             Icon(if (themeKey in temaFavorileri) AzimIkon.KalpDolu else AzimIkon.Kalp,
-                                cevir(dil, "Arka planı favorilere ekle veya çıkar", "Toggle favorite background"), Modifier.size(20.dp), tint = Renk.accent)
+                                cevir(dil, "Arka planı favorilere ekle veya çıkar", "Toggle favorite background"), Modifier.size(20.dp), tint = if (themeKey in temaFavorileri) Renk.accent else Renk.metin)
                         }
                     }
                     Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp).selectableGroup()) {
@@ -339,11 +341,14 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                         listOf(5, 10, 30, 45).forEach { sec -> FilterChip(selected = saniye == sec, onClick = { saniye = sec }, label = { Text("${sec}s") }, modifier = Modifier.testTag("share-duration-$sec")) }
                     }
                 } else {
+                    if (aktifArac == "ratio") {
                     Text(cevir(dil, "Kart boyutu", "Card size"), color = Renk.metin, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.fillMaxWidth())
                     FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         KartFormat.entries.forEach { f -> FilterChip(selected = ayar.format == f, onClick = { ayar = ayar.copy(format = f) }, enabled = !hazirlaniyor,
                             label = { Text(f.etiket(dil)) }, shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp)) }
                     }
+                    }
+                    if (aktifArac == "type") {
                     Text(cevir(dil, "Yazı stili", "Type style"), color = Renk.metin, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.fillMaxWidth())
                     FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         KartYazi.entries.forEach { y -> FilterChip(selected = ayar.yazi == y, onClick = { ayar = ayar.copy(yazi = y) }, enabled = !hazirlaniyor,
@@ -354,6 +359,8 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                         Text("${(ayar.yaziOlcegi * 100).toInt()}%", color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
                     }
                     Slider(ayar.yaziOlcegi, { ayar = ayar.copy(yaziOlcegi = it) }, valueRange = .8f..1.3f, enabled = !hazirlaniyor, modifier = Modifier.semantics { contentDescription = cevir(dil, "Yazı boyutu", "Text size") })
+                    }
+                    if (aktifArac == "layout") {
                     if (ayar.zemin is KartZemin.Sahne || ayar.zemin is KartZemin.Foto) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             Text(cevir(dil, "Arka plan karartması", "Background dimming"), color = Renk.metin, modifier = Modifier.weight(1f))
@@ -365,10 +372,15 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         KartHizalama.entries.forEach { h ->
                             FilterChip(selected = ayar.hizalama == h, onClick = { ayar = ayar.copy(hizalama = h) }, enabled = !hazirlaniyor,
-                                label = { Text(if (h == KartHizalama.ORTA) cevir(dil, "Orta", "Center") else cevir(dil, "Sol", "Left")) },
+                                label = { Text(if (ayar.zemin == KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9)) { if (h == KartHizalama.ORTA) cevir(dil, "Editoryal", "Editorial") else cevir(dil, "Geniş sol", "Wide left") } else if (h == KartHizalama.ORTA) cevir(dil, "Orta", "Center") else cevir(dil, "Sol", "Left")) },
                                 shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp))
                         }
+                    }                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(cevir(dil, "Ascend imzası", "Ascend signature"), Modifier.weight(1f), color = Renk.metin)
+                        Switch(checked = ayar.imzaGoster, onCheckedChange = { ayar = ayar.copy(imzaGoster = it) })
                     }
+                    }
+
                 }
                 TextButton(onClick = { arac = false }) { Text(cevir(dil, "Bitti", "Done")) }
             }

@@ -404,8 +404,8 @@ private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int
 private fun koleksiyonIkonu(key: String) = when (key) {
     "olumlamalar" -> AzimIkon.Yaprak
     "azim" -> AzimIkon.Basamak
-    "disiplin" -> AzimIkon.Odak
-    "cesaret" -> AzimIkon.Esik
+    "disiplin" -> AzimIkon.Hedef
+    "cesaret" -> AzimIkon.Kalkan
     "filozoflar" -> AzimIkon.Sutun
     "tasavvuf" -> AzimIkon.IcYol
     "inanc" -> AzimIkon.Eller

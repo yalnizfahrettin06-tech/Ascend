@@ -37,6 +37,16 @@ private fun ImageVector.Builder.dolgu(blok: PathBuilder.() -> Unit) =
     path(fill = SolidColor(Color.Black), pathBuilder = blok)
 
 object AzimIkon {
+    val Kalkan = ikon("kalkan") {
+        cizgi { moveTo(3f,4f); curveTo(7f,4f,10f,3f,12f,2f); curveTo(14f,3f,17f,4f,21f,4f)
+            lineTo(21f,11f); curveTo(21f,17f,17f,20f,12f,22f); curveTo(7f,20f,3f,17f,3f,11f); close() }
+    }
+    val Hedef = ikon("hedef") {
+        cizgi { moveTo(12f,4f); arcTo(8f,8f,0f,true,true,12f,20f); arcTo(8f,8f,0f,true,true,12f,4f)
+            moveTo(12f,1f); lineTo(12f,7f); moveTo(12f,17f); lineTo(12f,23f)
+            moveTo(1f,12f); lineTo(7f,12f); moveTo(17f,12f); lineTo(23f,12f) }
+    }
+
     val YukselenMarka = ikon("yukselen_marka") {
         dolgu {
             moveTo(2f,22f); lineTo(4f,22f); lineTo(4f,16f); lineTo(2f,16f); close()

@@ -93,6 +93,15 @@ fun AnaEkran(
         Box(Modifier.matchParentSize().background(if (Renk.karanlikMi) Renk.zemin.copy(alpha = .90f) else Color.Transparent))
         Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
             Renk.zemin.copy(alpha = if (buyukYazi) .96f else .35f), Renk.zemin.copy(alpha = .05f)))))
+        val orbitColor = Renk.metinIkincil
+        Canvas(Modifier.fillMaxWidth().height(155.dp)) {
+            val path = androidx.compose.ui.graphics.Path().apply {
+                moveTo(size.width * .07f, size.height * .20f)
+                cubicTo(size.width * .36f, -size.height * .03f, size.width * .61f, size.height * .31f, size.width * .75f, size.height * .89f)
+            }
+            drawPath(path, orbitColor.copy(alpha = .45f), style = androidx.compose.ui.graphics.drawscope.Stroke(.45.dp.toPx()))
+            drawCircle(orbitColor, 2.3.dp.toPx(), androidx.compose.ui.geometry.Offset(size.width * .75f, size.height * .89f))
+        }
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content")) {
             Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.YukselenMarka, null, Modifier.size(30.dp), tint = Renk.accent)
