@@ -139,7 +139,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                                     "collections" -> cevir(dil, "Koleksiyonlar", "Collections")
                                     "selected" -> cevir(dil, "Seçtiklerim", "Selected")
                                     else -> cevir(dil, "Tüm konular", "All topics")
-                                }, color = if (gorunum == view && query.isBlank()) Renk.metin else Renk.metinIkincil,
+                                }, color = if (gorunum == view && query.isBlank()) Renk.accent else Renk.metinIkincil,
                                     fontSize = 13.sp, lineHeight = 20.sp,
                                     fontWeight = if (gorunum == view) FontWeight.SemiBold else FontWeight.Normal)
                                 Spacer(Modifier.height(6.dp))
@@ -149,12 +149,12 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         }
                     }
                     Row(Modifier.fillMaxWidth().heightIn(min = 48.dp)
-                        .clip(RoundedCornerShape(12.dp)).background(Renk.yuzey)
-                        .clickable(role = Role.Button) { chooseView("selected") }
+                        .clip(RoundedCornerShape(12.dp)).background(Renk.markaSessizYuzeyi)
+                        .clickable(role = Role.Button) { chooseView(if (secili.isEmpty()) "all" else "selected") }
                         .testTag("category-selection-summary").padding(horizontal = 12.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         Icon(AzimIkon.Bildirim, null, Modifier.size(20.dp), tint = Renk.accent)
-                        Text(cevir(dil, secili.size.toString() + " konu bildirimlerinde", secili.size.toString() + " topics in your reminders"),
+                        Text(bildirimSecimOzeti(secili.size, bildirimAcik, dil),
                             color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp, modifier = Modifier.weight(1f))
                         Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
                     }
@@ -202,7 +202,8 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                     Row(Modifier.fillMaxWidth().padding(bottom = 12.dp).height(IntrinsicSize.Min),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         groups.forEach { group ->
-                            KoleksiyonKarti(group, dil, Modifier.weight(1f).fillMaxHeight()) {
+                            KoleksiyonKarti(group, dil, group.altlar.count { it.anahtar in secili },
+                                Modifier.weight(1f).fillMaxHeight()) {
                                 grupKey = group.anahtar; gorunum = "all"; scope.launch { groupScroll.scrollToItem(0) }
                             }
                         }
@@ -354,47 +355,79 @@ private fun kategoriDurumu(acik: Boolean, secili: Boolean, dil: String): String 
     else cevir(dil, "Erişime açık", "Unlocked")
 
 @Composable
-private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    Surface(onClick = onClick, modifier = modifier.testTag("collection-" + group.anahtar),
-        color = Renk.yuzey, shape = RoundedCornerShape(20.dp), border = BorderStroke(1.dp, Renk.kenarlik.copy(alpha = .5f))) {
+private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int,
+    modifier: Modifier = Modifier, onClick: () -> Unit) {
+    val interaction = remember { MutableInteractionSource() }
+    val focused by interaction.collectIsFocusedAsState()
+    val konuSayisi = cevir(dil, "${group.altlar.size} konu", "${group.altlar.size} topics")
+    val secim = cevir(dil, "${seciliSayisi} konu seçili", "${seciliSayisi} topics selected")
+    Surface(onClick = onClick, interactionSource = interaction,
+        modifier = modifier.testTag("collection-" + group.anahtar).semantics {
+            // Opening a collection never toggles its reminder topics.
+            role = Role.Button
+        },
+        color = Renk.koleksiyonYuzeyi, shape = RoundedCornerShape(20.dp),
+        border = BorderStroke(if (focused) 2.dp else 1.dp, if (focused) Renk.accent else Renk.kenarlik)) {
         Column(Modifier.padding(16.dp).heightIn(min = 128.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Icon(koleksiyonIkonu(group.anahtar), null, Modifier.size(20.dp), tint = Renk.accent)
             Text(group.ad(dil), fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 26.sp,
-                color = Renk.metin, modifier = Modifier.semantics { heading() })
-            Text(koleksiyonOzeti(group.anahtar, dil), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
-            Spacer(Modifier.weight(1f))
+                color = Renk.metin)
+            Text(koleksiyonOzeti(group.anahtar, dil), color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 19.sp)
+            Spacer(Modifier.weight(1f).heightIn(min = 4.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(cevir(dil, group.altlar.size.toString() + " konu", group.altlar.size.toString() + " topics"),
-                    color = Renk.metinIkincil, fontSize = 11.sp, modifier = Modifier.weight(1f))
+                Text(konuSayisi, color = Renk.metinIkincil, fontSize = 12.sp,
+                    lineHeight = 18.sp, modifier = Modifier.weight(1f))
                 Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
+            }
+            if (seciliSayisi > 0) Row(
+                Modifier.clip(RoundedCornerShape(8.dp)).background(Renk.markaYuzeyi)
+                    .padding(horizontal = 8.dp, vertical = 5.dp)
+                    .testTag("collection-selection-" + group.anahtar),
+                horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(AzimIkon.Tik, null, Modifier.size(14.dp), tint = Renk.accent)
+                Text(secim, color = Renk.accent, fontSize = 11.sp, lineHeight = 16.sp,
+                    modifier = Modifier.weight(1f, fill = false))
             }
         }
     }
 }
 
 private fun koleksiyonIkonu(key: String) = when (key) {
-    "olumlamalar", "iliskiler" -> AzimIkon.Kalp
-    "azim", "cesaret" -> AzimIkon.Yukselis
-    "disiplin", "is" -> AzimIkon.Kesfet
-    "filozoflar", "inanc" -> AzimIkon.Kitap
-    "zihin", "tasavvuf" -> AzimIkon.Yaprak
-    else -> AzimIkon.Patika
+    "olumlamalar" -> AzimIkon.AcikKalp
+    "azim" -> AzimIkon.Basamak
+    "disiplin" -> AzimIkon.Odak
+    "cesaret" -> AzimIkon.Esik
+    "filozoflar" -> AzimIkon.Sutun
+    "tasavvuf" -> AzimIkon.IcYol
+    "inanc" -> AzimIkon.Eller
+    "spor" -> AzimIkon.Hareket
+    "is" -> AzimIkon.Canta
+    "iliskiler" -> AzimIkon.Bag
+    "zihin" -> AzimIkon.Dalga
+    else -> AzimIkon.Kitap
+}
+
+internal fun bildirimSecimOzeti(sayi: Int, etkin: Boolean, dil: String): String = when {
+    sayi == 0 -> cevir(dil, "Bildirim konularını seç", "Choose reminder topics")
+    !etkin -> cevir(dil, "${sayi} konu seçili · Bildirimler kapalı", "${sayi} topics selected · Reminders off")
+    else -> cevir(dil, "${sayi} konu bildirim planında", "${sayi} topics in your reminder plan")
 }
 
 private fun koleksiyonOzeti(key: String, dil: String): String {
     val pair = when (key) {
-        "olumlamalar" -> "Kendinle daha nazik bir dil" to "A kinder inner voice"
-        "azim" -> "Devam etmek ve yeniden başlamak" to "Keep going, begin again"
-        "disiplin" -> "Dikkatine ve gününe yer aç" to "Make room for focus"
+        "olumlamalar" -> "Kendine daha nazik bir dil" to "A kinder inner voice"
+        "azim" -> "Devam et, yeniden başla" to "Keep going, begin again"
+        "disiplin" -> "Dikkatine alan aç" to "Make room for focus"
         "cesaret" -> "Korkuya rağmen bir adım" to "A step beyond fear"
-        "filozoflar" -> "Düşünce geleneklerinden ilham" to "Inspired by great thinkers"
-        "tasavvuf" -> "İç dünyana yeni bir bakış" to "A look within"
+        "filozoflar" -> "Düşünceye yeni bir açı" to "A fresh perspective"
+        "tasavvuf" -> "İç dünyana bir bakış" to "A look within"
         "inanc" -> "İnanç üzerine düşünceler" to "Reflections on faith"
-        "spor" -> "Bedenine eşlik eden sözler" to "Words for your movement"
-        "is" -> "Emek, amaç ve çalışma hayatı" to "Effort, purpose and work"
-        "iliskiler" -> "Bağ kurmak ve anlayış" to "Connection and understanding"
+        "spor" -> "Harekete eşlik eden sözler" to "Words for your movement"
+        "is" -> "Emek, amaç ve gelişim" to "Effort, purpose and growth"
+        "iliskiler" -> "Bağ kurmak ve anlamak" to "Connection and understanding"
         "zihin" -> "Günün içinde sakin bir durak" to "A quiet pause in your day"
-        else -> "Meraka ve gelişime alan aç" to "Room to learn and grow"
+        else -> "Merakına yer aç" to "Room for curiosity"
     }
     return cevir(dil, pair.first, pair.second)
 }

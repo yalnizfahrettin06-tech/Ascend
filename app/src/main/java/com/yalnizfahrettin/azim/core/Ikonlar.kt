@@ -38,6 +38,96 @@ private fun ImageVector.Builder.dolgu(blok: PathBuilder.() -> Unit) =
 
 object AzimIkon {
 
+    // Collection family: same 24-unit viewport and 1.75-unit rounded stroke.
+    val AcikKalp = ikon("acik_kalp") {
+        cizgi {
+            moveTo(10f, 18.8f); curveTo(6f, 16f, 3.5f, 12.8f, 3.5f, 9.2f)
+            curveTo(3.5f, 4f, 9.2f, 3.3f, 12f, 7f)
+            curveTo(14.8f, 3.3f, 20.5f, 4f, 20.5f, 9.2f)
+            curveTo(20.5f, 12.8f, 18f, 16f, 14f, 18.8f)
+        }
+    }
+    val Basamak = ikon("basamak") {
+        cizgi {
+            moveTo(3f, 19f); horizontalLineTo(9f); verticalLineTo(13f)
+            horizontalLineTo(15f); verticalLineTo(7f); horizontalLineTo(21f)
+        }
+    }
+    val Odak = ikon("odak") {
+        cizgi {
+            moveTo(8f, 4f); horizontalLineTo(4f); verticalLineTo(8f)
+            moveTo(16f, 4f); horizontalLineTo(20f); verticalLineTo(8f)
+            moveTo(20f, 16f); verticalLineTo(20f); horizontalLineTo(16f)
+            moveTo(8f, 20f); horizontalLineTo(4f); verticalLineTo(16f)
+        }
+        dolgu {
+            moveTo(12f, 13.3f); arcTo(1.3f, 1.3f, 0f, true, true, 12f, 10.7f)
+            arcTo(1.3f, 1.3f, 0f, true, true, 12f, 13.3f); close()
+        }
+    }
+    val Esik = ikon("esik") {
+        cizgi {
+            moveTo(5f, 20f); verticalLineTo(10f)
+            curveTo(5f, 1.5f, 19f, 1.5f, 19f, 10f); verticalLineTo(20f)
+            moveTo(9f, 20f); horizontalLineTo(15f)
+        }
+    }
+    val Sutun = ikon("sutun") {
+        cizgi {
+            moveTo(5f, 4f); horizontalLineTo(19f); verticalLineTo(7f); horizontalLineTo(5f); close()
+            moveTo(8f, 7f); verticalLineTo(18f)
+            moveTo(12f, 10f); verticalLineTo(16f)
+            moveTo(16f, 7f); verticalLineTo(18f)
+            moveTo(5f, 21f); verticalLineTo(18f); horizontalLineTo(19f); verticalLineTo(21f); close()
+        }
+    }
+    val IcYol = ikon("ic_yol") {
+        cizgi {
+            moveTo(19f, 18f); curveTo(11f, 24f, 1f, 17f, 5f, 9f)
+            curveTo(8f, 2f, 19f, 3f, 19f, 10f)
+            curveTo(19f, 16f, 10f, 17f, 10f, 11f)
+            curveTo(10f, 9f, 13f, 8f, 14f, 10f)
+        }
+    }
+    val Eller = ikon("eller") {
+        cizgi {
+            moveTo(3f, 6f); verticalLineTo(13f); lineTo(8f, 20f); horizontalLineTo(16f)
+            lineTo(21f, 13f); verticalLineTo(6f)
+            moveTo(5f, 11f); lineTo(9f, 15f); lineTo(12f, 13f); lineTo(15f, 15f); lineTo(19f, 11f)
+        }
+    }
+    val Hareket = ikon("hareket") {
+        cizgi {
+            moveTo(3f, 12f); horizontalLineTo(6f); lineTo(9f, 6f)
+            lineTo(15f, 18f); lineTo(18f, 12f); horizontalLineTo(21f)
+        }
+    }
+    val Canta = ikon("canta") {
+        cizgi {
+            moveTo(4f, 8f); horizontalLineTo(20f); verticalLineTo(20f); horizontalLineTo(4f); close()
+            moveTo(8f, 8f); verticalLineTo(4f); horizontalLineTo(16f); verticalLineTo(8f)
+            moveTo(4f, 12f); curveTo(8f, 15f, 16f, 15f, 20f, 12f)
+            moveTo(12f, 13f); verticalLineTo(16f)
+        }
+    }
+    val Bag = ikon("bag") {
+        cizgi {
+            moveTo(10f, 16f); lineTo(8f, 18f)
+            curveTo(3f, 22f, 0f, 15f, 5f, 12f); lineTo(8f, 9f)
+            curveTo(10f, 7f, 13f, 8f, 14f, 10f)
+            moveTo(14f, 8f); lineTo(16f, 6f)
+            curveTo(21f, 2f, 24f, 9f, 19f, 12f); lineTo(16f, 15f)
+            curveTo(14f, 17f, 11f, 16f, 10f, 14f)
+        }
+    }
+    val Dalga = ikon("dalga") {
+        cizgi {
+            moveTo(3f, 13f); curveTo(6f, 13f, 6f, 8f, 9f, 8f)
+            curveTo(12f, 8f, 12f, 16f, 15f, 16f)
+            curveTo(18f, 16f, 18f, 11f, 21f, 11f)
+        }
+    }
+
     // Ascend's single rising line: a small pause before the next step upward.
     val Yukselis = ikon("ascend") {
         cizgi { moveTo(3f, 19f); lineTo(10f, 12f); lineTo(14f, 15f); lineTo(21f, 4f) }

@@ -21,6 +21,16 @@ import org.junit.Test
  */
 class KontrastTest {
 
+    @Test fun `refinement surfaces keep readable labels and visible focus`() = tumSetler().forEach { (ad, r) ->
+        listOf(r.markaYuzeyi, r.markaBasiliYuzeyi, r.markaSessizYuzeyi).forEach { surface ->
+            kontrol(ad, r.accent, surface, 4.5, "brand label")
+        }
+        kontrol(ad, r.metinIkincil, r.koleksiyonYuzeyi, 4.5, "collection description")
+        kontrol(ad, r.metinIkincil, r.markaSessizYuzeyi, 4.5, "reminder summary")
+        kontrol(ad, r.accent, r.koleksiyonYuzeyi, 3.0, "collection focus")
+        kontrol(ad, r.kenarlikGuclu, r.zemin, 3.0, "save outline")
+    }
+
     @Test fun `open headers and ink actions remain readable`() = tumSetler().forEach { (ad, r) ->
         kontrol(ad, r.zemin, r.metin, 7.0, "ink button label")
         kontrol(ad, r.metin, r.metin.copy(alpha = .035f).compositeOver(r.zemin), 7.0, "open header ornament")

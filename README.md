@@ -2,6 +2,12 @@
 
 Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir.
 
+## 8.4 — Kontrollü bordo ve koleksiyon kimliği
+
+Açık bordo Paylaş, belirgin Kaydet konturu, 12 ayrı koleksiyon ikonu ve gerçek seçili konu sayıları. Sıcak taş yüzeyler ve daha okunur açıklamalar; kapalı bildirim durumu açıkça belirtilir. Mevcut serif söz, heykel, navigasyon ve içerik korunur.
+
+[Uygulama kararları](docs/22-ASCEND-8.4-RAFINASYON.md) · [Ayrıntılı tasarım raporu](docs/23-BORDO-RAFINASYON-RAPORU.md)
+
 ## 8.2 — Bordo ve mermer kütüphane
 
 Kullanıcının tasarım raporuna göre Keşfet, gerçek koleksiyonlar ve sade konu listeleri etrafında yeniden düzenlendi. Ortak bordo başlıklar, dengelenmiş ana ekran eylemleri ve 20 adımın tamamında tutarlı onboarding dili kullanılır.

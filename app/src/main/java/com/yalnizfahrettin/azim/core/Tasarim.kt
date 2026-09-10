@@ -42,6 +42,11 @@ data class AzimRenkleri(
     val karanlikMi: Boolean,
     val marka: Color = Color(0xFF6C2932),
     val markaUstu: Color = Color(0xFFFFF9F5),
+    // Scoped refinement surfaces; do not recolor global primary buttons.
+    val koleksiyonYuzeyi: Color = yuzey,
+    val markaYuzeyi: Color = accentZemin,
+    val markaSessizYuzeyi: Color = yuzey,
+    val markaBasiliYuzeyi: Color = accentZemin,
 )
 
 

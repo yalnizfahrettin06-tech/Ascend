@@ -1,6 +1,11 @@
 package com.yalnizfahrettin.azim.ui
 
 import androidx.compose.foundation.*
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -10,8 +15,9 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import com.yalnizfahrettin.azim.R
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalConfiguration
@@ -61,6 +67,15 @@ fun AnaEkran(
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     val darEkran = LocalConfiguration.current.screenWidthDp < 360
     val darEylemler = buyukYazi || darEkran
+    val shareInteraction = remember { MutableInteractionSource() }
+    val sharePressed by shareInteraction.collectIsPressedAsState()
+    val shareFocused by shareInteraction.collectIsFocusedAsState()
+    val saveInteraction = remember { MutableInteractionSource() }
+    val saveFocused by saveInteraction.collectIsFocusedAsState()
+    val shareSurface by animateColorAsState(
+        if (sharePressed) Renk.markaBasiliYuzeyi else Renk.markaYuzeyi,
+        animationSpec = tween(140), label = "share-surface",
+    )
     LaunchedEffect(pager, aktifIndeks) {
         if (feed.isNotEmpty()) {
             val hedef = aktifIndeks.coerceIn(feed.indices)
@@ -79,7 +94,8 @@ fun AnaEkran(
         }
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content")) {
             MarkaBasligi {
-                Icon(AzimIkon.Yukselis, if (buyukYazi) "Ascend" else null, Modifier.size(26.dp))
+                Image(painterResource(R.drawable.art_launcher_column),
+                    if (buyukYazi) "Ascend" else null, Modifier.size(28.dp).clip(RoundedCornerShape(8.dp)))
                 Spacer(Modifier.width(10.dp))
                 if (buyukYazi) Spacer(Modifier.weight(1f))
                 else Text("ascend", fontSize = 29.sp, fontFamily = LoraSerif,
@@ -92,7 +108,7 @@ fun AnaEkran(
                 }
             }
             Column(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 24.dp)) {
-            AnlikIhtiyacSecimi(ihtiyac, dil, ihtiyacSec, Modifier.align(Alignment.Start))
+            AnlikIhtiyacSecimi(ihtiyac, dil, ihtiyacSec, Modifier.align(Alignment.Start).padding(top = 4.dp))
             if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Text(cevir(dil, "Biraz yer açalım.", "Make a little room."), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
@@ -119,11 +135,12 @@ fun AnaEkran(
                     val metinGenisligi = if (kisa && !darEkran && !buyukYazi) .94f else 1f
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
                         .verticalScroll(rememberScrollState()).padding(vertical = 24.dp),
-                        horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.spacedBy(0.dp, BiasAlignment.Vertical(-.55f))) {
+                        horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Top) {
                         Row(Modifier.background(Renk.zemin).padding(vertical = 2.dp),
-                            verticalAlignment = Alignment.CenterVertically,
+                            verticalAlignment = Alignment.Top,
                             horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                            Box(Modifier.width(22.dp).height(1.dp).background(Renk.accent))
+                            Box(Modifier.padding(top = with(LocalDensity.current) { 9.sp.toDp() })
+                                .width(28.dp).height(1.dp).background(Renk.accent))
                             Text(Kategoriler.bul(soz.kategori)?.ad(dil).orEmpty(), color = Renk.metinIkincil,
                                 fontSize = 12.sp, lineHeight = 18.sp, letterSpacing = 0.sp)
                         }
@@ -163,20 +180,28 @@ fun AnaEkran(
                             selected = kayitli
                             contentDescription = cevir(dil, if (kayitli) "Kaydedilenlerden çıkar" else "Sözü kaydet", if (kayitli) "Remove from saved" else "Save quote")
                         },
-                        shape = RoundedCornerShape(100.dp), border = BorderStroke(1.dp, Renk.kenarlikGuclu.copy(alpha = .6f)), colors = ButtonDefaults.outlinedButtonColors(contentColor = Renk.metin), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
+                        interactionSource = saveInteraction,
+                        shape = RoundedCornerShape(100.dp),
+                        border = BorderStroke(if (saveFocused) 2.dp else 1.dp, if (saveFocused) Renk.accent else Renk.kenarlikGuclu),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Renk.metin),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
                         if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp))
+                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp),
+                                tint = if (kayitli) Renk.accent else Renk.metin)
                             Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"),
                                 modifier = Modifier.fillMaxWidth(), fontSize = 12.sp, lineHeight = 15.sp,
                                 letterSpacing = 0.sp, textAlign = TextAlign.Center)
                         } else {
-                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp))
+                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp),
+                                tint = if (kayitli) Renk.accent else Renk.metin)
                             Spacer(Modifier.width(7.dp))
                             Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"), fontSize = 13.sp)
                         }
                     }
-                    OutlinedButton(onClick = { paylas(aktif) }, modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-share"), shape = RoundedCornerShape(100.dp), border = BorderStroke(1.dp, Renk.kenarlik),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Renk.metin, containerColor = Renk.yuzeyYuksek),
+                    OutlinedButton(onClick = { paylas(aktif) }, modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-share"),
+                        interactionSource = shareInteraction, shape = RoundedCornerShape(100.dp),
+                        border = BorderStroke(if (shareFocused) 2.dp else 1.dp, if (shareFocused) Renk.accent else Renk.markaBasiliYuzeyi),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Renk.accent, containerColor = shareSurface),
                         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
                         if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
                             Icon(AzimIkon.Paylas, null, Modifier.size(19.dp))
@@ -221,7 +246,7 @@ private fun AnlikIhtiyacSecimi(
     var ihtiyaclar by rememberSaveable { mutableStateOf(false) }
     TextButton(
         onClick = { ihtiyaclar = true },
-        modifier = modifier.clip(RoundedCornerShape(24.dp)).background(Renk.zemin).testTag("home-moment"),
+        modifier = modifier.heightIn(min = 48.dp).clip(RoundedCornerShape(24.dp)).background(Renk.zemin).testTag("home-moment"),
     ) {
         Text(ihtiyacAdi(ihtiyac, dil), color = Renk.metinIkincil, fontSize = 13.sp)
         Spacer(Modifier.width(6.dp))

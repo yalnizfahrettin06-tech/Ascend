@@ -24,7 +24,7 @@ import org.junit.Test
 
 class DesignV82Test {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
-    private fun shot(name: String) { compose.waitForIdle(); ekranKaydet("v83-" + name) }
+    private fun shot(name: String) { compose.waitForIdle(); ekranKaydet("v84-" + name) }
 
     @Test fun collectionSearchDetailAndRecreationPreservePositionAndSelection() {
         val restoration = StateRestorationTester(compose)
@@ -34,6 +34,9 @@ class DesignV82Test {
                 { selected = if (it in selected) selected - it else selected + it }, {}, false, {}, bildirimAcik = false) }
         }
         compose.onNodeWithTag("collection-olumlamalar").assertIsDisplayed()
+        compose.onNodeWithTag("collection-olumlamalar").assertTextContains("1 konu seçili")
+        compose.onNodeWithTag("collection-azim").assertTextContains("1 konu seçili")
+        compose.onNodeWithTag("category-selection-summary").assertTextContains("2 konu seçili · Bildirimler kapalı")
         shot("collections")
         compose.onNodeWithTag("category-grid").performScrollToIndex(3)
         compose.onNodeWithTag("category-search").assertIsDisplayed()
@@ -57,6 +60,19 @@ class DesignV82Test {
         compose.onNodeWithTag("category-delivery-off").assertIsDisplayed()
         shot("selected-delivery-off")
         compose.onNodeWithTag("category-count").assertTextEquals("2 konu")
+    }
+
+    @Test fun emptySelectionOffersTopicsAndOpeningACollectionDoesNotSelectIt() {
+        var selected by mutableStateOf(emptySet<String>())
+        compose.setContent {
+            AzimTema { KategorilerEkrani(selected, Erisim.ucretsizKategoriler, "tr",
+                { selected = selected + it }, {}, false, {}, bildirimAcik = false) }
+        }
+        compose.onNodeWithTag("category-selection-summary").assertTextContains("Bildirim konularını seç").performClick()
+        compose.onNodeWithTag("category-count").assertTextEquals("70 konu")
+        compose.onNodeWithTag("category-filter-collections").performClick()
+        compose.onNodeWithTag("collection-olumlamalar").performClick()
+        compose.runOnIdle { assertTrue(selected.isEmpty()) }
     }
 
     @Test fun typographyMatrixKeepsFullQuotesAndPlanSourcesReachable() {
