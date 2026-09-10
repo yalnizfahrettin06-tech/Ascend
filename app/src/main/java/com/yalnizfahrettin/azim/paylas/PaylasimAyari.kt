@@ -44,7 +44,7 @@ sealed interface KartZemin {
 data class PaylasimAyari(
     val format: KartFormat = KartFormat.STORY,
     val yazi: KartYazi = KartYazi.LORA,
-    val zemin: KartZemin = KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.scene_summit),
+    val zemin: KartZemin = KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9),
     /** Fotoğraf üzerindeki karartma; metin okunurluğu için. */
     val karartma: Float = 0.45f,
     val yaziOlcegi: Float = 1f,
@@ -85,7 +85,8 @@ object HazirZeminler {
     fun metinRengi(zemin: KartZemin): Color = when (zemin) {
         is KartZemin.Duz -> if (aydinlikMi(zemin.renk)) Color(0xFF1A1D20) else Color(0xFFF2F5F8)
         is KartZemin.Gradyan -> if (aydinlikMi(zemin.ust)) Color(0xFF1A1D20) else Color(0xFFF2F5F8)
-        is KartZemin.Foto, is KartZemin.Sahne -> Color(0xFFF6F7F8) // karartma katmanı hep koyu
+        is KartZemin.Sahne -> if (zemin.kaynak == com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9) Color(0xFF191919) else Color(0xFFF6F7F8)
+        is KartZemin.Foto -> Color(0xFFF6F7F8) // karartma katmanı hep koyu
     }
 
     private fun aydinlikMi(renk: Long): Boolean {

@@ -7,12 +7,17 @@ import org.junit.Test
 
 class PaylasimErisimiTest {
     @Test
-    fun `free export has exactly summit night and paper backgrounds`() {
-        val expected = listOf(KartZemin.Sahne(R.drawable.scene_summit), HazirZeminler.duzler.first(), HazirZeminler.duzler.last())
+    fun `free export has marble night and paper backgrounds`() {
+        val expected = listOf(KartZemin.Sahne(R.drawable.art_roman_home_v9), HazirZeminler.duzler.first(), HazirZeminler.duzler.last())
         assertEquals(expected, PaylasimErisimi.ucretsizZeminler)
         expected.forEach { background ->
             assertTrue(PaylasimErisimi.izinVar(false, PaylasimAyari(zemin = background)))
         }
+    }
+
+    @Test
+    fun `previously free summit is preserved after upgrade`() {
+        assertTrue(PaylasimErisimi.izinVar(false, PaylasimAyari(zemin = KartZemin.Sahne(R.drawable.scene_summit))))
     }
 
     @Test
@@ -60,7 +65,7 @@ class PaylasimErisimiTest {
     }
 
     @Test
-    fun `restored Pro background is replaced with summit for a free preview`() {
+    fun `restored Pro background is replaced with marble for a free preview`() {
         val restored = PaylasimAyari(zemin = KartZemin.Sahne(R.drawable.scene_forest), format = KartFormat.YATAY)
         assertEquals(PaylasimAyari(), PaylasimErisimi.gorunenAyar(restored, pro = false))
         assertSame(restored, PaylasimErisimi.gorunenAyar(restored, pro = true))

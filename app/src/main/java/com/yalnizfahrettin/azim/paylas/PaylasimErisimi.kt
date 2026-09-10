@@ -5,12 +5,12 @@ import com.yalnizfahrettin.azim.R
 /** One entitlement rule for choices, restored previews and final export. */
 object PaylasimErisimi {
     val ucretsizZeminler: List<KartZemin> = listOf(
-        KartZemin.Sahne(R.drawable.scene_summit),
+        KartZemin.Sahne(R.drawable.art_roman_home_v9),
         HazirZeminler.duzler.first(),
         HazirZeminler.duzler.last(),
     )
 
-    fun zeminProMu(zemin: KartZemin): Boolean = zemin !in ucretsizZeminler
+    fun zeminProMu(zemin: KartZemin): Boolean = zemin !in ucretsizZeminler && zemin != KartZemin.Sahne(R.drawable.scene_summit)
 
     fun proGerekir(ayar: PaylasimAyari, video: Boolean = false): Boolean =
         video || zeminProMu(ayar.zemin) || ayar.format != KartFormat.STORY ||

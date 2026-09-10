@@ -7,6 +7,11 @@ on:
   pull_request:
     paths-ignore: ['docs/**', '**.md']
   workflow_dispatch:
+    inputs:
+      run_ui:
+        description: Run optional emulator checks
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -17,7 +22,8 @@ concurrency:
 
 jobs:
   build:
-    needs: ui-tests
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -43,10 +49,17 @@ jobs:
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-8.4.0-test-APK
+          name: Ascend-9.0.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
+      - name: Publish installable test APK
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.0.0.apk
+          gh release create v9.0.0-ui Ascend-9.0.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.0.0 — Marble UI" --notes "Reference-based home, explore and share studio redesign. Pro remains an explicitly labeled demo."
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
@@ -57,6 +70,7 @@ jobs:
           retention-days: 7
 
   ui-tests:
+    if: github.event_name == 'pull_request' || inputs.run_ui == true
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:

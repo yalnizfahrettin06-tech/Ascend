@@ -30,7 +30,7 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
     val dil = LocalConfiguration.current.locales[0].language
     val sekmeler = listOf(Sekme.ANA, Sekme.KATEGORI, Sekme.ISTATISTIK)
     val etiketler = listOf(cevir(dil, "Bugün", "Today"), cevir(dil, "Keşfet", "Explore"), cevir(dil, "Senin", "You"))
-    val ikonlar = listOf(AzimIkon.Yukselis, AzimIkon.Kesfet, AzimIkon.Kisi)
+    val ikonlar = listOf(AzimIkon.YukselenMarka, AzimIkon.Kesfet, AzimIkon.Kisi)
     Column(Modifier.fillMaxWidth().background(Renk.zemin).navigationBarsPadding()) {
         Box(Modifier.fillMaxWidth().height(1.dp).background(Renk.kenarlik.copy(alpha = .3f)))
         Row(Modifier.fillMaxWidth().selectableGroup().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {

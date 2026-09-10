@@ -13,6 +13,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -85,29 +89,27 @@ fun AnaEkran(
     val aktif = feed.getOrNull(pager.settledPage)
     LaunchedEffect(pager, aktif?.kimlik) { if (aktif != null) indeksDegisti(pager.settledPage); ses.durdur() }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
-        // Only decoration needs measurement-time subcomposition. The pager and
-        // its state stay in the same composition, even while a feed is replaced.
-        BoxWithConstraints(Modifier.matchParentSize()) {
-            KlasikGorsel(KlasikMotif.BUST,
-                Modifier.align(Alignment.TopEnd).offset(x = 32.dp, y = 48.dp)
-                    .width(maxWidth * .48f).height(maxHeight * .48f), opacity = .09f)
-        }
+        Image(painterResource(R.drawable.art_roman_home_v9), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop)
+        Box(Modifier.matchParentSize().background(if (Renk.karanlikMi) Renk.zemin.copy(alpha = .90f) else Color.Transparent))
+        Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
+            Renk.zemin.copy(alpha = if (buyukYazi) .96f else .35f), Renk.zemin.copy(alpha = .05f)))))
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content")) {
-            MarkaBasligi {
-                Image(painterResource(R.drawable.art_launcher_column),
-                    if (buyukYazi) "Ascend" else null, Modifier.size(28.dp).clip(RoundedCornerShape(8.dp)))
+            Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Icon(AzimIkon.YukselenMarka, null, Modifier.size(30.dp), tint = Renk.accent)
                 Spacer(Modifier.width(10.dp))
-                if (buyukYazi) Spacer(Modifier.weight(1f))
-                else Text("ascend", fontSize = 29.sp, fontFamily = LoraSerif,
-                    letterSpacing = (-.7).sp, modifier = Modifier.weight(1f))
-                TextButton(onClick = planAc, modifier = Modifier.heightIn(min = 48.dp).testTag("home-plan"),
-                    colors = ButtonDefaults.textButtonColors(contentColor = Renk.metin)) {
-                    Text(cevir(dil, "Planım", "My plan"), fontSize = 13.sp)
-                    Spacer(Modifier.width(6.dp))
-                    Icon(AzimIkon.Disari, null, Modifier.size(14.dp), tint = Renk.accent)
+                Text("ascend", fontSize = 32.sp, fontFamily = LoraSerif, color = Renk.metin,
+                    letterSpacing = (-1).sp, modifier = Modifier.weight(1f))
+                TextButton(onClick = planAc, modifier = Modifier.heightIn(min = 48.dp).testTag("home-plan")) {
+                    Text(cevir(dil, "Planım", "My plan"), color = Renk.metin, fontSize = 14.sp)
+                    Spacer(Modifier.width(5.dp)); Icon(AzimIkon.Disari, null, Modifier.size(20.dp), tint = Renk.accent)
                 }
             }
             Column(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 24.dp)) {
+            var simdi by remember { mutableStateOf(java.time.LocalTime.now()) }
+            LaunchedEffect(Unit) { while (true) { simdi = java.time.LocalTime.now(); kotlinx.coroutines.delay(60000) } }
+            Text(cevir(dil, when (simdi.hour) { in 5..11 -> "SABAH"; in 12..17 -> "GÜNDÜZ"; else -> "AKŞAM" },
+                when (simdi.hour) { in 5..11 -> "MORNING"; in 12..17 -> "AFTERNOON"; else -> "EVENING" }) + " · " + simdi.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")),
+                fontSize = 10.sp, letterSpacing = 2.sp, color = Renk.metinIkincil, modifier = Modifier.padding(top = 8.dp, bottom = 8.dp))
             AnlikIhtiyacSecimi(ihtiyac, dil, ihtiyacSec, Modifier.align(Alignment.Start).padding(top = 4.dp))
             if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
@@ -129,18 +131,18 @@ fun AnaEkran(
                     val yaziBoyutu = when {
                         buyukYazi -> if (kisa) 30 else if (uzun) 26 else 28
                         darEkran -> if (kisa) 33 else if (uzun) 28 else 30
-                        else -> if (kisa) 36 else if (uzun) 30 else 33
+                        else -> if (kisa) 34 else if (uzun) 26 else 30
                     }
-                    val satirYuksekligi = yaziBoyutu + if (uzun) 9 else 10
-                    val metinGenisligi = if (kisa && !darEkran && !buyukYazi) .94f else 1f
+                    val satirYuksekligi = yaziBoyutu + 5
+                    val metinGenisligi = if (buyukYazi) 1f else .68f
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
-                        .verticalScroll(rememberScrollState()).padding(vertical = 24.dp),
+                        .verticalScroll(rememberScrollState()).padding(top = 30.dp, bottom = 12.dp),
                         horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Top) {
-                        Row(Modifier.background(Renk.zemin).padding(vertical = 2.dp),
+                        Row(Modifier.padding(vertical = 2.dp),
                             verticalAlignment = Alignment.Top,
                             horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                             Box(Modifier.padding(top = with(LocalDensity.current) { 9.sp.toDp() })
-                                .width(28.dp).height(1.dp).background(Renk.accent))
+                                .width(28.dp).height(2.dp).background(Renk.accent))
                             Text(Kategoriler.bul(soz.kategori)?.ad(dil).orEmpty(), color = Renk.metinIkincil,
                                 fontSize = 12.sp, lineHeight = 18.sp, letterSpacing = 0.sp)
                         }
@@ -150,70 +152,42 @@ fun AnaEkran(
                             letterSpacing = (if (kisa) -.6 else -.4).sp, textAlign = TextAlign.Start,
                             style = TextStyle(lineBreak = if (kisa) LineBreak.Heading else LineBreak.Paragraph),
                             modifier = Modifier.widthIn(max = 560.dp).fillMaxWidth(metinGenisligi).semantics { heading() })
-                        Spacer(Modifier.height(16.dp))
-                        Text(soz.sunumEtiketi(dil), color = Renk.metinIkincil, fontSize = 11.sp,
-                            lineHeight = 17.sp, letterSpacing = .6.sp,
-                            modifier = Modifier.background(Renk.zemin).padding(vertical = 2.dp))
+
                     }
                 }
             }
             if (aktif != null) {
-                Row(Modifier.fillMaxWidth().background(Renk.zemin).heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage - 1).coerceAtLeast(0)) } }, enabled = pager.currentPage > 0, modifier = Modifier.testTag("quote-previous")) {
+                Row(Modifier.fillMaxWidth().heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage - 1).coerceAtLeast(0)) } }, enabled = pager.currentPage > 0, modifier = Modifier.size(48.dp).border(.7.dp, Renk.kenarlikGuclu, CircleShape).testTag("quote-previous")) {
                         Icon(AzimIkon.Geri, cevir(dil, "Önceki söz", "Previous quote"), modifier = Modifier.size(20.dp), tint = if (pager.currentPage > 0) Renk.metin else Renk.kenarlikGuclu)
                     }
-                    Text("${pager.settledPage + 1} / ${feed.size}",
+                    HorizontalDivider(Modifier.weight(1f).padding(horizontal = 10.dp), color = Renk.kenarlikGuclu, thickness = .5.dp)
+                    Text("${(pager.settledPage + 1).toString().padStart(2, '0')} / ${feed.size}",
                         color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp,
                         letterSpacing = .5.sp, textAlign = TextAlign.Center,
-                        modifier = Modifier.weight(1f).testTag("quote-position").clearAndSetSemantics {
+                        modifier = Modifier.testTag("quote-position").clearAndSetSemantics {
                             contentDescription = cevir(dil, "${feed.size} sözden ${pager.settledPage + 1}.", "Quote ${pager.settledPage + 1} of ${feed.size}.")
                         })
-                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1).coerceAtMost(feed.lastIndex)) } }, enabled = pager.currentPage < feed.lastIndex, modifier = Modifier.testTag("quote-next")) {
+                    HorizontalDivider(Modifier.weight(1f).padding(horizontal = 10.dp), color = Renk.kenarlikGuclu, thickness = .5.dp)
+                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1).coerceAtMost(feed.lastIndex)) } }, enabled = pager.currentPage < feed.lastIndex, modifier = Modifier.size(48.dp).border(.7.dp, Renk.kenarlikGuclu, CircleShape).testTag("quote-next")) {
                         Icon(AzimIkon.Sonraki, cevir(dil, "Sonraki söz", "Next quote"), Modifier.size(22.dp),
                             tint = if (pager.currentPage < feed.lastIndex) Renk.metin else Renk.kenarlikGuclu)
                     }
                 }
-                Row(Modifier.fillMaxWidth().background(Renk.zemin).padding(top = 4.dp, bottom = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     val kayitli = aktif.kimlik in favoriler
-                    OutlinedButton(onClick = { if (haptikAcik) haptik.performHapticFeedback(HapticFeedbackType.TextHandleMove); favoriDegistir(aktif) },
-                        modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-save").semantics {
-                            selected = kayitli
-                            contentDescription = cevir(dil, if (kayitli) "Kaydedilenlerden çıkar" else "Sözü kaydet", if (kayitli) "Remove from saved" else "Save quote")
-                        },
-                        interactionSource = saveInteraction,
-                        shape = RoundedCornerShape(100.dp),
-                        border = BorderStroke(if (saveFocused) 2.dp else 1.dp, if (saveFocused) Renk.accent else Renk.kenarlikGuclu),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Renk.metin),
-                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
-                        if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp),
-                                tint = if (kayitli) Renk.accent else Renk.metin)
-                            Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"),
-                                modifier = Modifier.fillMaxWidth(), fontSize = 12.sp, lineHeight = 15.sp,
-                                letterSpacing = 0.sp, textAlign = TextAlign.Center)
-                        } else {
-                            Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(20.dp),
-                                tint = if (kayitli) Renk.accent else Renk.metin)
-                            Spacer(Modifier.width(7.dp))
-                            Text(cevir(dil, if (kayitli) "Kayıtlı" else "Kaydet", if (kayitli) "Saved" else "Save"), fontSize = 13.sp)
-                        }
+                    Text(aktif.sunumEtiketi(dil), Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 10.sp, lineHeight = 15.sp)
+                    IconButton(onClick = { if (haptikAcik) haptik.performHapticFeedback(HapticFeedbackType.TextHandleMove); favoriDegistir(aktif) },
+                        modifier = Modifier.testTag("home-save").semantics { selected = kayitli }) {
+                        Icon(if (kayitli) AzimIkon.KalpDolu else AzimIkon.Kalp,
+                            cevir(dil, if (kayitli) "Kaydedilenlerden çıkar" else "Sözü kaydet", if (kayitli) "Remove from saved" else "Save quote"),
+                            Modifier.size(22.dp), tint = if (kayitli) Renk.accent else Renk.metin)
                     }
-                    OutlinedButton(onClick = { paylas(aktif) }, modifier = Modifier.weight(1f).heightIn(min = 52.dp).testTag("home-share"),
-                        interactionSource = shareInteraction, shape = RoundedCornerShape(100.dp),
-                        border = BorderStroke(if (shareFocused) 2.dp else 1.dp, if (shareFocused) Renk.accent else Renk.markaBasiliYuzeyi),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Renk.accent, containerColor = shareSurface),
-                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 12.dp)) {
-                        if (darEylemler) Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                            Icon(AzimIkon.Paylas, null, Modifier.size(19.dp))
-                            Text(cevir(dil, "Paylaş", "Share"), modifier = Modifier.fillMaxWidth(),
-                                fontSize = 12.sp, lineHeight = 15.sp, letterSpacing = 0.sp, textAlign = TextAlign.Center)
-                        } else {
-                            Icon(AzimIkon.Paylas, null, Modifier.size(19.dp)); Spacer(Modifier.width(7.dp))
-                            Text(cevir(dil, "Paylaş", "Share"), fontSize = 13.sp)
-                        }
+                    IconButton(onClick = { paylas(aktif) }, modifier = Modifier.testTag("home-share")) {
+                        Icon(AzimIkon.Paylas, cevir(dil, "Paylaş", "Share"), Modifier.size(22.dp), tint = Renk.metin)
                     }
                     Box {
-                        IconButton(onClick = { araclar = true }, modifier = Modifier.border(1.dp, Renk.kenarlik, RoundedCornerShape(100.dp)).testTag("home-more")) {
+                        IconButton(onClick = { araclar = true }, modifier = Modifier.testTag("home-more")) {
                             Icon(AzimIkon.Daha, cevir(dil, "Diğer araçlar", "More tools"), Modifier.size(22.dp), tint = Renk.metin)
                         }
                         DropdownMenu(expanded = araclar, onDismissRequest = { araclar = false }) {
@@ -246,9 +220,9 @@ private fun AnlikIhtiyacSecimi(
     var ihtiyaclar by rememberSaveable { mutableStateOf(false) }
     TextButton(
         onClick = { ihtiyaclar = true },
-        modifier = modifier.heightIn(min = 48.dp).clip(RoundedCornerShape(24.dp)).background(Renk.zemin).testTag("home-moment"),
+        modifier = modifier.heightIn(min = 48.dp).testTag("home-moment"),
     ) {
-        Text(ihtiyacAdi(ihtiyac, dil), color = Renk.metinIkincil, fontSize = 13.sp)
+        Text(ihtiyacAdi(ihtiyac, dil) + cevir(dil, " · Şimdi", " · Now"), color = Renk.metin, fontSize = 14.sp)
         Spacer(Modifier.width(6.dp))
         Icon(AzimIkon.Asagi, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
     }

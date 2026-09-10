@@ -99,12 +99,16 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     }
     val columns = if (LocalConfiguration.current.screenWidthDp < 360 || LocalDensity.current.fontScale > 1.3f) 1 else 2
     fun chooseView(value: String) { odak.clearFocus(); arama = ""; grupKey = null; gorunum = value }
-    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
-        MarkaBasligi(sutun = true) {
+    Box(Modifier.fillMaxSize().background(Renk.zemin)) {
+    MimariIsik(Modifier.matchParentSize())
+    Column(Modifier.fillMaxSize().statusBarsPadding()) {
+        Box(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 12.dp)) {
+            KlasikGorsel(KlasikMotif.COLUMN, Modifier.align(Alignment.TopEnd).width(120.dp).height(132.dp), opacity = .5f)
             Column {
-                Text(cevir(dil, "Keşfet", "Explore"), fontFamily = LoraSerif, fontSize = 29.sp, lineHeight = 37.sp,
-                    modifier = Modifier.semantics { heading() })
-                Text(cevir(dil, "Sözlere açılan bir kütüphane", "A library of perspectives"), fontSize = 11.sp, lineHeight = 17.sp)
+                Text("A S C E N D", fontSize = 9.sp, letterSpacing = 2.sp, color = Renk.metinIkincil)
+                Text(cevir(dil, "Keşfet", "Explore"), fontFamily = LoraSerif, fontSize = 40.sp, lineHeight = 49.sp,
+                    color = Renk.metin, modifier = Modifier.semantics { heading() })
+                Text(cevir(dil, "Sana iyi gelecek düşünceyi bul.", "Find a thought for this moment."), fontSize = 13.sp, lineHeight = 20.sp, color = Renk.metin)
             }
         }
         Column(Modifier.padding(horizontal = 24.dp, vertical = 8.dp)) {
@@ -113,14 +117,14 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         interactionSource = searchInteraction,
                         modifier = Modifier.fillMaxWidth().border(
                             if (searchFocused) 1.5.dp else 1.dp,
-                            if (searchFocused) Renk.accent else Color.Transparent, RoundedCornerShape(14.dp))
+                            Color.Transparent, RoundedCornerShape(0.dp))
                             .testTag("category-search").semantics {
                             contentDescription = cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers")
                         }, singleLine = true, shape = RoundedCornerShape(14.dp),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                         keyboardActions = KeyboardActions(onSearch = { odak.clearFocus() }),
-                        colors = TextFieldDefaults.colors(focusedContainerColor = Renk.yuzey, unfocusedContainerColor = Renk.yuzey,
-                            focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent),
+                        colors = TextFieldDefaults.colors(focusedContainerColor = Color.Transparent, unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Renk.accent, unfocusedIndicatorColor = Renk.kenarlikGuclu),
                         leadingIcon = { Icon(AzimIkon.Ara, null, Modifier.size(20.dp)) },
                         trailingIcon = { if (arama.isNotEmpty()) IconButton(onClick = { arama = "" }, modifier = Modifier.testTag("category-clear-search")) {
                             Icon(AzimIkon.Kapat, cevir(dil, "Aramayı temizle", "Clear search"))
@@ -149,7 +153,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         }
                     }
                     Row(Modifier.fillMaxWidth().heightIn(min = 48.dp)
-                        .clip(RoundedCornerShape(12.dp)).background(Renk.markaSessizYuzeyi)
+                        .clip(RoundedCornerShape(6.dp)).background(Renk.yuzey.copy(alpha = .5f)).border(.6.dp, Renk.kenarlik, RoundedCornerShape(6.dp))
                         .clickable(role = Role.Button) { chooseView(if (secili.isEmpty()) "all" else "selected") }
                         .testTag("category-selection-summary").padding(horizontal = 12.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -247,6 +251,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 }
             }
         }
+    }
     }
     if (alanlarAcik) ModalBottomSheet(onDismissRequest = { alanlarAcik = false },
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = Renk.zemin) {
@@ -366,9 +371,11 @@ private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int
             // Opening a collection never toggles its reminder topics.
             role = Role.Button
         },
-        color = Renk.koleksiyonYuzeyi, shape = RoundedCornerShape(20.dp),
+        color = Renk.koleksiyonYuzeyi.copy(alpha = .65f), shape = RoundedCornerShape(8.dp),
         border = BorderStroke(if (focused) 2.dp else 1.dp, if (focused) Renk.accent else Renk.kenarlik)) {
-        Column(Modifier.padding(16.dp).heightIn(min = 128.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Box {
+        KoleksiyonRolefi(group.anahtar, Modifier.matchParentSize())
+        Column(Modifier.padding(14.dp).heightIn(min = 196.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Icon(koleksiyonIkonu(group.anahtar), null, Modifier.size(20.dp), tint = Renk.accent)
             Text(group.ad(dil), fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 26.sp,
                 color = Renk.metin)
@@ -392,9 +399,10 @@ private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int
         }
     }
 }
+}
 
 private fun koleksiyonIkonu(key: String) = when (key) {
-    "olumlamalar" -> AzimIkon.AcikKalp
+    "olumlamalar" -> AzimIkon.Yaprak
     "azim" -> AzimIkon.Basamak
     "disiplin" -> AzimIkon.Odak
     "cesaret" -> AzimIkon.Esik

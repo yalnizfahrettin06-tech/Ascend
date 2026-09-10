@@ -46,6 +46,10 @@ object KartCizici {
 
         zeminiCiz(ctx, tuval, genislik, yukseklik, ayar, yakinlik, zeminBitmap)
 
+        if (ayar.zemin == KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9)) {
+            mermerMetni(ctx, tuval, metin, yazar, ayar, genislik, yukseklik, acilim)
+            return bmp
+        }
         val lora = yukle(ctx, "lora.ttf", Typeface.SERIF)
         val loraItalik = Typeface.create(lora, Typeface.ITALIC)
         val metinRengi = HazirZeminler.metinRengi(ayar.zemin).toArgb()
@@ -127,6 +131,39 @@ object KartCizici {
         return bmp
     }
 
+    /** Editorial marble layout uses the same geometry for preview, PNG and video. */
+    private fun mermerMetni(ctx: Context, canvas: Canvas, text: String, source: String,
+        a: PaylasimAyari, w: Int, h: Int, reveal: Float) {
+        val left = w * .075f
+        val width = (w * if (a.hizalama == KartHizalama.SOL) .82f else .60f).toInt()
+        val font = yukle(ctx, "lora.ttf", Typeface.SERIF)
+        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.rgb(24,24,24); typeface = a.yazi.tipi(font, Typeface.create(font, Typeface.ITALIC), false)
+            textSize = w * .078f * a.yaziOlcegi
+        }
+        fun layout(value: String) = StaticLayout.Builder.obtain(value, 0, value.length, paint, width)
+            .setAlignment(Layout.Alignment.ALIGN_NORMAL).setIncludePad(false).setLineSpacing(w * .01f, 1f).build()
+        val top = h * .34f
+        while (layout(text).height > h * .42f && paint.textSize > w * .023f) paint.textSize *= .95f
+        val fullHeight = layout(text).height
+        canvas.save(); canvas.translate(left, top)
+        layout(if (reveal >= 1f) text else kelimeAcilimi(text, reveal)).draw(canvas); canvas.restore()
+        val accent = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(108,41,50); strokeWidth = w * .006f; strokeCap = Paint.Cap.ROUND }
+        canvas.drawLine(left, top - w * .045f, left + w * .09f, top - w * .045f, accent)
+        if (reveal >= .98f && source.isNotBlank()) {
+            val sourcePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(57,56,53); typeface = Typeface.SANS_SERIF; textSize = w * .031f }
+            val sourceLayout = StaticLayout.Builder.obtain(source, 0, source.length, sourcePaint, width).setIncludePad(false).build()
+            canvas.save(); canvas.translate(left, top + fullHeight + w * .035f); sourceLayout.draw(canvas); canvas.restore()
+        }
+        if (a.imzaGoster) {
+            val markY = h * .09f
+            for (n in 0..3) canvas.drawRect(left + n * w * .013f, markY - w * (.012f + n * .01f), left + n * w * .013f + w * .007f, markY, accent)
+            canvas.drawLine(left, markY - w * .045f, left + w * .05f, markY - w * .07f, accent)
+            val brand = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(20,20,20); typeface = font; textSize = w * .06f }
+            canvas.drawText("ascend", left + w * .075f, markY, brand)
+        }
+    }
+
     /** Metin uzunluğuna göre punto — uzun sözler taşmasın. */
     private fun sozBoyutu(metin: String, genislik: Int, ayar: PaylasimAyari): Float {
         val taban = when {
@@ -183,7 +220,9 @@ object KartCizici {
                     tuval.drawBitmap(foto, matris, Paint(Paint.FILTER_BITMAP_FLAG))
                     if (zeminBitmap == null) foto.recycle()
                     // Okunurluk katmanı
-                    tuval.drawColor(Color.argb((ayar.karartma * 255).toInt(), 0, 0, 0))
+                    val marble = z == KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9)
+                    val dim = if (marble) ((ayar.karartma - .45f).coerceAtLeast(0f) * 255).toInt() else (ayar.karartma * 255).toInt()
+                    tuval.drawColor(Color.argb(dim, 0, 0, 0))
                 }
             }
         }

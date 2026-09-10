@@ -37,6 +37,32 @@ private fun ImageVector.Builder.dolgu(blok: PathBuilder.() -> Unit) =
     path(fill = SolidColor(Color.Black), pathBuilder = blok)
 
 object AzimIkon {
+    val YukselenMarka = ikon("yukselen_marka") {
+        dolgu {
+            moveTo(2f,22f); lineTo(4f,22f); lineTo(4f,16f); lineTo(2f,16f); close()
+            moveTo(7f,22f); lineTo(9f,22f); lineTo(9f,13f); lineTo(7f,13f); close()
+            moveTo(12f,22f); lineTo(14f,22f); lineTo(14f,10f); lineTo(12f,10f); close()
+            moveTo(17f,22f); lineTo(19f,22f); lineTo(19f,6f); lineTo(17f,6f); close()
+            moveTo(2f,12f); lineTo(20f,1f); lineTo(20f,4f); close()
+        }
+    }
+    val Fotograf = ikon("fotograf") {
+        cizgi { moveTo(4f,3f); lineTo(20f,3f); lineTo(21f,4f); lineTo(21f,20f); lineTo(20f,21f); lineTo(4f,21f); lineTo(3f,20f); lineTo(3f,4f); close()
+            moveTo(3f,16f); lineTo(9f,10f); lineTo(15f,16f); lineTo(18f,13f); lineTo(21f,16f) }
+        dolgu { moveTo(16f,7f); arcTo(1f,1f,0f,true,true,18f,7f); arcTo(1f,1f,0f,true,true,16f,7f); close() }
+    }
+    val Video = ikon("video") {
+        cizgi { moveTo(4f,3f); lineTo(20f,3f); lineTo(21f,4f); lineTo(21f,20f); lineTo(20f,21f); lineTo(4f,21f); lineTo(3f,20f); lineTo(3f,4f); close()
+            moveTo(10f,8f); lineTo(16f,12f); lineTo(10f,16f); close() }
+    }
+    val Indir = ikon("indir") {
+        cizgi { moveTo(12f,3f); lineTo(12f,15f); moveTo(7f,11f); lineTo(12f,16f); lineTo(17f,11f)
+            moveTo(3f,17f); lineTo(3f,21f); lineTo(21f,21f); lineTo(21f,17f) }
+    }
+    val Kirp = ikon("kirp") {
+        cizgi { moveTo(7f,2f); lineTo(7f,17f); lineTo(22f,17f); moveTo(2f,7f); lineTo(17f,7f); lineTo(17f,22f) }
+    }
+
 
     // Collection family: same 24-unit viewport and 1.75-unit rounded stroke.
     val AcikKalp = ikon("acik_kalp") {
