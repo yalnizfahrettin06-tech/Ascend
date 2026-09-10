@@ -375,7 +375,8 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                                 label = { Text(if (ayar.zemin == KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9)) { if (h == KartHizalama.ORTA) cevir(dil, "Editoryal", "Editorial") else cevir(dil, "Geniş sol", "Wide left") } else if (h == KartHizalama.ORTA) cevir(dil, "Orta", "Center") else cevir(dil, "Sol", "Left")) },
                                 shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp))
                         }
-                    }                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(cevir(dil, "Ascend imzası", "Ascend signature"), Modifier.weight(1f), color = Renk.metin)
                         Switch(checked = ayar.imzaGoster, onCheckedChange = { ayar = ayar.copy(imzaGoster = it) })
                     }
