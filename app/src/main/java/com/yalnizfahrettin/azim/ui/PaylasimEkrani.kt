@@ -70,11 +70,11 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     val focusManager = LocalFocusManager.current
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     val kapsam = rememberCoroutineScope()
-    var ayar by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(PaylasimAyari()) }
+    val lastStyle = remember { ctx.getSharedPreferences("share-last-style", android.content.Context.MODE_PRIVATE) }
+    var ayar by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(SonPaylasimDuzeni.oku(lastStyle)) }
     var video by rememberSaveable { mutableStateOf(false) }
     var saniye by rememberSaveable { mutableIntStateOf(10) }
     var arac by rememberSaveable { mutableStateOf(false) }
-    var kaynakSekmesi by rememberSaveable { mutableStateOf("background") }
     var kutuphane by rememberSaveable { mutableStateOf(false) }
     var aktifArac by rememberSaveable { mutableStateOf("type") }
     val tercih = remember { ctx.getSharedPreferences("share-theme-favorites", android.content.Context.MODE_PRIVATE) }
@@ -110,7 +110,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
             durdur()
             ayar = PaylasimErisimi.ucretsizAyar(ayar)
             video = false
-            kaynakSekmesi = "background"
             arac = false
             zeminFiltresi = PaylasimZeminFiltresi.UCRETSIZ.name
             bekleyenUri = null
@@ -173,6 +172,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     hata = cevir(dil, "Pro demosu kapatıldı. Ücretsiz bir görselle yeniden dene.", "Pro demo was turned off. Try again with a free image.")
                     return@launch
                 }
+                SonPaylasimDuzeni.kaydet(lastStyle, secim)
                 if (galeri) {
                     if (Build.VERSION.SDK_INT >= 29) {
                         MedyaDeposu.galeriyeKaydet(ctx, uri, videoMu)
@@ -215,23 +215,25 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                             tercih.edit().putStringSet("themes", temaFavorileri).apply()
                         }, modifier = Modifier.align(Alignment.TopEnd).padding(4.dp).background(Renk.zemin.copy(alpha = .82f), CircleShape)
                             .semantics { selected = themeKey in temaFavorileri }) {
-                            Icon(if (themeKey in temaFavorileri) AzimIkon.KalpDolu else AzimIkon.Kalp,
+                            Icon(if (themeKey in temaFavorileri) AzimIkon.AyracDolu else AzimIkon.Ayrac,
                                 cevir(dil, "Arka planı favorilere ekle veya çıkar", "Toggle favorite background"), Modifier.size(20.dp), tint = if (themeKey in temaFavorileri) Renk.accent else Renk.metin)
                         }
                     }
-                    Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp).selectableGroup()) {
-                        listOf("background", "photo", "video").forEach { source ->
-                            Column(Modifier.weight(1f).selectable(kaynakSekmesi == source, role = Role.Tab, enabled = !hazirlaniyor, onClick = {
-                                if (source != "background" && !pro) proAc() else {
-                                    kaynakSekmesi = source; video = source == "video"
-                                    if (source == "photo") fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                                }
-                            }).heightIn(min = 56.dp).testTag(when(source) { "photo" -> "share-background-photo"; "video" -> "share-video"; else -> "share-image" }), horizontalAlignment = Alignment.CenterHorizontally) {
-                                Icon(if (source == "video") AzimIkon.Video else AzimIkon.Fotograf, null, Modifier.size(22.dp), tint = Renk.metin)
-                                Text(when(source) { "photo" -> cevir(dil, "Fotoğraf", "Photo"); "video" -> "Video"; else -> cevir(dil, "Arka plan", "Background") },
-                                    fontSize = 12.sp, color = Renk.metin, modifier = Modifier.padding(top = 4.dp, bottom = 7.dp))
-                                Box(Modifier.width(60.dp).height(2.dp).background(if (kaynakSekmesi == source) Renk.accent else Color.Transparent))
-                            }
+                    FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(cevir(dil, "Çıktı", "Export"), color = Renk.metinIkincil, fontSize = 12.sp)
+                        FilterChip(selected = !gorunenVideo, onClick = { video = false }, enabled = !hazirlaniyor,
+                            label = { Text(cevir(dil, "Görsel", "Image")) }, modifier = Modifier.testTag("share-image"))
+                        FilterChip(selected = gorunenVideo, onClick = { if(!pro) proAc() else video = true }, enabled = !hazirlaniyor,
+                            label = { Text("Video") }, modifier = Modifier.testTag("share-video"))
+                    }
+                    FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        TextButton(onClick = { kutuphane = true }, enabled = !hazirlaniyor) {
+                            Text(cevir(dil, "Hazır arka planlar", "Background library"))
+                        }
+                        TextButton(onClick = {
+                            if(!pro) proAc() else fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                        }, enabled = !hazirlaniyor, modifier = Modifier.testTag("share-background-photo")) {
+                            Text(cevir(dil, "Kendi fotoğrafım", "My photo"))
                         }
                     }
                     val curated = remember(zeminler, temaFavorileri) {
@@ -336,7 +338,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                 Text(cevir(dil, "İnce ayarlar", "Fine adjustments"), fontFamily = LoraSerif, fontSize = 26.sp, color = Renk.metin)
                 if (aktifArac == "motion") {
                     Text(cevir(dil, "Sessiz video · Yazı yavaşça belirir", "Silent video · Gentle text reveal"), color = Renk.metinIkincil)
-                    Switch(checked = gorunenVideo, onCheckedChange = { video = it; kaynakSekmesi = if (it) "video" else "background" })
+                    Switch(checked = gorunenVideo, onCheckedChange = { video = it })
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         listOf(5, 10, 30, 45).forEach { sec -> FilterChip(selected = saniye == sec, onClick = { saniye = sec }, label = { Text("${sec}s") }, modifier = Modifier.testTag("share-duration-$sec")) }
                     }

@@ -53,6 +53,7 @@ fun AnaEkran(
     ipucunuKapat: () -> Unit, ayarlaraGit: () -> Unit,
     secilenAtmosfer: String? = null, atmosferSec: (String?) -> Unit = {},
     seciliKonular: Set<String> = emptySet(), konulariDuzenle: () -> Unit = {}, haptikAcik: Boolean = true,
+    gizle: (Soz) -> Unit = {},
     kullaniciAdi: String = "", planAc: () -> Unit = {}, ihtiyac: String? = null, ihtiyacSec: (String?) -> Unit = {},
 ) {
     // A feed replacement must replace its count, keys and page content together.
@@ -188,6 +189,8 @@ fun AnaEkran(
                                 araclar = false; pano.setText(AnnotatedString(aktif.metin(dil)))
                                 kapsam.launch { mesaj.showSnackbar(cevir(dil, "Söz kopyalandı", "Quote copied")) }
                             }, leadingIcon = { Icon(AzimIkon.Kopyala, null) })
+                            DropdownMenuItem(text = { Text(cevir(dil, "Bu sözü gizle", "Hide this quote")) },
+                                modifier = Modifier.testTag("home-hide"), onClick = { araclar = false; gizle(aktif) })
                             DropdownMenuItem(text = { Text(cevir(dil, "Bildirim ayarları", "Reminder settings")) }, onClick = { araclar = false; ayarlaraGit() })
                         }
                     }

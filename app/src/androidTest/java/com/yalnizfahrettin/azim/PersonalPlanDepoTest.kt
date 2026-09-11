@@ -86,6 +86,31 @@ class PersonalPlanDepoTest {
         } } finally { file.delete() }
     }
 
+    @Test fun pauseAndHiddenQuotesPreserveTheDailyPlan() = runBlocking {
+        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
+        val file = File(ctx.cacheDir, "quiet-${UUID.randomUUID()}.preferences_pb")
+        try { withPlanStore(file) { depo, _ ->
+            depo.completePersonalPlan(PersonalProfile(dailyCount = 4, startHour = 8, endHour = 20), true)
+            val topics = depo.secili.first()
+            val id = Sozler.kategoriden("motivasyon").first().kimlik
+            depo.gosterildi(id); depo.gosterildi(id)
+            assertEquals(listOf(id), depo.recentQuotes.first())
+            depo.hideQuote(id, true)
+            assertTrue(id in depo.hiddenQuotes.first())
+            depo.hideQuote(id, false)
+            assertFalse(id in depo.hiddenQuotes.first())
+            depo.pauseReminders(123456789L)
+            assertEquals(123456789L, depo.pausedUntil.first())
+            assertTrue(depo.hatirlaticiAcik.first())
+            assertEquals(topics, depo.secili.first())
+            assertEquals(4, depo.gunlukAdet.first())
+            assertEquals(8, depo.baslangicSaati.first())
+            assertEquals(20, depo.bitisSaati.first())
+            depo.pauseReminders(0)
+            assertEquals(0L, depo.pausedUntil.first())
+        } } finally { file.delete() }
+    }
+
     @Test fun newInstallationStartsWithMarbleAndLightWithoutGrantingAccess() = runBlocking {
         val ctx = InstrumentationRegistry.getInstrumentation().targetContext
         val file = File(ctx.cacheDir, "plan-marble-${UUID.randomUUID()}.preferences_pb")

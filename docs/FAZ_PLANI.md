@@ -1,6 +1,6 @@
 # Ascend — Sadelik odaklı üç faz
 
-11 Eylül 2026. Bu plan mevcut özellik raporunu kullanıcının son kapsam kararıyla daraltır. Bir önerinin raporda bulunması hemen uygulanacağı anlamına gelmez. Faz 1 ve Faz 2 uygulandı; Faz 3 henüz uygulanmadı.
+11 Eylül 2026. Bu plan mevcut özellik raporunu kullanıcının son kapsam kararıyla daraltır. Bir önerinin raporda bulunması hemen uygulanacağı anlamına gelmez. Faz 1 ve Faz 2 uygulandı; Faz 3 sade kapsamla uygulandı.
 
 ## Tasarım ve kapsam sınırı
 
@@ -37,7 +37,7 @@ Kabul: beş sayfalık normal yol, ilk sayfadan bildirimsiz çıkış, izin reddi
 
 Kabul: kullanıcı tek ayarı diğer tercihleri değiştirmeden günceller; Keşfet’te bulduğu sözü kaydedip tekrar bulur; ana ekranın görünür bileşen sayısı artmaz.
 
-## Faz 3 — Yalnızca faydası belirgin küçük eklemeler (plan)
+## Faz 3 — Yalnızca faydası belirgin küçük eklemeler (sade kapsam uygulandı)
 
 - Oturumlar arasında yakın tekrarları azalt. Ana akışta sayı, ilerleme veya puan gösterme.
 - Gerekirse Senin altında sınırlı son görülenler ekle. Ayrı ana sekme olmasın. Gerçek kronolojik kayıt ve temizleme seçeneği gerekir.
@@ -55,7 +55,7 @@ Demo reklam/Pro: ilk kullanım anlatısından çıkarıldı; gerçek ödeme/rekl
 
 ## Doğrulama kaydı
 
-Faz 1 için onboarding davranış testleri yeni akışa uyarlandı. GitHub derlemesinin birim test/lint sonuçları teslim mesajında ayrıca belirtilir. Cihazda çalıştırılmayan testler çalıştırılmış kabul edilmez. Faz 2 için ortak içerik sınırı, Türkçe kayıt araması, ayarların birbirinden bağımsız kaydı ve okuyucudan listeye dönüş senaryoları eklendi. Faz 3 plan durumundadır.
+Faz 1 için onboarding davranış testleri yeni akışa uyarlandı. GitHub derlemesinin birim test/lint sonuçları teslim mesajında ayrıca belirtilir. Cihazda çalıştırılmayan testler çalıştırılmış kabul edilmez. Faz 2 için ortak içerik sınırı, Türkçe kayıt araması, ayarların birbirinden bağımsız kaydı ve okuyucudan listeye dönüş senaryoları eklendi. Faz 3 uygulama kapsamı aşağıdadır.
 
 ### Faz 2 uygulama notları
 
@@ -65,3 +65,13 @@ Faz 1 için onboarding davranış testleri yeni akışa uyarlandı. GitHub derle
 - Kaydedilenlerde metin/konu araması ve boş sonuç açıklaması eklendi. Klasör ve etiket eklenmedi.
 - Görüntüleme sayacı Görülen söz olarak adlandırıldı. Açık konu sayısı gelişim bölümünden çıkarıldı.
 - Faz 3 özellikleri bu sürüme eklenmedi.
+
+### Faz 3 uygulama notları
+
+- Son 30 görülen söz cihazda sıralı tutulur; yeni oturumda diğer sözler öne gelir. Küçük havuzda en yakın görülen en sona kalır; havuz tükenince yeniden okunabilir. Ana ekrana sayaç eklenmedi.
+- Mevcut ek menüde Bu sözü gizle eklendi. Geri al mesajı çıkar; tek söz rastgele akış, bildirim ve widget havuzundan çıkar. Kaydedilenler silinmez, kullanıcı Keşfet’te kendisi okuyabilir. Planım > İçerik sınırlarından gizlenenlerin tümü geri getirilebilir.
+- Planım > Saat ve sıklık içinde Bugün ara ver ve Arayı bitir bulunur. Ara yerel gece yarısında biter; normal saat planı yeniden kurulur. Saatler/konular ve kalıcı aç-kapat tercihi korunur. Android güç yönetimi teslimatı geciktirebilir.
+- Paylaşımda görsel/video çıktı seçimi hazır arka plan/kendi fotoğrafı kaynağından ayrıldı. Arka plan değiştirmek video seçimini sıfırlamaz. Arka plan favorisi ayraç ikonuyla söz kaydetme kalbinden ayrıldı.
+- Başarıyla üretilen son kartın yazı, boyut, oran, hizalama, imza ve karartma düzeni hatırlanır. Medya kaynağı ve kişisel fotoğraf otomatik yeniden açılmaz. Pro erişim kuralları korunur.
+- Sadelik kararı: ayrı Son görülenler ekranı, yeni ana ekran sahneleri, şablon kütüphanesi ve efektler eklenmedi. Bunlar faz planında koşullu önerilerdi; bu sürümde gerekli görülmedi.
+- Birim testlerine döngü, gizlenen havuz ve sıralı kayıt senaryoları; cihaz test kaynaklarına ayarların duraklatma sırasında korunması eklendi. Cihazda çalıştırma yapılmış sayılmaz.

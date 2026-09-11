@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.ui.Alignment
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.first
+import com.yalnizfahrettin.azim.data.QuietFeed
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -60,6 +62,8 @@ fun Uygulama(
     val arkaPlan by depo.arkaPlan.collectAsStateWithLifecycle(null)
     val proDemo by remember(depo) { depo.proDemo.map { it as Boolean? } }.collectAsStateWithLifecycle(null)
     val favoriler by depo.favoriler.collectAsStateWithLifecycle(emptySet())
+    val hidden by remember(depo) { depo.hiddenQuotes.map { it as Set<String>? } }.collectAsStateWithLifecycle(null)
+    val pausedUntil by depo.pausedUntil.collectAsStateWithLifecycle(0L)
     val gecmis by depo.gecmis.collectAsStateWithLifecycle(emptySet())
     val seri by depo.seri.collectAsStateWithLifecycle(0)
     val rekor by depo.rekor.collectAsStateWithLifecycle(0)
@@ -115,7 +119,7 @@ fun Uygulama(
         when { paylasilanSoz != null -> paylasilanKimlik = null; ayarlardaMi -> ayarlardaMi = false; sekme == Sekme.FAVORI -> sekme = Sekme.ISTATISTIK; else -> sekme = Sekme.ANA }
     }
     LaunchedEffect(acilisSekmesi) { acilisSekmesi?.let { sekme = it } }
-    if (onboardingBitti == null || proDemo == null || !profileState.first) {
+    if (onboardingBitti == null || proDemo == null || !profileState.first || hidden == null) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
         return
     }
@@ -167,9 +171,9 @@ fun Uygulama(
     }
 
     // Akışı bir kez kur: seçili kategorilerden karıştırılmış liste.
-    LaunchedEffect(homeCategories, onboardingBitti) {
+    LaunchedEffect(homeCategories, onboardingBitti, hidden) {
         if (onboardingBitti == true) {
-            val yeni = Sozler.tumu().filter { it.kategori in homeCategories }.shuffled()
+            val yeni = QuietFeed.order(Sozler.tumu().filter { it.kategori in homeCategories }, depo.recentQuotes.first(), hidden.orEmpty())
             akis = yeni
             indeks = 0
         }
@@ -184,7 +188,7 @@ fun Uygulama(
         val arsiv = hedef.kimlik in favoriler || gunlukGelenler.values.any { hedef.kimlik in it }
         if (hedef.kategori !in acik && !arsiv) return@LaunchedEffect
         acilisTuketildi = true
-        if (hedef.kategori !in homeCategories) { readerId = hedef.kimlik; return@LaunchedEffect }
+        if (hedef.kategori !in homeCategories || hedef.kimlik in hidden.orEmpty()) { readerId = hedef.kimlik; return@LaunchedEffect }
         val yer = akis.indexOfFirst { it.kimlik == hedef.kimlik }
         if (yer >= 0) indeks = yer else {
             akis = listOf(hedef) + akis
@@ -236,6 +240,14 @@ fun Uygulama(
                 tabState.SaveableStateProvider(s.rota) {
                 when (s) {
                     Sekme.ANA -> AnaEkran(
+                        gizle = { quote -> kapsam.launch {
+                            depo.hideQuote(quote.kimlik, true); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx)
+                            val action = snackbar.showSnackbar(cevir(dil, "Söz gizlendi", "Quote hidden"), cevir(dil, "Geri al", "Undo"),
+                                duration = androidx.compose.material3.SnackbarDuration.Long)
+                            if(action == androidx.compose.material3.SnackbarResult.ActionPerformed) {
+                                depo.hideQuote(quote.kimlik, false); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx)
+                            }
+                        } },
                         kullaniciAdi = profil?.name.orEmpty(), planAc = { planGoster = true },
                         ihtiyac = ihtiyac, ihtiyacSec = { ihtiyac = it },
                         secilenAtmosfer = arkaPlan, atmosferSec = { ad -> kapsam.launch { depo.arkaPlanAyarla(ad) } },
@@ -327,6 +339,12 @@ fun Uygulama(
         adet = gunlukAdet, bas = bas, bit = bit, bildirimAcik = hatirlaticiAcik,
         kapat = { planGoster = false },
         konular = { planGoster = false; acilacakGrup = null; selectedRequest++; sekme = Sekme.KATEGORI },
+        pausedUntil = pausedUntil, hiddenCount = hidden.orEmpty().size,
+        restoreHidden = { depo.restoreHiddenQuotes(); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) },
+        pause = { shouldPause ->
+            val until = if(shouldPause) java.time.LocalDate.now().plusDays(1).atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli() else 0L
+            depo.pauseReminders(until); Planlayici.yenidenKur(ctx)
+        },
         saveContent = { answers -> depo.contentPreferences(answers); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) },
         saveRhythm = { count, start, end, enabled ->
             depo.reminderRhythm(count, start, end, enabled)

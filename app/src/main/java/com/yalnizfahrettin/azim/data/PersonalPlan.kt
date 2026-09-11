@@ -193,10 +193,10 @@ object PersonalPlan {
     }
 
     fun notification(profile: PersonalProfile?, selected: Set<String>, access: Set<String>, language: String,
-        seen: Set<String>, lastId: String?): BildirimSecimi? {
+        seen: Set<String>, lastId: String?, hidden: Set<String> = emptySet()): BildirimSecimi? {
         val scores = profile?.let(::weights).orEmpty()
         val categories = if (profile == null) selected.intersect(access) else effectiveCategories(profile, selected, access, scores)
-        val pool = Sozler.bildirimHavuzu(categories, language)
+        val pool = Sozler.bildirimHavuzu(categories, language).filterNot { it.kimlik in hidden }
         if (pool.isEmpty()) return null
         val fresh = pool.filterNot { it.kimlik in seen }
         val cycle = fresh.isEmpty()

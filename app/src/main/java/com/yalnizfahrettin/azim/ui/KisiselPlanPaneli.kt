@@ -27,6 +27,8 @@ fun KisiselPlanPaneli(
     konular: () -> Unit,
     saveContent: suspend (Map<String, Set<String>>) -> Unit,
     saveRhythm: suspend (Int, Int, Int, Boolean) -> Unit,
+    pausedUntil: Long = 0L, hiddenCount: Int = 0,
+    pause: suspend (Boolean) -> Unit = {}, restoreHidden: suspend () -> Unit = {},
 ) {
     var page by rememberSaveable { mutableStateOf("main") }
     var draft by rememberSaveable { mutableStateOf((profil ?: PersonalProfile()).encode()) }
@@ -38,6 +40,21 @@ fun KisiselPlanPaneli(
     var saving by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
     val scope = rememberCoroutineScope()
+    var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    LaunchedEffect(pausedUntil) {
+        now = System.currentTimeMillis()
+        if(pausedUntil > now) { kotlinx.coroutines.delay(pausedUntil - now); now = System.currentTimeMillis() }
+    }
+    val paused = pausedUntil > now
+    fun action(block: suspend () -> Unit) {
+        saving = true; error = null
+        scope.launch {
+            try { block() }
+            catch (e: kotlinx.coroutines.CancellationException) { throw e }
+            catch (_: Exception) { error = cevir(dil, "Kaydedilemedi. Yeniden dene.", "Could not save. Try again.") }
+            finally { saving = false }
+        }
+    }
     fun back() { if (!saving) { if (page == "main") kapat() else { page = "main"; error = null } } }
     ModalBottomSheet(onDismissRequest = { if (!saving) kapat() }, containerColor = Renk.zemin,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
@@ -59,7 +76,7 @@ fun KisiselPlanPaneli(
                 PlanSettingRow(cevir(dil, "Bildirim konuları", "Reminder topics"),
                     cevir(dil, "${secili.size} konu seçili", "${secili.size} topics selected"), "plan-categories", konular)
                 PlanSettingRow(cevir(dil, "Saat ve sıklık", "Time and frequency"),
-                    if (bildirimAcik) cevir(dil, "Günde $adet kez", "$adet times daily") + " · %02d:00–%02d:00".format(bas, bit % 24)
+                    if (paused && bildirimAcik) cevir(dil, "Yarına kadar ara verildi", "Paused until tomorrow") else if (bildirimAcik) cevir(dil, "Günde $adet kez", "$adet times daily") + " · %02d:00–%02d:00".format(bas, bit % 24)
                     else cevir(dil, "Bildirimler kapalı", "Reminders off"), "plan-settings") {
                     count = adet; start = bas; end = bit; enabled = bildirimAcik; page = "rhythm"
                 }
@@ -74,6 +91,13 @@ fun KisiselPlanPaneli(
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         Text(cevir(dil, "Hatırlatmalar", "Reminders"), Modifier.weight(1f))
                         Switch(enabled, { enabled = it }, modifier = Modifier.testTag("plan-reminders-toggle"))
+                    }
+                    if (bildirimAcik) {
+                        if (paused) Text(cevir(dil, "Gece yarısından sonra normal saat planın yeniden başlayacak.",
+                            "Your regular schedule resumes after midnight."), color = Renk.metinIkincil)
+                        TextButton(onClick = { action { pause(!paused) } }, modifier = Modifier.testTag("plan-pause")) {
+                            Text(cevir(dil, if(paused) "Arayı bitir" else "Bugün ara ver", if(paused) "Resume reminders" else "Pause for today"))
+                        }
                     }
                     BildirimPlani(count, start, end, secili.size, { count = it }, { b, e -> start = b; end = e }, dil = dil)
                     Text(cevir(dil, "Saatlerini değiştirmek konularını değiştirmez. Bildirimleri açarken gerekirse cihaz izni istenir.",
@@ -105,6 +129,9 @@ fun KisiselPlanPaneli(
                                 Text(option.label(dil), color = Renk.metin, modifier = Modifier.weight(1f))
                             }
                         }
+                    }
+                    if(hiddenCount > 0) TextButton(onClick = { action { restoreHidden() } }, modifier = Modifier.testTag("restore-hidden")) {
+                        Text(cevir(dil, "$hiddenCount gizlenen sözü geri getir", "Restore $hiddenCount hidden quotes"))
                     }
                     if (PersonalPlan.homeCategories(preferences, acik).isEmpty()) Text(cevir(dil,
                         "Bu tercihlere uygun açık konu yok. Kaydedersen ana akış boş kalır; tercihini değiştirebilir veya Keşfet’ten konu açabilirsin.",

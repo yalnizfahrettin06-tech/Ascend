@@ -31,6 +31,12 @@ object Planlayici {
         wm.cancelUniqueWork(ERTESI_GUN)
         depo.planliSaatleriYaz(emptyList())
         if (!depo.onboardingBitti.first() || !depo.hatirlaticiAcik.first() || !Bildirimler.izinVarMi(ctx)) return
+        val pauseDelay = depo.pausedUntil.first() - System.currentTimeMillis()
+        if (pauseDelay > 0) {
+            wm.enqueueUniqueWork(ERTESI_GUN, ExistingWorkPolicy.REPLACE,
+                OneTimeWorkRequestBuilder<YenileWorker>().setInitialDelay(pauseDelay, TimeUnit.MILLISECONDS).build())
+            return
+        }
         val simdi = LocalDateTime.now()
         val saatler = BildirimZamanlari.hesapla(simdi, depo.gunlukAdet.first(), depo.baslangicSaati.first(), depo.bitisSaati.first())
         saatler.forEachIndexed { i, an ->
@@ -67,6 +73,7 @@ class SozWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, p
     override suspend fun doWork(): Result = teslimKilidi.withLock {
         val depo = Depo(applicationContext)
         if (!depo.onboardingBitti.first() || !depo.hatirlaticiAcik.first() || !Bildirimler.izinVarMi(applicationContext)) return@withLock Result.success()
+        if (depo.pausedUntil.first() > System.currentTimeMillis()) return@withLock Result.success()
         val saat = java.time.LocalTime.now().hour
         if (saat < depo.baslangicSaati.first() || saat >= depo.bitisSaati.first()) return@withLock Result.success()
         val secili = depo.secili.first()
@@ -74,7 +81,7 @@ class SozWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, p
         val profil = depo.personalProfile.first()
         val erisim = depo.acik.first()
         val havuz = PersonalPlan.effectiveCategories(profil, secili, erisim)
-        val secim = PersonalPlan.notification(profil, secili, erisim, dil, depo.gecmis.first(), depo.sonBildirimKimlik.first()) ?: return@withLock Result.success()
+        val secim = PersonalPlan.notification(profil, secili, erisim, dil, depo.gecmis.first(), depo.sonBildirimKimlik.first(), depo.hiddenQuotes.first()) ?: return@withLock Result.success()
         val soz = secim.soz
         if (Bildirimler.goster(applicationContext, soz, dil)) {
             // Replanning can cancel this worker after Android accepted the notification.

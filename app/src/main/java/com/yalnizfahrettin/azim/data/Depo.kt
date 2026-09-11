@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
@@ -32,6 +33,9 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val PRO_DEMO = booleanPreferencesKey("pro_demo_acik")
         val ARKA_PLAN = stringPreferencesKey("ana_arka_plan")
         val FAVORI = stringSetPreferencesKey("favoriler")
+        val RECENT = stringPreferencesKey("recent_quote_order")
+        val HIDDEN = stringSetPreferencesKey("hidden_quotes")
+        val PAUSED_UNTIL = longPreferencesKey("reminders_paused_until")
         val GECMIS = stringSetPreferencesKey("gosterilen_gecmis")
         val SON_BILDIRIM = stringPreferencesKey("son_bildirim_kimlik")
         val GUNLUK = intPreferencesKey("gunluk_adet")
@@ -158,6 +162,15 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     }
     val favoriler: Flow<Set<String>> = store.data.map { it[K.FAVORI] ?: emptySet() }
     val sonBildirimKimlik: Flow<String?> = store.data.map { it[K.SON_BILDIRIM] }
+    val recentQuotes = store.data.map { p -> p[K.RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi).take(QuietFeed.RECENT_LIMIT) }
+    val hiddenQuotes = store.data.map { it[K.HIDDEN].orEmpty() }
+    val pausedUntil = store.data.map { it[K.PAUSED_UNTIL] ?: 0L }
+    suspend fun hideQuote(id: String, hidden: Boolean) = store.edit { p ->
+        p[K.HIDDEN] = if(hidden) p[K.HIDDEN].orEmpty() + id else p[K.HIDDEN].orEmpty() - id
+    }
+    suspend fun restoreHiddenQuotes() = store.edit { it.remove(K.HIDDEN) }
+    suspend fun pauseReminders(until: Long) = store.edit { it[K.PAUSED_UNTIL] = until }
+
     val gecmis: Flow<Set<String>> = store.data.map { (it[K.GECMIS] ?: emptySet()).filter(Sozler::aktifKimlikMi).toSet() }
     val gunlukAdet: Flow<Int> = store.data.map { it[K.GUNLUK] ?: 3 }
     val baslangicSaati: Flow<Int> = store.data.map { it[K.BASLANGIC] ?: 10 }
@@ -296,6 +309,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
 
     /** Cycle history and daily read counts have separate lifetimes. */
     suspend fun gosterildi(kimlik: String) = store.edit { p ->
+        if (Sozler.aktifKimlikMi(kimlik)) p[K.RECENT] = QuietFeed.remember(p[K.RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi), kimlik).joinToString("|")
         val g = (p[K.GECMIS] ?: emptySet()).filter(Sozler::aktifKimlikMi).toMutableSet()
         if (Sozler.aktifKimlikMi(kimlik)) g.add(kimlik)
         p[K.GECMIS] = g

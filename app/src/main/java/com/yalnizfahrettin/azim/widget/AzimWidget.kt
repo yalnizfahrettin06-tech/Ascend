@@ -116,14 +116,14 @@ class AzimWidget : GlanceAppWidget() {
             val dil = depo.dil.first()
             val secili = depo.secili.first()
             val soz = PersonalPlan.notification(depo.personalProfile.first(), secili, depo.acik.first(),
-                dil, depo.gecmis.first(), depo.sonBildirimKimlik.first())?.soz ?: return
+                dil, depo.gecmis.first(), depo.sonBildirimKimlik.first(), depo.hiddenQuotes.first())?.soz
             val widget = AzimWidget()
             androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
                 .getGlanceIds(AzimWidget::class.java)
                 .forEach { id ->
                     updateAppWidgetState(ctx, id) { p ->
-                        p[SOZ] = soz.metin(dil)
-                        p[YAZAR] = soz.sunumEtiketi(dil)
+                        p[SOZ] = soz?.metin(dil) ?: if(dil == "tr") "Uygulamadan içerik tercihlerini düzenleyebilirsin." else "Adjust content preferences in the app."
+                        p[YAZAR] = soz?.sunumEtiketi(dil) ?: "Ascend"
                     }
                 }
             widget.updateAll(ctx)
