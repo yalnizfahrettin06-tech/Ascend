@@ -168,7 +168,7 @@ fun Uygulama(
 
     // Akışı bir kez kur: seçili kategorilerden karıştırılmış liste.
     LaunchedEffect(acik, onboardingBitti) {
-        if (onboardingBitti) {
+        if (onboardingBitti == true) {
             val yeni = Sozler.tumu().filter { it.kategori in acik }.shuffled()
             akis = yeni
             indeks = 0
