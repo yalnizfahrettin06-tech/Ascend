@@ -1,6 +1,6 @@
 # Ascend — Sadelik odaklı üç faz
 
-11 Eylül 2026. Bu plan mevcut özellik raporunu kullanıcının son kapsam kararıyla daraltır. Bir önerinin raporda bulunması hemen uygulanacağı anlamına gelmez. Faz 2 ve 3 henüz uygulanmamıştır.
+11 Eylül 2026. Bu plan mevcut özellik raporunu kullanıcının son kapsam kararıyla daraltır. Bir önerinin raporda bulunması hemen uygulanacağı anlamına gelmez. Faz 1 ve Faz 2 uygulandı; Faz 3 henüz uygulanmadı.
 
 ## Tasarım ve kapsam sınırı
 
@@ -24,7 +24,7 @@ Eski tamamlanmamış taslakların adımı yeni akışa uyarlanır; mevcut tercih
 
 Kabul: beş sayfalık normal yol, ilk sayfadan bildirimsiz çıkış, izin reddinden sonra devam, geri dönüşte saat/adet korunması, büyük yazıda alt düğmelerin ulaşılabilirliği.
 
-## Faz 2 — Mevcut işleri kolaylaştır (plan)
+## Faz 2 — Mevcut işleri kolaylaştır (uygulandı)
 
 Öncelik sırası:
 
@@ -55,4 +55,13 @@ Demo reklam/Pro: ilk kullanım anlatısından çıkarıldı; gerçek ödeme/rekl
 
 ## Doğrulama kaydı
 
-Faz 1 için onboarding davranış testleri yeni akışa uyarlandı. GitHub derlemesinin birim test/lint sonuçları teslim mesajında ayrıca belirtilir. Cihazda çalıştırılmayan testler çalıştırılmış kabul edilmez. Faz 2–3 bu dosyada plan durumundadır.
+Faz 1 için onboarding davranış testleri yeni akışa uyarlandı. GitHub derlemesinin birim test/lint sonuçları teslim mesajında ayrıca belirtilir. Cihazda çalıştırılmayan testler çalıştırılmış kabul edilmez. Faz 2 için ortak içerik sınırı, Türkçe kayıt araması, ayarların birbirinden bağımsız kaydı ve okuyucudan listeye dönüş senaryoları eklendi. Faz 3 plan durumundadır.
+
+### Faz 2 uygulama notları
+
+- Ana ekrandaki rastgele havuz mevcut tür/kaçınma/manevi içerik sınırlarını kullanır; profil yüklenmeden havuz oluşturulmaz. Boş havuzda tercihi değiştirme yolu korunur.
+- Planım üç satırdan oluşur: bildirim konuları, saat/sıklık ve içerik sınırları. Ayarlar bağımsız kaydedilir; vazgeçme kalıcı tercihleri değiştirmez. Öneri ve Pro alanı bu panelden çıkarıldı.
+- Keşfet’te erişime açık söz okuyucuda açılır. Aynı okuyucu kaydedilenlerden de kullanılabilir. Altındaki liste kapanmaz; arama, konu ve kaydırma korunur. Kilitli önizlemeler tam okuyucu açmaz.
+- Kaydedilenlerde metin/konu araması ve boş sonuç açıklaması eklendi. Klasör ve etiket eklenmedi.
+- Görüntüleme sayacı Görülen söz olarak adlandırıldı. Açık konu sayısı gelişim bölümünden çıkarıldı.
+- Faz 3 özellikleri bu sürüme eklenmedi.

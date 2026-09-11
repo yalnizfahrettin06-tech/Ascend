@@ -192,9 +192,10 @@ class UygulamaTest {
         compose.onNodeWithTag("personal-plan-panel").assertIsDisplayed()
         shot("18-personal-plan")
         compose.onNodeWithTag("plan-edit").performScrollTo().performClick()
-        compose.onNodeWithTag("onboarding-root").assertIsDisplayed()
-        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
-        compose.onNodeWithTag("onboarding-back").performClick()
+        compose.onNodeWithTag("onboarding-root").assertDoesNotExist()
+        compose.onNodeWithTag("content-avoid-work").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("plan-close").performScrollTo().performClick()
+        compose.onNodeWithTag("plan-close").performScrollTo().performClick()
         waitForHome()
         assertEquals("Opening and cancelling the editor must not replace the saved plan", original,
             runBlocking { demoDepo.personalProfile.first() })
@@ -204,7 +205,7 @@ class UygulamaTest {
         compose.onNodeWithTag("nav-ana").performClick()
         compose.onNodeWithTag("home-plan").performClick()
         compose.onNodeWithTag("plan-settings").performScrollTo().performClick()
-        compose.onNodeWithText("Ayarlar").assertIsDisplayed()
+        compose.onNodeWithTag("plan-reminders-toggle").assertIsDisplayed()
     }
 
     @Test fun momentChoiceChangesOnlyTheCurrentFeed() {

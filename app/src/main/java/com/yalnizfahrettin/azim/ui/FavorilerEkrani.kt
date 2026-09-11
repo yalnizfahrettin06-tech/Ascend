@@ -7,7 +7,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -22,6 +23,8 @@ import com.yalnizfahrettin.azim.data.*
 fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, oku: (Soz) -> Unit,
     kesfet: () -> Unit, paylas: (Soz) -> Unit = {}, onBack: (() -> Unit)? = null,
 ) {
+    var query by rememberSaveable { mutableStateOf("") }
+    val results = remember(favoriler, query, dil) { LibraryQuery.saved(favoriler, query, dil) }
     LazyColumn(
         Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding().testTag("saved-list"),
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 20.dp),
@@ -45,6 +48,16 @@ fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, 
                 color = Renk.metinIkincil, modifier = Modifier.padding(top = 12.dp), style = MaterialTheme.typography.bodyMedium)
             HorizontalDivider(Modifier.padding(top = 22.dp), color = Renk.kenarlik)
         }
+        if (favoriler.isNotEmpty()) item {
+            OutlinedTextField(value = query, onValueChange = { query = it }, singleLine = true,
+                label = { Text(cevir(dil, "Kaydedilenlerde ara", "Search saved quotes")) },
+                leadingIcon = { Icon(AzimIkon.Ara, null) },
+                trailingIcon = { if (query.isNotEmpty()) IconButton(onClick = { query = "" }) {
+                    Icon(AzimIkon.Kapat, cevir(dil, "Aramayı temizle", "Clear search"))
+                } }, modifier = Modifier.fillMaxWidth().testTag("saved-search"), shape = RoundedCornerShape(14.dp))
+            if (results.isEmpty()) Text(cevir(dil, "Bu aramayla eşleşen kayıtlı söz yok.", "No saved quotes match this search."),
+                color = Renk.metinIkincil, modifier = Modifier.padding(top = 16.dp).testTag("saved-no-results"))
+        }
         if (favoriler.isEmpty()) item {
             Box(Modifier.fillMaxWidth()) {
                 KlasikGorsel(KlasikMotif.COLUMN, Modifier.align(Alignment.BottomEnd).width(132.dp).height(270.dp), opacity = .13f)
@@ -60,7 +73,7 @@ fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, 
                 }
             }
         }
-        itemsIndexed(favoriler, key = { _, soz -> soz.kimlik }) { index, soz ->
+        itemsIndexed(results, key = { _, soz -> soz.kimlik }) { index, soz ->
             Column(Modifier.fillMaxWidth().testTag("saved-quote-${soz.kimlik}"), verticalArrangement = Arrangement.spacedBy(15.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text((index + 1).toString().padStart(2, '0'), color = Renk.metinIkincil, style = MaterialTheme.typography.labelMedium)

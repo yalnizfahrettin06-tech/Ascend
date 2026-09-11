@@ -50,8 +50,8 @@ fun IstatistikEkrani(
             Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.Yukselis, null, Modifier.size(27.dp), tint = Renk.metin)
                 Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                    Text(cevir(dil, "Sana göre plan", "Your personal plan"), color = Renk.metin, style = MaterialTheme.typography.titleMedium)
-                    Text(if (buyukYazi) cevir(dil, "Yanıtlarını düzenle.", "Edit your answers.")
+                    Text(cevir(dil, "Bildirimler ve tercihler", "Reminders and preferences"), color = Renk.metin, style = MaterialTheme.typography.titleMedium)
+                    Text(if (buyukYazi) cevir(dil, "Tercihlerini düzenle.", "Edit your preferences.")
                         else planOzeti.ifBlank { cevir(dil, "İhtiyaçların değiştikçe yeniden düzenle.", "Adjust it as your needs change.") },
                         color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
                 }
@@ -84,7 +84,7 @@ fun IstatistikEkrani(
         HorizontalDivider(color = Renk.kenarlik)
         Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
             Text(cevir(dil, "Biriken küçük adımlar", "Small steps collected"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 23.sp, lineHeight = 31.sp)
-            val olcumler = listOf(gorulen to cevir(dil, "Okunan söz", "Quotes read"), rekor to cevir(dil, "En uzun seri · gün", "Longest streak · days"), acikKategori to cevir(dil, "Açık konu", "Unlocked topics"))
+            val olcumler = listOf(gorulen to cevir(dil, "Görülen söz", "Quotes seen"), rekor to cevir(dil, "En uzun seri · gün", "Longest streak · days"))
             if (buyukYazi) Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                 olcumler.forEach { (sayi, baslik) ->
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {

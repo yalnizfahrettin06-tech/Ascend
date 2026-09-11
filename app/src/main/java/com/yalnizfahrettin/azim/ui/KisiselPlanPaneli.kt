@@ -1,113 +1,145 @@
 package com.yalnizfahrettin.azim.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KisiselPlanPaneli(
     profil: PersonalProfile?, secili: Set<String>, acik: Set<String>, dil: String,
     adet: Int, bas: Int, bit: Int, bildirimAcik: Boolean, kapat: () -> Unit,
-    duzenle: () -> Unit, konular: () -> Unit, ayarlar: () -> Unit, proAc: () -> Unit,
+    konular: () -> Unit,
+    saveContent: suspend (Map<String, Set<String>>) -> Unit,
+    saveRhythm: suspend (Int, Int, Int, Boolean) -> Unit,
 ) {
-    val etkin = PersonalPlan.effectiveCategories(profil, secili, acik)
-    // Catalog order remains stable when DataStore returns a differently ordered Set.
-    val oncelikli = Kategoriler.tumAltlar.filter { it.anahtar in secili && it.anahtar in etkin }
-    val yeniOneriler = profil?.let(PersonalPlan::recommendedCategories).orEmpty().filterNot { it in acik }.take(3)
-    ModalBottomSheet(onDismissRequest = kapat, containerColor = Renk.zemin,
+    var page by rememberSaveable { mutableStateOf("main") }
+    var draft by rememberSaveable { mutableStateOf((profil ?: PersonalProfile()).encode()) }
+    val preferences = PersonalProfile.decode(draft)
+    var count by rememberSaveable { mutableIntStateOf(adet) }
+    var start by rememberSaveable { mutableIntStateOf(bas) }
+    var end by rememberSaveable { mutableIntStateOf(bit) }
+    var enabled by rememberSaveable { mutableStateOf(bildirimAcik) }
+    var saving by remember { mutableStateOf(false) }
+    var error by remember { mutableStateOf<String?>(null) }
+    val scope = rememberCoroutineScope()
+    fun back() { if (!saving) { if (page == "main") kapat() else { page = "main"; error = null } } }
+    ModalBottomSheet(onDismissRequest = { if (!saving) kapat() }, containerColor = Renk.zemin,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
-        Column(Modifier.fillMaxWidth().testTag("personal-plan-panel").verticalScroll(rememberScrollState())
-            .navigationBarsPadding().padding(horizontal = 24.dp, vertical = 8.dp)) {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                EditoryalBaslik(cevir(dil, "SANA AİT BİR YÖN", "A DIRECTION OF YOUR OWN"),
-                    cevir(dil, "Planım", "My plan"), modifier = Modifier.weight(1f))
-                IconButton(onClick = kapat, modifier = Modifier.size(48.dp).testTag("plan-close")) {
-                    Icon(AzimIkon.Kapat, cevir(dil, "Kapat", "Close"), Modifier.size(22.dp), tint = Renk.metin)
+        BackHandler(page != "main" || saving) { back() }
+        Column(Modifier.fillMaxWidth().testTag("personal-plan-panel").navigationBarsPadding()
+            .verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(when(page) { "content" -> cevir(dil, "İçerik tercihleri", "Content preferences")
+                    "rhythm" -> cevir(dil, "Bildirim saatleri", "Reminder schedule")
+                    else -> cevir(dil, "Planım", "My plan") }, fontFamily = LoraSerif, fontSize = 28.sp,
+                    color = Renk.metin, modifier = Modifier.weight(1f).semantics { heading() })
+                IconButton(onClick = { back() }, enabled = !saving, modifier = Modifier.testTag("plan-close")) {
+                    Icon(if (page == "main") AzimIkon.Kapat else AzimIkon.Geri,
+                        cevir(dil, if (page == "main") "Kapat" else "Geri", if (page == "main") "Close" else "Back"))
                 }
             }
-            Text(if (profil == null) cevir(dil, "Birkaç yanıtla sana daha yakın bir başlangıç.", "A few answers for a start that feels like you.")
-                else cevir(dil, "Seçimlerin yön verir. Planın değişebilir.", "Your choices guide the way. Your plan can change."),
-                color = Renk.metinIkincil, modifier = Modifier.padding(top = 12.dp), style = MaterialTheme.typography.bodyMedium)
-            Box(Modifier.fillMaxWidth().padding(top = 20.dp, bottom = 16.dp)) {
-                Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    profil?.let {
-                        PersonalPlan.summary(it, dil).forEach { line ->
-                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
-                                Box(Modifier.padding(top = 10.dp).width(20.dp).height(1.dp).background(Renk.accent))
-                                Text(line, color = Renk.metin, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+            if (page == "main") {
+                Text(cevir(dil, "Yalnızca değiştirmek istediğin ayarı aç.", "Open just the setting you want to change."), color = Renk.metinIkincil)
+                PlanSettingRow(cevir(dil, "Bildirim konuları", "Reminder topics"),
+                    cevir(dil, "${secili.size} konu seçili", "${secili.size} topics selected"), "plan-categories", konular)
+                PlanSettingRow(cevir(dil, "Saat ve sıklık", "Time and frequency"),
+                    if (bildirimAcik) cevir(dil, "Günde $adet kez", "$adet times daily") + " · %02d:00–%02d:00".format(bas, bit % 24)
+                    else cevir(dil, "Bildirimler kapalı", "Reminders off"), "plan-settings") {
+                    count = adet; start = bas; end = bit; enabled = bildirimAcik; page = "rhythm"
+                }
+                PlanSettingRow(cevir(dil, "İçerik sınırları", "Content boundaries"),
+                    cevir(dil, "Görmek istemediklerini düzenle", "Choose what to leave out"), "plan-edit") {
+                    draft = (profil ?: PersonalProfile()).encode(); page = "content"
+                }
+            } else if (saving) {
+                CircularProgressIndicator(Modifier.align(Alignment.CenterHorizontally))
+            } else {
+                if (page == "rhythm") {
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Text(cevir(dil, "Hatırlatmalar", "Reminders"), Modifier.weight(1f))
+                        Switch(enabled, { enabled = it }, modifier = Modifier.testTag("plan-reminders-toggle"))
+                    }
+                    BildirimPlani(count, start, end, secili.size, { count = it }, { b, e -> start = b; end = e }, dil = dil)
+                    Text(cevir(dil, "Saatlerini değiştirmek konularını değiştirmez. Bildirimleri açarken gerekirse cihaz izni istenir.",
+                        "Changing the schedule keeps your topics. Enabling reminders may request device permission."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+                } else {
+                    Text(cevir(dil, "Ana akış rastgele kalır. İçerik türü ve dışlamalar ana akışta ve bildirimlerde geçerlidir. Keşfet’te konuları kendin açıp okuyabilirsin.",
+                        "Home stays random. Content type and exclusions apply to home and reminders. You can still browse topics yourself in Explore."), color = Renk.metinIkincil)
+                    listOf("avoid", "spirituality", "format", "discovery").forEach { key ->
+                        val q = PersonalPlan.questions.first { it.id == key }
+                        HorizontalDivider(color = Renk.kenarlik)
+                        Text(when(key) {
+                            "avoid" -> cevir(dil, "Görmek istemediğin konular", "Topics to leave out")
+                            "spirituality" -> cevir(dil, "Manevi içerikler", "Spiritual content")
+                            "format" -> cevir(dil, "İçerik türü", "Content type")
+                            else -> cevir(dil, "Bildirimlerde çeşitlilik", "Variety in reminders")
+                        }, color = Renk.metin, style = MaterialTheme.typography.titleMedium)
+                        q.options.forEach { option ->
+                            val selected = option.id in preferences.answer(key) || (preferences.answer(key).isEmpty() && option.id == when(key) {
+                                "format" -> "mixed"; "spirituality" -> "no"; "discovery" -> "balanced"; else -> ""
+                            })
+                            Row(Modifier.fillMaxWidth().heightIn(min = 48.dp)
+                                .then(if(q.multiple) Modifier.toggleable(selected, role = Role.Checkbox) {
+                                    draft = preferences.choose(key, option.id, true).encode()
+                                } else Modifier.selectable(selected, role = Role.RadioButton) {
+                                    draft = preferences.choose(key, option.id).encode()
+                                }).testTag("content-$key-${option.id}"), verticalAlignment = Alignment.CenterVertically) {
+                                if(q.multiple) Checkbox(selected, null) else RadioButton(selected, null)
+                                Spacer(Modifier.width(8.dp))
+                                Text(option.label(dil), color = Renk.metin, modifier = Modifier.weight(1f))
                             }
                         }
-                    } ?: Text(cevir(dil, "Neye ihtiyacın olduğunu birlikte bulalım.", "Let’s find what you need."),
-                        color = Renk.metin, fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 30.sp)
-                }
-            }
-            Button(onClick = duzenle, shape = RoundedCornerShape(50), modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("plan-edit")) {
-                Text(if (profil == null) cevir(dil, "Kendi planımı oluştur", "Create my plan") else cevir(dil, "Yanıtlarımı düzenle", "Edit my answers"))
-            }
-            PlanBolumu("01", cevir(dil, "Bildirim karışımın", "Your reminder mix"))
-            if (oncelikli.isEmpty()) {
-                Text(cevir(dil, "Seçtiğin konular şu anki tercihlerinle örtüşmüyor. Yanıtlarını veya konularını düzenleyebilirsin.",
-                    "Your selected topics do not match your current preferences. You can adjust your answers or topics."),
-                    color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.testTag("plan-priorities-empty"))
-            } else FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                oncelikli.forEach { kategori ->
-                    PlanKonuEtiketi(kategori.ad(dil))
-                }
-            }
-            Text(cevir(dil, "${oncelikli.size} öncelikli konu · ${etkin.size} açık konu planına uygun",
-                "${oncelikli.size} priority topics · ${etkin.size} unlocked topics fit your plan"),
-                color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 12.dp))
-            TextButton(onClick = konular, modifier = Modifier.heightIn(min = 48.dp).testTag("plan-categories"), contentPadding = PaddingValues(vertical = 10.dp)) {
-                Text(cevir(dil, "Konuları gör ve değiştir", "View and change topics"), modifier = Modifier.weight(1f))
-                Spacer(Modifier.width(8.dp))
-                Icon(AzimIkon.Ileri, null, Modifier.size(18.dp))
-            }
-            PlanBolumu("02", cevir(dil, "Günün ritmi", "Your daily rhythm"))
-            Surface(onClick = ayarlar, color = Renk.zemin, border = BorderStroke(1.dp, Renk.kenarlik),
-                shape = RoundedCornerShape(18.dp), modifier = Modifier.fillMaxWidth().testTag("plan-settings")) {
-                Row(Modifier.padding(18.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                        Text(if (bildirimAcik) cevir(dil, "Günde $adet küçük hatırlatma", "$adet small reminders a day") else cevir(dil, "Bildirimler kapalı", "Reminders are off"),
-                            color = Renk.metin, style = MaterialTheme.typography.bodyMedium)
-                        Text("%02d:00 – %02d:00".format(bas, bit % 24), color = Renk.metin, fontFamily = LoraSerif, fontSize = 24.sp, lineHeight = 31.sp)
                     }
-                    Icon(AzimIkon.Ileri, null, Modifier.size(20.dp), tint = Renk.metin)
+                    if (PersonalPlan.homeCategories(preferences, acik).isEmpty()) Text(cevir(dil,
+                        "Bu tercihlere uygun açık konu yok. Kaydedersen ana akış boş kalır; tercihini değiştirebilir veya Keşfet’ten konu açabilirsin.",
+                        "No unlocked topics match. Saving leaves home empty; change preferences or unlock a topic in Explore."), color = Renk.metinIkincil)
                 }
-            }
-            if (yeniOneriler.isNotEmpty()) {
-                PlanBolumu("03", cevir(dil, "Yoluna ekleyebilirsin", "More for your path"))
-                Text(yeniOneriler.mapNotNull { Kategoriler.bul(it)?.ad(dil) }.joinToString(" · "),
-                    color = Renk.metin, fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 28.sp)
-                Text(cevir(dil, "Bu konular henüz kilitli. Keşfet'te tek tek açabilir veya Pro demosunu deneyebilirsin.",
-                    "These topics are locked. Unlock them individually in Discover, or try the Pro demo."),
-                    color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 12.dp))
-                TextButton(onClick = proAc, modifier = Modifier.heightIn(min = 48.dp), contentPadding = PaddingValues(vertical = 10.dp)) {
-                    Text(cevir(dil, "Pro demosunu incele", "Explore Pro demo"))
+                error?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Assertive }) }
+                Button(onClick = {
+                    saving = true; error = null
+                    scope.launch {
+                        try {
+                            if(page == "content") saveContent(preferences.answers)
+                            else saveRhythm(count, start, end, enabled)
+                            page = "main"
+                        } catch (_: Exception) { error = cevir(dil, "Kaydedilemedi. Yeniden dene.", "Could not save. Try again.") }
+                        finally { saving = false }
+                    }
+                }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("plan-save"), shape = RoundedCornerShape(26.dp)) {
+                    Text(cevir(dil, "Kaydet", "Save"))
                 }
+                TextButton(onClick = { back() }, modifier = Modifier.fillMaxWidth()) { Text(cevir(dil, "Vazgeç", "Cancel")) }
             }
-            Text(cevir(dil, "Kendi hızında, her gün yeniden.", "At your pace, a new start each day."), color = Renk.metinIkincil,
-                fontFamily = LoraSerif, fontStyle = FontStyle.Italic, fontSize = 16.sp, modifier = Modifier.padding(top = 24.dp, bottom = 28.dp))
         }
     }
 }
 
 @Composable
-private fun PlanBolumu(sira: String, baslik: String) {
-    HorizontalDivider(Modifier.padding(top = 24.dp, bottom = 20.dp), color = Renk.kenarlik)
-    Row(Modifier.padding(bottom = 16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Icon(when (sira) { "01" -> AzimIkon.Bildirim; "02" -> AzimIkon.Saat; else -> AzimIkon.Kesfet },
-            null, Modifier.size(20.dp), tint = Renk.accent)
-        Text(baslik, color = Renk.metin, fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 30.sp, modifier = Modifier.weight(1f))
+private fun PlanSettingRow(title: String, summary: String, tag: String, open: () -> Unit) {
+    Surface(onClick = open, color = Renk.zemin, shape = RoundedCornerShape(14.dp),
+        border = BorderStroke(1.dp, Renk.kenarlik), modifier = Modifier.fillMaxWidth().testTag(tag)) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text(title, color = Renk.metin, style = MaterialTheme.typography.titleMedium)
+                Text(summary, color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+            }
+            Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
+        }
     }
 }

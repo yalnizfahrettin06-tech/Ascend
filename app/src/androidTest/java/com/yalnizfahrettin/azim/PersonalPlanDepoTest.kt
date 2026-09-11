@@ -65,6 +65,27 @@ class PersonalPlanDepoTest {
         } finally { job.cancelAndJoin(); file.delete() }
     }
 
+    @Test fun focusedUpdatesPreserveTopicsAndOtherSettings() = runBlocking {
+        val ctx = InstrumentationRegistry.getInstrumentation().targetContext
+        val file = File(ctx.cacheDir, "focused-${UUID.randomUUID()}.preferences_pb")
+        try { withPlanStore(file) { depo, _ ->
+            depo.completePersonalPlan(PersonalProfile(name = "Ada").choose("tone", "gentle"), false)
+            val topics = depo.secili.first()
+            depo.contentPreferences(mapOf("avoid" to setOf("work")))
+            assertEquals(topics, depo.secili.first())
+            assertFalse(depo.hatirlaticiAcik.first())
+            assertEquals(setOf("gentle"), depo.personalProfile.first()!!.answer("tone"))
+            depo.reminderRhythm(5, 8, 19, true)
+            assertEquals(topics, depo.secili.first())
+            assertEquals(setOf("work"), depo.personalProfile.first()!!.answer("avoid"))
+            assertEquals("Ada", depo.personalProfile.first()!!.name)
+            assertEquals(5, depo.gunlukAdet.first())
+            assertEquals(8, depo.baslangicSaati.first())
+            assertEquals(19, depo.bitisSaati.first())
+            assertTrue(depo.hatirlaticiAcik.first())
+        } } finally { file.delete() }
+    }
+
     @Test fun newInstallationStartsWithMarbleAndLightWithoutGrantingAccess() = runBlocking {
         val ctx = InstrumentationRegistry.getInstrumentation().targetContext
         val file = File(ctx.cacheDir, "plan-marble-${UUID.randomUUID()}.preferences_pb")

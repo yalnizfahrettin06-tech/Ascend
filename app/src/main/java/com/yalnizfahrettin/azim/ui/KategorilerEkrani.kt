@@ -57,6 +57,7 @@ fun KilitDialog(kategori: Kategori, dil: String, kapat: () -> Unit, demoAc: () -
 @Composable
 fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: (String) -> Unit,
     kilidiAc: (Kategori) -> Unit, pro: Boolean, proAc: () -> Unit, acilacakGrup: String? = null, bildirimAcik: Boolean = true,
+    oku: (Soz) -> Unit = {}, selectedRequest: Int = 0,
 ) {
 
     var grupKey by rememberSaveable { mutableStateOf(acilacakGrup) }
@@ -83,6 +84,13 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     }
     BackHandler(grupKey != null && detayKey == null && !alanlarAcik && arama.isBlank()) {
         grupKey = null; gorunum = "collections"
+    }
+    var consumedRequest by rememberSaveable { mutableIntStateOf(0) }
+    LaunchedEffect(selectedRequest) {
+        if (selectedRequest > consumedRequest) {
+            gorunum = "selected"; grupKey = null; arama = ""; detayKey = null
+            consumedRequest = selectedRequest
+        }
     }
     val query = arama.trim()
     val collections = gorunum == "collections" && query.isBlank()
@@ -142,7 +150,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                                 .padding(vertical = 10.dp), verticalArrangement = Arrangement.Center) {
                                 Text(when (view) {
                                     "collections" -> cevir(dil, "Koleksiyonlar", "Collections")
-                                    "selected" -> cevir(dil, "Seçtiklerim", "Selected")
+                                    "selected" -> cevir(dil, "Bildirim konuları", "Reminder topics")
                                     else -> cevir(dil, "Tüm konular", "All topics")
                                 }, color = if (gorunum == view && query.isBlank()) Renk.accent else Renk.metinIkincil,
                                     fontSize = 13.sp, lineHeight = 20.sp,
@@ -348,7 +356,8 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             }
             items(gosterilenSozler, key = { it.kimlik }) { soz ->
                 HorizontalDivider(color = Renk.kenarlik)
-                Text(soz.metin(dil), Modifier.fillMaxWidth().padding(vertical = 22.dp).testTag("category-quote-${soz.kimlik}"),
+                Text(soz.metin(dil), Modifier.fillMaxWidth().clickable(enabled = acildi, role = Role.Button,
+                    onClickLabel = cevir(dil, "Sözü aç", "Open quote")) { oku(soz) }.padding(vertical = 22.dp).testTag("category-quote-${soz.kimlik}"),
                     color = Renk.metin, fontFamily = LoraSerif, fontSize = 23.sp, lineHeight = 33.sp)
             }
         }

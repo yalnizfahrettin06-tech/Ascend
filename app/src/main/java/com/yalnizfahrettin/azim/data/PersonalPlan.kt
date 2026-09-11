@@ -146,6 +146,10 @@ object PersonalPlan {
             category.anahtar to (1 + chosen.sumOf { (categories, weight) -> if (category.anahtar in categories) weight else 0 })
         }
     }
+    /** Random home discovery respects explicit content boundaries, without ranking topics. */
+    fun homeCategories(profile: PersonalProfile?, access: Set<String>): Set<String> =
+        if (profile == null) access else weights(profile).keys.intersect(access)
+
     private val starterOrder = listOf("motivasyon", "ozsefkat", "marcus")
     private fun recommended(scores: Map<String, Int>): List<String> = scores.entries
         .sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }

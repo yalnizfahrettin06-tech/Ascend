@@ -96,6 +96,25 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         p.remove(K.ONBOARDING_DRAFT)
     }
 
+    /** Update only content controls; never reset topics, rhythm or notification consent. */
+    suspend fun contentPreferences(answers: Map<String, Set<String>>) = store.edit { p ->
+        val current = PersonalProfile.decode(p[K.PERSONAL_PROFILE])
+        val keys = setOf("avoid", "spirituality", "format", "discovery")
+        p[K.PERSONAL_PROFILE] = current.copy(answers = current.answers + answers.filterKeys { it in keys }).encode()
+    }
+
+    suspend fun reminderRhythm(count: Int, start: Int, end: Int, enabled: Boolean) = store.edit { p ->
+        val safe = PersonalProfile.decode(PersonalProfile(dailyCount = count, startHour = start, endHour = end).encode())
+        p[K.GUNLUK] = safe.dailyCount
+        p[K.BASLANGIC] = safe.startHour
+        p[K.BITIS] = safe.endHour
+        p[K.HATIRLATICI] = enabled
+        p[K.PERSONAL_PROFILE]?.let { raw ->
+            p[K.PERSONAL_PROFILE] = PersonalProfile.decode(raw).copy(dailyCount = safe.dailyCount,
+                startHour = safe.startHour, endHour = safe.endHour).encode()
+        }
+    }
+
     private fun gorseliGocur(p: MutablePreferences) {
         if (p[K.VISUAL_V8] == true) return
         val previous = p[K.PALET]?.let { runCatching { Palet.valueOf(it) }.getOrNull() }
