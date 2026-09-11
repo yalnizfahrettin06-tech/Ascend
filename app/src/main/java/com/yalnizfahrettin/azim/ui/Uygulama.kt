@@ -167,9 +167,9 @@ fun Uygulama(
     }
 
     // Akışı bir kez kur: seçili kategorilerden karıştırılmış liste.
-    LaunchedEffect(secili, acik, profil, ihtiyac, onboardingBitti) {
-        if (secili.isNotEmpty()) {
-            val yeni = MomentFeed.apply(PersonalPlan.feed(profil, secili, acik, gecmis), ihtiyac)
+    LaunchedEffect(acik, onboardingBitti) {
+        if (onboardingBitti) {
+            val yeni = Sozler.tumu().filter { it.kategori in acik }.shuffled()
             akis = yeni
             indeks = 0
         }

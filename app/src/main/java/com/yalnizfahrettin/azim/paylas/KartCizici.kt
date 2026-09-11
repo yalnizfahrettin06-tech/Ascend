@@ -148,7 +148,7 @@ object KartCizici {
         val fullHeight = layout(text).height
         canvas.save(); canvas.translate(left, top)
         layout(if (reveal >= 1f) text else kelimeAcilimi(text, reveal)).draw(canvas); canvas.restore()
-        val accent = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(108,41,50); strokeWidth = w * .006f; strokeCap = Paint.Cap.ROUND }
+        val accent = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(52,52,50); strokeWidth = w * .006f; strokeCap = Paint.Cap.ROUND }
         canvas.drawLine(left, top - w * .045f, left + w * .09f, top - w * .045f, accent)
         if (reveal >= .98f && source.isNotBlank()) {
             val sourcePaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(57,56,53); typeface = Typeface.SANS_SERIF; textSize = w * .031f }

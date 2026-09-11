@@ -40,7 +40,7 @@ data class AzimRenkleri(
 
     val accentDerin: Color,
     val karanlikMi: Boolean,
-    val marka: Color = Color(0xFF6C2932),
+    val marka: Color = Color(0xFF343432),
     val markaUstu: Color = Color(0xFFFFF9F5),
     // Scoped refinement surfaces; do not recolor global primary buttons.
     val koleksiyonYuzeyi: Color = yuzey,
@@ -141,12 +141,15 @@ fun AzimTema(
         surfaceContainerLowest = renk.zemin, surfaceContainerLow = renk.yuzey,
         surfaceContainer = renk.yuzey, surfaceContainerHigh = renk.yuzeyYuksek,
         surfaceContainerHighest = renk.yuzeyYuksek,
-        error = if (renk.karanlikMi) Color(0xFFE0BAC8) else Color(0xFF743A4B),
+        error = if (renk.karanlikMi) Color(0xFFE2E2E0) else Color(0xFF343432),
         onError = onAccent, errorContainer = renk.accentZemin, onErrorContainer = renk.metin,
     )
     val view = androidx.compose.ui.platform.LocalView.current
     val activity = generateSequence(ctx) { (it as? android.content.ContextWrapper)?.baseContext }.filterIsInstance<android.app.Activity>().firstOrNull()
     SideEffect { activity?.let {
+        @Suppress("DEPRECATION")
+        it.window.navigationBarColor = renk.zemin.toArgb()
+        if (android.os.Build.VERSION.SDK_INT >= 29) it.window.isNavigationBarContrastEnforced = false
         it.window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(renk.zemin.toArgb()))
         androidx.core.view.WindowCompat.getInsetsController(it.window, view).apply {
         isAppearanceLightStatusBars = !renk.karanlikMi

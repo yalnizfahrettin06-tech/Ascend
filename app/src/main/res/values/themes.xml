@@ -6,7 +6,7 @@
         <item name="android:windowBackground">@color/zemin</item>
     </style>
 
-    <!-- Ascend: burgundy Roman column launcher and white app surface. -->
+    <!-- Ascend: graphite rising mark and matching stone surface. -->
     <style name="Theme.Azim.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/zemin</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>

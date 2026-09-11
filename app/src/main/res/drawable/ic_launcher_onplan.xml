@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Six dp inset keeps the column inside the adaptive icon safe zone. -->
-<inset xmlns:android="http://schemas.android.com/apk/res/android" android:inset="6dp">
-    <bitmap android:src="@drawable/art_launcher_column"
-        android:gravity="fill" android:filter="true"/>
-</inset>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <group android:translateX="31" android:translateY="29" android:scaleX="2" android:scaleY="2">
+        <path android:fillColor="#343432" android:pathData="M2,22 L4,22 L4,16 L2,16 Z M7,22 L9,22 L9,13 L7,13 Z M12,22 L14,22 L14,10 L12,10 Z M17,22 L19,22 L19,6 L17,6 Z M2,12 L20,1 L20,4 Z"/>
+    </group>
+</vector>

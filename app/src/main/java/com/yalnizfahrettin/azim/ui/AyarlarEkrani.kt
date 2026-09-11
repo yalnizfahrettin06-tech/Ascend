@@ -81,7 +81,7 @@ fun AyarlarEkrani(
                     TemaModu.KARANLIK to stringResource(R.string.tema_karanlik),
                     TemaModu.OLED to stringResource(R.string.tema_oled)), tema, temaSec)
             SecimSatiri(stringResource(R.string.renk_paleti),
-                listOf(Palet.MERMER, Palet.MONO, Palet.BORDO).map { it to it.etiket(dil) }, palet, paletSec)
+                listOf(Palet.MERMER, Palet.MONO).map { it to it.etiket(dil) }, guncelPalet(palet), paletSec)
             SecimSatiri(stringResource(R.string.dil), listOf("tr" to "Türkçe", "en" to "English"), dil, dilSec)
 
             AyarBolumu("02", stringResource(R.string.bildirimler))

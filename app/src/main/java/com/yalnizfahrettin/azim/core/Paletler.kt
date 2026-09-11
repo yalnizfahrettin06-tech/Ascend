@@ -10,7 +10,7 @@ enum class Palet(val etiketTr: String, val etiketEn: String) {
 }
 
 fun guncelPalet(palet: Palet): Palet = when (palet) {
-    Palet.KUM, Palet.LACIVERT, Palet.YOSUN -> Palet.MERMER
+    Palet.KUM, Palet.LACIVERT, Palet.YOSUN, Palet.BORDO -> Palet.MERMER
     else -> palet
 }
 
@@ -32,44 +32,44 @@ fun paletiCozTest(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri 
 internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri {
     val secim = guncelPalet(palet)
     val accent = if (karanlik) when (secim) {
-        Palet.BORDO -> Color(0xFFE0BAC8)
+        Palet.BORDO -> Color(0xFFE2E2E0)
         Palet.MONO -> Color(0xFFF2F2F2)
-        else -> Color(0xFFDBB6C0)
+        else -> Color(0xFFE2E2E0)
     } else when (secim) {
-        Palet.BORDO -> Color(0xFF5A2032)
-        Palet.MONO -> Color(0xFF211D1F)
-        else -> Color(0xFF6C2932)
+        Palet.BORDO -> Color(0xFF343432)
+        Palet.MONO -> Color(0xFF242424)
+        else -> Color(0xFF343432)
     }
     return if (karanlik) AzimRenkleri(
-        zemin = if (oled) Color.Black else Color(0xFF141214),
-        yuzey = Color(0xFF1F1B1D), yuzeyYuksek = Color(0xFF2C272A),
-        kenarlik = Color(0xFF494146), kenarlikGuclu = Color(0xFF9B9297),
-        metin = Color(0xFFF8F5F6), metinIkincil = Color(0xFFCBC3C7), metinSonuk = Color(0xFFCBC3C7),
-        accent = accent, accentSonuk = Color(0xFF9B9297),
+        zemin = if (oled) Color.Black else Color(0xFF141414),
+        yuzey = Color(0xFF202020), yuzeyYuksek = Color(0xFF2C2C2B),
+        kenarlik = Color(0xFF494948), kenarlikGuclu = Color(0xFF9B9B97),
+        metin = Color(0xFFF8F8F5), metinIkincil = Color(0xFFCBCBC7), metinSonuk = Color(0xFFCBCBC7),
+        accent = accent, accentSonuk = Color(0xFF9B9B97),
         accentZemin = when (secim) {
-            Palet.BORDO -> Color(0xFF32252A)
-            Palet.MONO -> Color(0xFF2C272A)
-            else -> Color(0xFF302529)
+            Palet.BORDO -> Color(0xFF30302E)
+            Palet.MONO -> Color(0xFF2C2C2B)
+            else -> Color(0xFF30302E)
         },
-        accentDerin = Color(0xFF494146), karanlikMi = true,
-        koleksiyonYuzeyi = Color(0xFF282326),
-        markaYuzeyi = if (secim == Palet.MONO) Color(0xFF2C272A) else Color(0xFF302529),
-        markaSessizYuzeyi = if (secim == Palet.MONO) Color(0xFF242124) else Color(0xFF282125),
-        markaBasiliYuzeyi = if (secim == Palet.MONO) Color(0xFF3C373A) else Color(0xFF463038),
+        accentDerin = Color(0xFF494948), karanlikMi = true,
+        koleksiyonYuzeyi = Color(0xFF282827),
+        markaYuzeyi = if (secim == Palet.MONO) Color(0xFF2C2C2B) else Color(0xFF30302E),
+        markaSessizYuzeyi = if (secim == Palet.MONO) Color(0xFF242424) else Color(0xFF282827),
+        markaBasiliYuzeyi = if (secim == Palet.MONO) Color(0xFF3C3C3A) else Color(0xFF444440),
     ) else AzimRenkleri(
         zemin = Color(0xFFF5F3EE), yuzey = Color(0xFFF7F5F1), yuzeyYuksek = Color(0xFFEDEAE4),
         kenarlik = Color(0xFFD6D3CD), kenarlikGuclu = Color(0xFF827F79),
         metin = Color(0xFF191919), metinIkincil = Color(0xFF55534F), metinSonuk = Color(0xFF55534F),
         accent = accent, accentSonuk = Color(0xFF827F79),
         accentZemin = when (secim) {
-            Palet.BORDO -> Color(0xFFF5ECEF)
-            Palet.MONO -> Color(0xFFF1EFF0)
-            else -> Color(0xFFF5EFF0)
+            Palet.BORDO -> Color(0xFFEEEDE9)
+            Palet.MONO -> Color(0xFFEEEDE9)
+            else -> Color(0xFFEEEDE9)
         },
-        accentDerin = Color(0xFFE6DDE0), karanlikMi = false,
+        accentDerin = Color(0xFFE2E1DC), karanlikMi = false,
         koleksiyonYuzeyi = Color(0xFFF3F0EA),
-        markaYuzeyi = if (secim == Palet.MONO) Color(0xFFF1EFF0) else Color(0xFFF3E7EA),
-        markaSessizYuzeyi = if (secim == Palet.MONO) Color(0xFFF5F3F4) else Color(0xFFF3F0ED),
-        markaBasiliYuzeyi = if (secim == Palet.MONO) Color(0xFFE3DFE1) else Color(0xFFEBDADD),
+        markaYuzeyi = if (secim == Palet.MONO) Color(0xFFEEEDE9) else Color(0xFFE9E8E3),
+        markaSessizYuzeyi = if (secim == Palet.MONO) Color(0xFFF3F2EE) else Color(0xFFF3F0ED),
+        markaBasiliYuzeyi = if (secim == Palet.MONO) Color(0xFFDDDDD8) else Color(0xFFDDDDD8),
     )
 }

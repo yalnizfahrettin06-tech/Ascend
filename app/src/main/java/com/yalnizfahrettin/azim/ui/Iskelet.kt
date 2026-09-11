@@ -38,15 +38,15 @@ fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
                 val etkin = secili == sekme || (sekme == Sekme.ISTATISTIK && secili == Sekme.FAVORI)
                 val renk by animateColorAsState(if (etkin) Renk.metin else Renk.metinIkincil, tween(150), label = "navigation-ink")
                 Column(
-                    Modifier.weight(1f).heightIn(min = 76.dp).testTag("nav-${sekme.rota}")
+                    Modifier.weight(1f).heightIn(min = 56.dp).testTag("nav-${sekme.rota}")
                         .selectable(selected = etkin, role = Role.Tab, onClick = { if (secili != sekme) secildi(sekme) })
-                        .padding(horizontal = 6.dp, vertical = 8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(5.dp),
+                        .padding(horizontal = 6.dp, vertical = 4.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(2.dp),
                 ) {
                     Box(Modifier.width(22.dp).height(2.dp).background(if (etkin) Renk.accent else Color.Transparent, RoundedCornerShape(1.dp)))
-                    Icon(ikonlar[index], null, Modifier.size(24.dp), tint = renk)
+                    Icon(ikonlar[index], null, Modifier.size(21.dp), tint = renk)
                     Text(etiketler[index], modifier = Modifier.fillMaxWidth(), color = renk,
-                        fontSize = 12.sp, lineHeight = 16.sp, letterSpacing = 0.sp,
+                        fontSize = 11.sp, lineHeight = 14.sp, letterSpacing = 0.sp,
                         maxLines = 2, softWrap = true,
                         fontWeight = if (etkin) FontWeight.SemiBold else FontWeight.Normal, textAlign = TextAlign.Center)
                 }

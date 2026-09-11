@@ -93,15 +93,6 @@ fun AnaEkran(
         Box(Modifier.matchParentSize().background(if (Renk.karanlikMi) Renk.zemin.copy(alpha = .90f) else Color.Transparent))
         Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
             Renk.zemin.copy(alpha = if (buyukYazi) .96f else .35f), Renk.zemin.copy(alpha = .05f)))))
-        val orbitColor = Renk.metinIkincil
-        Canvas(Modifier.fillMaxWidth().height(155.dp)) {
-            val path = androidx.compose.ui.graphics.Path().apply {
-                moveTo(size.width * .07f, size.height * .20f)
-                cubicTo(size.width * .36f, -size.height * .03f, size.width * .61f, size.height * .31f, size.width * .75f, size.height * .89f)
-            }
-            drawPath(path, orbitColor.copy(alpha = .45f), style = androidx.compose.ui.graphics.drawscope.Stroke(.45.dp.toPx()))
-            drawCircle(orbitColor, 2.3.dp.toPx(), androidx.compose.ui.geometry.Offset(size.width * .75f, size.height * .89f))
-        }
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content")) {
             Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.YukselenMarka, null, Modifier.size(30.dp), tint = Renk.accent)
@@ -119,7 +110,6 @@ fun AnaEkran(
             Text(cevir(dil, when (simdi.hour) { in 5..11 -> "SABAH"; in 12..17 -> "GÜNDÜZ"; else -> "AKŞAM" },
                 when (simdi.hour) { in 5..11 -> "MORNING"; in 12..17 -> "AFTERNOON"; else -> "EVENING" }) + " · " + simdi.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")),
                 fontSize = 10.sp, letterSpacing = 2.sp, color = Renk.metinIkincil, modifier = Modifier.padding(top = 8.dp, bottom = 8.dp))
-            AnlikIhtiyacSecimi(ihtiyac, dil, ihtiyacSec, Modifier.align(Alignment.Start).padding(top = 4.dp))
             if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Text(cevir(dil, "Biraz yer açalım.", "Make a little room."), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
@@ -166,23 +156,6 @@ fun AnaEkran(
                 }
             }
             if (aktif != null) {
-                Row(Modifier.fillMaxWidth().heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage - 1).coerceAtLeast(0)) } }, enabled = pager.currentPage > 0, modifier = Modifier.size(48.dp).border(.7.dp, Renk.kenarlikGuclu, CircleShape).testTag("quote-previous")) {
-                        Icon(AzimIkon.Geri, cevir(dil, "Önceki söz", "Previous quote"), modifier = Modifier.size(20.dp), tint = if (pager.currentPage > 0) Renk.metin else Renk.kenarlikGuclu)
-                    }
-                    HorizontalDivider(Modifier.weight(1f).padding(horizontal = 10.dp), color = Renk.kenarlikGuclu, thickness = .5.dp)
-                    Text("${(pager.settledPage + 1).toString().padStart(2, '0')} / ${feed.size}",
-                        color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp,
-                        letterSpacing = .5.sp, textAlign = TextAlign.Center,
-                        modifier = Modifier.testTag("quote-position").clearAndSetSemantics {
-                            contentDescription = cevir(dil, "${feed.size} sözden ${pager.settledPage + 1}.", "Quote ${pager.settledPage + 1} of ${feed.size}.")
-                        })
-                    HorizontalDivider(Modifier.weight(1f).padding(horizontal = 10.dp), color = Renk.kenarlikGuclu, thickness = .5.dp)
-                    IconButton(onClick = { kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1).coerceAtMost(feed.lastIndex)) } }, enabled = pager.currentPage < feed.lastIndex, modifier = Modifier.size(48.dp).border(.7.dp, Renk.kenarlikGuclu, CircleShape).testTag("quote-next")) {
-                        Icon(AzimIkon.Sonraki, cevir(dil, "Sonraki söz", "Next quote"), Modifier.size(22.dp),
-                            tint = if (pager.currentPage < feed.lastIndex) Renk.metin else Renk.kenarlikGuclu)
-                    }
-                }
                 Row(Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     val kayitli = aktif.kimlik in favoriler
                     Text(aktif.sunumEtiketi(dil), Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 10.sp, lineHeight = 15.sp)
@@ -200,6 +173,12 @@ fun AnaEkran(
                             Icon(AzimIkon.Daha, cevir(dil, "Diğer araçlar", "More tools"), Modifier.size(22.dp), tint = Renk.metin)
                         }
                         DropdownMenu(expanded = araclar, onDismissRequest = { araclar = false }) {
+                            DropdownMenuItem(text = { Text(cevir(dil, "Sonraki söz", "Next quote")) }, onClick = {
+                                araclar = false; kapsam.launch { pager.animateScrollToPage((pager.currentPage + 1) % feed.size) }
+                            }, leadingIcon = { Icon(AzimIkon.Sonraki, null) })
+                            DropdownMenuItem(text = { Text(cevir(dil, "Önceki söz", "Previous quote")) }, enabled = pager.currentPage > 0, onClick = {
+                                araclar = false; kapsam.launch { pager.animateScrollToPage((pager.currentPage - 1).coerceAtLeast(0)) }
+                            }, leadingIcon = { Icon(AzimIkon.Geri, null) })
                             DropdownMenuItem(text = { Text(cevir(dil, if (ses.konusuyor) "Sesi durdur" else "Sesli dinle", if (ses.konusuyor) "Stop reading" else "Listen")) }, onClick = {
                                 araclar = false
                                 if (ses.hazir) ses.degistir(aktif.metin(dil))

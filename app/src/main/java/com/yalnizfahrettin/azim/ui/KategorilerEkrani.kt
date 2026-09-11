@@ -100,18 +100,19 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     val columns = if (LocalConfiguration.current.screenWidthDp < 360 || LocalDensity.current.fontScale > 1.3f) 1 else 2
     fun chooseView(value: String) { odak.clearFocus(); arama = ""; grupKey = null; gorunum = value }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
-    MimariIsik(Modifier.matchParentSize())
     Column(Modifier.fillMaxSize().statusBarsPadding()) {
-        Box(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 12.dp)) {
-            KlasikGorsel(KlasikMotif.COLUMN, Modifier.align(Alignment.TopEnd).width(120.dp).height(132.dp), opacity = .5f)
+        Box(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp)) {
+            Box(Modifier.matchParentSize()) {
+                KlasikGorsel(KlasikMotif.ARCH, Modifier.align(Alignment.CenterEnd).width(94.dp).fillMaxHeight(), opacity = .24f)
+            }
             Column {
                 Text("A S C E N D", fontSize = 9.sp, letterSpacing = 2.sp, color = Renk.metinIkincil)
-                Text(cevir(dil, "Keşfet", "Explore"), fontFamily = LoraSerif, fontSize = 40.sp, lineHeight = 49.sp,
+                Text(cevir(dil, "Keşfet", "Explore"), fontFamily = LoraSerif, fontSize = 34.sp, lineHeight = 42.sp,
                     color = Renk.metin, modifier = Modifier.semantics { heading() })
                 Text(cevir(dil, "Sana iyi gelecek düşünceyi bul.", "Find a thought for this moment."), fontSize = 13.sp, lineHeight = 20.sp, color = Renk.metin)
             }
         }
-        Column(Modifier.padding(horizontal = 24.dp, vertical = 8.dp)) {
+        Column(Modifier.padding(horizontal = 24.dp, vertical = 2.dp)) {
                     TextField(arama, { arama = it },
                         placeholder = { Text(cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers"), fontSize = 14.sp) },
                         interactionSource = searchInteraction,
@@ -365,7 +366,7 @@ private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int
     val interaction = remember { MutableInteractionSource() }
     val focused by interaction.collectIsFocusedAsState()
     val konuSayisi = cevir(dil, "${group.altlar.size} konu", "${group.altlar.size} topics")
-    val secim = cevir(dil, "${seciliSayisi} konu seçili", "${seciliSayisi} topics selected")
+    val secim = cevir(dil, "${seciliSayisi} seçili", "${seciliSayisi} topics selected")
     Surface(onClick = onClick, interactionSource = interaction,
         modifier = modifier.testTag("collection-" + group.anahtar).semantics {
             // Opening a collection never toggles its reminder topics.
@@ -375,7 +376,7 @@ private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int
         border = BorderStroke(if (focused) 2.dp else 1.dp, if (focused) Renk.accent else Renk.kenarlik)) {
         Box {
         KoleksiyonRolefi(group.anahtar, Modifier.matchParentSize())
-        Column(Modifier.padding(14.dp).heightIn(min = 196.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(Modifier.padding(14.dp).heightIn(min = 170.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Icon(koleksiyonIkonu(group.anahtar), null, Modifier.size(20.dp), tint = Renk.accent)
             Text(group.ad(dil), fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 26.sp,
                 color = Renk.metin)

@@ -49,7 +49,7 @@ jobs:
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.0.0-test-APK
+          name: Ascend-9.1.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -58,8 +58,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.0.0.apk
-          gh release create v9.0.0-ui Ascend-9.0.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.0.0 — Marble UI" --notes "Reference-based home, explore and share studio redesign. Pro remains an explicitly labeled demo."
+          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.1.0.apk
+          gh release create v9.1.0-ui Ascend-9.1.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.1.0 — Quiet Stone UI" --notes "Reference-based home, explore and share studio redesign. Pro remains an explicitly labeled demo."
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
