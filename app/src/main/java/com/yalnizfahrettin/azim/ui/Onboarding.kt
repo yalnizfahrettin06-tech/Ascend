@@ -41,7 +41,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/** A skippable conversation; each explicit answer participates in the real local plan. */
+/** Five quiet pages. Reminder permission is optional and only requested by an explicit tap. */
 @Composable
 fun Onboarding(
     dil: String, kaydediliyor: Boolean = false, hata: String? = null,
@@ -52,26 +52,22 @@ fun Onboarding(
     previewAccess: Set<String> = Erisim.ucretsizKategoriler,
     bitir: (Set<String>, Int, Int, Int, Boolean) -> Unit,
 ) {
-    var encoded by rememberSaveable { mutableStateOf(initialDraft.encode()) }
+    var encoded by rememberSaveable { mutableStateOf(initialDraft.copy(step = if (initialDraft.setupVersion >= 2) initialDraft.step.coerceIn(0, 4) else when (initialDraft.step) { 15 -> 2; 16 -> 3; in 17..19 -> 4; else -> 0 }, setupVersion = 2).encode()) }
     val profile = remember(encoded) { PersonalProfile.decode(encoded) }
     val step = profile.step
-    var namePending by remember { mutableStateOf(false) }
     var hourDialog by rememberSaveable { mutableIntStateOf(0) }
     var permissionHelp by rememberSaveable { mutableStateOf(false) }
     val keyboard = LocalSoftwareKeyboardController.current
     val focus = LocalFocusManager.current
     val largeText = LocalDensity.current.fontScale > 1.35f
-    fun update(value: PersonalProfile, debounce: Boolean = false) {
-        encoded = value.encode(); namePending = debounce
-        if (!debounce) draftChanged(value)
-    }
-    LaunchedEffect(encoded, namePending) {
-        if (namePending) { delay(220); draftChanged(profile); namePending = false }
+    fun update(value: PersonalProfile) {
+        encoded = value.encode()
+        draftChanged(value)
     }
     fun move(next: Int) {
         focus.clearFocus()
         keyboard?.hide()
-        update(profile.copy(step = next.coerceIn(0, PersonalPlan.LAST_STEP)))
+        update(profile.copy(step = next.coerceIn(0, 4)))
     }
     fun finish(reminders: Boolean) {
         if (finishProfile != null) finishProfile(profile, reminders)
@@ -80,7 +76,6 @@ fun Onboarding(
     BackHandler(step > 0 || editing || kaydediliyor) {
         if (!kaydediliyor) { if (step > 0) move(step - 1) else onCancel() }
     }
-    val question = PersonalPlan.questions.getOrNull(step - 2)
     Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding().imePadding().testTag("onboarding-root")) {
         Row(Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             if (step > 0 || editing) IconButton(onClick = { if (step > 0) move(step - 1) else onCancel() }, enabled = !kaydediliyor,
@@ -91,14 +86,10 @@ fun Onboarding(
                 else Text("ascend", fontFamily = LoraSerif, fontSize = 24.sp, fontWeight = FontWeight.Normal,
                     letterSpacing = (-0.5).sp, color = Renk.metin)
             }
-            Text("${step + 1} / ${PersonalPlan.LAST_STEP + 1}", fontSize = 12.sp, color = Renk.metinIkincil)
-            if (step == 1 || question != null) TextButton(enabled = !kaydediliyor, onClick = {
-                focus.clearFocus(); keyboard?.hide()
-                update((if (step == 1) profile.copy(name = "") else profile.skip(question!!.id)).copy(step = step + 1))
-            }, modifier = Modifier.testTag("onboarding-skip")) { Text(cevir(dil, "Atla", "Skip"), color = Renk.metinIkincil) }
-            else Spacer(Modifier.width(12.dp))
+            Text("${step + 1} / 5", fontSize = 12.sp, color = Renk.metinIkincil)
+            Spacer(Modifier.width(12.dp))
         }
-        val progress = (step + 1f) / (PersonalPlan.LAST_STEP + 1)
+        val progress = (step + 1f) / 5
         val visibleProgress by animateFloatAsState(progress, tween(180), label = "onboarding-progress")
         Box(Modifier.fillMaxWidth().padding(horizontal = 24.dp).height(2.dp)
             .clip(CircleShape).background(Renk.kenarlik).testTag("onboarding-progress")
@@ -114,34 +105,10 @@ fun Onboarding(
                 PlanSection(shownStep, dil)
                 when (shownStep) {
                     0 -> PlanWelcome(dil)
-                    1 -> {
-                        PlanTitle(cevir(dil, "Sana nasıl hitap edelim?", "What should we call you?"),
-                            cevir(dil, "İstersen yalnızca adın. Karşılamanda kullanacağız.", "Just a first name, if you like. We will use it to greet you."))
-                        Spacer(Modifier.height(12.dp))
-                        OutlinedTextField(value = profile.name, onValueChange = { update(profile.copy(name = it.take(40)), debounce = true) }, enabled = !kaydediliyor,
-                            singleLine = true, label = { Text(cevir(dil, "Adın (isteğe bağlı)", "Name (optional)")) },
-                            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words, imeAction = ImeAction.Done),
-                            keyboardActions = KeyboardActions(onDone = { move(2) }),
-                            shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("onboarding-name"))
-                    }
-                    in 2..14 -> {
-                        val q = PersonalPlan.questions[shownStep - 2]
-                        PlanTitle(q.title(dil), q.hint(dil), Modifier.testTag("onboarding-question-${q.id}"))
-                        if (q.multiple) Text(cevir(dil, "${profile.answer(q.id).size} seçili · Birden fazla seçebilirsin", "${profile.answer(q.id).size} selected · Choose more than one"),
-                            color = Renk.metinIkincil, style = MaterialTheme.typography.labelMedium,
-                            modifier = Modifier.testTag("onboarding-selection-count").semantics { liveRegion = LiveRegionMode.Polite })
-                        Column(if (q.multiple) Modifier else Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            q.options.forEach { option ->
-                                PlanChoice(option.label(dil), option.id in profile.answer(q.id), "onboarding-option-${q.id}-${option.id}",
-                                    role = if (q.multiple) Role.Checkbox else Role.RadioButton) { update(profile.choose(q.id, option.id, q.multiple)) }
-                            }
-                        }
-                    }
-                    15 -> PlanFrequency(profile, dil) { update(profile.copy(dailyCount = it)) }
-                    16 -> PlanHours(profile, dil) { hourDialog = it }
-                    17 -> PlanPreview(profile, dil, previewAccess)
-                    18 -> PlanAccess(dil)
-                    19 -> PlanPermission(profile, dil, bildirimIzni, previewAccess) { permissionHelp = true }
+                    1 -> PlanIntroduction(dil)
+                    2 -> PlanFrequency(profile, dil) { update(profile.copy(dailyCount = it)) }
+                    3 -> PlanHours(profile, dil) { hourDialog = it }
+                    4 -> PlanPermission(profile, dil, bildirimIzni, previewAccess) { permissionHelp = true }
                 }
             }
             }
@@ -151,18 +118,18 @@ fun Onboarding(
             hata?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Polite }) }
             Button(onClick = {
-                if (step < PersonalPlan.LAST_STEP) move(step + 1)
+                if (step < 4) move(step + 1)
                 else if (bildirimIzni) finish(true) else izinIste()
             }, enabled = !kaydediliyor, shape = RoundedCornerShape(28.dp), modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("onboarding-next")) {
                 Text(if (kaydediliyor) cevir(dil, "Kaydediliyor…", "Saving…") else when (step) {
-                    0 -> cevir(dil, "Yolunu oluştur", "Build your path")
-                    17 -> cevir(dil, "Bu planla devam et", "Continue with this plan")
-                    19 -> if (bildirimIzni) cevir(dil, if (editing) "Planımı güncelle" else "Ascend’e başla", if (editing) "Update my plan" else "Start Ascend") else cevir(dil, "Bildirimlere izin ver", "Allow notifications")
+                    0 -> cevir(dil, "Ascend’i tanı", "Meet Ascend")
+                    1 -> cevir(dil, "Hatırlatmaları ayarla", "Set up reminders")
+                    4 -> if (bildirimIzni) cevir(dil, if (editing) "Planımı güncelle" else "Ascend’e başla", if (editing) "Update my plan" else "Start Ascend") else cevir(dil, "Bildirimlere izin ver", "Allow notifications")
                     else -> cevir(dil, "Devam", "Continue")
                 }, textAlign = TextAlign.Center)
             }
-            if (step == 0) TextButton(onClick = { move(17) }, enabled = !kaydediliyor, modifier = Modifier.testTag("onboarding-quick-start")) { Text(cevir(dil, "Hızlı başla, sonra kişiselleştir", "Start now, personalize later")) }
-            if (step == PersonalPlan.LAST_STEP) TextButton(onClick = { finish(false) }, enabled = !kaydediliyor, modifier = Modifier.testTag("onboarding-finish-without-reminders")) {
+            if (step < 4) TextButton(onClick = { finish(false) }, enabled = !kaydediliyor, modifier = Modifier.testTag("onboarding-quick-start")) { Text(cevir(dil, "Şimdilik bildirimsiz başla", "Start without reminders")) }
+            if (step == 4) TextButton(onClick = { finish(false) }, enabled = !kaydediliyor, modifier = Modifier.testTag("onboarding-finish-without-reminders")) {
                 Text(cevir(dil, "Şimdilik bildirimsiz devam et", "Continue without reminders"))
             }
         }
@@ -176,11 +143,10 @@ fun Onboarding(
 @Composable
 private fun PlanSection(step: Int, dil: String) {
     val chapter = when (step) {
-        0 -> cevir(dil, "YENİ BİR BAŞLANGIÇ", "A NEW BEGINNING")
-        in 1..7 -> cevir(dil, "SENİ TANIYALIM", "GETTING TO KNOW YOU")
-        in 8..14 -> cevir(dil, "SANA YAKIN OLAN", "WHAT MATTERS TO YOU")
-        15, 16 -> cevir(dil, "SENİN RİTMİN", "YOUR RHYTHM")
-        else -> cevir(dil, "SENİN YOLUN", "YOUR PATH")
+        0 -> cevir(dil, "HOŞ GELDİN", "WELCOME")
+        1 -> cevir(dil, "BİR SÖZ. BİR ADIM.", "ONE QUOTE. ONE STEP.")
+        2, 3 -> cevir(dil, "GÜNÜNÜN RİTMİ", "YOUR DAILY RHYTHM")
+        else -> cevir(dil, "SEN İSTEDİĞİNDE", "WHEN YOU CHOOSE")
     }
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Box(Modifier.width(24.dp).height(1.dp).background(Renk.accent))
@@ -195,17 +161,17 @@ private fun ColumnScope.PlanWelcome(dil: String) {
         KlasikGorsel(KlasikMotif.COLUMN, Modifier.matchParentSize().offset(x = 80.dp, y = (-16).dp), opacity = .16f)
         Column(Modifier.padding(vertical = 16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             PlanTitle(cevir(dil, "Kendi hızında. Bir adım yukarı.", "At your pace. One step higher."),
-                cevir(dil, "Bazen bir olumlama. Bazen yeni bir bakış. Sana eşlik edecek sözleri birlikte bulalım.",
-                    "Sometimes an affirmation. Sometimes a new perspective. Let’s find the words that meet you where you are."))
+                cevir(dil, "Bazen bir olumlama, bazen yeni bir bakış. Günün içinde kendine küçük bir an ayır.",
+                    "An affirmation or a fresh perspective. Make a little room for yourself in the day."))
         }
     }
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Icon(AzimIkon.Patika, null, Modifier.size(22.dp), tint = Renk.accent)
-        Text(cevir(dil, "20 küçük adım · Sana göre bir başlangıç", "20 small steps · A beginning that fits you"),
+        Text(cevir(dil, "Kendi hızında · Hesap gerekmez", "At your pace · No account needed"),
             color = Renk.metin, style = MaterialTheme.typography.bodyMedium)
     }
-    Text(cevir(dil, "Her soruyu atlayabilirsin. Hesap gerekmez; yanıtların uygulamada saklanır.",
-        "Skip any question. No account needed; your answers are saved in the app."),
+    Text(cevir(dil, "Kısa bir tanıtım, istersen gün içine yayılan hatırlatmalar. Hemen başlayabilir, ayarları sonra değiştirebilirsin.",
+        "A brief introduction, then optional reminders. Start now and change your settings later."),
         color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
 }
 
@@ -292,68 +258,35 @@ private fun PlanHours(profile: PersonalProfile, dil: String, select: (Int) -> Un
     Text(cevir(dil, "Yaklaşık saatler. Cihazın güç tasarrufu teslimatı geciktirebilir.", "Approximate times. Device power saving can delay delivery."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun PlanPreview(profile: PersonalProfile, dil: String, access: Set<String>) {
-    PlanTitle(cevir(dil, "İşte senin başlangıç çizgin.", "Your starting point."),
-        cevir(dil, "Tercihlerin hazır. İki adım kaldı: erişim ve bildirim izni.", "Your preferences are ready. Two steps left: access and notification permission."))
-    PersonalPlan.summary(profile, dil).dropLast(1).take(4).forEach { line ->
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
-            Icon(AzimIkon.Tik, null, Modifier.padding(top = 2.dp).size(18.dp), tint = Renk.accent)
-            Text(line, color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+private fun PlanIntroduction(dil: String) {
+    PlanTitle(cevir(dil, "Sende kalan bir söz.", "Words that stay with you."),
+        cevir(dil, "Ana ekranda rastgele bir sözle karşılaş. Yeni bir söz için kaydır.",
+            "Meet a random quote on the home screen. Swipe for another."))
+    Surface(color = Renk.yuzey, shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
+        Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+            Text(cevir(dil, "Her şeyi bugün bitirmek zorunda değilsin.", "You do not have to finish everything today."),
+                fontFamily = LoraSerif, fontSize = 25.sp, lineHeight = 34.sp, color = Renk.metin)
+            Text(cevir(dil, "Ascend · Örnek söz", "Ascend · Sample quote"), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
         }
     }
-    val starters = PersonalPlan.initialCategories(profile, access)
-    HorizontalDivider(color = Renk.kenarlik)
-    Text(cevir(dil, "Planındaki konular", "Topics in your plan"), fontFamily = LoraSerif, fontSize = 22.sp, color = Renk.metin)
-    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.testTag("onboarding-plan-topics")) {
-        starters.forEach { key ->
-            PlanKonuEtiketi(Kategoriler.bul(key)?.ad(dil) ?: key)
+    listOf(
+        AzimIkon.Kalp to cevir(dil, "Sende kalan sözleri kaydet, istersen paylaş.", "Save words that stay with you, or share them."),
+        AzimIkon.Kitap to cevir(dil, "Keşfet’te konuları kendin seçip oku.", "Choose topics to read in Explore.")
+    ).forEach { (icon, text) ->
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Icon(icon, null, Modifier.size(20.dp), tint = Renk.metinIkincil)
+            Text(text, color = Renk.metinIkincil, fontSize = 14.sp, lineHeight = 22.sp)
         }
     }
-    PersonalPlan.feed(profile, starters, access).firstOrNull()?.let { sample ->
-        Surface(color = Renk.yuzey, shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
-            Box(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text(cevir(dil, "İLK SÖZÜN", "YOUR FIRST WORDS"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.5.sp)
-                    Text(sample.metin(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 30.sp)
-                    Box(Modifier.width(28.dp).height(1.dp).background(Renk.accent))
-                    Text(sample.sunumEtiketi(dil), color = Renk.metinIkincil, style = MaterialTheme.typography.labelSmall, modifier = Modifier.testTag("onboarding-preview-source"))
-                }
-            }
-        }
-    }
-    val extras = PersonalPlan.recommendedCategories(profile).filterNot { it in access }.take(3)
-    if (extras.isNotEmpty()) Text(cevir(dil, "Sonra keşfedebilirsin: ", "Explore later: ") + extras.joinToString(" · ") { Kategoriler.bul(it)?.ad(dil) ?: it } +
-        cevir(dil, ". Bu konular ayrıca açılır.", ". These topics unlock separately."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
-}
-
-@Composable
-private fun PlanAccess(dil: String) {
-    PlanTitle(cevir(dil, "Burada yerin var.", "There is room for you here."), cevir(dil, "Başlamak için ödeme gerekmez.", "You do not need to pay to begin."))
-    val lines = listOf(
-        cevir(dil, "Ücretsiz bir başlangıç", "A free beginning") to cevir(dil, "6 tam kategori, günlük planın ve üç temel paylaşım arka planı.", "Six complete categories, your daily plan and three basic sharing backgrounds."),
-        cevir(dil, "Yeni bir konu, sen istediğinde", "A new topic, when you choose") to cevir(dil, "Kategorileri tek tek açabilirsin. Bu testte reklam yerine açıkça belirtilen Google yönlendirmesi deneniyor.", "Unlock individual categories. In this test, a clearly marked Google visit stands in for an ad."),
-        cevir(dil, "Pro ile tamamı", "Everything with Pro") to cevir(dil, "Tüm kategoriler ve gelişmiş paylaşım araçları. Bu sürümde yalnızca demo; ödeme veya abonelik yok.", "All categories and advanced sharing tools. Demo only in this version, with no payment or subscription."))
-    lines.forEachIndexed { index, (title, body) ->
-        Row(horizontalArrangement = Arrangement.spacedBy(16.dp), modifier = Modifier.padding(vertical = 6.dp)) {
-            Icon(listOf(AzimIkon.Yaprak, AzimIkon.Kilit, AzimIkon.Izgara)[index], null,
-                Modifier.padding(top = 2.dp).size(22.dp), tint = Renk.accent)
-            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                Text(title, color = Renk.metin, fontSize = 16.sp, lineHeight = 23.sp, fontWeight = FontWeight.Medium)
-                Text(body, color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
-            }
-        }
-        if (index < lines.lastIndex) HorizontalDivider(color = Renk.kenarlik)
-    }
-    Text(cevir(dil, "Pro demosuna daha sonra kilitli bir konunun içinden ulaşabilirsin.", "Find the Pro demo later inside any locked topic."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+    Text(cevir(dil, "Bildirim konularını daha sonra Keşfet’ten değiştirebilirsin. Bildirimler isteğe bağlı.",
+        "Change reminder topics later in Explore. Reminders are optional."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
 }
 
 @Composable
 private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boolean, access: Set<String>, help: () -> Unit) {
     PlanTitle(cevir(dil, "İyi bir söz seni bulsun.", "Let the right words find you."),
-        cevir(dil, "Planından günde ${profile.dailyCount} kez, ${planHour(profile.startHour)}–${planHour(profile.endHour)} arasında.", "From your plan, ${profile.dailyCount} times a day between ${planHour(profile.startHour)} and ${planHour(profile.endHour)}."))
+        cevir(dil, "Günde ${profile.dailyCount} kez, ${planHour(profile.startHour)}–${planHour(profile.endHour)} arasında.", "${profile.dailyCount} times a day between ${planHour(profile.startHour)} and ${planHour(profile.endHour)}."))
     val sample = PersonalPlan.feed(profile, PersonalPlan.initialCategories(profile, access), access).firstOrNull()
     Surface(color = Renk.yuzey, shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
         Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -372,7 +305,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
         Icon(AzimIkon.Tik, null, Modifier.size(18.dp), tint = Renk.accent)
         Text(cevir(dil, "Bildirim iznin açık. Hazırsın.", "Notifications are allowed. You are ready."), color = Renk.metin, style = MaterialTheme.typography.labelLarge)
     }
-    Text(cevir(dil, "Bildirimler senin seçimin. İzin vermeden de planını kullanabilirsin.", "Reminders are your choice. Your plan also works without permission."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
+    Text(cevir(dil, "Bildirimler senin seçimin. İzin vermeden de sözleri okuyabilir, kaydedebilir ve paylaşabilirsin.", "Reminders are optional. Read, save and share quotes without granting permission."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
     TextButton(onClick = help, modifier = Modifier.heightIn(min = 48.dp)) { Text(cevir(dil, "Bildirim görünümü ve cihaz ayarları", "Notification appearance and device settings")) }
 }
 

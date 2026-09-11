@@ -13,6 +13,7 @@ data class PersonalProfile(
     val dailyCount: Int = 3,
     val startHour: Int = 9,
     val endHour: Int = 21,
+    val setupVersion: Int = 2,
 ) {
     fun answer(key: String): Set<String> = answers[key].orEmpty()
     fun choose(key: String, value: String, multiple: Boolean = false): PersonalProfile {
@@ -22,7 +23,7 @@ data class PersonalProfile(
     fun skip(key: String) = copy(answers = answers - key)
     fun encode(): String {
         fun enc(s: String) = URLEncoder.encode(s, "UTF-8")
-        return listOf("v=1", "name=${enc(name.take(40))}", "step=$step", "count=$dailyCount", "start=$startHour", "end=$endHour")
+        return listOf("v=1", "setup=$setupVersion", "name=${enc(name.take(40))}", "step=$step", "count=$dailyCount", "start=$startHour", "end=$endHour")
             .plus(answers.toSortedMap().map { (key, value) -> "a.${enc(key)}=${enc(value.sorted().joinToString(","))}" }).joinToString("&")
     }
     companion object {
@@ -35,6 +36,7 @@ data class PersonalProfile(
             PersonalProfile(
                 answers = map.filterKeys { it.startsWith("a.") }.mapKeys { it.key.removePrefix("a.") }
                     .mapValues { it.value.split(',').filter(String::isNotBlank).toSet() },
+                setupVersion = map["setup"]?.toIntOrNull() ?: 1,
                 name = map["name"].orEmpty().take(40), step = (map["step"]?.toIntOrNull() ?: 0).coerceIn(0, PersonalPlan.LAST_STEP),
                 dailyCount = (map["count"]?.toIntOrNull() ?: 3).coerceIn(1, 7), startHour = start,
                 endHour = (map["end"]?.toIntOrNull() ?: 21).coerceIn(start + 1, 24),

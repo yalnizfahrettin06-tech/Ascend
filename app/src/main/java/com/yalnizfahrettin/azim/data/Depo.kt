@@ -81,12 +81,13 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     suspend fun saveOnboardingDraft(profile: PersonalProfile) = store.edit { it[K.ONBOARDING_DRAFT] = profile.encode() }
 
     /** One atomic commit: answers change recommendations, never paid access. */
-    suspend fun completePersonalPlan(profile: PersonalProfile, reminders: Boolean) = store.edit { p ->
+    suspend fun completePersonalPlan(profile: PersonalProfile, reminders: Boolean, preserveTopics: Boolean = false) = store.edit { p ->
         erisimiGocur(p)
         gorseliGocur(p)
         val safe = PersonalProfile.decode(profile.encode()).copy(step = 0)
         p[K.PERSONAL_PROFILE] = safe.encode()
-        p[K.SECILI] = PersonalPlan.initialCategories(safe, etkinErisim(p))
+        p[K.SECILI] = if (preserveTopics) p[K.SECILI].orEmpty().intersect(etkinErisim(p)).ifEmpty { PersonalPlan.initialCategories(safe, etkinErisim(p)) }
+            else PersonalPlan.initialCategories(safe, etkinErisim(p))
         p[K.GUNLUK] = safe.dailyCount
         p[K.BASLANGIC] = safe.startHour
         p[K.BITIS] = safe.endHour

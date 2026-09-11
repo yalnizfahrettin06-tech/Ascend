@@ -139,7 +139,7 @@ fun Uygulama(
                     kaydediliyor = true; kayitHatasi = null
                     kapsam.launch {
                         try {
-                            depo.completePersonalPlan(yeni, hatirlat)
+                            depo.completePersonalPlan(yeni, hatirlat, preserveTopics = planDuzenle)
                             planDuzenle = false; duzenlemeBaslangici = null; ihtiyac = null
                             Planlayici.yenidenKur(ctx)
                             AzimWidget.tazele(ctx)
