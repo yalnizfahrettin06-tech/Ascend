@@ -63,7 +63,7 @@ class OnboardingTest {
         compose.onNodeWithText("14:00").assertExists()
         compose.onNodeWithTag("live-reminder-preview").assertDoesNotExist()
         next()
-        compose.onNodeWithTag("live-reminder-time").assertTextEquals("14:00")
+        compose.onNodeWithTag("live-reminder-time", useUnmergedTree = true).assertTextEquals("14:00")
     }
 
     @Test fun notificationSampleExpandsAndCollapses() {

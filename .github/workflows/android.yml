@@ -59,7 +59,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.6.0.apk
-          gh release create v9.6.0-ui Ascend-9.6.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.6.0 — Inter typography and silver onboarding" --notes "New architectural welcome, interactive quote practice, animated rhythm dial, day timeline and a dedicated notification preview. Adaptive content and action placement."
+          if ! gh release view v9.6.0-ui >/dev/null 2>&1; then
+            gh release create v9.6.0-ui Ascend-9.6.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.6.0 — Inter typography and silver onboarding" --notes "New architectural welcome, interactive quote practice, animated rhythm dial, day timeline and a dedicated notification preview. Adaptive content and action placement."
+          fi
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
@@ -93,6 +95,7 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_2
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back none -memory 2048 -cores 2 -feature -Vulkan
           disable-animations: true
           script: bash .github/scripts/ui-tests.sh
       - uses: actions/upload-artifact@v7.0.1
