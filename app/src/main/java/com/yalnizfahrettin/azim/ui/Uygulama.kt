@@ -371,7 +371,7 @@ fun Uygulama(
         profil = profil, secili = secili, acik = acik, dil = dil,
         adet = gunlukAdet, bas = bas, bit = bit, bildirimAcik = hatirlaticiAcik,
         kapat = { planGoster = false },
-        konular = { planGoster = false; acilacakGrup = null; selectedRequest++; sekme = Sekme.KATEGORI },
+        konular = { planGoster = false; acilacakGrup = null; selectedRequest = kotlin.math.abs(selectedRequest) + 1; sekme = Sekme.KATEGORI },
         pausedUntil = pausedUntil, hiddenCount = hidden.orEmpty().size,
         restoreHidden = { depo.restoreHiddenQuotes(); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) },
         pause = { shouldPause ->
