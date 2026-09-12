@@ -230,7 +230,7 @@ object KartCizici {
 
     /** Bound photo decoding and load once per video export, not once per frame. */
     fun zeminYukle(ctx: Context, z: KartZemin): Bitmap? = when (z) {
-        is KartZemin.Sahne -> android.graphics.BitmapFactory.decodeResource(ctx.resources, z.kaynak)
+        is KartZemin.Sahne -> android.graphics.BitmapFactory.decodeResource(ctx.resources, z.kaynak, android.graphics.BitmapFactory.Options().apply { inScaled = false })
         is KartZemin.Foto -> {
             val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
             ctx.contentResolver.openInputStream(z.uri)?.use { android.graphics.BitmapFactory.decodeStream(it, null, bounds) }

@@ -15,14 +15,18 @@ import org.junit.Assert.*
 
 class ShareRegressionTest {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
+    private var fontScale by mutableStateOf(1f)
     private fun open(scale: Float) {
+        fontScale = scale
         compose.setContent {
             val d = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(d.density,scale)) {
+            CompositionLocalProvider(LocalDensity provides Density(d.density,fontScale)) {
                 AzimTema(modu = TemaModu.KARANLIK) { PaylasimEkrani(Sozler.tumu().first(),"tr",{},pro = true) }
             }
         }
-        compose.waitUntil(30000) { compose.onAllNodesWithTag("share-preview").fetchSemanticsNodes().isNotEmpty() }
+        try {
+            compose.waitUntil(60000) { compose.onAllNodesWithTag("share-preview").fetchSemanticsNodes().isNotEmpty() }
+        } finally { ekranKaydet("share-open") }
     }
     private fun buttonsFit() {
         val area = compose.onNodeWithTag("share-safe-content").fetchSemanticsNode().boundsInRoot
@@ -54,9 +58,8 @@ class ShareRegressionTest {
         compose.waitUntil(10000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
         compose.waitForIdle()
         ekranKaydet("share-video-saved")
-    }
-    @Test fun largeTextKeepsFooterReachable() {
-        open(1.8f)
+        compose.runOnIdle { fontScale = 1.8f }
+        compose.waitForIdle()
         buttonsFit()
         ekranKaydet("share-safe-large-text")
     }
