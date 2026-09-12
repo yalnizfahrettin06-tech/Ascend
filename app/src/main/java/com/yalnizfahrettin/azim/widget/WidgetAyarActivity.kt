@@ -47,9 +47,10 @@ class WidgetAyarActivity : ComponentActivity() {
             var message by rememberSaveable { mutableStateOf<String?>(null) }
             val config = WidgetSecimi(theme, true, false)
             val quote = cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward.")
-            val bitmap by produceState<android.graphics.Bitmap?>(null, config, dil) {
-                value = null
-                value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 720, 360) }
+            val previewState = remember(config,dil) { mutableStateOf<android.graphics.Bitmap?>(null) }
+            val bitmap by previewState
+            LaunchedEffect(config,dil) {
+                previewState.value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 720, 360) }
             }
             AzimTema(modu = mode) {
                 Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {

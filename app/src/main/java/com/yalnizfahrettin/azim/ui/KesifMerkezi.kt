@@ -59,9 +59,10 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
                 Text(cevir(dil,"İyi bir söz, telefonunda.","A good thought, on your phone."), fontSize = 27.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold, color = Renk.metin)
                 val theme = AnaTemalar.allowed(selected, pro)
                 val sample = cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward.")
-                val bmp by produceState<android.graphics.Bitmap?>(null,theme,dil) {
-                    value = null
-                    value = withContext(Dispatchers.Default) { com.yalnizfahrettin.azim.widget.WidgetTasarimi.render(ctx, com.yalnizfahrettin.azim.widget.WidgetSecimi(theme.id), sample, "Ascend", 720, 360) }
+                val previewState = remember(theme,dil) { mutableStateOf<android.graphics.Bitmap?>(null) }
+                val bmp by previewState
+                LaunchedEffect(theme,dil) {
+                    previewState.value = withContext(Dispatchers.Default) { com.yalnizfahrettin.azim.widget.WidgetTasarimi.render(ctx, com.yalnizfahrettin.azim.widget.WidgetSecimi(theme.id), sample, "Ascend", 720, 360) }
                 }
                 Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(22.dp)).background(Renk.yuzey)) {
                     bmp?.let { androidx.compose.foundation.Image(it.asImageBitmap(), sample, Modifier.fillMaxSize()) }

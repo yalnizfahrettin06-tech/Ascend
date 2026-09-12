@@ -53,9 +53,9 @@ fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f
         theme.art?.let { art ->
             val context = LocalContext.current
             val size = if(thumbnail) 320 else 1200
-            val bitmap by produceState<android.graphics.Bitmap?>(null, art, size) {
-                value = null; value = ThemeImages.load(context,art,size)
-            }
+            val imageState = remember(art,size) { mutableStateOf<android.graphics.Bitmap?>(null) }
+            val bitmap by imageState
+            LaunchedEffect(art,size) { imageState.value = ThemeImages.load(context,art,size) }
             bitmap?.let { Image(it.asImageBitmap(), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
                 colorFilter = if(theme.id == "rider") null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })) }
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
