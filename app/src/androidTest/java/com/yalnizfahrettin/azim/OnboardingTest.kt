@@ -42,6 +42,7 @@ class OnboardingTest {
         next()
         compose.onNodeWithTag("theme-white").assertExists()
         next()
+        compose.onNodeWithTag("trial-free").performClick()
         compose.runOnIdle { assertTrue(completed) }
     }
 
@@ -153,19 +154,27 @@ class OnboardingTest {
             ekranKaydet("v97-large-dark-${current + 1}")
         }
     }
-    @Test fun proPreviewDoesNotSelectOrUnlockTheme() {
+    @Test fun proPreviewWaitsForTrialAndFreeChoiceUsesFreeTheme() {
         var finished: PersonalProfile? = null
-        var proRequested = false
         compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true,
             initialDraft = PersonalProfile(setupVersion = 3, step = 4),
-            proOpen = { proRequested = true }, finishProfile = { value, _ -> finished = value }) { _,_,_,_,_ -> } } }
-        compose.onNodeWithTag("theme-black").performScrollTo().performClick()
+            finishProfile = { value, _ -> finished = value }) { _,_,_,_,_ -> } } }
         compose.onNodeWithTag("theme-rider").performScrollTo().performClick()
         compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
-        compose.runOnIdle { assertTrue(proRequested); assertNull(finished) }
-        compose.onNodeWithContentDescription("Close").performClick()
+        compose.runOnIdle { assertNull(finished) }
         next()
+        compose.onNodeWithTag("trial-offer").assertExists()
+        compose.onNodeWithTag("trial-free").performClick()
         compose.runOnIdle { assertEquals("black", finished?.answer("theme")?.firstOrNull()) }
     }
 
+    @Test fun successfulDemoTrialKeepsSelectedProTheme() {
+        var finished: PersonalProfile? = null
+        compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true,
+            initialDraft = PersonalProfile(setupVersion = 3, step = 4).choose("theme", "rider"),
+            startTrial = { it(true) }, finishProfile = { value, _ -> finished = value }) { _,_,_,_,_ -> } } }
+        next()
+        compose.onNodeWithTag("trial-start").performClick()
+        compose.runOnIdle { assertEquals("rider", finished?.answer("theme")?.firstOrNull()) }
+    }
 }

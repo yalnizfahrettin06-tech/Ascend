@@ -96,7 +96,7 @@ fun AnaEkran(
             Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.YukselenMarka, null, Modifier.size(30.dp), tint = Renk.accent)
                 Spacer(Modifier.width(10.dp))
-                Text("ascend", fontSize = 32.sp, fontFamily = LoraSerif, color = Renk.metin,
+                Text("ascend", fontSize = 30.sp, fontWeight = FontWeight.SemiBold, fontFamily = ArayuzFont, color = Renk.metin,
                     letterSpacing = (-1).sp, modifier = Modifier.weight(1f))
                 TextButton(onClick = planAc, modifier = Modifier.heightIn(min = 48.dp).testTag("home-plan")) {
                     Text(cevir(dil, "Planım", "My plan"), color = Renk.metin, fontSize = 14.sp)

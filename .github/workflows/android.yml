@@ -49,7 +49,7 @@ jobs:
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.7.1-test-APK
+          name: Ascend-9.8.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -58,9 +58,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.7.1.apk
-          if ! gh release view v9.7.1-ui >/dev/null 2>&1; then
-            gh release create v9.7.1-ui Ascend-9.7.1.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.7.1 — White and Black themes, Pro gallery and widgets" --notes "Free White and Black home themes; Rome and Dark Rider Pro previews. Neutral five-step onboarding, language selection, compact Explore customization and configurable Pro widgets. Demo only, no payment."
+          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.8.0.apk
+          if ! gh release view v9.8.0-ui >/dev/null 2>&1; then
+            gh release create v9.8.0-ui Ascend-9.8.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.8.0 — Simpler Explore, six themes and demo trial" --notes "Six onboarding theme previews, a transparent demo trial offer, streamlined topic discovery, background-only widgets and simpler sharing. Prominent pop-up notification guidance. Demo only; no payment or timed subscription."
           fi
       - uses: actions/upload-artifact@v7.0.1
         if: always()
@@ -114,6 +114,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -d screenshots ]; then
-            zip -r Ascend-9.7.1-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
-            gh release upload v9.7.1-ui Ascend-9.7.1-visual-evidence.zip --clobber
+            zip -r Ascend-9.8.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
+            gh release upload v9.8.0-ui Ascend-9.8.0-visual-evidence.zip --clobber
           fi

@@ -71,12 +71,10 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     val kapsam = rememberCoroutineScope()
     val lastStyle = remember { ctx.getSharedPreferences("share-last-style", android.content.Context.MODE_PRIVATE) }
-    var ayar by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(SonPaylasimDuzeni.oku(lastStyle)) }
+    var ayar by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(SonPaylasimDuzeni.oku(lastStyle).copy(format = KartFormat.STORY, yazi = KartYazi.LORA, yaziOlcegi = 1f, hizalama = KartHizalama.ORTA, karartma = .45f, imzaGoster = true)) }
     var video by rememberSaveable { mutableStateOf(false) }
     var saniye by rememberSaveable { mutableIntStateOf(10) }
-    var arac by rememberSaveable { mutableStateOf(false) }
     var kutuphane by rememberSaveable { mutableStateOf(false) }
-    var aktifArac by rememberSaveable { mutableStateOf("type") }
     val tercih = remember { ctx.getSharedPreferences("share-theme-favorites", android.content.Context.MODE_PRIVATE) }
     var temaFavorileri by remember { mutableStateOf(tercih.getStringSet("themes", emptySet()).orEmpty().toSet()) }
     var zeminFiltresi by rememberSaveable { mutableStateOf(PaylasimZeminFiltresi.UCRETSIZ.name) }
@@ -110,7 +108,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
             durdur()
             ayar = PaylasimErisimi.ucretsizAyar(ayar)
             video = false
-            arac = false
             zeminFiltresi = PaylasimZeminFiltresi.UCRETSIZ.name
             bekleyenUri = null
             bekleyenPro = false
@@ -251,18 +248,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                         Text(cevir(dil, "3 temel arka plan ücretsiz", "3 core backgrounds free"), fontSize = 10.sp, color = Renk.metinIkincil, modifier = Modifier.weight(1f))
                         TextButton(onClick = proAc, enabled = !hazirlaniyor) { Text(if (pro) "Pro demo ✓" else "Pro demo", fontSize = 10.sp, color = Renk.accent) }
                     }
-                    HorizontalDivider(Modifier.padding(horizontal = 18.dp), color = Renk.kenarlik)
-                    Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 4.dp)) {
-                        listOf("type", "layout", "ratio", "motion").forEach { tool ->
-                            Column(Modifier.weight(1f).clickable(enabled = !hazirlaniyor, role = Role.Button) {
-                                if (!pro) proAc() else { aktifArac = tool; arac = true }
-                            }.heightIn(min = 62.dp).padding(vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                                if (tool == "type") Text("Aa", fontSize = 22.sp, color = Renk.metin)
-                                else Icon(when(tool) { "layout" -> AzimIkon.Izgara; "ratio" -> AzimIkon.Kirp; else -> AzimIkon.Video }, null, Modifier.size(22.dp), tint = Renk.metin)
-                                Text(when(tool) { "type" -> cevir(dil, "Yazı", "Type"); "layout" -> cevir(dil, "Yerleşim", "Layout"); "ratio" -> cevir(dil, "Oran", "Ratio"); else -> cevir(dil, "Hareket", "Motion") }, fontSize = 11.sp, color = Renk.metin)
-                            }
-                        }
-                    }
                 }
                 HorizontalDivider(color = Renk.kenarlik)
                 Column(Modifier.fillMaxWidth().padding(12.dp)) {
@@ -331,61 +316,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     }
                 }
 
-            }
-        }
-        if (arac && pro) ModalBottomSheet(onDismissRequest = { arac = false }, containerColor = Renk.zemin) {
-            Column(Modifier.fillMaxWidth().navigationBarsPadding().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(cevir(dil, "İnce ayarlar", "Fine adjustments"), fontFamily = LoraSerif, fontSize = 26.sp, color = Renk.metin)
-                if (aktifArac == "motion") {
-                    Text(cevir(dil, "Sessiz video · Yazı yavaşça belirir", "Silent video · Gentle text reveal"), color = Renk.metinIkincil)
-                    Switch(checked = gorunenVideo, onCheckedChange = { video = it })
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        listOf(5, 10, 30, 45).forEach { sec -> FilterChip(selected = saniye == sec, onClick = { saniye = sec }, label = { Text("${sec}s") }, modifier = Modifier.testTag("share-duration-$sec")) }
-                    }
-                } else {
-                    if (aktifArac == "ratio") {
-                    Text(cevir(dil, "Kart boyutu", "Card size"), color = Renk.metin, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.fillMaxWidth())
-                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        KartFormat.entries.forEach { f -> FilterChip(selected = ayar.format == f, onClick = { ayar = ayar.copy(format = f) }, enabled = !hazirlaniyor,
-                            label = { Text(f.etiket(dil)) }, shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp)) }
-                    }
-                    }
-                    if (aktifArac == "type") {
-                    Text(cevir(dil, "Yazı stili", "Type style"), color = Renk.metin, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.fillMaxWidth())
-                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        KartYazi.entries.forEach { y -> FilterChip(selected = ayar.yazi == y, onClick = { ayar = ayar.copy(yazi = y) }, enabled = !hazirlaniyor,
-                            label = { Text(y.etiket(dil)) }, shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp)) }
-                    }
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text(cevir(dil, "Yazı boyutu", "Text size"), color = Renk.metin, modifier = Modifier.weight(1f))
-                        Text("${(ayar.yaziOlcegi * 100).toInt()}%", color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
-                    }
-                    Slider(ayar.yaziOlcegi, { ayar = ayar.copy(yaziOlcegi = it) }, valueRange = .8f..1.3f, enabled = !hazirlaniyor, modifier = Modifier.semantics { contentDescription = cevir(dil, "Yazı boyutu", "Text size") })
-                    }
-                    if (aktifArac == "layout") {
-                    if (ayar.zemin is KartZemin.Sahne || ayar.zemin is KartZemin.Foto) {
-                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            Text(cevir(dil, "Arka plan karartması", "Background dimming"), color = Renk.metin, modifier = Modifier.weight(1f))
-                            Text("${(ayar.karartma * 100).toInt()}%", color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
-                        }
-                        Slider(ayar.karartma, { ayar = ayar.copy(karartma = it) }, valueRange = .25f.. .75f, enabled = !hazirlaniyor, modifier = Modifier.semantics { contentDescription = cevir(dil, "Arka plan karartması", "Background dimming") })
-                    }
-                    Text(cevir(dil, "Hizalama", "Alignment"), color = Renk.metin, modifier = Modifier.fillMaxWidth())
-                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        KartHizalama.entries.forEach { h ->
-                            FilterChip(selected = ayar.hizalama == h, onClick = { ayar = ayar.copy(hizalama = h) }, enabled = !hazirlaniyor,
-                                label = { Text(if (ayar.zemin == KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9)) { if (h == KartHizalama.ORTA) cevir(dil, "Editoryal", "Editorial") else cevir(dil, "Geniş sol", "Wide left") } else if (h == KartHizalama.ORTA) cevir(dil, "Orta", "Center") else cevir(dil, "Sol", "Left")) },
-                                shape = RoundedCornerShape(50), modifier = Modifier.heightIn(min = 48.dp))
-                        }
-                    }
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(cevir(dil, "Ascend imzası", "Ascend signature"), Modifier.weight(1f), color = Renk.metin)
-                        Switch(checked = ayar.imzaGoster, onCheckedChange = { ayar = ayar.copy(imzaGoster = it) })
-                    }
-                    }
-
-                }
-                TextButton(onClick = { arac = false }) { Text(cevir(dil, "Bitti", "Done")) }
             }
         }
     }

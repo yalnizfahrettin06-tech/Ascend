@@ -64,6 +64,13 @@ class AzimWidget : GlanceAppWidget() {
         val manager = androidx.glance.appwidget.GlanceAppWidgetManager(context)
         val widgetId = manager.getAppWidgetId(id)
         val initialConfig = WidgetTasarimi.load(context, widgetId)
+        val daily = gununSozu(depo)
+        updateAppWidgetState(context, id) { state ->
+            state[ACCESS] = initialPro
+            state[SOZ] = daily?.metin(dil) ?: if(dil == "tr") "Kendine küçük bir an ayır." else "Take a moment for yourself."
+            state[YAZAR] = daily?.sunumEtiketi(dil) ?: "Ascend"
+            state[KIMLIK] = daily?.kimlik.orEmpty()
+        }
         provideContent {
             val state = currentState<androidx.datastore.preferences.core.Preferences>()
             val pro = state[ACCESS] ?: initialPro
@@ -95,14 +102,20 @@ class AzimWidget : GlanceAppWidget() {
         val SOZ = stringPreferencesKey("widget_soz")
         val YAZAR = stringPreferencesKey("widget_yazar")
 
+        private suspend fun gununSozu(depo: Depo): com.yalnizfahrettin.azim.data.Soz? {
+            val secili = depo.secili.first()
+            val allowed = depo.acik.first()
+            val hidden = depo.hiddenQuotes.first()
+            val choices = Sozler.tumu().filter { it.kategori in secili && it.kategori in allowed && it.kimlik !in hidden }.sortedBy { it.kimlik }
+            return choices.takeIf { it.isNotEmpty() }?.random(kotlin.random.Random(java.time.LocalDate.now().toEpochDay().toInt()))
+        }
+
         /** Tüm widget örneklerine yeni bir söz yazar. */
         suspend fun tazele(ctx: Context) {
             val depo = Depo(ctx)
             val dil = depo.dil.first()
             val access = depo.proDemo.first()
-            val secili = depo.secili.first()
-            val soz = PersonalPlan.notification(depo.personalProfile.first(), secili, depo.acik.first(),
-                dil, depo.gecmis.first(), depo.sonBildirimKimlik.first(), depo.hiddenQuotes.first())?.soz
+            val soz = gununSozu(depo)
             val widget = AzimWidget()
             androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
                 .getGlanceIds(AzimWidget::class.java)

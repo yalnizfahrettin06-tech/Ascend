@@ -40,39 +40,23 @@ class WidgetAyarActivity : ComponentActivity() {
             val dil by depot.dil.collectAsStateWithLifecycle("tr")
             val mode by depot.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
             var theme by rememberSaveable { mutableStateOf(initial.theme) }
-            var centered by rememberSaveable { mutableStateOf(initial.centered) }
-            var large by rememberSaveable { mutableStateOf(initial.large) }
-            var wide by rememberSaveable { mutableStateOf(true) }
             var showPro by rememberSaveable { mutableStateOf(false) }
             var busy by remember { mutableStateOf(false) }
             var message by rememberSaveable { mutableStateOf<String?>(null) }
-            val config = WidgetSecimi(theme, centered, large)
+            val config = WidgetSecimi(theme, true, false)
             val quote = cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward.")
-            val bitmap = remember(config, wide, dil) { WidgetTasarimi.render(this, config, quote, "Ascend", 720, if(wide) 360 else 620) }
+            val bitmap = remember(config, dil) { WidgetTasarimi.render(this, config, quote, "Ascend", 720, 360) }
             AzimTema(modu = mode) {
                 Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {
                     Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = { finish() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back")) }
-                        Text(cevir(dil,"Widget tasarımın","Your widget"), Modifier.weight(1f), color = Renk.metin, fontSize = 20.sp)
+                        IconButton(onClick = { finish() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
+                        Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 20.sp)
                         ProRozeti()
                     }
                     Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Image(bitmap.asImageBitmap(), quote, Modifier.fillMaxWidth().aspectRatio(if(wide) 2f else 720f/620f).clip(RoundedCornerShape(20.dp)).testTag("widget-live-preview"))
-                        Text(cevir(dil,"Bildirim konularından · Önizleme", "From your reminder topics · Preview"), color = Renk.metinIkincil, fontSize = 12.sp)
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            FilterChip(wide, { wide = true }, label = { Text(cevir(dil,"Geniş","Wide")) })
-                            FilterChip(!wide, { wide = false }, label = { Text(cevir(dil,"Kare","Square")) })
-                        }
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(cevir(dil,"Ortalanmış yazı","Centered text"), Modifier.weight(1f), color = Renk.metin)
-                            Switch(centered, { centered = it })
-                        }
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(cevir(dil,"Büyük yazı","Larger text"), Modifier.weight(1f), color = Renk.metin)
-                            Switch(large, { large = it })
-                        }
-                        Text(cevir(dil,"Arka plan","Background"), color = Renk.metin, fontSize = 18.sp)
-                        TemaGrid(dil, AnaTemalar.all, theme, true) { theme = it.id }
+                        Image(bitmap.asImageBitmap(), quote, Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(20.dp)).testTag("widget-live-preview"))
+                        Text(cevir(dil,"Her gün yeni bir söz · Önizleme", "A new quote each day · Preview"), color = Renk.metinIkincil, fontSize = 12.sp)
+                        ArkaPlanGrid(dil, AnaTemalar.all, theme) { theme = it.id }
                     }
                     Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         message?.let { Text(it, color = Renk.metinIkincil, fontSize = 12.sp) }
@@ -93,7 +77,7 @@ class WidgetAyarActivity : ComponentActivity() {
                                             } else {
                                                 val intent = Intent(this@WidgetAyarActivity, WidgetEkleAlicisi::class.java)
                                                     .setAction("ascend.widget.pin." + java.util.UUID.randomUUID())
-                                                    .putExtra("theme", theme).putExtra("center", centered).putExtra("large", large)
+                                                    .putExtra("theme", theme).putExtra("center", true).putExtra("large", false)
                                                 val callback = PendingIntent.getBroadcast(this@WidgetAyarActivity, 0, intent,
                                                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
                                                 val requested = manager.requestPinAppWidget(ComponentName(this@WidgetAyarActivity, AzimWidgetSaglayici::class.java), null, callback)

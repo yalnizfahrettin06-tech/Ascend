@@ -53,242 +53,64 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     oku: (Soz) -> Unit = {}, selectedRequest: Int = 0, insets: Boolean = true,
 ) {
 
-    var grupKey by rememberSaveable { mutableStateOf(acilacakGrup) }
-    var sonAcilisGrubu by rememberSaveable { mutableStateOf(acilacakGrup) }
-    var gorunum by rememberSaveable { mutableStateOf(if (acilacakGrup == null) "collections" else "all") }
-    var arama by rememberSaveable { mutableStateOf("") }
-    var filtre by rememberSaveable { mutableStateOf("all") }
+    var group by rememberSaveable { mutableStateOf(acilacakGrup) }
+    var reminders by rememberSaveable { mutableStateOf(false) }
+    var query by rememberSaveable { mutableStateOf("") }
     var detayKey by rememberSaveable { mutableStateOf<String?>(null) }
-    var alanlarAcik by rememberSaveable { mutableStateOf(false) }
-    val odak = LocalFocusManager.current
-    val searchInteraction = remember { MutableInteractionSource() }
-    val searchFocused by searchInteraction.collectIsFocusedAsState()
-    val collectionScroll = rememberLazyListState()
-    val allScroll = rememberLazyListState()
-    val selectedScroll = rememberLazyListState()
-    val searchScroll = rememberLazyListState()
-    val groupScroll = rememberLazyListState()
-    val scope = rememberCoroutineScope()
-    LaunchedEffect(acilacakGrup) {
-        if (sonAcilisGrubu != acilacakGrup) {
-            grupKey = acilacakGrup; gorunum = if (acilacakGrup == null) "collections" else "all"
-            sonAcilisGrubu = acilacakGrup
-        }
-    }
-    BackHandler(grupKey != null && detayKey == null && !alanlarAcik && arama.isBlank()) {
-        grupKey = null; gorunum = "collections"
-    }
-    var consumedRequest by rememberSaveable { mutableIntStateOf(0) }
-    LaunchedEffect(selectedRequest) {
-        if (selectedRequest > consumedRequest) {
-            gorunum = "selected"; grupKey = null; arama = ""; detayKey = null
-            consumedRequest = selectedRequest
-        }
-    }
-    val query = arama.trim()
-    val collections = gorunum == "collections" && query.isBlank()
-    val kategoriler = LibraryQuery.filter(query, dil,
-        group = if (query.isBlank()) grupKey else null,
-        selectedOnly = query.isBlank() && gorunum == "selected",
-        unlockedOnly = filtre == "open", selected = secili, unlocked = acik)
-    val scroll = when {
-        query.isNotBlank() -> searchScroll
-        collections -> collectionScroll
-        gorunum == "selected" -> selectedScroll
-        grupKey != null -> groupScroll
-        else -> allScroll
-    }
-    val columns = if (LocalConfiguration.current.screenWidthDp < 360 || LocalDensity.current.fontScale > 1.3f) 1 else 2
-    fun chooseView(value: String) { odak.clearFocus(); arama = ""; grupKey = null; gorunum = value }
-    Box(Modifier.fillMaxSize().background(Renk.zemin)) {
-    Column(Modifier.fillMaxSize().then(if(insets) Modifier.statusBarsPadding() else Modifier)) {
-        Column(Modifier.padding(horizontal = 24.dp, vertical = 2.dp)) {
-                    TextField(arama, { arama = it },
-                        placeholder = { Text(cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers"), fontSize = 14.sp) },
-                        interactionSource = searchInteraction,
-                        modifier = Modifier.fillMaxWidth().border(
-                            if (searchFocused) 1.5.dp else 1.dp,
-                            if (searchFocused) Renk.kenarlikGuclu else Color.Transparent, RoundedCornerShape(14.dp))
-                            .testTag("category-search").semantics {
-                            contentDescription = cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers")
-                        }, singleLine = true, shape = RoundedCornerShape(14.dp),
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                        keyboardActions = KeyboardActions(onSearch = { odak.clearFocus() }),
-                        colors = TextFieldDefaults.colors(focusedContainerColor = Renk.yuzey, unfocusedContainerColor = Renk.yuzey,
-                            focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent),
-                        leadingIcon = { Icon(AzimIkon.Ara, null, Modifier.size(20.dp)) },
-                        trailingIcon = { if (arama.isNotEmpty()) IconButton(onClick = { arama = "" }, modifier = Modifier.testTag("category-clear-search")) {
-                            Icon(AzimIkon.Kapat, cevir(dil, "Aramayı temizle", "Clear search"))
-                        } })
-        }
-        LazyColumn(Modifier.weight(1f).fillMaxWidth().testTag("category-grid"), state = scroll,
-            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp)) {
-            item(key = "controls") {
-                Column {
-                    LazyRow(horizontalArrangement = Arrangement.spacedBy(20.dp), modifier = Modifier.padding(top = 8.dp).selectableGroup()) {
-                        items(listOf("collections", "all", "selected")) { view ->
-                            Column(Modifier.heightIn(min = 52.dp).testTag("category-filter-" + view)
-                                .selectable(selected = gorunum == view && query.isBlank(), role = Role.Tab, onClick = { chooseView(view) })
-                                .padding(vertical = 10.dp), verticalArrangement = Arrangement.Center) {
-                                Text(when (view) {
-                                    "collections" -> cevir(dil, "Koleksiyonlar", "Collections")
-                                    "selected" -> cevir(dil, "Bildirim konuları", "Reminder topics")
-                                    else -> cevir(dil, "Tüm konular", "All topics")
-                                }, color = if (gorunum == view && query.isBlank()) Renk.accent else Renk.metinIkincil,
-                                    fontSize = 13.sp, lineHeight = 20.sp,
-                                    fontWeight = if (gorunum == view) FontWeight.SemiBold else FontWeight.Normal)
-                                Spacer(Modifier.height(6.dp))
-                                Box(Modifier.width(24.dp).height(2.dp).background(
-                                    if (gorunum == view && query.isBlank()) Renk.accent else Color.Transparent))
-                            }
-                        }
-                    }
-                    Row(Modifier.fillMaxWidth().heightIn(min = 48.dp)
-                        .clip(RoundedCornerShape(6.dp)).background(Renk.yuzey).border(.6.dp, Renk.kenarlik, RoundedCornerShape(6.dp))
-                        .clickable(role = Role.Button) { chooseView(if (secili.isEmpty()) "all" else "selected") }
-                        .testTag("category-selection-summary").padding(horizontal = 12.dp, vertical = 10.dp),
-                        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Icon(AzimIkon.Bildirim, null, Modifier.size(20.dp), tint = Renk.accent)
-                        Text(bildirimSecimOzeti(secili.size, bildirimAcik, dil),
-                            color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp, modifier = Modifier.weight(1f))
-                        Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
-                    }
-                    if (!bildirimAcik && gorunum == "selected") Text(
-                        cevir(dil, "Konuların kayıtlı. Bildirim teslimatı şu anda kapalı; Planım’dan açabilirsin.",
-                            "Your topics are saved. Reminder delivery is currently off; enable it in My plan."),
-                        color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp,
-                        modifier = Modifier.padding(top = 10.dp).testTag("category-delivery-off"))
-                    if (collections) {
-                        Text(cevir(dil, Kategoriler.gruplar.size.toString() + " koleksiyon · " + Kategoriler.tumAltlar.size + " konu",
-                            Kategoriler.gruplar.size.toString() + " collections · " + Kategoriler.tumAltlar.size + " topics"),
-                            color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 17.sp, modifier = Modifier.padding(vertical = 16.dp))
-                    } else {
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Text(cevir(dil, kategoriler.size.toString() + " konu", kategoriler.size.toString() + " topics"),
-                                color = Renk.metinIkincil, fontSize = 12.sp, modifier = Modifier.weight(1f).testTag("category-count"))
-                            if (gorunum == "all" || query.isNotBlank()) TextButton(onClick = { odak.clearFocus(); alanlarAcik = true },
-                                modifier = Modifier.testTag("category-group-filter")) { Text(cevir(dil, "Filtrele", "Filter"), fontSize = 12.sp) }
-                        }
-                        if (query.isNotBlank()) Text(cevir(dil, "Tüm konularda arama", "Searching all topics"),
-                            color = Renk.metinIkincil, fontSize = 11.sp, modifier = Modifier.padding(bottom = 10.dp))
-                        if (grupKey != null && query.isBlank()) {
-                            TextButton(onClick = { grupKey = null; gorunum = "collections" },
-                                modifier = Modifier.testTag("category-back-collections")) {
-                                Icon(AzimIkon.Geri, null, Modifier.size(16.dp)); Spacer(Modifier.width(8.dp))
-                                Text(cevir(dil, "Koleksiyonlara dön", "Back to collections"), fontSize = 12.sp)
-                            }
-                            Text(Kategoriler.grupBul(grupKey.orEmpty())?.ad(dil).orEmpty(),
-                                fontFamily = ArayuzFont, fontSize = 24.sp, lineHeight = 32.sp, color = Renk.metin,
-                                modifier = Modifier.padding(bottom = 12.dp).semantics { heading() })
-                        }
-                        if (filtre != "all" || (grupKey != null && query.isBlank())) {
-                            TextButton(onClick = { filtre = "all"; grupKey = null; gorunum = "all" },
-                                modifier = Modifier.testTag("category-clear-filters")) {
-                                Text((if (filtre == "open") cevir(dil, "Açık konular · ", "Unlocked topics · ") else "") +
-                                    cevir(dil, "Filtreleri temizle", "Clear filters"), fontSize = 12.sp)
-                            }
-                        }
-                        HorizontalDivider(color = Renk.kenarlik)
-                    }
-                }
+    val focus = LocalFocusManager.current
+    LaunchedEffect(acilacakGrup) { group = acilacakGrup }
+    LaunchedEffect(selectedRequest) { if(selectedRequest > 0) { reminders = true; group = null; query = "" } }
+    BackHandler((group != null || reminders) && detayKey == null) { group = null; reminders = false }
+    val showGroups = group == null && !reminders && query.isBlank()
+    val results = LibraryQuery.filter(query.trim(), dil, group = if(query.isBlank()) group else null,
+        selectedOnly = reminders, unlockedOnly = false, selected = secili, unlocked = acik).filter { !reminders || it.anahtar in secili }
+    Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(insets) Modifier.statusBarsPadding() else Modifier)) {
+        TextField(query, { query = it }, singleLine = true,
+            placeholder = { Text(cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers"), fontSize = 14.sp) },
+            leadingIcon = { Icon(AzimIkon.Ara, null, tint = Renk.metinIkincil) },
+            trailingIcon = { if(query.isNotBlank()) IconButton(onClick = { query = "" }) { Icon(AzimIkon.Kapat, cevir(dil,"Temizle","Clear")) } },
+            shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp).testTag("category-search"),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search), keyboardActions = KeyboardActions(onSearch = { focus.clearFocus() }),
+            colors = TextFieldDefaults.colors(focusedContainerColor = Renk.yuzey, unfocusedContainerColor = Renk.yuzey,
+                focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent))
+        Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+            if(group != null || reminders) IconButton(onClick = { group = null; reminders = false; query = "" }) { Icon(AzimIkon.Geri, cevir(dil,"Koleksiyonlar","Collections"), tint = Renk.metin) }
+            Text(if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.grupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
+                Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 13.sp)
+            if(!reminders) TextButton(onClick = { reminders = true; group = null; query = "" }, modifier = Modifier.testTag("category-selection-summary")) {
+                Icon(AzimIkon.Bildirim, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp))
+                Text(cevir(dil,"Bildirimlerim","My reminders"), fontSize = 12.sp)
             }
-            if (collections) {
-                item(key = "collection-feature") {
-                    val first = Kategoriler.gruplar.first()
-                    Surface(onClick = { grupKey = first.anahtar; gorunum = "all" },
-                        color = Color(0xFF25272B), shape = RoundedCornerShape(18.dp),
-                        modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp).testTag("collection-feature")) {
-                        Box(Modifier.heightIn(min = 154.dp)) {
-                            Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                                Text(cevir(dil, "KÜÇÜK BİR BAŞLANGIÇ", "A SMALL BEGINNING"), color = Color(0xFFD9DBDE), fontSize = 10.sp, letterSpacing = 1.sp)
-                                Text(first.ad(dil), color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 23.sp, lineHeight = 29.sp)
-                                Text(cevir(dil, "Kendine daha nazik bir dil", "A kinder voice for yourself"), color = Color(0xFFDFE1E4), fontSize = 13.sp)
-                                Icon(AzimIkon.Ileri, cevir(dil, "Koleksiyonu aç", "Open collection"), Modifier.size(20.dp), tint = Color.White)
-                            }
+        }
+        LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            if(showGroups) items(Kategoriler.gruplar, key = { it.anahtar }) { g ->
+                Surface(onClick = { group = g.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier.fillMaxWidth().testTag(if(g == Kategoriler.gruplar.first()) "collection-feature" else "collection-${g.anahtar}")) {
+                    Row(Modifier.padding(16.dp).heightIn(min = 44.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                        Icon(koleksiyonIkonu(g.anahtar), null, Modifier.size(24.dp), tint = Renk.metinIkincil)
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(g.ad(dil), color = Renk.metin, fontSize = 16.sp, lineHeight = 21.sp, fontWeight = FontWeight.Medium)
+                            Text(cevir(dil,"${g.altlar.size} konu","${g.altlar.size} topics"), color = Renk.metinIkincil, fontSize = 12.sp)
                         }
-                    }
-                }
-                items(Kategoriler.gruplar.drop(1).chunked(columns), key = { "collection-row-" + it.first().anahtar }) { groups ->
-                    Row(Modifier.fillMaxWidth().padding(bottom = 12.dp).height(IntrinsicSize.Min),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        groups.forEach { group ->
-                            KoleksiyonKarti(group, dil, group.altlar.count { it.anahtar in secili },
-                                Modifier.weight(1f).fillMaxHeight()) {
-                                grupKey = group.anahtar; gorunum = "all"; scope.launch { groupScroll.scrollToItem(0) }
-                            }
-                        }
-                        if (groups.size < columns) Spacer(Modifier.weight(1f))
+                        Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
                     }
                 }
             } else {
-                items(kategoriler, key = { it.anahtar }) { kat ->
-                    val secildi = kat.anahtar in secili; val acildi = kat.anahtar in acik
-                    Column {
-                        Row(Modifier.fillMaxWidth().heightIn(min = 74.dp).clip(RoundedCornerShape(8.dp))
-                            .clickable(role = Role.Button, onClickLabel = cevir(dil, "Konuya göz at", "Browse topic")) {
-                                odak.clearFocus(); detayKey = kat.anahtar
-                            }.testTag("category-" + kat.anahtar).semantics { stateDescription = kategoriDurumu(acildi, secildi, dil) }
-                            .padding(vertical = 14.dp), verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                if(results.isEmpty()) item { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp)) }
+                items(results, key = { it.anahtar }) { topic ->
+                    Surface(onClick = { focus.clearFocus(); detayKey = topic.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("category-${topic.anahtar}")) {
+                        Row(Modifier.padding(16.dp).heightIn(min = 42.dp), verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                                Text(kat.ad(dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 18.sp, lineHeight = 25.sp)
-                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                    if (secildi && acildi) Icon(AzimIkon.Tik, null, Modifier.size(13.dp), tint = Renk.accent)
-                                    Text(if (secildi && acildi) cevir(dil, "Bildirimlerinde", "In your reminders")
-                                        else if (!acildi) cevir(dil, "Pro · Önizleme", "Pro · Preview")
-                                        else cevir(dil, Sozler.kategoriden(kat.anahtar).size.toString() + " söz", Sozler.kategoriden(kat.anahtar).size.toString() + " quotes"),
-                                        color = if (secildi && acildi) Renk.accent else Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
-                                }
+                                Text(topic.ad(dil), color = Renk.metin, fontSize = 15.sp, lineHeight = 21.sp)
+                                if(topic.anahtar in secili) Text(cevir(dil,"✓ Bildirimlerinde","✓ In your reminders"), color = Renk.metinIkincil, fontSize = 11.sp)
                             }
-                            Icon(AzimIkon.Ileri, null, Modifier.size(17.dp), tint = Renk.metinIkincil)
-                        }
-                        HorizontalDivider(color = Renk.kenarlik)
-                    }
-                }
-                if (kategoriler.isEmpty()) item {
-                    Column(Modifier.fillMaxWidth().padding(vertical = 28.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text(cevir(dil, "Bu seçimde bir konu yok.", "No topics match this selection."),
-                            color = Renk.metin, fontFamily = ArayuzFont, fontSize = 21.sp, lineHeight = 29.sp)
-                        if (query.isNotBlank()) TextButton(onClick = { arama = "" }) { Text(cevir(dil, "Aramayı temizle", "Clear search")) }
-                        if (filtre != "all" || grupKey != null) TextButton(onClick = { filtre = "all"; grupKey = null }) {
-                            Text(cevir(dil, "Filtreleri temizle", "Clear filters"))
+                            if(topic.anahtar !in acik) ProRozeti()
+                            Spacer(Modifier.width(8.dp)); Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
                         }
                     }
                 }
             }
-        }
-    }
-    }
-    if (alanlarAcik) ModalBottomSheet(onDismissRequest = { alanlarAcik = false },
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = Renk.zemin) {
-        LazyColumn(Modifier.fillMaxWidth().testTag("category-filters"),
-            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 24.dp)) {
-            item { Text(cevir(dil, "Filtrele", "Filter"), fontFamily = ArayuzFont, fontSize = 26.sp,
-                color = Renk.metin, modifier = Modifier.padding(bottom = 12.dp).semantics { heading() }) }
-            items(listOf("all", "open")) { value ->
-                Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("category-filter-" + value + "-access")
-                    .selectable(selected = filtre == value, role = Role.RadioButton, onClick = { filtre = value })
-                    .padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Text(if (value == "open") cevir(dil, "Erişime açık konular", "Unlocked topics") else cevir(dil, "Tüm erişimler", "Any access"),
-                        Modifier.weight(1f), color = Renk.metin)
-                    RadioButton(filtre == value, onClick = null)
-                }
-            }
-            if (query.isBlank()) {
-                item { HorizontalDivider(); Text(cevir(dil, "Koleksiyon", "Collection"),
-                    modifier = Modifier.padding(vertical = 16.dp), color = Renk.accent) }
-                items(listOf<String?>(null) + Kategoriler.gruplar.map { it.anahtar }) { value ->
-                    Row(Modifier.fillMaxWidth().heightIn(min = 52.dp)
-                        .selectable(selected = grupKey == value, role = Role.RadioButton, onClick = { grupKey = value })
-                        .padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text(Kategoriler.grupBul(value.orEmpty())?.ad(dil) ?: cevir(dil, "Tüm koleksiyonlar", "All collections"),
-                            Modifier.weight(1f), color = Renk.metin)
-                        if (grupKey == value) Icon(AzimIkon.Tik, null, Modifier.size(18.dp), tint = Renk.accent)
-                    }
-                }
-            }
-            item { Button(onClick = { alanlarAcik = false }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)
-                .testTag("category-apply-filters")) { Text(cevir(dil, "Sonuçları göster", "Show results")) } }
         }
     }
 

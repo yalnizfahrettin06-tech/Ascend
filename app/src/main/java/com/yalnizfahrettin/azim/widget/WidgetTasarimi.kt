@@ -8,7 +8,7 @@ import android.text.TextPaint
 import android.text.TextUtils
 import com.yalnizfahrettin.azim.data.AnaTemalar
 
-data class WidgetSecimi(val theme: String = "black", val centered: Boolean = false, val large: Boolean = false)
+data class WidgetSecimi(val theme: String = "black", val centered: Boolean = true, val large: Boolean = false)
 object WidgetTasarimi {
     fun load(ctx: Context, id: Int): WidgetSecimi {
         val p = ctx.getSharedPreferences("widget_design", Context.MODE_PRIVATE)
@@ -35,26 +35,26 @@ object WidgetTasarimi {
                 val scale = maxOf(w.toFloat()/art.width, h.toFloat()/art.height)
                 val dw = art.width*scale; val dh = art.height*scale
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG).apply {
-                    colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
+                    colorFilter = if(theme.id == "rider") null else ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
                 }
                 canvas.drawBitmap(art, null, RectF((w-dw)/2, (h-dh)/2, (w+dw)/2, (h+dh)/2), paint)
-                paint.colorFilter = null; paint.color = bg; paint.alpha = if(dark) 195 else 220
+                paint.colorFilter = null; paint.color = bg; paint.alpha = if(dark) 150 else 170
                 canvas.drawRect(0f,0f,w.toFloat(),h.toFloat(),paint); art.recycle()
             }
         }
         val unit = w / 360f
         val pad = 20 * unit; val ink = if(dark) Color.WHITE else Color.rgb(24,24,26)
-        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = ink; typeface = Typeface.create("sans-serif", Typeface.NORMAL); textSize = (if(config.large) 24 else 20)*unit*ctx.resources.configuration.fontScale.coerceIn(.85f, 2f) }
+        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = ink; typeface = Typeface.create("sans-serif", Typeface.NORMAL); textSize = 20*unit*ctx.resources.configuration.fontScale.coerceIn(.85f, 2f) }
         val contentWidth = (w-pad*2).toInt()
         val maxLines = ((h-pad*2-32*unit)/(paint.textSize*1.3f)).toInt().coerceIn(1, 10)
         val layout = StaticLayout.Builder.obtain(text,0,text.length,paint,contentWidth)
-            .setAlignment(if(config.centered) Layout.Alignment.ALIGN_CENTER else Layout.Alignment.ALIGN_NORMAL)
+            .setAlignment(Layout.Alignment.ALIGN_CENTER)
             .setLineSpacing(0f,1.2f).setIncludePad(false).setMaxLines(maxLines).setEllipsize(TextUtils.TruncateAt.END).build()
         val y = ((h-layout.height-24*unit)/2f).coerceAtLeast(pad)
         canvas.save(); canvas.translate(pad,y); layout.draw(canvas); canvas.restore()
         paint.textSize = 11*unit; paint.alpha = 180
         val label = TextUtils.ellipsize(source,paint,contentWidth.toFloat(),TextUtils.TruncateAt.END).toString()
-        val x = if(config.centered) (w-paint.measureText(label))/2f else pad
+        val x = (w-paint.measureText(label))/2f
         canvas.drawText(label,x,(y+layout.height+24*unit).coerceAtMost(h-pad/2),paint)
         return bitmap
     }

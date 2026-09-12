@@ -27,15 +27,15 @@ fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f
     Box(modifier.background(base)) {
         theme.art?.let { art ->
             Image(painterResource(art), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
-                colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }))
+                colorFilter = if(theme.id == "rider") null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }))
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
-                base.copy(alpha = if (theme.dark) .85f else veil), base.copy(alpha = if (theme.dark) .42f else .05f)))))
+                base.copy(alpha = if (theme.dark) .65f else veil), base.copy(alpha = if (theme.dark) .2f else .05f)))))
         }
     }
 }
 
 @Composable
-fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolean, select: (AnaTema) -> Unit) {
+fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolean, compact: Boolean = false, select: (AnaTema) -> Unit) {
     val columns = if (LocalDensity.current.fontScale > 1.4f) 1 else 2
     Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.testTag("theme-gallery")) {
         themes.chunked(columns).forEach { row ->
@@ -45,19 +45,19 @@ fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolea
                     Column(Modifier.weight(1f)) {
                         Surface(onClick = { select(theme) }, shape = RoundedCornerShape(18.dp),
                             border = BorderStroke(if (selected) 2.dp else 1.dp, if (selected) Renk.metin else Renk.kenarlik),
-                            modifier = Modifier.fillMaxWidth().height(156.dp).testTag("theme-${theme.id}")
+                            modifier = Modifier.fillMaxWidth().height(if(compact) 128.dp else 156.dp).testTag("theme-${theme.id}")
                                 .semantics { this.selected = selected; contentDescription = theme.label(dil) + if (theme.pro) ", Pro" else "" }) {
                             Box {
                                 TemaZemini(theme, Modifier.matchParentSize())
                                 val ink = if (theme.dark) Color.White else Color(0xFF171719)
                                 Column(Modifier.fillMaxSize().padding(14.dp), verticalArrangement = Arrangement.SpaceBetween) {
                                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                        Text("ascend", fontFamily = LoraSerif, color = ink, fontSize = 13.sp)
+                                        Text("ascend", fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, color = ink, fontSize = 13.sp)
                                         if (theme.pro) Text("PRO", color = ink, fontSize = 9.sp, fontWeight = FontWeight.Bold,
                                             modifier = Modifier.background(if (theme.dark) Color.Black.copy(.55f) else Color.White.copy(.85f), RoundedCornerShape(5.dp)).padding(4.dp))
                                     }
                                     Text(cevir(dil, "Kendi hızında.\nBir adım daha.", "At your pace.\nOne step more."), color = ink,
-                                        fontFamily = LoraSerif, fontSize = 18.sp, lineHeight = 23.sp)
+                                        fontFamily = LoraSerif, fontSize = if(compact) 15.sp else 18.sp, lineHeight = if(compact) 20.sp else 23.sp)
                                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                                         Icon(if (selected) AzimIkon.Tik else if (theme.pro && !pro) AzimIkon.Kilit else AzimIkon.Kalp, null, Modifier.size(16.dp), tint = ink)
                                     }
@@ -96,6 +96,30 @@ fun TemaOnizleme(theme: AnaTema, dil: String, pro: Boolean, close: () -> Unit, a
                 "Artwork on your home screen; a matching, simple look everywhere else."), color = Renk.metinIkincil, fontSize = 13.sp)
             Button(onClick = if(theme.pro && !pro) proOpen else apply, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("theme-apply")) {
                 Text(cevir(dil, if(theme.pro && !pro) "Pro ile kullan" else "Bu temayı kullan", if(theme.pro && !pro) "Use with Pro" else "Use this theme"))
+            }
+        }
+    }
+}
+
+@Composable
+fun ArkaPlanGrid(dil: String, themes: List<AnaTema>, selectedId: String, select: (AnaTema) -> Unit) {
+    Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        themes.chunked(3).forEach { row ->
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                row.forEach { theme ->
+                    Column(Modifier.weight(1f)) {
+                        Surface(onClick = { select(theme) }, shape = RoundedCornerShape(14.dp),
+                            border = BorderStroke(if(selectedId == theme.id) 2.dp else .5.dp, if(selectedId == theme.id) Renk.metin else Renk.kenarlik),
+                            modifier = Modifier.fillMaxWidth().aspectRatio(.8f).testTag("widget-background-${theme.id}")) {
+                            Box {
+                                TemaZemini(theme, Modifier.matchParentSize(), .05f)
+                                if(selectedId == theme.id) Icon(AzimIkon.Tik,null,Modifier.align(Alignment.BottomEnd).padding(8.dp).size(18.dp),tint = if(theme.dark) Color.White else Color.Black)
+                            }
+                        }
+                        Text(theme.label(dil), color = Renk.metinIkincil,fontSize = 11.sp,lineHeight = 16.sp,modifier = Modifier.padding(top = 5.dp))
+                    }
+                }
+                repeat(3-row.size) { Spacer(Modifier.weight(1f)) }
             }
         }
     }

@@ -133,6 +133,10 @@ fun Uygulama(
             bildirimIzni = bildirimIzni, izinIste = izinIste,
             initialDraft = taslak!!, previewAccess = acik, pro = proDemo == true, proOpen = { proGoster = true },
             languageChanged = { kapsam.launch { depo.dilAyarla(it) } },
+            startTrial = { result -> kapsam.launch {
+                try { depo.proDemoAyarla(true); result(true) }
+                catch (_: java.io.IOException) { result(false) }
+            } },
             draftChanged = { yeni ->
                 kapsam.launch {
                     try { depo.saveOnboardingDraft(yeni) }

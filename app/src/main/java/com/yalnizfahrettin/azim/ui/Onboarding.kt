@@ -64,10 +64,14 @@ fun Onboarding(
     editing: Boolean = false, onCancel: () -> Unit = {},
     previewAccess: Set<String> = Erisim.ucretsizKategoriler,
     pro: Boolean = false, proOpen: () -> Unit = {}, languageChanged: (String) -> Unit = {},
+    startTrial: ((Boolean) -> Unit) -> Unit = { it(false) },
     bitir: (Set<String>, Int, Int, Int, Boolean) -> Unit,
 ) {
     var encoded by rememberSaveable { mutableStateOf(initialDraft.copy(
         step = if (initialDraft.setupVersion >= 3) initialDraft.step.coerceIn(0, 4) else 0, setupVersion = 3).encode()) }
+    var trial by rememberSaveable { mutableStateOf(false) }
+    var trialBusy by remember { mutableStateOf(false) }
+    var trialError by remember { mutableStateOf(false) }
     var previewTheme by rememberSaveable { mutableStateOf<String?>(null) }
 
     val profile = remember(encoded) { PersonalProfile.decode(encoded) }
@@ -86,9 +90,9 @@ fun Onboarding(
         keyboard?.hide()
         update(profile.copy(step = next.coerceIn(0, 4)))
     }
-    fun finish(reminders: Boolean) {
-        if (finishProfile != null) finishProfile(profile, reminders)
-        else bitir(PersonalPlan.initialCategories(profile, previewAccess), profile.dailyCount, profile.startHour, profile.endHour, reminders)
+    fun finish(reminders: Boolean, value: PersonalProfile = profile) {
+        if (finishProfile != null) finishProfile(value, reminders)
+        else bitir(PersonalPlan.initialCategories(value, previewAccess), value.dailyCount, value.startHour, value.endHour, reminders)
     }
     BackHandler(step > 0 || editing || kaydediliyor) {
         if (!kaydediliyor) { if (step > 0) move(step - 1) else onCancel() }
@@ -100,7 +104,7 @@ fun Onboarding(
             else Spacer(Modifier.width(12.dp))
             Box(Modifier.weight(1f)) {
                 if (largeText) Icon(AzimIkon.Yukselis, "Ascend", Modifier.size(24.dp), tint = Renk.metin)
-                else Text("ascend", fontFamily = LoraSerif, fontSize = 24.sp, fontWeight = FontWeight.Normal,
+                else Text("ascend", fontFamily = ArayuzFont, fontSize = 25.sp, fontWeight = FontWeight.SemiBold,
                     letterSpacing = (-0.5).sp, color = Renk.metin)
             }
             Text("${step + 1} / 5", fontSize = 12.sp, color = Renk.metinIkincil)
@@ -129,7 +133,7 @@ fun Onboarding(
                     horizontalAlignment = Alignment.CenterHorizontally) {
                     Column(Modifier.widthIn(max = 480.dp).fillMaxWidth().heightIn(min = viewport)
                         .padding(horizontal = 24.dp, vertical = 24.dp),
-                        verticalArrangement = Arrangement.Center) {
+                        verticalArrangement = if(shownStep == 4) Arrangement.Top else Arrangement.Center) {
                         Column(Modifier.fillMaxWidth().testTag("onboarding-body"), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                             when (shownStep) {
                                 0 -> PlanLanguage(dil, profile.answer("language").firstOrNull() ?: dil) { update(profile.choose("language", it)); languageChanged(it) }
@@ -138,7 +142,7 @@ fun Onboarding(
                                 3 -> PlanPermission(profile, dil, bildirimIzni, previewAccess, stageHeight) { permissionHelp = true }
                                 4 -> {
                                     PlanTitle(cevir(dil, "Sana ait bir görünüm.", "Make it feel like you."), cevir(dil, "Beyaz ve Siyah ücretsiz. Dilediğin zaman değiştir.", "White and Black are free. Change them anytime."))
-                                    TemaGrid(dil, AnaTemalar.onboarding, AnaTemalar.allowed(profile.answer("theme").firstOrNull(), pro).id, pro) {
+                                    TemaGrid(dil, AnaTemalar.onboarding, AnaTemalar.find(profile.answer("theme").firstOrNull()).id, pro, compact = true) {
                                         if (it.pro) previewTheme = it.id else update(profile.choose("theme", it.id))
                                     }
                                 }
@@ -151,14 +155,14 @@ fun Onboarding(
                             Button(onClick = {
                                 if (step == 3 && !bildirimIzni) izinIste()
                                 else if (step < 4) move(step + 1)
-                                else if (bildirimIzni) finish(true) else move(3)
+                                else if (bildirimIzni) { if(pro) finish(true) else trial = true } else move(3)
                             }, enabled = !kaydediliyor, shape = RoundedCornerShape(16.dp),
                                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("onboarding-next")) {
                                 Text(if (kaydediliyor) cevir(dil, "Kaydediliyor…", "Saving…") else when (step) {
                                     0 -> cevir(dil, "Devam", "Continue")
                                     1 -> cevir(dil, "Ritmimi ayarla", "Set my rhythm")
-                                    3 -> if (bildirimIzni) cevir(dil, "Temamı seç", "Choose my theme") else cevir(dil, "Bildirimlere izin ver", "Allow notifications")
-                                    4 -> cevir(dil, "Ascend’e başla", "Start Ascend")
+                                    3 -> if (bildirimIzni) cevir(dil, "Temamı seç", "Choose my theme") else cevir(dil, "Bildirimleri aç", "Enable notifications")
+                                    4 -> cevir(dil, "Devam", "Continue")
                                     else -> cevir(dil, "Devam", "Continue")
                                 }, textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Medium)
                             }
@@ -172,7 +176,15 @@ fun Onboarding(
         update(if (hourDialog == 1) profile.copy(startHour = hour) else profile.copy(endHour = hour)); hourDialog = 0
     }
     if (permissionHelp) PlanPermissionHelp(dil) { permissionHelp = false }
-    previewTheme?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro,
+    if(trial) DenemeTeklifi(dil, trialBusy, trialError, close = { trial = false },
+        start = {
+            trialBusy = true; trialError = false
+            startTrial { success ->
+                trialBusy = false
+                if(success) { trial = false; finish(true) } else trialError = true
+            }
+        }, free = { val freeProfile = profile.choose("theme", AnaTemalar.allowed(profile.answer("theme").firstOrNull(), false).id); update(freeProfile); trial = false; finish(true, freeProfile) })
+    previewTheme?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, true,
         close = { previewTheme = null }, apply = { update(profile.choose("theme", id)); previewTheme = null }, proOpen = proOpen) }
 }
 
@@ -183,18 +195,8 @@ private fun silverBrush() = Brush.linearGradient(if (Renk.karanlikMi)
 
 @Composable
 private fun PlanLanguage(dil: String, language: String, select: (String) -> Unit) {
-    PlanTitle(cevir(dil, "Küçük bir an.\nSana iyi gelen bir söz.", "A small moment.\nWords that stay with you."),
+    PlanTitle(cevir(dil, "İyi bir başlangıç.\nSenin dilinde.", "A fresh start.\nIn your language."),
         cevir(dil, "Ascend'e hoş geldin. Önce dilini seç.", "Welcome to Ascend. Choose your language."))
-    Box(Modifier.fillMaxWidth().height(148.dp).clip(RoundedCornerShape(24.dp)).background(silverBrush()), contentAlignment = Alignment.Center) {
-        Row(horizontalArrangement = Arrangement.spacedBy(24.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text("Aa", fontFamily = LoraSerif, color = Renk.metin, fontSize = 58.sp)
-            Box(Modifier.height(48.dp).width(1.dp).background(Renk.kenarlikGuclu))
-            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Merhaba", fontSize = 18.sp, fontWeight = FontWeight.Medium, color = Renk.metin)
-                Text("Hello", fontSize = 18.sp, color = Renk.metinIkincil)
-            }
-        }
-    }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.selectableGroup()) {
         PlanChoice("Türkçe", language == "tr", "language-tr") { select("tr") }
         PlanChoice("English", language == "en", "language-en") { select("en") }
@@ -345,6 +347,15 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
     PlanTitle(cevir(dil, "İyi bir söz seni bulsun.", "Let good words find you."),
         cevir(dil, "Günde ${profile.dailyCount} kez, ${planHour(profile.startHour)}–${planHour(profile.endHour)} arasında.",
             "${profile.dailyCount} times a day, between ${planHour(profile.startHour)} and ${planHour(profile.endHour)}."))
+    Surface(onClick = help, color = Renk.yuzey, shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik), modifier = Modifier.fillMaxWidth().testTag("notification-appearance-help")) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Icon(AzimIkon.Bildirim, null, tint = Renk.metin)
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                Text(cevir(dil,"Ekranda açılır bildirim","Pop-up notifications"), color = Renk.metin, fontSize = 15.sp, fontWeight = FontWeight.Medium)
+                Text(cevir(dil,"Ayrıntılı görünümü cihazında aç →","Enable detailed appearance on your device →"), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
+            }
+        }
+    }
     val firstTime = remember(profile.dailyCount, profile.startHour, profile.endHour) { previewTimes(profile).firstOrNull()?.format(DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT)).orEmpty() }
     val sample = remember(profile, access, dil) {
         PersonalPlan.feed(profile, PersonalPlan.initialCategories(profile, access), access).firstOrNull()?.metin(dil)
@@ -377,17 +388,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
         Spacer(Modifier.height(22.dp))
         Box(Modifier.width(72.dp).height(3.dp).background(Renk.metinIkincil.copy(alpha = .3f), CircleShape))
     }
-    Surface(onClick = help, color = Color.Transparent, modifier = Modifier.fillMaxWidth().testTag("notification-appearance-help")) {
-        Row(Modifier.padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Icon(if (allowed) AzimIkon.Tik else AzimIkon.Bildirim, null, Modifier.size(22.dp), tint = Renk.metinIkincil)
-            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(cevir(dil, "Ayrıntılı bildirim görünümü", "Detailed notification appearance"), color = Renk.metin, fontSize = 13.sp, fontWeight = FontWeight.Medium)
-                Text(cevir(dil, if (allowed) "İznin açık. Cihaz ayarlarını incele." else "Nasıl görünür? Cihaz ayarlarını incele.",
-                    if (allowed) "Permission granted. View device settings." else "How it appears. View device settings."), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
-            }
-            Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
-        }
-    }
+
 }
 
 @Composable
@@ -406,9 +407,13 @@ private fun PlanPermissionHelp(dil: String, close: () -> Unit) {
     AlertDialog(onDismissRequest = close, title = { Text(cevir(dil, "Bildirim yardımcısı", "Notification help"), fontFamily = ArayuzFont) },
         text = { Column(Modifier.heightIn(max = 380.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
             Text(cevir(dil, "Tam söz için bildirimi aşağı doğru genişlet. Kilit ekranı ve açılır pencere görünümü cihazının ayarlarına bağlıdır.", "Expand a notification to read the full quote. Lock screen and pop-up appearance depend on your device settings."))
-            Text(cevir(dil, "Samsung'da: Ayarlar → Bildirimler → Ascend → Bildirim açılır pencere stili → Ayrıntılı. Önceki One UI sürümlerinde stil genel Bildirimler menüsündedir.", "On Samsung: Settings → Notifications → Ascend → Notification pop-up style → Detailed. Earlier One UI versions keep the style in the general Notifications menu."))
-            Text(cevir(dil, "Menü adları değişebilir. Ascend bu görünüm ayarını kendiliğinden değiştiremez.", "Menu names can vary. Ascend cannot change this appearance setting automatically."), style = MaterialTheme.typography.bodySmall)
-            OutlinedButton(onClick = { TeslimatYardimi.bildirimAyarlariniAc(ctx) }) { Text(cevir(dil, "Cihaz ayarlarını aç", "Open device settings")) }
+            Text(cevir(dil, "Bildirim kategorisinde ‘Ekranda göster’ veya ‘Açılır bildirim’ seçeneğini aç. Menü adı telefonuna göre değişebilir.", "Enable ‘Show on screen’ or ‘Pop on screen’ in the notification channel. The name varies by phone."))
+            OutlinedButton(onClick = { TeslimatYardimi.kanalAyarlariniAc(ctx) }, modifier = Modifier.fillMaxWidth()) { Text(cevir(dil, "Açılır bildirim ayarını aç", "Open pop-up settings")) }
+            if (TeslimatYardimi.acilirPencereAyariVarMi()) {
+                Text(cevir(dil, "Samsung’da Bildirimler bölümünde ‘Bildirim açılır pencere stili’ni bulup ‘Ayrıntılı’yı seç. Bu seçenek One UI sürümüne göre uygulama ayarlarında veya genel Bildirimler bölümünde olabilir.", "On Samsung, find ‘Notification pop-up style’ and select ‘Detailed’. Depending on One UI, it may be in app settings or the main Notifications section."))
+                OutlinedButton(onClick = { TeslimatYardimi.genelBildirimAyarlariniAc(ctx) }, modifier = Modifier.fillMaxWidth()) { Text(cevir(dil, "Ayrıntılı görünüm ayarları", "Detailed appearance settings")) }
+            }
+            Text(cevir(dil, "Ascend bu ayarı kendiliğinden değiştiremez. Rahatsız Etmeyin modu açılır bildirimleri sessize alabilir.", "Ascend cannot change this setting automatically. Do Not Disturb can silence pop-up notifications."), style = MaterialTheme.typography.bodySmall)
         } }, confirmButton = { TextButton(onClick = close) { Text(cevir(dil, "Anladım", "Got it")) } })
 }
 
