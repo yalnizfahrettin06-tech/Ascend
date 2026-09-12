@@ -81,6 +81,7 @@ fun Uygulama(
     val haftalik by depo.haftalikAktiflik.collectAsStateWithLifecycle(List(7) { false })
     val bugunGelenler by depo.bugunGelenler.collectAsStateWithLifecycle(emptyList())
     val seriesProgress by depo.seriesProgress.collectAsStateWithLifecycle(emptyMap())
+    var notificationTopicsOpen by rememberSaveable { mutableStateOf(false) }
     var personalPage by rememberSaveable { mutableStateOf("") }
     val gunlukGelenler by depo.gunlukGelenler.collectAsStateWithLifecycle(emptyMap())
     val bugunGorulen by depo.bugunGorulen.collectAsStateWithLifecycle(0)
@@ -280,7 +281,7 @@ fun Uygulama(
                         gunlukHedef = gunlukAdet,
                         sonrakiBildirim = sonrakiBildirim,
                         hatirlaticiAcik = hatirlaticiAcik, bildirimIzni = bildirimIzni,
-                        seciliKonular = secili, haptikAcik = haptik, konulariDuzenle = { acilacakGrup = null; selectedRequest++; sekme = Sekme.KATEGORI },
+                        seciliKonular = secili, haptikAcik = haptik, konulariDuzenle = { notificationTopicsOpen = true },
                         oneri = oneri,
                         bugunPlanlanan = gunlukAdet,
                         dil = dil,
@@ -332,22 +333,22 @@ fun Uygulama(
                         paylas = { paylasilanKimlik = it.kimlik },
                     )
 
-                    Sekme.ISTATISTIK -> when(personalPage) {
+                    Sekme.ISTATISTIK -> SeninBolumleri(dil, personalPage, { personalPage = it }, { ayarlardaMi = true }) { when(personalPage) {
                         "history" -> BildirimGecmisiEkrani(dil, gunlukGelenler, favoriler, { personalPage = "" },
-                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik })
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, embedded = true)
                         "series" -> KisaSerilerEkrani(dil, seriesProgress, favoriler, { personalPage = "" },
                             { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
-                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik })
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, embedded = true)
                         else -> IstatistikEkrani(
                         seri = seri, rekor = rekor, gorulen = gorulen,
                         favoriSayisi = favoriler.size, acikKategori = acik.size, haftalik = haftalik,
                         name = profil?.name.orEmpty(),
                         planOzeti = cevir(dil, "Konular, saatler ve içerik sınırları", "Topics, schedule and content boundaries"),
-                        onHistory = { personalPage = "history" }, onSeries = { personalPage = "series" },
+                        embedded = true, onHistory = { personalPage = "history" }, onSeries = { personalPage = "series" },
                         onFavoriler = { sekme = Sekme.FAVORI }, onPlan = { planGoster = true },
                         onSettings = { ayarlardaMi = true },
                     )
-                    }
+                    } }
                 }
                 }
             }
@@ -355,6 +356,10 @@ fun Uygulama(
         }
         AltNav(sekme) { sekme = it }
     }
+
+    if(notificationTopicsOpen) BildirimKonulariPaneli(dil,secili,close = { notificationTopicsOpen = false },
+        toggle = { key -> kapsam.launch { depo.kategoriSec(key); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
+        discover = { notificationTopicsOpen = false; acilacakGrup = null; selectedRequest = -kotlin.math.abs(selectedRequest) - 1; sekme = Sekme.KATEGORI })
 
     val readerQuote = readerId?.let(Sozler::kimlikten)
     LaunchedEffect(readerId) { readerQuote?.let { depo.gosterildi(it.kimlik) } }

@@ -14,6 +14,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -21,13 +26,38 @@ import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 
+private object ThemeImages {
+    private val cache = object : android.util.LruCache<String, android.graphics.Bitmap>(16 * 1024 * 1024) {
+        override fun sizeOf(key: String, value: android.graphics.Bitmap) = value.allocationByteCount
+    }
+    private val permits = Semaphore(2)
+    suspend fun load(context: android.content.Context, resource: Int, maxSide: Int): android.graphics.Bitmap? = withContext(Dispatchers.IO) {
+        val key = "$resource:$maxSide"
+        cache.get(key) ?: permits.withPermit {
+            cache.get(key) ?: run {
+                val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true; inScaled = false }
+                android.graphics.BitmapFactory.decodeResource(context.resources, resource, bounds)
+                var sample = 1
+                while(maxOf(bounds.outWidth, bounds.outHeight) / (sample * 2) >= maxSide) sample *= 2
+                android.graphics.BitmapFactory.decodeResource(context.resources, resource,
+                    android.graphics.BitmapFactory.Options().apply { inSampleSize = sample; inScaled = false })?.also { cache.put(key,it) }
+            }
+        }
+    }
+}
+
 @Composable
-fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f) {
+fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f, thumbnail: Boolean = false) {
     val base = if (theme.dark) Color(0xFF171719) else Color(0xFFF5F5F4)
     Box(modifier.background(base)) {
         theme.art?.let { art ->
-            Image(painterResource(art), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
-                colorFilter = if(theme.id == "rider") null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }))
+            val context = LocalContext.current
+            val size = if(thumbnail) 320 else 1200
+            val bitmap by produceState<android.graphics.Bitmap?>(null, art, size) {
+                value = null; value = ThemeImages.load(context,art,size)
+            }
+            bitmap?.let { Image(it.asImageBitmap(), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
+                colorFilter = if(theme.id == "rider") null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })) }
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
                 base.copy(alpha = if (theme.dark) .65f else veil), base.copy(alpha = if (theme.dark) .2f else .05f)))))
         }
@@ -48,7 +78,7 @@ fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolea
                             modifier = Modifier.fillMaxWidth().height(if(compact) 128.dp else 156.dp).testTag("theme-${theme.id}")
                                 .semantics { this.selected = selected; contentDescription = theme.label(dil) + if (theme.pro) ", Pro" else "" }) {
                             Box {
-                                TemaZemini(theme, Modifier.matchParentSize())
+                                TemaZemini(theme, Modifier.matchParentSize(), thumbnail = true)
                                 val ink = if (theme.dark) Color.White else Color(0xFF171719)
                                 Column(Modifier.fillMaxSize().padding(14.dp), verticalArrangement = Arrangement.SpaceBetween) {
                                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -112,7 +142,7 @@ fun ArkaPlanGrid(dil: String, themes: List<AnaTema>, selectedId: String, select:
                             border = BorderStroke(if(selectedId == theme.id) 2.dp else .5.dp, if(selectedId == theme.id) Renk.metin else Renk.kenarlik),
                             modifier = Modifier.fillMaxWidth().aspectRatio(.8f).testTag("widget-background-${theme.id}")) {
                             Box {
-                                TemaZemini(theme, Modifier.matchParentSize(), .05f)
+                                TemaZemini(theme, Modifier.matchParentSize(), .05f, thumbnail = true)
                                 if(selectedId == theme.id) Icon(AzimIkon.Tik,null,Modifier.align(Alignment.BottomEnd).padding(8.dp).size(18.dp),tint = if(theme.dark) Color.White else Color.Black)
                             }
                         }

@@ -106,11 +106,7 @@ fun AnaEkran(
             Surface(onClick = konulariDuzenle, color = Renk.yuzey.copy(alpha = .85f), shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 4.dp).testTag("home-reminder-topics")) {
                 Row(Modifier.padding(horizontal = 12.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Icon(AzimIkon.Bildirim, null, Modifier.size(17.dp), tint = Renk.metinIkincil)
-                    Column(Modifier.weight(1f)) {
-                        Text(cevir(dil,"Bildirim konuların","Your reminder topics"), fontSize = 10.sp, color = Renk.metinIkincil)
-                        val labels = Kategoriler.tumAltlar.filter { it.anahtar in seciliKonular }.map { it.ad(dil) }
-                        Text(labels.take(2).joinToString(" · ") + if(labels.size > 2) " +${labels.size - 2}" else if(labels.isEmpty()) cevir(dil,"Konu seç","Choose topics") else "", fontSize = 12.sp, color = Renk.metin, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
-                    }
+                    Text(cevir(dil,"${seciliKonular.size} konu seçili","${seciliKonular.size} topics selected"),Modifier.weight(1f),fontSize = 12.sp,color = Renk.metin)
                     Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
                 }
             }

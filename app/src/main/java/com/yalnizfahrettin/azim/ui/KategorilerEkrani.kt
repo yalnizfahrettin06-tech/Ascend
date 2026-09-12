@@ -60,7 +60,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     var detayKey by rememberSaveable { mutableStateOf<String?>(null) }
     val focus = LocalFocusManager.current
     LaunchedEffect(acilacakGrup) { group = acilacakGrup }
-    LaunchedEffect(selectedRequest) { if(selectedRequest > 0) { reminders = true; group = null; query = "" } }
+    LaunchedEffect(selectedRequest) { if(selectedRequest != 0) { reminders = selectedRequest > 0; group = null; query = "" } }
     BackHandler((group != null || reminders) && detayKey == null) { group = null; reminders = false }
     val showGroups = group == null && !reminders && query.isBlank()
     val results = LibraryQuery.filter(query.trim(), dil, group = if(query.isBlank()) group else null,

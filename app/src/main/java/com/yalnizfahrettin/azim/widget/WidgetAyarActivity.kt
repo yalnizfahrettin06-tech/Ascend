@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -45,18 +47,25 @@ class WidgetAyarActivity : ComponentActivity() {
             var message by rememberSaveable { mutableStateOf<String?>(null) }
             val config = WidgetSecimi(theme, true, false)
             val quote = cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward.")
-            val bitmap = remember(config, dil) { WidgetTasarimi.render(this, config, quote, "Ascend", 720, 360) }
+            val bitmap by produceState<android.graphics.Bitmap?>(null, config, dil) {
+                value = null
+                value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 720, 360) }
+            }
             AzimTema(modu = mode) {
                 Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {
                     Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = { finish() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
-                        Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 20.sp)
+                        Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
                         ProRozeti()
                     }
-                    Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Image(bitmap.asImageBitmap(), quote, Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(20.dp)).testTag("widget-live-preview"))
-                        Text(cevir(dil,"Her gün yeni bir söz · Önizleme", "A new quote each day · Preview"), color = Renk.metinIkincil, fontSize = 12.sp)
-                        ArkaPlanGrid(dil, AnaTemalar.all, theme) { theme = it.id }
+                    LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        item {
+                            Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
+                                bitmap?.let { Image(it.asImageBitmap(), quote, Modifier.fillMaxSize()) }
+                            }
+                        }
+                        item { Text(cevir(dil,"Her gün yeni bir söz · Önizleme", "A new quote each day · Preview"), color = Renk.metinIkincil, fontSize = 12.sp) }
+                        items(AnaTemalar.all.chunked(3), key = { it.first().id }) { row -> ArkaPlanGrid(dil, row, theme) { theme = it.id } }
                     }
                     Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         message?.let { Text(it, color = Renk.metinIkincil, fontSize = 12.sp) }

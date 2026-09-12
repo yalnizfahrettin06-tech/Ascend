@@ -27,34 +27,33 @@ import kotlinx.coroutines.launch
 private fun PersonalHeader(title: String, dil: String, back: () -> Unit) {
     Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
         IconButton(onClick = back) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
-        Text(title, color = Renk.metin, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
+        Text(title, color = Renk.metin, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
     }
 }
 
 @Composable
 private fun QuoteActions(quote: Soz, dil: String, favorites: Set<String>, save: (Soz) -> Unit, share: (Soz) -> Unit) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-        TextButton(onClick = { save(quote) }, modifier = Modifier.testTag("personal-save-${quote.kimlik}")) {
-            Icon(if(quote.kimlik in favorites) AzimIkon.KalpDolu else AzimIkon.Kalp, null, Modifier.size(18.dp))
-            Spacer(Modifier.width(6.dp)); Text(cevir(dil,if(quote.kimlik in favorites) "Kaydedildi" else "Kaydet",if(quote.kimlik in favorites) "Saved" else "Save"))
+        IconButton(onClick = { save(quote) }, modifier = Modifier.testTag("personal-save-${quote.kimlik}")) {
+            Icon(if(quote.kimlik in favorites) AzimIkon.KalpDolu else AzimIkon.Kalp, cevir(dil,if(quote.kimlik in favorites) "Kaydedildi" else "Kaydet",if(quote.kimlik in favorites) "Saved" else "Save"), Modifier.size(20.dp), tint = Renk.metinIkincil)
         }
-        TextButton(onClick = { share(quote) }, modifier = Modifier.testTag("personal-share-${quote.kimlik}")) {
-            Icon(AzimIkon.Paylas,null,Modifier.size(18.dp)); Spacer(Modifier.width(6.dp)); Text(cevir(dil,"Paylaş","Share"))
+        IconButton(onClick = { share(quote) }, modifier = Modifier.testTag("personal-share-${quote.kimlik}")) {
+            Icon(AzimIkon.Paylas,cevir(dil,"Paylaş","Share"),Modifier.size(20.dp),tint = Renk.metinIkincil)
         }
     }
 }
 
 @Composable
-fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favorites: Set<String>, back: () -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit) {
-    BackHandler(onBack = back)
+fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favorites: Set<String>, back: () -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false) {
+    if(!embedded) BackHandler(onBack = back)
     val cutoff = LocalDate.now().minusDays(29)
     val groups = history.toSortedMap(reverseOrder()).mapNotNull { (date, ids) ->
         val day = runCatching { LocalDate.parse(date) }.getOrNull()
         val quotes = ids.distinct().mapNotNull(Sozler::kimlikten)
         if(day == null || day < cutoff || quotes.isEmpty()) null else day to quotes
     }
-    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding().testTag("notification-history")) {
-        PersonalHeader(cevir(dil,"Bildirim geçmişi","Notification history"),dil,back)
+    Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded) Modifier else Modifier.statusBarsPadding()).testTag("notification-history")) {
+        if(!embedded) PersonalHeader(cevir(dil,"Bildirim geçmişi","Notification history"),dil,back)
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             item { Text(cevir(dil,"Son 30 günde sana gelen sözler.","Quotes sent to you in the last 30 days."),color = Renk.metinIkincil,fontSize = 14.sp) }
             if(groups.isEmpty()) item {
@@ -63,7 +62,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
             groups.forEach { (day, quotes) ->
                 item(key = day.toString()) { Text(day.format(DateTimeFormatter.ofPattern("d MMMM yyyy",Locale.forLanguageTag(dil))),Modifier.padding(top = 14.dp),color = Renk.metinIkincil,fontSize = 12.sp) }
                 items(quotes,key = { "$day-${it.kimlik}" }) { quote ->
-                    Surface(color = Renk.yuzey,shape = RoundedCornerShape(18.dp),modifier = Modifier.fillMaxWidth()) {
+                    Surface(color = Renk.yuzey.copy(alpha = .45f),shape = RoundedCornerShape(24.dp),modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
                             Text(quote.metin(dil),color = Renk.metin,fontFamily = LoraSerif,fontSize = 21.sp,lineHeight = 29.sp)
                             Text(quote.sunumEtiketi(dil),color = Renk.metinIkincil,fontSize = 11.sp)
@@ -78,7 +77,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
 
 @Composable
 fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorites: Set<String>, back: () -> Unit,
-    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit) {
+    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false) {
     var chosen by rememberSaveable { mutableStateOf<String?>(null) }
     var readingDay by rememberSaveable(chosen) { mutableStateOf<Int?>(null) }
     var today by remember { mutableStateOf(LocalDate.now()) }
@@ -88,9 +87,9 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
     val scope = rememberCoroutineScope()
     val series = ShortSeries.all.firstOrNull { it.id == chosen }
     val goBack = { if(chosen != null) chosen = null else back() }
-    BackHandler(onBack = goBack)
-    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding().testTag("short-series")) {
-        PersonalHeader(cevir(dil,"Kısa seriler","Short series"),dil,goBack)
+    if(!embedded || chosen != null) BackHandler(onBack = goBack)
+    Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded) Modifier else Modifier.statusBarsPadding()).testTag("short-series")) {
+        if(!embedded || chosen != null) PersonalHeader(cevir(dil,"Kısa seriler","Short series"),dil,goBack)
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement = Arrangement.spacedBy(20.dp)) {
             if(series == null) {
                 Text(cevir(dil,"7 gün, her gün bir söz. Kendi isteğinle başla; ara vermek ilerlemeni silmez.","7 days, one quote each day. Start when you want; taking a break keeps your progress."),color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
@@ -133,5 +132,24 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
             }
             if(error) Text(cevir(dil,"Kaydedilemedi. Yeniden dene.","Could not save. Please retry."),color = MaterialTheme.colorScheme.error)
         }
+    }
+}
+
+@Composable
+fun SeninBolumleri(dil: String, selected: String, select: (String) -> Unit, settings: () -> Unit, content: @Composable () -> Unit) {
+    val holder = androidx.compose.runtime.saveable.rememberSaveableStateHolder()
+    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp),verticalAlignment = Alignment.CenterVertically) {
+            Text(cevir(dil,"Senin","You"),Modifier.weight(1f),fontSize = 18.sp,fontWeight = FontWeight.SemiBold,color = Renk.metin)
+            IconButton(onClick = settings,modifier = Modifier.testTag("profile-settings")) { Icon(AzimIkon.Ayarlar,cevir(dil,"Ayarlar","Settings"),Modifier.size(20.dp),tint = Renk.metinIkincil) }
+        }
+        Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp),horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf("" to cevir(dil,"Özet","Overview"), "history" to cevir(dil,"Geçmiş","History"), "series" to cevir(dil,"Seriler","Series")).forEach { (key,label) ->
+                Surface(onClick = { select(key) },color = if(selected == key) Renk.metin else Renk.yuzey,shape = RoundedCornerShape(12.dp),modifier = Modifier.weight(1f).testTag("personal-tab-${key.ifEmpty { "overview" }}")) {
+                    Text(label,Modifier.padding(vertical = 12.dp),color = if(selected == key) Renk.zemin else Renk.metinIkincil,fontSize = 12.sp,textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                }
+            }
+        }
+        Box(Modifier.weight(1f)) { holder.SaveableStateProvider(selected) { content() } }
     }
 }

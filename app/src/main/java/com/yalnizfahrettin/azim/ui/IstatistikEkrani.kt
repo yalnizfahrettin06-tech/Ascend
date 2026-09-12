@@ -29,16 +29,16 @@ fun IstatistikEkrani(
     seri: Int, rekor: Int, gorulen: Int, favoriSayisi: Int, acikKategori: Int,
     haftalik: List<Boolean> = List(7) { false },
     onFavoriler: () -> Unit = {}, onPlan: () -> Unit = {}, onSettings: () -> Unit = {},
-    name: String = "", planOzeti: String = "", onHistory: () -> Unit = {}, onSeries: () -> Unit = {},
+    name: String = "", planOzeti: String = "", onHistory: () -> Unit = {}, onSeries: () -> Unit = {}, embedded: Boolean = false,
 ) {
     val dil = LocalConfiguration.current.locales[0].language
     val sonHafta = List(7) { haftalik.getOrElse(it) { false } }
     val aktifGun = sonHafta.count { it }
     val sayilar = NumberFormat.getIntegerInstance(Locale.forLanguageTag(dil))
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
-    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()
+    Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded) Modifier else Modifier.statusBarsPadding())
         .verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
-        MarkaBasligi(yatayBosluk = 0.dp) {
+        if(!embedded) MarkaBasligi(yatayBosluk = 0.dp) {
             Text(if (name.isBlank()) cevir(dil, "Senin", "You") else name,
                 fontFamily = LoraSerif, fontSize = 28.sp, lineHeight = 36.sp, modifier = Modifier.weight(1f))
             IconButton(onClick = onSettings, modifier = Modifier.size(48.dp).testTag("profile-settings")) {
@@ -68,22 +68,9 @@ fun IstatistikEkrani(
                 Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
             }
         }
-        listOf(Triple(cevir(dil,"Bildirim geçmişi","Notification history"), cevir(dil,"Sana gelen sözleri yeniden bul","Revisit the quotes sent to you"), onHistory),
-            Triple(cevir(dil,"Kısa seriler","Short series"), cevir(dil,"7 gün, her gün küçük bir adım","7 days, a small step each day"), onSeries)).forEachIndexed { index, item ->
-            Surface(onClick = item.third, color = Renk.yuzey, shape = RoundedCornerShape(18.dp), modifier = Modifier.fillMaxWidth().testTag(if(index == 0) "profile-history" else "profile-series")) {
-                Row(Modifier.padding(18.dp),verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-                    Icon(if(index == 0) AzimIkon.Bildirim else AzimIkon.Yukselis,null,Modifier.size(24.dp),tint = Renk.metin)
-                    Column(Modifier.weight(1f),verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                        Text(item.first,color = Renk.metin,fontSize = 17.sp,fontWeight = FontWeight.Medium)
-                        Text(item.second,color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 18.sp)
-                    }
-                    Icon(AzimIkon.Ileri,null,Modifier.size(16.dp),tint = Renk.metinIkincil)
-                }
-            }
-        }
         HorizontalDivider(color = Renk.kenarlik)
         Column(Modifier.fillMaxWidth().testTag("journey-week"), verticalArrangement = Arrangement.spacedBy(18.dp)) {
-            Text(cevir(dil, "Haftanın izi", "Your weekly trail"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 26.sp, lineHeight = 34.sp)
+            Text(cevir(dil, "Haftanın izi", "Your weekly trail"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 19.sp, lineHeight = 26.sp)
             Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(9.dp)) {
                 Text(sayilar.format(aktifGun), color = Renk.metin, fontFamily = LoraSerif, fontSize = 42.sp, lineHeight = 48.sp)
                 Text(cevir(dil, "gün · son 7 günde", "days here · past 7 days"), color = Renk.metinIkincil,
@@ -96,7 +83,7 @@ fun IstatistikEkrani(
         }
         HorizontalDivider(color = Renk.kenarlik)
         Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text(cevir(dil, "Biriken küçük adımlar", "Small steps collected"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 23.sp, lineHeight = 31.sp)
+            Text(cevir(dil, "Biriken küçük adımlar", "Small steps collected"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 18.sp, lineHeight = 25.sp)
             val olcumler = listOf(gorulen to cevir(dil, "Görülen söz", "Quotes seen"), rekor to cevir(dil, "En uzun seri · gün", "Longest streak · days"))
             if (buyukYazi) Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                 olcumler.forEach { (sayi, baslik) ->

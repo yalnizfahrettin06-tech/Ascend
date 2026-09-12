@@ -29,7 +29,7 @@ object WidgetTasarimi {
         val dark = theme.dark; val bg = if(dark) Color.rgb(23,23,25) else Color.rgb(245,245,244)
         canvas.drawColor(bg)
         theme.art?.let { res ->
-            val opts = BitmapFactory.Options().apply { inSampleSize = 2 }
+            val opts = BitmapFactory.Options().apply { inSampleSize = 2; inScaled = false }
             val art = BitmapFactory.decodeResource(ctx.resources, res, opts)
             if (art != null) {
                 val scale = maxOf(w.toFloat()/art.width, h.toFloat()/art.height)
