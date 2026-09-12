@@ -369,9 +369,12 @@ private fun PlanIntroduction(dil: String, stageHeight: Dp) {
             Text(cevir(dil, "KENDİNE BİR NOT", "A NOTE TO YOURSELF"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.4.sp)
             AnimatedContent(page, transitionSpec = {
                 (fadeIn(tween(250)) + slideInHorizontally(tween(300)) { it / 8 }) togetherWith fadeOut(tween(150))
-            }, modifier = Modifier.heightIn(min = (stageHeight - 150.dp).coerceAtLeast(90.dp)), label = "practice-quote") { index ->
-                Text(quotes[index], color = Renk.metin, fontFamily = LoraSerif, fontSize = 27.sp, lineHeight = 36.sp,
-                    modifier = Modifier.testTag("practice-quote-text"))
+            }, label = "practice-quote") { index ->
+                Box(Modifier.fillMaxWidth().heightIn(min = (stageHeight - 150.dp).coerceAtLeast(90.dp)),
+                    contentAlignment = Alignment.CenterStart) {
+                    Text(quotes[index], color = Renk.metin, fontFamily = LoraSerif, fontSize = 27.sp, lineHeight = 36.sp,
+                        modifier = Modifier.testTag("practice-quote-text"))
+                }
             }
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(if (liked) cevir(dil, "Örnek beğenildi", "Sample liked") else cevir(dil, "Bir kez dene", "Give it a try"),
@@ -409,9 +412,9 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
     var expanded by rememberSaveable { mutableStateOf(false) }
     Column(Modifier.fillMaxWidth().heightIn(min = stageHeight).clip(RoundedCornerShape(32.dp))
         .background(silverBrush()).border(1.dp, Renk.kenarlik, RoundedCornerShape(32.dp)).padding(18.dp).testTag("notification-device"),
-        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(22.dp, Alignment.CenterVertically)) {
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceBetween) {
         Box(Modifier.width(38.dp).height(4.dp).background(Renk.metinIkincil.copy(alpha = .45f), CircleShape))
-        Text(cevir(dil, "BİLDİRİM ÖRNEĞİ", "NOTIFICATION PREVIEW"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.2.sp)
+        Text(cevir(dil, "BİLDİRİM ÖRNEĞİ", "NOTIFICATION PREVIEW"), modifier = Modifier.padding(vertical = 22.dp), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.2.sp)
         Surface(onClick = { expanded = !expanded }, color = Renk.zemin, shape = RoundedCornerShape(18.dp), border = BorderStroke(1.dp, Renk.kenarlik),
             modifier = Modifier.fillMaxWidth().animateContentSize(tween(280)).testTag("live-reminder-preview")
                 .semantics { stateDescription = cevir(dil, if (expanded) "Genişletilmiş" else "Daraltılmış", if (expanded) "Expanded" else "Collapsed") }) {
@@ -430,6 +433,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
                 }
             }
         }
+        Spacer(Modifier.height(22.dp))
         Box(Modifier.width(72.dp).height(3.dp).background(Renk.metinIkincil.copy(alpha = .3f), CircleShape))
     }
     Surface(onClick = help, color = Color.Transparent, modifier = Modifier.fillMaxWidth().testTag("notification-appearance-help")) {
