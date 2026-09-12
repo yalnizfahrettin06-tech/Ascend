@@ -111,7 +111,10 @@ fun Onboarding(
         }
         BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
             val viewport = maxHeight
-            val stageHeight = (viewport.value * .43f).coerceIn(210f, 310f).dp
+            // Taller phones give the illustration more room, rather than adding empty margins.
+            val sceneExtension = if (LocalDensity.current.fontScale <= 1.35f)
+                ((viewport.value - 650f) * .85f).coerceIn(0f, 130f).dp else 0.dp
+            val stageHeight = (viewport.value * .43f).coerceIn(210f, 310f).dp + sceneExtension
             AnimatedContent(step, transitionSpec = {
                 (slideInHorizontally(tween(360)) { if (targetState > initialState) it / 6 else -it / 6 } + fadeIn(tween(280))) togetherWith
                     (slideOutHorizontally(tween(240)) { if (targetState > initialState) -it / 8 else it / 8 } + fadeOut(tween(180)))
@@ -128,7 +131,7 @@ fun Onboarding(
                                 0 -> PlanWelcome(dil, stageHeight)
                                 1 -> PlanIntroduction(dil, stageHeight)
                                 2 -> PlanFrequency(profile, dil, stageHeight) { update(profile.copy(dailyCount = it)) }
-                                3 -> PlanHours(profile, dil) { hourDialog = it }
+                                3 -> PlanHours(profile, dil, sceneExtension) { hourDialog = it }
                                 4 -> PlanPermission(profile, dil, bildirimIzni, previewAccess, stageHeight) { permissionHelp = true }
                             }
                         }
@@ -180,8 +183,8 @@ private fun PlanWelcome(dil: String, stageHeight: Dp) {
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Icon(AzimIkon.Esik, null, Modifier.size(24.dp), tint = Renk.metinIkincil)
         Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-            Text(cevir(dil, "Senin saatlerinde, senin ritminde.", "Your hours. Your rhythm."), color = Renk.metin, fontSize = 14.sp)
-            Text(cevir(dil, "Hesap oluşturman gerekmez.", "No account needed."), color = Renk.metinIkincil, fontSize = 12.sp)
+            Text(cevir(dil, "Senin saatlerinde, senin ritminde.", "Your hours. Your rhythm."), color = Renk.metin, fontSize = 14.sp, lineHeight = 20.sp)
+            Text(cevir(dil, "Hesap oluşturman gerekmez.", "No account needed."), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
         }
     }
 }
@@ -224,7 +227,7 @@ private fun PlanFrequency(profile: PersonalProfile, dil: String, stageHeight: Dp
     val fill = silverBrush()
     val animatedCount by animateFloatAsState(profile.dailyCount.toFloat(), tween(350), label = "rhythm-dots")
     Box(Modifier.fillMaxWidth().heightIn(min = stageHeight).testTag("frequency-dial"), contentAlignment = Alignment.Center) {
-        Canvas(Modifier.size(stageHeight.coerceAtMost(280.dp)).clearAndSetSemantics { }) {
+        Canvas(Modifier.size(stageHeight.coerceAtMost(380.dp)).clearAndSetSemantics { }) {
             val radius = size.minDimension * .40f
             drawCircle(fill, radius * .85f)
             drawCircle(edge.copy(alpha = .65f), radius, style = Stroke(1.dp.toPx()))
@@ -242,17 +245,21 @@ private fun PlanFrequency(profile: PersonalProfile, dil: String, stageHeight: Dp
                 Text("$count", color = Renk.metin, fontFamily = ArayuzFont, fontWeight = FontWeight.Medium, fontSize = 68.sp, lineHeight = 78.sp,
                     modifier = Modifier.testTag("reminder-count").semantics { liveRegion = LiveRegionMode.Polite })
             }
-            Text(cevir(dil, "bildirim / gün", "reminders / day"), color = Renk.metinIkincil, fontSize = 13.sp)
+            Text(cevir(dil, "bildirim / gün", "reminders / day"), color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 19.sp)
         }
     }
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
         OutlinedIconButton(onClick = { changed(profile.dailyCount - 1) }, enabled = profile.dailyCount > 1,
+            colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Renk.metin, disabledContentColor = Renk.metinSonuk.copy(alpha = .4f)),
+            border = BorderStroke(1.dp, Renk.kenarlikGuclu),
             modifier = Modifier.size(52.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını azalt", "Fewer reminders") }) {
             Icon(AzimIkon.Eksi, null, Modifier.size(22.dp))
         }
         Text(cevir(dil, "Az", "Less") + "     ·     " + cevir(dil, "Çok", "More"), Modifier.padding(horizontal = 28.dp),
-            color = Renk.metinIkincil, fontSize = 13.sp)
+            color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 19.sp)
         OutlinedIconButton(onClick = { changed(profile.dailyCount + 1) }, enabled = profile.dailyCount < 7,
+            colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Renk.metin, disabledContentColor = Renk.metinSonuk.copy(alpha = .4f)),
+            border = BorderStroke(1.dp, Renk.kenarlikGuclu),
             modifier = Modifier.size(52.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını artır", "More reminders") }) {
             Icon(AzimIkon.Arti, null, Modifier.size(22.dp))
         }
@@ -268,7 +275,7 @@ private fun previewTimes(profile: PersonalProfile) = BildirimZamanlari.hesapla(
 /** A day diagram replaces the duplicated notification and schedule summaries. */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun PlanHours(profile: PersonalProfile, dil: String, select: (Int) -> Unit) {
+private fun PlanHours(profile: PersonalProfile, dil: String, sceneExtension: Dp, select: (Int) -> Unit) {
     PlanTitle(cevir(dil, "Hangi saatler sana ait?", "Which hours work for you?"),
         cevir(dil, "Bu aralıkta hatırlatır, dışında sessiz kalırız.", "Reminders inside this window. Quiet outside it."))
     val times = remember(profile.dailyCount, profile.startHour, profile.endHour) { previewTimes(profile) }
@@ -279,7 +286,7 @@ private fun PlanHours(profile: PersonalProfile, dil: String, select: (Int) -> Un
     Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(26.dp)).background(silverBrush()).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text(cevir(dil, "GÜNÜNÜN AKIŞI", "YOUR DAY"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.6.sp)
-        Canvas(Modifier.fillMaxWidth().height(116.dp).testTag("schedule-day-visual").clearAndSetSemantics { }) {
+        Canvas(Modifier.fillMaxWidth().height(116.dp + sceneExtension).testTag("schedule-day-visual").clearAndSetSemantics { }) {
             val y = size.height * .72f
             val left = 6.dp.toPx()
             val width = size.width - 2 * left
@@ -309,7 +316,7 @@ private fun PlanHours(profile: PersonalProfile, dil: String, select: (Int) -> Un
         }
     }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(cevir(dil, "Yaklaşık bildirim saatlerin", "Your approximate reminder times"), color = Renk.metinIkincil, fontSize = 12.sp)
+        Text(cevir(dil, "Yaklaşık bildirim saatlerin", "Your approximate reminder times"), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.testTag("reminder-preview-times")) {
             times.forEach { time ->
@@ -325,7 +332,7 @@ private fun HourControl(dil: String, start: Boolean, hour: Int, modifier: Modifi
     Surface(onClick = click, color = Renk.zemin, border = BorderStroke(1.dp, Renk.kenarlik), shape = RoundedCornerShape(18.dp),
         modifier = modifier.testTag(if (start) "reminder-start" else "reminder-end")) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(cevir(dil, if (start) "Başlangıç" else "Bitiş", if (start) "From" else "Until"), color = Renk.metinIkincil, fontSize = 12.sp)
+            Text(cevir(dil, if (start) "Başlangıç" else "Bitiş", if (start) "From" else "Until"), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(planHour(hour), Modifier.weight(1f), color = Renk.metin, fontSize = 23.sp, fontWeight = FontWeight.Medium)
                 Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
@@ -368,7 +375,7 @@ private fun PlanIntroduction(dil: String, stageHeight: Dp) {
             }
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(if (liked) cevir(dil, "Örnek beğenildi", "Sample liked") else cevir(dil, "Bir kez dene", "Give it a try"),
-                    Modifier.weight(1f).semantics { liveRegion = LiveRegionMode.Polite }, color = Renk.metinIkincil, fontSize = 12.sp)
+                    Modifier.weight(1f).semantics { liveRegion = LiveRegionMode.Polite }, color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
                 IconToggleButton(checked = liked, onCheckedChange = { liked = it }, modifier = Modifier.size(48.dp).testTag("practice-like")) {
                     val scale by animateFloatAsState(if (liked) 1.15f else 1f, tween(180), label = "practice-heart")
                     Icon(if (liked) AzimIkon.KalpDolu else AzimIkon.Kalp, cevir(dil, "Örnek sözü beğen", "Like sample quote"),
@@ -418,7 +425,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
                     maxLines = if (expanded) Int.MAX_VALUE else 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(cevir(dil, if (expanded) "Küçült" else "Tamamını gör", if (expanded) "Collapse" else "Read full quote"),
-                        Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 12.sp)
+                        Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
                     Icon(AzimIkon.Ileri, null, Modifier.size(15.dp).graphicsLayer { rotationZ = if (expanded) -90f else 90f }, tint = Renk.metinIkincil)
                 }
             }
