@@ -59,13 +59,15 @@ class AzimWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val depo = Depo(context)
-        val pro = depo.proDemo.first()
+        val initialPro = depo.proDemo.first()
         val dil = depo.dil.first()
         val manager = androidx.glance.appwidget.GlanceAppWidgetManager(context)
         val widgetId = manager.getAppWidgetId(id)
-        val config = WidgetTasarimi.load(context, widgetId)
+        val initialConfig = WidgetTasarimi.load(context, widgetId)
         provideContent {
             val state = currentState<androidx.datastore.preferences.core.Preferences>()
+            val pro = state[ACCESS] ?: initialPro
+            val config = WidgetSecimi(state[THEME] ?: initialConfig.theme, state[CENTER] ?: initialConfig.centered, state[LARGE] ?: initialConfig.large)
             val size = androidx.glance.LocalSize.current
             val quote = if(pro) state[SOZ].orEmpty().ifBlank { if(dil == "tr") "Kendine küçük bir an ayır." else "Take a moment for yourself." }
                 else if(dil == "tr") "Widget’lar Ascend Pro ile." else "Widgets are part of Ascend Pro."
@@ -85,6 +87,10 @@ class AzimWidget : GlanceAppWidget() {
     }
 
     companion object {
+        val THEME = stringPreferencesKey("widget_theme")
+        val CENTER = androidx.datastore.preferences.core.booleanPreferencesKey("widget_center")
+        val LARGE = androidx.datastore.preferences.core.booleanPreferencesKey("widget_large")
+        val ACCESS = androidx.datastore.preferences.core.booleanPreferencesKey("widget_pro")
         val KIMLIK = stringPreferencesKey("widget_quote_id")
         val SOZ = stringPreferencesKey("widget_soz")
         val YAZAR = stringPreferencesKey("widget_yazar")
@@ -93,6 +99,7 @@ class AzimWidget : GlanceAppWidget() {
         suspend fun tazele(ctx: Context) {
             val depo = Depo(ctx)
             val dil = depo.dil.first()
+            val access = depo.proDemo.first()
             val secili = depo.secili.first()
             val soz = PersonalPlan.notification(depo.personalProfile.first(), secili, depo.acik.first(),
                 dil, depo.gecmis.first(), depo.sonBildirimKimlik.first(), depo.hiddenQuotes.first())?.soz
@@ -100,7 +107,13 @@ class AzimWidget : GlanceAppWidget() {
             androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
                 .getGlanceIds(AzimWidget::class.java)
                 .forEach { id ->
+                    val widgetId = androidx.glance.appwidget.GlanceAppWidgetManager(ctx).getAppWidgetId(id)
+                    val config = WidgetTasarimi.load(ctx, widgetId)
                     updateAppWidgetState(ctx, id) { p ->
+                        p[THEME] = config.theme
+                        p[CENTER] = config.centered
+                        p[LARGE] = config.large
+                        p[ACCESS] = access
                         p[SOZ] = soz?.metin(dil) ?: if(dil == "tr") "Uygulamadan içerik tercihlerini düzenleyebilirsin." else "Adjust content preferences in the app."
                         p[KIMLIK] = soz?.kimlik.orEmpty()
                         p[YAZAR] = soz?.sunumEtiketi(dil) ?: "Ascend"

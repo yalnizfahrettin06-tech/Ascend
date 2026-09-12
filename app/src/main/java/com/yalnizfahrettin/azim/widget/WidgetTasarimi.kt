@@ -44,7 +44,7 @@ object WidgetTasarimi {
         }
         val unit = w / 360f
         val pad = 20 * unit; val ink = if(dark) Color.WHITE else Color.rgb(24,24,26)
-        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = ink; typeface = Typeface.create("sans-serif", Typeface.NORMAL); textSize = (if(config.large) 24 else 20)*unit }
+        val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { color = ink; typeface = Typeface.create("sans-serif", Typeface.NORMAL); textSize = (if(config.large) 24 else 20)*unit*ctx.resources.configuration.fontScale.coerceIn(.85f, 2f) }
         val contentWidth = (w-pad*2).toInt()
         val maxLines = ((h-pad*2-32*unit)/(paint.textSize*1.3f)).toInt().coerceIn(1, 10)
         val layout = StaticLayout.Builder.obtain(text,0,text.length,paint,contentWidth)

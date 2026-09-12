@@ -13,7 +13,7 @@ data class PersonalProfile(
     val dailyCount: Int = 3,
     val startHour: Int = 9,
     val endHour: Int = 21,
-    val setupVersion: Int = 2,
+    val setupVersion: Int = 3,
 ) {
     fun answer(key: String): Set<String> = answers[key].orEmpty()
     fun choose(key: String, value: String, multiple: Boolean = false): PersonalProfile {

@@ -52,17 +52,35 @@ class VisualAcceptanceTest {
 
 
     @Test fun homeExploreSearchAndTopicAreVisible() {
-        ekranKaydet("v96-home")
+        ekranKaydet("v97-home")
         compose.onNodeWithText("Keşfet").performClick()
         compose.onNodeWithTag("category-search").assertIsDisplayed()
         compose.waitForIdle()
-        ekranKaydet("v96-explore")
+        ekranKaydet("v97-explore")
         compose.onNodeWithTag("collection-feature").performClick()
         compose.waitForIdle()
-        ekranKaydet("v96-collection")
+        ekranKaydet("v97-collection")
         compose.onNodeWithTag("category-search").performTextInput("Marcus")
         compose.onNodeWithTag("category-search").performImeAction()
         compose.waitForIdle()
-        ekranKaydet("v96-search")
+        ekranKaydet("v97-search")
+        compose.onNodeWithText("Özelleştir").performClick()
+        compose.onNodeWithTag("theme-black").performScrollTo().performClick()
+        compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
+        compose.waitForIdle()
+        ekranKaydet("v97-customize-dark")
+        compose.onNodeWithText("Bugün").performClick()
+        compose.waitForIdle()
+        ekranKaydet("v97-home-black")
+        runBlocking { demoDepo.proDemoAyarla(true); demoDepo.arkaPlanAyarla("rider") }
+        compose.waitForIdle()
+        ekranKaydet("v97-home-rider")
+        runBlocking { demoDepo.arkaPlanAyarla("roma") }
+        compose.waitForIdle()
+        ekranKaydet("v97-home-roma")
+        runBlocking { demoDepo.proDemoAyarla(false) }
+        compose.waitForIdle()
+        assertEquals("white", runBlocking { demoDepo.arkaPlan.first() })
+
     }
 }

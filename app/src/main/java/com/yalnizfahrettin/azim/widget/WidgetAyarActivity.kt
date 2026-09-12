@@ -58,7 +58,7 @@ class WidgetAyarActivity : ComponentActivity() {
                     }
                     Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         Image(bitmap.asImageBitmap(), quote, Modifier.fillMaxWidth().aspectRatio(if(wide) 2f else 720f/620f).clip(RoundedCornerShape(20.dp)).testTag("widget-live-preview"))
-                        Text(cevir(dil,"Önizleme · Telefonunda boyutunu değiştirebilirsin.","Preview · Resize it on your phone."), color = Renk.metinIkincil, fontSize = 12.sp)
+                        Text(cevir(dil,"Bildirim konularından · Önizleme", "From your reminder topics · Preview"), color = Renk.metinIkincil, fontSize = 12.sp)
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             FilterChip(wide, { wide = true }, label = { Text(cevir(dil,"Geniş","Wide")) })
                             FilterChip(!wide, { wide = false }, label = { Text(cevir(dil,"Kare","Square")) })
@@ -106,7 +106,7 @@ class WidgetAyarActivity : ComponentActivity() {
                                 }
                             }
                         }, enabled = !busy, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("widget-add")) {
-                            Text(cevir(dil, if(!pro) "Pro ile kullan" else if(id > 0) "Widget’ı kaydet" else "Ana ekrana ekle",
+                            Text(cevir(dil, if(!pro) "Pro ile kullan" else if(id > 0) "Widget’ı kaydet" else "Telefon ekranına ekle",
                                 if(!pro) "Use with Pro" else if(id > 0) "Save widget" else "Add to home screen"))
                         }
                     }

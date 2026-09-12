@@ -89,10 +89,10 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         erisimiGocur(p)
         gorseliGocur(p)
         val safe = PersonalProfile.decode(profile.encode()).copy(step = 0)
-        val chosenTheme = AnaTemalar.allowed(safe.answer("theme").firstOrNull(), p[K.PRO_DEMO] ?: false)
+        val chosenTheme = AnaTemalar.allowed(safe.answer("theme").firstOrNull() ?: p[K.ARKA_PLAN], p[K.PRO_DEMO] ?: false)
         p[K.ARKA_PLAN] = chosenTheme.id
         p[K.TEMA] = if (chosenTheme.dark) TemaModu.KARANLIK.name else TemaModu.AYDINLIK.name
-        p[K.DIL] = safe.answer("language").firstOrNull()?.takeIf { it in setOf("tr", "en") } ?: "tr"
+        p[K.DIL] = safe.answer("language").firstOrNull()?.takeIf { it in setOf("tr", "en") } ?: p[K.DIL] ?: "tr"
         p[K.PERSONAL_PROFILE] = safe.encode()
         p[K.SECILI] = if (preserveTopics) p[K.SECILI].orEmpty().intersect(etkinErisim(p)).ifEmpty { PersonalPlan.initialCategories(safe, etkinErisim(p)) }
             else PersonalPlan.initialCategories(safe, etkinErisim(p))

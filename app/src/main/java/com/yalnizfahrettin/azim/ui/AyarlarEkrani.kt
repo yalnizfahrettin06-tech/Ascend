@@ -67,7 +67,6 @@ fun AyarlarEkrani(
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)) {
             Box(Modifier.fillMaxWidth().padding(top = 16.dp).heightIn(min = 88.dp)) {
-                KlasikGorsel(KlasikMotif.ARCH, Modifier.align(Alignment.CenterEnd).size(88.dp), opacity = .13f)
                 Column(Modifier.fillMaxWidth(.8f).align(Alignment.CenterStart), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                     Text(cevir(dil, "SANA AİT BİR ALAN", "A SPACE OF YOUR OWN"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.4.sp)
                     Text(cevir(dil, "Görünümü ve gününün ritmini sana göre düzenle.", "Make the page and your daily rhythm feel like yours."),
@@ -76,10 +75,8 @@ fun AyarlarEkrani(
             }
             AyarBolumu("01", stringResource(R.string.gorunum))
             SecimSatiri(stringResource(R.string.tema),
-                listOf(TemaModu.SISTEM to stringResource(R.string.tema_sistem),
-                    TemaModu.AYDINLIK to stringResource(R.string.tema_aydinlik),
-                    TemaModu.KARANLIK to stringResource(R.string.tema_karanlik),
-                    TemaModu.OLED to stringResource(R.string.tema_oled)), tema, temaSec)
+                listOf(TemaModu.AYDINLIK to cevir(dil, "Beyaz", "White"),
+                    TemaModu.KARANLIK to cevir(dil, "Siyah", "Black")), tema, temaSec)
             SecimSatiri(stringResource(R.string.renk_paleti),
                 listOf(Palet.MERMER, Palet.MONO).map { it to it.etiket(dil) }, guncelPalet(palet), paletSec)
             SecimSatiri(stringResource(R.string.dil), listOf("tr" to "Türkçe", "en" to "English"), dil, dilSec)

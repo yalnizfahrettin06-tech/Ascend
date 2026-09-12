@@ -11,7 +11,7 @@ object AnaTemalar {
     val roma = AnaTema("roma", "Roma", "Rome", false, true, R.drawable.art_roman_home_v9)
     val rider = AnaTema("rider", "Koyu Atlı Yolcu", "Dark Rider", true, true, R.drawable.scene_atli_yolcu)
     val onboarding = listOf(white, black, roma, rider)
-    val all = onboarding + listOf(
+    private val curated = onboarding + listOf(
         AnaTema("knight", "Şövalye", "Knight", true, true, R.drawable.scene_sovalye),
         AnaTema("castle", "Kale", "Castle", true, true, R.drawable.scene_kale),
         AnaTema("forest", "Orman", "Forest", true, true, R.drawable.scene_forest),
@@ -20,6 +20,9 @@ object AnaTemalar {
         AnaTema("wisdom", "Bilgelik", "Wisdom", false, true, R.drawable.scene_wisdom),
         AnaTema("hall", "Taş Salon", "Stone Hall", true, true, R.drawable.scene_tas_salon),
         AnaTema("graphite", "Grafit", "Graphite", true, true, R.drawable.scene_grafit_doku))
+    val all = curated + com.yalnizfahrettin.azim.ui.Atmosfer.entries.filter { scene -> curated.none { it.art == scene.res } }.map {
+        AnaTema("scene_" + it.name.lowercase(java.util.Locale.ROOT), it.tr, it.en, true, true, it.res)
+    }
     fun find(id: String?) = all.firstOrNull { it.id == id } ?: white
     fun allowed(id: String?, pro: Boolean): AnaTema = find(id).let { if (it.pro && !pro) if (it.dark) black else white else it }
 }
