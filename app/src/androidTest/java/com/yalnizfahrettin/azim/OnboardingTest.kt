@@ -16,13 +16,13 @@ import org.junit.Assert.*
 
 class OnboardingTest {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
-    private fun next() = compose.onNodeWithTag("onboarding-next").performClick()
+    private fun next() = compose.onNodeWithTag("onboarding-next").performScrollTo().performClick()
 
     @Test fun setupHasOneFooterActionWithoutSkippingPermission() {
         var done = false
         compose.setContent { AzimTema { Onboarding("en") { _, _, _, _, _ -> done = true } } }
         compose.onNodeWithTag("onboarding-quick-start").assertDoesNotExist()
-        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
         compose.runOnIdle { assertFalse(done) }
     }
 
@@ -51,24 +51,52 @@ class OnboardingTest {
         compose.runOnIdle { assertFalse(completed) }
     }
 
-    @Test fun livePreviewTracksCountAndHourChanges() {
+    @Test fun scheduleAndFinalPreviewTrackCountAndHourChanges() {
         compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 2)) { _, _, _, _, _ -> } } }
-        compose.onNodeWithTag("live-reminder-time").assertTextEquals("11:00")
-        compose.onNodeWithContentDescription("More reminders").performClick()
-        compose.onNodeWithTag("live-reminder-time").assertTextEquals("10:30")
-        compose.onNodeWithTag("live-reminder-summary").assertTextEquals("4 reminders daily · Approximate times")
+        compose.onNodeWithTag("live-reminder-preview").assertDoesNotExist()
+        compose.onNodeWithContentDescription("More reminders").performScrollTo().performClick()
+        compose.onNodeWithTag("reminder-count").assertTextEquals("4")
         next()
-        compose.onNodeWithTag("reminder-start").performClick()
+        compose.onNodeWithText("10:30").assertExists()
+        compose.onNodeWithTag("reminder-start").performScrollTo().performClick()
         compose.onNodeWithTag("hour-choice-13").performScrollTo().performClick()
+        compose.onNodeWithText("14:00").assertExists()
+        compose.onNodeWithTag("live-reminder-preview").assertDoesNotExist()
+        next()
         compose.onNodeWithTag("live-reminder-time").assertTextEquals("14:00")
     }
 
     @Test fun notificationSampleExpandsAndCollapses() {
-        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 2)) { _, _, _, _, _ -> } } }
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 4)) { _, _, _, _, _ -> } } }
         compose.onNodeWithTag("live-reminder-preview").performScrollTo().performClick()
-        compose.onNodeWithText("Sample · Tap to collapse").assertExists()
+        compose.onNodeWithText("Collapse").assertExists()
         compose.onNodeWithTag("live-reminder-preview").performClick()
-        compose.onNodeWithText("Sample · Tap to expand").assertExists()
+        compose.onNodeWithText("Read full quote").assertExists()
+    }
+
+    @Test fun practiceSupportsSwipingAndAccessibleAlternativeWithoutChangingSetup() {
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 1)) { _, _, _, _, _ -> } } }
+        val first = "You do not have to finish everything today."
+        compose.onNodeWithTag("practice-quote-text").assertTextEquals(first)
+        compose.onNodeWithTag("practice-like").performScrollTo().performClick()
+        compose.onNodeWithText("Sample liked").assertExists()
+        compose.onNodeWithTag("practice-next").performScrollTo().performClick()
+        compose.onNodeWithTag("practice-quote-text").assertTextEquals("A small step is still a step forward.")
+        compose.onNodeWithTag("practice-deck").performScrollTo().performTouchInput { swipeLeft() }
+        compose.onNodeWithTag("practice-quote-text").assertTextEquals("Speak to yourself as you would to someone you love.")
+        compose.onNodeWithText("2 / 5").assertIsDisplayed()
+    }
+
+    @Test fun actionStaysCloseToContentOnEveryPage() {
+        compose.setContent { AzimTema { Onboarding("en") { _, _, _, _, _ -> } } }
+        repeat(5) { page ->
+            compose.onNodeWithTag("onboarding-next").performScrollTo()
+            val body = compose.onNodeWithTag("onboarding-body").fetchSemanticsNode().boundsInRoot
+            val footer = compose.onNodeWithTag("onboarding-footer").fetchSemanticsNode().boundsInRoot
+            val gap = (footer.top - body.bottom) / compose.activity.resources.displayMetrics.density
+            assertTrue("Page $page has a detached action: $gap dp", gap in 23f..25f)
+            if (page < 4) next()
+        }
     }
 
     @Test fun rhythmSurvivesBackAndRestoration() {
@@ -90,6 +118,6 @@ class OnboardingTest {
             }
         }
         compose.onNodeWithText("5 / 5").assertIsDisplayed()
-        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
     }
 }
