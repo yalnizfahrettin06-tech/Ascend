@@ -19,13 +19,19 @@ import com.yalnizfahrettin.azim.data.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BildirimKonulariPaneli(dil: String, selected: Set<String>, close: () -> Unit, toggle: (String) -> Unit, discover: () -> Unit) {
+fun BildirimKonulariPaneli(dil: String, selected: Set<String>, close: () -> Unit, toggle: (String) -> Unit, discover: () -> Unit, settings: () -> Unit = {}) {
     // Keep switched-off rows until dismissal, so the choice can be reversed immediately.
     val original = rememberSaveable { selected.toList() }
     val rows = Kategoriler.tumAltlar.filter { it.anahtar in original || it.anahtar in selected }
     ModalBottomSheet(onDismissRequest = close,containerColor = Renk.zemin,sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
         Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal = 20.dp).padding(bottom = 16.dp).testTag("reminder-topic-panel")) {
-            Text(cevir(dil,"Bildirim konuların","Your reminder topics"),color = Renk.metin,fontSize = 18.sp)
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text(cevir(dil,"Bildirimlerin","Your reminders"),Modifier.weight(1f),color = Renk.metin,fontSize = 18.sp)
+                TextButton(onClick = settings, modifier = Modifier.testTag("reminder-settings")) {
+                    Icon(AzimIkon.Ayarlar,null,Modifier.size(17.dp)); Spacer(Modifier.width(6.dp))
+                    Text(cevir(dil,"Ayarlar","Settings"))
+                }
+            }
             Text(cevir(dil,"${selected.size} konu açık · En az bir konu açık kalmalı.","${selected.size} topics on · Keep at least one enabled."),Modifier.padding(vertical = 12.dp),color = Renk.metinIkincil,fontSize = 12.sp)
             LazyColumn(Modifier.fillMaxWidth().weight(1f,fill = false).heightIn(max = minOf(360, rows.size.coerceAtLeast(1) * 70).dp),contentPadding = PaddingValues(vertical = 4.dp)) {
                 items(rows,key = { it.anahtar }) { topic ->

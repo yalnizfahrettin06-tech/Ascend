@@ -56,13 +56,18 @@
         <receiver
             android:name=".widget.AzimWidgetSaglayici"
             android:exported="true"
-            android:label="@string/uygulama_adi">
+            android:label="@string/widget_wide_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/azim_widget_bilgi" />
+        </receiver>
+
+        <receiver android:name=".widget.AzimSquareWidgetSaglayici" android:exported="true" android:label="@string/widget_square_name">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/azim_widget_kare" />
         </receiver>
 
         <activity android:name=".widget.WidgetAyarActivity" android:exported="true">

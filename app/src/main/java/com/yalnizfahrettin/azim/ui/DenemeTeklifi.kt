@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.window.DialogWindowProvider
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -18,6 +22,20 @@ import com.yalnizfahrettin.azim.core.*
 @Composable
 fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit, start: () -> Unit, free: () -> Unit) {
     Dialog(onDismissRequest = { if(!busy) close() }, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
+        val view = LocalView.current
+        val colors = Renk
+        SideEffect {
+            (view.parent as? DialogWindowProvider)?.window?.let { window ->
+                window.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(colors.zemin.toArgb()))
+                @Suppress("DEPRECATION")
+                window.navigationBarColor = colors.zemin.toArgb()
+                if(android.os.Build.VERSION.SDK_INT >= 29) window.isNavigationBarContrastEnforced = false
+                androidx.core.view.WindowCompat.getInsetsController(window,view).apply {
+                    isAppearanceLightNavigationBars = !colors.karanlikMi
+                    isAppearanceLightStatusBars = !colors.karanlikMi
+                }
+            }
+        }
         Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding().imePadding().verticalScroll(rememberScrollState()).testTag("trial-offer")) {
             Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text("ascend", Modifier.weight(1f), fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, fontSize = 25.sp, color = Renk.metin)

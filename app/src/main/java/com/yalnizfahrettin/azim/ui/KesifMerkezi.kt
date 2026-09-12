@@ -14,6 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.activity.compose.BackHandler
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -47,10 +48,11 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
                 }
             }
         }
+        Spacer(Modifier.height(10.dp))
         if(!widgetTab) {
             val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f) 1 else 2
             val rows = remember(columns) { AnaTemalar.all.chunked(columns) }
-            LazyColumn(Modifier.weight(1f).testTag("appearance-gallery"),contentPadding = PaddingValues(20.dp),verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            LazyColumn(Modifier.weight(1f).clipToBounds().testTag("appearance-gallery"),contentPadding = PaddingValues(20.dp),verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 items(rows,key = { it.first().id }) { row -> TemaGrid(dil,row,AnaTemalar.allowed(selected,pro).id,pro) { preview = it.id } }
             }
         } else {

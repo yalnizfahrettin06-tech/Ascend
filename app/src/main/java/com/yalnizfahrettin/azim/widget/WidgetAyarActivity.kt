@@ -41,16 +41,18 @@ class WidgetAyarActivity : ComponentActivity() {
             val pro by depot.proDemo.collectAsStateWithLifecycle(false)
             val dil by depot.dil.collectAsStateWithLifecycle("tr")
             val mode by depot.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
+            var square by rememberSaveable { mutableStateOf(
+                AppWidgetManager.getInstance(this@WidgetAyarActivity).getAppWidgetInfo(id)?.provider == ComponentName(this@WidgetAyarActivity,AzimSquareWidgetSaglayici::class.java)) }
             var theme by rememberSaveable { mutableStateOf(initial.theme) }
             var showPro by rememberSaveable { mutableStateOf(false) }
             var busy by remember { mutableStateOf(false) }
             var message by rememberSaveable { mutableStateOf<String?>(null) }
             val config = WidgetSecimi(theme, true, false)
             val quote = cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward.")
-            val previewState = remember(config,dil) { mutableStateOf<android.graphics.Bitmap?>(null) }
+            val previewState = remember(config,dil,square) { mutableStateOf<android.graphics.Bitmap?>(null) }
             val bitmap by previewState
-            LaunchedEffect(config,dil) {
-                previewState.value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 720, 360) }
+            LaunchedEffect(config,dil,square) {
+                previewState.value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 720, if(square) 720 else 360) }
             }
             AzimTema(modu = mode) {
                 Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {
@@ -59,13 +61,20 @@ class WidgetAyarActivity : ComponentActivity() {
                         Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
                         ProRozeti()
                     }
+                    if(id == AppWidgetManager.INVALID_APPWIDGET_ID) Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        listOf(false,true).forEach { option ->
+                            FilterChip(selected = square == option,onClick = { square = option },label = {
+                                Text(if(option) cevir(dil,"Kare · 2 × 2","Square · 2 × 2") else cevir(dil,"Geniş · 4 × 2","Wide · 4 × 2"))
+                            },modifier = Modifier.weight(1f).testTag(if(option) "widget-square" else "widget-wide"))
+                        }
+                    }
                     LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         item {
-                            Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
+                            Box(Modifier.fillMaxWidth().aspectRatio(if(square) 1f else 2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
                                 bitmap?.let { Image(it.asImageBitmap(), quote, Modifier.fillMaxSize()) }
                             }
                         }
-                        item { Text(cevir(dil,"Her gün yeni bir söz · Önizleme", "A new quote each day · Preview"), color = Renk.metinIkincil, fontSize = 12.sp) }
+                        item { Text(cevir(dil,"Her gün yeni bir söz · Boyutu ana ekranında da ayarlayabilirsin.", "A new quote each day · Resize on your home screen too."), color = Renk.metinIkincil, fontSize = 12.sp) }
                         items(AnaTemalar.all.chunked(3), key = { it.first().id }) { row -> ArkaPlanGrid(dil, row, theme) { theme = it.id } }
                     }
                     Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -90,7 +99,7 @@ class WidgetAyarActivity : ComponentActivity() {
                                                     .putExtra("theme", theme).putExtra("center", true).putExtra("large", false)
                                                 val callback = PendingIntent.getBroadcast(this@WidgetAyarActivity, 0, intent,
                                                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
-                                                val requested = manager.requestPinAppWidget(ComponentName(this@WidgetAyarActivity, AzimWidgetSaglayici::class.java), null, callback)
+                                                val requested = manager.requestPinAppWidget(ComponentName(this@WidgetAyarActivity, if(square) AzimSquareWidgetSaglayici::class.java else AzimWidgetSaglayici::class.java), null, callback)
                                                 message = if(requested) cevir(dil,"Telefonunun ekleme penceresini onayla.","Confirm in your phone's add-widget dialog.")
                                                     else cevir(dil,"Ana ekranından Widget’lar → Ascend yolunu kullan.","Use Widgets → Ascend on your home screen.")
                                             }
@@ -111,7 +120,8 @@ class WidgetAyarActivity : ComponentActivity() {
     }
 }
 
-internal fun ownsWidget(ctx: Context, id: Int): Boolean = AppWidgetManager.getInstance(ctx).getAppWidgetInfo(id)?.provider == ComponentName(ctx, AzimWidgetSaglayici::class.java)
+internal fun ownsWidget(ctx: Context, id: Int): Boolean = AppWidgetManager.getInstance(ctx).getAppWidgetInfo(id)?.provider in setOf(
+    ComponentName(ctx,AzimWidgetSaglayici::class.java),ComponentName(ctx,AzimSquareWidgetSaglayici::class.java))
 
 class WidgetEkleAlicisi : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {

@@ -57,7 +57,7 @@ internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenk
         markaSessizYuzeyi = if (secim == Palet.MONO) Color(0xFF242424) else Color(0xFF282827),
         markaBasiliYuzeyi = if (secim == Palet.MONO) Color(0xFF3C3C3A) else Color(0xFF444440),
     ) else AzimRenkleri(
-        zemin = Color(0xFFE9EAEC), yuzey = Color(0xFFF7F7F8), yuzeyYuksek = Color(0xFFD9DBDE),
+        zemin = Color(0xFFF5F5F4), yuzey = Color(0xFFECEDEE), yuzeyYuksek = Color(0xFFD9DBDE),
         kenarlik = Color(0xFFC3C6CB), kenarlikGuclu = Color(0xFF747880),
         metin = Color(0xFF18191B), metinIkincil = Color(0xFF575B61), metinSonuk = Color(0xFF575B61),
         accent = accent, accentSonuk = Color(0xFF747880),

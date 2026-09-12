@@ -45,19 +45,6 @@ fun IstatistikEkrani(
                 Icon(AzimIkon.Ayarlar, cevir(dil, "Ayarlar", "Settings"), Modifier.size(22.dp))
             }
         }
-        Surface(onClick = onPlan, color = Renk.zemin, border = BorderStroke(1.dp, Renk.kenarlik),
-            shape = RoundedCornerShape(18.dp), modifier = Modifier.fillMaxWidth().testTag("profile-plan")) {
-            Row(Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                Icon(AzimIkon.Yukselis, null, Modifier.size(27.dp), tint = Renk.metin)
-                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                    Text(cevir(dil, "Bildirimler ve tercihler", "Reminders and preferences"), color = Renk.metin, style = MaterialTheme.typography.titleMedium)
-                    Text(if (buyukYazi) cevir(dil, "Tercihlerini düzenle.", "Edit your preferences.")
-                        else planOzeti.ifBlank { cevir(dil, "İhtiyaçların değiştikçe yeniden düzenle.", "Adjust it as your needs change.") },
-                        color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
-                }
-                Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
-            }
-        }
         Surface(onClick = onFavoriler, color = Renk.zemin, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().testTag("profile-saved")) {
             Row(Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.Ayrac, null, Modifier.size(22.dp), tint = Renk.metin)
@@ -69,10 +56,10 @@ fun IstatistikEkrani(
             }
         }
         HorizontalDivider(color = Renk.kenarlik)
-        Column(Modifier.fillMaxWidth().testTag("journey-week"), verticalArrangement = Arrangement.spacedBy(18.dp)) {
-            Text(cevir(dil, "Haftanın izi", "Your weekly trail"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 19.sp, lineHeight = 26.sp)
+        Column(Modifier.fillMaxWidth().background(Renk.yuzey, RoundedCornerShape(24.dp)).padding(18.dp).testTag("journey-week"), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Text(cevir(dil, "Bu hafta", "This week"), color = Renk.metin, fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, fontSize = 18.sp, lineHeight = 26.sp)
             Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(9.dp)) {
-                Text(sayilar.format(aktifGun), color = Renk.metin, fontFamily = LoraSerif, fontSize = 42.sp, lineHeight = 48.sp)
+                Text(sayilar.format(aktifGun), color = Renk.metin, fontFamily = ArayuzFont, fontWeight = FontWeight.Medium, fontSize = 32.sp, lineHeight = 38.sp)
                 Text(cevir(dil, "gün · son 7 günde", "days here · past 7 days"), color = Renk.metinIkincil,
                     style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f).padding(bottom = 5.dp))
             }
@@ -80,21 +67,6 @@ fun IstatistikEkrani(
             Text(if (seri > 1) cevir(dil, "Üst üste $seri gündür kendine bir an ayırdın.", "You made a moment for yourself $seri days in a row.")
                 else cevir(dil, "Her gelişin küçük bir adım. Ara vermek de yolun parçası.", "Every visit is a small step. Pauses belong here too."),
                 color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
-        }
-        HorizontalDivider(color = Renk.kenarlik)
-        Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text(cevir(dil, "Biriken küçük adımlar", "Small steps collected"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 18.sp, lineHeight = 25.sp)
-            val olcumler = listOf(gorulen to cevir(dil, "Görülen söz", "Quotes seen"), rekor to cevir(dil, "En uzun seri · gün", "Longest streak · days"))
-            if (buyukYazi) Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                olcumler.forEach { (sayi, baslik) ->
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text(baslik, Modifier.weight(1f), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall, letterSpacing = 0.sp)
-                        Text(sayilar.format(sayi), color = Renk.metin, fontFamily = LoraSerif, fontSize = 28.sp)
-                    }
-                }
-            } else Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(18.dp)) {
-                olcumler.forEach { (sayi, baslik) -> YolculukSayaci(sayilar.format(sayi), baslik, Modifier.weight(1f)) }
-            }
         }
 
     }
@@ -117,7 +89,7 @@ private fun HaftaninGunleri(dil: String, haftalik: List<Boolean>) {
                 // Narrow calendars use locale-aware initials; TalkBack retains the complete date.
                 Text(if (buyukYazi) tarih.format(kisaGun).take(1) else tarih.format(kisaGun), color = Renk.metinIkincil,
                     fontSize = 10.sp, lineHeight = 13.sp, letterSpacing = 0.sp, textAlign = TextAlign.Center)
-                Box(Modifier.size(34.dp).background(if (aktif) Renk.metin else Renk.zemin, CircleShape)
+                Box(Modifier.size(30.dp).background(if (aktif) Renk.metin else Renk.zemin, CircleShape)
                     .border(1.dp, if (aktif) Renk.metin else Renk.kenarlik, CircleShape), contentAlignment = Alignment.Center) {
                     if (aktif) Icon(AzimIkon.Tik, null, Modifier.size(16.dp), tint = Renk.zemin)
                     else Text(tarih.dayOfMonth.toString(), color = Renk.metinIkincil, fontSize = 11.sp, letterSpacing = 0.sp, fontWeight = FontWeight.Medium)
@@ -128,10 +100,3 @@ private fun HaftaninGunleri(dil: String, haftalik: List<Boolean>) {
     }
 }
 
-@Composable
-private fun YolculukSayaci(sayi: String, baslik: String, modifier: Modifier = Modifier) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(sayi, color = Renk.metin, fontFamily = LoraSerif, fontSize = 30.sp, lineHeight = 37.sp)
-        Text(baslik, color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
-    }
-}

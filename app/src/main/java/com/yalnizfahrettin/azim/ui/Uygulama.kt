@@ -358,6 +358,7 @@ fun Uygulama(
     }
 
     if(notificationTopicsOpen) BildirimKonulariPaneli(dil,secili,close = { notificationTopicsOpen = false },
+        settings = { notificationTopicsOpen = false; planGoster = true },
         toggle = { key -> kapsam.launch { depo.kategoriSec(key); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
         discover = { notificationTopicsOpen = false; acilacakGrup = null; selectedRequest = -kotlin.math.abs(selectedRequest) - 1; sekme = Sekme.KATEGORI })
 
@@ -371,7 +372,7 @@ fun Uygulama(
         profil = profil, secili = secili, acik = acik, dil = dil,
         adet = gunlukAdet, bas = bas, bit = bit, bildirimAcik = hatirlaticiAcik,
         kapat = { planGoster = false },
-        konular = { planGoster = false; acilacakGrup = null; selectedRequest = kotlin.math.abs(selectedRequest) + 1; sekme = Sekme.KATEGORI },
+        konular = { planGoster = false; notificationTopicsOpen = true },
         pausedUntil = pausedUntil, hiddenCount = hidden.orEmpty().size,
         restoreHidden = { depo.restoreHiddenQuotes(); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) },
         pause = { shouldPause ->

@@ -180,7 +180,7 @@ class UygulamaTest {
         compose.onNodeWithTag("category-search").assertIsDisplayed()
         shot("11-discover")
         compose.onNodeWithTag("nav-istatistik").performClick()
-        compose.onNodeWithTag("profile-plan").assertIsDisplayed()
+        compose.onNodeWithTag("profile-plan").assertDoesNotExist()
         shot("12-profile")
         compose.onNodeWithTag("journey-week").performScrollTo().assertIsDisplayed()
         shot("12-journey")

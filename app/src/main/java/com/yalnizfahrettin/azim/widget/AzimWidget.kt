@@ -52,7 +52,7 @@ import kotlinx.coroutines.flow.first
  * Bir söz uygulaması için ev ekranı varlığı çekirdek elde tutma aracıdır:
  * kullanıcı uygulamayı açmadan sözü görür.
  */
-class AzimWidget : GlanceAppWidget() {
+open class AzimWidget : GlanceAppWidget() {
 
     override val sizeMode = SizeMode.Exact
     override val stateDefinition: GlanceStateDefinition<*> = PreferencesGlanceStateDefinition
@@ -116,9 +116,9 @@ class AzimWidget : GlanceAppWidget() {
             val dil = depo.dil.first()
             val access = depo.proDemo.first()
             val soz = gununSozu(depo)
-            val widget = AzimWidget()
-            androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
-                .getGlanceIds(AzimWidget::class.java)
+            val manager = androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
+            val ids = manager.getGlanceIds(AzimWidget::class.java) + manager.getGlanceIds(AzimSquareWidget::class.java)
+            ids
                 .forEach { id ->
                     val widgetId = androidx.glance.appwidget.GlanceAppWidgetManager(ctx).getAppWidgetId(id)
                     val config = WidgetTasarimi.load(ctx, widgetId)
@@ -132,7 +132,8 @@ class AzimWidget : GlanceAppWidget() {
                         p[YAZAR] = soz?.sunumEtiketi(dil) ?: "Ascend"
                     }
                 }
-            widget.updateAll(ctx)
+            AzimWidget().updateAll(ctx)
+            AzimSquareWidget().updateAll(ctx)
         }
     }
 }
@@ -149,5 +150,15 @@ class AzimWidgetSaglayici : GlanceAppWidgetReceiver() {
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         appWidgetIds.forEach { WidgetTasarimi.remove(context, it) }
         super.onDeleted(context, appWidgetIds)
+    }
+}
+
+/** Separate provider metadata gives square widgets a real 2 x 2 starting footprint. */
+class AzimSquareWidget : AzimWidget()
+class AzimSquareWidgetSaglayici : GlanceAppWidgetReceiver() {
+    override val glanceAppWidget: GlanceAppWidget = AzimSquareWidget()
+    override fun onDeleted(context: Context, appWidgetIds: IntArray) {
+        appWidgetIds.forEach { WidgetTasarimi.remove(context,it) }
+        super.onDeleted(context,appWidgetIds)
     }
 }

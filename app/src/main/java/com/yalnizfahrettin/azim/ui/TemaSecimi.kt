@@ -59,7 +59,7 @@ fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f
             bitmap?.let { Image(it.asImageBitmap(), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
                 colorFilter = if(theme.id == "rider") null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })) }
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
-                base.copy(alpha = if (theme.dark) .65f else veil), base.copy(alpha = if (theme.dark) .2f else .05f)))))
+                base.copy(alpha = if (theme.dark) .65f else if(theme.id == "roma") veil else maxOf(veil, .78f)), base.copy(alpha = if (theme.dark) .2f else if(theme.id == "roma") .05f else .50f)))))
         }
     }
 }

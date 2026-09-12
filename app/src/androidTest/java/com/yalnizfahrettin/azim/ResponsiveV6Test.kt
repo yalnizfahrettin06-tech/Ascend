@@ -150,7 +150,7 @@ class ResponsiveV6Test {
 
         compose.onNodeWithTag("nav-istatistik").performClick()
         compose.onNodeWithTag("profile-saved").assertIsDisplayed().assertHasClickAction()
-        compose.onNodeWithTag("profile-plan").assertIsDisplayed().assertHasClickAction()
+        compose.onNodeWithTag("profile-plan").assertDoesNotExist()
         compose.onNodeWithTag("journey-week").performScrollTo()
         compose.onNodeWithText("Haftanın izi").assertIsDisplayed()
         compose.onNodeWithText("Görülen söz").performScrollTo().assertIsDisplayed()

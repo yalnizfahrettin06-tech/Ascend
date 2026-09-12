@@ -191,7 +191,6 @@ fun AnaEkran(
                             }, leadingIcon = { Icon(AzimIkon.Kopyala, null) })
                             DropdownMenuItem(text = { Text(cevir(dil, "Bu sözü gizle", "Hide this quote")) },
                                 modifier = Modifier.testTag("home-hide"), onClick = { araclar = false; gizle(aktif) })
-                            DropdownMenuItem(text = { Text(cevir(dil, "Bildirim ayarları", "Reminder settings")) }, onClick = { araclar = false; ayarlaraGit() })
                         }
                     }
                 }
