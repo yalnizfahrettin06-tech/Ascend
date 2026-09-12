@@ -52,7 +52,7 @@ Kullanıcının tasarım raporuna göre Keşfet, gerçek koleksiyonlar ve sade k
 - **20 ekranlık kişisel başlangıç:** 13 tercih sorusu, isteğe bağlı isim, bildirim düzeni, kişisel plan, erişim açıklaması ve izin adımı. Sorular atlanabilir; ilerleme kaydedilir ve plan sonradan düzenlenebilir. Hızlı başlangıç da sunulur.
 - Yanıtlar içerik biçimini, konu ağırlıklarını, uzunluk sıralamasını ve keşif tercihlerini belirler. Oluşan plan hem ana akışı hem hatırlatmaları besler; istenmeyen konular ve manevi içerik tercihi gözetilir.
 - Ana ekranın temel eylemleri kaydırmadan erişilebilir. Anlık ihtiyaç seçimi yalnız o anki akışı değiştirir; bildirim planı ayrı yönetilir.
-- Fotoğraf kalabalığı olmadan taranan **70 ayrı kategori**, kategori başına 10 özgün söz; seçili bildirim konuları kişisel plan ve Keşfet üzerinden görülebilir.
+- Fotoğraf kalabalığı olmadan taranan **90 ayrı kategori**, kategori başına 10 özgün söz; seçili bildirim konuları kişisel plan ve Keşfet üzerinden görülebilir.
 - Günlük 1–7 hatırlatma, başlangıç/bitiş saatleri ve yaklaşık gönderim saatlerinin önizlemesi.
 - Ayrıntılı Android bildirim izni, Samsung görünüm rehberi, kanal ayarı ve deneme bildirimi.
 - Görseller paylaşım stüdyosunda: önceki 37 arka plana eklenen 70 kategori görseliyle **107 hazır arka plan**. Dağ, doğa, kale, şövalye, cadı ve dokulu renkler; koleksiyon araması ve görsel önizleme.
@@ -71,13 +71,13 @@ Kullanıcının tasarım raporuna göre Keşfet, gerçek koleksiyonlar ve sade k
 
 Önceki sürüm: [Ascend 7.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v7.0.0-preview.1). O sürümün 64 birim ve 37 Android testi: [7.0 doğrulama](docs/16-ASCEND-7-DOGRULAMA.md).
 
-Önceki sürüm: [Ascend 6.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v6.0.0-preview.1) (`Ascend-6.0.0-test.apk`). 6.0 için kaydedilen 48 JVM ve 26 Android testi sonucu yalnız o sürüme aittir: [doğrulama](docs/13-ASCEND-6-TEST-PLANI.md) · [ekranlar](docs/14-ASCEND-6-EKRANLAR.md).
+Önceki sürüm: [Ascend 6.0 test APK’sı](https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v7.0.0-preview.1) (`Ascend-7.0.0-test.apk`). 6.0 için kaydedilen 48 JVM ve 26 Android testi sonucu yalnız o sürüme aittir: [doğrulama](docs/13-ASCEND-6-TEST-PLANI.md) · [ekranlar](docs/14-ASCEND-6-EKRANLAR.md).
 
 APK geliştirme imzalı test sürümüdür; mağazaya yükleme paketi değildir. Paket adı `.debug` ile bittiği için eski Azim ile yan yana kurulabilir. Farklı Actions çalışmaları farklı geliştirme imzaları oluşturabilir. Güncelleme imza hatası verirse eski test sürümünün kaldırılması gerekir ve o test sürümünün verileri silinir. Kalıcı güncelleme için sabit imzalama anahtarı gerekir.
 
 ## İngilizce ana kaynak
 
-- [Tek İngilizce kaynak](content/source.en.json): 700 özgün metin ve sabit kimlikler.
+- [Tek İngilizce kaynak](content/source.en.json): 1200 özgün metin ve sabit kimlikler.
 - [Türkçe çeviri](content/translations/tr.json) ve [English translation guide](content/README.md).
 - İngilizce değiştiğinde gözden geçirilmemiş çeviriyi durduran kaynak parmak izi kontrolü.
 - Uygulama dilleri Türkçe ve İngilizce; diğer diller henüz entegre edilmedi.
@@ -116,3 +116,7 @@ Sürüm imzası için `ASCEND_KEYSTORE_PATH`, `ASCEND_STORE_PASSWORD`, `ASCEND_K
 ## Actions kullanımı
 
 Public depolarda standart GitHub sunucularında çalışma ücretsizdir. Büyük sunucular ücretlidir; artifact ve önbellek için ayrı saklama sınırları bulunur. Akış standart `ubuntu-latest`, 25 dakikalık iş zaman aşımı, 7 günlük çıktı saklama ve aynı dal için eski çalışmayı iptal etme kullanır. [GitHub ücretlendirme belgesi](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+
+### Kişi içerikleri · kaynak güncellemesi
+
+Keşfet → Ünlü düşünürler altında 32 kişi, her birinde 10 Türkçe/İngilizce özgün Ascend düşüncesi bulunur. Yeni 20 kişi için 200 metin eklenmiştir; mevcut 700 kayıt değişmemiştir. Birebir tarihî alıntı veya araştırma dosyalarındaki doğrulanmamış çeviri olarak sunulmaz. Bu değişiklikte APK üretilmez.

@@ -10,6 +10,10 @@ catalog = json.loads((repo / "content/source.en.json").read_text(encoding="utf-8
 manifest = json.loads((repo / "docs/category-art.json").read_text(encoding="utf-8"))
 expected = {record["id"] for record in catalog["categories"]}
 records = manifest["categories"]
+text_only = set(manifest.get("textOnlyCategories", []))
+assert text_only <= expected, "Unknown text-only category"
+assert all(c["kind"] in {"inspired_reflection", "reflection", "affirmation"} for c in catalog["categories"] if c["id"] in text_only)
+expected -= text_only
 assert len(records) == manifest["count"] == len(expected) == 70, "All 70 categories need art"
 assert {record["category"] for record in records} == expected, "Missing or unknown category artwork"
 assert len({record["sha256"] for record in records}) == 70, "Duplicate bundled category images"

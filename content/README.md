@@ -2,7 +2,7 @@
 
 [The English source](source.en.json) is the **only canonical content master**. Translations refer to its stable quote IDs. Do not create a second bilingual master or edit the generated Kotlin catalogue by hand.
 
-The current catalogue contains 700 original Ascend texts in 70 categories across 12 groups. The app currently ships English and Turkish. The file format and template command provide a starting point for seven or eight additional languages; adding files alone does not add those languages to the app.
+The current catalogue contains 1200 original Ascend texts in 120 categories across 12 groups. The app currently ships English and Turkish. The file format and template command provide a starting point for seven or eight additional languages; adding files alone does not add those languages to the app.
 
 ## Files and ownership
 
@@ -34,7 +34,7 @@ Use the existing ID and category when correcting or translating an existing thou
 
 Category IDs are language-independent keys even when they contain Turkish words. Translators must not translate those keys. Group/category names in the master provide context; the current quote compiler does not generate the app's category labels or other interface copy from this metadata.
 
-The compiler currently requires exactly 700 distinct quote IDs, 70 categories, 12 groups and 10 quotes per category. It also checks each ID against `v5_<category>_<two digits>`. Expanding the catalogue is a developer change to the current validation and generation rules, not just appending another quote.
+The compiler currently requires exactly 1200 distinct quote IDs, 120 categories, 12 groups and 10 quotes per category. It also checks each ID against `v5_<category>_<two digits>`. Expanding the catalogue is a developer change to the current validation and generation rules, not just appending another quote.
 
 ## Translation records and source fingerprints
 
@@ -140,7 +140,7 @@ The command:
 - Validates the English master first.
 - Requires `--output`.
 - Creates a new file only and refuses to overwrite an existing one.
-- Writes all 700 IDs, the current source catalogue version and each English `sourceHash`.
+- Writes all 1200 IDs, the current source catalogue version and each English `sourceHash`.
 - Leaves every translated `text` empty for the translator.
 
 The output's parent directory must already exist. The accepted locale pattern is two or three lowercase letters, optionally followed by a hyphen and a two-to-four-letter suffix. Examples include `de`, `es`, `fr`, `ar`, `pt-BR` and `zh-Hant`. This is the script's limited pattern, not validation of every possible language tag.
@@ -154,3 +154,9 @@ Currently `render()` validates and compiles **Turkish only** alongside English; 
 For each additional shipped language, developers must extend translation validation/generation and the runtime text model, define missing-translation fallback, and integrate language selection and interface/category labels. Notifications, sharing/exported attribution, speech-language selection and layout must also use the chosen locale. Languages that need right-to-left layout or other font coverage require corresponding UI support and device checks.
 
 This separation keeps one English source for future translation work while stating accurately what the current app supports: English and Turkish.
+
+## Person catalogue (7.0.0)
+
+The 32 person topics each contain 10 original Ascend reflections (320 total). The 120 existing person records remain unchanged; 200 new English originals and linked Turkish translations cover 20 additional people. These are not verified historical quotations. Draft translations in `docs/content/phase2-people` remain research material and are not imported.
+
+Discovery presents one “Ünlü düşünürler / Famous thinkers” collection. This virtual collection does not alter the underlying philosopher/spiritual groups, topic IDs, saved items or access checks. The remaining Zen topic appears in Eastern tradition. New person rows are text-only; the existing 70 image assets retain their provenance checks, with the 20 text-only topics explicitly listed in `docs/category-art.json`.

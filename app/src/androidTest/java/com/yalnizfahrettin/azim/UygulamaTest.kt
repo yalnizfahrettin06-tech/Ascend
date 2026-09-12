@@ -253,7 +253,7 @@ class UygulamaTest {
         chooseLibraryArtwork("motivasyon")
         assertFalse("Selecting collection artwork must not silently grant Pro", runBlocking { demoDepo.proDemo.first() })
         enableProFromGate()
-        val access = runBlocking { withTimeout(10000) { demoDepo.acik.first { it.size == 70 } } }
+        val access = runBlocking { withTimeout(10000) { demoDepo.acik.first { it.size == 120 } } }
         assertEquals(Kategoriler.tumAltlar.map { it.anahtar }.toSet(), access)
         assertEquals("Pro changes access, not the user's plan selection", originalSelection, runBlocking { demoDepo.secili.first() })
         chooseLibraryArtwork("motivasyon")
@@ -311,7 +311,7 @@ class UygulamaTest {
         val other = Kategoriler.tumAltlar.first { it.anahtar in unlocked && it.anahtar !in original }.anahtar
         compose.onNodeWithTag("nav-kategori").performClick()
         compose.onNodeWithTag("category-filter-all").performClick()
-        compose.onNodeWithTag("category-count").assertTextEquals("70 konu")
+        compose.onNodeWithTag("category-count").assertTextEquals("120 konu")
         compose.onNodeWithTag("category-filter-selected").performClick().assertIsSelected()
         compose.onNodeWithTag("category-count").assertTextEquals("${original.size} konu")
         compose.onNodeWithTag("category-grid").performScrollToNode(hasTestTag("category-$chosen"))

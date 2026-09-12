@@ -44,24 +44,16 @@ jobs:
       - name: Check sources, tests and lint; build APK
         run: |
           python tools/icerik_derle.py --check
+          python tools/check_need_content.py
           python tools/check_category_art.py
           python tools/check_scene_art.py
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.13.3-test-APK
+          name: Ascend-9.14.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
-      - name: Publish installable test APK
-        if: github.ref == 'refs/heads/main'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.13.3.apk
-          if ! gh release view v9.13.3-ui >/dev/null 2>&1; then
-            gh release create v9.13.3-ui Ascend-9.13.3.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.13.3 — Safe sharing and detailed artwork" --notes "System-fitted sharing window, higher quality widget imagery, restored photographic contrast and home Pro entry."
-          fi
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
@@ -114,8 +106,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -d screenshots ]; then
-            zip -r Ascend-9.13.3-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
-            gh release upload v9.13.3-ui Ascend-9.13.3-visual-evidence.zip --clobber
+            zip -r Ascend-9.14.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
+            gh release upload v9.14.0-ui Ascend-9.14.0-visual-evidence.zip --clobber
           fi
 
   share-regression:
@@ -159,8 +151,27 @@ jobs:
             app/build/reports/androidTests/
             app/build/outputs/androidTest-results/
             screenshots/
-      - name: Publish screenshots
-        if: success()
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [build, share-regression]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: Ascend-9.14.0-test-APK
+          path: apk
+      - uses: actions/download-artifact@v8
+        with:
+          name: focused-share-regression
+          path: evidence
+      - name: Publish tested APK
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload v9.13.3-ui screenshots/*.png --clobber
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cp apk/app-debug.apk Ascend-9.14.0.apk
+          zip -r Ascend-9.14.0-test-evidence.zip evidence
+          gh release create v9.14.0-ui Ascend-9.14.0.apk Ascend-9.14.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.14.0 — Bilingual content catalogue" --notes "120 categories with 1,200 Turkish-English originals. Thirty new needs, grouped thinkers, stable saved IDs. Unit, lint, content, persistence and emulator sharing checks completed before publication. Demo Pro; test APK."

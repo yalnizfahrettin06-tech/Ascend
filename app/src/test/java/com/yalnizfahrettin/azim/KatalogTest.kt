@@ -16,13 +16,13 @@ import org.junit.Test
 class KatalogTest {
 
     @Test
-    fun `current catalogue covers all seventy categories with ten records each`() {
+    fun `current catalogue covers all ninety categories with ten records each`() {
         val records = Sozler.tumu()
         val categories = Kategoriler.tumAltlar.map { it.anahtar }.toSet()
         val grouped = records.groupBy { it.kategori }
 
-        assertEquals("The release must contain 700 current records", 700, records.size)
-        assertEquals("The release must define 70 categories", 70, categories.size)
+        assertEquals("The release must contain 1200 current records", 1200, records.size)
+        assertEquals("The release must define 120 categories", 120, categories.size)
         assertEquals("Missing or unknown content categories", categories, grouped.keys)
         categories.forEach { category ->
             assertEquals("Incomplete category: $category", 10, grouped.getValue(category).size)

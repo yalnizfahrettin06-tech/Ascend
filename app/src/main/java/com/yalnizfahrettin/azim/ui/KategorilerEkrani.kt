@@ -76,7 +76,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent))
         Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             if(group != null || reminders) IconButton(onClick = { group = null; reminders = false; query = "" }) { Icon(AzimIkon.Geri, cevir(dil,"Koleksiyonlar","Collections"), tint = Renk.metin) }
-            Text(if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.grupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
+            Text(if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.kesfetGrupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
                 Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 13.sp)
             if(!reminders) TextButton(onClick = { reminders = true; group = null; query = "" }, modifier = Modifier.testTag("category-selection-summary")) {
                 Icon(AzimIkon.Bildirim, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp))
@@ -85,14 +85,14 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
         }
         LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            if(showGroups) { items(Kategoriler.gruplar, key = { it.anahtar }) { g ->
+            if(showGroups) { items(Kategoriler.kesfetGruplari, key = { it.anahtar }) { g ->
                 Surface(onClick = { group = g.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier.fillMaxWidth().testTag(if(g == Kategoriler.gruplar.first()) "collection-feature" else "collection-${g.anahtar}")) {
+                    modifier = Modifier.fillMaxWidth().testTag(if(g == Kategoriler.kesfetGruplari.first()) "collection-feature" else "collection-${g.anahtar}")) {
                     Row(Modifier.padding(16.dp).heightIn(min = 44.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
                         Icon(koleksiyonIkonu(g.anahtar), null, Modifier.size(24.dp), tint = Renk.metinIkincil)
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(g.ad(dil), color = Renk.metin, fontSize = 16.sp, lineHeight = 21.sp, fontWeight = FontWeight.Medium)
-                            Text(cevir(dil,"${g.altlar.size} konu","${g.altlar.size} topics"), color = Renk.metinIkincil, fontSize = 12.sp)
+                            Text(if (g.anahtar == Kategoriler.DUSUNURLER) cevir(dil,"${g.altlar.size} düşünür","${g.altlar.size} thinkers") else cevir(dil,"${g.altlar.size} konu","${g.altlar.size} topics"), color = Renk.metinIkincil, fontSize = 12.sp)
                         }
                         Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
                     }
@@ -246,7 +246,7 @@ private fun koleksiyonIkonu(key: String) = when (key) {
     "azim" -> AzimIkon.Basamak
     "disiplin" -> AzimIkon.Hedef
     "cesaret" -> AzimIkon.Kalkan
-    "filozoflar" -> AzimIkon.Sutun
+    "filozoflar", Kategoriler.DUSUNURLER -> AzimIkon.Sutun
     "tasavvuf" -> AzimIkon.IcYol
     "inanc" -> AzimIkon.Eller
     "spor" -> AzimIkon.Hareket

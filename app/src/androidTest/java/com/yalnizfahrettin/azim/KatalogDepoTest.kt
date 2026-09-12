@@ -33,8 +33,8 @@ class KatalogDepoTest {
     @Test fun historyKeepsTheWholeCatalogAndFiltersLegacyIds() = isolated { depo, seed ->
         depo.proDemoAyarla(true)
         depo.kategorileriAyarla(Erisim.tumKategoriler)
-        assertEquals(70, depo.secili.first().size)
-        assertEquals(700, Sozler.bildirimHavuzu(depo.secili.first(), "en").size)
+        assertEquals(120, depo.secili.first().size)
+        assertEquals(1200, Sozler.bildirimHavuzu(depo.secili.first(), "en").size)
         val ids = Sozler.tumu().map { it.kimlik }
         seed(ids.dropLast(1).toSet() + "old-category:123")
         depo.bildirimGecmisineEkle(ids.last())

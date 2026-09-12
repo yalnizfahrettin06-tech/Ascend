@@ -69,7 +69,7 @@ class DesignV82Test {
                 { selected = selected + it }, {}, false, {}, bildirimAcik = false) }
         }
         compose.onNodeWithTag("category-selection-summary").assertTextContains("Bildirim konularını seç").performClick()
-        compose.onNodeWithTag("category-count").assertTextEquals("70 konu")
+        compose.onNodeWithTag("category-count").assertTextEquals("120 konu")
         compose.onNodeWithTag("category-filter-collections").performClick()
         compose.onNodeWithTag("collection-olumlamalar").performClick()
         compose.runOnIdle { assertTrue(selected.isEmpty()) }

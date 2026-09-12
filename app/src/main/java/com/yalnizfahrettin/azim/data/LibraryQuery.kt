@@ -16,7 +16,7 @@ object LibraryQuery {
         unlockedOnly: Boolean = false, selected: Set<String> = emptySet(), unlocked: Set<String> = emptySet()): List<Kategori> {
         val needle = query.trim().lowercase(Locale.forLanguageTag(language))
         return Kategoriler.tumAltlar.filter { k ->
-            (needle.isNotEmpty() || group == null || k.grup == group) &&
+            (needle.isNotEmpty() || group == null || Kategoriler.kesfetGrupBul(group)?.altlar?.contains(k) == true) &&
             (needle.isNotEmpty() || !selectedOnly || k.anahtar in selected) &&
             (!unlockedOnly || k.anahtar in unlocked) &&
             (needle.isEmpty() || k.ad(language).lowercase(Locale.forLanguageTag(language)).contains(needle) ||

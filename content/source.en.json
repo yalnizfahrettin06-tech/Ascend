@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "5.0.0",
+  "catalogVersion": "7.0.0",
   "sourceLanguage": "en",
   "author": "Ascend",
   "editorialNote": "Original Ascend writing. Inspired reflections are not quotations from people or sacred texts. Translate quote text only; preserve IDs and categories.",
@@ -473,6 +473,306 @@
       "id": "sinav",
       "group": "ogrenme",
       "name": "Exams & Study",
+      "kind": "reflection"
+    },
+    {
+      "id": "epikuros",
+      "group": "filozoflar",
+      "name": "Epicurus",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "diogenes",
+      "group": "filozoflar",
+      "name": "Diogenes",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "herakleitos",
+      "group": "filozoflar",
+      "name": "Heraclitus",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "cicero",
+      "group": "filozoflar",
+      "name": "Cicero",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "montaigne",
+      "group": "filozoflar",
+      "name": "Michel de Montaigne",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "bacon",
+      "group": "filozoflar",
+      "name": "Francis Bacon",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "descartes",
+      "group": "filozoflar",
+      "name": "René Descartes",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "spinoza",
+      "group": "filozoflar",
+      "name": "Baruch Spinoza",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "pascal",
+      "group": "filozoflar",
+      "name": "Blaise Pascal",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "locke",
+      "group": "filozoflar",
+      "name": "John Locke",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "hume",
+      "group": "filozoflar",
+      "name": "David Hume",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "rousseau",
+      "group": "filozoflar",
+      "name": "Jean-Jacques Rousseau",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "kant",
+      "group": "filozoflar",
+      "name": "Immanuel Kant",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "schopenhauer",
+      "group": "filozoflar",
+      "name": "Arthur Schopenhauer",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "kierkegaard",
+      "group": "filozoflar",
+      "name": "Søren Kierkegaard",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "emerson",
+      "group": "filozoflar",
+      "name": "Ralph Waldo Emerson",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "thoreau",
+      "group": "filozoflar",
+      "name": "Henry David Thoreau",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "sadi",
+      "group": "tasavvuf",
+      "name": "Saadi",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "attar",
+      "group": "tasavvuf",
+      "name": "Attar",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "hayyam",
+      "group": "tasavvuf",
+      "name": "Omar Khayyam",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "dustukten_sonra",
+      "group": "azim",
+      "name": "Getting back up",
+      "kind": "reflection"
+    },
+    {
+      "id": "kucuk_adim",
+      "group": "azim",
+      "name": "Small steps",
+      "kind": "reflection"
+    },
+    {
+      "id": "gelisimi_gormek",
+      "group": "azim",
+      "name": "Noticing progress",
+      "kind": "reflection"
+    },
+    {
+      "id": "beklemek",
+      "group": "azim",
+      "name": "Waiting for results",
+      "kind": "reflection"
+    },
+    {
+      "id": "niyetine_sadik",
+      "group": "disiplin",
+      "name": "Staying true to your intention",
+      "kind": "reflection"
+    },
+    {
+      "id": "hayir_demek",
+      "group": "iliskiler",
+      "name": "Saying no",
+      "kind": "reflection"
+    },
+    {
+      "id": "sinirlar",
+      "group": "iliskiler",
+      "name": "Keeping boundaries",
+      "kind": "reflection"
+    },
+    {
+      "id": "onay",
+      "group": "cesaret",
+      "name": "Living without approval",
+      "kind": "reflection"
+    },
+    {
+      "id": "kiyas",
+      "group": "cesaret",
+      "name": "Beyond comparison",
+      "kind": "reflection"
+    },
+    {
+      "id": "elestiri",
+      "group": "cesaret",
+      "name": "Receiving criticism",
+      "kind": "reflection"
+    },
+    {
+      "id": "kendini_ifade",
+      "group": "cesaret",
+      "name": "Expressing yourself",
+      "kind": "reflection"
+    },
+    {
+      "id": "kararsizlik",
+      "group": "zihin",
+      "name": "Making a choice",
+      "kind": "reflection"
+    },
+    {
+      "id": "kontrol",
+      "group": "zihin",
+      "name": "What you cannot control",
+      "kind": "reflection"
+    },
+    {
+      "id": "fazla_dusunmek",
+      "group": "zihin",
+      "name": "Circling thoughts",
+      "kind": "reflection"
+    },
+    {
+      "id": "ofke",
+      "group": "zihin",
+      "name": "Responding to anger",
+      "kind": "reflection"
+    },
+    {
+      "id": "pismanlik",
+      "group": "zihin",
+      "name": "Regret",
+      "kind": "reflection"
+    },
+    {
+      "id": "kendini_affet",
+      "group": "olumlamalar",
+      "name": "Forgiving yourself",
+      "kind": "affirmation"
+    },
+    {
+      "id": "mukemmeliyet",
+      "group": "ogrenme",
+      "name": "Good enough",
+      "kind": "reflection"
+    },
+    {
+      "id": "belirsizlik",
+      "group": "zihin",
+      "name": "Living with uncertainty",
+      "kind": "reflection"
+    },
+    {
+      "id": "degisim",
+      "group": "ogrenme",
+      "name": "Adapting to change",
+      "kind": "reflection"
+    },
+    {
+      "id": "vedalar",
+      "group": "iliskiler",
+      "name": "Goodbyes and loss",
+      "kind": "reflection"
+    },
+    {
+      "id": "tek_basina",
+      "group": "zihin",
+      "name": "Time on your own",
+      "kind": "reflection"
+    },
+    {
+      "id": "destek",
+      "group": "iliskiler",
+      "name": "Asking for support",
+      "kind": "reflection"
+    },
+    {
+      "id": "dinlemek",
+      "group": "iliskiler",
+      "name": "Really listening",
+      "kind": "reflection"
+    },
+    {
+      "id": "onarim",
+      "group": "iliskiler",
+      "name": "Apologizing and repairing",
+      "kind": "reflection"
+    },
+    {
+      "id": "dinlenme",
+      "group": "spor",
+      "name": "Permission to rest",
+      "kind": "reflection"
+    },
+    {
+      "id": "beden",
+      "group": "spor",
+      "name": "Respecting your body",
+      "kind": "reflection"
+    },
+    {
+      "id": "is_sinir",
+      "group": "is",
+      "name": "Work and life boundaries",
+      "kind": "reflection"
+    },
+    {
+      "id": "yaraticilik",
+      "group": "ogrenme",
+      "name": "Creative courage",
+      "kind": "reflection"
+    },
+    {
+      "id": "anlam",
+      "group": "ogrenme",
+      "name": "Finding your meaning",
       "kind": "reflection"
     }
   ],
@@ -3976,6 +4276,2506 @@
       "id": "v5_sinav_10",
       "category": "sinav",
       "text": "When you open the question paper, read what is being asked; let a clear question guide the knowledge you bring."
+    },
+    {
+      "id": "v5_epikuros_01",
+      "category": "epikuros",
+      "text": "A simple meal can be enough when I stop comparing my table with someone else's."
+    },
+    {
+      "id": "v5_epikuros_02",
+      "category": "epikuros",
+      "text": "Before buying more, I can ask which need I am actually trying to meet."
+    },
+    {
+      "id": "v5_epikuros_03",
+      "category": "epikuros",
+      "text": "A quiet conversation with a friend can matter more than another expensive possession."
+    },
+    {
+      "id": "v5_epikuros_04",
+      "category": "epikuros",
+      "text": "I can enjoy this small comfort without demanding that it last forever."
+    },
+    {
+      "id": "v5_epikuros_05",
+      "category": "epikuros",
+      "text": "Not every desire needs to become a task on my list."
+    },
+    {
+      "id": "v5_epikuros_06",
+      "category": "epikuros",
+      "text": "I can make room for pleasure that does not leave tomorrow harder to live."
+    },
+    {
+      "id": "v5_epikuros_07",
+      "category": "epikuros",
+      "text": "The future is uncertain; I can still care for what is here today."
+    },
+    {
+      "id": "v5_epikuros_08",
+      "category": "epikuros",
+      "text": "Enough may feel quieter than more, but I can learn to notice it."
+    },
+    {
+      "id": "v5_epikuros_09",
+      "category": "epikuros",
+      "text": "I do not need an impressive reason to enjoy a peaceful afternoon."
+    },
+    {
+      "id": "v5_epikuros_10",
+      "category": "epikuros",
+      "text": "When a wish feels urgent, I can ask whether fulfilling it will really bring rest."
+    },
+    {
+      "id": "v5_diogenes_01",
+      "category": "diogenes",
+      "text": "I can question a habit even when everyone around me calls it normal."
+    },
+    {
+      "id": "v5_diogenes_02",
+      "category": "diogenes",
+      "text": "Before keeping an object, I can ask whether I use it or only protect its image."
+    },
+    {
+      "id": "v5_diogenes_03",
+      "category": "diogenes",
+      "text": "Being noticed is not the same as having something worth saying."
+    },
+    {
+      "id": "v5_diogenes_04",
+      "category": "diogenes",
+      "text": "I can say what I mean without turning honesty into an excuse for cruelty."
+    },
+    {
+      "id": "v5_diogenes_05",
+      "category": "diogenes",
+      "text": "A simpler day may begin with one obligation I no longer need to perform."
+    },
+    {
+      "id": "v5_diogenes_06",
+      "category": "diogenes",
+      "text": "I can respect a person's title without letting it decide what I believe."
+    },
+    {
+      "id": "v5_diogenes_07",
+      "category": "diogenes",
+      "text": "What I carry out of habit may be heavier than what I actually need."
+    },
+    {
+      "id": "v5_diogenes_08",
+      "category": "diogenes",
+      "text": "I can notice the sunlight without first earning a more impressive life."
+    },
+    {
+      "id": "v5_diogenes_09",
+      "category": "diogenes",
+      "text": "An awkward question can reveal a rule I have never chosen for myself."
+    },
+    {
+      "id": "v5_diogenes_10",
+      "category": "diogenes",
+      "text": "I can let my everyday choices speak before I make a speech about my values."
+    },
+    {
+      "id": "v5_herakleitos_01",
+      "category": "herakleitos",
+      "text": "The same street can meet a different version of me on the way home."
+    },
+    {
+      "id": "v5_herakleitos_02",
+      "category": "herakleitos",
+      "text": "A changed feeling does not mean the earlier one was false."
+    },
+    {
+      "id": "v5_herakleitos_03",
+      "category": "herakleitos",
+      "text": "I can notice what is changing without rushing to call it a loss."
+    },
+    {
+      "id": "v5_herakleitos_04",
+      "category": "herakleitos",
+      "text": "More information is not always the same as a clearer understanding."
+    },
+    {
+      "id": "v5_herakleitos_05",
+      "category": "herakleitos",
+      "text": "When two needs pull against each other, I can listen to both before choosing."
+    },
+    {
+      "id": "v5_herakleitos_06",
+      "category": "herakleitos",
+      "text": "A useful discovery may follow several attempts that seemed to reveal nothing."
+    },
+    {
+      "id": "v5_herakleitos_07",
+      "category": "herakleitos",
+      "text": "I can leave room in my plans for the person I am still becoming."
+    },
+    {
+      "id": "v5_herakleitos_08",
+      "category": "herakleitos",
+      "text": "What looks still from a distance may be changing in ways I have not noticed."
+    },
+    {
+      "id": "v5_herakleitos_09",
+      "category": "herakleitos",
+      "text": "I do not have to freeze a good moment in order to value it."
+    },
+    {
+      "id": "v5_herakleitos_10",
+      "category": "herakleitos",
+      "text": "Listening again may reveal something that my first judgment missed."
+    },
+    {
+      "id": "v5_cicero_01",
+      "category": "cicero",
+      "text": "A friendship can make room for a truth that is difficult to hear."
+    },
+    {
+      "id": "v5_cicero_02",
+      "category": "cicero",
+      "text": "I can offer advice without deciding another person's life for them."
+    },
+    {
+      "id": "v5_cicero_03",
+      "category": "cicero",
+      "text": "Being a good friend includes noticing when listening matters more than speaking."
+    },
+    {
+      "id": "v5_cicero_04",
+      "category": "cicero",
+      "text": "I can disagree with someone I care about without withdrawing my respect."
+    },
+    {
+      "id": "v5_cicero_05",
+      "category": "cicero",
+      "text": "A small promise kept can give trust somewhere solid to stand."
+    },
+    {
+      "id": "v5_cicero_06",
+      "category": "cicero",
+      "text": "My experience can be useful without making a younger person's view worthless."
+    },
+    {
+      "id": "v5_cicero_07",
+      "category": "cicero",
+      "text": "I can ask what I owe to others as well as what I expect from them."
+    },
+    {
+      "id": "v5_cicero_08",
+      "category": "cicero",
+      "text": "A shared difficulty may show me who listens when there is nothing to gain."
+    },
+    {
+      "id": "v5_cicero_09",
+      "category": "cicero",
+      "text": "I can make time for a friend before there is a problem to solve."
+    },
+    {
+      "id": "v5_cicero_10",
+      "category": "cicero",
+      "text": "Growing older does not erase my ability to take interest in another person."
+    },
+    {
+      "id": "v5_montaigne_01",
+      "category": "montaigne",
+      "text": "I can describe what I experienced without pretending it explains everyone."
+    },
+    {
+      "id": "v5_montaigne_02",
+      "category": "montaigne",
+      "text": "Changing my mind can be a sign that I have paid closer attention."
+    },
+    {
+      "id": "v5_montaigne_03",
+      "category": "montaigne",
+      "text": "Before judging a strange custom, I can notice how familiar my own habits feel."
+    },
+    {
+      "id": "v5_montaigne_04",
+      "category": "montaigne",
+      "text": "I can admit a contradiction in myself without hiding behind a perfect image."
+    },
+    {
+      "id": "v5_montaigne_05",
+      "category": "montaigne",
+      "text": "A conversation becomes different when I stop preparing my reply and listen."
+    },
+    {
+      "id": "v5_montaigne_06",
+      "category": "montaigne",
+      "text": "My body is part of this day, not an interruption to my thoughts."
+    },
+    {
+      "id": "v5_montaigne_07",
+      "category": "montaigne",
+      "text": "I can observe a difficult mood without making it my whole identity."
+    },
+    {
+      "id": "v5_montaigne_08",
+      "category": "montaigne",
+      "text": "An ordinary detail may teach me something a grand explanation has missed."
+    },
+    {
+      "id": "v5_montaigne_09",
+      "category": "montaigne",
+      "text": "I am allowed to say that I have not settled this question yet."
+    },
+    {
+      "id": "v5_montaigne_10",
+      "category": "montaigne",
+      "text": "Writing down my uncertainty can be more honest than polishing it into certainty."
+    },
+    {
+      "id": "v5_bacon_01",
+      "category": "bacon",
+      "text": "After reading a page, I can pause to ask what I actually understood."
+    },
+    {
+      "id": "v5_bacon_02",
+      "category": "bacon",
+      "text": "A question can help me learn more than an answer offered too quickly."
+    },
+    {
+      "id": "v5_bacon_03",
+      "category": "bacon",
+      "text": "Writing an idea down can show where it is still unclear."
+    },
+    {
+      "id": "v5_bacon_04",
+      "category": "bacon",
+      "text": "I can listen for evidence instead of only for words that support my opinion."
+    },
+    {
+      "id": "v5_bacon_05",
+      "category": "bacon",
+      "text": "One careful observation can be worth more than several confident guesses."
+    },
+    {
+      "id": "v5_bacon_06",
+      "category": "bacon",
+      "text": "I can ask someone about the work they know rather than pretending I know it too."
+    },
+    {
+      "id": "v5_bacon_07",
+      "category": "bacon",
+      "text": "Reading slowly is useful when speed would leave the meaning behind."
+    },
+    {
+      "id": "v5_bacon_08",
+      "category": "bacon",
+      "text": "I can test an idea on a small scale before asking it to carry a large decision."
+    },
+    {
+      "id": "v5_bacon_09",
+      "category": "bacon",
+      "text": "Leaving space for another voice can improve the thought I brought to the conversation."
+    },
+    {
+      "id": "v5_bacon_10",
+      "category": "bacon",
+      "text": "A familiar explanation still deserves a look at the facts beneath it."
+    },
+    {
+      "id": "v5_descartes_01",
+      "category": "descartes",
+      "text": "I can divide a tangled task into parts small enough to examine."
+    },
+    {
+      "id": "v5_descartes_02",
+      "category": "descartes",
+      "text": "Before accepting a conclusion, I can ask which steps led me there."
+    },
+    {
+      "id": "v5_descartes_03",
+      "category": "descartes",
+      "text": "When everything feels complicated, I can begin with the part I understand."
+    },
+    {
+      "id": "v5_descartes_04",
+      "category": "descartes",
+      "text": "Doubting an assumption does not require me to abandon every useful action."
+    },
+    {
+      "id": "v5_descartes_05",
+      "category": "descartes",
+      "text": "I can separate what I have seen from what I have only been told."
+    },
+    {
+      "id": "v5_descartes_06",
+      "category": "descartes",
+      "text": "A second look at my reasoning may reveal a step I skipped."
+    },
+    {
+      "id": "v5_descartes_07",
+      "category": "descartes",
+      "text": "I can organize my notes before demanding a clear answer from them."
+    },
+    {
+      "id": "v5_descartes_08",
+      "category": "descartes",
+      "text": "Not being certain yet is a reason to examine, not a reason to pretend."
+    },
+    {
+      "id": "v5_descartes_09",
+      "category": "descartes",
+      "text": "I can choose a workable next step while keeping my conclusions open to revision."
+    },
+    {
+      "id": "v5_descartes_10",
+      "category": "descartes",
+      "text": "A problem on paper may be easier to approach than the same problem circling in my head."
+    },
+    {
+      "id": "v5_spinoza_01",
+      "category": "spinoza",
+      "text": "Naming a feeling can help me look at it with a little more clarity."
+    },
+    {
+      "id": "v5_spinoza_02",
+      "category": "spinoza",
+      "text": "I can ask what contributed to my anger before letting it choose my response."
+    },
+    {
+      "id": "v5_spinoza_03",
+      "category": "spinoza",
+      "text": "Understanding a cause does not require me to approve of its effects."
+    },
+    {
+      "id": "v5_spinoza_04",
+      "category": "spinoza",
+      "text": "My freedom can grow when I understand the pressures shaping my choices."
+    },
+    {
+      "id": "v5_spinoza_05",
+      "category": "spinoza",
+      "text": "I can seek a response that protects me without feeding my hatred."
+    },
+    {
+      "id": "v5_spinoza_06",
+      "category": "spinoza",
+      "text": "A difficult feeling can be examined without being treated as a personal defect."
+    },
+    {
+      "id": "v5_spinoza_07",
+      "category": "spinoza",
+      "text": "I can notice which encounters leave me more able to think and act."
+    },
+    {
+      "id": "v5_spinoza_08",
+      "category": "spinoza",
+      "text": "The wish to understand can give me a pause between injury and reaction."
+    },
+    {
+      "id": "v5_spinoza_09",
+      "category": "spinoza",
+      "text": "A clearer idea may begin with admitting how little of the situation I can see."
+    },
+    {
+      "id": "v5_spinoza_10",
+      "category": "spinoza",
+      "text": "I can look for support that increases my ability to act, not just my need for approval."
+    },
+    {
+      "id": "v5_pascal_01",
+      "category": "pascal",
+      "text": "I can notice a need for distraction without immediately filling the silence."
+    },
+    {
+      "id": "v5_pascal_02",
+      "category": "pascal",
+      "text": "A quiet room may reveal a thought that a busy day kept hidden."
+    },
+    {
+      "id": "v5_pascal_03",
+      "category": "pascal",
+      "text": "My vulnerability does not erase my ability to think carefully."
+    },
+    {
+      "id": "v5_pascal_04",
+      "category": "pascal",
+      "text": "I can leave room for what I feel without claiming that every feeling proves a fact."
+    },
+    {
+      "id": "v5_pascal_05",
+      "category": "pascal",
+      "text": "Preparing for tomorrow need not take every moment away from today."
+    },
+    {
+      "id": "v5_pascal_06",
+      "category": "pascal",
+      "text": "I can admit that a person is more complicated than my first explanation of them."
+    },
+    {
+      "id": "v5_pascal_07",
+      "category": "pascal",
+      "text": "The size of the world can invite wonder without making my small care meaningless."
+    },
+    {
+      "id": "v5_pascal_08",
+      "category": "pascal",
+      "text": "I can ask whether I want this activity or simply want to avoid being still."
+    },
+    {
+      "id": "v5_pascal_09",
+      "category": "pascal",
+      "text": "Knowing my limits can make my questions more careful, not less valuable."
+    },
+    {
+      "id": "v5_pascal_10",
+      "category": "pascal",
+      "text": "I do not have to resolve every mystery before paying attention to this life."
+    },
+    {
+      "id": "v5_locke_01",
+      "category": "locke",
+      "text": "I can distinguish a strong reason from an opinion repeated many times."
+    },
+    {
+      "id": "v5_locke_02",
+      "category": "locke",
+      "text": "Before arguing over a word, I can ask what the other person means by it."
+    },
+    {
+      "id": "v5_locke_03",
+      "category": "locke",
+      "text": "My confidence in an idea can change when the evidence changes."
+    },
+    {
+      "id": "v5_locke_04",
+      "category": "locke",
+      "text": "I can learn from experience without treating my experience as the only one."
+    },
+    {
+      "id": "v5_locke_05",
+      "category": "locke",
+      "text": "Respecting another person's conscience does not require sharing every belief."
+    },
+    {
+      "id": "v5_locke_06",
+      "category": "locke",
+      "text": "A name for something is not the same as an understanding of it."
+    },
+    {
+      "id": "v5_locke_07",
+      "category": "locke",
+      "text": "I can check whether my certainty rests on reasons or on familiar company."
+    },
+    {
+      "id": "v5_locke_08",
+      "category": "locke",
+      "text": "Not every question admits the same degree of certainty."
+    },
+    {
+      "id": "v5_locke_09",
+      "category": "locke",
+      "text": "I can judge an argument without accepting it merely because many people do."
+    },
+    {
+      "id": "v5_locke_10",
+      "category": "locke",
+      "text": "What I say I value can become clearer in the choices I make."
+    },
+    {
+      "id": "v5_hume_01",
+      "category": "hume",
+      "text": "A repeated pattern can guide my expectation without guaranteeing what comes next."
+    },
+    {
+      "id": "v5_hume_02",
+      "category": "hume",
+      "text": "I can ask how much evidence a striking claim actually has."
+    },
+    {
+      "id": "v5_hume_03",
+      "category": "hume",
+      "text": "A familiar habit may explain my confidence better than a careful argument does."
+    },
+    {
+      "id": "v5_hume_04",
+      "category": "hume",
+      "text": "I can remain curious without treating every possibility as equally likely."
+    },
+    {
+      "id": "v5_hume_05",
+      "category": "hume",
+      "text": "Thinking carefully does not require me to step away from ordinary human warmth."
+    },
+    {
+      "id": "v5_hume_06",
+      "category": "hume",
+      "text": "When a story surprises me, I can pause before passing it on as fact."
+    },
+    {
+      "id": "v5_hume_07",
+      "category": "hume",
+      "text": "My feelings influence my judgments; noticing that can make me more careful."
+    },
+    {
+      "id": "v5_hume_08",
+      "category": "hume",
+      "text": "A small uncertainty can remain open while I get on with the day."
+    },
+    {
+      "id": "v5_hume_09",
+      "category": "hume",
+      "text": "I can be interested in a disagreement without needing to win it."
+    },
+    {
+      "id": "v5_hume_10",
+      "category": "hume",
+      "text": "One vivid example may stay in memory more easily than the quieter facts."
+    },
+    {
+      "id": "v5_rousseau_01",
+      "category": "rousseau",
+      "text": "I can learn something by trying it, not only by hearing instructions."
+    },
+    {
+      "id": "v5_rousseau_02",
+      "category": "rousseau",
+      "text": "A walk without an audience can help me notice what interests me."
+    },
+    {
+      "id": "v5_rousseau_03",
+      "category": "rousseau",
+      "text": "I can ask whether I want this thing or want others to see me with it."
+    },
+    {
+      "id": "v5_rousseau_04",
+      "category": "rousseau",
+      "text": "A quieter setting may let me hear a preference I usually overlook."
+    },
+    {
+      "id": "v5_rousseau_05",
+      "category": "rousseau",
+      "text": "Learning has a pace; rushing the explanation can hide the experience."
+    },
+    {
+      "id": "v5_rousseau_06",
+      "category": "rousseau",
+      "text": "I can pay attention to an actual person instead of only to an ideal image of them."
+    },
+    {
+      "id": "v5_rousseau_07",
+      "category": "rousseau",
+      "text": "Time outdoors does not have to become another achievement to record."
+    },
+    {
+      "id": "v5_rousseau_08",
+      "category": "rousseau",
+      "text": "I can compare less and ask more directly what this day needs from me."
+    },
+    {
+      "id": "v5_rousseau_09",
+      "category": "rousseau",
+      "text": "A useful lesson can begin with touching, observing, or making something."
+    },
+    {
+      "id": "v5_rousseau_10",
+      "category": "rousseau",
+      "text": "I can notice when the wish to impress is pulling me away from my own needs."
+    },
+    {
+      "id": "v5_kant_01",
+      "category": "kant",
+      "text": "Before making an exception for myself, I can ask whether it would be fair for everyone."
+    },
+    {
+      "id": "v5_kant_02",
+      "category": "kant",
+      "text": "A person is more than the use I can make of their help."
+    },
+    {
+      "id": "v5_kant_03",
+      "category": "kant",
+      "text": "I can keep a promise because I chose it, not only because someone is watching."
+    },
+    {
+      "id": "v5_kant_04",
+      "category": "kant",
+      "text": "Respect can remain part of a disagreement even when agreement does not come."
+    },
+    {
+      "id": "v5_kant_05",
+      "category": "kant",
+      "text": "I can examine the rule behind my choice, not just the result I hope for."
+    },
+    {
+      "id": "v5_kant_06",
+      "category": "kant",
+      "text": "Convenience alone does not tell me whether a choice is fair."
+    },
+    {
+      "id": "v5_kant_07",
+      "category": "kant",
+      "text": "I can think for myself while remaining willing to hear a better reason."
+    },
+    {
+      "id": "v5_kant_08",
+      "category": "kant",
+      "text": "Another person's dignity does not depend on whether they agree with me."
+    },
+    {
+      "id": "v5_kant_09",
+      "category": "kant",
+      "text": "A good intention still deserves care in how it becomes an action."
+    },
+    {
+      "id": "v5_kant_10",
+      "category": "kant",
+      "text": "Looking at the night sky can remind me to make room for wonder."
+    },
+    {
+      "id": "v5_schopenhauer_01",
+      "category": "schopenhauer",
+      "text": "I can plan this day around the energy I have rather than the energy I wish I had."
+    },
+    {
+      "id": "v5_schopenhauer_02",
+      "category": "schopenhauer",
+      "text": "A tired mind may need rest before another round of judgment."
+    },
+    {
+      "id": "v5_schopenhauer_03",
+      "category": "schopenhauer",
+      "text": "I can value a quiet hour even when it produces nothing to show."
+    },
+    {
+      "id": "v5_schopenhauer_04",
+      "category": "schopenhauer",
+      "text": "Someone else's opinion does not need to occupy every room in my mind."
+    },
+    {
+      "id": "v5_schopenhauer_05",
+      "category": "schopenhauer",
+      "text": "A modest task within my strength can give this afternoon a useful shape."
+    },
+    {
+      "id": "v5_schopenhauer_06",
+      "category": "schopenhauer",
+      "text": "I can notice another person's pain without comparing it with my own."
+    },
+    {
+      "id": "v5_schopenhauer_07",
+      "category": "schopenhauer",
+      "text": "A little solitude can be chosen without turning away from every relationship."
+    },
+    {
+      "id": "v5_schopenhauer_08",
+      "category": "schopenhauer",
+      "text": "I can ask what this ambition costs me as well as what it might bring."
+    },
+    {
+      "id": "v5_schopenhauer_09",
+      "category": "schopenhauer",
+      "text": "Protecting time for thought may mean leaving one invitation unanswered until tomorrow."
+    },
+    {
+      "id": "v5_schopenhauer_10",
+      "category": "schopenhauer",
+      "text": "I can give today's limits a place in my plans without calling myself a failure."
+    },
+    {
+      "id": "v5_kierkegaard_01",
+      "category": "kierkegaard",
+      "text": "I can choose a next step without pretending that uncertainty has disappeared."
+    },
+    {
+      "id": "v5_kierkegaard_02",
+      "category": "kierkegaard",
+      "text": "A decision becomes mine through how I live it after the moment of choosing."
+    },
+    {
+      "id": "v5_kierkegaard_03",
+      "category": "kierkegaard",
+      "text": "I can notice the difference between what I perform and what I honestly care about."
+    },
+    {
+      "id": "v5_kierkegaard_04",
+      "category": "kierkegaard",
+      "text": "Looking back can bring understanding that was not available while I was choosing."
+    },
+    {
+      "id": "v5_kierkegaard_05",
+      "category": "kierkegaard",
+      "text": "I do not need a crowd to confirm that a personal question matters to me."
+    },
+    {
+      "id": "v5_kierkegaard_06",
+      "category": "kierkegaard",
+      "text": "Avoiding a choice also shapes the life I am living."
+    },
+    {
+      "id": "v5_kierkegaard_07",
+      "category": "kierkegaard",
+      "text": "I can take responsibility for a choice without claiming I controlled every outcome."
+    },
+    {
+      "id": "v5_kierkegaard_08",
+      "category": "kierkegaard",
+      "text": "A new possibility can feel unsettling and still deserve a careful look."
+    },
+    {
+      "id": "v5_kierkegaard_09",
+      "category": "kierkegaard",
+      "text": "I can ask whether I am living a value or only speaking convincingly about it."
+    },
+    {
+      "id": "v5_kierkegaard_10",
+      "category": "kierkegaard",
+      "text": "Becoming myself may involve a quiet choice that nobody else notices."
+    },
+    {
+      "id": "v5_emerson_01",
+      "category": "emerson",
+      "text": "I can try the work before deciding that I am not the kind of person who can do it."
+    },
+    {
+      "id": "v5_emerson_02",
+      "category": "emerson",
+      "text": "An honest thought of my own deserves a place beside the voices I admire."
+    },
+    {
+      "id": "v5_emerson_03",
+      "category": "emerson",
+      "text": "I can learn from an example without making my life a copy of it."
+    },
+    {
+      "id": "v5_emerson_04",
+      "category": "emerson",
+      "text": "A friendship can begin with the attention I am willing to offer."
+    },
+    {
+      "id": "v5_emerson_05",
+      "category": "emerson",
+      "text": "What I notice closely may matter more than what I repeat confidently."
+    },
+    {
+      "id": "v5_emerson_06",
+      "category": "emerson",
+      "text": "I can allow a new understanding to change an old opinion."
+    },
+    {
+      "id": "v5_emerson_07",
+      "category": "emerson",
+      "text": "Approval feels good, but it does not have to be the author of my choices."
+    },
+    {
+      "id": "v5_emerson_08",
+      "category": "emerson",
+      "text": "The work in front of me is a place to practice the trust I want to have in myself."
+    },
+    {
+      "id": "v5_emerson_09",
+      "category": "emerson",
+      "text": "I can bring my own attention to a familiar place and discover something different."
+    },
+    {
+      "id": "v5_emerson_10",
+      "category": "emerson",
+      "text": "A small act of sincerity can matter more than an impressive performance."
+    },
+    {
+      "id": "v5_thoreau_01",
+      "category": "thoreau",
+      "text": "I can ask how much of my life I am exchanging for the things I buy."
+    },
+    {
+      "id": "v5_thoreau_02",
+      "category": "thoreau",
+      "text": "A slower pace may help me hear what hurry keeps covering up."
+    },
+    {
+      "id": "v5_thoreau_03",
+      "category": "thoreau",
+      "text": "I can make a little room for a life that fits me rather than a schedule that impresses."
+    },
+    {
+      "id": "v5_thoreau_04",
+      "category": "thoreau",
+      "text": "A walk can be worthwhile without a distance to beat or a photo to share."
+    },
+    {
+      "id": "v5_thoreau_05",
+      "category": "thoreau",
+      "text": "I can notice one living thing outside the window before returning to my work."
+    },
+    {
+      "id": "v5_thoreau_06",
+      "category": "thoreau",
+      "text": "Keeping fewer things can mean having fewer things to protect and maintain."
+    },
+    {
+      "id": "v5_thoreau_07",
+      "category": "thoreau",
+      "text": "Someone else's pace does not have to become the measure of my day."
+    },
+    {
+      "id": "v5_thoreau_08",
+      "category": "thoreau",
+      "text": "I can test whether a necessity is truly necessary in my own life."
+    },
+    {
+      "id": "v5_thoreau_09",
+      "category": "thoreau",
+      "text": "Paying attention can turn an ordinary morning into an experience I actually remember."
+    },
+    {
+      "id": "v5_thoreau_10",
+      "category": "thoreau",
+      "text": "I can leave an empty space in the day without immediately finding something to fill it."
+    },
+    {
+      "id": "v5_sadi_01",
+      "category": "sadi",
+      "text": "What I learn can become useful through one small action today."
+    },
+    {
+      "id": "v5_sadi_02",
+      "category": "sadi",
+      "text": "I can offer help without making the other person feel smaller."
+    },
+    {
+      "id": "v5_sadi_03",
+      "category": "sadi",
+      "text": "A gentle way of speaking can carry a difficult truth more carefully."
+    },
+    {
+      "id": "v5_sadi_04",
+      "category": "sadi",
+      "text": "Skill can show itself in the work without needing a loud introduction."
+    },
+    {
+      "id": "v5_sadi_05",
+      "category": "sadi",
+      "text": "A friendship built over years deserves more care than a moment of anger allows."
+    },
+    {
+      "id": "v5_sadi_06",
+      "category": "sadi",
+      "text": "I can notice who bears the cost of a choice that is convenient for me."
+    },
+    {
+      "id": "v5_sadi_07",
+      "category": "sadi",
+      "text": "Listening to advice does not make my own judgment unnecessary."
+    },
+    {
+      "id": "v5_sadi_08",
+      "category": "sadi",
+      "text": "I can speak firmly without forgetting the dignity of the person before me."
+    },
+    {
+      "id": "v5_sadi_09",
+      "category": "sadi",
+      "text": "A generous act need not become a story about how generous I am."
+    },
+    {
+      "id": "v5_sadi_10",
+      "category": "sadi",
+      "text": "I can let a mistake teach me something before I turn it into an excuse."
+    },
+    {
+      "id": "v5_attar_01",
+      "category": "attar",
+      "text": "I can ask for companionship on a path I do not yet understand."
+    },
+    {
+      "id": "v5_attar_02",
+      "category": "attar",
+      "text": "A question I carry honestly may take me further than an answer I only repeat."
+    },
+    {
+      "id": "v5_attar_03",
+      "category": "attar",
+      "text": "When the journey feels large, I can return to the next step we can take together."
+    },
+    {
+      "id": "v5_attar_04",
+      "category": "attar",
+      "text": "I can notice which attachment keeps me from a change I say I want."
+    },
+    {
+      "id": "v5_attar_05",
+      "category": "attar",
+      "text": "Seeking understanding may ask me to listen beyond the story I tell about myself."
+    },
+    {
+      "id": "v5_attar_06",
+      "category": "attar",
+      "text": "Another person's question can reveal a part of the path I have not seen."
+    },
+    {
+      "id": "v5_attar_07",
+      "category": "attar",
+      "text": "I can share the effort without pretending that everyone faces the same difficulty."
+    },
+    {
+      "id": "v5_attar_08",
+      "category": "attar",
+      "text": "A meaningful search does not have to look impressive from the outside."
+    },
+    {
+      "id": "v5_attar_09",
+      "category": "attar",
+      "text": "I can loosen one certainty enough to hear something unfamiliar."
+    },
+    {
+      "id": "v5_attar_10",
+      "category": "attar",
+      "text": "The people beside me are part of the journey, not merely witnesses to my progress."
+    },
+    {
+      "id": "v5_hayyam_01",
+      "category": "hayyam",
+      "text": "I can enjoy this cup of tea without asking the moment to explain my whole life."
+    },
+    {
+      "id": "v5_hayyam_02",
+      "category": "hayyam",
+      "text": "The afternoon will pass; I can choose to be present for a small part of it."
+    },
+    {
+      "id": "v5_hayyam_03",
+      "category": "hayyam",
+      "text": "I can make room for wonder where I do not have a certain answer."
+    },
+    {
+      "id": "v5_hayyam_04",
+      "category": "hayyam",
+      "text": "A shared meal can hold meaning without becoming an extraordinary occasion."
+    },
+    {
+      "id": "v5_hayyam_05",
+      "category": "hayyam",
+      "text": "I cannot rewrite yesterday, but I can attend to what my hands are doing now."
+    },
+    {
+      "id": "v5_hayyam_06",
+      "category": "hayyam",
+      "text": "Remembering that time passes can invite care rather than panic."
+    },
+    {
+      "id": "v5_hayyam_07",
+      "category": "hayyam",
+      "text": "I can appreciate a brief pleasure without pretending that nothing difficult exists."
+    },
+    {
+      "id": "v5_hayyam_08",
+      "category": "hayyam",
+      "text": "A question about life can stay open while I share this evening with a friend."
+    },
+    {
+      "id": "v5_hayyam_09",
+      "category": "hayyam",
+      "text": "I can notice what is here before my wishes move the whole day into the future."
+    },
+    {
+      "id": "v5_hayyam_10",
+      "category": "hayyam",
+      "text": "The passing of a moment does not cancel the warmth it brought."
+    },
+    {
+      "id": "v5_dustukten_sonra_01",
+      "category": "dustukten_sonra",
+      "text": "Struggling today does not erase yesterday's learning. Take it with you when you try again."
+    },
+    {
+      "id": "v5_dustukten_sonra_02",
+      "category": "dustukten_sonra",
+      "text": "One attempt did not work. Your next attempt does not have to start from the same place."
+    },
+    {
+      "id": "v5_dustukten_sonra_03",
+      "category": "dustukten_sonra",
+      "text": "Getting back up can be as ordinary as reopening the file you left unfinished."
+    },
+    {
+      "id": "v5_dustukten_sonra_04",
+      "category": "dustukten_sonra",
+      "text": "Before retrying the same route, look at where you got stuck."
+    },
+    {
+      "id": "v5_dustukten_sonra_05",
+      "category": "dustukten_sonra",
+      "text": "Slowing down after a setback can be one way of continuing."
+    },
+    {
+      "id": "v5_dustukten_sonra_06",
+      "category": "dustukten_sonra",
+      "text": "You now know something you did not know on your first try; your starting point has changed."
+    },
+    {
+      "id": "v5_dustukten_sonra_07",
+      "category": "dustukten_sonra",
+      "text": "If all you did today was gather the scattered pieces, you did part of the rebuilding."
+    },
+    {
+      "id": "v5_dustukten_sonra_08",
+      "category": "dustukten_sonra",
+      "text": "When describing your failure, account for the information you did not have then."
+    },
+    {
+      "id": "v5_dustukten_sonra_09",
+      "category": "dustukten_sonra",
+      "text": "Asking for help before trying again may be a lesson from your first attempt."
+    },
+    {
+      "id": "v5_dustukten_sonra_10",
+      "category": "dustukten_sonra",
+      "text": "Stumbling once does not mean you have to watch every later step with suspicion."
+    },
+    {
+      "id": "v5_kucuk_adim_01",
+      "category": "kucuk_adim",
+      "text": "If tidying the whole room feels too much, clear one corner of the desk."
+    },
+    {
+      "id": "v5_kucuk_adim_02",
+      "category": "kucuk_adim",
+      "text": "If a whole page feels out of reach, write one sentence about what you want to say."
+    },
+    {
+      "id": "v5_kucuk_adim_03",
+      "category": "kucuk_adim",
+      "text": "Today's task need not be the whole plan; choose just the next action."
+    },
+    {
+      "id": "v5_kucuk_adim_04",
+      "category": "kucuk_adim",
+      "text": "A five-minute task may be smaller than the space it has occupied in your mind for days."
+    },
+    {
+      "id": "v5_kucuk_adim_05",
+      "category": "kucuk_adim",
+      "text": "Make starting easier: leave your notebook where you can see it rather than search for it."
+    },
+    {
+      "id": "v5_kucuk_adim_06",
+      "category": "kucuk_adim",
+      "text": "When thinking about a long journey, identify the first stop you can reach today."
+    },
+    {
+      "id": "v5_kucuk_adim_07",
+      "category": "kucuk_adim",
+      "text": "Let a small goal look small; you do not need to enlarge it to impress someone else."
+    },
+    {
+      "id": "v5_kucuk_adim_08",
+      "category": "kucuk_adim",
+      "text": "Dividing a task into parts does not make it trivial; it puts it within reach."
+    },
+    {
+      "id": "v5_kucuk_adim_09",
+      "category": "kucuk_adim",
+      "text": "Choose today's step for the energy you have, not the energy you wish you had."
+    },
+    {
+      "id": "v5_kucuk_adim_10",
+      "category": "kucuk_adim",
+      "text": "Write down the next step so tomorrow's start need not involve thinking everything through again."
+    },
+    {
+      "id": "v5_gelisimi_gormek_01",
+      "category": "gelisimi_gormek",
+      "text": "Did you do something alone today that once required help? Change can be quiet."
+    },
+    {
+      "id": "v5_gelisimi_gormek_02",
+      "category": "gelisimi_gormek",
+      "text": "Return to an old note; you may notice a thought you can now express more clearly."
+    },
+    {
+      "id": "v5_gelisimi_gormek_03",
+      "category": "gelisimi_gormek",
+      "text": "Noticing a mistake sooner can be a sign of learning, just as making fewer mistakes can."
+    },
+    {
+      "id": "v5_gelisimi_gormek_04",
+      "category": "gelisimi_gormek",
+      "text": "Remember to compare today's ease with the hesitation you felt at the beginning."
+    },
+    {
+      "id": "v5_gelisimi_gormek_05",
+      "category": "gelisimi_gormek",
+      "text": "You have not reached the result yet, but you may now know better which questions to ask."
+    },
+    {
+      "id": "v5_gelisimi_gormek_06",
+      "category": "gelisimi_gormek",
+      "text": "This time you stated a boundary earlier. That change is yours even if others cannot see it."
+    },
+    {
+      "id": "v5_gelisimi_gormek_07",
+      "category": "gelisimi_gormek",
+      "text": "Do not measure growth only on your hardest day; notice what is easier on ordinary days."
+    },
+    {
+      "id": "v5_gelisimi_gormek_08",
+      "category": "gelisimi_gormek",
+      "text": "If last month's difficult task feels easier today, pause before taking that for granted."
+    },
+    {
+      "id": "v5_gelisimi_gormek_09",
+      "category": "gelisimi_gormek",
+      "text": "You left a conversation blaming yourself less. You do not have to dismiss that small difference."
+    },
+    {
+      "id": "v5_gelisimi_gormek_10",
+      "category": "gelisimi_gormek",
+      "text": "Sometimes seeing progress requires a brief look back rather than another new goal."
+    },
+    {
+      "id": "v5_beklemek_01",
+      "category": "beklemek",
+      "text": "You need not suspend your life until the reply arrives; other parts of today are yours."
+    },
+    {
+      "id": "v5_beklemek_02",
+      "category": "beklemek",
+      "text": "Not knowing an application's outcome does not change the effort you put into it."
+    },
+    {
+      "id": "v5_beklemek_03",
+      "category": "beklemek",
+      "text": "Refreshing again may bring no news; give yourself a break away from the screen."
+    },
+    {
+      "id": "v5_beklemek_04",
+      "category": "beklemek",
+      "text": "The news you await may matter greatly, but it need not occupy every minute of your day."
+    },
+    {
+      "id": "v5_beklemek_05",
+      "category": "beklemek",
+      "text": "There is no reply yet. Remember that before reading silence as a definite rejection."
+    },
+    {
+      "id": "v5_beklemek_06",
+      "category": "beklemek",
+      "text": "If you have finished your part, you need not fill the remaining time with self-questioning."
+    },
+    {
+      "id": "v5_beklemek_07",
+      "category": "beklemek",
+      "text": "On a day you cannot hurry the outcome, you may still be able to eat without rushing."
+    },
+    {
+      "id": "v5_beklemek_08",
+      "category": "beklemek",
+      "text": "When waiting becomes tiring, you can tell someone you trust what you are waiting for."
+    },
+    {
+      "id": "v5_beklemek_09",
+      "category": "beklemek",
+      "text": "Choosing a time to follow up may be easier to live with than checking all day."
+    },
+    {
+      "id": "v5_beklemek_10",
+      "category": "beklemek",
+      "text": "Decisions that depend on the result need not all be solved before you have the information."
+    },
+    {
+      "id": "v5_niyetine_sadik_01",
+      "category": "niyetine_sadik",
+      "text": "Recall why you chose this work, honestly for yourself rather than as an explanation to others."
+    },
+    {
+      "id": "v5_niyetine_sadik_02",
+      "category": "niyetine_sadik",
+      "text": "When enthusiasm fades, you can shrink the plan without abandoning what matters to you."
+    },
+    {
+      "id": "v5_niyetine_sadik_03",
+      "category": "niyetine_sadik",
+      "text": "Does the task on your calendar still matter to you? Commitment leaves room for that question too."
+    },
+    {
+      "id": "v5_niyetine_sadik_04",
+      "category": "niyetine_sadik",
+      "text": "Keeping an intention does not require waking up with the same feeling every day."
+    },
+    {
+      "id": "v5_niyetine_sadik_05",
+      "category": "niyetine_sadik",
+      "text": "Does today's choice make even a little room for what matters to you? You can start there."
+    },
+    {
+      "id": "v5_niyetine_sadik_06",
+      "category": "niyetine_sadik",
+      "text": "When you remember a promise, remember the circumstances in which you made it too."
+    },
+    {
+      "id": "v5_niyetine_sadik_07",
+      "category": "niyetine_sadik",
+      "text": "Changing the method that leads toward your purpose is not the same as forgetting your purpose."
+    },
+    {
+      "id": "v5_niyetine_sadik_08",
+      "category": "niyetine_sadik",
+      "text": "You can choose something for today that you would still value if nobody saw it."
+    },
+    {
+      "id": "v5_niyetine_sadik_09",
+      "category": "niyetine_sadik",
+      "text": "If your plan slipped, set a concrete time to return rather than a punishment for yourself."
+    },
+    {
+      "id": "v5_niyetine_sadik_10",
+      "category": "niyetine_sadik",
+      "text": "Occasionally ask again what you want a habit to make room for in your life."
+    },
+    {
+      "id": "v5_hayir_demek_01",
+      "category": "hayir_demek",
+      "text": "You need not answer a request immediately; you can ask for time to check your calendar."
+    },
+    {
+      "id": "v5_hayir_demek_02",
+      "category": "hayir_demek",
+      "text": "You do not need another invitation in order to decline one you do not want to accept."
+    },
+    {
+      "id": "v5_hayir_demek_03",
+      "category": "hayir_demek",
+      "text": "Saying you cannot do something does not mean the other person does not matter to you."
+    },
+    {
+      "id": "v5_hayir_demek_04",
+      "category": "hayir_demek",
+      "text": "Every free hour does not have to become a promise you make to someone else."
+    },
+    {
+      "id": "v5_hayir_demek_05",
+      "category": "hayir_demek",
+      "text": "A brief, clear no can be more honest than a long yes you did not want to give."
+    },
+    {
+      "id": "v5_hayir_demek_06",
+      "category": "hayir_demek",
+      "text": "A trembling voice while declining something does not make your answer invalid."
+    },
+    {
+      "id": "v5_hayir_demek_07",
+      "category": "hayir_demek",
+      "text": "A day when you cannot help is not a day when your goodwill has become smaller."
+    },
+    {
+      "id": "v5_hayir_demek_08",
+      "category": "hayir_demek",
+      "text": "Having said yes before does not require the same answer to every later request."
+    },
+    {
+      "id": "v5_hayir_demek_09",
+      "category": "hayir_demek",
+      "text": "You can hear another person's disappointment without being obliged to change your answer."
+    },
+    {
+      "id": "v5_hayir_demek_10",
+      "category": "hayir_demek",
+      "text": "You need not find the perfect explanation before saying no; your limit is a reason too."
+    },
+    {
+      "id": "v5_sinirlar_01",
+      "category": "sinirlar",
+      "text": "Repeating a boundary you already stated is not the same as making unnecessary trouble."
+    },
+    {
+      "id": "v5_sinirlar_02",
+      "category": "sinirlar",
+      "text": "Not replying to messages at every moment does not have to mean withdrawing from a relationship."
+    },
+    {
+      "id": "v5_sinirlar_03",
+      "category": "sinirlar",
+      "text": "For a boundary to work, it may need a place in your actions as well as your words."
+    },
+    {
+      "id": "v5_sinirlar_04",
+      "category": "sinirlar",
+      "text": "Not laughing at an upsetting joke can be one way of showing what you do not accept."
+    },
+    {
+      "id": "v5_sinirlar_05",
+      "category": "sinirlar",
+      "text": "Closeness does not oblige you to share every private space; some things can remain yours."
+    },
+    {
+      "id": "v5_sinirlar_06",
+      "category": "sinirlar",
+      "text": "Asking for a pause in a hurtful conversation does not close it forever."
+    },
+    {
+      "id": "v5_sinirlar_07",
+      "category": "sinirlar",
+      "text": "Explaining a boundary need not win an argument; you can clarify what you are able to do."
+    },
+    {
+      "id": "v5_sinirlar_08",
+      "category": "sinirlar",
+      "text": "Someone need not feel the same need as you in order to respect your boundary."
+    },
+    {
+      "id": "v5_sinirlar_09",
+      "category": "sinirlar",
+      "text": "If a boundary is hard to maintain, check whether it is practical before blaming yourself."
+    },
+    {
+      "id": "v5_sinirlar_10",
+      "category": "sinirlar",
+      "text": "You can protect your space while noticing another's; the two needs do not cancel each other out."
+    },
+    {
+      "id": "v5_onay_01",
+      "category": "onay",
+      "text": "Before explaining a decision, ask whether you want it or mainly want approval for it."
+    },
+    {
+      "id": "v5_onay_02",
+      "category": "onay",
+      "text": "A choice that not everyone understands is not necessarily meaningless to you."
+    },
+    {
+      "id": "v5_onay_03",
+      "category": "onay",
+      "text": "An achievement you have not shared still happened; being seen does not make it real."
+    },
+    {
+      "id": "v5_onay_04",
+      "category": "onay",
+      "text": "Changing direction after every comment can be tiring; pause to revisit your own reasons."
+    },
+    {
+      "id": "v5_onay_05",
+      "category": "onay",
+      "text": "An answer someone dislikes may be your honest response to your own need."
+    },
+    {
+      "id": "v5_onay_06",
+      "category": "onay",
+      "text": "Another person's view can inform your decision without carrying its whole responsibility."
+    },
+    {
+      "id": "v5_onay_07",
+      "category": "onay",
+      "text": "Leave one thing you did today unannounced; notice what it still gives you in that quiet."
+    },
+    {
+      "id": "v5_onay_08",
+      "category": "onay",
+      "text": "Wanting approval is nothing to be ashamed of; it need not direct every choice you make."
+    },
+    {
+      "id": "v5_onay_09",
+      "category": "onay",
+      "text": "While seeking a sentence that pleases everyone, do not lose what you actually want to say."
+    },
+    {
+      "id": "v5_onay_10",
+      "category": "onay",
+      "text": "Getting used to your own decision can take time; you need not keep asking permission meanwhile."
+    },
+    {
+      "id": "v5_kiyas_01",
+      "category": "kiyas",
+      "text": "You see another person's result, not all the conditions that helped them reach it."
+    },
+    {
+      "id": "v5_kiyas_02",
+      "category": "kiyas",
+      "text": "Being the same age does not mean carrying the same burdens or having the same opportunities."
+    },
+    {
+      "id": "v5_kiyas_03",
+      "category": "kiyas",
+      "text": "Before measuring your day by someone else's pace, remember what you are carrying today."
+    },
+    {
+      "id": "v5_kiyas_04",
+      "category": "kiyas",
+      "text": "You may not want every part of a life you admire; separate out the desire that is yours."
+    },
+    {
+      "id": "v5_kiyas_05",
+      "category": "kiyas",
+      "text": "If a post leaves you feeling inadequate, remember that it does not show an entire life."
+    },
+    {
+      "id": "v5_kiyas_06",
+      "category": "kiyas",
+      "text": "Other people's progress does not mean you have been sent back to where you started."
+    },
+    {
+      "id": "v5_kiyas_07",
+      "category": "kiyas",
+      "text": "When first trying a skill, you need not expect the ease of someone with years of practice."
+    },
+    {
+      "id": "v5_kiyas_08",
+      "category": "kiyas",
+      "text": "You do not need to diminish someone else's path in order to value your own."
+    },
+    {
+      "id": "v5_kiyas_09",
+      "category": "kiyas",
+      "text": "The goal that serves you may not be the one that looks most impressive from outside."
+    },
+    {
+      "id": "v5_kiyas_10",
+      "category": "kiyas",
+      "text": "When comparison begins, change the question: not where are they, but what do I need?"
+    },
+    {
+      "id": "v5_elestiri_01",
+      "category": "elestiri",
+      "text": "While listening to criticism, separate its delivery from the information it contains."
+    },
+    {
+      "id": "v5_elestiri_02",
+      "category": "elestiri",
+      "text": "Asking what you could do differently does not mean declaring your whole self wrong."
+    },
+    {
+      "id": "v5_elestiri_03",
+      "category": "elestiri",
+      "text": "Asking for a concrete example of a general judgment is one way of trying to understand."
+    },
+    {
+      "id": "v5_elestiri_04",
+      "category": "elestiri",
+      "text": "You need not respond to every piece of feedback at once; you can take time to think."
+    },
+    {
+      "id": "v5_elestiri_05",
+      "category": "elestiri",
+      "text": "One person's assessment cannot tell the entire story of your work on its own."
+    },
+    {
+      "id": "v5_elestiri_06",
+      "category": "elestiri",
+      "text": "You can take a useful suggestion without accepting a hurtful way of expressing it."
+    },
+    {
+      "id": "v5_elestiri_07",
+      "category": "elestiri",
+      "text": "If criticism hurt, you need not force yourself to find its lesson before the feeling settles."
+    },
+    {
+      "id": "v5_elestiri_08",
+      "category": "elestiri",
+      "text": "Correcting a mistake may not require a long speech defending your character."
+    },
+    {
+      "id": "v5_elestiri_09",
+      "category": "elestiri",
+      "text": "If the requested change is unclear, clarify the expectation instead of guessing."
+    },
+    {
+      "id": "v5_elestiri_10",
+      "category": "elestiri",
+      "text": "After feedback, note not only what needs fixing but also what is good enough to keep."
+    },
+    {
+      "id": "v5_kendini_ifade_01",
+      "category": "kendini_ifade",
+      "text": "Even without explaining a feeling perfectly, you may know enough to start speaking."
+    },
+    {
+      "id": "v5_kendini_ifade_02",
+      "category": "kendini_ifade",
+      "text": "If hinting is tiring, try saying directly what you need."
+    },
+    {
+      "id": "v5_kendini_ifade_03",
+      "category": "kendini_ifade",
+      "text": "Pausing to find a word does not make what you have to say less important."
+    },
+    {
+      "id": "v5_kendini_ifade_04",
+      "category": "kendini_ifade",
+      "text": "When describing an upsetting event, distinguish what happened from how it affected you."
+    },
+    {
+      "id": "v5_kendini_ifade_05",
+      "category": "kendini_ifade",
+      "text": "Before talking, write one sentence: what do I most want the other person to understand?"
+    },
+    {
+      "id": "v5_kendini_ifade_06",
+      "category": "kendini_ifade",
+      "text": "If your view has changed, you can say so; you are not bound to your earlier answer."
+    },
+    {
+      "id": "v5_kendini_ifade_07",
+      "category": "kendini_ifade",
+      "text": "It may be possible to be clear without raising your voice; clarity is not always harshness."
+    },
+    {
+      "id": "v5_kendini_ifade_08",
+      "category": "kendini_ifade",
+      "text": "You do not have to make someone else's need smaller while expressing your own."
+    },
+    {
+      "id": "v5_kendini_ifade_09",
+      "category": "kendini_ifade",
+      "text": "If speaking face to face feels hard, writing first may help you gather your thoughts."
+    },
+    {
+      "id": "v5_kendini_ifade_10",
+      "category": "kendini_ifade",
+      "text": "When misunderstood, try another example rather than forcing the same sentence."
+    },
+    {
+      "id": "v5_kararsizlik_01",
+      "category": "kararsizlik",
+      "text": "Write down what information your decision needs; not every uncertainty needs solving at once."
+    },
+    {
+      "id": "v5_kararsizlik_02",
+      "category": "kararsizlik",
+      "text": "You need not carry a reversible choice as though it determines your entire life."
+    },
+    {
+      "id": "v5_kararsizlik_03",
+      "category": "kararsizlik",
+      "text": "Struggling between two good options does not mean you are facing a bad one."
+    },
+    {
+      "id": "v5_kararsizlik_04",
+      "category": "kararsizlik",
+      "text": "While waiting for a perfect choice, consider whether waiting has a cost of its own."
+    },
+    {
+      "id": "v5_kararsizlik_05",
+      "category": "kararsizlik",
+      "text": "Rather than asking everyone, consult one person with relevant knowledge."
+    },
+    {
+      "id": "v5_kararsizlik_06",
+      "category": "kararsizlik",
+      "text": "Consider not only an option's gains but also what it would ask of your daily life."
+    },
+    {
+      "id": "v5_kararsizlik_07",
+      "category": "kararsizlik",
+      "text": "If the decision is not due today, give yourself a defined period to consider it."
+    },
+    {
+      "id": "v5_kararsizlik_08",
+      "category": "kararsizlik",
+      "text": "Knowing what you do not want can narrow the options before you know exactly what you want."
+    },
+    {
+      "id": "v5_kararsizlik_09",
+      "category": "kararsizlik",
+      "text": "A small trial can help you explore whether an option that looks good on paper fits you."
+    },
+    {
+      "id": "v5_kararsizlik_10",
+      "category": "kararsizlik",
+      "text": "Revising a decision with new information does not mean you were thoughtless when you first made it."
+    },
+    {
+      "id": "v5_kontrol_01",
+      "category": "kontrol",
+      "text": "You can prepare for a conversation; you cannot manage every response in advance."
+    },
+    {
+      "id": "v5_kontrol_02",
+      "category": "kontrol",
+      "text": "Today's effort is within your reach; not every condition affecting the outcome may be."
+    },
+    {
+      "id": "v5_kontrol_03",
+      "category": "kontrol",
+      "text": "Fixing another person's mood is not always a task you can take on."
+    },
+    {
+      "id": "v5_kontrol_04",
+      "category": "kontrol",
+      "text": "You do not blame yourself when the weather changes; remember that with other outside conditions."
+    },
+    {
+      "id": "v5_kontrol_05",
+      "category": "kontrol",
+      "text": "There is a difference between doing what you can and making everything possible."
+    },
+    {
+      "id": "v5_kontrol_06",
+      "category": "kontrol",
+      "text": "While thinking about what you cannot influence, identify one concrete thing you can do."
+    },
+    {
+      "id": "v5_kontrol_07",
+      "category": "kontrol",
+      "text": "Accepting another's decision does not require agreeing with it or liking it."
+    },
+    {
+      "id": "v5_kontrol_08",
+      "category": "kontrol",
+      "text": "While calculating every possibility, do not overlook what you can actually choose today."
+    },
+    {
+      "id": "v5_kontrol_09",
+      "category": "kontrol",
+      "text": "If you did not determine an outcome alone, you need not carry all its responsibility alone."
+    },
+    {
+      "id": "v5_kontrol_10",
+      "category": "kontrol",
+      "text": "Knowing your limits where control is limited is different from simply giving up."
+    },
+    {
+      "id": "v5_fazla_dusunmek_01",
+      "category": "fazla_dusunmek",
+      "text": "When asking the question again, are you finding new information or circling the same answer?"
+    },
+    {
+      "id": "v5_fazla_dusunmek_02",
+      "category": "fazla_dusunmek",
+      "text": "Writing down a recurring sentence may ease the burden of holding it in mind all day."
+    },
+    {
+      "id": "v5_fazla_dusunmek_03",
+      "category": "fazla_dusunmek",
+      "text": "Replaying a conversation cannot tell you with certainty what the other person thought."
+    },
+    {
+      "id": "v5_fazla_dusunmek_04",
+      "category": "fazla_dusunmek",
+      "text": "If thinking leads to no action, make the question smaller and more answerable."
+    },
+    {
+      "id": "v5_fazla_dusunmek_05",
+      "category": "fazla_dusunmek",
+      "text": "Saying you cannot solve this now does not mean it will remain unsolved forever."
+    },
+    {
+      "id": "v5_fazla_dusunmek_06",
+      "category": "fazla_dusunmek",
+      "text": "You do not need to prepare every sentence of a conversation that has not happened yet."
+    },
+    {
+      "id": "v5_fazla_dusunmek_07",
+      "category": "fazla_dusunmek",
+      "text": "A thought returning again does not mean it has become more accurate."
+    },
+    {
+      "id": "v5_fazla_dusunmek_08",
+      "category": "fazla_dusunmek",
+      "text": "Thinking about a possibility repeatedly is not evidence that it will happen."
+    },
+    {
+      "id": "v5_fazla_dusunmek_09",
+      "category": "fazla_dusunmek",
+      "text": "Write down any action needed; distinguish that from simply waiting for an answer."
+    },
+    {
+      "id": "v5_fazla_dusunmek_10",
+      "category": "fazla_dusunmek",
+      "text": "While taking a break from an inner debate, you can return to a small everyday task."
+    },
+    {
+      "id": "v5_ofke_01",
+      "category": "ofke",
+      "text": "You need not send the message you wrote in anger immediately; leave it as a draft."
+    },
+    {
+      "id": "v5_ofke_02",
+      "category": "ofke",
+      "text": "Anger may point to a need; shouting is not the only way to express it."
+    },
+    {
+      "id": "v5_ofke_03",
+      "category": "ofke",
+      "text": "Asking for a pause in a tense conversation is not admitting defeat."
+    },
+    {
+      "id": "v5_ofke_04",
+      "category": "ofke",
+      "text": "The strength of a feeling does not oblige you to choose the first action that comes to mind."
+    },
+    {
+      "id": "v5_ofke_05",
+      "category": "ofke",
+      "text": "Name the event that angered you separately from the assumption you made about it."
+    },
+    {
+      "id": "v5_ofke_06",
+      "category": "ofke",
+      "text": "Your objection may be valid; take time to find words that express it without hurting someone."
+    },
+    {
+      "id": "v5_ofke_07",
+      "category": "ofke",
+      "text": "Sometimes not responding in the moment better protects what you want to say."
+    },
+    {
+      "id": "v5_ofke_08",
+      "category": "ofke",
+      "text": "What still matters after anger settles may be a need worth discussing."
+    },
+    {
+      "id": "v5_ofke_09",
+      "category": "ofke",
+      "text": "If you hurt someone, anger may be part of the explanation; it does not replace repair."
+    },
+    {
+      "id": "v5_ofke_10",
+      "category": "ofke",
+      "text": "Between noticing anger and directing it at someone, there may be a small space for choice."
+    },
+    {
+      "id": "v5_pismanlik_01",
+      "category": "pismanlik",
+      "text": "What you knew then differs from what you know now; remember that when judging a past decision."
+    },
+    {
+      "id": "v5_pismanlik_02",
+      "category": "pismanlik",
+      "text": "After a sentence you cannot take back, there may be an honest sentence you can say today."
+    },
+    {
+      "id": "v5_pismanlik_03",
+      "category": "pismanlik",
+      "text": "Wishing things had gone differently is understandable; later, look for what can be repaired."
+    },
+    {
+      "id": "v5_pismanlik_04",
+      "category": "pismanlik",
+      "text": "Reliving a memory will not change that day's outcome; make room for what you need today."
+    },
+    {
+      "id": "v5_pismanlik_05",
+      "category": "pismanlik",
+      "text": "You cannot know what another choice would have brought; do not assume that path was perfect."
+    },
+    {
+      "id": "v5_pismanlik_06",
+      "category": "pismanlik",
+      "text": "You can learn from regret; carrying the same pain constantly is not a condition of learning."
+    },
+    {
+      "id": "v5_pismanlik_07",
+      "category": "pismanlik",
+      "text": "If an apology is possible, begin simply: say what you did and what you will do differently."
+    },
+    {
+      "id": "v5_pismanlik_08",
+      "category": "pismanlik",
+      "text": "A missed opportunity does not name every opportunity you can notice today."
+    },
+    {
+      "id": "v5_pismanlik_09",
+      "category": "pismanlik",
+      "text": "Regretting a decision does not make all the effort you made at that time worthless."
+    },
+    {
+      "id": "v5_pismanlik_10",
+      "category": "pismanlik",
+      "text": "You cannot change yesterday, but you can answer the question it left you more honestly today."
+    },
+    {
+      "id": "v5_kendini_affet_01",
+      "category": "kendini_affet",
+      "text": "I can acknowledge doing wrong without putting myself on trial again every day."
+    },
+    {
+      "id": "v5_kendini_affet_02",
+      "category": "kendini_affet",
+      "text": "I can take responsibility for a mistake without denying my worth as a person."
+    },
+    {
+      "id": "v5_kendini_affet_03",
+      "category": "kendini_affet",
+      "text": "Treating myself gently does not mean I regard the harm I caused as unimportant."
+    },
+    {
+      "id": "v5_kendini_affet_04",
+      "category": "kendini_affet",
+      "text": "After doing what I can to repair things, I do not have to continue punishing myself."
+    },
+    {
+      "id": "v5_kendini_affet_05",
+      "category": "kendini_affet",
+      "text": "I can give today's attention to a different action instead of counting my old mistake again."
+    },
+    {
+      "id": "v5_kendini_affet_06",
+      "category": "kendini_affet",
+      "text": "Understanding my exhaustion then is not avoiding responsibility; it is seeing the conditions honestly."
+    },
+    {
+      "id": "v5_kendini_affet_07",
+      "category": "kendini_affet",
+      "text": "A sentence I say to myself can hold both honesty and compassion."
+    },
+    {
+      "id": "v5_kendini_affet_08",
+      "category": "kendini_affet",
+      "text": "I need not become perfect to show change; I can change my actions."
+    },
+    {
+      "id": "v5_kendini_affet_09",
+      "category": "kendini_affet",
+      "text": "Even if I am not ready to forgive myself, I can reduce the words I use to hurt myself today."
+    },
+    {
+      "id": "v5_kendini_affet_10",
+      "category": "kendini_affet",
+      "text": "A past action is one truth about me; it is not every truth about me."
+    },
+    {
+      "id": "v5_mukemmeliyet_01",
+      "category": "mukemmeliyet",
+      "text": "One uneven line does not require erasing the whole drawing; look at the rest of your work too."
+    },
+    {
+      "id": "v5_mukemmeliyet_02",
+      "category": "mukemmeliyet",
+      "text": "Deciding what counts as finished before starting can help you leave endless revisions."
+    },
+    {
+      "id": "v5_mukemmeliyet_03",
+      "category": "mukemmeliyet",
+      "text": "On the tenth revision of a sentence, ask whether its meaning improves or merely changes."
+    },
+    {
+      "id": "v5_mukemmeliyet_04",
+      "category": "mukemmeliyet",
+      "text": "A small flaw does not always prevent work from being usable and helpful."
+    },
+    {
+      "id": "v5_mukemmeliyet_05",
+      "category": "mukemmeliyet",
+      "text": "While learning, you need not measure your first attempt against someone else's finished work."
+    },
+    {
+      "id": "v5_mukemmeliyet_06",
+      "category": "mukemmeliyet",
+      "text": "You need not give every detail equal time; choose the one that truly affects the result."
+    },
+    {
+      "id": "v5_mukemmeliyet_07",
+      "category": "mukemmeliyet",
+      "text": "If you wait until work is beyond criticism before sharing, that day may never come."
+    },
+    {
+      "id": "v5_mukemmeliyet_08",
+      "category": "mukemmeliyet",
+      "text": "Leaving something that is good enough takes effort too; effort does not always mean adding more."
+    },
+    {
+      "id": "v5_mukemmeliyet_09",
+      "category": "mukemmeliyet",
+      "text": "An attempt looking unpolished is not evidence that you should not have made it."
+    },
+    {
+      "id": "v5_mukemmeliyet_10",
+      "category": "mukemmeliyet",
+      "text": "Finished work can bring feedback; the perfect work that stays in your head cannot."
+    },
+    {
+      "id": "v5_belirsizlik_01",
+      "category": "belirsizlik",
+      "text": "Something is still unknown; that does not make everything you already know uncertain too."
+    },
+    {
+      "id": "v5_belirsizlik_02",
+      "category": "belirsizlik",
+      "text": "Even if you cannot see next month clearly, you can make a small plan for this evening."
+    },
+    {
+      "id": "v5_belirsizlik_03",
+      "category": "belirsizlik",
+      "text": "Without a definite answer, separate things: what do I know, and what am I guessing?"
+    },
+    {
+      "id": "v5_belirsizlik_04",
+      "category": "belirsizlik",
+      "text": "In an uncertain period, a familiar routine may make the day easier to understand."
+    },
+    {
+      "id": "v5_belirsizlik_05",
+      "category": "belirsizlik",
+      "text": "Preparing for every possibility may be impossible; choose the most necessary preparation."
+    },
+    {
+      "id": "v5_belirsizlik_06",
+      "category": "belirsizlik",
+      "text": "A plan being temporary does not prevent it from being useful today."
+    },
+    {
+      "id": "v5_belirsizlik_07",
+      "category": "belirsizlik",
+      "text": "Saying you do not know the future is an honest description of your information, not a weakness."
+    },
+    {
+      "id": "v5_belirsizlik_08",
+      "category": "belirsizlik",
+      "text": "You can eat breakfast and carry on with small parts of life alongside an unanswered question."
+    },
+    {
+      "id": "v5_belirsizlik_09",
+      "category": "belirsizlik",
+      "text": "A possibility being frightening does not make it more certain than the others."
+    },
+    {
+      "id": "v5_belirsizlik_10",
+      "category": "belirsizlik",
+      "text": "For something still unclear, it may be enough to decide when to seek information again."
+    },
+    {
+      "id": "v5_degisim_01",
+      "category": "degisim",
+      "text": "Before expecting your old pace in new conditions, name what has changed."
+    },
+    {
+      "id": "v5_degisim_02",
+      "category": "degisim",
+      "text": "If settling in takes time, do not treat day one's unfamiliarity as a permanent verdict."
+    },
+    {
+      "id": "v5_degisim_03",
+      "category": "degisim",
+      "text": "If a method that once worked now struggles, you can consider changing it."
+    },
+    {
+      "id": "v5_degisim_04",
+      "category": "degisim",
+      "text": "Adapting to change does not prevent you from missing what you left behind."
+    },
+    {
+      "id": "v5_degisim_05",
+      "category": "degisim",
+      "text": "You need not build a whole new routine at once; settle one part of the day first."
+    },
+    {
+      "id": "v5_degisim_06",
+      "category": "degisim",
+      "text": "Updating expectations when conditions change is not abandoning your previous effort."
+    },
+    {
+      "id": "v5_degisim_07",
+      "category": "degisim",
+      "text": "Even when a familiar role changes, some of the skills you learned in it can stay with you."
+    },
+    {
+      "id": "v5_degisim_08",
+      "category": "degisim",
+      "text": "It is natural to ask for help in a new setting, even if you knew everything in the old one."
+    },
+    {
+      "id": "v5_degisim_09",
+      "category": "degisim",
+      "text": "You need not deny the difficult parts of a change in order to see its good parts."
+    },
+    {
+      "id": "v5_degisim_10",
+      "category": "degisim",
+      "text": "Ask today what you want to keep from your old routine and what you want to rebuild."
+    },
+    {
+      "id": "v5_vedalar_01",
+      "category": "vedalar",
+      "text": "Having a good moment while missing someone does not mean you have forgotten them."
+    },
+    {
+      "id": "v5_vedalar_02",
+      "category": "vedalar",
+      "text": "Sometimes an object brings back an entire period; you need not put it away immediately."
+    },
+    {
+      "id": "v5_vedalar_03",
+      "category": "vedalar",
+      "text": "You do not have to decide in advance how you will feel after a goodbye."
+    },
+    {
+      "id": "v5_vedalar_04",
+      "category": "vedalar",
+      "text": "You need not tell a grand story of missing someone; a small memory may be enough."
+    },
+    {
+      "id": "v5_vedalar_05",
+      "category": "vedalar",
+      "text": "Leaving a period behind does not have to erase its place in your life."
+    },
+    {
+      "id": "v5_vedalar_06",
+      "category": "vedalar",
+      "text": "People may move at different paces after loss; do not force yourself into someone else's timetable."
+    },
+    {
+      "id": "v5_vedalar_07",
+      "category": "vedalar",
+      "text": "You can say you do not want to talk today; you may want to talk tomorrow."
+    },
+    {
+      "id": "v5_vedalar_08",
+      "category": "vedalar",
+      "text": "Reaching for a familiar voice while adjusting to an absence is not weakness."
+    },
+    {
+      "id": "v5_vedalar_09",
+      "category": "vedalar",
+      "text": "Remembering may bring pain or warmth; you do not have to feel only one of them."
+    },
+    {
+      "id": "v5_vedalar_10",
+      "category": "vedalar",
+      "text": "You need not understand the meaning of a goodbye today; you can simply get through the day."
+    },
+    {
+      "id": "v5_tek_basina_01",
+      "category": "tek_basina",
+      "text": "You can fill an hour alone with an activity you enjoy simply for yourself."
+    },
+    {
+      "id": "v5_tek_basina_02",
+      "category": "tek_basina",
+      "text": "You need not wait for a guest to put care into a table set for one."
+    },
+    {
+      "id": "v5_tek_basina_03",
+      "category": "tek_basina",
+      "text": "Walking alone can let you notice your own pace; today there may be nobody to catch up with."
+    },
+    {
+      "id": "v5_tek_basina_04",
+      "category": "tek_basina",
+      "text": "Watching a film alone can be a small experience of enjoyment without needing to share it."
+    },
+    {
+      "id": "v5_tek_basina_05",
+      "category": "tek_basina",
+      "text": "Spending time with yourself is not choosing to withdraw from people entirely."
+    },
+    {
+      "id": "v5_tek_basina_06",
+      "category": "tek_basina",
+      "text": "Before rushing to fill a quiet hour, listen for what you actually want to do."
+    },
+    {
+      "id": "v5_tek_basina_07",
+      "category": "tek_basina",
+      "text": "You can make a drawing nobody will see and enjoy the act of trying it."
+    },
+    {
+      "id": "v5_tek_basina_08",
+      "category": "tek_basina",
+      "text": "A plan you make for yourself is still a plan; being alone does not make it unimportant."
+    },
+    {
+      "id": "v5_tek_basina_09",
+      "category": "tek_basina",
+      "text": "Sitting in a cafe, you need not look busy all the time; you can simply look around."
+    },
+    {
+      "id": "v5_tek_basina_10",
+      "category": "tek_basina",
+      "text": "If being alone does not feel good today, you can call someone; you may change your choice."
+    },
+    {
+      "id": "v5_destek_01",
+      "category": "destek",
+      "text": "You need not tell the whole story to ask for help; you can say what you need now."
+    },
+    {
+      "id": "v5_destek_02",
+      "category": "destek",
+      "text": "Saying you only want someone to listen clarifies how they can be there for you."
+    },
+    {
+      "id": "v5_destek_03",
+      "category": "destek",
+      "text": "Asking to do a task together does not mean you will never be able to do it alone."
+    },
+    {
+      "id": "v5_destek_04",
+      "category": "destek",
+      "text": "You need not wait until everything becomes unbearable before saying you are struggling."
+    },
+    {
+      "id": "v5_destek_05",
+      "category": "destek",
+      "text": "Not receiving support from someone does not mean it was wrong to ask for it."
+    },
+    {
+      "id": "v5_destek_06",
+      "category": "destek",
+      "text": "If you do not know what to ask for, say that too: I am struggling; could we think together?"
+    },
+    {
+      "id": "v5_destek_07",
+      "category": "destek",
+      "text": "You can thank someone for help without feeling obliged to repay it immediately."
+    },
+    {
+      "id": "v5_destek_08",
+      "category": "destek",
+      "text": "A small, specific request may be easier to understand than a vague call for help."
+    },
+    {
+      "id": "v5_destek_09",
+      "category": "destek",
+      "text": "Consulting a professional is one way to accept that you need not find every answer alone."
+    },
+    {
+      "id": "v5_destek_10",
+      "category": "destek",
+      "text": "Sitting quietly beside someone can be support too; solutions do not always need discussing."
+    },
+    {
+      "id": "v5_dinlemek_01",
+      "category": "dinlemek",
+      "text": "If you notice yourself preparing a reply while someone speaks, return to their last sentence."
+    },
+    {
+      "id": "v5_dinlemek_02",
+      "category": "dinlemek",
+      "text": "Asking whether you understood correctly may help more than offering advice immediately."
+    },
+    {
+      "id": "v5_dinlemek_03",
+      "category": "dinlemek",
+      "text": "Before turning someone's story into your own similar one, give them room to finish."
+    },
+    {
+      "id": "v5_dinlemek_04",
+      "category": "dinlemek",
+      "text": "You need not fill a silence immediately; the other person may be searching for words."
+    },
+    {
+      "id": "v5_dinlemek_05",
+      "category": "dinlemek",
+      "text": "Trying to understand a feeling does not mean approving of every action described."
+    },
+    {
+      "id": "v5_dinlemek_06",
+      "category": "dinlemek",
+      "text": "Putting your phone aside while listening is a concrete way to offer your attention."
+    },
+    {
+      "id": "v5_dinlemek_07",
+      "category": "dinlemek",
+      "text": "Someone telling you a problem may not want a solution; first ask how you can help."
+    },
+    {
+      "id": "v5_dinlemek_08",
+      "category": "dinlemek",
+      "text": "Check your assumption about a sentence before treating it as what was actually said."
+    },
+    {
+      "id": "v5_dinlemek_09",
+      "category": "dinlemek",
+      "text": "If tired, offering a later time to listen carefully may be more honest than pretending now."
+    },
+    {
+      "id": "v5_dinlemek_10",
+      "category": "dinlemek",
+      "text": "Asking about a detail you missed can show the care you take to understand."
+    },
+    {
+      "id": "v5_onarim_01",
+      "category": "onarim",
+      "text": "When apologizing, name what you did first; do not let the explanation obscure responsibility."
+    },
+    {
+      "id": "v5_onarim_02",
+      "category": "onarim",
+      "text": "Rather than expecting the hurt person to feel better immediately, take time to hear them."
+    },
+    {
+      "id": "v5_onarim_03",
+      "category": "onarim",
+      "text": "Alongside saying you are sorry, identify how you will handle the situation differently."
+    },
+    {
+      "id": "v5_onarim_04",
+      "category": "onarim",
+      "text": "Repairing harm may ask more than simply easing your own sense of guilt."
+    },
+    {
+      "id": "v5_onarim_05",
+      "category": "onarim",
+      "text": "Even after an apology is accepted, trust may take time; your actions are part of that time."
+    },
+    {
+      "id": "v5_onarim_06",
+      "category": "onarim",
+      "text": "Before asking what you can do, look at the responsibility you can identify for yourself."
+    },
+    {
+      "id": "v5_onarim_07",
+      "category": "onarim",
+      "text": "When clearing up a misunderstanding, remember that good intentions do not erase the impact."
+    },
+    {
+      "id": "v5_onarim_08",
+      "category": "onarim",
+      "text": "If you could not keep a promise, saying so openly rather than staying silent can begin repair."
+    },
+    {
+      "id": "v5_onarim_09",
+      "category": "onarim",
+      "text": "If the other person asks for distance, respecting it can be part of your apology."
+    },
+    {
+      "id": "v5_onarim_10",
+      "category": "onarim",
+      "text": "Truly changing one small behavior is more concrete than promising a great transformation."
+    },
+    {
+      "id": "v5_dinlenme_01",
+      "category": "dinlenme",
+      "text": "If you wait for the entire to-do list to end before resting, your turn may never come."
+    },
+    {
+      "id": "v5_dinlenme_02",
+      "category": "dinlenme",
+      "text": "You can take a break without turning it into another hour for catching up on tasks."
+    },
+    {
+      "id": "v5_dinlenme_03",
+      "category": "dinlenme",
+      "text": "If you are tired, you need not prove that your tiredness exceeds someone else's."
+    },
+    {
+      "id": "v5_dinlenme_04",
+      "category": "dinlenme",
+      "text": "Feeling guilty while resting does not mean you are actually doing something wrong."
+    },
+    {
+      "id": "v5_dinlenme_05",
+      "category": "dinlenme",
+      "text": "Lying down for a while does not cancel out the rest of your day."
+    },
+    {
+      "id": "v5_dinlenme_06",
+      "category": "dinlenme",
+      "text": "You need not make every gap productive; some gaps can simply be room to breathe."
+    },
+    {
+      "id": "v5_dinlenme_07",
+      "category": "dinlenme",
+      "text": "Before postponing rest until tomorrow, notice what your body is asking of you today."
+    },
+    {
+      "id": "v5_dinlenme_08",
+      "category": "dinlenme",
+      "text": "If a task can wait, choose that when you notice fatigue, not only when you are exhausted."
+    },
+    {
+      "id": "v5_dinlenme_09",
+      "category": "dinlenme",
+      "text": "You need not prepare a long explanation justifying your rest in order to take a break."
+    },
+    {
+      "id": "v5_dinlenme_10",
+      "category": "dinlenme",
+      "text": "The moment you rest belongs to your life too; it is not merely a gap between tasks."
+    },
+    {
+      "id": "v5_beden_01",
+      "category": "beden",
+      "text": "When thinking about your body, remember not just how it looks but what it carries each day."
+    },
+    {
+      "id": "v5_beden_02",
+      "category": "beden",
+      "text": "Choosing comfortable clothes is care you can offer yourself regardless of appearance."
+    },
+    {
+      "id": "v5_beden_03",
+      "category": "beden",
+      "text": "Noticing your body's limit today does not mean you must push beyond it."
+    },
+    {
+      "id": "v5_beden_04",
+      "category": "beden",
+      "text": "Try hearing a need such as hunger or fatigue before arguing with yourself about it."
+    },
+    {
+      "id": "v5_beden_05",
+      "category": "beden",
+      "text": "Your reflection is not a measure of how you deserve to be treated."
+    },
+    {
+      "id": "v5_beden_06",
+      "category": "beden",
+      "text": "If a movement does not suit you, another person's ease with it is no reason to force yourself."
+    },
+    {
+      "id": "v5_beden_07",
+      "category": "beden",
+      "text": "Notice a change in your body with curiosity; not every change needs an immediate verdict."
+    },
+    {
+      "id": "v5_beden_08",
+      "category": "beden",
+      "text": "Care is sometimes as ordinary as putting on another layer when you feel cold."
+    },
+    {
+      "id": "v5_beden_09",
+      "category": "beden",
+      "text": "An angle in a photograph is not your body's whole story; do not give it that much authority."
+    },
+    {
+      "id": "v5_beden_10",
+      "category": "beden",
+      "text": "You do not have to like your body every day in order to treat it with respect."
+    },
+    {
+      "id": "v5_is_sinir_01",
+      "category": "is_sinir",
+      "text": "Mark the end of work not only by the clock, but also by closing the screen."
+    },
+    {
+      "id": "v5_is_sinir_02",
+      "category": "is_sinir",
+      "text": "Not every message is urgent; clarifying expected response times may ease the burden."
+    },
+    {
+      "id": "v5_is_sinir_03",
+      "category": "is_sinir",
+      "text": "Noting tomorrow's task and leaving it there may help you stop working through this evening mentally."
+    },
+    {
+      "id": "v5_is_sinir_04",
+      "category": "is_sinir",
+      "text": "When saying yes to work, notice what personal time you are giving up."
+    },
+    {
+      "id": "v5_is_sinir_05",
+      "category": "is_sinir",
+      "text": "When working from home, a small closing routine can separate work from the evening."
+    },
+    {
+      "id": "v5_is_sinir_06",
+      "category": "is_sinir",
+      "text": "Discussing availability during rest does not mean you do not care about your work."
+    },
+    {
+      "id": "v5_is_sinir_07",
+      "category": "is_sinir",
+      "text": "An activity outside work need not advance your career; you can simply enjoy it."
+    },
+    {
+      "id": "v5_is_sinir_08",
+      "category": "is_sinir",
+      "text": "Your calendar can hold time for yourself as well as meetings."
+    },
+    {
+      "id": "v5_is_sinir_09",
+      "category": "is_sinir",
+      "text": "Before naming an entire day after one mistake at work, remember the rest of your life too."
+    },
+    {
+      "id": "v5_is_sinir_10",
+      "category": "is_sinir",
+      "text": "If your workload is consistently beyond what you can carry, do not treat it only as a planning problem."
+    },
+    {
+      "id": "v5_yaraticilik_01",
+      "category": "yaraticilik",
+      "text": "An idea may look odd at first; develop it a little before rushing to explain it."
+    },
+    {
+      "id": "v5_yaraticilik_02",
+      "category": "yaraticilik",
+      "text": "An experiment you will not show anyone can give you more freedom to work with an idea."
+    },
+    {
+      "id": "v5_yaraticilik_03",
+      "category": "yaraticilik",
+      "text": "While waiting for inspiration, pick up a material; ideas sometimes take shape through working."
+    },
+    {
+      "id": "v5_yaraticilik_04",
+      "category": "yaraticilik",
+      "text": "The part of an experiment that fails can show what to change next time."
+    },
+    {
+      "id": "v5_yaraticilik_05",
+      "category": "yaraticilik",
+      "text": "When looking at work you admire, ask which detail draws you in."
+    },
+    {
+      "id": "v5_yaraticilik_06",
+      "category": "yaraticilik",
+      "text": "You need not turn a creative activity into a product immediately; it can remain exploration."
+    },
+    {
+      "id": "v5_yaraticilik_07",
+      "category": "yaraticilik",
+      "text": "Change one small detail of your method; curiosity need not require a great risk."
+    },
+    {
+      "id": "v5_yaraticilik_08",
+      "category": "yaraticilik",
+      "text": "When sharing an idea, ask what it brings to mind rather than defending it."
+    },
+    {
+      "id": "v5_yaraticilik_09",
+      "category": "yaraticilik",
+      "text": "Leaving work and returning later may help you see details you had grown used to."
+    },
+    {
+      "id": "v5_yaraticilik_10",
+      "category": "yaraticilik",
+      "text": "If today's result differs from what you expected, examine what is there before erasing it."
+    },
+    {
+      "id": "v5_anlam_01",
+      "category": "anlam",
+      "text": "Think of a small moment that satisfied you today; it may point to something you value."
+    },
+    {
+      "id": "v5_anlam_02",
+      "category": "anlam",
+      "text": "You need not find a grand purpose; how you treat someone today is a place to start."
+    },
+    {
+      "id": "v5_anlam_03",
+      "category": "anlam",
+      "text": "How close are the things you make time for to the things you value?"
+    },
+    {
+      "id": "v5_anlam_04",
+      "category": "anlam",
+      "text": "Knowing why you do something does not require everyone else to find it valuable."
+    },
+    {
+      "id": "v5_anlam_05",
+      "category": "anlam",
+      "text": "Something that once felt meaningful can change; you can allow yourself to seek a new answer."
+    },
+    {
+      "id": "v5_anlam_06",
+      "category": "anlam",
+      "text": "A small act of care toward someone is a real part of your day, even when it cannot be measured."
+    },
+    {
+      "id": "v5_anlam_07",
+      "category": "anlam",
+      "text": "Alongside what you want to add to your life, consider what you no longer want to make room for."
+    },
+    {
+      "id": "v5_anlam_08",
+      "category": "anlam",
+      "text": "Judge whether a choice fits you separately from how it looks from outside."
+    },
+    {
+      "id": "v5_anlam_09",
+      "category": "anlam",
+      "text": "Care in a small task can be a moment when your values move beyond thought."
+    },
+    {
+      "id": "v5_anlam_10",
+      "category": "anlam",
+      "text": "You can give time to something that matters today without first finding an answer for your whole life."
     }
   ]
 }
