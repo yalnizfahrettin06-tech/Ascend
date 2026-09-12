@@ -49,7 +49,7 @@ jobs:
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.5.0-test-APK
+          name: Ascend-9.6.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -58,8 +58,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.5.0.apk
-          gh release create v9.5.0-ui Ascend-9.5.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.5.0 — Five distinct onboarding experiences" --notes "New architectural welcome, interactive quote practice, animated rhythm dial, day timeline and a dedicated notification preview. Adaptive content and action placement."
+          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.6.0.apk
+          gh release create v9.6.0-ui Ascend-9.6.0.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.6.0 — Inter typography and silver onboarding" --notes "New architectural welcome, interactive quote practice, animated rhythm dial, day timeline and a dedicated notification preview. Adaptive content and action placement."
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
@@ -70,7 +70,9 @@ jobs:
           retention-days: 7
 
   ui-tests:
-    if: github.event_name == 'pull_request' || inputs.run_ui == true
+    needs: build
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -102,3 +104,12 @@ jobs:
             app/build/outputs/androidTest-results/
             screenshots/
           retention-days: 7
+      - name: Publish visual evidence
+        if: always() && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -d screenshots ]; then
+            zip -r Ascend-9.6.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
+            gh release upload v9.6.0-ui Ascend-9.6.0-visual-evidence.zip --clobber
+          fi

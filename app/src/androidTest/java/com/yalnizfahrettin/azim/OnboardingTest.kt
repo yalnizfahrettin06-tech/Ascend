@@ -120,4 +120,35 @@ class OnboardingTest {
         compose.onNodeWithText("5 / 5").assertIsDisplayed()
         compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
     }
+
+    @Test fun captureFiveTurkishPagesAndExpandedNotification() {
+        compose.setContent { AzimTema { Onboarding("tr") { _, _, _, _, _ -> } } }
+        repeat(5) { page ->
+            compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+            compose.waitForIdle()
+            ekranKaydet("v96-onboarding-${page + 1}")
+            if (page < 4) next()
+        }
+        compose.onNodeWithTag("live-reminder-preview").performScrollTo().performClick()
+        compose.waitForIdle()
+        ekranKaydet("v96-notification-expanded")
+    }
+
+    @Test fun allLargeTextPagesRemainScrollableAndDarkModeReadable() {
+        var page by mutableIntStateOf(0)
+        compose.setContent {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(density.density, 2f)) {
+                key(page) { AzimTema(modu = TemaModu.KARANLIK) {
+                    Onboarding("tr", initialDraft = PersonalProfile(step = page)) { _, _, _, _, _ -> }
+                } }
+            }
+        }
+        repeat(5) { current ->
+            compose.runOnIdle { page = current }
+            compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+            compose.waitForIdle()
+            ekranKaydet("v96-large-dark-${current + 1}")
+        }
+    }
 }

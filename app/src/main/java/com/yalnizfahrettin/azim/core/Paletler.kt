@@ -36,9 +36,9 @@ internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenk
         Palet.MONO -> Color(0xFFF2F2F2)
         else -> Color(0xFFE2E2E0)
     } else when (secim) {
-        Palet.BORDO -> Color(0xFF343432)
+        Palet.BORDO -> Color(0xFF25272B)
         Palet.MONO -> Color(0xFF242424)
-        else -> Color(0xFF343432)
+        else -> Color(0xFF25272B)
     }
     return if (karanlik) AzimRenkleri(
         zemin = if (oled) Color.Black else Color(0xFF141414),
@@ -57,17 +57,17 @@ internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenk
         markaSessizYuzeyi = if (secim == Palet.MONO) Color(0xFF242424) else Color(0xFF282827),
         markaBasiliYuzeyi = if (secim == Palet.MONO) Color(0xFF3C3C3A) else Color(0xFF444440),
     ) else AzimRenkleri(
-        zemin = Color(0xFFF5F3EE), yuzey = Color(0xFFE9EBEC), yuzeyYuksek = Color(0xFFDDE0E2),
-        kenarlik = Color(0xFFC5C9CC), kenarlikGuclu = Color(0xFF827F79),
-        metin = Color(0xFF191919), metinIkincil = Color(0xFF55534F), metinSonuk = Color(0xFF55534F),
-        accent = accent, accentSonuk = Color(0xFF827F79),
+        zemin = Color(0xFFE9EAEC), yuzey = Color(0xFFF7F7F8), yuzeyYuksek = Color(0xFFD9DBDE),
+        kenarlik = Color(0xFFC3C6CB), kenarlikGuclu = Color(0xFF747880),
+        metin = Color(0xFF18191B), metinIkincil = Color(0xFF575B61), metinSonuk = Color(0xFF575B61),
+        accent = accent, accentSonuk = Color(0xFF747880),
         accentZemin = when (secim) {
             Palet.BORDO -> Color(0xFFEEEDE9)
             Palet.MONO -> Color(0xFFEEEDE9)
             else -> Color(0xFFEEEDE9)
         },
         accentDerin = Color(0xFFE2E1DC), karanlikMi = false,
-        koleksiyonYuzeyi = Color(0xFFE6E8E9),
+        koleksiyonYuzeyi = Color(0xFFDFE1E4),
         markaYuzeyi = if (secim == Palet.MONO) Color(0xFFEEEDE9) else Color(0xFFE9E8E3),
         markaSessizYuzeyi = if (secim == Palet.MONO) Color(0xFFF3F2EE) else Color(0xFFF3F0ED),
         markaBasiliYuzeyi = if (secim == Palet.MONO) Color(0xFFDDDDD8) else Color(0xFFDDDDD8),

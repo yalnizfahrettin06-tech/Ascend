@@ -139,14 +139,14 @@ fun Onboarding(
                             Button(onClick = {
                                 if (step < 4) move(step + 1)
                                 else if (bildirimIzni) finish(true) else izinIste()
-                            }, enabled = !kaydediliyor, shape = RoundedCornerShape(22.dp),
+                            }, enabled = !kaydediliyor, shape = RoundedCornerShape(16.dp),
                                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("onboarding-next")) {
                                 Text(if (kaydediliyor) cevir(dil, "Kaydediliyor…", "Saving…") else when (step) {
                                     0 -> cevir(dil, "Bir sözle başla", "Begin with a quote")
                                     1 -> cevir(dil, "Ritmimi ayarla", "Set my rhythm")
                                     4 -> if (bildirimIzni) cevir(dil, if (editing) "Planımı güncelle" else "Ascend’e başla", if (editing) "Update my plan" else "Start Ascend") else cevir(dil, "Bildirimlere izin ver", "Allow notifications")
                                     else -> cevir(dil, "Devam", "Continue")
-                                }, textAlign = TextAlign.Center, fontSize = 16.sp, fontWeight = FontWeight.Medium)
+                                }, textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Medium)
                             }
                         }
                     }
@@ -189,8 +189,8 @@ private fun PlanWelcome(dil: String, stageHeight: Dp) {
 @Composable
 private fun PlanTitle(title: String, description: String) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(title, Modifier.semantics { heading() }, color = Renk.metin, fontFamily = LoraSerif,
-            fontSize = 29.sp, lineHeight = 36.sp, fontWeight = FontWeight.Normal)
+        Text(title, Modifier.semantics { heading() }, color = Renk.metin, fontFamily = ArayuzFont,
+            fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold)
         Text(description, color = Renk.metinIkincil, fontSize = 14.sp, lineHeight = 21.sp)
     }
 }
@@ -239,7 +239,7 @@ private fun PlanFrequency(profile: PersonalProfile, dil: String, stageHeight: Dp
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(2.dp)) {
             AnimatedContent(profile.dailyCount, label = "count-change") { count ->
-                Text("$count", color = Renk.metin, fontFamily = LoraSerif, fontSize = 68.sp, lineHeight = 78.sp,
+                Text("$count", color = Renk.metin, fontFamily = ArayuzFont, fontWeight = FontWeight.Medium, fontSize = 68.sp, lineHeight = 78.sp,
                     modifier = Modifier.testTag("reminder-count").semantics { liveRegion = LiveRegionMode.Polite })
             }
             Text(cevir(dil, "bildirim / gün", "reminders / day"), color = Renk.metinIkincil, fontSize = 13.sp)
@@ -440,7 +440,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
 
 @Composable
 private fun PlanHourDialog(profile: PersonalProfile, start: Boolean, dil: String, close: () -> Unit, select: (Int) -> Unit) {
-    AlertDialog(onDismissRequest = close, title = { Text(if (start) cevir(dil, "Başlangıç saatini seç", "Choose start hour") else cevir(dil, "Bitiş saatini seç", "Choose end hour"), fontFamily = LoraSerif) },
+    AlertDialog(onDismissRequest = close, title = { Text(if (start) cevir(dil, "Başlangıç saatini seç", "Choose start hour") else cevir(dil, "Bitiş saatini seç", "Choose end hour"), fontFamily = ArayuzFont) },
         text = { Column(Modifier.heightIn(max = 320.dp).verticalScroll(rememberScrollState()).selectableGroup(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             val hours = if (start) (0 until profile.endHour).toList() else (profile.startHour + 1..24).toList()
             hours.forEach { hour -> PlanChoice(planHour(hour) + if (hour == 24) cevir(dil, " · Gece yarısı", " · Midnight") else "",
@@ -451,7 +451,7 @@ private fun PlanHourDialog(profile: PersonalProfile, start: Boolean, dil: String
 @Composable
 private fun PlanPermissionHelp(dil: String, close: () -> Unit) {
     val ctx = LocalContext.current
-    AlertDialog(onDismissRequest = close, title = { Text(cevir(dil, "Bildirim yardımcısı", "Notification help"), fontFamily = LoraSerif) },
+    AlertDialog(onDismissRequest = close, title = { Text(cevir(dil, "Bildirim yardımcısı", "Notification help"), fontFamily = ArayuzFont) },
         text = { Column(Modifier.heightIn(max = 380.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
             Text(cevir(dil, "Tam söz için bildirimi aşağı doğru genişlet. Kilit ekranı ve açılır pencere görünümü cihazının ayarlarına bağlıdır.", "Expand a notification to read the full quote. Lock screen and pop-up appearance depend on your device settings."))
             Text(cevir(dil, "Samsung'da: Ayarlar → Bildirimler → Ascend → Bildirim açılır pencere stili → Ayrıntılı. Önceki One UI sürümlerinde stil genel Bildirimler menüsündedir.", "On Samsung: Settings → Notifications → Ascend → Notification pop-up style → Detailed. Earlier One UI versions keep the style in the general Notifications menu."))

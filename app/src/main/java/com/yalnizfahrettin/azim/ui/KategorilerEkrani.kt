@@ -115,7 +115,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             }
             Column {
                 Text("A S C E N D", fontSize = 9.sp, letterSpacing = 2.sp, color = Renk.metinIkincil)
-                Text(cevir(dil, "Keşfet", "Explore"), fontFamily = LoraSerif, fontSize = 34.sp, lineHeight = 42.sp,
+                Text(cevir(dil, "Keşfet", "Explore"), fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, fontSize = 32.sp, lineHeight = 38.sp,
                     color = Renk.metin, modifier = Modifier.semantics { heading() })
                 Text(cevir(dil, "Sana iyi gelecek düşünceyi bul.", "Find a thought for this moment."), fontSize = 13.sp, lineHeight = 20.sp, color = Renk.metin)
             }
@@ -126,14 +126,14 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         interactionSource = searchInteraction,
                         modifier = Modifier.fillMaxWidth().border(
                             if (searchFocused) 1.5.dp else 1.dp,
-                            Color.Transparent, RoundedCornerShape(0.dp))
+                            if (searchFocused) Renk.kenarlikGuclu else Color.Transparent, RoundedCornerShape(14.dp))
                             .testTag("category-search").semantics {
                             contentDescription = cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers")
                         }, singleLine = true, shape = RoundedCornerShape(14.dp),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                         keyboardActions = KeyboardActions(onSearch = { odak.clearFocus() }),
-                        colors = TextFieldDefaults.colors(focusedContainerColor = Color.Transparent, unfocusedContainerColor = Color.Transparent,
-                            focusedIndicatorColor = Renk.accent, unfocusedIndicatorColor = Renk.kenarlikGuclu),
+                        colors = TextFieldDefaults.colors(focusedContainerColor = Renk.yuzey, unfocusedContainerColor = Renk.yuzey,
+                            focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent),
                         leadingIcon = { Icon(AzimIkon.Ara, null, Modifier.size(20.dp)) },
                         trailingIcon = { if (arama.isNotEmpty()) IconButton(onClick = { arama = "" }, modifier = Modifier.testTag("category-clear-search")) {
                             Icon(AzimIkon.Kapat, cevir(dil, "Aramayı temizle", "Clear search"))
@@ -162,7 +162,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         }
                     }
                     Row(Modifier.fillMaxWidth().heightIn(min = 48.dp)
-                        .clip(RoundedCornerShape(6.dp)).background(Renk.yuzey.copy(alpha = .5f)).border(.6.dp, Renk.kenarlik, RoundedCornerShape(6.dp))
+                        .clip(RoundedCornerShape(6.dp)).background(Renk.yuzey).border(.6.dp, Renk.kenarlik, RoundedCornerShape(6.dp))
                         .clickable(role = Role.Button) { chooseView(if (secili.isEmpty()) "all" else "selected") }
                         .testTag("category-selection-summary").padding(horizontal = 12.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -196,7 +196,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                                 Text(cevir(dil, "Koleksiyonlara dön", "Back to collections"), fontSize = 12.sp)
                             }
                             Text(Kategoriler.grupBul(grupKey.orEmpty())?.ad(dil).orEmpty(),
-                                fontFamily = LoraSerif, fontSize = 24.sp, lineHeight = 32.sp, color = Renk.metin,
+                                fontFamily = ArayuzFont, fontSize = 24.sp, lineHeight = 32.sp, color = Renk.metin,
                                 modifier = Modifier.padding(bottom = 12.dp).semantics { heading() })
                         }
                         if (filtre != "all" || (grupKey != null && query.isBlank())) {
@@ -211,7 +211,23 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 }
             }
             if (collections) {
-                items(Kategoriler.gruplar.chunked(columns), key = { "collection-row-" + it.first().anahtar }) { groups ->
+                item(key = "collection-feature") {
+                    val first = Kategoriler.gruplar.first()
+                    Surface(onClick = { grupKey = first.anahtar; gorunum = "all" },
+                        color = Color(0xFF25272B), shape = RoundedCornerShape(18.dp),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp).testTag("collection-feature")) {
+                        Box(Modifier.heightIn(min = 154.dp)) {
+                            KlasikGorsel(KlasikMotif.ARCH, Modifier.matchParentSize(), opacity = .24f)
+                            Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                                Text(cevir(dil, "KÜÇÜK BİR BAŞLANGIÇ", "A SMALL BEGINNING"), color = Color(0xFFD9DBDE), fontSize = 10.sp, letterSpacing = 1.sp)
+                                Text(first.ad(dil), color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 23.sp, lineHeight = 29.sp)
+                                Text(cevir(dil, "Kendine daha nazik bir dil", "A kinder voice for yourself"), color = Color(0xFFDFE1E4), fontSize = 13.sp)
+                                Icon(AzimIkon.Ileri, cevir(dil, "Koleksiyonu aç", "Open collection"), Modifier.size(20.dp), tint = Color.White)
+                            }
+                        }
+                    }
+                }
+                items(Kategoriler.gruplar.drop(1).chunked(columns), key = { "collection-row-" + it.first().anahtar }) { groups ->
                     Row(Modifier.fillMaxWidth().padding(bottom = 12.dp).height(IntrinsicSize.Min),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         groups.forEach { group ->
@@ -234,7 +250,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                             .padding(vertical = 14.dp), verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                                Text(kat.ad(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = 18.sp, lineHeight = 25.sp)
+                                Text(kat.ad(dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 18.sp, lineHeight = 25.sp)
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                     if (secildi && acildi) Icon(AzimIkon.Tik, null, Modifier.size(13.dp), tint = Renk.accent)
                                     Text(if (secildi && acildi) cevir(dil, "Bildirimlerinde", "In your reminders")
@@ -251,7 +267,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 if (kategoriler.isEmpty()) item {
                     Column(Modifier.fillMaxWidth().padding(vertical = 28.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(cevir(dil, "Bu seçimde bir konu yok.", "No topics match this selection."),
-                            color = Renk.metin, fontFamily = LoraSerif, fontSize = 21.sp, lineHeight = 29.sp)
+                            color = Renk.metin, fontFamily = ArayuzFont, fontSize = 21.sp, lineHeight = 29.sp)
                         if (query.isNotBlank()) TextButton(onClick = { arama = "" }) { Text(cevir(dil, "Aramayı temizle", "Clear search")) }
                         if (filtre != "all" || grupKey != null) TextButton(onClick = { filtre = "all"; grupKey = null }) {
                             Text(cevir(dil, "Filtreleri temizle", "Clear filters"))
@@ -266,7 +282,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = Renk.zemin) {
         LazyColumn(Modifier.fillMaxWidth().testTag("category-filters"),
             contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 24.dp)) {
-            item { Text(cevir(dil, "Filtrele", "Filter"), fontFamily = LoraSerif, fontSize = 26.sp,
+            item { Text(cevir(dil, "Filtrele", "Filter"), fontFamily = ArayuzFont, fontSize = 26.sp,
                 color = Renk.metin, modifier = Modifier.padding(bottom = 12.dp).semantics { heading() }) }
             items(listOf("all", "open")) { value ->
                 Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("category-filter-" + value + "-access")
@@ -307,7 +323,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
                     Column(Modifier.weight(1f).padding(top = 8.dp, end = 8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text(Kategoriler.grupBul(kat.grup)?.ad(dil).orEmpty(), color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp)
-                        Text(kat.ad(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = 27.sp, lineHeight = 35.sp,
+                        Text(kat.ad(dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 27.sp, lineHeight = 35.sp,
                             modifier = Modifier.semantics { heading() })
                         Text(koleksiyonOzeti(kat.grup, dil), color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 20.sp)
                     }
@@ -341,11 +357,9 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         "This topic is locked. Preview the quotes first; once unlocked, you can choose to add it to your reminders."),
                         color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 20.sp,
                         modifier = Modifier.padding(top = 16.dp, bottom = 12.dp))
-                    Button(onClick = { detayKey = null; kilidiAc(kat) }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                        shape = RoundedCornerShape(50)) { Text(cevir(dil, "Bu kategoriyi aç · Demo", "Unlock this topic · Demo")) }
-                    TextButton(onClick = { detayKey = null; proAc() }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
-                        Text(cevir(dil, "Pro ile tümüne eriş", "Get all topics with Pro"))
-                    }
+                    Button(onClick = { detayKey = null; proAc() }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                        shape = RoundedCornerShape(50)) { Text(cevir(dil, "Pro ile eriş · Demo", "Access with Pro · Demo")) }
+
                 }
                 if (kat.grup in setOf("filozoflar", "tasavvuf", "inanc")) {
                     Text(cevir(dil, "Bu gelenekten ilham alan özgün Ascend düşünceleri; doğrudan alıntı veya kutsal metin değildir.",
@@ -381,13 +395,13 @@ private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int
             // Opening a collection never toggles its reminder topics.
             role = Role.Button
         },
-        color = Renk.koleksiyonYuzeyi.copy(alpha = .65f), shape = RoundedCornerShape(8.dp),
+        color = Renk.koleksiyonYuzeyi, shape = RoundedCornerShape(18.dp),
         border = BorderStroke(if (focused) 2.dp else 1.dp, if (focused) Renk.accent else Renk.kenarlik)) {
         Box {
         KoleksiyonRolefi(group.anahtar, Modifier.matchParentSize())
-        Column(Modifier.padding(14.dp).heightIn(min = 170.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(Modifier.padding(16.dp).heightIn(min = 180.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Icon(koleksiyonIkonu(group.anahtar), null, Modifier.size(20.dp), tint = Renk.accent)
-            Text(group.ad(dil), fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 26.sp,
+            Text(group.ad(dil), fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, fontSize = 18.sp, lineHeight = 24.sp,
                 color = Renk.metin)
             Text(koleksiyonOzeti(group.anahtar, dil), color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 19.sp)
             Spacer(Modifier.weight(1f).heightIn(min = 4.dp))

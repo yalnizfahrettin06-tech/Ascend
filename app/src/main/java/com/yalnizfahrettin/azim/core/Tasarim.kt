@@ -17,6 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -79,24 +80,30 @@ val LoraSerif = FontFamily(
 )
 
 
+@OptIn(androidx.compose.ui.text.ExperimentalTextApi::class)
+val ArayuzFont = FontFamily(
+    Font(R.font.inter, FontWeight.Normal, variationSettings = FontVariation.Settings(FontVariation.weight(400))),
+    Font(R.font.inter, FontWeight.Medium, variationSettings = FontVariation.Settings(FontVariation.weight(500))),
+    Font(R.font.inter, FontWeight.SemiBold, variationSettings = FontVariation.Settings(FontVariation.weight(600))),
+    Font(R.font.inter, FontWeight.Bold, variationSettings = FontVariation.Settings(FontVariation.weight(700))),
+)
+
+private fun uiType(size: Int, height: Int, weight: FontWeight = FontWeight.Normal) =
+    TextStyle(fontFamily = ArayuzFont, fontWeight = weight, fontSize = size.sp, lineHeight = height.sp)
+
 val AzimTipografi = Typography(
-    headlineLarge = TextStyle(fontFamily = LoraSerif, fontWeight = FontWeight.Normal, fontSize = 30.sp, lineHeight = 39.sp),
-    displaySmall = TextStyle(
-        fontFamily = LoraSerif, fontWeight = FontWeight.Normal,
-        fontSize = 27.sp, lineHeight = 36.sp,
-    ),
-    headlineSmall = TextStyle(
-        fontFamily = LoraSerif, fontWeight = FontWeight.Normal,
-        fontSize = 22.sp, lineHeight = 32.sp,
-    ),
-    titleMedium = TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 16.sp, lineHeight = 22.sp),
-    bodyLarge = TextStyle(fontSize = 16.sp, lineHeight = 24.sp),
-    bodyMedium = TextStyle(fontSize = 14.sp, lineHeight = 20.sp),
-    labelLarge = TextStyle(fontWeight = FontWeight.Medium, fontSize = 13.sp, lineHeight = 18.sp),
-    labelSmall = TextStyle(
-        fontWeight = FontWeight.Medium, fontSize = 12.sp,
-        lineHeight = 14.sp, letterSpacing = 1.2.sp,
-    ),
+    displayLarge = uiType(40, 48, FontWeight.SemiBold),
+    displayMedium = uiType(36, 44, FontWeight.SemiBold),
+    displaySmall = uiType(32, 38, FontWeight.SemiBold),
+    headlineLarge = uiType(32, 38, FontWeight.SemiBold),
+    headlineMedium = uiType(28, 34, FontWeight.SemiBold),
+    headlineSmall = uiType(24, 30, FontWeight.SemiBold),
+    titleLarge = uiType(20, 28, FontWeight.SemiBold),
+    titleMedium = uiType(16, 22, FontWeight.Medium),
+    titleSmall = uiType(14, 20, FontWeight.Medium),
+    bodyLarge = uiType(16, 24), bodyMedium = uiType(15, 23), bodySmall = uiType(12, 18),
+    labelLarge = uiType(15, 20, FontWeight.Medium),
+    labelMedium = uiType(13, 18, FontWeight.Medium), labelSmall = uiType(12, 16),
 )
 
 val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.MERMER, karanlik = false, oled = false) }
