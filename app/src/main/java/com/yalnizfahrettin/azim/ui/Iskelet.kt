@@ -23,14 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.*
 
-enum class Sekme(val rota: String) { ANA("ana"), KATEGORI("kategori"), FAVORI("favori"), ISTATISTIK("istatistik") }
+enum class Sekme(val rota: String) { ANA("ana"), KATEGORI("kategori"), GORUNUM("gorunum"), FAVORI("favori"), ISTATISTIK("istatistik") }
 
 @Composable
 fun AltNav(secili: Sekme, secildi: (Sekme) -> Unit) {
     val dil = LocalConfiguration.current.locales[0].language
-    val sekmeler = listOf(Sekme.ANA, Sekme.KATEGORI, Sekme.ISTATISTIK)
-    val etiketler = listOf(cevir(dil, "Bugün", "Today"), cevir(dil, "Keşfet", "Explore"), cevir(dil, "Senin", "You"))
-    val ikonlar = listOf(AzimIkon.YukselenMarka, AzimIkon.Kesfet, AzimIkon.Kisi)
+    val sekmeler = listOf(Sekme.ANA, Sekme.KATEGORI, Sekme.GORUNUM, Sekme.ISTATISTIK)
+    val etiketler = listOf(cevir(dil, "Bugün", "Today"), cevir(dil, "Keşfet", "Explore"), cevir(dil, "Görünüm", "Appearance"), cevir(dil, "Senin", "You"))
+    val ikonlar = listOf(AzimIkon.YukselenMarka, AzimIkon.Kesfet, AzimIkon.Izgara, AzimIkon.Kisi)
     Column(Modifier.fillMaxWidth().background(Renk.zemin).navigationBarsPadding()) {
         Box(Modifier.fillMaxWidth().height(1.dp).background(Renk.kenarlik.copy(alpha = .3f)))
         Row(Modifier.fillMaxWidth().selectableGroup().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {

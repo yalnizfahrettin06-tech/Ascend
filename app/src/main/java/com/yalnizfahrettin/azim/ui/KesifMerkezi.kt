@@ -9,6 +9,8 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.activity.compose.BackHandler
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -20,34 +22,42 @@ import com.yalnizfahrettin.azim.data.*
 import com.yalnizfahrettin.azim.widget.WidgetAyarActivity
 
 @Composable
-fun KesifMerkezi(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit,
-    selectedRequest: Int, topics: @Composable () -> Unit) {
-    var custom by rememberSaveable { mutableStateOf(false) }
+fun KesifMerkezi(dil: String, topics: @Composable () -> Unit) {
+    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
+        Text(cevir(dil,"Keşfet","Explore"), Modifier.padding(horizontal = 24.dp, vertical = 14.dp), color = Renk.metin, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
+        Box(Modifier.weight(1f)) { topics() }
+    }
+}
+
+@Composable
+fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit) {
+    var widgetTab by rememberSaveable { mutableStateOf(false) }
     var preview by rememberSaveable { mutableStateOf<String?>(null) }
     val ctx = LocalContext.current
-    LaunchedEffect(selectedRequest) { if (selectedRequest > 0) custom = false }
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
-        BackHandler(custom) { custom = false }
-        Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically) {
-            if(custom) IconButton(onClick = { custom = false }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
-            Text(cevir(dil, if(custom) "Görünüm" else "Keşfet", if(custom) "Appearance" else "Explore"), Modifier.weight(1f), color = Renk.metin, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
-            if(!custom) IconButton(onClick = { custom = true }, modifier = Modifier.testTag("explore-customize")) { Icon(AzimIkon.Izgara, cevir(dil,"Tema ve widget","Themes and widgets"), tint = Renk.metin) }
-        }
-        Box(Modifier.weight(1f)) {
-            if (!custom) topics() else Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp).padding(bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                Surface(onClick = { ctx.startActivity(Intent(ctx, WidgetAyarActivity::class.java)) }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp),
-                    modifier = Modifier.fillMaxWidth().testTag("widget-editor-open")) {
-                    Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text(cevir(dil,"Telefonuna widget ekle","Add a phone widget"), Modifier.weight(1f), color = Renk.metin, fontSize = 14.sp)
-                        ProRozeti(); Spacer(Modifier.width(10.dp)); Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
-                    }
+        Text(cevir(dil,"Görünüm","Appearance"), Modifier.padding(horizontal = 24.dp, vertical = 14.dp), color = Renk.metin, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
+        Row(Modifier.padding(horizontal = 24.dp).fillMaxWidth().background(Renk.yuzey, RoundedCornerShape(16.dp)).padding(4.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            listOf(false, true).forEach { widget ->
+                Surface(onClick = { widgetTab = widget }, color = if(widgetTab == widget) Renk.metin else Renk.yuzey, shape = RoundedCornerShape(12.dp), modifier = Modifier.weight(1f).testTag(if(widget) "appearance-widget" else "appearance-theme")) {
+                    Text(if(widget) "Widget" else cevir(dil,"Uygulama teması","App theme"), Modifier.padding(vertical = 13.dp, horizontal = 6.dp), color = if(widgetTab == widget) Renk.zemin else Renk.metinIkincil, fontSize = 13.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                 }
-                Text(cevir(dil,"Temanı seç","Choose your theme"), color = Renk.metinIkincil, fontSize = 13.sp)
+            }
+        }
+        Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+            if(!widgetTab) {
+                Text(cevir(dil,"Günün, senin renklerinle.","Your day, in your colors."), fontSize = 16.sp, color = Renk.metinIkincil)
                 TemaGrid(dil, AnaTemalar.all, AnaTemalar.allowed(selected, pro).id, pro) { preview = it.id }
+            } else {
+                ProRozeti(metin = "WIDGET · PRO")
+                Text(cevir(dil,"İyi bir söz, telefonunda.","A good thought, on your phone."), fontSize = 27.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold, color = Renk.metin)
+                val theme = AnaTemalar.allowed(selected, pro)
+                val sample = cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward.")
+                val bmp = remember(theme, dil) { com.yalnizfahrettin.azim.widget.WidgetTasarimi.render(ctx, com.yalnizfahrettin.azim.widget.WidgetSecimi(theme.id), sample, "Ascend", 720, 360) }
+                androidx.compose.foundation.Image(bmp.asImageBitmap(), sample, Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(22.dp)))
+                Text(cevir(dil,"Arka planını seç, telefonuna ekle. Söz her gün yenilenir; yazıyı biz yerleştiririz.","Choose a background and add it to your phone. The quote changes daily; we handle the layout."), color = Renk.metinIkincil, fontSize = 15.sp, lineHeight = 23.sp)
+                Button(onClick = { ctx.startActivity(Intent(ctx, WidgetAyarActivity::class.java)) }, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("widget-editor-open"), shape = RoundedCornerShape(16.dp)) { Text(cevir(dil,"Widget oluştur","Create widget")) }
             }
         }
     }
-    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro,
-        close = { preview = null }, apply = { select(id); preview = null }, proOpen = proOpen) }
+    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null }, apply = { select(id); preview = null }, proOpen = proOpen) }
 }

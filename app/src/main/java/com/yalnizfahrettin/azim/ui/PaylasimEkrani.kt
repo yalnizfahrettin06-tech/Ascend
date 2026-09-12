@@ -206,32 +206,16 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                             Modifier.fillMaxSize().testTag("share-preview"), contentScale = ContentScale.Fit)
                         else if (hata == null) CircularProgressIndicator(Modifier.size(24.dp), color = Renk.metin, strokeWidth = 2.dp)
                         else Text(cevir(dil, "Başka bir arka plan seç", "Choose another background"), Modifier.padding(16.dp), color = Renk.metin)
-                        val themeKey = zeminler.firstOrNull { it.zemin == gorunenAyar.zemin }?.anahtar
-                        if (themeKey != null) IconButton(onClick = {
-                            temaFavorileri = if (themeKey in temaFavorileri) temaFavorileri - themeKey else temaFavorileri + themeKey
-                            tercih.edit().putStringSet("themes", temaFavorileri).apply()
-                        }, modifier = Modifier.align(Alignment.TopEnd).padding(4.dp).background(Renk.zemin.copy(alpha = .82f), CircleShape)
-                            .semantics { selected = themeKey in temaFavorileri }) {
-                            Icon(if (themeKey in temaFavorileri) AzimIkon.AyracDolu else AzimIkon.Ayrac,
-                                cevir(dil, "Arka planı favorilere ekle veya çıkar", "Toggle favorite background"), Modifier.size(20.dp), tint = if (themeKey in temaFavorileri) Renk.accent else Renk.metin)
-                        }
                     }
                     FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(cevir(dil, "Çıktı", "Export"), color = Renk.metinIkincil, fontSize = 12.sp)
                         FilterChip(selected = !gorunenVideo, onClick = { video = false }, enabled = !hazirlaniyor,
                             label = { Text(cevir(dil, "Görsel", "Image")) }, modifier = Modifier.testTag("share-image"))
                         FilterChip(selected = gorunenVideo, onClick = { if(!pro) proAc() else video = true }, enabled = !hazirlaniyor,
-                            label = { Text("Video") }, modifier = Modifier.testTag("share-video"))
+                            label = { Text(if(pro) "Video" else "Video · PRO") }, modifier = Modifier.testTag("share-video"))
                     }
-                    FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        TextButton(onClick = { kutuphane = true }, enabled = !hazirlaniyor) {
-                            Text(cevir(dil, "Hazır arka planlar", "Background library"))
-                        }
-                        TextButton(onClick = {
-                            if(!pro) proAc() else fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                        }, enabled = !hazirlaniyor, modifier = Modifier.testTag("share-background-photo")) {
-                            Text(cevir(dil, "Kendi fotoğrafım", "My photo"))
-                        }
+                    Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Text(cevir(dil,"Arka plan","Background"), Modifier.weight(1f), color = Renk.metin, fontSize = 14.sp)
+                        TextButton(onClick = { kutuphane = true }, enabled = !hazirlaniyor) { Text(cevir(dil,"Tümünü gör","See all")) }
                     }
                     val curated = remember(zeminler, temaFavorileri) {
                         (zeminler.take(3) + zeminler.filter { it.anahtar in temaFavorileri } + zeminler.filter { it.grup == AtmosferGrubu.EFSANE }.take(5)).distinctBy { it.anahtar }
@@ -242,11 +226,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                                 if (PaylasimErisimi.zeminProMu(z.zemin) && !pro) proAc() else ayar = gorunenAyar.copy(zemin = z.zemin)
                             }
                         }
-                        item { TextButton(onClick = { kutuphane = true }, modifier = Modifier.height(96.dp)) { Text(cevir(dil, "Tümünü\ngör", "See all")) } }
-                    }
-                    Row(Modifier.fillMaxWidth().padding(horizontal = 18.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text(cevir(dil, "3 temel arka plan ücretsiz", "3 core backgrounds free"), fontSize = 10.sp, color = Renk.metinIkincil, modifier = Modifier.weight(1f))
-                        TextButton(onClick = proAc, enabled = !hazirlaniyor) { Text(if (pro) "Pro demo ✓" else "Pro demo", fontSize = 10.sp, color = Renk.accent) }
                     }
                 }
                 HorizontalDivider(color = Renk.kenarlik)
@@ -269,53 +248,23 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                 }
             }
         }
-        if (kutuphane) ModalBottomSheet(onDismissRequest = { kutuphane = false }, containerColor = Renk.zemin) {
-            Column(Modifier.fillMaxWidth().navigationBarsPadding().verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(cevir(dil, "Arka planlar", "Backgrounds"), fontFamily = LoraSerif, fontSize = 26.sp, color = Renk.metin)
-                LazyRow(Modifier.fillMaxWidth().testTag("share-background-filters"), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    items(PaylasimZeminFiltresi.entries, key = { it.name }) { f ->
-                        FilterChip(
-                            selected = etkinZeminFiltresi == f, onClick = { zeminFiltresi = f.name }, enabled = !hazirlaniyor,
-                            label = { Text(f.ad(dil)) }, shape = RoundedCornerShape(50),
-                            modifier = Modifier.heightIn(min = 48.dp).testTag("share-filter-${f.name.lowercase()}"),
-                        )
+        if (kutuphane) ModalBottomSheet(onDismissRequest = { kutuphane = false }, sheetState = sheet, containerColor = Renk.zemin) {
+            Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp).padding(bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text(cevir(dil,"Arka plan seç","Choose a background"), Modifier.weight(1f), fontSize = 20.sp, color = Renk.metin)
+                    TextButton(onClick = { if(!pro) proAc() else { kutuphane = false; fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) } }, modifier = Modifier.testTag("share-background-photo")) { Text(cevir(dil,"Fotoğrafım","My photo")) }
+                }
+                OutlinedTextField(value = gorselArama, onValueChange = { gorselArama = it }, singleLine = true,
+                    placeholder = { Text(cevir(dil,"Arka plan ara","Search backgrounds")) }, leadingIcon = { Icon(AzimIkon.Ara,null) }, modifier = Modifier.fillMaxWidth().testTag("share-library-search"), shape = RoundedCornerShape(14.dp))
+                val found = zeminler.filter { gorselArama.isBlank() || it.ad.contains(gorselArama, ignoreCase = true) }
+                if(found.isEmpty()) Text(cevir(dil,"Sonuç bulunamadı.","No results."),color = Renk.metinIkincil)
+                LazyVerticalGrid(columns = GridCells.Adaptive(if(buyukYazi) 112.dp else 84.dp), modifier = Modifier.fillMaxWidth().height(340.dp).testTag("share-artwork-grid"), verticalArrangement = Arrangement.spacedBy(14.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    items(found, key = { it.anahtar }) { z ->
+                        Box(contentAlignment = Alignment.TopCenter) { PaylasimZeminSecenegi(z, gorunenAyar.zemin == z.zemin, dil, hazirlaniyor) {
+                            if(PaylasimErisimi.zeminProMu(z.zemin) && !pro) proAc() else { ayar = gorunenAyar.copy(zemin = z.zemin); kutuphane = false }
+                        } }
                     }
                 }
-                if (etkinZeminFiltresi == PaylasimZeminFiltresi.KOLEKSIYON) {
-                    OutlinedTextField(value = gorselArama, onValueChange = { gorselArama = it }, singleLine = true,
-                        enabled = !hazirlaniyor,
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                        keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
-                        placeholder = { Text(cevir(dil, "Görsel ara", "Search artwork")) },
-                        leadingIcon = { Icon(AzimIkon.Ara, null, Modifier.size(20.dp)) },
-                        trailingIcon = { if (gorselArama.isNotEmpty()) IconButton(onClick = { gorselArama = "" }, enabled = !hazirlaniyor) {
-                            Icon(AzimIkon.Kapat, cevir(dil, "Aramayı temizle", "Clear search"), Modifier.size(20.dp))
-                        } },
-                        modifier = Modifier.fillMaxWidth().testTag("share-library-search"), shape = RoundedCornerShape(50))
-                    Text(cevir(dil, "${gorunenZeminler.size} görsel", "${gorunenZeminler.size} artworks"),
-                        color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall, modifier = Modifier.fillMaxWidth().testTag("share-library-count"))
-                    if (gorunenZeminler.isEmpty()) Text(cevir(dil, "Bu aramada görsel yok.", "No artwork matches your search."), color = Renk.metinIkincil)
-                    else LazyVerticalGrid(columns = GridCells.Adaptive(if (buyukYazi) 122.dp else 84.dp), modifier = Modifier.fillMaxWidth().height(310.dp).testTag("share-artwork-grid"),
-                        verticalArrangement = Arrangement.spacedBy(14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        items(gorunenZeminler, key = { it.anahtar }) { z ->
-                            Box(contentAlignment = Alignment.TopCenter) {
-                                PaylasimZeminSecenegi(z, gorunenAyar.zemin == z.zemin, dil, hazirlaniyor) {
-                                    if (!pro) proAc() else ayar = gorunenAyar.copy(zemin = z.zemin)
-                                }
-                            }
-                        }
-                    }
-                } else key(zeminFiltresi) {
-                    LazyRow(Modifier.fillMaxWidth().testTag("share-background-options"), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        items(gorunenZeminler, key = { it.anahtar }) { z ->
-                            PaylasimZeminSecenegi(z, gorunenAyar.zemin == z.zemin, dil, hazirlaniyor) {
-                                if (PaylasimErisimi.zeminProMu(z.zemin) && !pro) proAc()
-                                else ayar = gorunenAyar.copy(zemin = z.zemin)
-                            }
-                        }
-                    }
-                }
-
             }
         }
     }

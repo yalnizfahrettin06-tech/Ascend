@@ -103,6 +103,17 @@ fun AnaEkran(
                     Spacer(Modifier.width(5.dp)); Icon(AzimIkon.Disari, null, Modifier.size(20.dp), tint = Renk.accent)
                 }
             }
+            Surface(onClick = konulariDuzenle, color = Renk.yuzey.copy(alpha = .85f), shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 4.dp).testTag("home-reminder-topics")) {
+                Row(Modifier.padding(horizontal = 12.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Icon(AzimIkon.Bildirim, null, Modifier.size(17.dp), tint = Renk.metinIkincil)
+                    Column(Modifier.weight(1f)) {
+                        Text(cevir(dil,"Bildirim konuların","Your reminder topics"), fontSize = 10.sp, color = Renk.metinIkincil)
+                        val labels = Kategoriler.tumAltlar.filter { it.anahtar in seciliKonular }.map { it.ad(dil) }
+                        Text(labels.take(2).joinToString(" · ") + if(labels.size > 2) " +${labels.size - 2}" else if(labels.isEmpty()) cevir(dil,"Konu seç","Choose topics") else "", fontSize = 12.sp, color = Renk.metin, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+                    }
+                    Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
+                }
+            }
             Column(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 24.dp)) {
             if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {

@@ -278,7 +278,7 @@ fun Uygulama(
                         gunlukHedef = gunlukAdet,
                         sonrakiBildirim = sonrakiBildirim,
                         hatirlaticiAcik = hatirlaticiAcik, bildirimIzni = bildirimIzni,
-                        seciliKonular = secili, haptikAcik = haptik, konulariDuzenle = { acilacakGrup = null; sekme = Sekme.KATEGORI },
+                        seciliKonular = secili, haptikAcik = haptik, konulariDuzenle = { acilacakGrup = null; selectedRequest++; sekme = Sekme.KATEGORI },
                         oneri = oneri,
                         bugunPlanlanan = gunlukAdet,
                         dil = dil,
@@ -308,8 +308,9 @@ fun Uygulama(
                         ayarlaraGit = { ayarlardaMi = true },
                     )
 
-                    Sekme.KATEGORI -> KesifMerkezi(dil, arkaPlan, proDemo == true, { proGoster = true },
-                        { id -> kapsam.launch { depo.arkaPlanAyarla(id) } }, selectedRequest) {
+                    Sekme.GORUNUM -> GorunumEkrani(dil, arkaPlan, proDemo == true, { proGoster = true },
+                        { id -> kapsam.launch { depo.arkaPlanAyarla(id) } })
+                    Sekme.KATEGORI -> KesifMerkezi(dil) {
                         KategorilerEkrani(
                         secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },
                         sec = { kapsam.launch { depo.kategoriSec(it); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },

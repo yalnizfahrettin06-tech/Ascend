@@ -53,6 +53,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     oku: (Soz) -> Unit = {}, selectedRequest: Int = 0, insets: Boolean = true,
 ) {
 
+    var emptyTopic by rememberSaveable { mutableStateOf<String?>(null) }
     var group by rememberSaveable { mutableStateOf(acilacakGrup) }
     var reminders by rememberSaveable { mutableStateOf(false) }
     var query by rememberSaveable { mutableStateOf("") }
@@ -84,7 +85,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
         }
         LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            if(showGroups) items(Kategoriler.gruplar, key = { it.anahtar }) { g ->
+            if(showGroups) { items(Kategoriler.gruplar, key = { it.anahtar }) { g ->
                 Surface(onClick = { group = g.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(16.dp),
                     modifier = Modifier.fillMaxWidth().testTag(if(g == Kategoriler.gruplar.first()) "collection-feature" else "collection-${g.anahtar}")) {
                     Row(Modifier.padding(16.dp).heightIn(min = 44.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -96,13 +97,24 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
                     }
                 }
+            }
+                item { Text(cevir(dil,"Yakında","Coming soon"), Modifier.padding(top = 16.dp, bottom = 4.dp), color = Renk.metinIkincil, fontSize = 12.sp) }
+                items(listOf("Sabah niyeti" to "Morning intention", "Dijital mola" to "Digital break", "Yaratıcı cesaret" to "Creative courage")) { names ->
+                    val name = cevir(dil,names.first,names.second)
+                    Surface(onClick = { emptyTopic = name }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth()) {
+                        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Text(name, Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 15.sp)
+                            Text(cevir(dil,"0 söz · Yakında","0 quotes · Soon"), color = Renk.metinIkincil, fontSize = 11.sp)
+                        }
+                    }
+                }
             } else {
                 if(results.isEmpty()) item { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp)) }
                 items(results, key = { it.anahtar }) { topic ->
-                    Surface(onClick = { focus.clearFocus(); detayKey = topic.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("category-${topic.anahtar}")) {
+                    Surface(onClick = { focus.clearFocus(); if(topic.anahtar !in acik) proAc() else detayKey = topic.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("category-${topic.anahtar}")) {
                         Row(Modifier.padding(16.dp).heightIn(min = 42.dp), verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                                Text(topic.ad(dil), color = Renk.metin, fontSize = 15.sp, lineHeight = 21.sp)
+                                Text(topic.ad(dil), color = if(topic.anahtar !in acik) Renk.metinIkincil else Renk.metin, fontSize = 15.sp, lineHeight = 21.sp, textDecoration = if(topic.anahtar !in acik) androidx.compose.ui.text.style.TextDecoration.LineThrough else null)
                                 if(topic.anahtar in secili) Text(cevir(dil,"✓ Bildirimlerinde","✓ In your reminders"), color = Renk.metinIkincil, fontSize = 11.sp)
                             }
                             if(topic.anahtar !in acik) ProRozeti()
@@ -113,6 +125,8 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             }
         }
     }
+
+    emptyTopic?.let { name -> AlertDialog(onDismissRequest = { emptyTopic = null }, title = { Text(name) }, text = { Text(cevir(dil,"Bu kategori hazırlanıyor. Henüz söz eklenmedi.","This category is being prepared. No quotes have been added yet.")) }, confirmButton = { TextButton(onClick = { emptyTopic = null }) { Text(cevir(dil,"Tamam","OK")) } }) }
 
     val kat = Kategoriler.bul(detayKey ?: "")
     if (kat != null) ModalBottomSheet(onDismissRequest = { detayKey = null }, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = Renk.zemin) {

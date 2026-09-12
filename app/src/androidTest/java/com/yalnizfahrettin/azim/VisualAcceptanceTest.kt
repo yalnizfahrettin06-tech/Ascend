@@ -64,7 +64,7 @@ class VisualAcceptanceTest {
         compose.onNodeWithTag("category-search").performImeAction()
         compose.waitForIdle()
         ekranKaydet("v97-search")
-        compose.onNodeWithTag("explore-customize").performClick()
+        compose.onNodeWithTag("nav-gorunum").performClick()
         compose.onNodeWithTag("theme-black").performScrollTo().performClick()
         compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
         compose.waitForIdle()
