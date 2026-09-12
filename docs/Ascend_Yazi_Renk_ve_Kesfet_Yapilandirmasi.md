@@ -1,6 +1,6 @@
 # Ascend — Yazı, renk ve Keşfet yeniden yapılandırması
 
-Tarih: 12 Eylül 2026. İncelenen Android kaynak: 9.5.0 / 71af841. Bu teslim, uygulanabilir tasarım kararı ve etkileşimli görünüm örneğidir; Android uygulamasına uygulanmış yeni sürüm değildir.
+Tarih: 12 Eylül 2026. İlk analiz 9.5.0 / 71af841 üzerinden yapıldı. Bu belge tasarım kararlarının başlangıç kaydıdır. Uygulanan değişiklikler ve Android doğrulaması için [9.6.3 teslim kaydına](Ascend_9_6_Tasarim_ve_Dogrulama.md) bakın; aşağıdaki fikirlerin tamamı uygulanmış özellik olarak okunmamalıdır.
 
 ## 1. Net karar
 
