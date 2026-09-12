@@ -81,7 +81,7 @@ open class AzimWidget : GlanceAppWidget() {
             val source = if(pro) state[YAZAR] ?: "Ascend" else if(dil == "tr") "Önizlemek için dokun" else "Tap to preview"
             val bitmap = androidx.compose.runtime.remember(config, quote, source, size, pro) {
                 WidgetTasarimi.render(context, if(pro) config else WidgetSecimi(), quote, source,
-                    (size.width.value * 2).toInt(), (size.height.value * 2).toInt())
+                    (size.width.value * context.resources.displayMetrics.density).toInt(), (size.height.value * context.resources.displayMetrics.density).toInt())
             }
             val intent = if(pro) android.content.Intent(context, com.yalnizfahrettin.azim.MainActivity::class.java)
                 .putExtra(com.yalnizfahrettin.azim.notif.Bildirimler.EXTRA_KIMLIK, state[KIMLIK])

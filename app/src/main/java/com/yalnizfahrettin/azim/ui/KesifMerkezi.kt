@@ -64,7 +64,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
                 val previewState = remember(theme,dil) { mutableStateOf<android.graphics.Bitmap?>(null) }
                 val bmp by previewState
                 LaunchedEffect(theme,dil) {
-                    previewState.value = withContext(Dispatchers.Default) { com.yalnizfahrettin.azim.widget.WidgetTasarimi.render(ctx, com.yalnizfahrettin.azim.widget.WidgetSecimi(theme.id), sample, "Ascend", 720, 360) }
+                    previewState.value = withContext(Dispatchers.Default) { com.yalnizfahrettin.azim.widget.WidgetTasarimi.render(ctx, com.yalnizfahrettin.azim.widget.WidgetSecimi(theme.id), sample, "Ascend", 1080, 540) }
                 }
                 Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(22.dp)).background(Renk.yuzey)) {
                     bmp?.let { androidx.compose.foundation.Image(it.asImageBitmap(), sample, Modifier.fillMaxSize()) }

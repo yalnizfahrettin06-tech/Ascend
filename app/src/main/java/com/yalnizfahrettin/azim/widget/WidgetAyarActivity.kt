@@ -52,7 +52,7 @@ class WidgetAyarActivity : ComponentActivity() {
             val previewState = remember(config,dil,square) { mutableStateOf<android.graphics.Bitmap?>(null) }
             val bitmap by previewState
             LaunchedEffect(config,dil,square) {
-                previewState.value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 720, if(square) 720 else 360) }
+                previewState.value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 1080, if(square) 1080 else 540) }
             }
             AzimTema(modu = mode) {
                 Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {

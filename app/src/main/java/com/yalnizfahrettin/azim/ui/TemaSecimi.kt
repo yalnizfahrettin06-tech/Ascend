@@ -27,7 +27,7 @@ import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 
 private object ThemeImages {
-    private val cache = object : android.util.LruCache<String, android.graphics.Bitmap>(16 * 1024 * 1024) {
+    private val cache = object : android.util.LruCache<String, android.graphics.Bitmap>(32 * 1024 * 1024) {
         override fun sizeOf(key: String, value: android.graphics.Bitmap) = value.allocationByteCount
     }
     private val permits = Semaphore(2)
@@ -52,14 +52,14 @@ fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f
     Box(modifier.background(base)) {
         theme.art?.let { art ->
             val context = LocalContext.current
-            val size = if(thumbnail) 320 else 1200
+            val size = if(thumbnail) 640 else 1920
             val imageState = remember(art,size) { mutableStateOf<android.graphics.Bitmap?>(null) }
             val bitmap by imageState
             LaunchedEffect(art,size) { imageState.value = ThemeImages.load(context,art,size) }
             bitmap?.let { Image(it.asImageBitmap(), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
-                colorFilter = if(theme.id == "rider") null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })) }
+                colorFilter = null) }
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
-                base.copy(alpha = if (theme.dark) .65f else if(theme.id == "roma") veil else maxOf(veil, .78f)), base.copy(alpha = if (theme.dark) .2f else if(theme.id == "roma") .05f else .50f)))))
+                base.copy(alpha = if (theme.dark) .32f else veil), base.copy(alpha = if (theme.dark) .08f else .05f)))))
         }
     }
 }

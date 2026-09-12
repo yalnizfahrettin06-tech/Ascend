@@ -265,7 +265,7 @@ fun Uygulama(
                                 depo.hideQuote(quote.kimlik, false); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx)
                             }
                         } },
-                        kullaniciAdi = profil?.name.orEmpty(), planAc = { planGoster = true },
+                        pro = proDemo == true, proAc = { proGoster = true }, kullaniciAdi = profil?.name.orEmpty(), planAc = { planGoster = true },
                         ihtiyac = ihtiyac, ihtiyacSec = { ihtiyac = it },
                         secilenAtmosfer = arkaPlan, atmosferSec = { ad -> kapsam.launch { depo.arkaPlanAyarla(ad) } },
                         sozler = akis,

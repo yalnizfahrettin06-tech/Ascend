@@ -23,23 +23,26 @@ object WidgetTasarimi {
 
     /** The editor and Glance use this same renderer, including crop and typography. */
     fun render(ctx: Context, config: WidgetSecimi, text: String, source: String, width: Int, height: Int): Bitmap {
-        val w = width.coerceIn(180, 1000); val h = height.coerceIn(100, 1000)
+        val w = width.coerceIn(180, 1440); val h = height.coerceIn(100, 1440)
         val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap); val theme = AnaTemalar.find(config.theme)
         val dark = theme.dark; val bg = if(dark) Color.rgb(23,23,25) else Color.rgb(245,245,244)
         canvas.drawColor(bg)
         theme.art?.let { res ->
-            val opts = BitmapFactory.Options().apply { inSampleSize = 2; inScaled = false }
+            val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true; inScaled = false }
+            BitmapFactory.decodeResource(ctx.resources,res,bounds)
+            var sample = 1
+            while(bounds.outWidth / (sample * 2) >= w && bounds.outHeight / (sample * 2) >= h) sample *= 2
+            val opts = BitmapFactory.Options().apply { inSampleSize = sample; inScaled = false }
             val art = BitmapFactory.decodeResource(ctx.resources, res, opts)
             if (art != null) {
                 val scale = maxOf(w.toFloat()/art.width, h.toFloat()/art.height)
                 val dw = art.width*scale; val dh = art.height*scale
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG).apply {
-                    colorFilter = if(theme.id == "rider") null else ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
+                    colorFilter = null
                 }
                 canvas.drawBitmap(art, null, RectF((w-dw)/2, (h-dh)/2, (w+dw)/2, (h+dh)/2), paint)
-                paint.colorFilter = null; paint.color = bg; paint.alpha = if(dark) 150 else 170
-                canvas.drawRect(0f,0f,w.toFloat(),h.toFloat(),paint); art.recycle()
+                art.recycle()
             }
         }
         val unit = w / 360f
@@ -51,6 +54,15 @@ object WidgetTasarimi {
             .setAlignment(Layout.Alignment.ALIGN_CENTER)
             .setLineSpacing(0f,1.2f).setIncludePad(false).setMaxLines(maxLines).setEllipsize(TextUtils.TruncateAt.END).build()
         val y = ((h-layout.height-24*unit)/2f).coerceAtLeast(pad)
+        if(theme.art != null) {
+            // Contrast only behind the quote, preserving the photograph elsewhere.
+            val shade = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                shader = LinearGradient(0f,y-18*unit,0f,y+layout.height+32*unit,
+                    intArrayOf(Color.TRANSPARENT, if(dark) 0x85000000.toInt() else 0xBFFFFFFF.toInt(), if(dark) 0x85000000.toInt() else 0xBFFFFFFF.toInt(), Color.TRANSPARENT),
+                    floatArrayOf(0f,.2f,.8f,1f), Shader.TileMode.CLAMP)
+            }
+            canvas.drawRect(0f,y-18*unit,w.toFloat(),y+layout.height+32*unit,shade)
+        }
         canvas.save(); canvas.translate(pad,y); layout.draw(canvas); canvas.restore()
         paint.textSize = 11*unit; paint.alpha = 180
         val label = TextUtils.ellipsize(source,paint,contentWidth.toFloat(),TextUtils.TruncateAt.END).toString()

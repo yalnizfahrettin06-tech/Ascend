@@ -17,9 +17,9 @@ object AnaTemalar {
 
         AnaTema("castle", "Kale", "Castle", true, true, R.drawable.scene_kale),
 
-        AnaTema("sea", "Deniz", "Sea", false, true, R.drawable.scene_sea),
-        AnaTema("summit", "Zirve", "Summit", false, true, R.drawable.scene_summit),
-        AnaTema("wisdom", "Bilgelik", "Wisdom", false, true, R.drawable.scene_wisdom),
+        AnaTema("sea", "Deniz", "Sea", true, true, R.drawable.scene_sea),
+        AnaTema("summit", "Zirve", "Summit", true, true, R.drawable.scene_summit),
+        AnaTema("wisdom", "Bilgelik", "Wisdom", true, true, R.drawable.scene_wisdom),
         AnaTema("hall", "Taş Salon", "Stone Hall", true, true, R.drawable.scene_tas_salon),
         AnaTema("graphite", "Grafit", "Graphite", true, true, R.drawable.scene_grafit_doku))
     val all = curated + com.yalnizfahrettin.azim.ui.Atmosfer.entries.filter { scene -> curated.none { it.art == scene.res } }.map {

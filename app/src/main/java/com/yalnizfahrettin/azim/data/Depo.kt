@@ -196,7 +196,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     val baslangicSaati: Flow<Int> = store.data.map { it[K.BASLANGIC] ?: 10 }
     val bitisSaati: Flow<Int> = store.data.map { it[K.BITIS] ?: 23 }
     val tema: Flow<TemaModu> = erisimVerisi.map {
-        runCatching { TemaModu.valueOf(it[K.TEMA] ?: "AYDINLIK") }.getOrDefault(TemaModu.AYDINLIK)
+        it[K.ARKA_PLAN]?.let { id -> if(AnaTemalar.find(id).dark) TemaModu.KARANLIK else TemaModu.AYDINLIK }
+            ?: runCatching { TemaModu.valueOf(it[K.TEMA] ?: "AYDINLIK") }.getOrDefault(TemaModu.AYDINLIK)
     }
     val dinamikRenk: Flow<Boolean> = store.data.map { it[K.DINAMIK] ?: false }
     val haptikAcik: Flow<Boolean> = store.data.map { it[K.HAPTIK] ?: true }

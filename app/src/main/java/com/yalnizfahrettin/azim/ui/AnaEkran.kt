@@ -54,7 +54,7 @@ fun AnaEkran(
     secilenAtmosfer: String? = null, atmosferSec: (String?) -> Unit = {},
     seciliKonular: Set<String> = emptySet(), konulariDuzenle: () -> Unit = {}, haptikAcik: Boolean = true,
     gizle: (Soz) -> Unit = {},
-    kullaniciAdi: String = "", planAc: () -> Unit = {}, ihtiyac: String? = null, ihtiyacSec: (String?) -> Unit = {},
+    pro: Boolean = false, proAc: () -> Unit = {}, kullaniciAdi: String = "", planAc: () -> Unit = {}, ihtiyac: String? = null, ihtiyacSec: (String?) -> Unit = {},
 ) {
     // A feed replacement must replace its count, keys and page content together.
     // Updating the count of an existing pager while a lazy layout still holds the
@@ -98,8 +98,8 @@ fun AnaEkran(
                 Spacer(Modifier.width(10.dp))
                 Text("ascend", fontSize = 30.sp, fontWeight = FontWeight.SemiBold, fontFamily = ArayuzFont, color = Renk.metin,
                     letterSpacing = (-1).sp, modifier = Modifier.weight(1f))
-                TextButton(onClick = planAc, modifier = Modifier.heightIn(min = 48.dp).testTag("home-plan")) {
-                    Text(cevir(dil, "Planım", "My plan"), color = Renk.metin, fontSize = 14.sp)
+                TextButton(onClick = proAc, modifier = Modifier.heightIn(min = 48.dp).testTag("home-pro")) {
+                    Text(if(pro) "Pro" else cevir(dil, "Pro’yu keşfet", "Explore Pro"), color = Renk.metin, fontSize = 14.sp)
                     Spacer(Modifier.width(5.dp)); Icon(AzimIkon.Disari, null, Modifier.size(20.dp), tint = Renk.accent)
                 }
             }
