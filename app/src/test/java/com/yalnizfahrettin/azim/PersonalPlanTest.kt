@@ -49,11 +49,11 @@ class PersonalPlanTest {
     @Test fun contentStyleAndExcludedTopicsAreHardFiltersEvenWhenManuallySelected() {
         val profile = PersonalProfile().choose("format", "affirmation").choose("discovery", "wide")
         val feed = PersonalPlan.feed(profile, Erisim.tumKategoriler, Erisim.tumKategoriler)
-        assertEquals(30, feed.size)
+        assertEquals(40, feed.size)
         assertTrue(feed.all { Kategoriler.bul(it.kategori)?.grup == "olumlamalar" })
         val filtered = PersonalProfile().choose("avoid", "relationships").choose("avoid", "body", true)
-        assertFalse(PersonalPlan.effectiveCategories(filtered, setOf("ask", "ayrilik", "beslenme"), Erisim.tumKategoriler)
-            .any { it in setOf("ask", "ayrilik", "beslenme") })
+        assertFalse(PersonalPlan.effectiveCategories(filtered, setOf("ask", "ayrilik", "beslenme", "beden", "dinlenme"), Erisim.tumKategoriler)
+            .any { it in setOf("ask", "ayrilik", "beslenme", "beden", "dinlenme") })
     }
     @Test fun spiritualContentRequiresAnExplicitPreference() {
         fun groups(profile: PersonalProfile) = PersonalPlan.recommendedCategories(profile).map { Kategoriler.bul(it)?.grup }.toSet()

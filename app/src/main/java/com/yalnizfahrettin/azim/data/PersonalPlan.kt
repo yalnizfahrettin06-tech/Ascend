@@ -112,9 +112,9 @@ object PersonalPlan {
             option("wide", "Keşfetmeyi seviyorum", "I enjoy discovering new things"))),
         PlanQuestion("avoid", "Şimdilik görmek istemediğin var mı?", "Anything you would rather skip?", "Seçtiklerin akışından ve bildirimlerinden çıkarılır.", "Selected topics stay out of your feed and reminders.", listOf(
             option("relationships", "Aşk ve ayrılık", "Love and breakup", "ask ayrilik"),
-            option("work", "İş, başarı ve para", "Work, success and money", "kariyer para basari basarisizlik girisimcilik liderlik"),
-            option("body", "Beden ve beslenme", "Body and nutrition", "beslenme sakatlik antrenman dayaniklilik"),
-            option("hardship", "Zorluk ve tükenmişlik", "Hardship and burnout", "tukenmislik yorgunluk_sabir zorluk_sabir")), true),
+            option("work", "İş, başarı ve para", "Work, success and money", "kariyer para basari basarisizlik girisimcilik liderlik is_sinir"),
+            option("body", "Beden ve beslenme", "Body and nutrition", "beslenme sakatlik antrenman dayaniklilik beden dinlenme"),
+            option("hardship", "Zorluk ve tükenmişlik", "Hardship and burnout", "tukenmislik yorgunluk_sabir zorluk_sabir dustukten_sonra")), true),
         PlanQuestion("spirituality", "Manevi düşüncelere yer verelim mi?", "Would you like spiritual reflections?", "İnanç ve tasavvuf içerikleri ancak sen istersen karışıma girer.", "Faith and spiritual topics enter your mix only if you choose.", listOf(
             option("no", "Daha genel bir dil tercih ederim", "I prefer a general perspective"),
             option("spiritual", "Tasavvuf ve Doğu düşüncesi olabilir", "Sufi and Eastern reflections are welcome"),
