@@ -193,14 +193,19 @@ object PersonalPlan {
     }
 
     fun notification(profile: PersonalProfile?, selected: Set<String>, access: Set<String>, language: String,
-        seen: Set<String>, lastId: String?, hidden: Set<String> = emptySet()): BildirimSecimi? {
+        seen: Set<String>, lastId: String?, hidden: Set<String> = emptySet(), recent: List<String> = emptyList()): BildirimSecimi? {
         val scores = profile?.let(::weights).orEmpty()
         val categories = if (profile == null) selected.intersect(access) else effectiveCategories(profile, selected, access, scores)
         val pool = Sozler.bildirimHavuzu(categories, language).filterNot { it.kimlik in hidden }
         if (pool.isEmpty()) return null
         val fresh = pool.filterNot { it.kimlik in seen }
         val cycle = fresh.isEmpty()
-        val candidates = fresh.ifEmpty { pool }.let { list -> list.filterNot { it.kimlik == lastId }.ifEmpty { list } }
+        val eligible = fresh.ifEmpty { pool }.let { list -> list.filterNot { it.kimlik == lastId }.ifEmpty { list } }
+        val cooled = eligible.filterNot { it.kimlik in recent.take(8) }
+        val candidates = cooled.ifEmpty {
+            val oldest = eligible.maxOf { recent.indexOf(it.kimlik).let { rank -> if(rank < 0) Int.MAX_VALUE else rank } }
+            eligible.filter { recent.indexOf(it.kimlik).let { rank -> if(rank < 0) Int.MAX_VALUE else rank } == oldest }
+        }
         if (profile == null) return BildirimSecimi(candidates.random(), cycle)
         val boosted = boostedWeights(profile, selected, scores)
         val weighted = candidates.map { quote ->

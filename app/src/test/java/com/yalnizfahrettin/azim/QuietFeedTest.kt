@@ -21,9 +21,9 @@ class QuietFeedTest {
         assertTrue(QuietFeed.order(pool, emptyList(), pool.map { it.kimlik }.toSet()).isEmpty())
     }
     @Test fun boundedRecentOrderDeduplicatesBeforeTrimming() {
-        val recent = (0..40).map(Int::toString)
+        val recent = (0..740).map(Int::toString)
         val updated = QuietFeed.remember(recent, "4")
-        assertEquals(30, updated.size)
+        assertEquals(QuietFeed.RECENT_LIMIT, updated.size)
         assertEquals("4", updated.first())
         assertEquals(1, updated.count { it == "4" })
     }

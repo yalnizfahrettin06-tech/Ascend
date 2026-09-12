@@ -81,7 +81,7 @@ class SozWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, p
         val profil = depo.personalProfile.first()
         val erisim = depo.acik.first()
         val havuz = PersonalPlan.effectiveCategories(profil, secili, erisim)
-        val secim = PersonalPlan.notification(profil, secili, erisim, dil, depo.gecmis.first(), depo.sonBildirimKimlik.first(), depo.hiddenQuotes.first()) ?: return@withLock Result.success()
+        val secim = PersonalPlan.notification(profil, secili, erisim, dil, depo.gecmis.first(), depo.sonBildirimKimlik.first(), depo.hiddenQuotes.first(), (depo.recentQuotes.first() + depo.notificationRecent.first()).distinct()) ?: return@withLock Result.success()
         val soz = secim.soz
         if (Bildirimler.goster(applicationContext, soz, dil)) {
             // Replanning can cancel this worker after Android accepted the notification.

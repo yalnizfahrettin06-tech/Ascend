@@ -80,6 +80,8 @@ fun Uygulama(
     val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.MERMER)
     val haftalik by depo.haftalikAktiflik.collectAsStateWithLifecycle(List(7) { false })
     val bugunGelenler by depo.bugunGelenler.collectAsStateWithLifecycle(emptyList())
+    val seriesProgress by depo.seriesProgress.collectAsStateWithLifecycle(emptyMap())
+    var personalPage by rememberSaveable { mutableStateOf("") }
     val gunlukGelenler by depo.gunlukGelenler.collectAsStateWithLifecycle(emptyMap())
     val bugunGorulen by depo.bugunGorulen.collectAsStateWithLifecycle(0)
     val sonrakiBildirim by depo.sonrakiBildirim.collectAsStateWithLifecycle(null)
@@ -330,14 +332,22 @@ fun Uygulama(
                         paylas = { paylasilanKimlik = it.kimlik },
                     )
 
-                    Sekme.ISTATISTIK -> IstatistikEkrani(
+                    Sekme.ISTATISTIK -> when(personalPage) {
+                        "history" -> BildirimGecmisiEkrani(dil, gunlukGelenler, favoriler, { personalPage = "" },
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik })
+                        "series" -> KisaSerilerEkrani(dil, seriesProgress, favoriler, { personalPage = "" },
+                            { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik })
+                        else -> IstatistikEkrani(
                         seri = seri, rekor = rekor, gorulen = gorulen,
                         favoriSayisi = favoriler.size, acikKategori = acik.size, haftalik = haftalik,
                         name = profil?.name.orEmpty(),
                         planOzeti = cevir(dil, "Konular, saatler ve içerik sınırları", "Topics, schedule and content boundaries"),
+                        onHistory = { personalPage = "history" }, onSeries = { personalPage = "series" },
                         onFavoriler = { sekme = Sekme.FAVORI }, onPlan = { planGoster = true },
                         onSettings = { ayarlardaMi = true },
                     )
+                    }
                 }
                 }
             }

@@ -3,7 +3,7 @@ package com.yalnizfahrettin.azim.data
 import kotlin.random.Random
 
 object QuietFeed {
-    const val RECENT_LIMIT = 30
+    const val RECENT_LIMIT = 700
     fun remember(recent: List<String>, id: String): List<String> =
         (listOf(id) + recent.filterNot { it == id }).take(RECENT_LIMIT)
 

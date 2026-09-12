@@ -29,7 +29,7 @@ fun IstatistikEkrani(
     seri: Int, rekor: Int, gorulen: Int, favoriSayisi: Int, acikKategori: Int,
     haftalik: List<Boolean> = List(7) { false },
     onFavoriler: () -> Unit = {}, onPlan: () -> Unit = {}, onSettings: () -> Unit = {},
-    name: String = "", planOzeti: String = "",
+    name: String = "", planOzeti: String = "", onHistory: () -> Unit = {}, onSeries: () -> Unit = {},
 ) {
     val dil = LocalConfiguration.current.locales[0].language
     val sonHafta = List(7) { haftalik.getOrElse(it) { false } }
@@ -66,6 +66,19 @@ fun IstatistikEkrani(
                     Text(cevir(dil, "${sayilar.format(favoriSayisi)} söz sende kaldı", "${sayilar.format(favoriSayisi)} quotes to revisit"), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
                 }
                 Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
+            }
+        }
+        listOf(Triple(cevir(dil,"Bildirim geçmişi","Notification history"), cevir(dil,"Sana gelen sözleri yeniden bul","Revisit the quotes sent to you"), onHistory),
+            Triple(cevir(dil,"Kısa seriler","Short series"), cevir(dil,"7 gün, her gün küçük bir adım","7 days, a small step each day"), onSeries)).forEachIndexed { index, item ->
+            Surface(onClick = item.third, color = Renk.yuzey, shape = RoundedCornerShape(18.dp), modifier = Modifier.fillMaxWidth().testTag(if(index == 0) "profile-history" else "profile-series")) {
+                Row(Modifier.padding(18.dp),verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                    Icon(if(index == 0) AzimIkon.Bildirim else AzimIkon.Yukselis,null,Modifier.size(24.dp),tint = Renk.metin)
+                    Column(Modifier.weight(1f),verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                        Text(item.first,color = Renk.metin,fontSize = 17.sp,fontWeight = FontWeight.Medium)
+                        Text(item.second,color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 18.sp)
+                    }
+                    Icon(AzimIkon.Ileri,null,Modifier.size(16.dp),tint = Renk.metinIkincil)
+                }
             }
         }
         HorizontalDivider(color = Renk.kenarlik)

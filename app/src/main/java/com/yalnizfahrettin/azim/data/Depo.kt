@@ -33,6 +33,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val PRO_DEMO = booleanPreferencesKey("pro_demo_acik")
         val ARKA_PLAN = stringPreferencesKey("ana_arka_plan")
         val FAVORI = stringSetPreferencesKey("favoriler")
+        val SERIES = stringSetPreferencesKey("short_series_progress")
+        val NOTIF_RECENT = stringPreferencesKey("recent_notification_order")
         val RECENT = stringPreferencesKey("recent_quote_order")
         val HIDDEN = stringSetPreferencesKey("hidden_quotes")
         val PAUSED_UNTIL = longPreferencesKey("reminders_paused_until")
@@ -168,6 +170,18 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     }
     val favoriler: Flow<Set<String>> = store.data.map { it[K.FAVORI] ?: emptySet() }
     val sonBildirimKimlik: Flow<String?> = store.data.map { it[K.SON_BILDIRIM] }
+    val notificationRecent = store.data.map { it[K.NOTIF_RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi) }
+    val seriesProgress = store.data.map { p -> p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode).associateBy { it.id } }
+    suspend fun startSeries(id: String) = store.edit { p ->
+        if (ShortSeries.all.none { it.id == id }) return@edit
+        val existing = p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode)
+        if (existing.none { it.id == id }) p[K.SERIES] = (existing + SeriesProgress(id)).map { it.encode() }.toSet()
+    }
+    suspend fun completeSeriesDay(id: String) = store.edit { p ->
+        val existing = p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode)
+        p[K.SERIES] = existing.map { if(it.id == id) it.complete(LocalDate.now()) else it }.map { it.encode() }.toSet()
+    }
+
     val recentQuotes = store.data.map { p -> p[K.RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi).take(QuietFeed.RECENT_LIMIT) }
     val hiddenQuotes = store.data.map { it[K.HIDDEN].orEmpty() }
     val pausedUntil = store.data.map { it[K.PAUSED_UNTIL] ?: 0L }
@@ -217,7 +231,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     }
 
     /**
-     * Son 7 günün gelen sözleri, tarihe göre gruplanmış.
+     * Son 30 günün gelen sözleri, tarihe göre gruplanmış.
      * Haftalık şeritte bir güne dokununca o günün sözlerini göstermek için.
      */
     val gunlukGelenler: Flow<Map<String, List<String>>> = store.data.map { p ->
@@ -271,8 +285,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     /** Bildirimle gelen sözü günün listesine yazar. */
     suspend fun bugunGeldi(kimlik: String) = store.edit { p ->
         val bugun = LocalDate.now()
-        val esik = bugun.minusDays(6)
-        // Son 7 günü sakla — haftalık şeride dokunma bu veriyi okuyor.
+        val esik = bugun.minusDays(29)
+        // Son 30 günü sakla — haftalık şeride dokunma bu veriyi okuyor.
         val mevcut = (p[K.BUGUN_GELEN] ?: emptySet()).filter { kayit ->
             runCatching { LocalDate.parse(kayit.substringBefore("|")) >= esik }
                 .getOrDefault(false)
@@ -363,6 +377,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
             .filterNot { id -> Sozler.kimlikten(id)?.kategori in yeniTurKategorileri }
         it[K.GECMIS] = (onceki + kimlik).filter(Sozler::aktifKimlikMi).toSet()
         it[K.SON_BILDIRIM] = kimlik
+        it[K.NOTIF_RECENT] = QuietFeed.remember(it[K.NOTIF_RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi), kimlik).joinToString("|")
+        it[K.RECENT] = QuietFeed.remember(it[K.RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi), kimlik).joinToString("|")
     }
     suspend fun kategorileriAyarla(s: Set<String>) = store.edit {
         erisimiGocur(it)
@@ -389,7 +405,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         p[K.SON_GUN] = bugun.toString()
 
         // Haftalık şerit için: son 7 günden eskisini at, bugünü ekle.
-        val esik = bugun.minusDays(6)
+        val esik = bugun.minusDays(29)
         val gunler = (p[K.AKTIF_GUNLER] ?: emptySet())
             .filter { g -> runCatching { LocalDate.parse(g) >= esik }.getOrDefault(false) }
         p[K.AKTIF_GUNLER] = (gunler + bugun.toString()).toSet()
