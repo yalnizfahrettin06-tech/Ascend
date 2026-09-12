@@ -405,7 +405,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
         horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(22.dp, Alignment.CenterVertically)) {
         Box(Modifier.width(38.dp).height(4.dp).background(Renk.metinIkincil.copy(alpha = .45f), CircleShape))
         Text(cevir(dil, "BİLDİRİM ÖRNEĞİ", "NOTIFICATION PREVIEW"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.2.sp)
-        Surface(onClick = { expanded = !expanded }, color = Renk.zemin, shape = RoundedCornerShape(18.dp), shadowElevation = 3.dp,
+        Surface(onClick = { expanded = !expanded }, color = Renk.zemin, shape = RoundedCornerShape(18.dp), border = BorderStroke(1.dp, Renk.kenarlik),
             modifier = Modifier.fillMaxWidth().animateContentSize(tween(280)).testTag("live-reminder-preview")
                 .semantics { stateDescription = cevir(dil, if (expanded) "Genişletilmiş" else "Daraltılmış", if (expanded) "Expanded" else "Collapsed") }) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
