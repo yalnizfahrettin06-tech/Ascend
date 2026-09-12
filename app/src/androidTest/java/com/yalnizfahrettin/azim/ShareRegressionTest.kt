@@ -37,12 +37,20 @@ class ShareRegressionTest {
         open(1f)
         buttonsFit()
         ekranKaydet("share-safe-normal")
+        val resolver = compose.activity.contentResolver
+        fun count(uri: android.net.Uri): Int = resolver.query(uri,arrayOf("_id"),"display_name LIKE ?",arrayOf("Ascend%"),null)?.use { it.count } ?: 0
+        val images = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val videos = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+        val beforeImage = count(images)
         compose.onNodeWithTag("share-save-device").performClick()
-        compose.waitUntil(120000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(120000) { count(images) > beforeImage }
+        compose.waitForIdle()
         compose.onNodeWithTag("share-video").performScrollTo().performClick()
         buttonsFit()
+        val beforeVideo = count(videos)
         compose.onNodeWithTag("share-save-device").performClick()
-        compose.waitUntil(180000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(180000) { count(videos) > beforeVideo }
+        compose.waitForIdle()
         ekranKaydet("share-video-saved")
     }
     @Test fun largeTextKeepsFooterReachable() {

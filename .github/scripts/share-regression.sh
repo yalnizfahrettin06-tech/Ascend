@@ -4,4 +4,5 @@ bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerA
 result=$?
 mkdir -p screenshots
 adb pull /sdcard/Download/ascend-screenshots/. screenshots/ || true
+find app/build -name "*.xml" -path "*connected*" -exec cat {} \;
 exit "$result"

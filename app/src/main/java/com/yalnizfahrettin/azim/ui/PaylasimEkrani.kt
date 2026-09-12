@@ -186,9 +186,9 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
         }
     }
     Dialog(onDismissRequest = { if (hazirlaniyor) durdur() else geri() },
-        properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = true)) {
+        properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         Surface(Modifier.fillMaxSize(), color = Renk.zemin) {
-            Column(Modifier.fillMaxSize().imePadding().testTag("share-safe-content")) {
+            Column(Modifier.fillMaxSize().padding(WindowInsets.safeDrawing.asPaddingValues()).imePadding().testTag("share-safe-content")) {
                 Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = { if (hazirlaniyor) durdur() else geri() }, modifier = Modifier.testTag("share-close")) {
                         Icon(AzimIkon.Geri, cevir(dil, "Geri", "Back"), tint = Renk.metin)
