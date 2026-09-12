@@ -38,7 +38,7 @@ class ShareRegressionTest {
         buttonsFit()
         ekranKaydet("share-safe-normal")
         val resolver = compose.activity.contentResolver
-        fun count(uri: android.net.Uri): Int = resolver.query(uri,arrayOf("_id"),"display_name LIKE ?",arrayOf("Ascend%"),null)?.use { it.count } ?: 0
+        fun count(uri: android.net.Uri): Int = resolver.query(uri,arrayOf("_id"),"${android.provider.MediaStore.MediaColumns.DISPLAY_NAME} LIKE ?",arrayOf("Ascend%"),null)?.use { it.count } ?: 0
         val images = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val videos = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI
         val beforeImage = count(images)
