@@ -49,7 +49,7 @@ jobs:
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.13.1-test-APK
+          name: Ascend-9.13.2-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -58,9 +58,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.13.1.apk
-          if ! gh release view v9.13.1-ui >/dev/null 2>&1; then
-            gh release create v9.13.1-ui Ascend-9.13.1.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.13.1 — Safe sharing and detailed artwork" --notes "System-fitted sharing window, higher quality widget imagery, restored photographic contrast and home Pro entry."
+          cp app/build/outputs/apk/debug/app-debug.apk Ascend-9.13.2.apk
+          if ! gh release view v9.13.2-ui >/dev/null 2>&1; then
+            gh release create v9.13.2-ui Ascend-9.13.2.apk --target "$GITHUB_SHA" --prerelease --title "Ascend 9.13.2 — Safe sharing and detailed artwork" --notes "System-fitted sharing window, higher quality widget imagery, restored photographic contrast and home Pro entry."
           fi
       - uses: actions/upload-artifact@v7.0.1
         if: always()
@@ -114,8 +114,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -d screenshots ]; then
-            zip -r Ascend-9.13.1-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
-            gh release upload v9.13.1-ui Ascend-9.13.1-visual-evidence.zip --clobber
+            zip -r Ascend-9.13.2-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
+            gh release upload v9.13.2-ui Ascend-9.13.2-visual-evidence.zip --clobber
           fi
 
   share-regression:
@@ -163,4 +163,4 @@ jobs:
         if: success()
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload v9.13.1-ui screenshots/*.png --clobber
+        run: gh release upload v9.13.2-ui screenshots/*.png --clobber

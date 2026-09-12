@@ -64,7 +64,7 @@ fun KisiselPlanPaneli(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(when(page) { "content" -> cevir(dil, "İçerik tercihleri", "Content preferences")
                     "rhythm" -> cevir(dil, "Bildirim saatleri", "Reminder schedule")
-                    else -> cevir(dil, "Planım", "My plan") }, fontFamily = LoraSerif, fontSize = 28.sp,
+                    else -> cevir(dil, "Bildirim ayarları", "Reminder settings") }, fontFamily = ArayuzFont, fontSize = 20.sp,
                     color = Renk.metin, modifier = Modifier.weight(1f).semantics { heading() })
                 IconButton(onClick = { back() }, enabled = !saving, modifier = Modifier.testTag("plan-close")) {
                     Icon(if (page == "main") AzimIkon.Kapat else AzimIkon.Geri,

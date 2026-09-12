@@ -38,18 +38,20 @@ class ShareRegressionTest {
         buttonsFit()
         ekranKaydet("share-safe-normal")
         val resolver = compose.activity.contentResolver
-        fun count(uri: android.net.Uri): Int = resolver.query(uri,arrayOf("_id"),"${android.provider.MediaStore.MediaColumns.DISPLAY_NAME} LIKE ?",arrayOf("Ascend%"),null)?.use { it.count } ?: 0
+        fun count(uri: android.net.Uri): Int = resolver.query(uri,arrayOf("_id"),"${android.provider.MediaStore.MediaColumns.DISPLAY_NAME} LIKE ? AND ${android.provider.MediaStore.MediaColumns.IS_PENDING} = 0",arrayOf("Ascend%"),null)?.use { it.count } ?: 0
         val images = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val videos = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI
         val beforeImage = count(images)
         compose.onNodeWithTag("share-save-device").performClick()
         compose.waitUntil(120000) { count(images) > beforeImage }
+        compose.waitUntil(10000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
         compose.waitForIdle()
         compose.onNodeWithTag("share-video").performScrollTo().performClick()
         buttonsFit()
         val beforeVideo = count(videos)
         compose.onNodeWithTag("share-save-device").performClick()
         compose.waitUntil(180000) { count(videos) > beforeVideo }
+        compose.waitUntil(10000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
         compose.waitForIdle()
         ekranKaydet("share-video-saved")
     }

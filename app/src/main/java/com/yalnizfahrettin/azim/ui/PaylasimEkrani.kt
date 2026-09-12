@@ -186,9 +186,26 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
         }
     }
     Dialog(onDismissRequest = { if (hazirlaniyor) durdur() else geri() },
-        properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
-        Surface(Modifier.fillMaxSize(), color = Renk.zemin) {
-            Column(Modifier.fillMaxSize().padding(WindowInsets.safeDrawing.asPaddingValues()).imePadding().testTag("share-safe-content")) {
+        properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = true)) {
+        val configuration = LocalConfiguration.current
+        val density = LocalDensity.current
+        val safeHeight = remember(configuration.orientation, configuration.screenHeightDp, density.density) {
+            val manager = ctx.getSystemService(android.content.Context.WINDOW_SERVICE) as android.view.WindowManager
+            val pixels = if(Build.VERSION.SDK_INT >= 30) {
+                val metrics = manager.currentWindowMetrics
+                val insets = metrics.windowInsets.getInsetsIgnoringVisibility(android.view.WindowInsets.Type.systemBars() or android.view.WindowInsets.Type.displayCutout())
+                metrics.bounds.height() - insets.top - insets.bottom
+            } else {
+                val metrics = android.util.DisplayMetrics()
+                @Suppress("DEPRECATION")
+                manager.defaultDisplay.getRealMetrics(metrics)
+                fun bar(name: String): Int { val id = ctx.resources.getIdentifier(name,"dimen","android"); return if(id != 0) ctx.resources.getDimensionPixelSize(id) else 0 }
+                metrics.heightPixels - bar("status_bar_height") - bar("navigation_bar_height")
+            }
+            with(density) { pixels.coerceAtLeast(1).toDp() }
+        }
+        Surface(Modifier.fillMaxWidth().requiredHeight(safeHeight), color = Renk.zemin) {
+            Column(Modifier.fillMaxSize().imePadding().testTag("share-safe-content")) {
                 Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = { if (hazirlaniyor) durdur() else geri() }, modifier = Modifier.testTag("share-close")) {
                         Icon(AzimIkon.Geri, cevir(dil, "Geri", "Back"), tint = Renk.metin)
