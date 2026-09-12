@@ -63,6 +63,14 @@ class OnboardingTest {
         compose.onNodeWithTag("live-reminder-time").assertTextEquals("14:00")
     }
 
+    @Test fun notificationSampleExpandsAndCollapses() {
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 2)) { _, _, _, _, _ -> } } }
+        compose.onNodeWithTag("live-reminder-preview").performScrollTo().performClick()
+        compose.onNodeWithText("Sample · Tap to collapse").assertExists()
+        compose.onNodeWithTag("live-reminder-preview").performClick()
+        compose.onNodeWithText("Sample · Tap to expand").assertExists()
+    }
+
     @Test fun rhythmSurvivesBackAndRestoration() {
         val restore = StateRestorationTester(compose)
         restore.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 2)) { _, _, _, _, _ -> } } }

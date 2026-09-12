@@ -81,3 +81,7 @@ Faz 1 için onboarding davranış testleri yeni akışa uyarlandı. GitHub derle
 İşlevsel başlıklar ve sayılar daha küçük sans tipografiye taşındı; marka ve örnek alıntı serif kaldı. İçerikte biriken bağımsız boşluklar azaltıldı. Footer tek devam eylemi taşıyor; bildirimsiz bitirme yolları kaldırıldı. Sıklık, saat ve izin sayfaları aynı canlı örnek kartını kullanıyor: kartın saati ve günlük özeti gerçek planlama hesabıyla güncelleniyor. Önizleme gerçek bildirim göndermiyor. Önceki fazlardaki isteğe bağlı kurulum açıklamaları bu değişiklik için tarihsel kayıttır.
 
 Hedefli cihaz test kaynakları izin reddinde kurulumun açık kalmasını, saat/adet önizlemesini ve büyük yazıda eyleme erişimi kapsıyor. Cihazda çalıştırma yapılmış sayılmaz. APK sonrası ek kontrol yapılmayacak.
+
+## 9.4.2 — Görselli gümüş başlangıç
+
+İlk iki sayfada gerçek Roma görseli ve kısa metin kompozisyonu; yönlü kayma/solma geçişleri; animasyonlu adet değişimi; görselli genişletilebilir bildirim örneği eklendi. Ortak açık tema kart yüzeyleri nötr gümüşe taşındı. Ana ekran gün/saat satırı kaldırıldı; söz alanı genişletilip dikey dengelendi. Büyük yazıda görsel kartın yüksekliği içeriğe uyarlanır. Genişleme etkileşimi için cihaz test kaynağı eklendi; cihazda çalıştırılmış sayılmaz. APK sonrası ek kontrol yok.

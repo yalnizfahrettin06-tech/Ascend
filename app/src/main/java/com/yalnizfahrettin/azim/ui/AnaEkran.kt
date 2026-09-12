@@ -106,11 +106,6 @@ fun AnaEkran(
                 }
             }
             Column(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 24.dp)) {
-            var simdi by remember { mutableStateOf(java.time.LocalTime.now()) }
-            LaunchedEffect(Unit) { while (true) { simdi = java.time.LocalTime.now(); kotlinx.coroutines.delay(60000) } }
-            Text(cevir(dil, when (simdi.hour) { in 5..11 -> "SABAH"; in 12..17 -> "GÜNDÜZ"; else -> "AKŞAM" },
-                when (simdi.hour) { in 5..11 -> "MORNING"; in 12..17 -> "AFTERNOON"; else -> "EVENING" }) + " · " + simdi.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")),
-                fontSize = 10.sp, letterSpacing = 2.sp, color = Renk.metinIkincil, modifier = Modifier.padding(top = 8.dp, bottom = 8.dp))
             if (feed.isEmpty()) {
                 Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Text(cevir(dil, "Biraz yer açalım.", "Make a little room."), color = Renk.metin, style = MaterialTheme.typography.headlineLarge)
@@ -134,10 +129,10 @@ fun AnaEkran(
                         else -> if (kisa) 34 else if (uzun) 26 else 30
                     }
                     val satirYuksekligi = yaziBoyutu + 5
-                    val metinGenisligi = if (buyukYazi) 1f else .68f
+                    val metinGenisligi = if (buyukYazi) 1f else .76f
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
-                        .verticalScroll(rememberScrollState()).padding(top = 30.dp, bottom = 12.dp),
-                        horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Top) {
+                        .verticalScroll(rememberScrollState()).padding(top = 12.dp, bottom = 12.dp),
+                        horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Center) {
                         Row(Modifier.padding(vertical = 2.dp),
                             verticalAlignment = Alignment.Top,
                             horizontalArrangement = Arrangement.spacedBy(10.dp)) {
