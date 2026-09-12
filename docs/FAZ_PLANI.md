@@ -75,3 +75,9 @@ Faz 1 için onboarding davranış testleri yeni akışa uyarlandı. GitHub derle
 - Başarıyla üretilen son kartın yazı, boyut, oran, hizalama, imza ve karartma düzeni hatırlanır. Medya kaynağı ve kişisel fotoğraf otomatik yeniden açılmaz. Pro erişim kuralları korunur.
 - Sadelik kararı: ayrı Son görülenler ekranı, yeni ana ekran sahneleri, şablon kütüphanesi ve efektler eklenmedi. Bunlar faz planında koşullu önerilerdi; bu sürümde gerekli görülmedi.
 - Birim testlerine döngü, gizlenen havuz ve sıralı kayıt senaryoları; cihaz test kaynaklarına ayarların duraklatma sırasında korunması eklendi. Cihazda çalıştırma yapılmış sayılmaz.
+
+## 9.4.1 — Onboarding görsel düzeni
+
+İşlevsel başlıklar ve sayılar daha küçük sans tipografiye taşındı; marka ve örnek alıntı serif kaldı. İçerikte biriken bağımsız boşluklar azaltıldı. Footer tek devam eylemi taşıyor; bildirimsiz bitirme yolları kaldırıldı. Sıklık, saat ve izin sayfaları aynı canlı örnek kartını kullanıyor: kartın saati ve günlük özeti gerçek planlama hesabıyla güncelleniyor. Önizleme gerçek bildirim göndermiyor. Önceki fazlardaki isteğe bağlı kurulum açıklamaları bu değişiklik için tarihsel kayıttır.
+
+Hedefli cihaz test kaynakları izin reddinde kurulumun açık kalmasını, saat/adet önizlemesini ve büyük yazıda eyleme erişimi kapsıyor. Cihazda çalıştırma yapılmış sayılmaz. APK sonrası ek kontrol yapılmayacak.

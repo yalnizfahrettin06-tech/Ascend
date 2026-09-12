@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.*
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -41,7 +42,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/** Five quiet pages. Reminder permission is optional and only requested by an explicit tap. */
+/** Five quiet pages with a single footer action and a live reminder preview. */
 @Composable
 fun Onboarding(
     dil: String, kaydediliyor: Boolean = false, hata: String? = null,
@@ -98,23 +99,21 @@ fun Onboarding(
         }
         AnimatedContent(step, transitionSpec = { fadeIn(tween(180)) togetherWith fadeOut(tween(100)) },
             modifier = Modifier.weight(1f).fillMaxWidth().clipToBounds(), label = "onboarding-step") { shownStep ->
-            BoxWithConstraints(Modifier.fillMaxSize()) {
-            Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).heightIn(min = maxHeight).testTag("onboarding-scroll")
-                .padding(horizontal = 24.dp, vertical = 28.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp, if (shownStep == 0) Alignment.CenterVertically else Alignment.Top)) {
+            Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).testTag("onboarding-scroll")
+                .padding(horizontal = 24.dp, vertical = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)) {
                 PlanSection(shownStep, dil)
                 when (shownStep) {
                     0 -> PlanWelcome(dil)
                     1 -> PlanIntroduction(dil)
-                    2 -> PlanFrequency(profile, dil) { update(profile.copy(dailyCount = it)) }
-                    3 -> PlanHours(profile, dil) { hourDialog = it }
+                    2 -> PlanFrequency(profile, dil, previewAccess) { update(profile.copy(dailyCount = it)) }
+                    3 -> PlanHours(profile, dil, previewAccess) { hourDialog = it }
                     4 -> PlanPermission(profile, dil, bildirimIzni, previewAccess) { permissionHelp = true }
                 }
             }
-            }
         }
         HorizontalDivider(color = Renk.kenarlik.copy(alpha = .25f))
-        Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 12.dp).testTag("onboarding-footer"), horizontalAlignment = Alignment.CenterHorizontally) {
             hata?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Polite }) }
             Button(onClick = {
@@ -128,10 +127,7 @@ fun Onboarding(
                     else -> cevir(dil, "Devam", "Continue")
                 }, textAlign = TextAlign.Center)
             }
-            if (step < 4) TextButton(onClick = { finish(false) }, enabled = !kaydediliyor, modifier = Modifier.testTag("onboarding-quick-start")) { Text(cevir(dil, "Şimdilik bildirimsiz başla", "Start without reminders")) }
-            if (step == 4) TextButton(onClick = { finish(false) }, enabled = !kaydediliyor, modifier = Modifier.testTag("onboarding-finish-without-reminders")) {
-                Text(cevir(dil, "Şimdilik bildirimsiz devam et", "Continue without reminders"))
-            }
+
         }
     }
     if (hourDialog != 0) PlanHourDialog(profile, hourDialog == 1, dil, { hourDialog = 0 }) { hour ->
@@ -146,7 +142,7 @@ private fun PlanSection(step: Int, dil: String) {
         0 -> cevir(dil, "HOŞ GELDİN", "WELCOME")
         1 -> cevir(dil, "BİR SÖZ. BİR ADIM.", "ONE QUOTE. ONE STEP.")
         2, 3 -> cevir(dil, "GÜNÜNÜN RİTMİ", "YOUR DAILY RHYTHM")
-        else -> cevir(dil, "SEN İSTEDİĞİNDE", "WHEN YOU CHOOSE")
+        else -> cevir(dil, "BİLDİRİMLERİN", "YOUR REMINDERS")
     }
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Box(Modifier.width(24.dp).height(1.dp).background(Renk.accent))
@@ -162,7 +158,7 @@ private fun ColumnScope.PlanWelcome(dil: String) {
         Column(Modifier.padding(vertical = 16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             PlanTitle(cevir(dil, "Kendi hızında. Bir adım yukarı.", "At your pace. One step higher."),
                 cevir(dil, "Bazen bir olumlama, bazen yeni bir bakış. Günün içinde kendine küçük bir an ayır.",
-                    "An affirmation or a fresh perspective. Make a little room for yourself in the day."))
+                    "An affirmation or a fresh perspective. Make a little room for yourself in the day."), editorial = true)
         }
     }
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -170,17 +166,19 @@ private fun ColumnScope.PlanWelcome(dil: String) {
         Text(cevir(dil, "Kendi hızında · Hesap gerekmez", "At your pace · No account needed"),
             color = Renk.metin, style = MaterialTheme.typography.bodyMedium)
     }
-    Text(cevir(dil, "Kısa bir tanıtım, istersen gün içine yayılan hatırlatmalar. Hemen başlayabilir, ayarları sonra değiştirebilirsin.",
-        "A brief introduction, then optional reminders. Start now and change your settings later."),
+    Text(cevir(dil, "Kısa bir tanıtımın ardından bildirim saatlerini ayarlayalım. Planını daha sonra değiştirebilirsin.",
+        "After a brief introduction, choose your reminder hours. You can change your plan later."),
         color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
 }
 
 @Composable
-private fun PlanTitle(title: String, description: String, modifier: Modifier = Modifier) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-    Text(title, modifier.semantics { heading() }, color = Renk.metin, fontFamily = LoraSerif,
-        fontSize = 30.sp, lineHeight = 37.sp, fontWeight = FontWeight.Normal, letterSpacing = (-0.4).sp)
-    Text(description, color = Renk.metinIkincil, fontSize = 14.sp, lineHeight = 22.sp)
+private fun PlanTitle(title: String, description: String, modifier: Modifier = Modifier, editorial: Boolean = false) {
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Text(title, modifier.semantics { heading() }, color = Renk.metin,
+        fontFamily = if (editorial) LoraSerif else FontFamily.SansSerif,
+        fontSize = if (editorial) 30.sp else 26.sp, lineHeight = if (editorial) 38.sp else 33.sp,
+        fontWeight = if (editorial) FontWeight.Normal else FontWeight.Medium)
+    Text(description, color = Renk.metinIkincil, fontSize = 15.sp, lineHeight = 23.sp)
     }
 }
 
@@ -204,10 +202,9 @@ private fun PlanChoice(label: String, selected: Boolean, tag: String, role: Role
 }
 
 @Composable
-private fun PlanFrequency(profile: PersonalProfile, dil: String, changed: (Int) -> Unit) {
+private fun PlanFrequency(profile: PersonalProfile, dil: String, access: Set<String>, changed: (Int) -> Unit) {
     PlanTitle(cevir(dil, "Gününe kaç kez eşlik edelim?", "How often should we check in?"),
         cevir(dil, "Az ya da çok, ritim senin. Bildirim iznini son adımda soracağız.", "A little or often, it is your rhythm. We will ask for notification permission at the end."))
-    Spacer(Modifier.height(12.dp))
     Surface(color = Renk.yuzey, border = BorderStroke(1.dp, Renk.kenarlik), shape = RoundedCornerShape(20.dp)) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 20.dp), horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -215,7 +212,7 @@ private fun PlanFrequency(profile: PersonalProfile, dil: String, changed: (Int) 
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
                 OutlinedIconButton(onClick = { changed(profile.dailyCount - 1) }, enabled = profile.dailyCount > 1,
                     modifier = Modifier.size(52.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını azalt", "Fewer reminders") }) { Icon(AzimIkon.Eksi, null, Modifier.size(24.dp)) }
-                Text("${profile.dailyCount}", color = Renk.metin, fontFamily = LoraSerif, fontSize = 48.sp,
+                Text("${profile.dailyCount}", color = Renk.metin, fontFamily = FontFamily.SansSerif, fontSize = 36.sp, fontWeight = FontWeight.Medium,
                     modifier = Modifier.testTag("reminder-count").semantics { liveRegion = LiveRegionMode.Polite })
                 OutlinedIconButton(onClick = { changed(profile.dailyCount + 1) }, enabled = profile.dailyCount < 7,
                     modifier = Modifier.size(52.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını artır", "More reminders") }) { Icon(AzimIkon.Arti, null, Modifier.size(24.dp)) }
@@ -223,39 +220,28 @@ private fun PlanFrequency(profile: PersonalProfile, dil: String, changed: (Int) 
             Text(cevir(dil, "küçük durak / gün", "small pauses / day"), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
         }
     }
-    Text(cevir(dil, "Başlangıç için 3 kısa mola öneriyoruz. İstediğin zaman değiştirebilir veya kapatabilirsin.", "Start with three small pauses. Change the rhythm or turn reminders off anytime."),
-        color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
+    PlanLivePreview(profile, dil, access)
 }
 
 private fun planHour(hour: Int) = "%02d:00".format(Locale.ROOT, hour % 24)
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun PlanHours(profile: PersonalProfile, dil: String, select: (Int) -> Unit) {
+private fun PlanHours(profile: PersonalProfile, dil: String, access: Set<String>, select: (Int) -> Unit) {
     PlanTitle(cevir(dil, "Günün hangi saatlerinde?", "Which hours work for you?"),
         cevir(dil, "Seçtiğin aralığın dışında sessiz kalırız.", "We stay quiet outside your chosen window."))
-    Spacer(Modifier.height(12.dp))
     listOf(Triple(1, cevir(dil, "Başlangıç", "From"), profile.startHour), Triple(2, cevir(dil, "Bitiş", "Until"), profile.endHour)).forEach { (id, label, hour) ->
         Surface(onClick = { select(id) }, shape = RoundedCornerShape(14.dp), color = Renk.zemin, border = BorderStroke(1.dp, Renk.kenarlik),
             modifier = Modifier.fillMaxWidth().testTag(if (id == 1) "reminder-start" else "reminder-end")) {
             Row(Modifier.padding(horizontal = 16.dp, vertical = 16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Icon(AzimIkon.Saat, null, Modifier.size(22.dp), tint = Renk.metinIkincil)
                 Text(label, Modifier.weight(1f), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
-                Text(planHour(hour), color = Renk.metin, fontFamily = LoraSerif, fontSize = 28.sp)
+                Text(planHour(hour), color = Renk.metin, fontFamily = FontFamily.SansSerif, fontSize = 24.sp, fontWeight = FontWeight.Medium)
                 Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
             }
         }
     }
-    Spacer(Modifier.height(16.dp))
-    HorizontalDivider(color = Renk.kenarlik)
-    Text(cevir(dil, "Günün küçük durakları", "Your small pauses"), color = Renk.metin, fontFamily = LoraSerif, fontSize = 22.sp)
-    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.testTag("reminder-preview-times")) {
-        BildirimZamanlari.hesapla(LocalDateTime.of(2000, 1, 1, 0, 0), profile.dailyCount, profile.startHour, profile.endHour).forEach {
-            Text(it.format(DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT)), color = Renk.metin,
-                modifier = Modifier.background(Renk.yuzey, RoundedCornerShape(8.dp)).padding(horizontal = 12.dp, vertical = 9.dp))
-        }
-    }
-    Text(cevir(dil, "Yaklaşık saatler. Cihazın güç tasarrufu teslimatı geciktirebilir.", "Approximate times. Device power saving can delay delivery."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+    PlanLivePreview(profile, dil, access)
 }
 
 @Composable
@@ -279,33 +265,59 @@ private fun PlanIntroduction(dil: String) {
             Text(text, color = Renk.metinIkincil, fontSize = 14.sp, lineHeight = 22.sp)
         }
     }
-    Text(cevir(dil, "Bildirim konularını daha sonra Keşfet’ten değiştirebilirsin. Bildirimler isteğe bağlı.",
-        "Change reminder topics later in Explore. Reminders are optional."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+    Text(cevir(dil, "Bildirim konularını daha sonra Keşfet’ten değiştirebilirsin.",
+        "Change reminder topics later in Explore."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+}
+
+/** Uses the same schedule as delivery; this card never sends a notification. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun PlanLivePreview(profile: PersonalProfile, dil: String, access: Set<String>) {
+    val times = remember(profile.dailyCount, profile.startHour, profile.endHour) {
+        BildirimZamanlari.hesapla(LocalDateTime.of(2000, 1, 1, 0, 0), profile.dailyCount, profile.startHour, profile.endHour)
+            .map { it.format(DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT)) }
+    }
+    val sample = remember(profile, access, dil) {
+        PersonalPlan.feed(profile, PersonalPlan.initialCategories(profile, access), access).firstOrNull()?.metin(dil)
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text(cevir(dil, "Bildirim önizlemen", "Your reminder preview"), color = Renk.metin,
+            fontSize = 14.sp, fontWeight = FontWeight.Medium)
+        Surface(color = Renk.yuzey, shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(1.dp, Renk.kenarlik), modifier = Modifier.fillMaxWidth().testTag("live-reminder-preview")) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Icon(AzimIkon.Saat, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
+                    Text("Ascend", Modifier.weight(1f), color = Renk.metin, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                    Text(times.firstOrNull().orEmpty(), color = Renk.metinIkincil, fontSize = 13.sp,
+                        modifier = Modifier.testTag("live-reminder-time").semantics { liveRegion = LiveRegionMode.Polite })
+                }
+                Text(sample ?: cevir(dil, "Kendine küçük bir an ayır.", "Take a small moment for yourself."),
+                    color = Renk.metin, fontSize = 16.sp, lineHeight = 24.sp)
+                Text(cevir(dil, "Örnek bildirim", "Sample notification"), color = Renk.metinIkincil, fontSize = 12.sp)
+            }
+        }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = Modifier.testTag("reminder-preview-times")) {
+            times.forEach { Text(it, color = Renk.metinIkincil, fontSize = 13.sp) }
+        }
+        Text(cevir(dil, "Günde ${profile.dailyCount} bildirim · Saatler yaklaşık",
+            "${profile.dailyCount} reminders daily · Approximate times"), color = Renk.metinIkincil, fontSize = 12.sp,
+            modifier = Modifier.testTag("live-reminder-summary"))
+    }
 }
 
 @Composable
 private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boolean, access: Set<String>, help: () -> Unit) {
     PlanTitle(cevir(dil, "İyi bir söz seni bulsun.", "Let the right words find you."),
         cevir(dil, "Günde ${profile.dailyCount} kez, ${planHour(profile.startHour)}–${planHour(profile.endHour)} arasında.", "${profile.dailyCount} times a day between ${planHour(profile.startHour)} and ${planHour(profile.endHour)}."))
-    val sample = PersonalPlan.feed(profile, PersonalPlan.initialCategories(profile, access), access).firstOrNull()
-    Surface(color = Renk.yuzey, shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
-        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Icon(AzimIkon.Yukselis, null, Modifier.size(20.dp), tint = Renk.metin)
-                Text("ascend", fontFamily = LoraSerif, fontSize = 20.sp, color = Renk.metin, modifier = Modifier.weight(1f))
-                Text(cevir(dil, "önizleme", "preview"), fontSize = 11.sp, color = Renk.metinIkincil)
-            }
-            HorizontalDivider(color = Renk.kenarlik)
-            Text(sample?.metin(dil).orEmpty(), color = Renk.metin, fontSize = 16.sp, lineHeight = 24.sp)
-            Text(cevir(dil, "Tamamını okumak için bildirimi genişlet.", "Expand the notification to read it in full."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
-        }
-    }
+    PlanLivePreview(profile, dil, access)
     if (allowed) Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) {
         Icon(AzimIkon.Tik, null, Modifier.size(18.dp), tint = Renk.accent)
         Text(cevir(dil, "Bildirim iznin açık. Hazırsın.", "Notifications are allowed. You are ready."), color = Renk.metin, style = MaterialTheme.typography.labelLarge)
     }
-    Text(cevir(dil, "Bildirimler senin seçimin. İzin vermeden de sözleri okuyabilir, kaydedebilir ve paylaşabilirsin.", "Reminders are optional. Read, save and share quotes without granting permission."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
+    Text(cevir(dil, "Planının çalışması için bildirim iznini aç.", "Allow notifications so your reminder plan can work."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
     TextButton(onClick = help, modifier = Modifier.heightIn(min = 48.dp)) { Text(cevir(dil, "Bildirim görünümü ve cihaz ayarları", "Notification appearance and device settings")) }
 }
 

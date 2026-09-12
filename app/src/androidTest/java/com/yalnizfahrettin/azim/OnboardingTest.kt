@@ -18,16 +18,12 @@ class OnboardingTest {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
     private fun next() = compose.onNodeWithTag("onboarding-next").performClick()
 
-    @Test fun quickStartDoesNotRequestPermission() {
+    @Test fun setupHasOneFooterActionWithoutSkippingPermission() {
         var done = false
-        var requested = false
-        compose.setContent { AzimTema { Onboarding("en", izinIste = { requested = true }) { selected, count, start, end, enabled ->
-            assertEquals(Kategoriler.varsayilanSecili, selected)
-            assertEquals(3, count); assertEquals(9, start); assertEquals(21, end)
-            assertFalse(enabled); done = true
-        } } }
-        compose.onNodeWithTag("onboarding-quick-start").performClick()
-        compose.runOnIdle { assertTrue(done); assertFalse(requested) }
+        compose.setContent { AzimTema { Onboarding("en") { _, _, _, _, _ -> done = true } } }
+        compose.onNodeWithTag("onboarding-quick-start").assertDoesNotExist()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+        compose.runOnIdle { assertFalse(done) }
     }
 
     @Test fun fivePagesRequestPermissionOnlyOnFinalTap() {
@@ -47,14 +43,24 @@ class OnboardingTest {
         compose.runOnIdle { assertTrue(completed) }
     }
 
-    @Test fun deniedPermissionStillAllowsStarting() {
+    @Test fun deniedPermissionKeepsSetupOpen() {
         var completed = false
-        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 4)) { _, _, _, _, reminders ->
-            assertFalse(reminders); completed = true
-        } } }
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 4)) { _, _, _, _, _ -> completed = true } } }
         next()
-        compose.onNodeWithTag("onboarding-finish-without-reminders").performClick()
-        compose.runOnIdle { assertTrue(completed) }
+        compose.onNodeWithTag("onboarding-finish-without-reminders").assertDoesNotExist()
+        compose.runOnIdle { assertFalse(completed) }
+    }
+
+    @Test fun livePreviewTracksCountAndHourChanges() {
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 2)) { _, _, _, _, _ -> } } }
+        compose.onNodeWithTag("live-reminder-time").assertTextEquals("11:00")
+        compose.onNodeWithContentDescription("More reminders").performClick()
+        compose.onNodeWithTag("live-reminder-time").assertTextEquals("10:30")
+        compose.onNodeWithTag("live-reminder-summary").assertTextEquals("4 reminders daily · Approximate times")
+        next()
+        compose.onNodeWithTag("reminder-start").performClick()
+        compose.onNodeWithTag("hour-choice-13").performScrollTo().performClick()
+        compose.onNodeWithTag("live-reminder-time").assertTextEquals("14:00")
     }
 
     @Test fun rhythmSurvivesBackAndRestoration() {
@@ -76,6 +82,6 @@ class OnboardingTest {
             }
         }
         compose.onNodeWithText("5 / 5").assertIsDisplayed()
-        compose.onNodeWithTag("onboarding-finish-without-reminders").assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
     }
 }
