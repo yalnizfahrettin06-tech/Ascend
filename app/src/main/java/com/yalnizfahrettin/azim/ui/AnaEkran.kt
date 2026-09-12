@@ -90,10 +90,8 @@ fun AnaEkran(
     val aktif = feed.getOrNull(pager.settledPage)
     LaunchedEffect(pager, aktif?.kimlik) { if (aktif != null) indeksDegisti(pager.settledPage); ses.durdur() }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
-        Image(painterResource(R.drawable.art_roman_home_v9), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop)
-        Box(Modifier.matchParentSize().background(if (Renk.karanlikMi) Renk.zemin.copy(alpha = .90f) else Color.Transparent))
-        Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
-            Renk.zemin.copy(alpha = if (buyukYazi) .96f else .35f), Renk.zemin.copy(alpha = .05f)))))
+        val homeTheme = AnaTemalar.find(secilenAtmosfer)
+        TemaZemini(homeTheme, Modifier.matchParentSize(), if (buyukYazi) .94f else .25f)
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content")) {
             Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.YukselenMarka, null, Modifier.size(30.dp), tint = Renk.accent)
@@ -129,7 +127,7 @@ fun AnaEkran(
                         else -> if (kisa) 34 else if (uzun) 26 else 30
                     }
                     val satirYuksekligi = yaziBoyutu + 5
-                    val metinGenisligi = if (buyukYazi) 1f else .76f
+                    val metinGenisligi = if (buyukYazi || homeTheme.art == null) 1f else .76f
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
                         .verticalScroll(rememberScrollState()).padding(top = 12.dp, bottom = 12.dp),
                         horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Center) {

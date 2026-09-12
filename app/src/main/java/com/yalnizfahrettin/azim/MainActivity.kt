@@ -127,7 +127,13 @@ class MainActivity : ComponentActivity() {
         }
         val durum = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
         if (durum != PackageManager.PERMISSION_GRANTED) {
-            izinIstegi.launch(Manifest.permission.POST_NOTIFICATIONS)
+            val history = getSharedPreferences("notification_permission", MODE_PRIVATE)
+            if (history.getBoolean("asked", false) && !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                com.yalnizfahrettin.azim.notif.TeslimatYardimi.bildirimAyarlariniAc(this)
+            } else {
+                history.edit().putBoolean("asked", true).apply()
+                izinIstegi.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
     }
 }

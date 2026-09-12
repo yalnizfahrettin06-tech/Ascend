@@ -89,6 +89,10 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         erisimiGocur(p)
         gorseliGocur(p)
         val safe = PersonalProfile.decode(profile.encode()).copy(step = 0)
+        val chosenTheme = AnaTemalar.allowed(safe.answer("theme").firstOrNull(), p[K.PRO_DEMO] ?: false)
+        p[K.ARKA_PLAN] = chosenTheme.id
+        p[K.TEMA] = if (chosenTheme.dark) TemaModu.KARANLIK.name else TemaModu.AYDINLIK.name
+        p[K.DIL] = safe.answer("language").firstOrNull()?.takeIf { it in setOf("tr", "en") } ?: "tr"
         p[K.PERSONAL_PROFILE] = safe.encode()
         p[K.SECILI] = if (preserveTopics) p[K.SECILI].orEmpty().intersect(etkinErisim(p)).ifEmpty { PersonalPlan.initialCategories(safe, etkinErisim(p)) }
             else PersonalPlan.initialCategories(safe, etkinErisim(p))
@@ -133,10 +137,12 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         p[K.VISUAL_V7] = true
         p[K.VISUAL_V8] = true
     }
-    val arkaPlan: Flow<String?> = store.data.map { it[K.ARKA_PLAN] }
+    val arkaPlan: Flow<String?> = erisimVerisi.map { AnaTemalar.allowed(it[K.ARKA_PLAN], it[K.PRO_DEMO] ?: false).id }
 
     suspend fun arkaPlanAyarla(ad: String?) = store.edit { p ->
-        if (ad == null) p.remove(K.ARKA_PLAN) else p[K.ARKA_PLAN] = ad
+        val theme = AnaTemalar.allowed(ad, p[K.PRO_DEMO] ?: false)
+        p[K.ARKA_PLAN] = theme.id
+        p[K.TEMA] = if (theme.dark) TemaModu.KARANLIK.name else TemaModu.AYDINLIK.name
     }
 
     /** Compatibility view only: a group is open when every category in it is open. */
@@ -296,6 +302,9 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     suspend fun proDemoAyarla(acik: Boolean) = store.edit { p ->
         erisimiGocur(p)
         p[K.PRO_DEMO] = acik
+        val theme = AnaTemalar.allowed(p[K.ARKA_PLAN], acik)
+        p[K.ARKA_PLAN] = theme.id
+        p[K.TEMA] = if (theme.dark) TemaModu.KARANLIK.name else TemaModu.AYDINLIK.name
         // Enabling never subscribes the user to additional notification topics.
         // Revoking preserves individual rewards and grandfathered v5 access.
         p[K.SECILI] = Erisim.guvenliSecim(p[K.SECILI] ?: emptySet(), etkinErisim(p))
@@ -332,7 +341,10 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     suspend fun saatAraligiAyarla(bas: Int, bit: Int) = store.edit {
         it[K.BASLANGIC] = bas.coerceIn(0, 23); it[K.BITIS] = bit.coerceIn(bas.coerceIn(0, 23) + 1, 24)
     }
-    suspend fun temaAyarla(t: TemaModu) = store.edit { it[K.TEMA] = t.name }
+    suspend fun temaAyarla(t: TemaModu) = store.edit {
+        it[K.TEMA] = t.name
+        it[K.ARKA_PLAN] = if (t == TemaModu.KARANLIK || t == TemaModu.OLED) "black" else "white"
+    }
     suspend fun dinamikRenkAyarla(a: Boolean) = store.edit { it[K.DINAMIK] = a }
     suspend fun haptikAyarla(a: Boolean) = store.edit { it[K.HAPTIK] = a }
     suspend fun dilAyarla(d: String) = store.edit { it[K.DIL] = d }

@@ -40,24 +40,17 @@ import java.util.Locale
 
 @Composable
 fun KilitDialog(kategori: Kategori, dil: String, kapat: () -> Unit, demoAc: () -> Unit, proAc: () -> Unit, hata: String? = null) {
-    val sozSayisi = Sozler.kategoriden(kategori.anahtar).size
-    AlertDialog(onDismissRequest = kapat, title = { Text(kategori.ad(dil)) }, text = {
-        Column(Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(cevir(dil, "$sozSayisi özgün söz · Yalnız bu kategori açılır", "$sozSayisi original quotes · Unlocks this topic only"), color = Renk.accent)
-            Text(cevir(dil, "GEÇİCİ DEMO", "TEMPORARY DEMO"), style = MaterialTheme.typography.labelSmall)
-            Text(cevir(dil, "Bu sürümde gerçek reklam yok. Google.com tarayıcıda açılır. Uygulamaya döndüğünde bu kategori açılır. Bildirimlerine eklemek senin seçimin.", "There is no real ad in this version. Google.com opens in your browser. Returning unlocks this topic. You choose whether to add it to your reminders."))
-            TextButton(onClick = proAc) { Text(cevir(dil, "Tüm kategoriler için Pro’yu keşfet", "Explore Pro for all topics")) }
-            hata?.let { Text(it, color = MaterialTheme.colorScheme.error) }
-        }
-    }, confirmButton = { TextButton(onClick = demoAc) { Text(cevir(dil, "Demo bağlantısını aç", "Open demo link")) } },
-    dismissButton = { TextButton(onClick = kapat) { Text(cevir(dil, "Vazgeç", "Cancel")) } })
+    AlertDialog(onDismissRequest = kapat, title = { Text(kategori.ad(dil)) },
+        text = { Text(cevir(dil, "Bu konu Ascend Pro ile kullanılabilir. Demo ödeme gerektirmez.", "This topic is available with Ascend Pro. The demo does not require payment.")) },
+        confirmButton = { TextButton(onClick = proAc) { Text(cevir(dil, "Pro’yu incele", "Explore Pro")) } },
+        dismissButton = { TextButton(onClick = kapat) { Text(cevir(dil, "Kapat", "Close")) } })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: (String) -> Unit,
     kilidiAc: (Kategori) -> Unit, pro: Boolean, proAc: () -> Unit, acilacakGrup: String? = null, bildirimAcik: Boolean = true,
-    oku: (Soz) -> Unit = {}, selectedRequest: Int = 0,
+    oku: (Soz) -> Unit = {}, selectedRequest: Int = 0, insets: Boolean = true,
 ) {
 
     var grupKey by rememberSaveable { mutableStateOf(acilacakGrup) }
@@ -108,18 +101,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     val columns = if (LocalConfiguration.current.screenWidthDp < 360 || LocalDensity.current.fontScale > 1.3f) 1 else 2
     fun chooseView(value: String) { odak.clearFocus(); arama = ""; grupKey = null; gorunum = value }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
-    Column(Modifier.fillMaxSize().statusBarsPadding()) {
-        Box(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp)) {
-            Box(Modifier.matchParentSize()) {
-                KlasikGorsel(KlasikMotif.ARCH, Modifier.align(Alignment.CenterEnd).width(94.dp).fillMaxHeight(), opacity = .24f)
-            }
-            Column {
-                Text("A S C E N D", fontSize = 9.sp, letterSpacing = 2.sp, color = Renk.metinIkincil)
-                Text(cevir(dil, "Keşfet", "Explore"), fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, fontSize = 32.sp, lineHeight = 38.sp,
-                    color = Renk.metin, modifier = Modifier.semantics { heading() })
-                Text(cevir(dil, "Sana iyi gelecek düşünceyi bul.", "Find a thought for this moment."), fontSize = 13.sp, lineHeight = 20.sp, color = Renk.metin)
-            }
-        }
+    Column(Modifier.fillMaxSize().then(if(insets) Modifier.statusBarsPadding() else Modifier)) {
         Column(Modifier.padding(horizontal = 24.dp, vertical = 2.dp)) {
                     TextField(arama, { arama = it },
                         placeholder = { Text(cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers"), fontSize = 14.sp) },
@@ -217,7 +199,6 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         color = Color(0xFF25272B), shape = RoundedCornerShape(18.dp),
                         modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp).testTag("collection-feature")) {
                         Box(Modifier.heightIn(min = 154.dp)) {
-                            KlasikGorsel(KlasikMotif.ARCH, Modifier.matchParentSize(), opacity = .24f)
                             Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                                 Text(cevir(dil, "KÜÇÜK BİR BAŞLANGIÇ", "A SMALL BEGINNING"), color = Color(0xFFD9DBDE), fontSize = 10.sp, letterSpacing = 1.sp)
                                 Text(first.ad(dil), color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 23.sp, lineHeight = 29.sp)
@@ -254,7 +235,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                     if (secildi && acildi) Icon(AzimIkon.Tik, null, Modifier.size(13.dp), tint = Renk.accent)
                                     Text(if (secildi && acildi) cevir(dil, "Bildirimlerinde", "In your reminders")
-                                        else if (!acildi) cevir(dil, "Kilitli · Önizleme", "Locked · Preview")
+                                        else if (!acildi) cevir(dil, "Pro · Önizleme", "Pro · Preview")
                                         else cevir(dil, Sozler.kategoriden(kat.anahtar).size.toString() + " söz", Sozler.kategoriden(kat.anahtar).size.toString() + " quotes"),
                                         color = if (secildi && acildi) Renk.accent else Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
                                 }
@@ -379,7 +360,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
 }
 
 private fun kategoriDurumu(acik: Boolean, secili: Boolean, dil: String): String =
-    if (!acik) cevir(dil, "Kilitli · Önizleme", "Locked · Preview")
+    if (!acik) cevir(dil, "Pro · Önizleme", "Pro · Preview")
     else if (secili) cevir(dil, "Bildirimlerinde", "In your reminders")
     else cevir(dil, "Erişime açık", "Unlocked")
 
@@ -398,7 +379,6 @@ private fun KoleksiyonKarti(group: KategoriGrubu, dil: String, seciliSayisi: Int
         color = Renk.koleksiyonYuzeyi, shape = RoundedCornerShape(18.dp),
         border = BorderStroke(if (focused) 2.dp else 1.dp, if (focused) Renk.accent else Renk.kenarlik)) {
         Box {
-        KoleksiyonRolefi(group.anahtar, Modifier.matchParentSize())
         Column(Modifier.padding(16.dp).heightIn(min = 180.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Icon(koleksiyonIkonu(group.anahtar), null, Modifier.size(20.dp), tint = Renk.accent)
             Text(group.ad(dil), fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, fontSize = 18.sp, lineHeight = 24.sp,

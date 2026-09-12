@@ -53,11 +53,10 @@ fun ProEkrani(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Box(Modifier.fillMaxWidth()) {
-                    KlasikGorsel(KlasikMotif.ARCH, Modifier.align(Alignment.CenterEnd).size(190.dp), opacity = .17f)
                     Column(Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         Icon(AzimIkon.Yukselis, null, Modifier.size(32.dp), tint = Renk.metin)
                         Box(Modifier.width(32.dp).height(1.dp).background(Renk.accent))
-                        Text(cevir(dil, "İlhamın tamamı.", "More room for inspiration."), color = Renk.metin, fontFamily = LoraSerif,
+                        Text(cevir(dil, "İlhamın tamamı.", "More room for inspiration."), color = Renk.metin, fontFamily = ArayuzFont,
                             fontSize = 32.sp, lineHeight = 39.sp, modifier = Modifier.semantics { heading() })
                         Text(cevir(dil, "Tüm konular. Kendi tarzında paylaşımlar.", "Every topic. Share in your own style."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
                     }
@@ -68,9 +67,10 @@ fun ProEkrani(
                 ProOzelligi(AzimIkon.Dag, cevir(dil, "Bütün arka planlar", "Every background"), cevir(dil, "Sahneler, renkler ve kendi fotoğrafların.", "Scenes, colors and your own photos."))
                 HorizontalDivider(color = Renk.kenarlik)
                 ProOzelligi(AzimIkon.Paylas, cevir(dil, "Gelişmiş paylaşım araçları", "Advanced sharing tools"), cevir(dil, "Video, süre, farklı boyutlar ve yazı stilleri.", "Video, duration, layouts and type styles."))
+                ProOzelligi(AzimIkon.Kitap, cevir(dil, "Kişisel temalar ve tüm widget’lar", "Personal themes and every widget"), cevir(dil, "Roma, Koyu Atlı Yolcu ve kendi görünümünle ana ekran widget’ları.", "Rome, Dark Rider and home screen widgets in your own style."))
                 Surface(color = Renk.yuzey, shape = RoundedCornerShape(14.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                        Text(cevir(dil, "Bu bir test demosu", "This is a test demo"), fontFamily = LoraSerif, fontSize = 21.sp, color = Renk.metin)
+                        Text(cevir(dil, "Bu bir test demosu", "This is a test demo"), fontFamily = ArayuzFont, fontSize = 21.sp, color = Renk.metin)
                         Text(cevir(dil, "Bildirim konularını yine sen seçersin.", "You still choose your notification topics."), style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
                         if (acik) Text(cevir(dil, "Demo kapanınca Pro araçları kilitlenir. Tek tek açtığın kategoriler sende kalır.", "Turning off the demo locks Pro tools. Categories you unlocked individually stay available."), style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
                     }
@@ -110,7 +110,7 @@ private fun ProOzelligi(ikon: ImageVector, baslik: String, aciklama: String) {
             Icon(ikon, null, Modifier.size(23.dp), tint = Renk.metin)
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(baslik, fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 28.sp, color = Renk.metin)
+            Text(baslik, fontFamily = ArayuzFont, fontSize = 22.sp, lineHeight = 28.sp, color = Renk.metin)
             Text(aciklama, style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
         }
     }

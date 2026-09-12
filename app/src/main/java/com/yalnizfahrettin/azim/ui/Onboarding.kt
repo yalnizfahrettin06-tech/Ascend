@@ -63,9 +63,13 @@ fun Onboarding(
     finishProfile: ((PersonalProfile, Boolean) -> Unit)? = null,
     editing: Boolean = false, onCancel: () -> Unit = {},
     previewAccess: Set<String> = Erisim.ucretsizKategoriler,
+    pro: Boolean = false, proOpen: () -> Unit = {}, languageChanged: (String) -> Unit = {},
     bitir: (Set<String>, Int, Int, Int, Boolean) -> Unit,
 ) {
-    var encoded by rememberSaveable { mutableStateOf(initialDraft.copy(step = if (initialDraft.setupVersion >= 2) initialDraft.step.coerceIn(0, 4) else when (initialDraft.step) { 15 -> 2; 16 -> 3; in 17..19 -> 4; else -> 0 }, setupVersion = 2).encode()) }
+    var encoded by rememberSaveable { mutableStateOf(initialDraft.copy(
+        step = if (initialDraft.setupVersion >= 3) initialDraft.step.coerceIn(0, 4) else 0, setupVersion = 3).encode()) }
+    var previewTheme by rememberSaveable { mutableStateOf<String?>(null) }
+
     val profile = remember(encoded) { PersonalProfile.decode(encoded) }
     val step = profile.step
     var hourDialog by rememberSaveable { mutableIntStateOf(0) }
@@ -128,11 +132,16 @@ fun Onboarding(
                         verticalArrangement = Arrangement.Center) {
                         Column(Modifier.fillMaxWidth().testTag("onboarding-body"), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                             when (shownStep) {
-                                0 -> PlanWelcome(dil, stageHeight)
+                                0 -> PlanLanguage(dil, profile.answer("language").firstOrNull() ?: dil) { update(profile.choose("language", it)); languageChanged(it) }
                                 1 -> PlanIntroduction(dil, stageHeight)
-                                2 -> PlanFrequency(profile, dil, stageHeight) { update(profile.copy(dailyCount = it)) }
-                                3 -> PlanHours(profile, dil, sceneExtension) { hourDialog = it }
-                                4 -> PlanPermission(profile, dil, bildirimIzni, previewAccess, stageHeight) { permissionHelp = true }
+                                2 -> PlanRhythm(profile, dil, { update(profile.copy(dailyCount = it)) }, { hourDialog = it })
+                                3 -> PlanPermission(profile, dil, bildirimIzni, previewAccess, stageHeight) { permissionHelp = true }
+                                4 -> {
+                                    PlanTitle(cevir(dil, "Sana ait bir görünüm.", "Make it feel like you."), cevir(dil, "Beyaz ve Siyah ücretsiz. Dilediğin zaman değiştir.", "White and Black are free. Change them anytime."))
+                                    TemaGrid(dil, AnaTemalar.onboarding, AnaTemalar.allowed(profile.answer("theme").firstOrNull(), pro).id, pro) {
+                                        if (it.pro) previewTheme = it.id else update(profile.choose("theme", it.id))
+                                    }
+                                }
                             }
                         }
                         Spacer(Modifier.height(24.dp))
@@ -140,14 +149,16 @@ fun Onboarding(
                             hata?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall,
                                 modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Polite }) }
                             Button(onClick = {
-                                if (step < 4) move(step + 1)
-                                else if (bildirimIzni) finish(true) else izinIste()
+                                if (step == 3 && !bildirimIzni) izinIste()
+                                else if (step < 4) move(step + 1)
+                                else if (bildirimIzni) finish(true) else move(3)
                             }, enabled = !kaydediliyor, shape = RoundedCornerShape(16.dp),
                                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("onboarding-next")) {
                                 Text(if (kaydediliyor) cevir(dil, "Kaydediliyor…", "Saving…") else when (step) {
-                                    0 -> cevir(dil, "Bir sözle başla", "Begin with a quote")
+                                    0 -> cevir(dil, "Devam", "Continue")
                                     1 -> cevir(dil, "Ritmimi ayarla", "Set my rhythm")
-                                    4 -> if (bildirimIzni) cevir(dil, if (editing) "Planımı güncelle" else "Ascend’e başla", if (editing) "Update my plan" else "Start Ascend") else cevir(dil, "Bildirimlere izin ver", "Allow notifications")
+                                    3 -> if (bildirimIzni) cevir(dil, "Temamı seç", "Choose my theme") else cevir(dil, "Bildirimlere izin ver", "Allow notifications")
+                                    4 -> cevir(dil, "Ascend’e başla", "Start Ascend")
                                     else -> cevir(dil, "Devam", "Continue")
                                 }, textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Medium)
                             }
@@ -161,6 +172,8 @@ fun Onboarding(
         update(if (hourDialog == 1) profile.copy(startHour = hour) else profile.copy(endHour = hour)); hourDialog = 0
     }
     if (permissionHelp) PlanPermissionHelp(dil) { permissionHelp = false }
+    previewTheme?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro,
+        close = { previewTheme = null }, apply = { update(profile.choose("theme", id)); previewTheme = null }, proOpen = proOpen) }
 }
 
 @Composable
@@ -169,23 +182,61 @@ private fun silverBrush() = Brush.linearGradient(if (Renk.karanlikMi)
     else listOf(Color(0xFFE1E4E6), Color(0xFFF7F8F8), Color(0xFFC9CED2)))
 
 @Composable
-private fun PlanWelcome(dil: String, stageHeight: Dp) {
-    PlanTitle(cevir(dil, "Kendine açılan\nküçük bir alan.", "A little space\nfor yourself."),
-        cevir(dil, "Günün içinde dur. Bir sözle kendine dön.", "Pause in your day. Find a moment in a quote."))
-    var entered by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { entered = true }
-    val scale by animateFloatAsState(if (entered) 1f else 1.07f, tween(1100), label = "gateway-reveal")
-    Box(Modifier.fillMaxWidth().height(stageHeight).clip(RoundedCornerShape(topStart = 64.dp, topEnd = 64.dp, bottomEnd = 22.dp, bottomStart = 22.dp))
-        .background(Renk.yuzey).testTag("welcome-gateway")) {
-        Image(painterResource(R.drawable.art_onboarding_gateway), null, Modifier.fillMaxSize().graphicsLayer { scaleX = scale; scaleY = scale },
-            contentScale = ContentScale.Crop, colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }))
-    }
-    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Icon(AzimIkon.Esik, null, Modifier.size(24.dp), tint = Renk.metinIkincil)
-        Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-            Text(cevir(dil, "Senin saatlerinde, senin ritminde.", "Your hours. Your rhythm."), color = Renk.metin, fontSize = 14.sp, lineHeight = 20.sp)
-            Text(cevir(dil, "Hesap oluşturman gerekmez.", "No account needed."), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
+private fun PlanLanguage(dil: String, language: String, select: (String) -> Unit) {
+    PlanTitle(cevir(dil, "Küçük bir an.\nSana iyi gelen bir söz.", "A small moment.\nWords that stay with you."),
+        cevir(dil, "Ascend'e hoş geldin. Önce dilini seç.", "Welcome to Ascend. Choose your language."))
+    Box(Modifier.fillMaxWidth().height(148.dp).clip(RoundedCornerShape(24.dp)).background(silverBrush()), contentAlignment = Alignment.Center) {
+        Row(horizontalArrangement = Arrangement.spacedBy(24.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("Aa", fontFamily = LoraSerif, color = Renk.metin, fontSize = 58.sp)
+            Box(Modifier.height(48.dp).width(1.dp).background(Renk.kenarlikGuclu))
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("Merhaba", fontSize = 18.sp, fontWeight = FontWeight.Medium, color = Renk.metin)
+                Text("Hello", fontSize = 18.sp, color = Renk.metinIkincil)
+            }
         }
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.selectableGroup()) {
+        PlanChoice("Türkçe", language == "tr", "language-tr") { select("tr") }
+        PlanChoice("English", language == "en", "language-en") { select("en") }
+    }
+    Text(cevir(dil, "Hesap gerekmez. Tercihlerin cihazında saklanır.", "No account needed. Your preferences stay on your device."),
+        color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
+}
+
+private fun planHour(hour: Int) = "%02d:00".format(Locale.ROOT, hour % 24)
+private fun previewTimes(profile: PersonalProfile) = BildirimZamanlari.hesapla(
+    LocalDateTime.of(2000, 1, 1, 0, 0), profile.dailyCount, profile.startHour, profile.endHour)
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun PlanRhythm(profile: PersonalProfile, dil: String, count: (Int) -> Unit, hour: (Int) -> Unit) {
+    PlanTitle(cevir(dil, "Günün ritmini seç.", "Choose your daily rhythm."),
+        cevir(dil, "Kaç kez, hangi saatler arasında?", "How often, and between which hours?"))
+    Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(24.dp)).background(silverBrush()).padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(cevir(dil, "Günlük bildirim", "Daily reminders"), color = Renk.metinIkincil, fontSize = 13.sp)
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
+            OutlinedIconButton(onClick = { count(profile.dailyCount - 1) }, enabled = profile.dailyCount > 1,
+                modifier = Modifier.size(48.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını azalt", "Fewer reminders") }) { Icon(AzimIkon.Eksi, null) }
+            AnimatedContent(profile.dailyCount, label = "rhythm-number") { Text("$it", fontSize = 48.sp, color = Renk.metin, fontWeight = FontWeight.Medium, modifier = Modifier.testTag("reminder-count")) }
+            OutlinedIconButton(onClick = { count(profile.dailyCount + 1) }, enabled = profile.dailyCount < 7,
+                modifier = Modifier.size(48.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını artır", "More reminders") }) { Icon(AzimIkon.Arti, null) }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            repeat(7) { i -> Box(Modifier.size(if(i < profile.dailyCount) 8.dp else 5.dp).background(if(i < profile.dailyCount) Renk.metin else Renk.kenarlikGuclu, CircleShape)) }
+        }
+    }
+    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        HourControl(dil, true, profile.startHour, Modifier.weight(1f)) { hour(1) }
+        HourControl(dil, false, profile.endHour, Modifier.weight(1f)) { hour(2) }
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text(cevir(dil, "Yaklaşık bildirim saatlerin", "Your approximate reminder times"), color = Renk.metinIkincil, fontSize = 12.sp)
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.testTag("reminder-preview-times")) {
+            previewTimes(profile).forEach { Text(it.format(DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT)), color = Renk.metin, fontSize = 13.sp,
+                modifier = Modifier.background(Renk.yuzey, RoundedCornerShape(8.dp)).padding(10.dp)) }
+        }
+        Text(cevir(dil, "Bu aralığın dışında sessiz kalırız.", "We stay quiet outside this window."), color = Renk.metinIkincil, fontSize = 12.sp)
     }
 }
 
@@ -213,116 +264,6 @@ private fun PlanChoice(label: String, selected: Boolean, tag: String, role: Role
             fontWeight = if (selected) FontWeight.Medium else FontWeight.Normal)
         Box(Modifier.size(22.dp).border(1.dp, if (selected) Renk.accent else Renk.metinIkincil, markShape), contentAlignment = Alignment.Center) {
             if (selected) Icon(AzimIkon.Tik, null, Modifier.size(15.dp), tint = Renk.accent)
-        }
-    }
-}
-
-/** One decision, one visual: the count directly changes the silver dial. */
-@Composable
-private fun PlanFrequency(profile: PersonalProfile, dil: String, stageHeight: Dp, changed: (Int) -> Unit) {
-    PlanTitle(cevir(dil, "Gününde kaç küçük durak?", "How many moments in your day?"),
-        cevir(dil, "Sana uygun bildirim sayısını seç.", "Choose how often you would like a reminder."))
-    val ink = Renk.metin
-    val edge = Renk.kenarlik
-    val fill = silverBrush()
-    val animatedCount by animateFloatAsState(profile.dailyCount.toFloat(), tween(350), label = "rhythm-dots")
-    Box(Modifier.fillMaxWidth().heightIn(min = stageHeight).testTag("frequency-dial"), contentAlignment = Alignment.Center) {
-        Canvas(Modifier.size(stageHeight.coerceAtMost(380.dp)).clearAndSetSemantics { }) {
-            val radius = size.minDimension * .40f
-            drawCircle(fill, radius * .85f)
-            drawCircle(edge.copy(alpha = .65f), radius, style = Stroke(1.dp.toPx()))
-            drawCircle(edge.copy(alpha = .35f), radius * 1.12f, style = Stroke(1.dp.toPx()))
-            for (i in 0..6) {
-                val theta = (-90 + i * 360.0 / 7) * Math.PI / 180
-                val center = Offset(this.center.x + cos(theta).toFloat() * radius, this.center.y + sin(theta).toFloat() * radius)
-                val active = (animatedCount - i).coerceIn(0f, 1f)
-                drawCircle(edge, 5.dp.toPx(), center)
-                if (active > 0f) drawCircle(ink, (3f + active * 3f).dp.toPx(), center)
-            }
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            AnimatedContent(profile.dailyCount, label = "count-change") { count ->
-                Text("$count", color = Renk.metin, fontFamily = ArayuzFont, fontWeight = FontWeight.Medium, fontSize = 68.sp, lineHeight = 78.sp,
-                    modifier = Modifier.testTag("reminder-count").semantics { liveRegion = LiveRegionMode.Polite })
-            }
-            Text(cevir(dil, "bildirim / gün", "reminders / day"), color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 19.sp)
-        }
-    }
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
-        OutlinedIconButton(onClick = { changed(profile.dailyCount - 1) }, enabled = profile.dailyCount > 1,
-            colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Renk.metin, disabledContentColor = Renk.metinSonuk.copy(alpha = .4f)),
-            border = BorderStroke(1.dp, Renk.kenarlikGuclu),
-            modifier = Modifier.size(52.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını azalt", "Fewer reminders") }) {
-            Icon(AzimIkon.Eksi, null, Modifier.size(22.dp))
-        }
-        Text(cevir(dil, "Az", "Less") + "     ·     " + cevir(dil, "Çok", "More"), Modifier.padding(horizontal = 28.dp),
-            color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 19.sp)
-        OutlinedIconButton(onClick = { changed(profile.dailyCount + 1) }, enabled = profile.dailyCount < 7,
-            colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Renk.metin, disabledContentColor = Renk.metinSonuk.copy(alpha = .4f)),
-            border = BorderStroke(1.dp, Renk.kenarlikGuclu),
-            modifier = Modifier.size(52.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını artır", "More reminders") }) {
-            Icon(AzimIkon.Arti, null, Modifier.size(22.dp))
-        }
-    }
-    Text(cevir(dil, "1–7 bildirim. Daha sonra değiştirebilirsin.", "1–7 reminders. You can change this later."),
-        Modifier.fillMaxWidth(), textAlign = TextAlign.Center, color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
-}
-
-private fun planHour(hour: Int) = "%02d:00".format(Locale.ROOT, hour % 24)
-private fun previewTimes(profile: PersonalProfile) = BildirimZamanlari.hesapla(
-    LocalDateTime.of(2000, 1, 1, 0, 0), profile.dailyCount, profile.startHour, profile.endHour)
-
-/** A day diagram replaces the duplicated notification and schedule summaries. */
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun PlanHours(profile: PersonalProfile, dil: String, sceneExtension: Dp, select: (Int) -> Unit) {
-    PlanTitle(cevir(dil, "Hangi saatler sana ait?", "Which hours work for you?"),
-        cevir(dil, "Bu aralıkta hatırlatır, dışında sessiz kalırız.", "Reminders inside this window. Quiet outside it."))
-    val times = remember(profile.dailyCount, profile.startHour, profile.endHour) { previewTimes(profile) }
-    val ink = Renk.metin
-    val edge = Renk.kenarlik
-    val begin by animateFloatAsState(profile.startHour / 24f, tween(400), label = "day-start")
-    val end by animateFloatAsState(profile.endHour / 24f, tween(400), label = "day-end")
-    Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(26.dp)).background(silverBrush()).padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text(cevir(dil, "GÜNÜNÜN AKIŞI", "YOUR DAY"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.6.sp)
-        Canvas(Modifier.fillMaxWidth().height(116.dp + sceneExtension).testTag("schedule-day-visual").clearAndSetSemantics { }) {
-            val y = size.height * .72f
-            val left = 6.dp.toPx()
-            val width = size.width - 2 * left
-            // A quiet arc evokes a day's passage, without another photo or clock face.
-            drawArc(edge, 180f, 180f, false, Offset(left, y - size.height * .7f), Size(width, size.height * 1.4f), style = Stroke(1.dp.toPx()))
-            drawLine(edge, Offset(left, y), Offset(left + width, y), 2.dp.toPx(), StrokeCap.Round)
-            drawLine(ink, Offset(left + width * begin, y), Offset(left + width * end, y), 3.dp.toPx(), StrokeCap.Round)
-            repeat(profile.dailyCount) { i ->
-                val fraction = begin + (end - begin) * (2 * i + 1) / (2 * profile.dailyCount)
-                val x = left + width * fraction
-                drawLine(edge, Offset(x, y - 28.dp.toPx()), Offset(x, y), 1.dp.toPx())
-                drawCircle(ink, 4.dp.toPx(), Offset(x, y - 28.dp.toPx()))
-            }
-        }
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            listOf("00:00", "12:00", "24:00").forEach { Text(it, color = Renk.metinIkincil, fontSize = 11.sp) }
-        }
-    }
-    BoxWithConstraints {
-        val stacked = maxWidth < 300.dp || LocalDensity.current.fontScale > 1.35f
-        if (stacked) Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            HourControl(dil, true, profile.startHour, Modifier.fillMaxWidth()) { select(1) }
-            HourControl(dil, false, profile.endHour, Modifier.fillMaxWidth()) { select(2) }
-        } else Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            HourControl(dil, true, profile.startHour, Modifier.weight(1f)) { select(1) }
-            HourControl(dil, false, profile.endHour, Modifier.weight(1f)) { select(2) }
-        }
-    }
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(cevir(dil, "Yaklaşık bildirim saatlerin", "Your approximate reminder times"), color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
-        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.testTag("reminder-preview-times")) {
-            times.forEach { time ->
-                Text(time.format(DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT)), color = Renk.metin, fontSize = 13.sp,
-                    modifier = Modifier.background(Renk.yuzey, RoundedCornerShape(10.dp)).padding(horizontal = 12.dp, vertical = 8.dp))
-            }
         }
     }
 }

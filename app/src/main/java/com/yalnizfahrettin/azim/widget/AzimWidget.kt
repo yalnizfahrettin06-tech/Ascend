@@ -58,55 +58,34 @@ class AzimWidget : GlanceAppWidget() {
     override val stateDefinition: GlanceStateDefinition<*> = PreferencesGlanceStateDefinition
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        provideContent { Icerik() }
-    }
-
-    @Composable
-    private fun Icerik() {
-        val durum = currentState<androidx.datastore.preferences.core.Preferences>()
-        val soz = durum[SOZ] ?: ""
-        val yazar = durum[YAZAR] ?: ""
-
-        Column(
-            modifier = GlanceModifier
-                .fillMaxSize()
-                .background(ColorProvider(Color(0xFF141414)))
-                .cornerRadius(16.dp)
-                .padding(16.dp)
-                .clickable(actionRunCallback<YenileEylemi>()),
-            verticalAlignment = Alignment.Vertical.CenterVertically,
-            horizontalAlignment = Alignment.Horizontal.Start,
-        ) {
-            if (soz.isBlank()) {
-                Text(
-                    "ASCEND",
-                    style = TextStyle(
-                        color = ColorProvider(Color(0xFF9FADBC)),
-                        fontFamily = FontFamily.Serif,
-                    ),
-                )
-            } else {
-                Text(
-                    soz,
-                    maxLines = 5,
-                    style = TextStyle(
-                        color = ColorProvider(Color(0xFFF2F5F8)),
-                        fontFamily = FontFamily.Serif,
-                    ),
-                )
-                Text(
-                    "— $yazar",
-                    modifier = GlanceModifier.padding(top = 8.dp),
-                    style = TextStyle(
-                        color = ColorProvider(Color(0xFF9FADBC)),
-                        fontFamily = FontFamily.Serif,
-                    ),
-                )
+        val depo = Depo(context)
+        val pro = depo.proDemo.first()
+        val dil = depo.dil.first()
+        val manager = androidx.glance.appwidget.GlanceAppWidgetManager(context)
+        val widgetId = manager.getAppWidgetId(id)
+        val config = WidgetTasarimi.load(context, widgetId)
+        provideContent {
+            val state = currentState<androidx.datastore.preferences.core.Preferences>()
+            val size = androidx.glance.LocalSize.current
+            val quote = if(pro) state[SOZ].orEmpty().ifBlank { if(dil == "tr") "Kendine küçük bir an ayır." else "Take a moment for yourself." }
+                else if(dil == "tr") "Widget’lar Ascend Pro ile." else "Widgets are part of Ascend Pro."
+            val source = if(pro) state[YAZAR] ?: "Ascend" else if(dil == "tr") "Önizlemek için dokun" else "Tap to preview"
+            val bitmap = androidx.compose.runtime.remember(config, quote, source, size, pro) {
+                WidgetTasarimi.render(context, if(pro) config else WidgetSecimi(), quote, source,
+                    (size.width.value * 2).toInt(), (size.height.value * 2).toInt())
             }
+            val intent = if(pro) android.content.Intent(context, com.yalnizfahrettin.azim.MainActivity::class.java)
+                .putExtra(com.yalnizfahrettin.azim.notif.Bildirimler.EXTRA_KIMLIK, state[KIMLIK])
+                else android.content.Intent(context, WidgetAyarActivity::class.java).putExtra(android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
+            androidx.glance.Image(provider = androidx.glance.ImageProvider(bitmap), contentDescription = "$quote $source",
+                contentScale = androidx.glance.layout.ContentScale.FillBounds,
+                modifier = GlanceModifier.fillMaxSize().cornerRadius(20.dp)
+                    .clickable(androidx.glance.appwidget.action.actionStartActivity(intent)))
         }
     }
 
     companion object {
+        val KIMLIK = stringPreferencesKey("widget_quote_id")
         val SOZ = stringPreferencesKey("widget_soz")
         val YAZAR = stringPreferencesKey("widget_yazar")
 
@@ -123,6 +102,7 @@ class AzimWidget : GlanceAppWidget() {
                 .forEach { id ->
                     updateAppWidgetState(ctx, id) { p ->
                         p[SOZ] = soz?.metin(dil) ?: if(dil == "tr") "Uygulamadan içerik tercihlerini düzenleyebilirsin." else "Adjust content preferences in the app."
+                        p[KIMLIK] = soz?.kimlik.orEmpty()
                         p[YAZAR] = soz?.sunumEtiketi(dil) ?: "Ascend"
                     }
                 }
@@ -140,4 +120,8 @@ class YenileEylemi : ActionCallback {
 
 class AzimWidgetSaglayici : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget = AzimWidget()
+    override fun onDeleted(context: Context, appWidgetIds: IntArray) {
+        appWidgetIds.forEach { WidgetTasarimi.remove(context, it) }
+        super.onDeleted(context, appWidgetIds)
+    }
 }

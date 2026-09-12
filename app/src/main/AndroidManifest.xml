@@ -65,6 +65,10 @@
                 android:resource="@xml/azim_widget_bilgi" />
         </receiver>
 
+        <activity android:name=".widget.WidgetAyarActivity" android:exported="true">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" /></intent-filter>
+        </activity>
+        <receiver android:name=".widget.WidgetEkleAlicisi" android:exported="false" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

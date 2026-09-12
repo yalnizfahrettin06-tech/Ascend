@@ -131,7 +131,8 @@ fun Uygulama(
         }
         Onboarding(dil = dil, kaydediliyor = kaydediliyor, hata = kayitHatasi,
             bildirimIzni = bildirimIzni, izinIste = izinIste,
-            initialDraft = taslak!!, previewAccess = acik,
+            initialDraft = taslak!!, previewAccess = acik, pro = proDemo == true, proOpen = { proGoster = true },
+            languageChanged = { kapsam.launch { depo.dilAyarla(it) } },
             draftChanged = { yeni ->
                 kapsam.launch {
                     try { depo.saveOnboardingDraft(yeni) }
@@ -165,6 +166,15 @@ fun Uygulama(
                             kayitHatasi = hataMetni
                         } finally { kaydediliyor = false }
                     }
+                }
+            })
+        if (proGoster) ProEkrani(dil, proDemo == true, proKaydediliyor, proHata,
+            kapat = { proGoster = false }, degistir = { enabled ->
+                proKaydediliyor = true
+                kapsam.launch {
+                    try { depo.proDemoAyarla(enabled); proGoster = false }
+                    catch (_: java.io.IOException) { proHata = hataMetni }
+                    finally { proKaydediliyor = false }
                 }
             })
         return
@@ -294,13 +304,16 @@ fun Uygulama(
                         ayarlaraGit = { ayarlardaMi = true },
                     )
 
-                    Sekme.KATEGORI -> KategorilerEkrani(
+                    Sekme.KATEGORI -> KesifMerkezi(dil, arkaPlan, proDemo == true, { proGoster = true },
+                        { id -> kapsam.launch { depo.arkaPlanAyarla(id) } }, selectedRequest) {
+                        KategorilerEkrani(
                         secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },
                         sec = { kapsam.launch { depo.kategoriSec(it); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
                         kilidiAc = { kilitKategori = it },
                         acilacakGrup = acilacakGrup, bildirimAcik = hatirlaticiAcik && bildirimIzni,
-                        oku = { readerId = it.kimlik }, selectedRequest = selectedRequest,
+                        oku = { readerId = it.kimlik }, selectedRequest = selectedRequest, insets = false,
                     )
+                    }
 
                     Sekme.FAVORI -> FavorilerEkrani(
                         onBack = { sekme = Sekme.ISTATISTIK },

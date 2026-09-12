@@ -34,29 +34,30 @@ class OnboardingTest {
             izinIste = { requests++; allowed = true }) { _, _, _, _, reminders ->
             assertTrue(reminders); completed = true
         } } }
-        repeat(4) { next() }
-        compose.onNodeWithText("5 / 5").assertIsDisplayed()
+        repeat(3) { next() }
+        compose.onNodeWithText("4 / 5").assertIsDisplayed()
         compose.runOnIdle { assertEquals(0, requests); assertFalse(completed) }
         next()
         compose.runOnIdle { assertEquals(1, requests); assertFalse(completed) }
+        next()
+        compose.onNodeWithTag("theme-white").assertExists()
         next()
         compose.runOnIdle { assertTrue(completed) }
     }
 
     @Test fun deniedPermissionKeepsSetupOpen() {
         var completed = false
-        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 4)) { _, _, _, _, _ -> completed = true } } }
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(setupVersion = 3, step = 3)) { _, _, _, _, _ -> completed = true } } }
         next()
         compose.onNodeWithTag("onboarding-finish-without-reminders").assertDoesNotExist()
         compose.runOnIdle { assertFalse(completed) }
     }
 
     @Test fun scheduleAndFinalPreviewTrackCountAndHourChanges() {
-        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 2)) { _, _, _, _, _ -> } } }
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(setupVersion = 3, step = 2)) { _, _, _, _, _ -> } } }
         compose.onNodeWithTag("live-reminder-preview").assertDoesNotExist()
         compose.onNodeWithContentDescription("More reminders").performScrollTo().performClick()
         compose.onNodeWithTag("reminder-count").assertTextEquals("4")
-        next()
         compose.onNodeWithText("10:30").assertExists()
         compose.onNodeWithTag("reminder-start").performScrollTo().performClick()
         compose.onNodeWithTag("hour-choice-13").performScrollTo().performClick()
@@ -67,7 +68,7 @@ class OnboardingTest {
     }
 
     @Test fun notificationSampleExpandsAndCollapses() {
-        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 4)) { _, _, _, _, _ -> } } }
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(setupVersion = 3, step = 3)) { _, _, _, _, _ -> } } }
         compose.onNodeWithTag("live-reminder-preview").performScrollTo().performClick()
         compose.onNodeWithText("Collapse").assertExists()
         compose.onNodeWithTag("live-reminder-preview").performClick()
@@ -75,7 +76,7 @@ class OnboardingTest {
     }
 
     @Test fun practiceSupportsSwipingAndAccessibleAlternativeWithoutChangingSetup() {
-        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 1)) { _, _, _, _, _ -> } } }
+        compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(setupVersion = 3, step = 1)) { _, _, _, _, _ -> } } }
         val first = "You do not have to finish everything today."
         compose.onNodeWithTag("practice-quote-text").assertTextEquals(first)
         compose.onNodeWithTag("practice-like").performScrollTo().performClick()
@@ -88,7 +89,7 @@ class OnboardingTest {
     }
 
     @Test fun actionStaysCloseToContentOnEveryPage() {
-        compose.setContent { AzimTema { Onboarding("en") { _, _, _, _, _ -> } } }
+        compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true) { _, _, _, _, _ -> } } }
         repeat(5) { page ->
             compose.onNodeWithTag("onboarding-next").performScrollTo()
             val body = compose.onNodeWithTag("onboarding-body").fetchSemanticsNode().boundsInRoot
@@ -101,7 +102,7 @@ class OnboardingTest {
 
     @Test fun rhythmSurvivesBackAndRestoration() {
         val restore = StateRestorationTester(compose)
-        restore.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(step = 2)) { _, _, _, _, _ -> } } }
+        restore.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(setupVersion = 3, step = 2)) { _, _, _, _, _ -> } } }
         compose.onNodeWithContentDescription("More reminders").performClick()
         next()
         restore.emulateSavedInstanceStateRestore()
@@ -117,21 +118,22 @@ class OnboardingTest {
                 AzimTema { Onboarding("tr", initialDraft = old) { _, _, _, _, _ -> } }
             }
         }
-        compose.onNodeWithText("5 / 5").assertIsDisplayed()
+        compose.onNodeWithText("1 / 5").assertIsDisplayed()
         compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
     }
 
     @Test fun captureFiveTurkishPagesAndExpandedNotification() {
-        compose.setContent { AzimTema { Onboarding("tr") { _, _, _, _, _ -> } } }
+        compose.setContent { AzimTema { Onboarding("tr", bildirimIzni = true) { _, _, _, _, _ -> } } }
         repeat(5) { page ->
             compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
             compose.waitForIdle()
-            ekranKaydet("v96-onboarding-${page + 1}")
+            ekranKaydet("v97-onboarding-${page + 1}")
             if (page < 4) next()
         }
+        compose.onNodeWithTag("onboarding-back").performClick()
         compose.onNodeWithTag("live-reminder-preview").performScrollTo().performClick()
         compose.waitForIdle()
-        ekranKaydet("v96-notification-expanded")
+        ekranKaydet("v97-notification-expanded")
     }
 
     @Test fun allLargeTextPagesRemainScrollableAndDarkModeReadable() {
@@ -140,7 +142,7 @@ class OnboardingTest {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, 2f)) {
                 key(page) { AzimTema(modu = TemaModu.KARANLIK) {
-                    Onboarding("tr", initialDraft = PersonalProfile(step = page)) { _, _, _, _, _ -> }
+                    Onboarding("tr", initialDraft = PersonalProfile(setupVersion = 3, step = page)) { _, _, _, _, _ -> }
                 } }
             }
         }
@@ -148,7 +150,22 @@ class OnboardingTest {
             compose.runOnIdle { page = current }
             compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
             compose.waitForIdle()
-            ekranKaydet("v96-large-dark-${current + 1}")
+            ekranKaydet("v97-large-dark-${current + 1}")
         }
     }
+    @Test fun proPreviewDoesNotSelectOrUnlockTheme() {
+        var finished: PersonalProfile? = null
+        var proRequested = false
+        compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true,
+            initialDraft = PersonalProfile(setupVersion = 3, step = 4),
+            proOpen = { proRequested = true }, finishProfile = { value, _ -> finished = value }) { _,_,_,_,_ -> } } }
+        compose.onNodeWithTag("theme-black").performScrollTo().performClick()
+        compose.onNodeWithTag("theme-rider").performScrollTo().performClick()
+        compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
+        compose.runOnIdle { assertTrue(proRequested); assertNull(finished) }
+        compose.onNodeWithContentDescription("Close").performClick()
+        next()
+        compose.runOnIdle { assertEquals("black", finished?.answer("theme")?.firstOrNull()) }
+    }
+
 }
