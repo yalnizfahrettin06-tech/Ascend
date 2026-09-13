@@ -23,7 +23,7 @@
     <string name="izle">"Regarder"</string>
     <string name="favoriler_baslik">"Enregistrés"</string>
     <string name="favori_bos_baslik">"Rien n\'a encore été enregistré"</string>
-    <string name="favori_bos_alt">"Tap the heart on a quote to keep it here."</string>
+    <string name="favori_bos_alt">"Touche le cœur d’une citation pour la retrouver ici."</string>
     <string name="istatistik_baslik">"Votre voyage"</string>
     <string name="seri">"Série"</string>
     <string name="gun">"jours"</string>
@@ -74,7 +74,7 @@
     <string name="sonraki_soz">"Devis suivant ~%1$s"</string>
     <string name="o_gun_soz_yok">"Aucun devis n\'est arrivé ce jour-là."</string>
     <string name="kesif_ipucu">"Vous voulez essayer le %1$s ?"</string>
-    <string name="tamamini_oku">"Tap to read in full"</string>
+    <string name="tamamini_oku">"Toucher pour lire la suite"</string>
     <string name="sistem_bildirim_ayarlari">"Paramètres de notification du système"</string>
     <string name="ayari_ac">"Ouvert"</string>
     <string name="sesi_durdur">"Arrêter"</string>

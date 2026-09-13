@@ -26,6 +26,7 @@ for lang in LANGS:
  assert set(ui)==set(ui_source),f'UI coverage mismatch: {lang}'
  for q in master['quotes']:
   record=data['quotes'][q['id']];s=record['text']
+  assert s != q['text'],f'Untranslated content: {lang} {q["id"]}'
   assert record['sourceHash']==hashlib.sha256(q['text'].encode()).hexdigest()
   assert 20<=len(s)<=300 and s==s.strip() and '\n' not in s and '\ufffd' not in s,(lang,q['id'])
   assert unicodedata.normalize('NFC',s)==s
