@@ -2263,5 +2263,7 @@ internal object LocaleDe {
         "✓ In your reminders" to "✓ In Ihren Erinnerungen",
         "Saving…" to "Wird gespeichert…",
         "adapted" to "bearbeitet",
+        "Ascend · Square" to "Ascend · Quadratisch",
+        "Ascend · Wide" to "Ascend · Breit",
     )
 }

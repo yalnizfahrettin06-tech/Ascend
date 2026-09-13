@@ -140,4 +140,6 @@
     <string name="asc_yukleniyor">"Préparation d’Ascend"</string>
     <string name="asc_konular_alt">"Commencez par des affirmations quotidiennes, puis explorez d\'autres collections à votre rythme."</string>
     <string name="asc_okumaya_don">"Revenez à vos affirmations"</string>
+    <string name="widget_square_name">"Ascend · Carré"</string>
+    <string name="widget_wide_name">"Ascend · Large"</string>
 </resources>

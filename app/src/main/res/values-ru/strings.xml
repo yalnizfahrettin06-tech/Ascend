@@ -140,4 +140,6 @@
     <string name="asc_yukleniyor">"Подготовка Ascend"</string>
     <string name="asc_konular_alt">"Начните с ежедневных утверждений, а затем изучайте другие коллекции в удобном для вас темпе."</string>
     <string name="asc_okumaya_don">"Вернитесь к своим аффирмациям"</string>
+    <string name="widget_square_name">"Ascend · Квадратный"</string>
+    <string name="widget_wide_name">"Ascend · Широкий"</string>
 </resources>

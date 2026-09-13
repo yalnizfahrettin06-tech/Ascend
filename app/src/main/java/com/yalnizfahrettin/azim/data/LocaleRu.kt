@@ -2263,5 +2263,7 @@ internal object LocaleRu {
         "✓ In your reminders" to "✓ В ваших напоминаниях",
         "Saving…" to "Сохранение…",
         "adapted" to "адаптация",
+        "Ascend · Square" to "Ascend · Квадратный",
+        "Ascend · Wide" to "Ascend · Широкий",
     )
 }

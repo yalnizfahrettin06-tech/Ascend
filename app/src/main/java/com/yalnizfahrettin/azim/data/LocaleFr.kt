@@ -2263,5 +2263,7 @@ internal object LocaleFr {
         "✓ In your reminders" to "✓ Dans vos rappels",
         "Saving…" to "Enregistrement…",
         "adapted" to "adaptation",
+        "Ascend · Square" to "Ascend · Carré",
+        "Ascend · Wide" to "Ascend · Large",
     )
 }

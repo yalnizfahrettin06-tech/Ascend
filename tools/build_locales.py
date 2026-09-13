@@ -42,7 +42,7 @@ for lang in LANGS:
  text+=table('ui',ui)+'}\n'
  write(OUT/f'Locale{lang.title()}.kt',text)
  resources=ET.Element('resources')
- for e in ET.parse(ROOT/'app/src/main/res/values-en/strings.xml').getroot():
+ for e in [element for xml in sorted((ROOT/'app/src/main/res/values-en').glob('*.xml')) for element in ET.parse(xml).getroot()]:
   assert e.tag=='string'
   source=''.join(e.itertext()).replace("\\'","'")
   v=ui[source]

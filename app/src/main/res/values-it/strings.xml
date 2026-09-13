@@ -140,4 +140,6 @@
     <string name="asc_yukleniyor">"Preparazione di Ascend"</string>
     <string name="asc_konular_alt">"Inizia con affermazioni quotidiane, quindi esplora altre collezioni al tuo ritmo."</string>
     <string name="asc_okumaya_don">"Ritorna alle tue affermazioni"</string>
+    <string name="widget_square_name">"Ascend · Quadrato"</string>
+    <string name="widget_wide_name">"Ascend · Orizzontale"</string>
 </resources>

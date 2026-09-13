@@ -2263,5 +2263,7 @@ internal object LocaleIt {
         "✓ In your reminders" to "✓ Nei tuoi promemoria",
         "Saving…" to "Salvataggio…",
         "adapted" to "adattamento",
+        "Ascend · Square" to "Ascend · Quadrato",
+        "Ascend · Wide" to "Ascend · Orizzontale",
     )
 }

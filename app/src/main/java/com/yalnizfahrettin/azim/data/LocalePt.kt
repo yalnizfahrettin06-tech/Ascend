@@ -2263,5 +2263,7 @@ internal object LocalePt {
         "✓ In your reminders" to "✓ Em seus lembretes",
         "Saving…" to "Salvando…",
         "adapted" to "adaptação",
+        "Ascend · Square" to "Ascend · Quadrado",
+        "Ascend · Wide" to "Ascend · Horizontal",
     )
 }
