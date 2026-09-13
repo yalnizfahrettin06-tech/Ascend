@@ -139,34 +139,31 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             item {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
                     Column(Modifier.weight(1f).padding(top = 8.dp, end = 8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(Kategoriler.grupBul(kat.grup)?.ad(dil).orEmpty(), color = Renk.metinIkincil, fontSize = 11.sp, lineHeight = 16.sp)
-                        Text(kat.ad(dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 27.sp, lineHeight = 35.sp,
+                        Text(kat.ad(dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 22.sp, lineHeight = 28.sp,
                             modifier = Modifier.semantics { heading() })
-                        Text(koleksiyonOzeti(kat.grup, dil), color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 20.sp)
                     }
                     IconButton(onClick = { detayKey = null }, modifier = Modifier.testTag("category-detail-close")) {
                         Icon(AzimIkon.Kapat, cevir(dil, "Konuya göz atmayı kapat", "Close topic"), Modifier.size(20.dp))
                     }
                 }
-                Text(if (acildi) cevir(dil, "${sozler.size} özgün söz · Erişime açık", "${sozler.size} original quotes · Unlocked")
+                Text(if (acildi) cevir(dil, "${sozler.size} söz", "${sozler.size} reflections")
                     else cevir(dil, "${sozler.size} özgün söz · ${gosterilenSozler.size} sözlük önizleme", "${sozler.size} original quotes · ${gosterilenSozler.size}-quote preview"),
                     color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp,
-                    modifier = Modifier.padding(top = 12.dp, bottom = 18.dp).testTag("category-detail-access"))
+                    modifier = Modifier.padding(bottom = 8.dp).testTag("category-detail-access"))
                 HorizontalDivider(color = Renk.kenarlik)
             }
             item {
                 if (acildi) {
                     val degisebilir = !secildi || secili.size > 1
-                    Row(Modifier.fillMaxWidth().heightIn(min = 64.dp).testTag("category-reminder-${kat.anahtar}")
+                    Row(Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("category-reminder-${kat.anahtar}")
                         .toggleable(value = secildi, enabled = degisebilir, role = Role.Switch, onValueChange = { sec(kat.anahtar) })
-                        .padding(vertical = 10.dp), verticalAlignment = Alignment.CenterVertically,
+                        .padding(vertical = 2.dp), verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(cevir(dil, "Bildirimlerime ekle", "Add to my reminders"), modifier = Modifier.weight(1f),
                             color = Renk.metin, fontSize = 14.sp, lineHeight = 21.sp)
                         Switch(checked = secildi, onCheckedChange = null, enabled = degisebilir)
                     }
-                    Text(if (!degisebilir) cevir(dil, "Son konunu kaldırmadan önce başka bir konu seç.", "Choose another topic before removing your last one.")
-                        else cevir(dil, "Seçersen bildirimlerinde bu konuya öncelik veririz. Planındaki tür ve kaçınma tercihleri korunur.", "Selected topics have priority in your reminders. Your format and avoidance preferences still apply."),
+                    if (!degisebilir) Text(cevir(dil, "Son konunu kaldırmadan önce başka bir konu seç.", "Choose another topic before removing your last one."),
                         color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp,
                         modifier = Modifier.padding(bottom = 18.dp))
                 } else {
@@ -179,8 +176,8 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
 
                 }
                 if (kat.grup in setOf("filozoflar", "tasavvuf", "inanc")) {
-                    Text(cevir(dil, "Bu gelenekten ilham alan özgün Ascend düşünceleri; doğrudan alıntı veya kutsal metin değildir.",
-                        "Original Ascend reflections inspired by this tradition, not direct quotations or sacred texts."),
+                    Text(cevir(dil, "Ascend yorumu · Doğrudan alıntı değildir.",
+                        "Ascend reflections · Not direct quotations."),
                         color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp, fontStyle = FontStyle.Italic,
                         modifier = Modifier.padding(bottom = 16.dp))
                 }
@@ -188,8 +185,8 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             items(gosterilenSozler, key = { it.kimlik }) { soz ->
                 HorizontalDivider(color = Renk.kenarlik)
                 Text(soz.metin(dil), Modifier.fillMaxWidth().clickable(enabled = acildi, role = Role.Button,
-                    onClickLabel = cevir(dil, "Sözü aç", "Open quote")) { oku(soz) }.padding(vertical = 22.dp).testTag("category-quote-${soz.kimlik}"),
-                    color = Renk.metin, fontFamily = LoraSerif, fontSize = 23.sp, lineHeight = 33.sp)
+                    onClickLabel = cevir(dil, "Sözü aç", "Open quote")) { oku(soz) }.padding(vertical = 16.dp).testTag("category-quote-${soz.kimlik}"),
+                    color = Renk.metin, fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 29.sp)
             }
         }
     }

@@ -91,7 +91,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     var oncekiPro by remember { mutableStateOf(pro) }
     val gorunenAyar = PaylasimErisimi.gorunenAyar(ayar, pro)
     val gorunenVideo = video && pro
-    val zeminler = remember(dil, soz.kategori) { paylasimZeminleri(dil, soz.kategori) }
+    val zeminler = remember(dil) { paylasimZeminleri(dil) }
     val etkinZeminFiltresi = PaylasimZeminFiltresi.valueOf(zeminFiltresi)
     val gorunenZeminler = remember(zeminler, etkinZeminFiltresi, gorselArama) {
         zeminler.filter { z -> etkinZeminFiltresi.kapsar(z) &&
@@ -226,8 +226,14 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     }
                     FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         FilterChip(selected = !gorunenVideo, onClick = { video = false }, enabled = !hazirlaniyor,
+                            colors = FilterChipDefaults.filterChipColors(containerColor = Renk.yuzey, labelColor = Renk.metin,
+                                selectedContainerColor = Renk.metin, selectedLabelColor = Renk.zemin, selectedLeadingIconColor = Renk.zemin),
+                            leadingIcon = if (!gorunenVideo) { { Icon(AzimIkon.Tik, null, Modifier.size(18.dp)) } } else null,
                             label = { Text(cevir(dil, "Görsel", "Image")) }, modifier = Modifier.testTag("share-image"))
                         FilterChip(selected = gorunenVideo, onClick = { if(!pro) proAc() else video = true }, enabled = !hazirlaniyor,
+                            colors = FilterChipDefaults.filterChipColors(containerColor = Renk.yuzey, labelColor = Renk.metin,
+                                selectedContainerColor = Renk.metin, selectedLabelColor = Renk.zemin, selectedLeadingIconColor = Renk.zemin),
+                            leadingIcon = if (gorunenVideo) { { Icon(AzimIkon.Tik, null, Modifier.size(18.dp)) } } else null,
                             label = { Text(if(pro) "Video" else "Video · PRO") }, modifier = Modifier.testTag("share-video"))
                     }
                     Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -316,15 +322,12 @@ private enum class PaylasimZeminFiltresi(val tr: String, val en: String) {
     }
 }
 
-// Every former category cover is now available for any quote in the share studio.
-private fun paylasimZeminleri(dil: String, kategori: String): List<PaylasimZemini> = buildList {
+// Art is independent from content categories; never expose fallback category covers.
+private fun paylasimZeminleri(dil: String): List<PaylasimZemini> = buildList {
     add(PaylasimZemini("marble", PaylasimErisimi.ucretsizZeminler[0], cevir(dil, "Mermer", "Marble"), AtmosferGrubu.MANZARA))
     add(PaylasimZemini("night", PaylasimErisimi.ucretsizZeminler[1], cevir(dil, "Gece", "Night")))
     add(PaylasimZemini("paper", PaylasimErisimi.ucretsizZeminler[2], cevir(dil, "Kâğıt", "Paper")))
-    Kategoriler.tumAltlar.forEach { konu ->
-        add(PaylasimZemini("topic-${konu.anahtar}", KartZemin.Sahne(KategoriResimleri.kaynak(konu.anahtar)), konu.ad(dil)))
-    }
-    Atmosfer.entries.filter { it != Atmosfer.ZIRVE }.forEach { a ->
+    Atmosfer.entries.forEach { a ->
         add(PaylasimZemini(a.name.lowercase(), KartZemin.Sahne(a.res), a.ad(dil), a.grup))
     }
     val renkAdlari = listOf("Grafit" to "Graphite", "Gece yarısı" to "Midnight", "Şarap" to "Wine", "Lacivert" to "Navy", "Yosun" to "Moss", "Kar" to "Snow")
@@ -335,7 +338,7 @@ private fun paylasimZeminleri(dil: String, kategori: String): List<PaylasimZemin
     HazirZeminler.gradyanlar.forEachIndexed { i, z ->
         add(PaylasimZemini("gradient-$i", z, cevir(dil, gecisAdlari[i].first, gecisAdlari[i].second)))
     }
-}
+}.distinctBy { it.zemin }
 
 @Composable
 private fun PaylasimZeminSecenegi(z: PaylasimZemini, secili: Boolean, dil: String, mesgul: Boolean, sec: () -> Unit) {

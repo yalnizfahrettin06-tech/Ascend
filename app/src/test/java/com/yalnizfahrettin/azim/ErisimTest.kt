@@ -28,7 +28,7 @@ class ErisimTest {
         val reward = Erisim.acikKategoriler(setOf("ozguven", "unknown"), false)
         assertEquals(Erisim.ucretsizKategoriler + "ozguven", reward)
         assertFalse("korku" in reward)
-        assertEquals(120, Erisim.acikKategoriler(emptySet(), true).size)
+        assertEquals(com.yalnizfahrettin.azim.data.Kategoriler.tumAltlar.size, Erisim.acikKategoriler(emptySet(), true).size)
     }
 
     @Test fun `revocation discards inaccessible selections and uses a usable fallback`() {

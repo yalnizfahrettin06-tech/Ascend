@@ -80,6 +80,10 @@ object Kategoriler {
             Triple("utangaclik", "Utangaçlık", "Shyness"),
         ),
         g("filozoflar", "Filozoflar", "Philosophers", ucretsiz = true,
+            Triple("sokrates", "Sokrates", "Socrates"),
+            Triple("demokritos", "Demokritos", "Democritus"),
+            Triple("plotinos", "Plotinos", "Plotinus"),
+            Triple("pyrrhon", "Pyrrhon", "Pyrrho"),
             Triple("marcus", "Marcus Aurelius", "Marcus Aurelius"),
             Triple("seneca", "Seneca", "Seneca"),
             Triple("epiktetos", "Epiktetos", "Epictetus"),
@@ -107,6 +111,8 @@ object Kategoriler {
             Triple("thoreau", "Henry David Thoreau", "Henry David Thoreau"),
         ),
         g("tasavvuf", "Tasavvuf & Doğu", "Sufism & East", ucretsiz = false,
+            Triple("tao", "Tao düşüncesi", "Taoist reflections"),
+            Triple("budist_dusunce", "Budist düşünce", "Buddhist reflections"),
             Triple("mevlana", "Mevlânâ", "Rumi"),
             Triple("yunus", "Yunus Emre", "Yunus Emre"),
             Triple("sems", "Şems", "Shams"),
@@ -189,7 +195,7 @@ object Kategoriler {
     // Discovery is a presentation layer; keep real groups for saved grants and plan filters.
     const val DUSUNURLER = "unlu_dusunurler"
     val dusunurler: List<Kategori> = tumAltlar.filter {
-        it.grup == "filozoflar" || (it.grup == "tasavvuf" && it.anahtar != "zen")
+        it.grup == "filozoflar" || (it.grup == "tasavvuf" && it.anahtar !in setOf("zen", "tao", "budist_dusunce"))
     }
     val kesfetGruplari: List<KategoriGrubu> = gruplar.map { group ->
         when (group.anahtar) {

@@ -28,14 +28,15 @@ def read_master():
     assert master['author']=='Ascend'
     categories = [c['id'] for c in master['categories']]
     groups = [g['id'] for g in master['groups']]
-    assert len(categories)==len(set(categories))==120 and len(groups)==len(set(groups))==12
+    assert categories and groups and len(categories)==len(set(categories)) and len(groups)==len(set(groups))
     assert all(c['group'] in groups for c in master['categories'])
     quotes=master['quotes']; ids=[q['id'] for q in quotes]
-    assert len(ids)==len(set(ids))==1200, 'Expected 1200 distinct stable IDs'
-    assert collections.Counter(q['category'] for q in quotes)==collections.Counter({c:10 for c in categories})
+    assert ids and len(ids)==len(set(ids)), 'Expected distinct stable IDs'
+    assert set(q['category'] for q in quotes)==set(categories), 'Missing or unknown category content'
+    assert all(n >= 10 and n % 5 == 0 for n in collections.Counter(q['category'] for q in quotes).values()), 'Use 10, 15, 20 or more records in increments of five'
     for q in quotes:
         assert set(q)=={'id','category','text'}, f'Unexpected source fields in {q}'
-        assert re.fullmatch(r'v5_'+re.escape(q['category'])+r'_\d{2}',q['id'])
+        assert re.fullmatch(r'v5_'+re.escape(q['category'])+r'_\d{2,}',q['id'])
         validate_text(q['text'],q['id']+' en')
     assert len({norm(q['text']) for q in quotes})==len(quotes), 'Repeated English text'
     return master

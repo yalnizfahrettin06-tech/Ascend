@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "locale": "tr",
-  "sourceCatalogVersion": "7.0.0",
+  "sourceCatalogVersion": "8.0.0",
   "quotes": {
     "v5_ozsefkat_01": {
       "text": "Kırıldığım yerde kendimi azarlamak yerine neye ihtiyacım olduğunu dinliyorum.",
@@ -4802,6 +4802,286 @@
     "v5_anlam_10": {
       "text": "Bütün hayatına cevap bulmadan da bugün önemli bulduğun bir şeye zaman ayırabilirsin.",
       "sourceHash": "7aed591b357775df000c886a12261ff8c8e37e8740a02325b43b40a714654a6c"
+    },
+    "v5_sokrates_01": {
+      "text": "Emin olduğun bir düşünceye bugün bir soru sor: Bunu hangi deneyime dayanarak biliyorum?",
+      "sourceHash": "35701b7dd55aeb83606076bb529fd800c1d83427c6d917efacc691b7fdf307e4"
+    },
+    "v5_sokrates_02": {
+      "text": "Bir tartışmada haklı çıkmadan önce, kullandığınız kelimelerle aynı şeyi mi kastettiğinize bak.",
+      "sourceHash": "3847b1e914935eec62e147c2f440c18077404d5c416c755b14e538b07ef69f86"
+    },
+    "v5_sokrates_03": {
+      "text": "Bilmediğin bir konuda açıkça soru sormak, bildiğini gösterme çabasından daha çok şey öğretebilir.",
+      "sourceHash": "4469a2e3282574512f3066a58c988e47fe0995029521acecd029863eb84eb4c2"
+    },
+    "v5_sokrates_04": {
+      "text": "İyi bir cevap ararken, sorunun içinde saklı kabulü de inceleyebilirsin.",
+      "sourceHash": "683320d1ac9fe707613774168856d7af35cb13bd26327093901647c55fe5ed7d"
+    },
+    "v5_sokrates_05": {
+      "text": "Herkesin tekrarladığı bir düşünceyi benimsemeden önce, kendi gerekçeni bulmaya çalış.",
+      "sourceHash": "3e2648b2da23fbcd92c9b48c58a0a39a33c7e6f523cfba5706a39b9449a7558e"
+    },
+    "v5_sokrates_06": {
+      "text": "Bir çelişkiyi fark ettiğinde onu hemen örtme; düşüncenin değişebileceği yer orası olabilir.",
+      "sourceHash": "a93ede7f66cd0745af97589ce691fa810eaa240155c8d0ae868bffae3f8378c7"
+    },
+    "v5_sokrates_07": {
+      "text": "Birine neden böyle düşündüğünü sormak, onu köşeye sıkıştırmadan da mümkün olabilir.",
+      "sourceHash": "8cbdac2982d1d4e6694d21d117969f72e02b5f37d6ece924517a46dc81779dff"
+    },
+    "v5_sokrates_08": {
+      "text": "Bildiklerinin sınırını görmek, öğrenmeye nereden başlayacağını daha açık gösterebilir.",
+      "sourceHash": "b25caff0a2c5d784dcd00fd5a50c8b02e4c946169b2a2b9aa18b1a89dd6059ac"
+    },
+    "v5_sokrates_09": {
+      "text": "Savunduğun değerle bugünkü davranışın arasındaki mesafeye, kendini suçlamadan bakabilirsin.",
+      "sourceHash": "3108652e6cff812c89ecf4072fa9e86e84b7f5015b2236bca20504b13f703670"
+    },
+    "v5_sokrates_10": {
+      "text": "Bir sohbetten fikrin değişerek çıkman, o sohbeti kaybettiğin anlamına gelmez.",
+      "sourceHash": "9a82a50a495e594a4370436332d45c1d831ecfe463c0f92231d512d8202e60d4"
+    },
+    "v5_demokritos_01": {
+      "text": "Bir sonuca bakarken görünmeyen küçük nedenleri ara; ilk göze çarpan şey açıklamanın tamamı olmayabilir.",
+      "sourceHash": "3d42b11dccda515d0f1028507c2d0dc89d0fd4295b6708c993fd593e069768b9"
+    },
+    "v5_demokritos_02": {
+      "text": "İstediğin şey çoğaldığında, sana gerçekten yeten şeyin ne olduğunu yeniden sorabilirsin.",
+      "sourceHash": "bef67de655f83d31a6018dc361500d595c45d55de9be29f4e931de1cacce265d"
+    },
+    "v5_demokritos_03": {
+      "text": "Bir olayı anlamak için hemen birini suçlamak yerine, onu oluşturan koşulları inceleyebilirsin.",
+      "sourceHash": "b1d3b4663c4b5ed746e1ae31901dd08f7881ff78ee62cd7cc01b7b763befd921"
+    },
+    "v5_demokritos_04": {
+      "text": "Sıradan görünen bir değişim, biriken küçük etkilerin sonucu olabilir; yalnızca son ana bakma.",
+      "sourceHash": "e848fae08afa6100ede31f13c900fe6aacc9e627946d369612f9e07e138d3887"
+    },
+    "v5_demokritos_05": {
+      "text": "Keyif veren bir seçimin sonrasını da düşünmek, o keyfi inkâr etmek değildir.",
+      "sourceHash": "4f2c1804784dfabc107845a4f4bb6583f97acb0063fcd63958aa460bca70069b"
+    },
+    "v5_demokritos_06": {
+      "text": "Bir günün dengesini korumak için her isteğine aynı anda cevap vermen gerekmeyebilir.",
+      "sourceHash": "54d64da61b07f1a2f404844067990cc31efac764cdbeb89289846844b73e81a7"
+    },
+    "v5_demokritos_07": {
+      "text": "Elindekini fark etmek, daha iyisini istemeyi yasaklamaz; başlangıç noktanı görünür kılar.",
+      "sourceHash": "ca4a4364aa8e4f2dfe4670cc052e889e08e55a9a720fe135d75ba71f504f3014"
+    },
+    "v5_demokritos_08": {
+      "text": "Bir alışkanlığın sonucunu anlamak için tek bir güne değil, günler içinde bıraktığı ize bak.",
+      "sourceHash": "50ffa77cf5b4d475c0050bcf87d8596ebce9b05e1d037de30376184a8f064ee7"
+    },
+    "v5_demokritos_09": {
+      "text": "Gürültülü bir başarı kadar sessiz bir memnuniyetin de hayatında yeri olabilir.",
+      "sourceHash": "1ac42eedbc5892b3ac1720676dfcc979df0400ab5552912776ac30c79b5a5c64"
+    },
+    "v5_demokritos_10": {
+      "text": "Gördüğün şeyle ona verdiğin açıklamayı ayırmak, merakını daha dikkatli kullanmana yardım edebilir.",
+      "sourceHash": "ba6b83a62838a7072eadb8f32299d7d1e2d3eb827528962f3a760d00e0383a7d"
+    },
+    "v5_plotinos_01": {
+      "text": "Dikkatin dağıldığında, değer verdiğin tek bir düşüncede biraz daha kalmayı deneyebilirsin.",
+      "sourceHash": "9c79fcceea52bf8aebcf780767f2d95a27b63b90e8b2d3fc0e75ab7eb328ed27"
+    },
+    "v5_plotinos_02": {
+      "text": "Güzel bulduğun bir şeyin sende ne uyandırdığına bak; yalnızca sahip olmayı düşünmen gerekmiyor.",
+      "sourceHash": "c79432926a64c6ff3947f7ddb5466180496ae578ee9a34e09e36c70a28efd288"
+    },
+    "v5_plotinos_03": {
+      "text": "Kendine dönmek, çevrendeki hayatı yok saymak değil; ona nasıl katıldığını fark etmek olabilir.",
+      "sourceHash": "65581d8dd6c81c1106c18af3a9b89ad75289ec950445d2154331bd093bc6fed6"
+    },
+    "v5_plotinos_04": {
+      "text": "Bir bütünün anlamını ararken, parçaları birbirine bağlayan ilişkilere de dikkat et.",
+      "sourceHash": "b9235e49e546388b594c0ed13aca90212880c0c73562be0e8e472dd0e89d9f9b"
+    },
+    "v5_plotinos_05": {
+      "text": "Bir uğraşta derinleşmek için ona daha fazla şey eklemek değil, dikkati toparlamak gerekebilir.",
+      "sourceHash": "4680420a24cdf0bf49ba5b93bb68e8d8373e37bf77f2281531f7fe4951c88960"
+    },
+    "v5_plotinos_06": {
+      "text": "Kendini yalnızca dışarıdan nasıl göründüğünle tanımlamadığında, başka sorulara yer açılır.",
+      "sourceHash": "1adab110bec6906213c9a754092d3707c1c644315e90cc544385871acb7d56c4"
+    },
+    "v5_plotinos_07": {
+      "text": "Sessiz bir anda, peşinden gittiğin şeyin senin için neden değerli olduğunu düşünebilirsin.",
+      "sourceHash": "48cb1e37b89e969dba1180e13363ee3f2f0809f18e7a12745a81b92d6c668544"
+    },
+    "v5_plotinos_08": {
+      "text": "Bir şeyi anlamak bazen hızlı bir hükümden çok, onunla biraz daha dikkatli kalmayı ister.",
+      "sourceHash": "bd47df36cd5d51189d1d7f92a773f8b7c27ecb41390128e7ae81cf7246786cea"
+    },
+    "v5_plotinos_09": {
+      "text": "Bir manzarayı izlerken onu hemen fotoğrafa dönüştürmeden, sende bıraktığı duyguya yer verebilirsin.",
+      "sourceHash": "15add42ca52dc60bf31fef0ea28b7257d9fa47f8b85d6e7c86d367232f1ac5cf"
+    },
+    "v5_plotinos_10": {
+      "text": "İç dünyana özen göstermek, dışarıdaki sorumluluklarından kaçmak zorunda değildir.",
+      "sourceHash": "f3642594309424aac41cab67a5439c97ba9fc9f8c941d843a02e3705d082c245"
+    },
+    "v5_pyrrhon_01": {
+      "text": "Bir konuda iki farklı açıklama varsa, hemen birini kesin doğru ilan etmek zorunda değilsin.",
+      "sourceHash": "5057cab9816c052e82f765cd6ab713dac22572615a18bfcd5ce105305da82045"
+    },
+    "v5_pyrrhon_02": {
+      "text": "Şu an bana böyle görünüyor demek, gördüğünü anlatırken bilginin sınırına da yer verir.",
+      "sourceHash": "ba533e95fa4bc604bb49a6fae5df1f955e6357f715e5ab765d2b65212bdf1c59"
+    },
+    "v5_pyrrhon_03": {
+      "text": "Bir yargıyı bekletmek, hiçbir şey yapamayacağın anlamına gelmez; küçük bir adım hâlâ seçilebilir.",
+      "sourceHash": "b88de5a9ba239f1b8bd8c64f60e66c34b69977ccdbb3d596d5a12ac4368b9cd1"
+    },
+    "v5_pyrrhon_04": {
+      "text": "Karşındaki görüşü anlamak için onu benimsemen gerekmiyor; önce gerekçesini duyabilirsin.",
+      "sourceHash": "10d8ae12598e41d21e09d39cfd667c5df0e114b18f0b915d400644f4fb018331"
+    },
+    "v5_pyrrhon_05": {
+      "text": "Eksik bilgiden kesin bir sonuç çıkardığını fark edersen, cümlene bir belki ekleyebilirsin.",
+      "sourceHash": "afc14d54b2afea4775cd6ee574c4702cb65c1ec84c4dbe29c41bdd53dfbd7af0"
+    },
+    "v5_pyrrhon_06": {
+      "text": "Bir düşünceden kuşku duymak, onu küçümsemek değildir; dayanaklarını daha dikkatli incelemektir.",
+      "sourceHash": "39a6ddb433121a94a4654b1fb0c0eeb248b7389c0a4658fc6d6342e1a2c980ed"
+    },
+    "v5_pyrrhon_07": {
+      "text": "Bugünkü izlenimin koşullarla değişebilir; yorgun bir anı bütün günün hükmü yapma.",
+      "sourceHash": "74461aaf06b01b28b4a3c0e6aa57d81b2009d9dd88eeca397916091adfe1cbe9"
+    },
+    "v5_pyrrhon_08": {
+      "text": "Bir anlaşmazlıkta emin olmadığın yeri söylemek, konuşmaya dürüst bir sınır çizebilir.",
+      "sourceHash": "8e97bd0bb3bbd3a32b5704bee2e2e3ffdcae75408c0e93e5941dd1724eb3c846"
+    },
+    "v5_pyrrhon_09": {
+      "text": "Her soruya son cevabı vermen gerekmiyor; bazen araştırmayı açık bırakabilirsin.",
+      "sourceHash": "320ff272edb3c3511ee69be02d54b43bd3ea13b157d52d77a8054849d7259436"
+    },
+    "v5_pyrrhon_10": {
+      "text": "Bir seçeneği geçici olarak denemekle onu sonsuza kadar doğru saymak aynı şey değildir.",
+      "sourceHash": "ce1079036d6535b079296edb1a6cc35bcbb207187d7d70d6ebd0ea4ad04629a2"
+    },
+    "v5_tao_01": {
+      "text": "Bir işi sürekli zorlamak yerine, hangi koşulda daha kolay ilerlediğini gözlemleyebilirsin.",
+      "sourceHash": "5262f6a33c0068789713e2d050fd18c7697ce8205d2242feaab0cb7ed1c70054"
+    },
+    "v5_tao_02": {
+      "text": "Bir duruma uyum sağlamak, ona boyun eğmek olmak zorunda değil; yöntemini esnetebilirsin.",
+      "sourceHash": "97678ef82fb48c3191619fe952ab6e97b28e18f0443c9369d3fdc119c4684071"
+    },
+    "v5_tao_03": {
+      "text": "Bir şeyin kendi hızında gelişmesine izin vermek, ilgini geri çektiğin anlamına gelmez.",
+      "sourceHash": "6529c6a06456adf532e41d4548b9c55414af8ef2e8ff4526b92bc94aa6742899"
+    },
+    "v5_tao_04": {
+      "text": "Gereksiz bir adımı çıkarmak, bazen işi hızlandırmaktan daha sade bir çözüm olabilir.",
+      "sourceHash": "913f60fd3fb058f598b0b591c9cdcf815e369f252999b85c0a27a0793adcda4e"
+    },
+    "v5_tao_05": {
+      "text": "Bir konuşmadaki boşluk, söylenenlerin yerleşmesine alan açabilir; her arayı doldurmak gerekmiyor.",
+      "sourceHash": "8f6a27ebf69cd02e638d4f90354e754693ad921db9930eb7bacecda61dd0ccc1"
+    },
+    "v5_tao_06": {
+      "text": "Bugünkü koşula dünkü yöntemi zorla sığdırmadan önce, neyin değiştiğine bakabilirsin.",
+      "sourceHash": "14279116ea0933fc60379b88a23284150a362efa8390924a1453ffeec94eaca5"
+    },
+    "v5_tao_07": {
+      "text": "Bir planı sadeleştirirken, hangi yükün gerçekten gerekli olduğunu kendine sor.",
+      "sourceHash": "a7d6dbba6b268be13f6be919bd3963e45a71146f72e6909c6bbf54e5ba2270cf"
+    },
+    "v5_tao_08": {
+      "text": "Yavaş akan bir gündeki küçük ayrıntıları, hızlı günlerde fark etmemiş olabilirsin.",
+      "sourceHash": "3617178f3aac383d3a4ea37df66869fe4f5a1efda69655b6602d848c9584077f"
+    },
+    "v5_tao_09": {
+      "text": "Her etkili davranışın güçlü görünmesi gerekmez; bazen küçük bir yön değişikliği yeterlidir.",
+      "sourceHash": "00ef4a92a2d9be5fd3db93e3d332e54abbdb91f01edf2a39279d2e832d1d902e"
+    },
+    "v5_tao_10": {
+      "text": "Bir işi kolaylaştıran düzen kurmak, kendini sürekli zorlamaktan farklı bir emek biçimidir.",
+      "sourceHash": "ce0fb1401c3b684f65f98324f254475bdd54617ee6d9dca57b865fd0f65277b8"
+    },
+    "v5_tao_11": {
+      "text": "Bıraktığın boşluğun hemen dolması gerekmiyor; yeni ihtiyacını fark etmek için açık kalabilir.",
+      "sourceHash": "adbc07db115251ef0417d867a8e6d39f82afa83f916360b9f02d3a11cf4e3ad9"
+    },
+    "v5_tao_12": {
+      "text": "Bir seçimi yaparken, yalnızca daha fazlasını değil, daha azıyla neyin mümkün olduğunu da düşün.",
+      "sourceHash": "a511626c7344a7e48f842876062c10ea580491d287e109d3ec65d93fc1292ef0"
+    },
+    "v5_budist_dusunce_01": {
+      "text": "Bir duyguya dikkat etmek, onu kimliğinin tamamı saymak zorunda olmak değildir.",
+      "sourceHash": "d8fe692963dabd6e6fef37c44f234df3a6ec45d54930cdbc52dc1bcb3801409d"
+    },
+    "v5_budist_dusunce_02": {
+      "text": "Bir isteğin doğduğunu fark ettiğinde, hemen peşinden gitmeden önce bir an bekleyebilirsin.",
+      "sourceHash": "5b46272fd72ca4370275fde14414e9f0adeb02a52d84859bb44ef2f945604313"
+    },
+    "v5_budist_dusunce_03": {
+      "text": "Birine özen gösterirken, onun yaşadıklarını bütünüyle bildiğini varsaymayabilirsin.",
+      "sourceHash": "aeedd78a54a9d8623106ed0029bc3fe056a89e15426e0c4c8369ec5400201aab"
+    },
+    "v5_budist_dusunce_04": {
+      "text": "Hoş bir anın geçici olduğunu bilmek, o anın değerini azaltmak zorunda değildir.",
+      "sourceHash": "e968fb19d6361cad9ac2bb6ddfe72ac032535cdf9af5a8f4889ca016118de684"
+    },
+    "v5_budist_dusunce_05": {
+      "text": "İncitici bir söz söylemeden önce, o sözün karşındakinde nasıl kalabileceğini düşün.",
+      "sourceHash": "93e760716399131c61c36c77ee6e1beb5414354507ba7b5dea88d4b246706729"
+    },
+    "v5_budist_dusunce_06": {
+      "text": "Bir düşüncenin gelişini fark edip onu hemen sürdürmemeyi deneyebilirsin.",
+      "sourceHash": "4cb3838487aee4fa493d8d610a75e57bc1336b12c730419fc34cf1fc9e9f97fe"
+    },
+    "v5_budist_dusunce_07": {
+      "text": "Kendine gösterdiğin merhametin, başkasına göstereceğin merhametle yarışması gerekmez.",
+      "sourceHash": "e86309fb91630c39b96d108cab10abef437088a75013db9b65f39ad07a243f4a"
+    },
+    "v5_budist_dusunce_08": {
+      "text": "Bir anı aynı biçimde tutmaya çalışırken, şu anda değişen küçük şeyleri kaçırıyor olabilirsin.",
+      "sourceHash": "befd9d7ebdc10d707417daefdcdf6cb65e992e0f1be776bf32fb1fb9aa2b0149"
+    },
+    "v5_budist_dusunce_09": {
+      "text": "Davranışının etkisini düşünmek için büyük bir olay beklemene gerek yok; küçük seçimler de iz bırakır.",
+      "sourceHash": "581d279ccb3a32c517cdca41a9d19daf13b0535e6c416be8bb0f54fe7b830c62"
+    },
+    "v5_budist_dusunce_10": {
+      "text": "Bir yargı oluştuğunda, gördüğün ayrıntıyla eklediğin hikâyeyi ayrı ayrı fark edebilirsin.",
+      "sourceHash": "6bcb3ba6d541ccdc0b2e263b994cb8cc022436e30273ca988f72800e475d87a1"
+    },
+    "v5_budist_dusunce_11": {
+      "text": "Rahatsız edici bir duyguyu inkâr etmeden, bugün bir başkasına nazik davranmayı seçebilirsin.",
+      "sourceHash": "e849fd62535959963e0cceec13b2dea1ca92a08a9f9ca220c563816870bead00"
+    },
+    "v5_budist_dusunce_12": {
+      "text": "Bugün dikkatini verdiğin küçük bir iyilik, yalnızca düşüncede kalan niyetinden farklı bir iz bırakır.",
+      "sourceHash": "ec821dea192ec576477fb13d02edf88683f8f988e8dd7b06d5a057ad804c0078"
+    },
+    "v5_tao_13": {
+      "text": "Bir konuşmayı yönlendirmekten vazgeçtiğinde, karşındakinin asıl derdini daha iyi duyabilirsin.",
+      "sourceHash": "9a147b3718af328286a3480e3ad41e5e45c6ae19689cff371e0501f4c5747e7d"
+    },
+    "v5_tao_14": {
+      "text": "Masandaki boş bir köşe, yeni bir işe başlamayı kolaylaştırabilir; her alanı doldurmak gerekmiyor.",
+      "sourceHash": "4b768816b4cf821f40d58aa7e132edb9efb5fe3abcb65bbfc5607f74564c7ff3"
+    },
+    "v5_tao_15": {
+      "text": "Bir aksilikte hızını artırmadan önce, izlediğin yolu değiştirme ihtimalini de düşün.",
+      "sourceHash": "fc0382bb4a7dbbf9b726c0fbe3d64f58b5bea8f8c9e73af9d91b1c84b306347e"
+    },
+    "v5_budist_dusunce_13": {
+      "text": "Birini dinlerken vereceğin cevabı kısa süreliğine bırak; henüz duymadığın bir şey olabilir.",
+      "sourceHash": "8cfc2f8ef2952745811b9e30332d9c8fc09fd8f8f23706dd174775f7b41c2a34"
+    },
+    "v5_budist_dusunce_14": {
+      "text": "Elindeki fincan soğurken, sevdiğin şeylerin değişmesine kızmadan da onlara özen gösterebilirsin.",
+      "sourceHash": "e9b8b399693824c4214f9ce407b31ca393abd5183812f64d157deaeda455b3b2"
+    },
+    "v5_budist_dusunce_15": {
+      "text": "Bugün kırıcı bir davranışını fark ettiysen, kendini etiketlemek yerine onarabileceğin yere bak.",
+      "sourceHash": "54671c7df267144cb140d3732d6347da98e513f01826d2fabd094fe07ef089ed"
     }
   }
 }

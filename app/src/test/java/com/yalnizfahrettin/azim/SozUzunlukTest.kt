@@ -30,7 +30,7 @@ class SozUzunlukTest {
     @Test
     fun `yedi yuz guncel sozun tamami her iki dilde kisaltilmadan gecer`() {
         val tumu = Sozler.tumu()
-        assertEquals("Güncel katalog eksik", 1200, tumu.size)
+        org.junit.Assert.assertTrue("Güncel katalog eksik", tumu.size >= 1200)
         tumu.forEach { soz ->
             listOf("tr", "en").forEach { dil ->
                 assertTrue("${soz.kimlik} $dil bildirime uygun değil", soz.bildirimeUygun(dil))

@@ -21,19 +21,21 @@ class LibraryQueryTest {
     }
     @Test fun accessFiltersNeverGrantAccessAndDataIdsAreUnchanged() {
         assertTrue(LibraryQuery.filter("Marcus", "en", unlockedOnly = true, unlocked = emptySet()).isEmpty())
-        assertEquals(120, LibraryQuery.filter("", "tr").size)
+        assertEquals(Kategoriler.tumAltlar.size, LibraryQuery.filter("", "tr").size)
         assertEquals(Kategoriler.tumAltlar.map { it.anahtar }, LibraryQuery.filter("", "en").map { it.anahtar })
     }
     @Test fun thinkersHaveOneDiscoveryEntryWithoutChangingRealGroups() {
         val entry = Kategoriler.kesfetGruplari.single { it.anahtar == Kategoriler.DUSUNURLER }
-        assertEquals(32, entry.altlar.size)
+        assertEquals(36, entry.altlar.size)
         assertEquals("Ünlü düşünürler", entry.ad("tr"))
         assertEquals(entry.altlar, LibraryQuery.filter("", "tr", group = entry.anahtar))
         assertTrue(entry.altlar.any { it.anahtar == "mevlana" })
         assertTrue(entry.altlar.any { it.anahtar == "marcus" })
         assertEquals("tasavvuf", Kategoriler.bul("mevlana")!!.grup)
         assertEquals("filozoflar", Kategoriler.bul("marcus")!!.grup)
-        assertEquals(listOf("zen"), LibraryQuery.filter("", "tr", group = "dogu_gelenegi").map { it.anahtar })
+        assertEquals(setOf("zen", "tao", "budist_dusunce"), LibraryQuery.filter("", "tr", group = "dogu_gelenegi").map { it.anahtar }.toSet())
+        assertEquals(15, Sozler.kategoriden("tao").size)
+        assertEquals(15, Sozler.kategoriden("budist_dusunce").size)
         val displayed = Kategoriler.kesfetGruplari.flatMap { it.altlar }.map { it.anahtar }
         assertEquals(Kategoriler.tumAltlar.map { it.anahtar }.toSet(), displayed.toSet())
         assertEquals(displayed.size, displayed.toSet().size)

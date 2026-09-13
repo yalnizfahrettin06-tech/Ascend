@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "7.0.0",
+  "catalogVersion": "8.0.0",
   "sourceLanguage": "en",
   "author": "Ascend",
   "editorialNote": "Original Ascend writing. Inspired reflections are not quotations from people or sacred texts. Translate quote text only; preserve IDs and categories.",
@@ -774,6 +774,42 @@
       "group": "ogrenme",
       "name": "Finding your meaning",
       "kind": "reflection"
+    },
+    {
+      "id": "sokrates",
+      "group": "filozoflar",
+      "name": "Socrates",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "demokritos",
+      "group": "filozoflar",
+      "name": "Democritus",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "plotinos",
+      "group": "filozoflar",
+      "name": "Plotinus",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "pyrrhon",
+      "group": "filozoflar",
+      "name": "Pyrrho",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "tao",
+      "group": "tasavvuf",
+      "name": "Taoist reflections",
+      "kind": "inspired_reflection"
+    },
+    {
+      "id": "budist_dusunce",
+      "group": "tasavvuf",
+      "name": "Buddhist reflections",
+      "kind": "inspired_reflection"
     }
   ],
   "quotes": [
@@ -6776,6 +6812,356 @@
       "id": "v5_anlam_10",
       "category": "anlam",
       "text": "You can give time to something that matters today without first finding an answer for your whole life."
+    },
+    {
+      "id": "v5_sokrates_01",
+      "category": "sokrates",
+      "text": "Ask one confident belief a question today: what experience gives me reason to believe it?"
+    },
+    {
+      "id": "v5_sokrates_02",
+      "category": "sokrates",
+      "text": "Before trying to win an argument, check whether you mean the same thing by the words you use."
+    },
+    {
+      "id": "v5_sokrates_03",
+      "category": "sokrates",
+      "text": "Asking openly about what you do not know may teach more than trying to display what you know."
+    },
+    {
+      "id": "v5_sokrates_04",
+      "category": "sokrates",
+      "text": "While seeking a good answer, examine the assumption hidden inside the question too."
+    },
+    {
+      "id": "v5_sokrates_05",
+      "category": "sokrates",
+      "text": "Before adopting a thought everyone repeats, try to find your own reason for accepting it."
+    },
+    {
+      "id": "v5_sokrates_06",
+      "category": "sokrates",
+      "text": "When you notice a contradiction, do not cover it up immediately; it may be where your thinking can change."
+    },
+    {
+      "id": "v5_sokrates_07",
+      "category": "sokrates",
+      "text": "You can ask why someone thinks that way without trying to corner them."
+    },
+    {
+      "id": "v5_sokrates_08",
+      "category": "sokrates",
+      "text": "Seeing the limits of your knowledge may make it clearer where to begin learning."
+    },
+    {
+      "id": "v5_sokrates_09",
+      "category": "sokrates",
+      "text": "You can examine the distance between a value you defend and today's actions without condemning yourself."
+    },
+    {
+      "id": "v5_sokrates_10",
+      "category": "sokrates",
+      "text": "Leaving a conversation with a changed mind does not mean you lost the conversation."
+    },
+    {
+      "id": "v5_demokritos_01",
+      "category": "demokritos",
+      "text": "Look for small, unseen causes behind a result; what first catches the eye may not explain everything."
+    },
+    {
+      "id": "v5_demokritos_02",
+      "category": "demokritos",
+      "text": "When your wants multiply, you can ask again what would actually be enough for you."
+    },
+    {
+      "id": "v5_demokritos_03",
+      "category": "demokritos",
+      "text": "To understand an event, examine its conditions rather than immediately looking for someone to blame."
+    },
+    {
+      "id": "v5_demokritos_04",
+      "category": "demokritos",
+      "text": "An ordinary change may result from many small effects; do not look only at the final moment."
+    },
+    {
+      "id": "v5_demokritos_05",
+      "category": "demokritos",
+      "text": "Considering what follows a pleasant choice does not mean denying its pleasure."
+    },
+    {
+      "id": "v5_demokritos_06",
+      "category": "demokritos",
+      "text": "Keeping balance in a day may not require answering every desire at once."
+    },
+    {
+      "id": "v5_demokritos_07",
+      "category": "demokritos",
+      "text": "Noticing what you have does not forbid wanting better; it makes your starting point visible."
+    },
+    {
+      "id": "v5_demokritos_08",
+      "category": "demokritos",
+      "text": "To understand a habit's effects, look beyond one day to the trace it leaves over time."
+    },
+    {
+      "id": "v5_demokritos_09",
+      "category": "demokritos",
+      "text": "Quiet satisfaction can have a place in your life alongside a loudly celebrated achievement."
+    },
+    {
+      "id": "v5_demokritos_10",
+      "category": "demokritos",
+      "text": "Separating what you see from your explanation of it can help you use curiosity more carefully."
+    },
+    {
+      "id": "v5_plotinos_01",
+      "category": "plotinos",
+      "text": "When attention scatters, try staying a little longer with one thought you value."
+    },
+    {
+      "id": "v5_plotinos_02",
+      "category": "plotinos",
+      "text": "Notice what something beautiful awakens in you; you need not think only of possessing it."
+    },
+    {
+      "id": "v5_plotinos_03",
+      "category": "plotinos",
+      "text": "Turning inward can mean noticing how you take part in life around you, rather than ignoring it."
+    },
+    {
+      "id": "v5_plotinos_04",
+      "category": "plotinos",
+      "text": "When seeking the meaning of a whole, attend to the relationships that connect its parts."
+    },
+    {
+      "id": "v5_plotinos_05",
+      "category": "plotinos",
+      "text": "Going deeper into an activity may require gathering attention rather than adding more things to it."
+    },
+    {
+      "id": "v5_plotinos_06",
+      "category": "plotinos",
+      "text": "When you do not define yourself only by outward appearance, there is room for other questions."
+    },
+    {
+      "id": "v5_plotinos_07",
+      "category": "plotinos",
+      "text": "In a quiet moment, consider why what you pursue is valuable to you."
+    },
+    {
+      "id": "v5_plotinos_08",
+      "category": "plotinos",
+      "text": "Understanding something sometimes asks for sustained attention rather than a quick verdict."
+    },
+    {
+      "id": "v5_plotinos_09",
+      "category": "plotinos",
+      "text": "While viewing a landscape, make room for its feeling before immediately turning it into a photograph."
+    },
+    {
+      "id": "v5_plotinos_10",
+      "category": "plotinos",
+      "text": "Caring for your inner life need not mean escaping your responsibilities outside it."
+    },
+    {
+      "id": "v5_pyrrhon_01",
+      "category": "pyrrhon",
+      "text": "If there are two explanations, you need not immediately declare one certainly correct."
+    },
+    {
+      "id": "v5_pyrrhon_02",
+      "category": "pyrrhon",
+      "text": "Saying it seems this way to you now describes what you see while leaving room for the limits of knowledge."
+    },
+    {
+      "id": "v5_pyrrhon_03",
+      "category": "pyrrhon",
+      "text": "Holding back a judgment need not prevent all action; a small step can still be chosen."
+    },
+    {
+      "id": "v5_pyrrhon_04",
+      "category": "pyrrhon",
+      "text": "You need not adopt another view to understand it; first, you can hear its reasons."
+    },
+    {
+      "id": "v5_pyrrhon_05",
+      "category": "pyrrhon",
+      "text": "If you notice a firm conclusion drawn from incomplete information, you can add a perhaps."
+    },
+    {
+      "id": "v5_pyrrhon_06",
+      "category": "pyrrhon",
+      "text": "Doubting a thought need not mean dismissing it; it can mean examining its grounds more carefully."
+    },
+    {
+      "id": "v5_pyrrhon_07",
+      "category": "pyrrhon",
+      "text": "Today's impression may change with conditions; do not let a tired moment judge the entire day."
+    },
+    {
+      "id": "v5_pyrrhon_08",
+      "category": "pyrrhon",
+      "text": "Naming where you are unsure in a disagreement can give the conversation an honest boundary."
+    },
+    {
+      "id": "v5_pyrrhon_09",
+      "category": "pyrrhon",
+      "text": "You need not give the final answer to every question; sometimes you can leave inquiry open."
+    },
+    {
+      "id": "v5_pyrrhon_10",
+      "category": "pyrrhon",
+      "text": "Trying an option provisionally is not the same as declaring it right forever."
+    },
+    {
+      "id": "v5_tao_01",
+      "category": "tao",
+      "text": "Instead of continually forcing a task, notice the conditions in which it moves more easily."
+    },
+    {
+      "id": "v5_tao_02",
+      "category": "tao",
+      "text": "Adapting to a situation need not mean surrendering to it; you can make your method more flexible."
+    },
+    {
+      "id": "v5_tao_03",
+      "category": "tao",
+      "text": "Allowing something to develop at its own pace does not mean withdrawing your care."
+    },
+    {
+      "id": "v5_tao_04",
+      "category": "tao",
+      "text": "Removing an unnecessary step can sometimes be a simpler solution than speeding the work up."
+    },
+    {
+      "id": "v5_tao_05",
+      "category": "tao",
+      "text": "A pause in conversation may let words settle; not every gap needs filling."
+    },
+    {
+      "id": "v5_tao_06",
+      "category": "tao",
+      "text": "Before forcing yesterday's method into today's conditions, look at what has changed."
+    },
+    {
+      "id": "v5_tao_07",
+      "category": "tao",
+      "text": "When simplifying a plan, ask yourself which burdens are actually necessary."
+    },
+    {
+      "id": "v5_tao_08",
+      "category": "tao",
+      "text": "You may notice small details in a slow day that escaped you on faster ones."
+    },
+    {
+      "id": "v5_tao_09",
+      "category": "tao",
+      "text": "An effective action need not look forceful; sometimes a small change of direction is enough."
+    },
+    {
+      "id": "v5_tao_10",
+      "category": "tao",
+      "text": "Creating conditions that make work easier is a different kind of effort from constantly pushing yourself."
+    },
+    {
+      "id": "v5_tao_11",
+      "category": "tao",
+      "text": "A space you leave need not fill immediately; it can remain open while you notice what is needed."
+    },
+    {
+      "id": "v5_tao_12",
+      "category": "tao",
+      "text": "When making a choice, consider not only having more but also what may be possible with less."
+    },
+    {
+      "id": "v5_budist_dusunce_01",
+      "category": "budist_dusunce",
+      "text": "Paying attention to a feeling does not require treating it as your entire identity."
+    },
+    {
+      "id": "v5_budist_dusunce_02",
+      "category": "budist_dusunce",
+      "text": "When you notice a desire arise, you can pause before immediately following it."
+    },
+    {
+      "id": "v5_budist_dusunce_03",
+      "category": "budist_dusunce",
+      "text": "In caring for someone, you need not assume you fully know what they are experiencing."
+    },
+    {
+      "id": "v5_budist_dusunce_04",
+      "category": "budist_dusunce",
+      "text": "Knowing a pleasant moment is temporary does not have to make it less valuable."
+    },
+    {
+      "id": "v5_budist_dusunce_05",
+      "category": "budist_dusunce",
+      "text": "Before speaking a hurtful word, consider how it might stay with the other person."
+    },
+    {
+      "id": "v5_budist_dusunce_06",
+      "category": "budist_dusunce",
+      "text": "You can notice a thought arriving and experiment with not immediately following it further."
+    },
+    {
+      "id": "v5_budist_dusunce_07",
+      "category": "budist_dusunce",
+      "text": "Compassion for yourself does not need to compete with compassion for someone else."
+    },
+    {
+      "id": "v5_budist_dusunce_08",
+      "category": "budist_dusunce",
+      "text": "While trying to keep a moment unchanged, you may miss the small things changing now."
+    },
+    {
+      "id": "v5_budist_dusunce_09",
+      "category": "budist_dusunce",
+      "text": "You need not wait for a major event to consider your actions' effects; small choices leave traces too."
+    },
+    {
+      "id": "v5_budist_dusunce_10",
+      "category": "budist_dusunce",
+      "text": "When a judgment forms, notice the detail you saw separately from the story you added."
+    },
+    {
+      "id": "v5_budist_dusunce_11",
+      "category": "budist_dusunce",
+      "text": "Without denying an uncomfortable feeling, you can choose to treat another person kindly today."
+    },
+    {
+      "id": "v5_budist_dusunce_12",
+      "category": "budist_dusunce",
+      "text": "A small kindness you attend to today leaves a different trace from an intention kept only in thought."
+    },
+    {
+      "id": "v5_tao_13",
+      "category": "tao",
+      "text": "When you stop steering a conversation, you may hear more clearly what troubles the other person."
+    },
+    {
+      "id": "v5_tao_14",
+      "category": "tao",
+      "text": "An empty corner of your desk can make starting something easier; not every space needs filling."
+    },
+    {
+      "id": "v5_tao_15",
+      "category": "tao",
+      "text": "Before speeding up in response to a setback, consider whether a different route might help."
+    },
+    {
+      "id": "v5_budist_dusunce_13",
+      "category": "budist_dusunce",
+      "text": "When listening, set your planned reply aside for a moment; there may be something you have not heard."
+    },
+    {
+      "id": "v5_budist_dusunce_14",
+      "category": "budist_dusunce",
+      "text": "As your cup cools, you can care for the things you love without resenting their changes."
+    },
+    {
+      "id": "v5_budist_dusunce_15",
+      "category": "budist_dusunce",
+      "text": "If you noticed a hurtful action today, look for what you can repair rather than labeling yourself."
     }
   ]
 }

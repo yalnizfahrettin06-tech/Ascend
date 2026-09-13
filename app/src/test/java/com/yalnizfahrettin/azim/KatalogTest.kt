@@ -16,16 +16,17 @@ import org.junit.Test
 class KatalogTest {
 
     @Test
-    fun `current catalogue covers all ninety categories with ten records each`() {
+    fun `current catalogue covers categories in editorial groups of five`() {
         val records = Sozler.tumu()
         val categories = Kategoriler.tumAltlar.map { it.anahtar }.toSet()
         val grouped = records.groupBy { it.kategori }
 
-        assertEquals("The release must contain 1200 current records", 1200, records.size)
-        assertEquals("The release must define 120 categories", 120, categories.size)
+        assertTrue("Previous content must remain available", records.size >= 1200)
+        assertTrue("Previous categories must remain available", categories.size >= 120)
         assertEquals("Missing or unknown content categories", categories, grouped.keys)
         categories.forEach { category ->
-            assertEquals("Incomplete category: $category", 10, grouped.getValue(category).size)
+            assertTrue("Incomplete category: $category", grouped.getValue(category).size >= 10)
+            assertEquals(0, grouped.getValue(category).size % 5)
             assertEquals(grouped.getValue(category), Sozler.kategoriden(category))
         }
     }
@@ -36,7 +37,7 @@ class KatalogTest {
         assertEquals(records.size, records.map { it.kimlik }.toSet().size)
 
         records.groupBy { it.kategori }.forEach { (category, group) ->
-            val expected = (1..10).map { "v5_${category}_${it.toString().padStart(2, '0')}" }.toSet()
+            val expected = (1..group.size).map { "v5_${category}_${it.toString().padStart(2, '0')}" }.toSet()
             assertEquals("Unexpected IDs in $category", expected, group.map { it.kimlik }.toSet())
         }
         records.forEach { original ->

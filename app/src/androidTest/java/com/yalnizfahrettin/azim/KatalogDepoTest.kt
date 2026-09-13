@@ -7,6 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.yalnizfahrettin.azim.data.Depo
 import com.yalnizfahrettin.azim.data.Erisim
 import com.yalnizfahrettin.azim.data.Sozler
+import com.yalnizfahrettin.azim.data.Kategoriler
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
 import org.junit.Assert.*
@@ -33,8 +34,8 @@ class KatalogDepoTest {
     @Test fun historyKeepsTheWholeCatalogAndFiltersLegacyIds() = isolated { depo, seed ->
         depo.proDemoAyarla(true)
         depo.kategorileriAyarla(Erisim.tumKategoriler)
-        assertEquals(120, depo.secili.first().size)
-        assertEquals(1200, Sozler.bildirimHavuzu(depo.secili.first(), "en").size)
+        assertEquals(Kategoriler.tumAltlar.size, depo.secili.first().size)
+        assertEquals(Sozler.tumu().size, Sozler.bildirimHavuzu(depo.secili.first(), "en").size)
         val ids = Sozler.tumu().map { it.kimlik }
         seed(ids.dropLast(1).toSet() + "old-category:123")
         depo.bildirimGecmisineEkle(ids.last())

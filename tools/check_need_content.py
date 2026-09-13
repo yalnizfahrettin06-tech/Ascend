@@ -8,7 +8,7 @@ master = read_master()
 translation = json.loads((ROOT / 'content/translations/tr.json').read_text(encoding='utf-8'))
 render(master, translation)
 draft = json.loads((ROOT / 'content/katalog/faz1-kategori-taslagi.tr.json').read_text(encoding='utf-8'))
-assert {c['id'] for c in draft['categories']} == {c['id'] for c in master['categories']}
+assert {c['id'] for c in draft['categories']} <= {c['id'] for c in master['categories']}
 expected = {c['id'] for c in draft['categories'] if c['isNew'] and c['type'] != 'person'}
 pairs = {}
 for line in (ROOT / 'content/katalog/faz2-ihtiyaclar-pairs.txt').read_text(encoding='utf-8').splitlines():

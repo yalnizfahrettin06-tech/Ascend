@@ -40,6 +40,16 @@ class ShareRegressionTest {
     @Test fun imageAndVideoCanActuallyBeSaved() {
         open(1f)
         buttonsFit()
+        compose.onNodeWithTag("share-image").assertIsSelected()
+        compose.onNodeWithTag("share-video").assertIsNotSelected()
+        compose.onNodeWithText("Tümünü gör").performScrollTo().performClick()
+        compose.onNodeWithTag("share-library-search").performTextInput("Marcus")
+        compose.onNodeWithText("Sonuç bulunamadı.").assertIsDisplayed()
+        compose.onNodeWithTag("share-library-search").performTextReplacement("Zirve")
+        compose.onNodeWithTag("share-library-search").performImeAction()
+        compose.onAllNodesWithContentDescription("Zirve").assertCountEquals(1)
+        compose.onNodeWithContentDescription("Zirve").performClick()
+        compose.waitForIdle()
         ekranKaydet("share-safe-normal")
         val resolver = compose.activity.contentResolver
         fun count(uri: android.net.Uri): Int = resolver.query(uri,arrayOf("_id"),"${android.provider.MediaStore.MediaColumns.DISPLAY_NAME} LIKE ? AND ${android.provider.MediaStore.MediaColumns.IS_PENDING} = 0",arrayOf("Ascend%"),null)?.use { it.count } ?: 0
@@ -51,6 +61,8 @@ class ShareRegressionTest {
         compose.waitUntil(10000) { compose.onAllNodesWithText("Galeriye kaydedildi ✓").fetchSemanticsNodes().isNotEmpty() }
         compose.waitForIdle()
         compose.onNodeWithTag("share-video").performScrollTo().performClick()
+        compose.onNodeWithTag("share-video").assertIsSelected()
+        compose.onNodeWithTag("share-image").assertIsNotSelected()
         buttonsFit()
         val beforeVideo = count(videos)
         compose.onNodeWithTag("share-save-device").performClick()
