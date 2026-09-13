@@ -278,6 +278,8 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     TextButton(onClick = { if(!pro) proAc() else { kutuphane = false; fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) } }, modifier = Modifier.testTag("share-background-photo")) { Text(cevir(dil,"Fotoğrafım","My photo")) }
                 }
                 OutlinedTextField(value = gorselArama, onValueChange = { gorselArama = it }, singleLine = true,
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                    keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
                     placeholder = { Text(cevir(dil,"Arka plan ara","Search backgrounds")) }, leadingIcon = { Icon(AzimIkon.Ara,null) }, modifier = Modifier.fillMaxWidth().testTag("share-library-search"), shape = RoundedCornerShape(14.dp))
                 val found = zeminler.filter { gorselArama.isBlank() || it.ad.contains(gorselArama, ignoreCase = true) }
                 if(found.isEmpty()) Text(cevir(dil,"Sonuç bulunamadı.","No results."),color = Renk.metinIkincil)
