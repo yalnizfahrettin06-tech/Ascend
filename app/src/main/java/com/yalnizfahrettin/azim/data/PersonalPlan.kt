@@ -46,12 +46,12 @@ data class PersonalProfile(
 }
 
 data class PlanOption(val id: String, val tr: String, val en: String, val categories: Set<String> = emptySet()) {
-    fun label(language: String) = if (language == "tr") tr else en
+    fun label(language: String) = com.yalnizfahrettin.azim.data.Diller.metin(language, tr, en)
 }
 data class PlanQuestion(val id: String, val tr: String, val en: String, val hintTr: String, val hintEn: String,
     val options: List<PlanOption>, val multiple: Boolean = false) {
-    fun title(language: String) = if (language == "tr") tr else en
-    fun hint(language: String) = if (language == "tr") hintTr else hintEn
+    fun title(language: String) = com.yalnizfahrettin.azim.data.Diller.metin(language, tr, en)
+    fun hint(language: String) = com.yalnizfahrettin.azim.data.Diller.metin(language, hintTr, hintEn)
 }
 
 /** The same explicit ranking/filter policy powers setup previews, the feed and reminders. */
@@ -222,7 +222,7 @@ object PersonalPlan {
     }
 
     fun summary(profile: PersonalProfile, language: String): List<String> {
-        fun text(tr: String, en: String) = if (language == "tr") tr else en
+        fun text(tr: String, en: String) = com.yalnizfahrettin.azim.data.Diller.metin(language, tr, en)
         fun label(key: String) = questions.first { it.id == key }.options.filter { it.id in profile.answer(key) }.joinToString { it.label(language) }
         return buildList {
             listOf("format", "goal", "tone").forEach { key -> label(key).takeIf(String::isNotBlank)?.let(::add) }

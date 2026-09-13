@@ -198,8 +198,9 @@ private fun PlanLanguage(dil: String, language: String, select: (String) -> Unit
     PlanTitle(cevir(dil, "İyi bir başlangıç.\nSenin dilinde.", "A fresh start.\nIn your language."),
         cevir(dil, "Ascend'e hoş geldin. Önce dilini seç.", "Welcome to Ascend. Choose your language."))
     Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.selectableGroup()) {
-        PlanChoice("Türkçe", language == "tr", "language-tr") { select("tr") }
-        PlanChoice("English", language == "en", "language-en") { select("en") }
+        Diller.secenekler.forEach { (code, name) ->
+            PlanChoice(name, language == code, "language-$code") { select(code) }
+        }
     }
     Text(cevir(dil, "Hesap gerekmez. Tercihlerin cihazında saklanır.", "No account needed. Your preferences stay on your device."),
         color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)

@@ -10,15 +10,15 @@ data class Soz(
     val sabitKimlik: String? = null,
     val arsiv: Boolean = false,
 ) {
-    fun metin(dil: String): String = if (dil == "tr") tr else en
+    fun metin(dil: String): String = if (Diller.normalize(dil) == "tr") tr else Diller.soz(dil, kimlik) ?: en
     fun imza(dil: String): String = when {
-        arsiv -> if (dil == "tr") "Arşiv · Önceki sürüm" else "Archive · Earlier edition"
-        sabitKimlik != null -> if (dil == "tr") "Ascend · Özgün düşünce" else "Ascend · Original reflection"
-        uyarlama -> "$yazar · ${if (dil == "tr") "uyarlama" else "adapted"}"
+        arsiv -> com.yalnizfahrettin.azim.data.Diller.metin(dil, "Arşiv · Önceki sürüm", "Archive · Earlier edition")
+        sabitKimlik != null -> com.yalnizfahrettin.azim.data.Diller.metin(dil, "Ascend · Özgün düşünce", "Ascend · Original reflection")
+        uyarlama -> "$yazar · ${com.yalnizfahrettin.azim.data.Diller.metin(dil, "uyarlama", "adapted")}"
         else -> yazar
     }
     fun sunumEtiketi(dil: String): String = if (!arsiv && Kategoriler.bul(kategori)?.grup == "olumlamalar") {
-        if (dil == "tr") "Ascend · Olumlama" else "Ascend · Affirmation"
+        com.yalnizfahrettin.azim.data.Diller.metin(dil, "Ascend · Olumlama", "Ascend · Affirmation")
     } else imza(dil)
     val kimlik: String get() = sabitKimlik ?: "$kategori:${tr.hashCode()}"
     fun bildirimeUygun(dil: String) = metin(dil).length <= Sozler.BILDIRIM_SINIRI

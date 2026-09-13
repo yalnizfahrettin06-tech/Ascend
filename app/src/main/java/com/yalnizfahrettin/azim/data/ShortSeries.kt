@@ -19,9 +19,9 @@ data class SeriesProgress(val id: String, val completed: Int = 0, val lastDay: L
 }
 
 data class ShortSeries(val id: String, val tr: String, val en: String, val category: String, val prompts: List<Pair<String,String>>) {
-    fun title(dil: String) = if(dil == "tr") tr else en
+    fun title(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
     val quotes get() = Sozler.kategoriden(category).take(7)
-    fun prompt(index: Int, dil: String) = prompts[index].let { if(dil == "tr") it.first else it.second }
+    fun prompt(index: Int, dil: String) = prompts[index].let { com.yalnizfahrettin.azim.data.Diller.metin(dil, it.first, it.second) }
     companion object {
         val all = listOf(
             ShortSeries("kindness", "Kendine daha nazik", "A little kinder to yourself", "ozsefkat", listOf(

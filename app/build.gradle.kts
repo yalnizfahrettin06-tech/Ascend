@@ -12,10 +12,10 @@ android {
         applicationId = "com.yalnizfahrettin.azim"
         minSdk = 26
         targetSdk = 35
-        versionCode = 46
-        versionName = "9.15.0"
+        versionCode = 47
+        versionName = "9.16.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        resourceConfigurations += listOf("tr", "en")
+        resourceConfigurations += listOf("tr", "en", "pt", "de", "fr", "it", "ru")
     }
 
     val releaseStore = providers.environmentVariable("ASCEND_KEYSTORE_PATH").orNull
@@ -49,7 +49,7 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
     buildFeatures { compose = true; buildConfig = true }
-    // Both supported languages must remain available for the in-app language picker.
+    // All offline languages remain available to the in-app picker, including offline switches.
     bundle { language { enableSplit = false } }
     packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
 }

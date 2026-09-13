@@ -3,7 +3,7 @@ package com.yalnizfahrettin.azim.data
 import com.yalnizfahrettin.azim.R
 
 data class AnaTema(val id: String, val tr: String, val en: String, val dark: Boolean, val pro: Boolean, val art: Int? = null) {
-    fun label(dil: String) = if (dil == "tr") tr else en
+    fun label(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
 }
 object AnaTemalar {
     val white = AnaTema("white", "Beyaz", "White", false, false)

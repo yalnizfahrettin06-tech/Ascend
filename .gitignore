@@ -14,3 +14,4 @@ captures/
 .env
 *.pem
 __pycache__/
+content/translations/cache-*.json

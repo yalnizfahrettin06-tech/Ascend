@@ -9,7 +9,7 @@ data class Kategori(
     val adEn: String,
     val grup: String,
 ) {
-    fun ad(dil: String) = if (dil == "en") adEn else adTr
+    fun ad(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, adTr, adEn)
 }
 
 /**
@@ -25,7 +25,7 @@ data class KategoriGrubu(
     val ucretsiz: Boolean,
     val altlar: List<Kategori>,
 ) {
-    fun ad(dil: String) = if (dil == "en") adEn else adTr
+    fun ad(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, adTr, adEn)
 }
 
 object Kategoriler {

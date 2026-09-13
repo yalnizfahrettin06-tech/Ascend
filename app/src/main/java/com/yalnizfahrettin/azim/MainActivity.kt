@@ -76,6 +76,7 @@ class MainActivity : ComponentActivity() {
                 val resources = base.createConfigurationContext(localizedConfiguration).resources
                 object : ContextWrapper(base) { override fun getResources() = resources }
             }
+            androidx.compose.runtime.LaunchedEffect(dil) { Bildirimler.kanalKur(localizedContext) }
             CompositionLocalProvider(LocalContext provides localizedContext, LocalConfiguration provides localizedConfiguration) {
             AzimTema(modu = tema, palet = palet, dinamik = dinamik) {
                 HaptikSaglayici(haptik) {

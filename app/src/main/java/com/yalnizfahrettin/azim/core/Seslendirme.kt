@@ -42,7 +42,7 @@ class Seslendirici(ctx: Context, private val dil: String) {
                 override fun onDone(id: String?) { main.post { konusuyor = false } }
                 @Deprecated("Platform callback") override fun onError(id: String?) { main.post { konusuyor = false } }
             })
-            val yerel = if (dil == "en") Locale.ENGLISH else Locale("tr", "TR")
+            val yerel = Locale.forLanguageTag(com.yalnizfahrettin.azim.data.Diller.normalize(dil))
             val sonuc = motor?.setLanguage(yerel)
             hazir = sonuc != TextToSpeech.LANG_MISSING_DATA &&
                 sonuc != TextToSpeech.LANG_NOT_SUPPORTED

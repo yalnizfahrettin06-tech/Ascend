@@ -49,7 +49,10 @@ object Bildirimler {
 
     fun goster(ctx: Context, soz: Soz, dil: String = "tr"): Boolean {
         if (!izinVarMi(ctx)) return false
-        kanalKur(ctx)
+        val localized = ctx.createConfigurationContext(android.content.res.Configuration(ctx.resources.configuration).apply {
+            setLocale(java.util.Locale.forLanguageTag(com.yalnizfahrettin.azim.data.Diller.normalize(dil)))
+        })
+        kanalKur(localized)
 
         val kategoriAdi = Kategoriler.bul(soz.kategori)?.ad(dil)
             ?: ctx.getString(R.string.uygulama_adi)
@@ -90,7 +93,7 @@ object Bildirimler {
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .addAction(
                 0,
-                ctx.getString(R.string.favoriye_ekle),
+                localized.getString(R.string.favoriye_ekle),
                 FavoriAlicisi.pendingIntent(ctx, soz.kimlik),
             )
             .build()

@@ -94,7 +94,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val chosenTheme = AnaTemalar.allowed(safe.answer("theme").firstOrNull() ?: p[K.ARKA_PLAN], p[K.PRO_DEMO] ?: false)
         p[K.ARKA_PLAN] = chosenTheme.id
         p[K.TEMA] = if (chosenTheme.dark) TemaModu.KARANLIK.name else TemaModu.AYDINLIK.name
-        p[K.DIL] = safe.answer("language").firstOrNull()?.takeIf { it in setOf("tr", "en") } ?: p[K.DIL] ?: "tr"
+        p[K.DIL] = safe.answer("language").firstOrNull()?.takeIf { it in Diller.kodlar } ?: p[K.DIL] ?: "tr"
         p[K.PERSONAL_PROFILE] = safe.encode()
         p[K.SECILI] = if (preserveTopics) p[K.SECILI].orEmpty().intersect(etkinErisim(p)).ifEmpty { PersonalPlan.initialCategories(safe, etkinErisim(p)) }
             else PersonalPlan.initialCategories(safe, etkinErisim(p))
@@ -362,7 +362,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     }
     suspend fun dinamikRenkAyarla(a: Boolean) = store.edit { it[K.DINAMIK] = a }
     suspend fun haptikAyarla(a: Boolean) = store.edit { it[K.HAPTIK] = a }
-    suspend fun dilAyarla(d: String) = store.edit { it[K.DIL] = d }
+    suspend fun dilAyarla(d: String) = store.edit { it[K.DIL] = Diller.normalize(d) }
     suspend fun onboardingKaydet(secili: Set<String>, adet: Int, bas: Int, bit: Int, hatirlat: Boolean) = store.edit {
         erisimiGocur(it)
         it[K.SECILI] = Baslangic.dogrula(secili)

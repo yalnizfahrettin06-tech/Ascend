@@ -21,7 +21,7 @@ enum class AtmosferGrubu(val tr: String, val en: String) {
     MANZARA("Manzaralar", "Scenery"),
     EFSANE("Efsaneler", "Legends"),
     DOKU("Dokular", "Textures");
-    fun ad(dil: String) = if (dil == "en") en else tr
+    fun ad(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
 }
 
 enum class Atmosfer(val res: Int, val tr: String, val en: String, val grup: AtmosferGrubu = AtmosferGrubu.MANZARA) {
@@ -48,7 +48,7 @@ enum class Atmosfer(val res: Int, val tr: String, val en: String, val grup: Atmo
     COL_YOLCUSU(R.drawable.scene_col_yolcusu, "Çöl yolcusu", "Desert traveller", AtmosferGrubu.EFSANE),
     KIYI_NOBETI(R.drawable.scene_kiyi_nobeti, "Kıyı nöbeti", "Coastal watch", AtmosferGrubu.EFSANE),
     KALE_NOBETI(R.drawable.scene_kale_nobeti, "Kale nöbeti", "Castle watch", AtmosferGrubu.EFSANE);
-    fun ad(dil: String) = if (dil == "en") en else tr
+    fun ad(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
     companion object {
         fun grup(anahtar: String?) = when (anahtar) {
             "olumlamalar", "iliskiler", "zihin" -> DENIZ
@@ -79,4 +79,4 @@ fun YuvarlakIkon(ikon: ImageVector, aciklama: String, tikla: () -> Unit, modifie
     }
 }
 
-fun cevir(dil: String, tr: String, en: String) = if (dil == "en") en else tr
+fun cevir(dil: String, tr: String, en: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)

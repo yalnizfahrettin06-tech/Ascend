@@ -67,7 +67,7 @@ open class AzimWidget : GlanceAppWidget() {
         val daily = gununSozu(depo)
         updateAppWidgetState(context, id) { state ->
             state[ACCESS] = initialPro
-            state[SOZ] = daily?.metin(dil) ?: if(dil == "tr") "Kendine küçük bir an ayır." else "Take a moment for yourself."
+            state[SOZ] = daily?.metin(dil) ?: com.yalnizfahrettin.azim.data.Diller.metin(dil, "Kendine küçük bir an ayır.", "Take a moment for yourself.")
             state[YAZAR] = daily?.sunumEtiketi(dil) ?: "Ascend"
             state[KIMLIK] = daily?.kimlik.orEmpty()
         }
@@ -76,9 +76,9 @@ open class AzimWidget : GlanceAppWidget() {
             val pro = state[ACCESS] ?: initialPro
             val config = WidgetSecimi(state[THEME] ?: initialConfig.theme, state[CENTER] ?: initialConfig.centered, state[LARGE] ?: initialConfig.large)
             val size = androidx.glance.LocalSize.current
-            val quote = if(pro) state[SOZ].orEmpty().ifBlank { if(dil == "tr") "Kendine küçük bir an ayır." else "Take a moment for yourself." }
-                else if(dil == "tr") "Widget’lar Ascend Pro ile." else "Widgets are part of Ascend Pro."
-            val source = if(pro) state[YAZAR] ?: "Ascend" else if(dil == "tr") "Önizlemek için dokun" else "Tap to preview"
+            val quote = if(pro) state[SOZ].orEmpty().ifBlank { com.yalnizfahrettin.azim.data.Diller.metin(dil, "Kendine küçük bir an ayır.", "Take a moment for yourself.") }
+                else com.yalnizfahrettin.azim.data.Diller.metin(dil, "Widget’lar Ascend Pro ile.", "Widgets are part of Ascend Pro.")
+            val source = if(pro) state[YAZAR] ?: "Ascend" else com.yalnizfahrettin.azim.data.Diller.metin(dil, "Önizlemek için dokun", "Tap to preview")
             val bitmap = androidx.compose.runtime.remember(config, quote, source, size, pro) {
                 WidgetTasarimi.render(context, if(pro) config else WidgetSecimi(), quote, source,
                     (size.width.value * context.resources.displayMetrics.density).toInt(), (size.height.value * context.resources.displayMetrics.density).toInt())
@@ -127,7 +127,7 @@ open class AzimWidget : GlanceAppWidget() {
                         p[CENTER] = config.centered
                         p[LARGE] = config.large
                         p[ACCESS] = access
-                        p[SOZ] = soz?.metin(dil) ?: if(dil == "tr") "Uygulamadan içerik tercihlerini düzenleyebilirsin." else "Adjust content preferences in the app."
+                        p[SOZ] = soz?.metin(dil) ?: com.yalnizfahrettin.azim.data.Diller.metin(dil, "Uygulamadan içerik tercihlerini düzenleyebilirsin.", "Adjust content preferences in the app.")
                         p[KIMLIK] = soz?.kimlik.orEmpty()
                         p[YAZAR] = soz?.sunumEtiketi(dil) ?: "Ascend"
                     }

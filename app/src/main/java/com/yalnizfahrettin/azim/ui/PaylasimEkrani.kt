@@ -313,7 +313,7 @@ private enum class PaylasimZeminFiltresi(val tr: String, val en: String) {
     KOLEKSIYON("Koleksiyon", "Collection"),
     RENKLER("Renkler", "Colors");
 
-    fun ad(dil: String) = if (dil == "en") en else tr
+    fun ad(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
     fun kapsar(zemin: PaylasimZemini): Boolean = when (this) {
         UCRETSIZ -> !PaylasimErisimi.zeminProMu(zemin.zemin)
         MANZARA -> zemin.grup == AtmosferGrubu.MANZARA

@@ -1,0 +1,49 @@
+Today | Hoje | Heute | Aujourd’hui | Oggi | Сегодня
+Explore | Explorar | Entdecken | Explorer | Esplora | Обзор
+Appearance | Aparência | Gestaltung | Apparence | Aspetto | Оформление
+You | Você | Du | Vous | Tu | Профиль
+Continue | Continuar | Weiter | Continuer | Continua | Продолжить
+Saving… | Salvando… | Wird gespeichert… | Enregistrement… | Salvataggio… | Сохранение…
+adapted | adaptação | bearbeitet | adaptation | adattamento | адаптация
+Back | Voltar | Zurück | Retour | Indietro | Назад
+Close | Fechar | Schließen | Fermer | Chiudi | Закрыть
+Done | Concluído | Fertig | Terminé | Fine | Готово
+Settings | Configurações | Einstellungen | Réglages | Impostazioni | Настройки
+Image | Imagem | Bild | Image | Immagine | Изображение
+Video | Vídeo | Video | Vidéo | Video | Видео
+Share | Compartilhar | Teilen | Partager | Condividi | Поделиться
+Save | Salvar | Speichern | Enregistrer | Salva | Сохранить
+Saved | Salvos | Gespeichert | Enregistrés | Salvati | Сохранённое
+Saved quotes | Frases salvas | Gespeicherte Gedanken | Pensées enregistrées | Pensieri salvati | Сохранённые мысли
+Save to device | Salvar no dispositivo | Auf Gerät speichern | Enregistrer sur l’appareil | Salva sul dispositivo | Сохранить на устройстве
+Choose a background | Escolha um fundo | Hintergrund wählen | Choisir un fond | Scegli uno sfondo | Выберите фон
+Search backgrounds | Buscar fundos | Hintergründe suchen | Rechercher un fond | Cerca sfondi | Найти фон
+Add to my reminders | Incluir nos lembretes | In Erinnerungen aufnehmen | Ajouter aux rappels | Aggiungi ai promemoria | Добавить в уведомления
+Enable notifications | Ativar notificações | Benachrichtigungen aktivieren | Activer les notifications | Attiva le notifiche | Включить уведомления
+Your reminder topics | Temas dos lembretes | Deine Erinnerungsthemen | Thèmes des rappels | Temi dei promemoria | Темы уведомлений
+Your reminders | Seus lembretes | Deine Erinnerungen | Vos rappels | I tuoi promemoria | Ваши уведомления
+Daily reminders | Lembretes diários | Tägliche Erinnerungen | Rappels quotidiens | Promemoria giornalieri | Ежедневные уведомления
+Set my rhythm | Definir meu ritmo | Meinen Rhythmus wählen | Choisir mon rythme | Scegli il mio ritmo | Настроить ритм
+Choose my theme | Escolher meu tema | Mein Design wählen | Choisir mon thème | Scegli il mio tema | Выбрать тему
+Start 3-day trial | Iniciar teste de 3 dias | 3 Tage testen | Essayer pendant 3 jours | Prova per 3 giorni | Попробовать 3 дня
+Explore with a 3-day trial. | Explore com um teste de 3 dias. | Entdecke mehr mit 3 Probetagen. | Découvrez plus avec 3 jours d’essai. | Scopri di più con 3 giorni di prova. | Откройте больше с пробным периодом на 3 дня.
+Demo screen: no payment or subscription. The three-day timer is not active in this build; demo Pro is enabled. | Tela de demonstração: sem pagamento ou assinatura. Nesta versão, o prazo de três dias não é contado; o Pro de demonstração é ativado. | Demo: keine Zahlung, kein Abonnement. In dieser Version läuft keine dreitägige Frist; Demo-Pro wird aktiviert. | Démonstration : aucun paiement ni abonnement. Le délai de trois jours n’est pas actif dans cette version ; Pro est activé en mode démo. | Schermata demo: nessun pagamento o abbonamento. In questa versione il periodo di tre giorni non è attivo; viene abilitato Pro in modalità demo. | Демоверсия: без оплаты и подписки. В этой сборке отсчёт трёх дней не работает; включается демодоступ Pro.
+Access with Pro · Demo | Acessar com Pro · Demo | Mit Pro öffnen · Demo | Accès Pro · Démo | Accedi con Pro · Demo | Открыть с Pro · Демо
+Ascend | Ascend | Ascend | Ascend | Ascend | Ascend
+Ascend · Original reflection | Ascend · Reflexão original | Ascend · Eigener Gedanke | Ascend · Pensée originale | Ascend · Pensiero originale | Ascend · Авторская мысль
+Ascend · Affirmation | Ascend · Afirmação | Ascend · Affirmation | Ascend · Affirmation | Ascend · Affermazione | Ascend · Аффирмация
+Ascend reflections · Not direct quotations. | Reflexões do Ascend · Não são citações diretas. | Gedanken von Ascend · Keine direkten Zitate. | Réflexions d’Ascend · Pas de citations directes. | Riflessioni di Ascend · Non sono citazioni dirette. | Размышления Ascend · Не прямые цитаты.
+Ascend reminders | Lembretes do Ascend | Ascend-Erinnerungen | Rappels Ascend | Promemoria Ascend | Уведомления Ascend
+Preparing Ascend | Preparando o Ascend | Ascend wird vorbereitet | Préparation d’Ascend | Preparazione di Ascend | Подготовка Ascend
+Share from Ascend | Compartilhar pelo Ascend | Aus Ascend teilen | Partager depuis Ascend | Condividi da Ascend | Поделиться из Ascend
+Welcome to Ascend. Choose your language. | Boas-vindas ao Ascend. Escolha seu idioma. | Willkommen bei Ascend. Wähle deine Sprache. | Bienvenue sur Ascend. Choisissez votre langue. | Benvenuto su Ascend. Scegli la tua lingua. | Добро пожаловать в Ascend. Выберите язык.
+Widgets are part of Ascend Pro. | Os widgets fazem parte do Ascend Pro. | Widgets gehören zu Ascend Pro. | Les widgets font partie d’Ascend Pro. | I widget sono inclusi in Ascend Pro. | Виджеты доступны в Ascend Pro.
+This topic is available with Ascend Pro. The demo does not require payment. | Este tema está disponível no Ascend Pro. A demonstração não exige pagamento. | Dieses Thema ist mit Ascend Pro verfügbar. Die Demo erfordert keine Zahlung. | Ce thème est disponible avec Ascend Pro. La démo ne nécessite aucun paiement. | Questo tema è disponibile con Ascend Pro. La demo non richiede pagamenti. | Эта тема доступна в Ascend Pro. Демоверсия не требует оплаты.
+{0} topics selected | Temas selecionados: {0} | Ausgewählte Themen: {0} | Thèmes sélectionnés : {0} | Temi selezionati: {0} | Выбрано тем: {0}
+{0} topics | Temas: {0} | Themen: {0} | Thèmes : {0} | Temi: {0} | Тем: {0}
+{0} reflections | Reflexões: {0} | Gedanken: {0} | Réflexions : {0} | Riflessioni: {0} | Мыслей: {0}
+{0} thinkers | Pensadores: {0} | Denker: {0} | Penseurs : {0} | Pensatori: {0} | Мыслителей: {0}
+{0} times daily | Por dia: {0} | Pro Tag: {0} | Par jour : {0} | Al giorno: {0} | В день: {0}
+Famous thinkers | Grandes pensadores | Bekannte Denker | Grands penseurs | Grandi pensatori | Известные мыслители
+Eastern tradition | Tradições orientais | Östliche Traditionen | Traditions orientales | Tradizioni orientali | Восточные традиции
+No account needed. Your preferences stay on your device. | Não precisa de conta. Suas preferências ficam no dispositivo. | Kein Konto nötig. Deine Einstellungen bleiben auf deinem Gerät. | Aucun compte nécessaire. Vos préférences restent sur votre appareil. | Nessun account necessario. Le preferenze restano sul dispositivo. | Аккаунт не нужен. Настройки хранятся на вашем устройстве.

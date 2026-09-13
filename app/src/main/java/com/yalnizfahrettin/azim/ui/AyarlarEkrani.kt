@@ -79,7 +79,7 @@ fun AyarlarEkrani(
                     TemaModu.KARANLIK to cevir(dil, "Siyah", "Black")), tema, temaSec)
             SecimSatiri(stringResource(R.string.renk_paleti),
                 listOf(Palet.MERMER, Palet.MONO).map { it to it.etiket(dil) }, guncelPalet(palet), paletSec)
-            SecimSatiri(stringResource(R.string.dil), listOf("tr" to "Türkçe", "en" to "English"), dil, dilSec)
+            SecimSatiri(stringResource(R.string.dil), com.yalnizfahrettin.azim.data.Diller.secenekler, dil, dilSec)
 
             AyarBolumu("02", stringResource(R.string.bildirimler))
             AyarAnahtari(stringResource(R.string.asc_hatirlaticilar), hatirlaticiAcik, hatirlaticiSec)

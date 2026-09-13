@@ -105,7 +105,7 @@ class KatalogTest {
     fun `unsupported content locales use the English source`() {
         val selected = setOf("motivasyon", "ozsefkat")
         val expectedPool = Sozler.bildirimHavuzu(selected, "en").map { it.kimlik }.toSet()
-        listOf("de", "fr", "zz-ZZ", "").forEach { unsupported ->
+        listOf("es", "ja", "zz-ZZ", "").forEach { unsupported ->
             (Sozler.tumu() + EskiSozler.kimlikler.values).forEach { record ->
                 assertEquals("Wrong fallback for ${record.kimlik}", record.en, record.metin(unsupported))
                 assertEquals(record.imza("en"), record.imza(unsupported))

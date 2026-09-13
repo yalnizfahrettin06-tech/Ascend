@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 enum class Palet(val etiketTr: String, val etiketEn: String) {
     MERMER("Mermer", "Marble"), MONO("Mürekkep", "Ink"), BORDO("Bordo", "Wine"),
     KUM("Kum", "Sand"), LACIVERT("Lacivert", "Indigo"), YOSUN("Yosun", "Moss");
-    fun etiket(dil: String) = if (dil == "en") etiketEn else etiketTr
+    fun etiket(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, etiketTr, etiketEn)
 }
 
 fun guncelPalet(palet: Palet): Palet = when (palet) {

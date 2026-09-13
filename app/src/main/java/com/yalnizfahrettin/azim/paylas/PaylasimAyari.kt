@@ -10,7 +10,7 @@ enum class KartFormat(val genislik: Int, val yukseklik: Int, val etiketTr: Strin
     STORY(1080, 1920, "Story", "Story"),
     YATAY(1920, 1080, "Yatay", "Wide");
 
-    fun etiket(dil: String) = if (dil == "en") etiketEn else etiketTr
+    fun etiket(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, etiketTr, etiketEn)
     val oran: Float get() = genislik.toFloat() / yukseklik
 }
 
@@ -28,7 +28,7 @@ enum class KartYazi(val etiketTr: String, val etiketEn: String) {
     SANS("Modern", "Modern"),
     MONO("Daktilo", "Typewriter");
 
-    fun etiket(dil: String) = if (dil == "en") etiketEn else etiketTr
+    fun etiket(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, etiketTr, etiketEn)
 }
 
 enum class KartHizalama { SOL, ORTA }
