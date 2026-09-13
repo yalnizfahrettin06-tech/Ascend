@@ -13,7 +13,7 @@ object Diller {
     private val results = object : LinkedHashMap<Pair<String, String>, String>(256, .75f, true) {
         override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Pair<String, String>, String>?) = size > 512
     }
-    private val placeholder = Regex("\\{[0-9]+}")
+    private val placeholder = Regex("\\{[0-9]+\\}")
 
     fun metin(dil: String, tr: String, en: String): String {
         val lang = normalize(dil)
