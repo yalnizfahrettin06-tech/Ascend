@@ -1,5 +1,9 @@
 # Ascend
 
+## 9.18 — söz kontrolü ve doğal dil
+
+Söz gizleme açık anlatımı, beş dilde terminoloji düzeltmeleri ve görsel örnekli sade Pro. [Güncelleme kapsamı](docs/UPDATE-9.18.md).
+
 ## 9.17 — sade keşif ve bildirim deneyimi
 
 Kaydedilenler/Geçmiş, Keşfet’te kısa seriler, tek bildirim ayar akışı ve görsel odaklı paylaşım. Yedi dil ve mevcut kayıtlar korunur. [Değişiklikler ve kapsam](docs/UPDATE-9.17.md).

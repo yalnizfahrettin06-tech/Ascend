@@ -255,7 +255,7 @@ fun Uygulama(
                     Sekme.ANA -> AnaEkran(
                         gizle = { quote -> kapsam.launch {
                             depo.hideQuote(quote.kimlik, true); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx)
-                            val action = snackbar.showSnackbar(cevir(dil, "Söz gizlendi", "Quote hidden"), cevir(dil, "Geri al", "Undo"),
+                            val action = snackbar.showSnackbar(cevir(dil, "Bu söz akışta ve bildirimlerde gösterilmeyecek.", "This quote will no longer appear in your feed or reminders."), cevir(dil, "Geri al", "Undo"),
                                 duration = androidx.compose.material3.SnackbarDuration.Long)
                             if(action == androidx.compose.material3.SnackbarResult.ActionPerformed) {
                                 depo.hideQuote(quote.kimlik, false); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx)

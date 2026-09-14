@@ -31,6 +31,29 @@ class KatalogDepoTest {
         }
     }
 
+    @Test fun hiddenQuoteIsExcludedAcrossLanguagesAndRestorableWithoutLosingSavedHistory() = isolated { depot, _ ->
+        val quotes = Sozler.kategoriden("motivasyon")
+        val quote = quotes.first()
+        depot.bildirimGecmisineEkle(quote.kimlik, teslimEdildi = true)
+        depot.hideQuote(quote.kimlik, true)
+        val hidden = depot.hiddenQuotes.first()
+        assertTrue(quote.kimlik in hidden)
+        com.yalnizfahrettin.azim.data.Diller.kodlar.forEach { language ->
+            repeat(20) {
+                val next = com.yalnizfahrettin.azim.data.PersonalPlan.notification(null,setOf("motivasyon"),setOf("motivasyon"),language,
+                    emptySet(),null,hidden)!!
+                assertNotEquals(quote.kimlik,next.soz.kimlik)
+            }
+        }
+        assertFalse(com.yalnizfahrettin.azim.data.QuietFeed.order(quotes,emptyList(),hidden).any { it.kimlik == quote.kimlik })
+        assertTrue(quote.kimlik in depot.bugunGelenler.first())
+        depot.hideQuote(quote.kimlik,false)
+        assertTrue(depot.hiddenQuotes.first().isEmpty())
+        depot.hideQuote(quote.kimlik,true)
+        depot.restoreHiddenQuotes()
+        assertTrue(depot.hiddenQuotes.first().isEmpty())
+    }
+
     @Test fun successfulDeliveryPersistsBothHistoryAndRepeatState() = isolated { depot, _ ->
         val quote = Sozler.kategoriden("motivasyon").first()
         depot.bildirimGecmisineEkle(quote.kimlik, teslimEdildi = true)

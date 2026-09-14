@@ -90,7 +90,7 @@
     <string name="acilir_pencere_alt">"Il tuo dispositivo mostra brevemente le notifiche. Il passaggio al pop-up dettagliato rivela l\'intera citazione."</string>
     <string name="pencere_kisa">"Breve · tagliato"</string>
     <string name="pencere_ayrintili">"Dettagliato · completo"</string>
-    <string name="ob_acilir_pencere">"Imposta lo stile pop-up su Dettagliato in modo che le virgolette vengano visualizzate per intero →"</string>
+    <string name="ob_acilir_pencere">"Imposta lo stile pop-up su Dettagliato in modo che le citazioni vengano visualizzate per intero →"</string>
     <string name="oneri_havuz">"Solo gli argomenti %1$d nelle tue notifiche: amplia con %2$s"</string>
     <string name="oneri_favori">"Se ti piacciono le citazioni salvate, prova %1$s"</string>
     <string name="oneri_zaman">"Adatto a quest\'ora del giorno: %1$s"</string>

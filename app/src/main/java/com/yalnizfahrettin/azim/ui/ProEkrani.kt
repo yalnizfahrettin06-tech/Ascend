@@ -58,16 +58,12 @@ fun ProEkrani(
                         Box(Modifier.width(32.dp).height(1.dp).background(Renk.accent))
                         Text(cevir(dil, "İlhamın tamamı.", "More room for inspiration."), color = Renk.metin, fontFamily = ArayuzFont,
                             fontSize = 32.sp, lineHeight = 39.sp, modifier = Modifier.semantics { heading() })
-                        Text(cevir(dil, "Tüm konular. Kendi tarzında paylaşımlar.", "Every topic. Share in your own style."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
+                        Text(cevir(dil, "Temanı seç. Widget’ını ekle. Sözünü paylaş.", "Choose your theme. Add a widget. Share a quote."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
                     }
                 }
-                HorizontalDivider(color = Renk.kenarlik)
-                ProOzelligi(AzimIkon.Kesfet, cevir(dil, "$kategoriSayisi kategorinin tamamı", "All $kategoriSayisi categories"), cevir(dil, "Motivasyondan felsefeye, tüm sözlere eriş.", "From motivation to philosophy, explore every quote."))
-                HorizontalDivider(color = Renk.kenarlik)
-                ProOzelligi(AzimIkon.Dag, cevir(dil, "Bütün arka planlar", "Every background"), cevir(dil, "Sahneler, renkler ve kendi fotoğrafların.", "Scenes, colors and your own photos."))
-                HorizontalDivider(color = Renk.kenarlik)
-                ProOzelligi(AzimIkon.Paylas, cevir(dil, "Gelişmiş paylaşım araçları", "Advanced sharing tools"), cevir(dil, "Video, süre, farklı boyutlar ve yazı stilleri.", "Video, duration, layouts and type styles."))
-                ProOzelligi(AzimIkon.Kitap, cevir(dil, "Kişisel temalar ve tüm widget’lar", "Personal themes and every widget"), cevir(dil, "Roma, Koyu Atlı Yolcu ve kendi görünümünle ana ekran widget’ları.", "Rome, Dark Rider and home screen widgets in your own style."))
+                ProGorselOrnek(dil)
+                ProOzelligi(AzimIkon.Kesfet, cevir(dil, "Tüm konular ve sözler", "Every topic and quote"), cevir(dil, "Bildirim konularını yine sen seçersin.", "You still choose your notification topics."))
+                ProOzelligi(AzimIkon.Paylas, cevir(dil, "Görsel ve video paylaşımları", "Image and video sharing"), cevir(dil, "Arka planını seç, sözünü paylaş.", "Choose a background and share your quote."))
                 Surface(color = Renk.yuzey, shape = RoundedCornerShape(14.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
                         Text(cevir(dil, "Bu bir test demosu", "This is a test demo"), fontFamily = ArayuzFont, fontSize = 21.sp, color = Renk.metin)
@@ -88,7 +84,7 @@ fun ProEkrani(
                     if (kaydediliyor) CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp, color = MaterialTheme.colorScheme.onPrimary)
                     else Text(if (acik) cevir(dil, "Pro demosunu kapat", "Turn off Pro demo") else cevir(dil, "Pro demosunu aç", "Enable Pro demo"), textAlign = TextAlign.Center)
                 }
-                Text(cevir(dil, "İstediğin zaman değiştirebilirsin.", "You can change this anytime."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+                if (!acik) TextButton(onClick = kapat, enabled = !kaydediliyor) { Text(cevir(dil, "Ücretsiz devam et", "Continue free")) }
             }
         }
     }
@@ -113,5 +109,20 @@ private fun ProOzelligi(ikon: ImageVector, baslik: String, aciklama: String) {
             Text(baslik, fontFamily = ArayuzFont, fontSize = 22.sp, lineHeight = 28.sp, color = Renk.metin)
             Text(aciklama, style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
         }
+    }
+}
+
+/** Concrete, read-only examples; no additional editor or purchase step. */
+@Composable
+fun ProGorselOrnek(dil: String) {
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text(cevir(dil, "Tema ve widget örneği", "Theme and widget preview"), color = Renk.metin, style = MaterialTheme.typography.titleSmall)
+        Box(Modifier.fillMaxWidth().height(190.dp).clip(RoundedCornerShape(20.dp)).testTag("pro-visual-preview")) {
+            TemaZemini(com.yalnizfahrettin.azim.data.AnaTemalar.rider, Modifier.matchParentSize(), thumbnail = true)
+            Text(cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward."),
+                Modifier.align(Alignment.Center).padding(24.dp), color = androidx.compose.ui.graphics.Color.White,
+                fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 29.sp, textAlign = TextAlign.Center)
+        }
+        Text(cevir(dil, "Arka planını seç; widget her gün yeni bir söz göstersin.", "Choose a background; your widget shows a new quote each day."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
     }
 }

@@ -12,6 +12,19 @@ import org.junit.Assert.*
 
 class SimplificationTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+    @Test fun proPreviewHasAFreeExitAndNoObsoleteEditorPromises() {
+        val depot=Depo(compose.activity)
+        runBlocking { depot.completePersonalPlan(PersonalProfile(),false); depot.dilAyarla("tr"); depot.proDemoAyarla(false) }
+        compose.activityRule.scenario.recreate()
+        compose.waitUntil(15000) { compose.onAllNodesWithTag("home-pro").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithTag("home-pro").performClick()
+        compose.onNodeWithTag("pro-visual-preview").assertExists()
+        compose.onNodeWithText("Gelişmiş paylaşım araçları").assertDoesNotExist()
+        compose.onNodeWithText("Ücretsiz devam et").assertIsDisplayed().performClick()
+        compose.onNodeWithTag("pro-sheet").assertDoesNotExist()
+        assertFalse(runBlocking { depot.proDemo.first() })
+    }
+
     @Test fun personalSpaceDiscoveryAndRepeatedNotificationOpen() {
         val depot=Depo(compose.activity)
         runBlocking { depot.completePersonalPlan(PersonalProfile(),false); depot.dilAyarla("tr"); depot.proDemoAyarla(false) }

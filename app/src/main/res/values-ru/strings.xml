@@ -90,7 +90,7 @@
     <string name="acilir_pencere_alt">"На вашем устройстве на короткое время отображаются уведомления. При переключении на подробное всплывающее окно отображается вся цитата."</string>
     <string name="pencere_kisa">"Кратко · отрезано"</string>
     <string name="pencere_ayrintili">"Подробный · полный"</string>
-    <string name="ob_acilir_pencere">"Установите стиль всплывающего окна «Подробно», чтобы кавычки отображались полностью →"</string>
+    <string name="ob_acilir_pencere">"Установите стиль всплывающего окна «Подробно», чтобы высказывания отображались полностью →"</string>
     <string name="oneri_havuz">"В ваших уведомлениях только темы %1$d — расширьте их с помощью %2$s"</string>
     <string name="oneri_favori">"Если вам нравятся сохраненные котировки, попробуйте %1$s"</string>
     <string name="oneri_zaman">"Подходит для этого времени суток: %1$s"</string>

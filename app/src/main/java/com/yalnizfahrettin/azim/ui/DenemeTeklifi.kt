@@ -45,6 +45,7 @@ fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit,
                 ProRozeti(metin = "ASCEND PRO")
                 Text(cevir(dil,"Kendine daha\nfazla alan aç.","Make more\nroom for yourself."), fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold, color = Renk.metin)
                 Text(cevir(dil,"3 günlük denemeyle keşfet.","Explore with a 3-day trial."), fontSize = 18.sp, color = Renk.metinIkincil)
+                ProGorselOrnek(dil)
                 Surface(color = Renk.yuzey, shape = RoundedCornerShape(22.dp)) {
                     Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         listOf(cevir(dil,"Tüm konular ve sözler","Every topic and quote"), cevir(dil,"Roma, Atlı Yolcu ve tüm temalar","Rome, Rider and every theme"),

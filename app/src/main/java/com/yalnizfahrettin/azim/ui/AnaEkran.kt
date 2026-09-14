@@ -189,7 +189,7 @@ fun AnaEkran(
                                 araclar = false; pano.setText(AnnotatedString(aktif.metin(dil)))
                                 kapsam.launch { mesaj.showSnackbar(cevir(dil, "Söz kopyalandı", "Quote copied")) }
                             }, leadingIcon = { Icon(AzimIkon.Kopyala, null) })
-                            DropdownMenuItem(text = { Text(cevir(dil, "Bu sözü gizle", "Hide this quote")) },
+                            DropdownMenuItem(text = { Text(cevir(dil, "Bu sözü bir daha gösterme", "Never show this quote again")) },
                                 modifier = Modifier.testTag("home-hide"), onClick = { araclar = false; gizle(aktif) })
                         }
                     }

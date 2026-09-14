@@ -54,7 +54,6 @@ fun AyarlarEkrani(
     geri: () -> Unit,
     remindersOpen: () -> Unit = {}, appearanceOpen: () -> Unit = {},
 ) {
-    var kurulum by rememberSaveable { mutableStateOf(false) }
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding().navigationBarsPadding()) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -72,7 +71,7 @@ fun AyarlarEkrani(
             TextButton(onClick = remindersOpen) { Text(cevir(dil,"Bildirimlerin","Your reminders")) }
             AyarAnahtari(stringResource(R.string.haptik), haptik, haptikSec)
 
-            AyarBolumu("03", stringResource(R.string.hakkinda))
+            AyarBolumu(stringResource(R.string.hakkinda))
             Row(Modifier.fillMaxWidth().heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(stringResource(R.string.surum), Modifier.weight(1f), color = Renk.metin, style = MaterialTheme.typography.bodyMedium)
                 Text(BuildConfig.VERSION_NAME, color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
@@ -84,33 +83,13 @@ fun AyarlarEkrani(
             }
         }
     }
-    if (kurulum) ModalBottomSheet(onDismissRequest = { kurulum = false }, containerColor = Renk.zemin,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
-        Column(Modifier.fillMaxWidth().fillMaxHeight(.9f)) {
-            Row(Modifier.fillMaxWidth().padding(start = 24.dp, end = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(cevir(dil, "Bildirim kurulumu", "Notification setup"), fontFamily = LoraSerif, fontSize = 26.sp,
-                    color = Renk.metin, modifier = Modifier.weight(1f).semantics { heading() })
-                IconButton(onClick = { kurulum = false }, modifier = Modifier.size(48.dp)) {
-                    Icon(AzimIkon.Kapat, cevir(dil, "Kapat", "Close"), tint = Renk.metin)
-                }
-            }
-            HorizontalDivider(color = Renk.kenarlik, modifier = Modifier.padding(top = 12.dp))
-            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp)) {
-                BildirimKurulumu(dil, bildirimIzni) { hatirlaticiSec(true) }
-            }
-            TextButton(onClick = { kurulum = false }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
-                Text(cevir(dil, "Tamam", "Done"))
-            }
-        }
-    }
 }
 
 @Composable
-private fun AyarBolumu(number: String, title: String) {
+private fun AyarBolumu(title: String) {
     Column(Modifier.padding(top = 8.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         HorizontalDivider(color = Renk.kenarlik)
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text(number, color = Renk.accent, fontFamily = LoraSerif, fontSize = 16.sp)
             Text(title, color = Renk.metin, fontFamily = LoraSerif, fontSize = 25.sp,
                 modifier = Modifier.weight(1f).semantics { heading() })
         }
