@@ -50,6 +50,7 @@ fun KilitDialog(kategori: Kategori, dil: String, kapat: () -> Unit, demoAc: () -
 @Composable
 fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: (String) -> Unit,
     kilidiAc: (Kategori) -> Unit, pro: Boolean, proAc: () -> Unit, acilacakGrup: String? = null, bildirimAcik: Boolean = true,
+    series: (() -> Unit)? = null, remindersOpen: (() -> Unit)? = null,
     oku: (Soz) -> Unit = {}, selectedRequest: Int = 0, insets: Boolean = true,
 ) {
 
@@ -64,7 +65,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     BackHandler((group != null || reminders) && detayKey == null) { group = null; reminders = false }
     val showGroups = group == null && !reminders && query.isBlank()
     val results = LibraryQuery.filter(query.trim(), dil, group = if(query.isBlank()) group else null,
-        selectedOnly = reminders, unlockedOnly = false, selected = secili, unlocked = acik).filter { !reminders || it.anahtar in secili }
+        selectedOnly = reminders, unlockedOnly = false, selected = secili, unlocked = acik).filter { Sozler.kategoriden(it.anahtar).isNotEmpty() && (!reminders || it.anahtar in secili) }
     Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(insets) Modifier.statusBarsPadding() else Modifier)) {
         TextField(query, { query = it }, singleLine = true,
             placeholder = { Text(cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers"), fontSize = 14.sp) },
@@ -78,14 +79,25 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             if(group != null || reminders) IconButton(onClick = { group = null; reminders = false; query = "" }) { Icon(AzimIkon.Geri, cevir(dil,"Koleksiyonlar","Collections"), tint = Renk.metin) }
             Text(if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.kesfetGrupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
                 Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 13.sp)
-            if(!reminders) TextButton(onClick = { reminders = true; group = null; query = "" }, modifier = Modifier.testTag("category-selection-summary")) {
+            if(!reminders) TextButton(onClick = { if (remindersOpen != null) remindersOpen() else { reminders = true; group = null; query = "" } }, modifier = Modifier.testTag("category-selection-summary")) {
                 Icon(AzimIkon.Bildirim, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp))
                 Text(cevir(dil,"Bildirimlerim","My reminders"), fontSize = 12.sp)
             }
         }
         LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            if(showGroups) { items(Kategoriler.kesfetGruplari, key = { it.anahtar }) { g ->
+            if (showGroups && series != null) item {
+                Surface(onClick = series, color = Renk.yuzey, shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().testTag("discovery-series")) {
+                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(cevir(dil,"Kısa seriler","Short series"), color = Renk.metin, fontSize = 16.sp)
+                            Text(cevir(dil,"7 gün, her gün bir söz.","7 days, one quote each day."), color = Renk.metinIkincil, fontSize = 12.sp)
+                        }
+                        Icon(AzimIkon.Ileri, null, Modifier.size(18.dp))
+                    }
+                }
+            }
+            if(showGroups) { items(LibraryQuery.visibleGroups(), key = { it.anahtar }) { g ->
                 Surface(onClick = { group = g.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(16.dp),
                     modifier = Modifier.fillMaxWidth().testTag(if(g == Kategoriler.kesfetGruplari.first()) "collection-feature" else "collection-${g.anahtar}")) {
                     Row(Modifier.padding(16.dp).heightIn(min = 44.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -146,6 +158,13 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                         Icon(AzimIkon.Kapat, cevir(dil, "Konuya göz atmayı kapat", "Close topic"), Modifier.size(20.dp))
                     }
                 }
+                val purpose = when(kat.anahtar) {
+                    "azim" -> cevir(dil,"Küçük çabaları sürdürmek.","Keep small efforts going.")
+                    "pes" -> cevir(dil,"Vazgeçmek istediğinde bir yol bulmak.","Find a way when you feel like giving up.")
+                    "yeniden" -> cevir(dil,"Bir aradan sonra yeniden başlamak.","Begin again after a break.")
+                    else -> null
+                }
+                purpose?.let { Text(it, color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp) }
                 Text(if (acildi) cevir(dil, "${sozler.size} söz", "${sozler.size} reflections")
                     else cevir(dil, "${sozler.size} özgün söz · ${gosterilenSozler.size} sözlük önizleme", "${sozler.size} original quotes · ${gosterilenSozler.size}-quote preview"),
                     color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp,

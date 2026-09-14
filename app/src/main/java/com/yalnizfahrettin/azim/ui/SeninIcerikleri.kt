@@ -77,7 +77,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
 
 @Composable
 fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorites: Set<String>, back: () -> Unit,
-    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false) {
+    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true) {
     var chosen by rememberSaveable { mutableStateOf<String?>(null) }
     var readingDay by rememberSaveable(chosen) { mutableStateOf<Int?>(null) }
     var today by remember { mutableStateOf(LocalDate.now()) }
@@ -88,7 +88,7 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
     val series = ShortSeries.all.firstOrNull { it.id == chosen }
     val goBack = { if(chosen != null) chosen = null else back() }
     if(!embedded || chosen != null) BackHandler(onBack = goBack)
-    Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded) Modifier else Modifier.statusBarsPadding()).testTag("short-series")) {
+    Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded || !insets) Modifier else Modifier.statusBarsPadding()).testTag("short-series")) {
         if(!embedded || chosen != null) PersonalHeader(cevir(dil,"Kısa seriler","Short series"),dil,goBack)
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement = Arrangement.spacedBy(20.dp)) {
             if(series == null) {
@@ -144,7 +144,7 @@ fun SeninBolumleri(dil: String, selected: String, select: (String) -> Unit, sett
             IconButton(onClick = settings,modifier = Modifier.testTag("profile-settings")) { Icon(AzimIkon.Ayarlar,cevir(dil,"Ayarlar","Settings"),Modifier.size(20.dp),tint = Renk.metinIkincil) }
         }
         Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp),horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf("" to cevir(dil,"Özet","Overview"), "history" to cevir(dil,"Geçmiş","History"), "series" to cevir(dil,"Seriler","Series")).forEach { (key,label) ->
+            listOf("" to cevir(dil,"Kaydedilenler","Saved quotes"), "history" to cevir(dil,"Geçmiş","History")).forEach { (key,label) ->
                 Surface(onClick = { select(key) },color = if(selected == key) Renk.metin else Renk.yuzey,shape = RoundedCornerShape(12.dp),modifier = Modifier.weight(1f).testTag("personal-tab-${key.ifEmpty { "overview" }}")) {
                     Text(label,Modifier.padding(vertical = 12.dp),color = if(selected == key) Renk.zemin else Renk.metinIkincil,fontSize = 12.sp,textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                 }

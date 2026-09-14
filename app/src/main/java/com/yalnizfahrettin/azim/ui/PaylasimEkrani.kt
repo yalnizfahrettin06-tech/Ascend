@@ -90,6 +90,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     val guncelPro by rememberUpdatedState(pro)
     var oncekiPro by remember { mutableStateOf(pro) }
     val gorunenAyar = PaylasimErisimi.gorunenAyar(ayar, pro)
+    var formatOptions by rememberSaveable { mutableStateOf(false) }
     val gorunenVideo = video && pro
     val zeminler = remember(dil) { paylasimZeminleri(dil) }
     val etkinZeminFiltresi = PaylasimZeminFiltresi.valueOf(zeminFiltresi)
@@ -224,7 +225,10 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                         else if (hata == null) CircularProgressIndicator(Modifier.size(24.dp), color = Renk.metin, strokeWidth = 2.dp)
                         else Text(cevir(dil, "Başka bir arka plan seç", "Choose another background"), Modifier.padding(16.dp), color = Renk.metin)
                     }
-                    FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    TextButton(onClick = { formatOptions = !formatOptions }, modifier = Modifier.testTag("share-format-options")) {
+                        Text(cevir(dil,"Biçim","Format") + " · " + if(gorunenVideo) "Video" else cevir(dil,"Görsel","Image"))
+                    }
+                    if (formatOptions) FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         FilterChip(selected = !gorunenVideo, onClick = { video = false }, enabled = !hazirlaniyor,
                             colors = FilterChipDefaults.filterChipColors(containerColor = Renk.yuzey, labelColor = Renk.metin,
                                 selectedContainerColor = Renk.metin, selectedLabelColor = Renk.zemin, selectedLeadingIconColor = Renk.zemin),

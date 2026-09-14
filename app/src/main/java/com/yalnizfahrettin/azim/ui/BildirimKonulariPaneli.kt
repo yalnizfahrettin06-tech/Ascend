@@ -19,7 +19,7 @@ import com.yalnizfahrettin.azim.data.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BildirimKonulariPaneli(dil: String, selected: Set<String>, close: () -> Unit, toggle: (String) -> Unit, discover: () -> Unit, settings: () -> Unit = {}) {
+fun BildirimKonulariPaneli(dil: String, selected: Set<String>, close: () -> Unit, toggle: (String) -> Unit, discover: () -> Unit, settings: () -> Unit = {}, status: String = "") {
     // Keep switched-off rows until dismissal, so the choice can be reversed immediately.
     val original = rememberSaveable { selected.toList() }
     val rows = Kategoriler.tumAltlar.filter { it.anahtar in original || it.anahtar in selected }
@@ -32,6 +32,7 @@ fun BildirimKonulariPaneli(dil: String, selected: Set<String>, close: () -> Unit
                     Text(cevir(dil,"Ayarlar","Settings"))
                 }
             }
+            if (status.isNotBlank()) Text(status, color = Renk.metinIkincil, fontSize = 13.sp, modifier = Modifier.testTag("reminder-status"))
             Text(cevir(dil,"${selected.size} konu açık · En az bir konu açık kalmalı.","${selected.size} topics on · Keep at least one enabled."),Modifier.padding(vertical = 12.dp),color = Renk.metinIkincil,fontSize = 12.sp)
             LazyColumn(Modifier.fillMaxWidth().weight(1f,fill = false).heightIn(max = minOf(360, rows.size.coerceAtLeast(1) * 70).dp),contentPadding = PaddingValues(vertical = 4.dp)) {
                 items(rows,key = { it.anahtar }) { topic ->

@@ -21,16 +21,16 @@ import com.yalnizfahrettin.azim.data.*
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, oku: (Soz) -> Unit,
-    kesfet: () -> Unit, paylas: (Soz) -> Unit = {}, onBack: (() -> Unit)? = null,
+    kesfet: () -> Unit, paylas: (Soz) -> Unit = {}, onBack: (() -> Unit)? = null, embedded: Boolean = false,
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     val results = remember(favoriler, query, dil) { LibraryQuery.saved(favoriler, query, dil) }
     LazyColumn(
-        Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding().testTag("saved-list"),
+        Modifier.fillMaxSize().background(Renk.zemin).then(if (embedded) Modifier else Modifier.statusBarsPadding()).testTag("saved-list"),
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
-        item {
+        if (!embedded) item {
             Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 onBack?.let {
                     OutlinedIconButton(onClick = it, modifier = Modifier.padding(top = 17.dp).size(48.dp),
@@ -60,7 +60,6 @@ fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, 
         }
         if (favoriler.isEmpty()) item {
             Box(Modifier.fillMaxWidth()) {
-                KlasikGorsel(KlasikMotif.COLUMN, Modifier.align(Alignment.BottomEnd).width(132.dp).height(270.dp), opacity = .13f)
                 Column(Modifier.fillMaxWidth().padding(vertical = 30.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                     Icon(AzimIkon.Ayrac, null, Modifier.size(30.dp), tint = Renk.metin)
                     Text(cevir(dil, "Bazı sözler\nseninle kalır.", "Some words\nstay with you."), color = Renk.metin,

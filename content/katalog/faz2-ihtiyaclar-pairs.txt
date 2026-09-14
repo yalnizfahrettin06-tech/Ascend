@@ -70,7 +70,7 @@ Mesajlara her an dönmemek, ilişkiden çekilmek anlamına gelmek zorunda değil
 Sınırın işe yaraması için yalnızca sözlerinde değil, davranışında da yer bulması gerekebilir. | For a boundary to work, it may need a place in your actions as well as your words.
 Rahatsız olduğun bir şakaya gülmemek de neyi kabul etmediğini göstermenin bir yoludur. | Not laughing at an upsetting joke can be one way of showing what you do not accept.
 Yakınlık, bütün özel alanını paylaşma zorunluluğu değildir; kendine ait şeyler kalabilir. | Closeness does not oblige you to share every private space; some things can remain yours.
-İncitici bir konuşmada ara istemek, konuşmayı sonsuza dek kapatmak değildir. | Asking for a pause in a hurtful conversation does not close it forever.
+Bir konuşma incitici olduğunda, neyi şimdi konuşabileceğini ve neyin beklemesi gerektiğini söyle. | When a conversation turns hurtful, say what you can discuss now and what needs to wait.
 Sınırını açıklarken tartışmayı kazanman gerekmiyor; ne yapabileceğini netleştirebilirsin. | Explaining a boundary need not win an argument; you can clarify what you are able to do.
 Birinin sınırına saygı duyması için seninle aynı ihtiyacı hissetmesi gerekmez. | Someone need not feel the same need as you in order to respect your boundary.
 Bir kuralı sürdürmek zorsa, kendini suçlamadan önce uygulanabilir olup olmadığına bak. | If a boundary is hard to maintain, check whether it is practical before blaming yourself.
@@ -116,7 +116,7 @@ Rahatsız olduğun olayı anlatırken, ne olduğunu ve sende ne bıraktığını
 Konuşmadan önce tek cümle yaz: Karşımdakinin en çok neyi anlamasını istiyorum? | Before talking, write one sentence: what do I most want the other person to understand?
 Düşüncen değiştiyse söyleyebilirsin; önceki cevabına bağlı kalmak zorunda değilsin. | If your view has changed, you can say so; you are not bound to your earlier answer.
 Sesini yükseltmeden açık olmak mümkün olabilir; netlik her zaman sertlik değildir. | It may be possible to be clear without raising your voice; clarity is not always harshness.
-Bir ihtiyacını söylerken başkasının ihtiyacını küçültmek zorunda değilsin. | You do not have to make someone else's need smaller while expressing your own.
+Bir isteğini açıklamadan önce neye ihtiyacın olduğunu tek ve açık bir cümleyle söyle. | Before explaining a request, state what you need in one clear sentence.
 Yüz yüze anlatmak zorsa, önce yazmak düşüncelerini toparlamana yardımcı olabilir. | If speaking face to face feels hard, writing first may help you gather your thoughts.
 Anlaşılmadığında aynı cümleyi zorlamak yerine başka bir örnek deneyebilirsin. | When misunderstood, try another example rather than forcing the same sentence.
 [kararsizlik]
@@ -256,7 +256,7 @@ Karşındaki konuşurken cevap hazırladığını fark edersen, son söylediği 
 Bunu doğru mu anladım diye sormak, hemen öneri vermekten daha yardımcı olabilir. | Asking whether you understood correctly may help more than offering advice immediately.
 Anlatılanı kendi benzer hikâyene çevirmeden önce, karşındakinin bitirmesine alan bırak. | Before turning someone's story into your own similar one, give them room to finish.
 Sessizliği hemen doldurman gerekmiyor; karşındaki kelimelerini arıyor olabilir. | You need not fill a silence immediately; the other person may be searching for words.
-Bir duyguyu anlamaya çalışmak, anlatılan her davranışı doğru bulmak değildir. | Trying to understand a feeling does not mean approving of every action described.
+Birini dinlerken öğüt vermeden önce senden ne beklediğini sorabilirsin. | Before offering advice, ask what the person speaking would like from you.
 Dinlerken telefonu kenara koymak, dikkatinle verebileceğin somut bir işarettir. | Putting your phone aside while listening is a concrete way to offer your attention.
 Sana anlatılan sorunun çözümü istenmiyor olabilir; önce nasıl yardımcı olabileceğini sor. | Someone telling you a problem may not want a solution; first ask how you can help.
 Bir cümlenin sende uyandırdığı tahmini, söylenen gerçek sanmadan önce kontrol et. | Check your assumption about a sentence before treating it as what was actually said.

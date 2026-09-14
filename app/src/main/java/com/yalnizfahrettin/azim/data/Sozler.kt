@@ -13,6 +13,7 @@ data class Soz(
     fun metin(dil: String): String = if (Diller.normalize(dil) == "tr") tr else Diller.soz(dil, kimlik) ?: en
     fun imza(dil: String): String = when {
         arsiv -> com.yalnizfahrettin.azim.data.Diller.metin(dil, "Arşiv · Önceki sürüm", "Archive · Earlier edition")
+        sabitKimlik != null && Kategoriler.bul(kategori)?.grup in setOf("filozoflar", "tasavvuf", "inanc") -> Diller.metin(dil, "Ascend · Esinlenilmiş düşünce", "Ascend · Inspired reflection")
         sabitKimlik != null -> com.yalnizfahrettin.azim.data.Diller.metin(dil, "Ascend · Özgün düşünce", "Ascend · Original reflection")
         uyarlama -> "$yazar · ${com.yalnizfahrettin.azim.data.Diller.metin(dil, "uyarlama", "adapted")}"
         else -> yazar

@@ -31,6 +31,17 @@ class KatalogDepoTest {
         }
     }
 
+    @Test fun successfulDeliveryPersistsBothHistoryAndRepeatState() = isolated { depot, _ ->
+        val quote = Sozler.kategoriden("motivasyon").first()
+        depot.bildirimGecmisineEkle(quote.kimlik, teslimEdildi = true)
+        assertTrue(quote.kimlik in depot.bugunGelenler.first())
+        assertTrue(quote.kimlik in depot.gecmis.first())
+        assertEquals(quote.kimlik, depot.sonBildirimKimlik.first())
+        val next = com.yalnizfahrettin.azim.data.PersonalPlan.notification(null,setOf("motivasyon"),setOf("motivasyon"),"ru",
+            depot.gecmis.first(),depot.sonBildirimKimlik.first())!!
+        assertNotEquals(quote.kimlik,next.soz.kimlik)
+    }
+
     @Test fun historyKeepsTheWholeCatalogAndFiltersLegacyIds() = isolated { depo, seed ->
         depo.proDemoAyarla(true)
         depo.kategorileriAyarla(Erisim.tumKategoriler)

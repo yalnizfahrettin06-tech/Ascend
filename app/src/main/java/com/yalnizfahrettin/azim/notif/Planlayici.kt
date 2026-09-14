@@ -86,8 +86,7 @@ class SozWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, p
         if (Bildirimler.goster(applicationContext, soz, dil)) {
             // Replanning can cancel this worker after Android accepted the notification.
             withContext(NonCancellable) {
-                depo.bildirimGecmisineEkle(soz.kimlik, if (secim.yeniTur) havuz else emptySet())
-                depo.bugunGeldi(soz.kimlik)
+                depo.bildirimGecmisineEkle(soz.kimlik, if (secim.yeniTur) havuz else emptySet(), teslimEdildi = true)
             }
         }
         Result.success()

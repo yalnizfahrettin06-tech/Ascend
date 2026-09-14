@@ -1,5 +1,9 @@
 # Ascend
 
+## 9.17 — sade keşif ve bildirim deneyimi
+
+Kaydedilenler/Geçmiş, Keşfet’te kısa seriler, tek bildirim ayar akışı ve görsel odaklı paylaşım. Yedi dil ve mevcut kayıtlar korunur. [Değişiklikler ve kapsam](docs/UPDATE-9.17.md).
+
 Motivasyon, olumlama, azim, odak ve felsefeden özgün düşünceleri gününe taşıyan Android uygulaması. Kotlin, Jetpack Compose ve Material 3 ile geliştirilmiştir.
 
 ## 8.4 — Kontrollü bordo ve koleksiyon kimliği

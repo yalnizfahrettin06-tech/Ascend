@@ -373,10 +373,17 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         it[K.ONBOARDING] = true
     }
     suspend fun hatirlaticiAyarla(acik: Boolean) = store.edit { it[K.HATIRLATICI] = acik }
-    suspend fun bildirimGecmisineEkle(kimlik: String, yeniTurKategorileri: Set<String> = emptySet()) = store.edit {
+    suspend fun bildirimGecmisineEkle(kimlik: String, yeniTurKategorileri: Set<String> = emptySet(), teslimEdildi: Boolean = false) = store.edit {
         val onceki = (it[K.GECMIS] ?: emptySet()).filter(Sozler::aktifKimlikMi)
             .filterNot { id -> Sozler.kimlikten(id)?.kategori in yeniTurKategorileri }
         it[K.GECMIS] = (onceki + kimlik).filter(Sozler::aktifKimlikMi).toSet()
+        if (teslimEdildi) {
+            val day = LocalDate.now()
+            val kept = it[K.BUGUN_GELEN].orEmpty().filter { entry ->
+                runCatching { LocalDate.parse(entry.substringBefore("|")) >= day.minusDays(29) }.getOrDefault(false)
+            }
+            it[K.BUGUN_GELEN] = (kept + "$day|$kimlik").toSet()
+        }
         it[K.SON_BILDIRIM] = kimlik
         it[K.NOTIF_RECENT] = QuietFeed.remember(it[K.NOTIF_RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi), kimlik).joinToString("|")
         it[K.RECENT] = QuietFeed.remember(it[K.RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi), kimlik).joinToString("|")

@@ -27,7 +27,7 @@ fun SozOkuyucu(soz: Soz, dil: String, saved: Boolean, close: () -> Unit, save: (
             }
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(vertical = 24.dp),
                 verticalArrangement = Arrangement.Center) {
-                Text(soz.metin(dil), fontFamily = LoraSerif, fontSize = 30.sp, lineHeight = 41.sp, color = Renk.metin)
+                Text(soz.metin(dil), fontFamily = LoraSerif, fontSize = if (soz.metin(dil).length > 180) 26.sp else 30.sp, lineHeight = if (soz.metin(dil).length > 180) 36.sp else 41.sp, color = Renk.metin)
                 Spacer(Modifier.height(24.dp))
                 Text(soz.sunumEtiketi(dil), color = Renk.metinIkincil)
             }

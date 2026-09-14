@@ -43,7 +43,7 @@ import kotlinx.coroutines.launch
 fun Uygulama(
     depo: Depo,
     reklam: ReklamKapisi,
-    acilistakiKimlik: String? = null,
+    acilistakiKimlik: String? = null, acilisIstegi: Long = 0L,
     acilisSekmesi: Sekme? = null,
     izinIste: () -> Unit,
     bildirimIzni: Boolean,
@@ -198,26 +198,19 @@ fun Uygulama(
     }
 
     // Consume this launch request once; changing entitlements must not replay it.
-    var acilisTuketildi by rememberSaveable(acilistakiKimlik) { mutableStateOf(false) }
-    LaunchedEffect(acilistakiKimlik, acik, homeCategories, favoriler, gunlukGelenler) {
+    var acilisTuketildi by rememberSaveable(acilistakiKimlik, acilisIstegi) { mutableStateOf(false) }
+    LaunchedEffect(acilistakiKimlik, acilisIstegi, acik, homeCategories, favoriler, gunlukGelenler) {
         if (acilisTuketildi || acik.isEmpty()) return@LaunchedEffect
         val hedef = acilistakiKimlik?.let { Sozler.kimlikten(it) } ?: return@LaunchedEffect
         val arsiv = hedef.kimlik in favoriler || gunlukGelenler.values.any { hedef.kimlik in it }
         if (hedef.kategori !in acik && !arsiv) return@LaunchedEffect
         acilisTuketildi = true
-        if (hedef.kategori !in homeCategories || hedef.kimlik in hidden.orEmpty()) { readerId = hedef.kimlik; return@LaunchedEffect }
-        val yer = akis.indexOfFirst { it.kimlik == hedef.kimlik }
-        if (yer >= 0) indeks = yer else {
-            akis = listOf(hedef) + akis
-            indeks = 0
-        }
-        sekme = Sekme.ANA
+        // A notification always opens its own reader; feed refresh cannot replace it.
+        readerId = hedef.kimlik
+
     }
 
-    // Kilometre taşı kontrolü (rapor 4.1)
-    LaunchedEffect(seri, kutlanan) {
-        Kilometre.yeniEsik(seri, kutlanan)?.let { kutlamaGunu = it }
-    }
+    // Personal space focuses on saved words and delivered reminders; no streak prompts.
 
     if (ayarlardaMi) {
         AyarlarEkrani(
@@ -234,10 +227,13 @@ fun Uygulama(
             dinamikSec = { kapsam.launch { depo.dinamikRenkAyarla(it) } },
             paletSec = { kapsam.launch { depo.paletAyarla(it) } },
             geri = { ayarlardaMi = false },
+            remindersOpen = { ayarlardaMi = false; notificationTopicsOpen = true },
+            appearanceOpen = { ayarlardaMi = false; sekme = Sekme.GORUNUM },
         )
         return
     }
 
+    var discoverySeries by rememberSaveable { mutableStateOf(false) }
     val tabState = androidx.compose.runtime.saveable.rememberSaveableStateHolder()
     Column(Modifier.fillMaxSize()) {
         Box(Modifier.weight(1f)) {
@@ -314,12 +310,17 @@ fun Uygulama(
                     Sekme.GORUNUM -> GorunumEkrani(dil, arkaPlan, proDemo == true, { proGoster = true },
                         { id -> kapsam.launch { depo.arkaPlanAyarla(id) } })
                     Sekme.KATEGORI -> KesifMerkezi(dil) {
+                        if (discoverySeries) KisaSerilerEkrani(dil, seriesProgress, favoriler, { discoverySeries = false },
+                            { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, insets = false)
+                        else
                         KategorilerEkrani(
                         secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },
                         sec = { kapsam.launch { depo.kategoriSec(it); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
                         kilidiAc = { kilitKategori = it },
                         acilacakGrup = acilacakGrup, bildirimAcik = hatirlaticiAcik && bildirimIzni,
                         oku = { readerId = it.kimlik }, selectedRequest = selectedRequest, insets = false,
+                        series = { discoverySeries = true }, remindersOpen = { notificationTopicsOpen = true },
                     )
                     }
 
@@ -336,18 +337,11 @@ fun Uygulama(
                     Sekme.ISTATISTIK -> SeninBolumleri(dil, personalPage, { personalPage = it }, { ayarlardaMi = true }) { when(personalPage) {
                         "history" -> BildirimGecmisiEkrani(dil, gunlukGelenler, favoriler, { personalPage = "" },
                             { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, embedded = true)
-                        "series" -> KisaSerilerEkrani(dil, seriesProgress, favoriler, { personalPage = "" },
-                            { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
-                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, embedded = true)
-                        else -> IstatistikEkrani(
-                        seri = seri, rekor = rekor, gorulen = gorulen,
-                        favoriSayisi = favoriler.size, acikKategori = acik.size, haftalik = haftalik,
-                        name = profil?.name.orEmpty(),
-                        planOzeti = cevir(dil, "Konular, saatler ve içerik sınırları", "Topics, schedule and content boundaries"),
-                        embedded = true, onHistory = { personalPage = "history" }, onSeries = { personalPage = "series" },
-                        onFavoriler = { sekme = Sekme.FAVORI }, onPlan = { planGoster = true },
-                        onSettings = { ayarlardaMi = true },
-                    )
+                        else -> FavorilerEkrani(favoriler.mapNotNull(Sozler::kimlikten), dil,
+                            cikar = { kapsam.launch { depo.favoriDegistir(it) } },
+                            oku = { readerId = it.kimlik }, kesfet = { sekme = Sekme.ANA },
+                            paylas = { paylasilanKimlik = it.kimlik }, embedded = true)
+
                     } }
                 }
                 }
@@ -359,6 +353,8 @@ fun Uygulama(
 
     if(notificationTopicsOpen) BildirimKonulariPaneli(dil,secili,close = { notificationTopicsOpen = false },
         settings = { notificationTopicsOpen = false; planGoster = true },
+        status = cevir(dil, if (!bildirimIzni) "Bildirim izni kapalı" else if (!hatirlaticiAcik) "Bildirimler kapalı" else if(pausedUntil > System.currentTimeMillis()) "Yarına kadar ara verildi" else "Bildirimler açık",
+            if (!bildirimIzni) "Notification permission is off" else if (!hatirlaticiAcik) "Reminders off" else if(pausedUntil > System.currentTimeMillis()) "Paused until tomorrow" else "Reminders on"),
         toggle = { key -> kapsam.launch { depo.kategoriSec(key); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
         discover = { notificationTopicsOpen = false; acilacakGrup = null; selectedRequest = -kotlin.math.abs(selectedRequest) - 1; sekme = Sekme.KATEGORI })
 
@@ -373,6 +369,7 @@ fun Uygulama(
         adet = gunlukAdet, bas = bas, bit = bit, bildirimAcik = hatirlaticiAcik,
         kapat = { planGoster = false },
         konular = { planGoster = false; notificationTopicsOpen = true },
+        permission = bildirimIzni, requestPermission = izinIste,
         pausedUntil = pausedUntil, hiddenCount = hidden.orEmpty().size,
         restoreHidden = { depo.restoreHiddenQuotes(); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) },
         pause = { shouldPause ->

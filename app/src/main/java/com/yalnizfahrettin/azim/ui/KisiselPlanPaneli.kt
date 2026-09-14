@@ -27,6 +27,7 @@ fun KisiselPlanPaneli(
     konular: () -> Unit,
     saveContent: suspend (Map<String, Set<String>>) -> Unit,
     saveRhythm: suspend (Int, Int, Int, Boolean) -> Unit,
+    permission: Boolean = true, requestPermission: () -> Unit = {},
     pausedUntil: Long = 0L, hiddenCount: Int = 0,
     pause: suspend (Boolean) -> Unit = {}, restoreHidden: suspend () -> Unit = {},
 ) {
@@ -84,6 +85,10 @@ fun KisiselPlanPaneli(
                     cevir(dil, "Görmek istemediklerini düzenle", "Choose what to leave out"), "plan-edit") {
                     draft = (profil ?: PersonalProfile()).encode(); page = "content"
                 }
+                PlanSettingRow(cevir(dil,"Bildirim kurulumu","Notification setup"),
+                    cevir(dil, if(!permission) "Bildirim izni kapalı" else if(bildirimAcik) "Bildirimler açık" else "Bildirimler kapalı", if(!permission) "Notification permission is off" else if(bildirimAcik) "Reminders on" else "Reminders off"), "plan-delivery") { page = "delivery" }
+            } else if (page == "delivery") {
+                BildirimKurulumu(dil, permission, requestPermission)
             } else if (saving) {
                 CircularProgressIndicator(Modifier.align(Alignment.CenterHorizontally))
             } else {

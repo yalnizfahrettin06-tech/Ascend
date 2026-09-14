@@ -47,6 +47,12 @@ object Bildirimler {
             mgr?.getNotificationChannel(KANAL)?.importance != NotificationManager.IMPORTANCE_NONE
     }
 
+    internal fun acilisNiyeti(ctx: Context, id: String) = Intent(ctx, MainActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        data = android.net.Uri.Builder().scheme("ascend").authority("quote").appendPath(id).build()
+        putExtra(EXTRA_KIMLIK, id)
+    }
+
     fun goster(ctx: Context, soz: Soz, dil: String = "tr"): Boolean {
         if (!izinVarMi(ctx)) return false
         val localized = ctx.createConfigurationContext(android.content.res.Configuration(ctx.resources.configuration).apply {
@@ -57,10 +63,7 @@ object Bildirimler {
         val kategoriAdi = Kategoriler.bul(soz.kategori)?.ad(dil)
             ?: ctx.getString(R.string.uygulama_adi)
 
-        val acilis = Intent(ctx, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra(EXTRA_KIMLIK, soz.kimlik)
-        }
+        val acilis = acilisNiyeti(ctx, soz.kimlik)
         val pi = PendingIntent.getActivity(
             ctx, soz.kimlik.hashCode(), acilis,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,

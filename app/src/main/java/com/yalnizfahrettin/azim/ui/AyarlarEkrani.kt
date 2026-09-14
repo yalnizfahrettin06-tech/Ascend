@@ -52,6 +52,7 @@ fun AyarlarEkrani(
     paletSec: (Palet) -> Unit,
     seciliKategoriSayisi: Int,
     geri: () -> Unit,
+    remindersOpen: () -> Unit = {}, appearanceOpen: () -> Unit = {},
 ) {
     var kurulum by rememberSaveable { mutableStateOf(false) }
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding().navigationBarsPadding()) {
@@ -60,43 +61,15 @@ fun AyarlarEkrani(
             IconButton(onClick = geri, modifier = Modifier.size(48.dp)) {
                 Icon(AzimIkon.Geri, cevir(dil, "Geri", "Back"), Modifier.size(24.dp), tint = Renk.metin)
             }
-            Text(stringResource(R.string.ayarlar), fontFamily = LoraSerif, fontSize = 28.sp,
+            Text(stringResource(R.string.ayarlar), fontFamily = ArayuzFont, fontSize = 20.sp,
                 color = Renk.metin, modifier = Modifier.weight(1f).semantics { heading() })
         }
         HorizontalDivider(color = Renk.kenarlik)
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Box(Modifier.fillMaxWidth().padding(top = 16.dp).heightIn(min = 88.dp)) {
-                Column(Modifier.fillMaxWidth(.8f).align(Alignment.CenterStart), verticalArrangement = Arrangement.spacedBy(9.dp)) {
-                    Text(cevir(dil, "SANA AİT BİR ALAN", "A SPACE OF YOUR OWN"), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.4.sp)
-                    Text(cevir(dil, "Görünümü ve gününün ritmini sana göre düzenle.", "Make the page and your daily rhythm feel like yours."),
-                        color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
-                }
-            }
-            AyarBolumu("01", stringResource(R.string.gorunum))
-            SecimSatiri(stringResource(R.string.tema),
-                listOf(TemaModu.AYDINLIK to cevir(dil, "Beyaz", "White"),
-                    TemaModu.KARANLIK to cevir(dil, "Siyah", "Black")), tema, temaSec)
-            SecimSatiri(stringResource(R.string.renk_paleti),
-                listOf(Palet.MERMER, Palet.MONO).map { it to it.etiket(dil) }, guncelPalet(palet), paletSec)
             SecimSatiri(stringResource(R.string.dil), com.yalnizfahrettin.azim.data.Diller.secenekler, dil, dilSec)
-
-            AyarBolumu("02", stringResource(R.string.bildirimler))
-            AyarAnahtari(stringResource(R.string.asc_hatirlaticilar), hatirlaticiAcik, hatirlaticiSec)
-            if (hatirlaticiAcik && !bildirimIzni) {
-                val context = LocalContext.current
-                Text(stringResource(R.string.asc_bildirim_engelli), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
-                OutlinedButton(onClick = { TeslimatYardimi.bildirimAyarlariniAc(context) }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                    shape = RoundedCornerShape(14.dp)) { Text(stringResource(R.string.sistem_bildirim_ayarlari)) }
-            }
-            if (hatirlaticiAcik) BildirimPlani(
-                adet = gunlukAdet, baslangic = baslangic, bitis = bitis,
-                seciliKategoriSayisi = seciliKategoriSayisi, adetDegisti = adetSec,
-                araligiDegisti = saatSec, dil = dil)
-            OutlinedButton(onClick = { kurulum = true }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                shape = RoundedCornerShape(14.dp)) {
-                Text(cevir(dil, "Ayrıntılı bildirim kurulumu", "Detailed notification setup"))
-            }
+            TextButton(onClick = appearanceOpen) { Text(cevir(dil,"Görünüm","Appearance")) }
+            TextButton(onClick = remindersOpen) { Text(cevir(dil,"Bildirimlerin","Your reminders")) }
             AyarAnahtari(stringResource(R.string.haptik), haptik, haptikSec)
 
             AyarBolumu("03", stringResource(R.string.hakkinda))

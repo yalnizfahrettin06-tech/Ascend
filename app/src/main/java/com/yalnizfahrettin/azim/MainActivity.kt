@@ -36,6 +36,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
+    private var acilisIstegi by mutableStateOf(0L)
     private var acilistakiKimlik by mutableStateOf<String?>(null)
     private var acilisSekmesi by mutableStateOf<Sekme?>(null)
     private lateinit var depo: Depo
@@ -83,7 +84,7 @@ class MainActivity : ComponentActivity() {
                     Uygulama(
                         depo = depo,
                         reklam = reklam,
-                        acilistakiKimlik = acilistakiKimlik,
+                        acilistakiKimlik = acilistakiKimlik, acilisIstegi = acilisIstegi,
                         acilisSekmesi = acilisSekmesi,
                         izinIste = ::bildirimIzniniIste,
                         bildirimIzni = bildirimIzni,
@@ -108,6 +109,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun niyetiOku(i: Intent?) {
+        if (i?.hasExtra(Bildirimler.EXTRA_KIMLIK) == true) acilisIstegi++
         acilistakiKimlik = i?.getStringExtra(Bildirimler.EXTRA_KIMLIK)
         acilisSekmesi = when (i?.action) {
             "com.yalnizfahrettin.azim.FAVORILER" -> Sekme.FAVORI
@@ -135,6 +137,8 @@ class MainActivity : ComponentActivity() {
                 history.edit().putBoolean("asked", true).apply()
                 izinIstegi.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
+        } else if (!Bildirimler.izinVarMi(this)) {
+            com.yalnizfahrettin.azim.notif.TeslimatYardimi.kanalAyarlariniAc(this)
         }
     }
 }

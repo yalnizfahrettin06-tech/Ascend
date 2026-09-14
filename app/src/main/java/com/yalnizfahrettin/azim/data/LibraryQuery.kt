@@ -3,6 +3,9 @@ package com.yalnizfahrettin.azim.data
 import java.util.Locale
 
 object LibraryQuery {
+    fun visibleGroups(populated: Set<String> = Sozler.tumu().map { it.kategori }.toSet()): List<KategoriGrubu> =
+        Kategoriler.kesfetGruplari.map { it.copy(altlar = it.altlar.filter { k -> k.anahtar in populated }) }.filter { it.altlar.isNotEmpty() }
+
     fun saved(quotes: List<Soz>, query: String, language: String): List<Soz> {
         val locale = Locale.forLanguageTag(language)
         val needle = query.trim().lowercase(locale)
@@ -16,6 +19,7 @@ object LibraryQuery {
         unlockedOnly: Boolean = false, selected: Set<String> = emptySet(), unlocked: Set<String> = emptySet()): List<Kategori> {
         val needle = query.trim().lowercase(Locale.forLanguageTag(language))
         return Kategoriler.tumAltlar.filter { k ->
+            Sozler.kategoriden(k.anahtar).isNotEmpty() &&
             (needle.isNotEmpty() || group == null || Kategoriler.kesfetGrupBul(group)?.altlar?.contains(k) == true) &&
             (needle.isNotEmpty() || !selectedOnly || k.anahtar in selected) &&
             (!unlockedOnly || k.anahtar in unlocked) &&
