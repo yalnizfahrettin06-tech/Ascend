@@ -47,12 +47,12 @@ private object ThemeImages {
 }
 
 @Composable
-fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f, thumbnail: Boolean = false) {
+fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f, thumbnail: Boolean = false, previewSize: Int = 640) {
     val base = if (theme.dark) Color(0xFF171719) else Color(0xFFF5F5F4)
     Box(modifier.background(base)) {
         theme.art?.let { art ->
             val context = LocalContext.current
-            val size = if(thumbnail) 640 else 1920
+            val size = if(thumbnail) previewSize else 1920
             val imageState = remember(art,size) { mutableStateOf<android.graphics.Bitmap?>(null) }
             val bitmap by imageState
             LaunchedEffect(art,size) { imageState.value = ThemeImages.load(context,art,size) }
@@ -76,17 +76,17 @@ fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolea
                     Column(Modifier.weight(1f)) {
                         Surface(onClick = { select(theme) }, shape = RoundedCornerShape(20.dp),
                             border = BorderStroke(if (selected) 2.dp else .5.dp, if (selected) Renk.metin else Renk.kenarlik),
-                            modifier = Modifier.fillMaxWidth().then(if(compact) Modifier.height(128.dp) else Modifier.aspectRatio(.72f))
+                            modifier = Modifier.fillMaxWidth().then(if(compact) Modifier.height(128.dp) else if(theme.art == null) Modifier.height(112.dp) else Modifier.aspectRatio(.72f))
                                 .testTag("theme-${theme.id}").semantics {
                                     this.selected = selected
                                     contentDescription = theme.label(dil) + if (theme.pro) ", Pro" else ""
                                 }) {
                             Box {
                                 // Gallery shows the artwork clearly; quote readability is demonstrated in the full preview.
-                                TemaZemini(theme, Modifier.matchParentSize(), thumbnail = true, veil = .06f)
+                                TemaZemini(theme, Modifier.matchParentSize(), thumbnail = true, veil = .06f, previewSize = if(columns == 1) 1536 else 640)
                                 if(theme.art == null) Text(cevir(dil,"Kendi hızında.\nBir adım daha.","At your pace.\nOne step more."),
                                     Modifier.align(Alignment.CenterStart).padding(16.dp), color = ink, fontFamily = LoraSerif,
-                                    fontSize = if(compact) 16.sp else 21.sp, lineHeight = if(compact) 21.sp else 28.sp)
+                                    fontSize = if(compact) 16.sp else 18.sp, lineHeight = if(compact) 21.sp else 24.sp)
                                 if(theme.pro) Text("PRO", color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold,
                                     modifier = Modifier.align(Alignment.TopStart).padding(10.dp)
                                         .background(Color.Black.copy(alpha = .75f), RoundedCornerShape(6.dp)).padding(horizontal = 7.dp, vertical = 4.dp))
@@ -113,7 +113,7 @@ fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolea
 fun TemaKoleksiyonKapagi(dil: String, open: () -> Unit) {
     Surface(onClick = open, shape = RoundedCornerShape(22.dp), modifier = Modifier.fillMaxWidth().height((186 * LocalDensity.current.fontScale.coerceAtLeast(1f)).dp).testTag("theme-featured")) {
         Box {
-            TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize(),thumbnail = true)
+            TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize(),thumbnail = true,previewSize = 1024)
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(Color.Black.copy(alpha = .62f),Color.Transparent))))
             Column(Modifier.fillMaxSize().padding(20.dp),verticalArrangement = Arrangement.Bottom) {
                 Text(cevir(dil,"YENİ KOLEKSİYON","NEW COLLECTION"),color = Color.White.copy(alpha = .8f),fontSize = 9.sp,letterSpacing = 1.sp)
