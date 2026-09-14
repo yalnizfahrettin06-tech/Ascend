@@ -25,6 +25,16 @@ enum class AtmosferGrubu(val tr: String, val en: String) {
 }
 
 enum class Atmosfer(val res: Int, val tr: String, val en: String, val grup: AtmosferGrubu = AtmosferGrubu.MANZARA) {
+    IMPARATOR(R.drawable.warrior_emperor, "İmparator", "Emperor", AtmosferGrubu.EFSANE),
+    DUELLO(R.drawable.warrior_duel, "Düello", "Duel", AtmosferGrubu.EFSANE),
+    LEJYON(R.drawable.warrior_legion, "Lejyon", "Legion", AtmosferGrubu.EFSANE),
+    GLADYATOR(R.drawable.warrior_gladiator, "Gladyatör", "Gladiator", AtmosferGrubu.EFSANE),
+    TAHT(R.drawable.warrior_throne, "Taht", "Throne", AtmosferGrubu.EFSANE),
+    SPARTA(R.drawable.warrior_spartan, "Spartalı", "Spartan", AtmosferGrubu.EFSANE),
+    KOMUTAN(R.drawable.warrior_commander, "Atlı Komutan", "Mounted Commander", AtmosferGrubu.EFSANE),
+    KALKAN(R.drawable.warrior_shieldwall, "Kalkan Duvarı", "Shield Wall", AtmosferGrubu.EFSANE),
+    SAMPIYON(R.drawable.warrior_champion, "Arena Şampiyonu", "Arena Champion", AtmosferGrubu.EFSANE),
+    KUSATMA(R.drawable.warrior_siege, "Kuşatma", "Siege", AtmosferGrubu.EFSANE),
     ZIRVE(R.drawable.scene_summit, "Zirve", "Summit"),
     DENIZ(R.drawable.scene_sea, "Gün batımı", "Sunset"),
     BILGELIK(R.drawable.scene_wisdom, "Bilgelik", "Wisdom"),
@@ -50,6 +60,10 @@ enum class Atmosfer(val res: Int, val tr: String, val en: String, val grup: Atmo
     KALE_NOBETI(R.drawable.scene_kale_nobeti, "Kale nöbeti", "Castle watch", AtmosferGrubu.EFSANE);
     fun ad(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
     companion object {
+        // Only this collection is offered by pickers. Old enum/resource IDs remain readable for saved designs.
+        val gallery = listOf(IMPARATOR, DUELLO, LEJYON, GLADYATOR, TAHT, SPARTA, KOMUTAN, KALKAN, SAMPIYON, KUSATMA, ARENA, SOVALYE,
+            ATLI_YOLCU, KAR_MUHAFIZI, KALE_NOBETI, KIYI_NOBETI, KALE, HISAR, TAS_SALON, BILGELIK)
+
         fun grup(anahtar: String?) = when (anahtar) {
             "olumlamalar", "iliskiler", "zihin" -> DENIZ
             "filozoflar", "tasavvuf", "inanc" -> BILGELIK

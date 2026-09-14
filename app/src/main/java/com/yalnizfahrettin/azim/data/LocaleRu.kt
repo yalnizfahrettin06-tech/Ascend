@@ -1305,7 +1305,7 @@ internal object LocaleRu {
         "v5_budist_dusunce_14" to "Когда ваша чашка остынет, вы сможете заботиться о вещах, которые вам нравятся, не возмущаясь их изменениями.",
         "v5_budist_dusunce_15" to "Если сегодня вы заметили обидное действие, поищите то, что можно исправить, а не вешайте на себя ярлыки.",
     )
-    val ui: Map<String, String> by lazy { ui0() + ui1() + ui2() + ui3() + ui4() + ui5() + ui6() + ui7() + ui8() + ui9() + ui10() + ui11() }
+    val ui: Map<String, String> by lazy { ui0() + ui1() + ui2() + ui3() + ui4() + ui5() + ui6() + ui7() + ui8() + ui9() + ui10() + ui11() + ui12() }
     private fun ui0(): Map<String, String> = mapOf(
         "\n            attribute vec4 konum;\n            attribute vec2 dokuKoord;\n            varying vec2 vKoord;\n            void main() { gl_Position = konum; vKoord = dokuKoord; }\n        " to "атрибут vec4 konum; \n атрибут vec2 dokuKoord; \n варьируется vec2 vKoord; \n void main() { gl_Position = konum; вКоорд = докуКоорд; }",
         "\n            precision mediump float;\n            varying vec2 vKoord;\n            uniform sampler2D doku;\n            void main() { gl_FragColor = texture2D(doku, vKoord); }\n        " to "точность mediump float;\n варьируемый vec2 vKoord;\n униформный сэмплер2D doku;\n void main() { gl_FragColor =texture2D(doku, vKoord); }",
@@ -2039,7 +2039,7 @@ internal object LocaleRu {
         "Tamam" to "Тамам",
         "Taoist reflections" to "Даосские размышления",
         "Tap the heart on a quote to keep it here." to "Нажмите на сердечко цитаты, чтобы сохранить ее здесь.",
-        "Tap to preview" to "Нажмите, чтобы просмотреть",
+        "Tap to preview" to "Нажмите для просмотра",
         "Tap to read in full" to "Нажмите, чтобы прочитать полностью",
         "Telefonunun ekleme penceresini onayla." to "Telefonunun ekleme penceresini onayla.",
         "Temizle" to "Темизле",
@@ -2278,5 +2278,21 @@ internal object LocaleRu {
         "Choose a background and share your quote." to "Выберите фон и поделитесь высказыванием.",
         "Theme and widget preview" to "Предпросмотр темы и виджета",
         "Choose a background; your widget shows a new quote each day." to "Выберите фон: каждый день виджет показывает новое высказывание.",
+        "Emperor" to "Император",
+        "Duel" to "Дуэль",
+        "Legion" to "Легион",
+        "Gladiator" to "Гладиатор",
+        "Throne" to "Трон",
+        "Spartan" to "Спартанец",
+        "Mounted Commander" to "Конный полководец",
+        "Shield Wall" to "Стена щитов",
+        "Arena Champion" to "Чемпион арены",
+        "Siege" to "Осада",
+        "NEW COLLECTION" to "НОВАЯ КОЛЛЕКЦИЯ",
+    )
+    private fun ui12(): Map<String, String> = mapOf(
+        "Rome and warriors" to "Рим и воины",
+        "All themes" to "Все темы",
+        "Selected" to "Выбрано",
     )
 }

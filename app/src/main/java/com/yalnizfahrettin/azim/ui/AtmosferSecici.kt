@@ -39,7 +39,7 @@ fun AtmosferSecici(
 ) {
     var filtre by rememberSaveable { mutableStateOf((secili ?: otomatik).grup.name) }
     val grup = AtmosferGrubu.valueOf(filtre)
-    val gorunen = remember(grup) { Atmosfer.entries.filter { it.grup == grup } }
+    val gorunen = remember(grup) { Atmosfer.gallery.filter { it.grup == grup } }
     val liste = rememberLazyGridState()
     LaunchedEffect(grup) { liste.scrollToItem(gorunen.indexOf(secili).coerceAtLeast(0)) }
     val pencereYuksekligi = (LocalConfiguration.current.screenHeightDp * .86f).dp
@@ -74,7 +74,7 @@ fun AtmosferSecici(
                     }
                 }
                 LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    items(AtmosferGrubu.entries, key = { it.name }) { g ->
+                    items(Atmosfer.gallery.map { it.grup }.distinct(), key = { it.name }) { g ->
                         FilterChip(
                             selected = grup == g, onClick = { filtre = g.name },
                             label = { Text(g.ad(dil)) }, shape = RoundedCornerShape(50),

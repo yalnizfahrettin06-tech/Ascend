@@ -1305,7 +1305,7 @@ internal object LocaleDe {
         "v5_budist_dusunce_14" to "Während Ihre Tasse abkühlt, können Sie sich um die Dinge kümmern, die Sie lieben, ohne sich über deren Veränderungen ärgern zu müssen.",
         "v5_budist_dusunce_15" to "Wenn Ihnen heute eine verletzende Handlung aufgefallen ist, suchen Sie nach etwas, das Sie reparieren können, anstatt sich selbst zu beschimpfen.",
     )
-    val ui: Map<String, String> by lazy { ui0() + ui1() + ui2() + ui3() + ui4() + ui5() + ui6() + ui7() + ui8() + ui9() + ui10() + ui11() }
+    val ui: Map<String, String> by lazy { ui0() + ui1() + ui2() + ui3() + ui4() + ui5() + ui6() + ui7() + ui8() + ui9() + ui10() + ui11() + ui12() }
     private fun ui0(): Map<String, String> = mapOf(
         "\n            attribute vec4 konum;\n            attribute vec2 dokuKoord;\n            varying vec2 vKoord;\n            void main() { gl_Position = konum; vKoord = dokuKoord; }\n        " to "Attribut vec4 konum;\n Attribut vec2 dokuKoord;\n variierend vec2 vKoord;\n void main() { gl_Position = konum; vKoord = dokuKoord; }",
         "\n            precision mediump float;\n            varying vec2 vKoord;\n            uniform sampler2D doku;\n            void main() { gl_FragColor = texture2D(doku, vKoord); }\n        " to "precision mediump float;\n variierend vec2 vKoord;\n uniform sampler2D doku;\n void main() { gl_FragColor = texture2D(doku, vKoord); }",
@@ -2039,7 +2039,7 @@ internal object LocaleDe {
         "Tamam" to "Tamam",
         "Taoist reflections" to "Taoistische Überlegungen",
         "Tap the heart on a quote to keep it here." to "Tippen Sie auf das Herz eines Zitats, um es hier zu behalten.",
-        "Tap to preview" to "Tippen Sie auf, um eine Vorschau anzuzeigen",
+        "Tap to preview" to "Tippen für Vorschau",
         "Tap to read in full" to "Zum vollständigen Lesen tippen",
         "Telefonunun ekleme penceresini onayla." to "Telefonunun ekleme penceresini onayla.",
         "Temizle" to "Temizle",
@@ -2278,5 +2278,21 @@ internal object LocaleDe {
         "Choose a background and share your quote." to "Wähle einen Hintergrund und teile deinen Spruch.",
         "Theme and widget preview" to "Vorschau für Design und Widget",
         "Choose a background; your widget shows a new quote each day." to "Wähle einen Hintergrund. Dein Widget zeigt jeden Tag einen neuen Spruch.",
+        "Emperor" to "Kaiser",
+        "Duel" to "Duell",
+        "Legion" to "Legion",
+        "Gladiator" to "Gladiator",
+        "Throne" to "Thron",
+        "Spartan" to "Spartaner",
+        "Mounted Commander" to "Berittener Feldherr",
+        "Shield Wall" to "Schildwall",
+        "Arena Champion" to "Champion der Arena",
+        "Siege" to "Belagerung",
+        "NEW COLLECTION" to "NEUE KOLLEKTION",
+    )
+    private fun ui12(): Map<String, String> = mapOf(
+        "Rome and warriors" to "Rom und Krieger",
+        "All themes" to "Alle Designs",
+        "Selected" to "Ausgewählt",
     )
 }

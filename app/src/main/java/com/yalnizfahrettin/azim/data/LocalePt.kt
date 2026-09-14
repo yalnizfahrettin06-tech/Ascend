@@ -1305,7 +1305,7 @@ internal object LocalePt {
         "v5_budist_dusunce_14" to "À medida que sua xícara esfria, você pode cuidar das coisas que ama sem se ressentir das mudanças.",
         "v5_budist_dusunce_15" to "Se você notou uma ação prejudicial hoje, procure o que pode reparar, em vez de se rotular.",
     )
-    val ui: Map<String, String> by lazy { ui0() + ui1() + ui2() + ui3() + ui4() + ui5() + ui6() + ui7() + ui8() + ui9() + ui10() + ui11() }
+    val ui: Map<String, String> by lazy { ui0() + ui1() + ui2() + ui3() + ui4() + ui5() + ui6() + ui7() + ui8() + ui9() + ui10() + ui11() + ui12() }
     private fun ui0(): Map<String, String> = mapOf(
         "\n            attribute vec4 konum;\n            attribute vec2 dokuKoord;\n            varying vec2 vKoord;\n            void main() { gl_Position = konum; vKoord = dokuKoord; }\n        " to "Atributo \n vec4 konum;\n atributo vec2 dokuKoord;\n variando vec2 vKoord;\n void main() { gl_Position = konum; vKoord = dokuKoord; }",
         "\n            precision mediump float;\n            varying vec2 vKoord;\n            uniform sampler2D doku;\n            void main() { gl_FragColor = texture2D(doku, vKoord); }\n        " to "precisão médiap float;\n variando vec2 vKoord;\n amostrador uniforme2D doku;\n void main() { gl_FragColor = textura2D(doku, vKoord); }",
@@ -2039,7 +2039,7 @@ internal object LocalePt {
         "Tamam" to "Tamam",
         "Taoist reflections" to "Reflexões taoístas",
         "Tap the heart on a quote to keep it here." to "Toque no coração de uma citação para mantê-la aqui.",
-        "Tap to preview" to "Toque para visualizar",
+        "Tap to preview" to "Toque para ver",
         "Tap to read in full" to "Toque para ler na íntegra",
         "Telefonunun ekleme penceresini onayla." to "Telefone ekleme penceresini onayla.",
         "Temizle" to "Temizle",
@@ -2278,5 +2278,21 @@ internal object LocalePt {
         "Choose a background and share your quote." to "Escolha um fundo e compartilhe sua frase.",
         "Theme and widget preview" to "Prévia de tema e widget",
         "Choose a background; your widget shows a new quote each day." to "Escolha um fundo; o widget mostra uma nova frase a cada dia.",
+        "Emperor" to "Imperador",
+        "Duel" to "Duelo",
+        "Legion" to "Legião",
+        "Gladiator" to "Gladiador",
+        "Throne" to "Trono",
+        "Spartan" to "Espartano",
+        "Mounted Commander" to "Comandante a cavalo",
+        "Shield Wall" to "Muralha de escudos",
+        "Arena Champion" to "Campeão da arena",
+        "Siege" to "Cerco",
+        "NEW COLLECTION" to "NOVA COLEÇÃO",
+    )
+    private fun ui12(): Map<String, String> = mapOf(
+        "Rome and warriors" to "Roma e guerreiros",
+        "All themes" to "Todos os temas",
+        "Selected" to "Selecionado",
     )
 }

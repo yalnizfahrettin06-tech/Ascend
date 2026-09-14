@@ -1,0 +1,117 @@
+{
+  "generator": "image_gen.imagegen",
+  "processing": "Lossless RGB WebP encoding, original resolution, no crop, no recoloring",
+  "interpretation": "Original AI-generated historical fantasy artwork; not documentary reconstructions",
+  "artworks": [
+    {
+      "id": "emperor",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_emperor.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "d09891a09fd31bd458a0c54acb0a93959f5b240698e5a25f88effdf0cc3357fc",
+      "sourceSha256": "63c29c05503cb721048073dfcc2b3d1526f2395a4d280ed2136eae5109b7e555",
+      "bytes": 1595050
+    },
+    {
+      "id": "duel",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_duel.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "f6d15d2214ef1431ef977e3a2117ca168d3b448d802b6ff912440b2713690751",
+      "sourceSha256": "71761fc93d565e55cb07a9637a92bd5e4b9c24a0c91805989cdb8249701a14f6",
+      "bytes": 1674640
+    },
+    {
+      "id": "legion",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_legion.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "feabda83e840b33af1b9993c83c5322ebe3312414fda2b4de16ace520c43967c",
+      "sourceSha256": "0fda3c27853e4a28571f295a8faa92fb41cedbe7d7a42385674791cedb4eb11a",
+      "bytes": 1700538
+    },
+    {
+      "id": "gladiator",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_gladiator.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "eae54fdd92a6ad0d2593dc55de00dee5386e64725580fdd372474b3e132ad4c9",
+      "sourceSha256": "2288b82b79cdf08d84e958e34f492ad5c5a8a1c5a5ebcbc814eb35aa80b83425",
+      "bytes": 1791738
+    },
+    {
+      "id": "throne",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_throne.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "0a0356db852abe41ae678fa7dec92213e3a5c7862fb0d466d1e3ce5c971553e4",
+      "sourceSha256": "3a72c0477522319f3b127e394981f3136e0c9793f8d0eaf784aa394a253a443d",
+      "bytes": 1765606
+    },
+    {
+      "id": "spartan",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_spartan.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "04d9cd482a01226cfed89964bf01d6ce07466b36d5c617c86ac122ce2b8f335f",
+      "sourceSha256": "c85eb832b0979312965a9408cb0ad422645b32d0542c07dac647dcff9e2b612c",
+      "bytes": 1930756
+    },
+    {
+      "id": "commander",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_commander.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "60da96f9028dd7b9c007ccf0ee0ec3e0c445d6ead65b473edf76bfd7a6fdf53d",
+      "sourceSha256": "5f0718d4bc9ff27b0e8856dc67f4072ae7412453a2c340252a74c5c8588b2dee",
+      "bytes": 1962138
+    },
+    {
+      "id": "shieldwall",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_shieldwall.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "25b8d7f9e796753dab10c812cf0302726fb8c2740b33e26e37c5879e975e4037",
+      "sourceSha256": "4d6562284172d3740781a3fea0080903b36769accba93160ee479c0a2593e531",
+      "bytes": 2124780
+    },
+    {
+      "id": "champion",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_champion.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "c84ed3b0bf78f5fee4490a3448b7e0d162271afb1aa967a0235cd5c405565c21",
+      "sourceSha256": "c12110facf41bd4bbe9589dca43af0e805badfff0ff2ae9675bd4b36da04c262",
+      "bytes": 1634298
+    },
+    {
+      "id": "siege",
+      "asset": "app/src/main/res/drawable-nodpi/warrior_siege.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "sha256": "39b4e616bf2aa5e442e7cb633fa064e79b848678502beb4c0bbed7575c96e5a4",
+      "sourceSha256": "555ce137ea8f6a29dcdd22b2d9a28183ee59acc34943b95ea84760c4c7d059d4",
+      "bytes": 1819636
+    }
+  ]
+}

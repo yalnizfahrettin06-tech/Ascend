@@ -52,7 +52,14 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
         if(!widgetTab) {
             val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f) 1 else 2
             val rows = remember(columns) { AnaTemalar.all.chunked(columns) }
-            LazyColumn(Modifier.weight(1f).clipToBounds().testTag("appearance-gallery"),contentPadding = PaddingValues(20.dp),verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            LazyColumn(Modifier.weight(1f).clipToBounds().testTag("appearance-gallery"),contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 6.dp, bottom = 24.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                item(key = "featured") { TemaKoleksiyonKapagi(dil) { preview = AnaTemalar.emperor.id } }
+                item(key = "gallery-heading") {
+                    Row(Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
+                        Text(cevir(dil,"Tüm temalar","All themes"),Modifier.weight(1f),fontSize = 16.sp,fontWeight = FontWeight.SemiBold,color = Renk.metin)
+                        Text(cevir(dil,"Dokun ve önizle","Tap to preview"),fontSize = 11.sp,color = Renk.metinIkincil)
+                    }
+                }
                 items(rows,key = { it.first().id }) { row -> TemaGrid(dil,row,AnaTemalar.allowed(selected,pro).id,pro) { preview = it.id } }
             }
         } else {

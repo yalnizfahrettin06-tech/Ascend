@@ -77,7 +77,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     var kutuphane by rememberSaveable { mutableStateOf(false) }
     val tercih = remember { ctx.getSharedPreferences("share-theme-favorites", android.content.Context.MODE_PRIVATE) }
     var temaFavorileri by remember { mutableStateOf(tercih.getStringSet("themes", emptySet()).orEmpty().toSet()) }
-    var zeminFiltresi by rememberSaveable { mutableStateOf(PaylasimZeminFiltresi.UCRETSIZ.name) }
     var gorselArama by rememberSaveable { mutableStateOf("") }
     var onizleme by remember { mutableStateOf<Bitmap?>(null) }
     var hazirlaniyor by remember { mutableStateOf(false) }
@@ -93,12 +92,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     var formatOptions by rememberSaveable { mutableStateOf(false) }
     val gorunenVideo = video && pro
     val zeminler = remember(dil) { paylasimZeminleri(dil) }
-    val etkinZeminFiltresi = PaylasimZeminFiltresi.valueOf(zeminFiltresi)
-    val gorunenZeminler = remember(zeminler, etkinZeminFiltresi, gorselArama) {
-        zeminler.filter { z -> etkinZeminFiltresi.kapsar(z) &&
-            (etkinZeminFiltresi != PaylasimZeminFiltresi.KOLEKSIYON || gorselArama.isBlank() ||
-                z.ad.contains(gorselArama, ignoreCase = true) || z.anahtar.contains(gorselArama, ignoreCase = true)) }
-    }
     val sheet = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     fun durdur() { islem?.cancel() }
     BackHandler { if (hazirlaniyor) durdur() else geri() }
@@ -109,7 +102,6 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
             durdur()
             ayar = PaylasimErisimi.ucretsizAyar(ayar)
             video = false
-            zeminFiltresi = PaylasimZeminFiltresi.UCRETSIZ.name
             bekleyenUri = null
             bekleyenPro = false
             durum = cevir(dil, "Ücretsiz paylaşım seçeneklerine döndün.", "Free sharing options are now selected.")
@@ -309,40 +301,13 @@ private fun PaylasimBolumBasligi(sira: String, baslik: String, modifier: Modifie
 
 private data class PaylasimZemini(val anahtar: String, val zemin: KartZemin, val ad: String, val grup: AtmosferGrubu? = null)
 
-private enum class PaylasimZeminFiltresi(val tr: String, val en: String) {
-    UCRETSIZ("Ücretsiz", "Free"),
-    MANZARA("Manzaralar", "Scenery"),
-    EFSANE("Efsaneler", "Legends"),
-    DOKU("Dokular", "Textures"),
-    KOLEKSIYON("Koleksiyon", "Collection"),
-    RENKLER("Renkler", "Colors");
-
-    fun ad(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
-    fun kapsar(zemin: PaylasimZemini): Boolean = when (this) {
-        UCRETSIZ -> !PaylasimErisimi.zeminProMu(zemin.zemin)
-        MANZARA -> zemin.grup == AtmosferGrubu.MANZARA
-        EFSANE -> zemin.grup == AtmosferGrubu.EFSANE
-        DOKU -> zemin.grup == AtmosferGrubu.DOKU
-        KOLEKSIYON -> zemin.anahtar.startsWith("topic-")
-        RENKLER -> zemin.zemin is KartZemin.Duz || zemin.zemin is KartZemin.Gradyan
-    }
-}
-
 // Art is independent from content categories; never expose fallback category covers.
 private fun paylasimZeminleri(dil: String): List<PaylasimZemini> = buildList {
     add(PaylasimZemini("marble", PaylasimErisimi.ucretsizZeminler[0], cevir(dil, "Mermer", "Marble"), AtmosferGrubu.MANZARA))
     add(PaylasimZemini("night", PaylasimErisimi.ucretsizZeminler[1], cevir(dil, "Gece", "Night")))
     add(PaylasimZemini("paper", PaylasimErisimi.ucretsizZeminler[2], cevir(dil, "Kâğıt", "Paper")))
-    Atmosfer.entries.forEach { a ->
+    Atmosfer.gallery.forEach { a ->
         add(PaylasimZemini(a.name.lowercase(), KartZemin.Sahne(a.res), a.ad(dil), a.grup))
-    }
-    val renkAdlari = listOf("Grafit" to "Graphite", "Gece yarısı" to "Midnight", "Şarap" to "Wine", "Lacivert" to "Navy", "Yosun" to "Moss", "Kar" to "Snow")
-    HazirZeminler.duzler.drop(1).dropLast(1).forEachIndexed { i, z ->
-        add(PaylasimZemini("color-$i", z, cevir(dil, renkAdlari[i].first, renkAdlari[i].second)))
-    }
-    val gecisAdlari = listOf("Sis" to "Mist", "Akşam" to "Evening", "Okyanus" to "Ocean", "Yaprak" to "Leaf", "Gül" to "Rose", "Fildişi" to "Ivory")
-    HazirZeminler.gradyanlar.forEachIndexed { i, z ->
-        add(PaylasimZemini("gradient-$i", z, cevir(dil, gecisAdlari[i].first, gecisAdlari[i].second)))
     }
 }.distinctBy { it.zemin }
 

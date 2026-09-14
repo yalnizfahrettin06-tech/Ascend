@@ -56,10 +56,10 @@ fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f
             val imageState = remember(art,size) { mutableStateOf<android.graphics.Bitmap?>(null) }
             val bitmap by imageState
             LaunchedEffect(art,size) { imageState.value = ThemeImages.load(context,art,size) }
-            bitmap?.let { Image(it.asImageBitmap(), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
+            bitmap?.let { Image(it.asImageBitmap(), null, Modifier.matchParentSize().testTag("theme-art-${theme.id}"), contentScale = ContentScale.Crop,
                 colorFilter = null) }
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(
-                base.copy(alpha = if (theme.dark) .32f else veil), base.copy(alpha = if (theme.dark) .08f else .05f)))))
+                base.copy(alpha = if(thumbnail) 0f else if (theme.dark) .32f else veil), base.copy(alpha = if(thumbnail) 0f else if (theme.dark) .08f else .05f)))))
         }
     }
 }
@@ -67,38 +67,63 @@ fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f
 @Composable
 fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolean, compact: Boolean = false, select: (AnaTema) -> Unit) {
     val columns = if (LocalDensity.current.fontScale > 1.4f) 1 else 2
-    Column(verticalArrangement = Arrangement.spacedBy(14.dp), modifier = Modifier.testTag("theme-gallery")) {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp), modifier = Modifier.testTag("theme-gallery")) {
         themes.chunked(columns).forEach { row ->
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 row.forEach { theme ->
                     val selected = selectedId == theme.id
+                    val ink = if (theme.dark) Color.White else Color(0xFF171719)
                     Column(Modifier.weight(1f)) {
-                        Surface(onClick = { select(theme) }, shape = RoundedCornerShape(18.dp),
-                            border = BorderStroke(if (selected) 2.dp else 1.dp, if (selected) Renk.metin else Renk.kenarlik),
-                            modifier = Modifier.fillMaxWidth().height(if(compact) 128.dp else 156.dp).testTag("theme-${theme.id}")
-                                .semantics { this.selected = selected; contentDescription = theme.label(dil) + if (theme.pro) ", Pro" else "" }) {
+                        Surface(onClick = { select(theme) }, shape = RoundedCornerShape(20.dp),
+                            border = BorderStroke(if (selected) 2.dp else .5.dp, if (selected) Renk.metin else Renk.kenarlik),
+                            modifier = Modifier.fillMaxWidth().then(if(compact) Modifier.height(128.dp) else Modifier.aspectRatio(.72f))
+                                .testTag("theme-${theme.id}").semantics {
+                                    this.selected = selected
+                                    contentDescription = theme.label(dil) + if (theme.pro) ", Pro" else ""
+                                }) {
                             Box {
-                                TemaZemini(theme, Modifier.matchParentSize(), thumbnail = true)
-                                val ink = if (theme.dark) Color.White else Color(0xFF171719)
-                                Column(Modifier.fillMaxSize().padding(14.dp), verticalArrangement = Arrangement.SpaceBetween) {
-                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                        Text("ascend", fontFamily = ArayuzFont, fontWeight = FontWeight.SemiBold, color = ink, fontSize = 13.sp)
-                                        if (theme.pro) Text("PRO", color = ink, fontSize = 9.sp, fontWeight = FontWeight.Bold,
-                                            modifier = Modifier.background(if (theme.dark) Color.Black.copy(.55f) else Color.White.copy(.85f), RoundedCornerShape(5.dp)).padding(4.dp))
-                                    }
-                                    Text(cevir(dil, "Kendi hızında.\nBir adım daha.", "At your pace.\nOne step more."), color = ink,
-                                        fontFamily = LoraSerif, fontSize = if(compact) 15.sp else 18.sp, lineHeight = if(compact) 20.sp else 23.sp)
-                                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                                        Icon(if (selected) AzimIkon.Tik else if (theme.pro && !pro) AzimIkon.Kilit else AzimIkon.Kalp, null, Modifier.size(16.dp), tint = ink)
-                                    }
+                                // Gallery shows the artwork clearly; quote readability is demonstrated in the full preview.
+                                TemaZemini(theme, Modifier.matchParentSize(), thumbnail = true, veil = .06f)
+                                if(theme.art == null) Text(cevir(dil,"Kendi hızında.\nBir adım daha.","At your pace.\nOne step more."),
+                                    Modifier.align(Alignment.CenterStart).padding(16.dp), color = ink, fontFamily = LoraSerif,
+                                    fontSize = if(compact) 16.sp else 21.sp, lineHeight = if(compact) 21.sp else 28.sp)
+                                if(theme.pro) Text("PRO", color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold,
+                                    modifier = Modifier.align(Alignment.TopStart).padding(10.dp)
+                                        .background(Color.Black.copy(alpha = .75f), RoundedCornerShape(6.dp)).padding(horizontal = 7.dp, vertical = 4.dp))
+                                if(selected) Surface(color = ink, shape = androidx.compose.foundation.shape.CircleShape,
+                                    modifier = Modifier.align(Alignment.TopEnd).padding(10.dp)) {
+                                    Icon(AzimIkon.Tik,cevir(dil,"Seçili","Selected"),Modifier.padding(5.dp).size(15.dp),tint = if(theme.dark) Color.Black else Color.White)
                                 }
                             }
                         }
-                        Text(theme.label(dil), color = Renk.metin, fontSize = 12.sp, lineHeight = 18.sp,
-                            fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal, modifier = Modifier.padding(top = 6.dp))
+                        Row(Modifier.fillMaxWidth().padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Text(theme.label(dil), Modifier.weight(1f), color = Renk.metin, fontSize = 12.sp, lineHeight = 17.sp,
+                                fontWeight = if(selected) FontWeight.SemiBold else FontWeight.Medium)
+                            if(selected) Icon(AzimIkon.Tik,null,Modifier.padding(start = 4.dp).size(14.dp),tint = Renk.metin)
+                        }
                     }
                 }
                 if (row.size < columns) Spacer(Modifier.weight(1f))
+            }
+        }
+    }
+}
+
+@Composable
+fun TemaKoleksiyonKapagi(dil: String, open: () -> Unit) {
+    Surface(onClick = open, shape = RoundedCornerShape(22.dp), modifier = Modifier.fillMaxWidth().height((186 * LocalDensity.current.fontScale.coerceAtLeast(1f)).dp).testTag("theme-featured")) {
+        Box {
+            TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize(),thumbnail = true)
+            Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(Color.Black.copy(alpha = .62f),Color.Transparent))))
+            Column(Modifier.fillMaxSize().padding(20.dp),verticalArrangement = Arrangement.Bottom) {
+                Text(cevir(dil,"YENİ KOLEKSİYON","NEW COLLECTION"),color = Color.White.copy(alpha = .8f),fontSize = 9.sp,letterSpacing = 1.sp)
+                Spacer(Modifier.height(7.dp))
+                Text(cevir(dil,"Roma ve savaşçılar","Rome and warriors"),Modifier.fillMaxWidth(.7f),color = Color.White,fontSize = 24.sp,lineHeight = 29.sp,fontWeight = FontWeight.SemiBold)
+                Spacer(Modifier.height(10.dp))
+                Row(verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(cevir(dil,"Önizle","Preview"),color = Color.White,fontSize = 12.sp)
+                    Icon(AzimIkon.Ileri,null,Modifier.size(16.dp),tint = Color.White)
+                }
             }
         }
     }
@@ -115,7 +140,7 @@ fun TemaOnizleme(theme: AnaTema, dil: String, pro: Boolean, close: () -> Unit, a
                 Text(theme.label(dil), Modifier.weight(1f), color = Renk.metin, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
                 IconButton(onClick = close) { Icon(AzimIkon.Kapat, cevir(dil, "Kapat", "Close")) }
             }
-            Box(Modifier.fillMaxWidth().height(340.dp).clip(RoundedCornerShape(22.dp)).testTag("theme-preview")) {
+            Box(Modifier.fillMaxWidth().height(400.dp).clip(RoundedCornerShape(22.dp)).testTag("theme-preview")) {
                 TemaZemini(theme, Modifier.matchParentSize())
                 Column(Modifier.fillMaxSize().padding(24.dp), verticalArrangement = Arrangement.Center) {
                     Text(cevir(dil, "Kendine ayırdığın\nbu an yeter.", "This moment\nfor yourself is enough."), fontFamily = LoraSerif,

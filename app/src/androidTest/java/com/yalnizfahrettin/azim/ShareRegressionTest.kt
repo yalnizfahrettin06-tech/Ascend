@@ -46,10 +46,10 @@ class ShareRegressionTest {
         compose.onNodeWithText("Tümünü gör").performScrollTo().performClick()
         compose.onNodeWithTag("share-library-search").performTextInput("Marcus")
         compose.onNodeWithText("Sonuç bulunamadı.").assertIsDisplayed()
-        compose.onNodeWithTag("share-library-search").performTextReplacement("Zirve")
+        compose.onNodeWithTag("share-library-search").performTextReplacement("İmparator")
         compose.onNodeWithTag("share-library-search").performImeAction()
-        compose.onAllNodesWithContentDescription("Zirve").assertCountEquals(1)
-        compose.onNodeWithContentDescription("Zirve").performClick()
+        compose.onAllNodesWithContentDescription("İmparator").assertCountEquals(1)
+        compose.onNodeWithContentDescription("İmparator").performClick()
         compose.waitForIdle()
         ekranKaydet("share-safe-normal")
         val resolver = compose.activity.contentResolver
