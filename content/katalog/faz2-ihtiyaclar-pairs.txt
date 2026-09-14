@@ -4,7 +4,7 @@ Bir girişimin sonuç vermedi. Sonraki girişimin aynı yerden başlaması gerek
 Ayağa kalkmak bazen büyük bir karar değil, yarım kalan dosyayı yeniden açmaktır. | Getting back up can be as ordinary as reopening the file you left unfinished.
 Aynı yolu hemen denemeden önce, nerede takıldığını inceleyebilirsin. | Before retrying the same route, look at where you got stuck.
 Bir aksilikten sonra hızını düşürmek, devam etmenin bir biçimi olabilir. | Slowing down after a setback can be one way of continuing.
-İlk denemede bilmediğin bir şeyi artık biliyorsun; aynı yerden başlamıyorsun. | You now know something you did not know on your first try; your starting point has changed.
+Yeniden denemeden önce işe yarayan kısmı koru. Bir başarısızlık, bütün yöntemi çöpe atmanı gerektirmez. | Before trying again, keep the part that worked. One failure need not make you discard the whole method.
 Bugün yalnızca dağılan parçaları topladıysan, yeniden kurmanın bir bölümünü yaptın. | If all you did today was gather the scattered pieces, you did part of the rebuilding.
 Başarısızlığını anlatırken, o sırada elinde olmayan bilgiyi de hesaba kat. | When describing your failure, account for the information you did not have then.
 Tekrar denemeden önce yardım istemek, ilk denemenden çıkardığın bir ders olabilir. | Asking for help before trying again may be a lesson from your first attempt.
@@ -78,7 +78,7 @@ Kendi alanını korurken başkasının alanını da görebilirsin; iki ihtiyaç 
 [onay]
 Kararını anlatmadan önce sor: Bunu gerçekten istiyor muyum, yoksa beğenilmesini mi istiyorum? | Before explaining a decision, ask whether you want it or mainly want approval for it.
 Bir tercihin herkesçe anlaşılmaması, senin için anlamsız olduğu anlamına gelmez. | A choice that not everyone understands is not necessarily meaningless to you.
-Paylaşmadığın bir başarı da yaşanmıştır; başkalarının görmesi onu gerçek yapmaz. | An achievement you have not shared still happened; being seen does not make it real.
+Kimseye anlatmadığın başarın da gerçektir. Onu değerli yapan, kaç kişinin gördüğü değil, senin verdiğin emektir. | An achievement you keep to yourself is still real. Your effort matters even when nobody sees it.
 Her yorumdan sonra yön değiştirmek yorabilir; kendi gerekçene tekrar bakmak için durabilirsin. | Changing direction after every comment can be tiring; pause to revisit your own reasons.
 Birinin hoşuna gitmeyen cevabın, kendi ihtiyacına verdiğin dürüst cevap olabilir. | An answer someone dislikes may be your honest response to your own need.
 Başkasının fikri kararına katkı sunabilir; kararının bütün sorumluluğunu taşıyamayabilir. | Another person's view can inform your decision without carrying its whole responsibility.
@@ -193,7 +193,7 @@ Küçük bir kusur, bir işin kullanılabilir ve faydalı olmasını her zaman e
 Öğrenirken başkasının bitmiş işiyle kendi ilk denemeni aynı ölçüye koymayabilirsin. | While learning, you need not measure your first attempt against someone else's finished work.
 Her ayrıntıya aynı zamanı vermen gerekmiyor; sonucu gerçekten etkileyeni seç. | You need not give every detail equal time; choose the one that truly affects the result.
 İşini paylaşmak için eleştirilemez olmasını beklersen, paylaşma günü gelmeyebilir. | If you wait until work is beyond criticism before sharing, that day may never come.
-Yeterince iyi olanı bırakmak da emek ister; her emek eklemek biçiminde değildir. | Leaving something that is good enough takes effort too; effort does not always mean adding more.
+İşini tekrar açmadan önce sor: Gerçek bir eksik mi var, yoksa bitirdiğime güvenmekte mi zorlanıyorum? | Before revising again, ask: Is something truly missing, or am I struggling to trust that I am finished?
 Bir denemenin acemice görünmesi, onu yapmaman gerektiğinin kanıtı değildir. | An attempt looking unpolished is not evidence that you should not have made it.
 Tamamlanan iş geri bildirim getirebilir; zihnindeki kusursuz çalışma bunu yapamaz. | Finished work can bring feedback; the perfect work that stays in your head cannot.
 [belirsizlik]
@@ -205,7 +205,7 @@ Her ihtimale hazırlanmak mümkün olmayabilir; en gerekli hazırlığı seçebi
 Bir planın geçici olması, bugün işine yaramasına engel değildir. | A plan being temporary does not prevent it from being useful today.
 Geleceği bilmediğini söylemek güçsüzlük değil, elindeki bilginin dürüst bir tarifidir. | Saying you do not know the future is an honest description of your information, not a weakness.
 Cevapsız bir soruyla birlikte kahvaltı yapabilir, hayatın küçük işlerini sürdürebilirsin. | You can eat breakfast and carry on with small parts of life alongside an unanswered question.
-Bir olasılığın korkutucu olması, onu diğerlerinden daha kesin yapmaz. | A possibility being frightening does not make it more certain than the others.
+Henüz kesinleşmemiş bir habere dayanarak söz vermek zorunda değilsin. Önce neyin belli olmadığını söyle. | You need not make promises based on news that is not confirmed. Say what remains uncertain first.
 Netleşmeyen konuda, ne zaman yeniden bilgi arayacağını belirlemek yeterli olabilir. | For something still unclear, it may be enough to decide when to seek information again.
 [degisim]
 Yeni koşullarda eski hızını beklemeden önce, nelerin değiştiğini kendine söyle. | Before expecting your old pace in new conditions, name what has changed.
@@ -231,7 +231,7 @@ Hatırlamak bazen acı, bazen sıcaklık getirir; yalnızca birini hissetmek zor
 Bir vedanın anlamını bugün çözmen gerekmiyor; bugün yalnızca günü geçirebilirsin. | You need not understand the meaning of a goodbye today; you can simply get through the day.
 [tek_basina]
 Kendi başına geçireceğin bir saate, yalnızca senin sevdiğin bir uğraşı koyabilirsin. | You can fill an hour alone with an activity you enjoy simply for yourself.
-Tek kişilik sofraya özen göstermek için bir misafirin gelmesini beklemen gerekmiyor. | You need not wait for a guest to put care into a table set for one.
+Güzel bir sofra hazırlamak için misafir beklemen gerekmiyor. Kendin için gösterdiğin özen de değerli. | You need not wait for guests to set a lovely table. The care you take for yourself matters too.
 Yalnız yürürken kendi hızını fark edebilirsin; bugün kimseye yetişmen gerekmeyebilir. | Walking alone can let you notice your own pace; today there may be nobody to catch up with.
 Bir filmi tek başına izlemek, keyfini paylaşmadan da yaşayabildiğin küçük bir deneyim olabilir. | Watching a film alone can be a small experience of enjoyment without needing to share it.
 Kendinle zaman geçirmek, insanlardan bütünüyle uzaklaşmayı seçmek değildir. | Spending time with yourself is not choosing to withdraw from people entirely.
@@ -258,7 +258,7 @@ Anlatılanı kendi benzer hikâyene çevirmeden önce, karşındakinin bitirmesi
 Sessizliği hemen doldurman gerekmiyor; karşındaki kelimelerini arıyor olabilir. | You need not fill a silence immediately; the other person may be searching for words.
 Birini dinlerken öğüt vermeden önce senden ne beklediğini sorabilirsin. | Before offering advice, ask what the person speaking would like from you.
 Dinlerken telefonu kenara koymak, dikkatinle verebileceğin somut bir işarettir. | Putting your phone aside while listening is a concrete way to offer your attention.
-Sana anlatılan sorunun çözümü istenmiyor olabilir; önce nasıl yardımcı olabileceğini sor. | Someone telling you a problem may not want a solution; first ask how you can help.
+Biri sevincini anlatırken hemen bir uyarı ekleme. Önce onun için neyin güzel olduğunu dinle. | When someone shares good news, pause before adding a warning. First hear what makes it good for them.
 Bir cümlenin sende uyandırdığı tahmini, söylenen gerçek sanmadan önce kontrol et. | Check your assumption about a sentence before treating it as what was actually said.
 Yorgunsan daha sonra dikkatle dinlemek için zaman önermek, dinliyormuş gibi yapmaktan dürüst olabilir. | If tired, offering a later time to listen carefully may be more honest than pretending now.
 Anlamadığın bir ayrıntıyı sormak, anlamaya verdiğin özeni gösterebilir. | Asking about a detail you missed can show the care you take to understand.
@@ -289,7 +289,7 @@ Bedenini düşünürken yalnızca nasıl göründüğünü değil, gün içinde 
 Rahat kıyafet seçmek, görünüşünden bağımsız olarak kendine gösterebileceğin bir özendir. | Choosing comfortable clothes is care you can offer yourself regardless of appearance.
 Bugünkü bedensel sınırını fark etmek, onu aşman gerektiği anlamına gelmez. | Noticing your body's limit today does not mean you must push beyond it.
 Açlık veya yorgunluk gibi ihtiyacını, kendinle tartışmadan önce duymaya çalışabilirsin. | Try hearing a need such as hunger or fatigue before arguing with yourself about it.
-Aynadaki görüntün, kendine nasıl davranılmayı hak ettiğinin ölçüsü değildir. | Your reflection is not a measure of how you deserve to be treated.
+Görünüşün, ne kadar saygıyı hak ettiğini belirlemez. Bedenin değişse de saygı görme hakkın değişmez. | Your appearance does not determine the respect you deserve. A changing body does not change that right.
 Bir hareket uygun gelmiyorsa, başkası rahat yapıyor diye kendini zorlaman gerekmiyor. | If a movement does not suit you, another person's ease with it is no reason to force yourself.
 Bedenindeki değişimi merakla fark edebilirsin; her değişime hemen hüküm vermek gerekmiyor. | Notice a change in your body with curiosity; not every change needs an immediate verdict.
 Bakım bazen büyük bir karar değil, üşüdüğünde üzerine bir şey almaktır. | Care is sometimes as ordinary as putting on another layer when you feel cold.

@@ -85,8 +85,8 @@
       "sourceHash": "f964a07f15e210def6f0604942b63f76715b1706d200a93de5f5637feb05261d"
     },
     "v5_kendine_guven_01": {
-      "text": "Ao tomar uma decisão, lembro que minha própria experiência merece um lugar à mesa.",
-      "sourceHash": "a94f244648f137a254e904567274075076adbbee494b425c2df1e48a7f4b50cd"
+      "text": "Ao decidir, escuto os outros sem ignorar o que aprendi com minha experiência.",
+      "sourceHash": "a2182c63b196900d47bc2c40d411c5cbfd8bbb1c6c02a9066d0c86056cb8314f"
     },
     "v5_kendine_guven_02": {
       "text": "Posso reconhecer o que ainda preciso aprender sem minimizar o que já sei.",
@@ -105,8 +105,8 @@
       "sourceHash": "349362ae130393362b71a91d621b712cbd68e4231587ebbfa889aee196c18038"
     },
     "v5_kendine_guven_06": {
-      "text": "Quando faço algo pela primeira vez, pertenço a esse lugar, mesmo sendo um iniciante.",
-      "sourceHash": "1fddce22bfbb4105773d7664e302b8b49ac426a8ae6112bbb97f44d3c80f2c9d"
+      "text": "É natural ser iniciante ao tentar algo novo. Tenho lugar ali mesmo antes de saber tudo.",
+      "sourceHash": "b58e680de4dd2e5cf7423bf7c0d4251834dea1513ebb0043153e4788a22265ad"
     },
     "v5_kendine_guven_07": {
       "text": "Posso confiar em mim mesmo para fazer uma pausa e reconsiderar uma decisão que não parece certa.",
@@ -157,8 +157,8 @@
       "sourceHash": "d6f786392c6bffff70f59673f312cb0d23a2e5cd5bfc96f6d7f07ef4721eaf0a"
     },
     "v5_motivasyon_09": {
-      "text": "Dê ao seu desejo um cenário: um caderno aberto, uma ferramenta ao seu alcance, um espaço no seu dia.",
-      "sourceHash": "285aa7230b3ab513292cdbe379118ffb1ef20a9e11c717603dd9208b64c6a272"
+      "text": "Dê espaço hoje ao que quer começar: um caderno aberto, uma hora livre, uma primeira tentativa.",
+      "sourceHash": "5471bb759982bc99184ed1e86a7272caae2c6b4ec8a0db42abdcac72ffe60e17"
     },
     "v5_motivasyon_10": {
       "text": "Todo o seu sonho ainda pode estar longe; você pode cuidar dele antes de percorrer toda essa distância.",
@@ -181,8 +181,8 @@
       "sourceHash": "111c7f6976b6654037d78a18e239de1be763d7b90126f4b4ee4633d0514b15cb"
     },
     "v5_azim_05": {
-      "text": "Revisite regularmente o que você trabalha; se ainda atender aos seus valores, abra espaço para ele novamente.",
-      "sourceHash": "35048f926a8349309284c6ee9a891abd6def7dd3966b7efef60c0be5a6986e36"
+      "text": "Na repetição de hoje, melhore um detalhe. A prática rende mais quando você presta atenção.",
+      "sourceHash": "08f40573db219b31794ede0e46efc0857ad077b435ccaa6e3c3f73f8728338b0"
     },
     "v5_azim_06": {
       "text": "Aprender uma habilidade tem seus trechos enfadonhos. Encontre um detalhe neles que o deixe curioso.",
@@ -213,8 +213,8 @@
       "sourceHash": "a96a9cc3e7ea519d40a728909317fe0be0bb9fff2d00a9ba18ed77a0def67cd0"
     },
     "v5_pes_03": {
-      "text": "Retornar a um arquivo inacabado pode começar com a descoberta do seu lugar, mesmo antes do retorno do antigo entusiasmo.",
-      "sourceHash": "72eded4eb0f79308ffc1c39251ad72fbcb42f581e63902497a11b2baa2e1df57"
+      "text": "Quando quiser desistir, diga o que está pesado demais. Talvez seja a carga que precise diminuir.",
+      "sourceHash": "35aa70bdc6f5868328ec240af42bb09e604090a10d483aa5fda8bec9330b8fd7"
     },
     "v5_pes_04": {
       "text": "Uma porta que permanece fechada não exige que você passe todas as tentativas futuras diante dela.",
@@ -273,8 +273,8 @@
       "sourceHash": "98cd1d08d60301eed38e59334d99b38a477313be66eec5e8503706380d57bfb1"
     },
     "v5_zorluk_sabir_08": {
-      "text": "Alguns dias não trazem nenhuma resposta nova para uma pergunta difícil; carregar a questão pode ser suficiente por um tempo.",
-      "sourceHash": "13c9f6f018aac457e90a28ba3c8c000fba5c53f6fbded63026f6a2a30ad1de70"
+      "text": "Um problema sem solução não torna o dia perdido. Você fez outras coisas enquanto lidava com ele.",
+      "sourceHash": "b1c7a00434a45b15f1c95d36df37e7ed3c18cbf0f1e753bf60e8f05e7fa65a32"
     },
     "v5_zorluk_sabir_09": {
       "text": "Revise o processo com o qual você está sendo paciente; a mudança das condições pode merecer uma nova decisão.",
@@ -297,8 +297,8 @@
       "sourceHash": "75ff8438aba8b0750bd7bf36e7167d3166f91befad99f1908df74a12d49d1a9f"
     },
     "v5_yorgunluk_sabir_04": {
-      "text": "Deixe que esta pausa tenha um espaço próprio, sem preenchê-la com todas as tarefas que pertencem ao amanhã.",
-      "sourceHash": "24ee5cd401ecca2b722376ba07c4e1294d1bea4a75e788b0a523db1566c837ae"
+      "text": "Você não precisa planejar as tarefas de amanhã nesta pausa. Estes minutos podem ser só para descansar.",
+      "sourceHash": "0e35fbf03ac858d581f4ee4b9f217d1fe45f5a9abebb8983f0b5c25b5941e308"
     },
     "v5_yorgunluk_sabir_05": {
       "text": "Depois de um dia exigente, você pode querer menos palavras. Deixe as pessoas próximas a você saberem gentilmente.",
@@ -349,8 +349,8 @@
       "sourceHash": "672c20d7fa45fc1aa149ff50c3b5a90e9564cf0b48c83a7a90f034c509826e15"
     },
     "v5_tukenmislik_07": {
-      "text": "Não se repreenda por perder entusiasmo. Primeiro, abra espaço para que as condições de drenagem sejam ouvidas.",
-      "sourceHash": "bd6c2b558f0ed5a6e2ac7d1cc7b162e98916048e26c3a26af21f41c75c205456"
+      "text": "Antes de se culpar pela falta de ânimo, olhe para a carga de trabalho. Exigências constantes podem fazer parte do problema.",
+      "sourceHash": "b5a40c124e92e2932ff77f22669a7cfadbccaa0a5e71408390fdc105f7136a92"
     },
     "v5_tukenmislik_08": {
       "text": "Discutir quando você pode ser contatado depois do trabalho é uma forma de proteger o tempo que lhe pertence.",
@@ -429,8 +429,8 @@
       "sourceHash": "2ef955af1c7608e5937ca20fcb8cbaaecff71b746b5d33a9bbead898621a6605"
     },
     "v5_uzun_soluk_07": {
-      "text": "Uma longa busca tem espaço para companheirismo; às vezes conhecimento, às vezes coragem, às vezes simplesmente companhia.",
-      "sourceHash": "bdf51a7bfdbfcfc77236c54a8b55308b6e45b51afb6c56a225cd4535a6fb076b"
+      "text": "Ao longo de meses de trabalho, compartilhe com alguém o que está aprendendo, não só o resultado final.",
+      "sourceHash": "93b5a1c60ce59376b222086ea8c0e1062e526b66610a18c23a2ff02a687ed77f"
     },
     "v5_uzun_soluk_08": {
       "text": "Dê aos dias interrompidos algum espaço em seu plano; a vida real nem sempre pode caber num calendário perfeitamente desenhado.",
@@ -481,8 +481,8 @@
       "sourceHash": "fe108de1368937c61c39042504ac2c4faa27911fc574a4e3012b86fb9ea8fb3a"
     },
     "v5_umut_10": {
-      "text": "Você pode abordar o futuro com cuidado e ao mesmo tempo permanecer inseguro sobre ele; a esperança às vezes encontra um lugar lá.",
-      "sourceHash": "dc94a4a316bbdbe608e4d6e5b600cf47a45232bb476fc6cdcd6c4735a27c3ae8"
+      "text": "Hoje pode ser difícil esperar algo bom. Isso não significa que amanhã só possa repetir este dia.",
+      "sourceHash": "4ba524dd15ae0d4cd085442476a5f1a9829aa8d4dd4f3b0964ab554b2f1520e2"
     },
     "v5_erteleme_01": {
       "text": "Descreva a tarefa atrasada com um verbo: abra o arquivo, escreva o título, leia a primeira pergunta.",
@@ -581,12 +581,12 @@
       "sourceHash": "250f3f5817c2c8f05b92b399341b6b66b62157f1f8c1a95b9d4fc5d98a9f2872"
     },
     "v5_durtu_05": {
-      "text": "Abra espaço para imaginar a noite após uma decisão, juntamente com a emoção que você sente no início.",
-      "sourceHash": "467c51d6d0a7ac6af5ac3f891ed6cc7375038b287ec371b2eb72aecc02bdccfe"
+      "text": "Imagine as horas depois de conseguir o que quer agora. Como poderá se sentir com essa escolha?",
+      "sourceHash": "4a0f26ec395e27ecc4a6fc90ad9809bb52705d2cecc7d53b80291d818430b4dc"
     },
     "v5_durtu_06": {
-      "text": "Você pode escrever a frase dura em sua mente e deixá-la sem enviá-la; expressão e entrega são escolhas separadas.",
-      "sourceHash": "b72ced3bf5e3e43deda4207873745024282de9d365d102d80abb0d4c5209b3a3"
+      "text": "Escreva as palavras duras num rascunho. Tê-las escrito não significa que precise enviá-las agora.",
+      "sourceHash": "849b1e3af62ad017b1c5b2312f4fb339e0d10aa4f989965d8a50fa5b528fc7bc"
     },
     "v5_durtu_07": {
       "text": "Querer algo imediatamente pode não tornar a necessidade urgente; reserve um pouco de tempo para observar.",
@@ -617,8 +617,8 @@
       "sourceHash": "172831463d2f5f753c47846350262624882e98a0e4b6489c272c21ea53c26858"
     },
     "v5_rutin_04": {
-      "text": "Um dia vazio não tira o que você aprendeu. Você pode reencontrar a prática no próximo momento adequado.",
-      "sourceHash": "cfb84743e22fc0ce67ee5523a759c4931413a49bafab49e44616bf5dcf21bba2"
+      "text": "Um dia fora da rotina não precisa comprometer a semana inteira. Retome no próximo dia possível.",
+      "sourceHash": "2ed60c770aa9e37a565e8f7f1c082baf21fd0898c6f56b588ffba4cc0dcb8539"
     },
     "v5_rutin_05": {
       "text": "Se tomar uma nova decisão todas as manhãs parecer cansativo, escolha o local e o horário de início com antecedência.",
@@ -717,8 +717,8 @@
       "sourceHash": "642f9874c0b6684529a600745ccf0fa3e8ceaed6f0fb2b82f793abf5624ed861"
     },
     "v5_ozguven_09": {
-      "text": "Uma frase que estabelece um limite pode ser breve; sua dignidade não precisa de longas explicações.",
-      "sourceHash": "d5380a5b09928f5a355a738a74b9dcf11758fa3418d9587625a4139980fd714b"
+      "text": "Ao falar do que faz bem, não precisa listar logo todas as falhas. Deixe sua capacidade ser reconhecida.",
+      "sourceHash": "6c862e4b45127db0f19f4d58ad3e2eebb1004876fe2ec2383f7d7c85c770ff8c"
     },
     "v5_ozguven_10": {
       "text": "Escolher o que é útil no feedback faz parte de aprender a compreender a si mesmo.",
@@ -825,8 +825,8 @@
       "sourceHash": "28d9ca994b1782b6d4df945d6c2f9172c4f407802394366ec39a83f37e3c3271"
     },
     "v5_risk_06": {
-      "text": "Um experimento reversível pode trazer informações úteis de uma grande incerteza.",
-      "sourceHash": "dad5dc084befb46db8350ddd8526d01df156f46af5f2881e4c36d4646e6af1dd"
+      "text": "Antes de uma tentativa, pense em como recuar. Ter uma saída pode ajudar a decidir com mais cuidado.",
+      "sourceHash": "466e61ac8e0b76ab5faf4589d2a5ad8c37c87b2e1e006f44845c2be160c189d3"
     },
     "v5_risk_07": {
       "text": "Uma oportunidade apresentada como urgente não exige que você a aceite com pressa.",
@@ -893,8 +893,8 @@
       "sourceHash": "99bd2026cb62d414ac0ef18f025b13bde78f6e6fdfb267307337de3e1e5d7117"
     },
     "v5_marcus_03": {
-      "text": "Quando a discussão termina, o facto de que devemos continuar a partilhar a vida permanece em questão.",
-      "sourceHash": "a7124948fd3fb309f1aaf953fe6d7a2eafeb9c27e1068b9649c7882913e299f3"
+      "text": "Continuaremos convivendo depois desta discussão. Não quero que vencer hoje prejudique nossa relação amanhã.",
+      "sourceHash": "08f94acc50922ef0ccacdc522a99c9c2617e2ae1fa66ccdd6caa93045d6a382c"
     },
     "v5_marcus_04": {
       "text": "Quando alguém fala asperamente, posso tentar evitar que essa aspereza chegue a outra pessoa.",
@@ -941,8 +941,8 @@
       "sourceHash": "64eedf7f4f52e5dafaa0923e2abb034cddccd05efc1cf811ef04b3d30ce0da29"
     },
     "v5_seneca_05": {
-      "text": "Deixar uma mensagem irritada não enviada pode poupar um relacionamento que amanhã precisaria de reparos.",
-      "sourceHash": "14db71430bf06a4f9d5841bbd34b0283499f482df3e963b67af4e08c5bf916f2"
+      "text": "Posso deixar uma mensagem de raiva sem enviar. Amanhã, prefiro não ter de retirar as palavras de hoje.",
+      "sourceHash": "097898d35e41fd145f6361a7375c9679646374e519908151415663066b779593"
     },
     "v5_seneca_06": {
       "text": "Antes de comprar algo, posso considerar quando e como começou o desejo por aquilo.",
@@ -953,8 +953,8 @@
       "sourceHash": "6cf19a5ae4a205520aac3d2765b1ff081310d3def428d140150c4481bf4d97cf"
     },
     "v5_seneca_08": {
-      "text": "Hoje escolho outro uso para os minutos que posso gastar ressentindo-me de uma hora perdida.",
-      "sourceHash": "526e9306c655e809c443f217f04068748890a5b31dc0b31334177cbc647ae2c4"
+      "text": "Não quero perder mais uma hora lamentando a anterior. Posso usar o tempo que ainda tenho.",
+      "sourceHash": "822c621309891d910337ccdb4a73881c82509e38b0c11edb2179f3dc7f676d17"
     },
     "v5_seneca_09": {
       "text": "O conselho de um amigo ganha profundidade quando ele também reserva tempo para ouvir as partes difíceis de nossas vidas.",
@@ -981,8 +981,8 @@
       "sourceHash": "a02199258f4f6aca672f98fa3688ddf1c87d2ece7e7bc02df22d6ee6dfdfb422"
     },
     "v5_epiktetos_05": {
-      "text": "Se não puder agir de acordo com um lembrete agora, posso escolhê-lo novamente no próximo momento adequado.",
-      "sourceHash": "0c3775dab0c70f7d49c7de122e4db3ea8d3b6ba5d2a0bca14d5c578e4ccea7e8"
+      "text": "Não posso fazer a fila andar mais depressa; posso escolher como trato quem espera ao meu lado.",
+      "sourceHash": "9d519b9516c329e57e2f13657a5751b4feb7cce45354533bd0179cecd4374799"
     },
     "v5_epiktetos_06": {
       "text": "Nem todo papel que se espera de mim exige deixar meus próprios valores de lado.",
@@ -1041,8 +1041,8 @@
       "sourceHash": "c191d9233bcff94187dcf0db3111c2cf780a53b8410464260975b6806fce8fc4"
     },
     "v5_platon_10": {
-      "text": "Uma tela mostra parte de um evento; pensar também inclui procurar o contexto que deixa de ser visto.",
-      "sourceHash": "9c568771e9fd03494c5d28ef73729d2cb2ad2a1474bf0bf818c06fbd96554996"
+      "text": "Um vídeo curto pode não mostrar o acontecimento inteiro. Antes de julgar, posso buscar o que veio antes e depois.",
+      "sourceHash": "d0c85ad53f1c9554d227527164eb65368f3159a78d8e64b863824f7c564d7bc4"
     },
     "v5_aristoteles_01": {
       "text": "Ser atencioso me pede para perceber as necessidades dessa pessoa, e não repetir a mesma frase educada.",
@@ -1141,8 +1141,8 @@
       "sourceHash": "53ac788ad0d47e441a37a985d5a79adba505661d30b94e66adc053ead412a409"
     },
     "v5_konfucyus_05": {
-      "text": "Antes de lembrar aos outros uma prática, posso tentar dar o exemplo em minha própria mesa.",
-      "sourceHash": "079984156b07f743587ab2bf69ce5a61dce4cb091c62d0d89225411e7631f31a"
+      "text": "Posso começar mostrando nas minhas ações o cuidado que peço aos outros. Meu exemplo também diz algo.",
+      "sourceHash": "9b14ffba988aff93ce5b9879d6292f51aebd6acba03dff72719426f2f505a32e"
     },
     "v5_konfucyus_06": {
       "text": "Um agradecimento sincero começa com a observação do trabalho da outra pessoa.",
@@ -1169,8 +1169,8 @@
       "sourceHash": "31013ec57ea093d7cd62faa0ea5b3dbaafa64105d0529416996be8f9f694d9b4"
     },
     "v5_machiavelli_02": {
-      "text": "Uma mesa que aceita apenas boas notícias pode demorar para reconhecer uma má decisão.",
-      "sourceHash": "4dedacd0099dfc1049cb563c98b6c9cd6f7f93096849ea696c6419bd8989b111"
+      "text": "Onde se calam as más notícias, os problemas não desaparecem. Só sobra menos tempo para percebê-los.",
+      "sourceHash": "ba56e600788e5911ab6050e067ad635c19ec2f2096d210a6a429746c58b6279d"
     },
     "v5_machiavelli_03": {
       "text": "Antes de repetir um plano bem-sucedido, posso verificar se as pessoas e os recursos necessários continuam disponíveis.",
@@ -1249,8 +1249,8 @@
       "sourceHash": "e9ef8d4a1b8befb37254bc01d6579201b23a7fb616b3653f517d05f531b2068a"
     },
     "v5_yunus_02": {
-      "text": "Colocar mais um lugar à mesa pode traduzir o amor das pessoas para a linguagem do dia a dia.",
-      "sourceHash": "c3fa8e4a9c2c9a308a8fe409aa59a0ad48859877ca1225b33ea3e2a75f257cf9"
+      "text": "Preparar um lugar para mais uma pessoa transforma meu cuidado pelos outros em um gesto de hoje.",
+      "sourceHash": "79714c42ceb76b0576d304969fb82b04e605ca44069d6abfbeece31f6b446d98"
     },
     "v5_yunus_03": {
       "text": "Antes de compartilhar o que sei, posso esperar que a outra pessoa termine a pergunta.",
@@ -1377,8 +1377,8 @@
       "sourceHash": "baa7a0311c1ec7bd7ffca6be80ddb9b88c6baa17ea98c91022d7ced740fdabd7"
     },
     "v5_zen_04": {
-      "text": "Limpar minha mesa não está fora da vida enquanto espero por um momento mais importante.",
-      "sourceHash": "c20ec89a707b7076ae99e632946446d9ecfe12c45f4cfcca77758c86f7e5c3ed"
+      "text": "Limpo a mesa enquanto espero um momento mais importante. Mas esta tarefa comum também faz parte da vida.",
+      "sourceHash": "45530e1d5e225b995bd747c2f3b2870672d48fb63ef438fea6650a5cebb01696"
     },
     "v5_zen_05": {
       "text": "Ao ouvir um som, posso ouvi-lo por um tempo antes de classificá-lo em agradável ou irritante.",
@@ -1481,8 +1481,8 @@
       "sourceHash": "7e3bb3eaeb1fa50178f9d4bec864fe90e4b17324acf9e2943081c73530f3b966"
     },
     "v5_incil_10": {
-      "text": "Perceber quem fica de fora da mesa pode transformar minha reflexão sobre compaixão em ação.",
-      "sourceHash": "9631dfe04b33a529ef8d59d338238c5860b4307f0c31e3ed0ae2c60c869cc2ff"
+      "text": "Posso notar quem ficou de fora da refeição e convidar essa pessoa; assim, a compaixão se torna um gesto.",
+      "sourceHash": "abd543745b7fd7dd77a1da77c68c93fcfe0488cdd4a08f0fc627ab39d74370a1"
     },
     "v5_tevrat_01": {
       "text": "Pagar pelo trabalho em dia torna meu respeito pelo trabalho de outra pessoa visível no calendário.",
@@ -1565,8 +1565,8 @@
       "sourceHash": "2e74b7f051d529c2186ce7e47072be864cd9b629af8fd42d071f7d4fdd92befc"
     },
     "v5_sukur_01": {
-      "text": "Ao agradecer por algo que está na minha mesa hoje, lembro-me das pessoas cujo trabalho o trouxe até aqui.",
-      "sourceHash": "8fd6b7e5fdd4f7f21ec82b792eada42b1477adf661ebfb285acf9787b0e57548"
+      "text": "Ao agradecer pela refeição de hoje, lembro das pessoas cujo trabalho a trouxe à minha mesa.",
+      "sourceHash": "c209168582b4002c0841285a09e7757bbaff16c855b25cf1a979b42983be1aa9"
     },
     "v5_sukur_02": {
       "text": "Uma expressão da minha gratidão pode ser usar um recurso que possuo para facilitar o dia de outra pessoa.",
@@ -1697,8 +1697,8 @@
       "sourceHash": "cf643aa97f53ef40cdb46f35bb4f6ec35fc5196e16badb2482a569e2384cac41"
     },
     "v5_sakatlik_04": {
-      "text": "Ao se lembrar de seu desempenho anterior, abra espaço na mesa para suas necessidades atuais.",
-      "sourceHash": "868b0c55d407740d71c20b491173d2eb45ac953cc33e31051c9949706806b72f"
+      "text": "Você pode sentir falta do desempenho de antes. Conte a quem acompanha sua volta o que seu corpo precisa agora.",
+      "sourceHash": "c2912bcc8b5242419c5657099db52e4ac8791e1edf51bb780fe87dfba7a79a0b"
     },
     "v5_sakatlik_05": {
       "text": "Quando esperar parece difícil, esse sentimento também merece um lugar nas conversas de recuperação.",
@@ -1777,8 +1777,8 @@
       "sourceHash": "e8a90b541938ee9555195474ff9cda3cd7e0eee4f587db182d848faf9dfca276"
     },
     "v5_beslenme_04": {
-      "text": "Uma mesa posta com os meios de que você dispõe ainda pode exigir esforço e consideração.",
-      "sourceHash": "d221925b3c2fa3e5fb492ad411044c78b18378ffb4b603f06332c8876399971e"
+      "text": "Uma refeição simples, feita com o que você tem, também pode ter carinho. Sua mesa não precisa impressionar.",
+      "sourceHash": "04d14db95baaa17f0d3352c6fdad981745a9602e0c9e8f8fd8cc1687e74f1761"
     },
     "v5_beslenme_05": {
       "text": "Ser curioso sobre um novo sabor abre uma porta para a comida além de uma lista de regras.",
@@ -1821,8 +1821,8 @@
       "sourceHash": "7bceba96c00f1436ec4ded95d1c0ab07d0614e1c31bd8ec33c874015e565e6e7"
     },
     "v5_girisimcilik_05": {
-      "text": "Veja o tempo e o esforço que você pode suportar antes de começar; deixe seus limites sentarem-se à mesa com sua excitação.",
-      "sourceHash": "8fef9bd46b1cfa0ce1e76edefd1a007b1beb794889fd611b824ec40979919422"
+      "text": "Pense nas exigências do negócio junto com o entusiasmo. Deixe tempo para sua própria vida no plano.",
+      "sourceHash": "ad4fabebeb15019e2a1dca63189d68d93ef14d1413db0b9d3521804893534165"
     },
     "v5_girisimcilik_06": {
       "text": "Você não precisa adicionar todas as solicitações ao seu produto; lembre-se de quem você pretende ajudar e com qual problema.",
@@ -1961,8 +1961,8 @@
       "sourceHash": "fe0c70b27ff7ab38eefb1ede0a35e01dcdda5df84e0da8e495c2c448a95a1923"
     },
     "v5_para_10": {
-      "text": "Organizar um registro de pagamento adiciona uma linha legível à sua história financeira; todo o emaranhado não precisa ser resolvido de uma só vez.",
-      "sourceHash": "69645fc038fef688aa8e123dbcfa8e5def07c525d3d26c8cb718ee3bcc90800c"
+      "text": "Anotar um pagamento pendente não resolve tudo, mas ajuda a saber do que precisa cuidar.",
+      "sourceHash": "837a451389fc82861ce70c6668a29ca2eef36a04a54a43a095ae51cc461b166e"
     },
     "v5_zaman_01": {
       "text": "Um espaço vazio na sua agenda pode ser uma maneira tranquila de deixar espaço para uma necessidade que você ainda não pode prever.",
@@ -1985,8 +1985,8 @@
       "sourceHash": "840a2c19c2c610ac898a62f92b787367894ed08869bb4cf320fc03f2d51f4423"
     },
     "v5_zaman_06": {
-      "text": "Se alguém com quem você deseja passar tempo continua sendo adiado, sugira um momento que você possa compartilhar.",
-      "sourceHash": "d96314f8c408ee18738b0eaee1ece5b7ff67f1f812b61a406b489f672c92feea"
+      "text": "Se você sempre adia encontrar alguém, sugira um dia específico. Reserve um espaço na agenda para esse encontro.",
+      "sourceHash": "16c5fc83936c53b92ffae2630da960fb1e03e4015e3e4de6fcf90ca33299748c"
     },
     "v5_zaman_07": {
       "text": "Cada minuto não precisa provar a sua utilidade; o tempo gasto olhando pela janela também faz parte da sua vida.",
@@ -2129,8 +2129,8 @@
       "sourceHash": "22e92308e2d78aed05050972d10e8b38072ba5025b04c715e8589710b783f661"
     },
     "v5_ayrilik_02": {
-      "text": "A falta de alguém não precisa vir acompanhada de uma instrução para retornar.",
-      "sourceHash": "0868688b1373f14429a504851369093102fc4e366e79711b4359baed3c216846"
+      "text": "Sentir saudade de alguém não significa que você precise voltar àquela relação.",
+      "sourceHash": "fa74179400337967a8f3a7cb6408cb3e748dba2e6dddf7efdf40e06d76e62b68"
     },
     "v5_ayrilik_03": {
       "text": "Quando um futuro compartilhado muda, reserve um tempo para lamentar antes de imaginar o seu próprio.",
@@ -2301,8 +2301,8 @@
       "sourceHash": "e6606cddadfeebe346a7d3aeb5f8e01a44ac9df4ce717afaeb896e6c0ada0579"
     },
     "v5_affetmek_05": {
-      "text": "Ao enfrentar seu erro, considere o que você pode consertar; exaurir-se não pode fazer esse trabalho.",
-      "sourceHash": "a0db152560589ba898010ce48d45fad90efd1e0e1be19a74a033fafdc6d37956"
+      "text": "Mesmo escolhendo perdoar, a confiança pode voltar devagar. Uma decisão não precisa mudar todos os sentimentos de uma vez.",
+      "sourceHash": "72d2b6986d6a417361b97f65709e97f272a05ce0a787608f3136c5ffc71bf108"
     },
     "v5_affetmek_06": {
       "text": "Você não pode reescrever o passado; você pode escolher qual limite irá protegê-lo daqui.",
@@ -2317,11 +2317,11 @@
       "sourceHash": "d9de5792380c22cfef18452aa907c0dea380fed92f36bc753eb952d050e14a41"
     },
     "v5_affetmek_09": {
-      "text": "Perdoar a si mesmo sem deixar de reconhecer sua responsabilidade pode abrir um caminho mais cuidadoso na sua vida.",
-      "sourceHash": "07083fb664050afe6d898aa199a44141c815e1098f09b2f391bfa216be2e3102"
+      "text": "A pressão para perdoar não diminui a mágoa. É importante que a decisão seja sua.",
+      "sourceHash": "50510390f807448fefbd8a1add30284a3d816b5e5ccfb41ad8185767163c31c8"
     },
     "v5_affetmek_10": {
-      "text": "Still feeling anger does not take away your right to seek peace; você pode olhar honestamente para ambos.",
+      "text": "Ainda sentir raiva não tira seu direito de buscar paz. Você pode reconhecer os dois sentimentos com honestidade.",
       "sourceHash": "a2904389cd3fc61d117765d83606935300525f8a7215ff30b65c342e5f7a805a"
     },
     "v5_kaygi_01": {
@@ -2349,7 +2349,7 @@
       "sourceHash": "aea47bebac840ff80432b059a6f7f609261d59b3ee37a791126739f27a7180c0"
     },
     "v5_kaygi_07": {
-      "text": "Seu desconforto pode falar alto; before answering it, notice one detail in your surroundings.",
+      "text": "O desconforto pode falar alto. Antes de reagir, repare em um detalhe ao seu redor.",
       "sourceHash": "9f99c3875b036b5a12fa6c52547f23ca349679fe827b13f51778a9e642438a69"
     },
     "v5_kaygi_08": {
@@ -2361,7 +2361,7 @@
       "sourceHash": "69f15e1cb7816aed61bf8e0f802b1a518d4826e5ba7306debd366ee6e7041ba7"
     },
     "v5_kaygi_10": {
-      "text": "You need not describe your anxiety perfectly to share it; comece com a parte que parece difícil.",
+      "text": "Você não precisa descrever sua ansiedade perfeitamente para falar sobre ela. Comece pela parte que está difícil.",
       "sourceHash": "3f486dbe23bb00c8f2daa5598a25a0c5b565084bbc3aa89d80fd9b6ff12e0294"
     },
     "v5_stres_01": {
@@ -2453,11 +2453,11 @@
       "sourceHash": "5763fc49e595fa024e0d5bef2c039a7bd48b25c607e3f68ae3c9a6bac95bd89e"
     },
     "v5_simdiki_an_03": {
-      "text": "Listen for where a fading sound disappears; os finais ao seu redor estão tão disponíveis para serem notados quanto os começos.",
+      "text": "Escute um som até ele desaparecer. Você também pode perceber o fim das coisas, não só o começo.",
       "sourceHash": "8ae78bd9cd900cc4d68e427a45263e70fb336b3763e0b00377c0bf6263e7e5f1"
     },
     "v5_simdiki_an_04": {
-      "text": "Notice the surface of the chair supporting you; um detalhe concreto de onde você está já está ao seu alcance.",
+      "text": "Perceba a superfície da cadeira que sustenta você. Um detalhe concreto de onde você está já está ao seu alcance.",
       "sourceHash": "12104cea9b178296ea7b0f7599ea570bb744bcea71152e3d37030f0915c23544"
     },
     "v5_simdiki_an_05": {
@@ -2465,7 +2465,7 @@
       "sourceHash": "65b4b65c263a4c905112e0a9ba8c1d68cd1e09c5648cba4a4c26a101da330ef6"
     },
     "v5_simdiki_an_06": {
-      "text": "Rain can be more than a weather report; você pode observar uma única gota descendo pelo vidro.",
+      "text": "A chuva pode ser mais do que uma previsão do tempo. Observe uma única gota descendo pelo vidro.",
       "sourceHash": "2909f000c3b00e1ee27b1abd3bb11f6fb2f11c6f6104db56ac9e18485fd85c15"
     },
     "v5_simdiki_an_07": {
@@ -2477,7 +2477,7 @@
       "sourceHash": "65e8fc6f520ca52304f8fcbc7317da5deaa4eb161653f720884caaee34ef2435"
     },
     "v5_simdiki_an_09": {
-      "text": "This moment need not be perfect; você ainda pode se conectar com um detalhe real dentro dele.",
+      "text": "Este momento não precisa ser perfeito. Você ainda pode se conectar com um detalhe real dele.",
       "sourceHash": "30e91456c76b67a37b2cd62f844fbb84ffd6f101680842a68ee966a37751ffbf"
     },
     "v5_simdiki_an_10": {
@@ -2513,8 +2513,8 @@
       "sourceHash": "040be31818ef5fbf6922c26c6a8222d38ec76b567fdd298d18f651bfd0d94f44"
     },
     "v5_uyku_08": {
-      "text": "Você não precisa tomar uma decisão durante a noite se ela puder esperar até de manhã.",
-      "sourceHash": "ddfbacc8d2429916d90bbec7409aad64307cd0a14c0423e8a902295977c816f1"
+      "text": "Você não precisa ensaiar na cama a conversa de amanhã. Pode haver tempo para se preparar amanhã.",
+      "sourceHash": "8e7fafc852fd97483cd057de8e93fde11a369324ee3a7badf8b8df7c8a47972f"
     },
     "v5_uyku_09": {
       "text": "À medida que a noite fica tranquila, você pode fazer uma pausa para julgar o seu dia e reservar sua cama para descansar.",
@@ -2701,16 +2701,16 @@
       "sourceHash": "df24694ba77f86f1985fb62a9c0adc2675f9987765ca9ce2073dbae06620cea9"
     },
     "v5_hata_05": {
-      "text": "Ouvir alguém afetado por um erro pode mostrar onde o reparo pode começar.",
-      "sourceHash": "1423d70a8dfc71a835428fdb596e3f76085e9d8dabc45e2403e032dd6868eebd"
+      "text": "Volte ao último passo correto de uma solução errada. Não precisa apagar todo o trabalho para corrigir.",
+      "sourceHash": "8e43d388a18f179dea165d5e41e67047e7966be1d8ebee31e4e04ce057c86641"
     },
     "v5_hata_06": {
       "text": "Você não pode alterar o resultado de uma tentativa, mas pode escolher a pergunta que trará para a próxima.",
       "sourceHash": "83f7168cea872a9e721f795164d5de77d956a9748cc1cd07981d5289c5f7cb09"
     },
     "v5_hata_07": {
-      "text": "Uma mudança concreta após um pedido de desculpas dá às suas palavras um lugar para se sustentar.",
-      "sourceHash": "53aaec206aab00501f09cacb54b501480230c6f59408d242c5bfeaf222c11f13"
+      "text": "Teste a correção num problema parecido. É aí que a compreensão encontra o que você consegue fazer.",
+      "sourceHash": "0720abf7bbf86d644034acd3d91e21b24c059f8a51b97cda34ea63b95d193edf"
     },
     "v5_hata_08": {
       "text": "Onde você percebe uma lacuna no seu conhecimento, a forma do que você pode aprender começa a aparecer.",
@@ -3325,8 +3325,8 @@
       "sourceHash": "34c9e3e5ac0e109c984a98f0c4c4181aa6ffd8afa8ee7d805493f871becad3ac"
     },
     "v5_schopenhauer_01": {
-      "text": "Posso planejar este dia em torno da energia que tenho, e não da energia que gostaria de ter.",
-      "sourceHash": "fb25329a53ae4186ea9cbba761195d18267d635a8ee5a9a5a78517c742183e28"
+      "text": "Depois de realizar um desejo, posso parar antes de perseguir outro. Procurar o que falta pode esconder o que tenho.",
+      "sourceHash": "b3b0a94046e382b2e760c4d3089bcb713504e9b25ca94ed179a057fddc571708"
     },
     "v5_schopenhauer_02": {
       "text": "Uma mente cansada pode precisar de descanso antes de outra rodada de julgamento.",
@@ -3361,8 +3361,8 @@
       "sourceHash": "afe182785b2379347d6cd505804458525c2ebad110d13173264e879911c934ae"
     },
     "v5_schopenhauer_10": {
-      "text": "Posso dar aos limites de hoje um lugar em meus planos sem me considerar um fracasso.",
-      "sourceHash": "fdaf9ee55cbd749240e4c69160a2244de197fddc64b22d598a84bf227ee19f3b"
+      "text": "Nestes minutos de música, não preciso tentar ganhar nada. Posso apenas prestar atenção ao que ouço.",
+      "sourceHash": "8490364bc97db5126c70782d039b4d560f64648a2f05c40ded18799d3bd7d1d9"
     },
     "v5_kierkegaard_01": {
       "text": "Posso escolher o próximo passo sem fingir que a incerteza desapareceu.",
@@ -3625,8 +3625,8 @@
       "sourceHash": "360f655c9abe080c6162bc2eaa5c13fef15240ebc19363e2f290bc11d0e6a600"
     },
     "v5_dustukten_sonra_06": {
-      "text": "Agora você sabe algo que não sabia na primeira tentativa; seu ponto de partida mudou.",
-      "sourceHash": "542113000dc4d3ac2ad575733ed39c4f32318d4f73b937528a8871c49693998d"
+      "text": "Antes de tentar de novo, preserve o que funcionou. Uma falha não exige abandonar todo o método.",
+      "sourceHash": "f952304e1bd69b8bbc5cb5f1448d53b8184fcdee09b14e6c87f624054fc564b9"
     },
     "v5_dustukten_sonra_07": {
       "text": "Se tudo o que você fez hoje foi juntar os pedaços espalhados, você fez parte da reconstrução.",
@@ -3893,8 +3893,8 @@
       "sourceHash": "44df3c536e939af27db9afd847d0a595207b97b0ae24336606f438e98f3d8c61"
     },
     "v5_onay_03": {
-      "text": "Uma conquista que você não compartilhou ainda aconteceu; ser visto não o torna real.",
-      "sourceHash": "decfff3f80c6cb6a8a6c6e4830e5b46e8ab23fdf03f8f35e62c06576080daf23"
+      "text": "Uma conquista que você guarda para si continua sendo real. Seu esforço importa mesmo quando ninguém vê.",
+      "sourceHash": "4131e2067434893942823f8b313c18209631dd5e24c9501498a2ec025bdff524"
     },
     "v5_onay_04": {
       "text": "Mudar de direção após cada comentário pode ser cansativo; faça uma pausa para revisitar seus próprios motivos.",
@@ -4313,8 +4313,8 @@
       "sourceHash": "99cf8bef9d2a423b6f3270e257c934e64735eaa577710a059e80dc6155e2133d"
     },
     "v5_mukemmeliyet_08": {
-      "text": "Deixar algo que é bom o suficiente também exige esforço; esforço nem sempre significa adicionar mais.",
-      "sourceHash": "f3ec8df5f064f220a2b674a1b4976305d811c1d5942fa212eb6d2fe5d84a56f6"
+      "text": "Antes de revisar de novo, pergunte: falta algo de verdade ou estou com dificuldade de aceitar que terminei?",
+      "sourceHash": "afc76f3a1743fdd56f514d1dd609796d3837def23672dc94dd08ed7ee8b8cf8f"
     },
     "v5_mukemmeliyet_09": {
       "text": "Uma tentativa que parece pouco polida não é evidência de que você não deveria ter feito isso.",
@@ -4357,8 +4357,8 @@
       "sourceHash": "9edaf6c6085a4b71e035f503e9ec50c8dcae89f8bd1cfd5449322b8b6acafc50"
     },
     "v5_belirsizlik_09": {
-      "text": "Uma possibilidade ser assustadora não a torna mais certa que as outras.",
-      "sourceHash": "5cfcb4faaf03ae48ea8f7d5e33ed453297e03fabbedf2930aa9c613b7d202140"
+      "text": "Você não precisa fazer promessas com base em notícias não confirmadas. Diga primeiro o que ainda é incerto.",
+      "sourceHash": "e93b28a1ba378ef131ada5d42121a731b189cfa4e6fa5fc444b17e9ff99b0f88"
     },
     "v5_belirsizlik_10": {
       "text": "Para algo que ainda não está claro, pode ser suficiente decidir quando procurar informações novamente.",
@@ -4449,8 +4449,8 @@
       "sourceHash": "807600e97f24b38e1562404cffbfc60409abf9ff06882994c877577d31c6acbe"
     },
     "v5_tek_basina_02": {
-      "text": "Você não precisa esperar que um convidado cuide de uma mesa posta para ele.",
-      "sourceHash": "a891c279f52f63772d8a2ecd52f6ed7c2979856ff058583a08d8681ec4b386f7"
+      "text": "Você não precisa esperar visitas para arrumar uma mesa bonita. O cuidado consigo também importa.",
+      "sourceHash": "41987d433278f0b84fb6a1ff2368a6cdcb08b86f6522d2dcdd612a573b932ffd"
     },
     "v5_tek_basina_03": {
       "text": "Andar sozinho pode permitir que você perceba seu próprio ritmo; hoje pode não haver ninguém com quem acompanhar.",
@@ -4549,8 +4549,8 @@
       "sourceHash": "6d31b729086086ab358befea367fc33faf5724db8de81d1013cac8c1c7e9eea4"
     },
     "v5_dinlemek_07": {
-      "text": "Alguém que lhe conta um problema pode não querer uma solução; primeiro pergunte como você pode ajudar.",
-      "sourceHash": "95b54ddccaf4674c6c433c76f895c6f174b5bfa33988a509f674be6532d1520c"
+      "text": "Quando alguém conta uma boa notícia, espere antes de fazer um alerta. Primeiro ouça por que aquilo é bom para a pessoa.",
+      "sourceHash": "0bde24e4f13d7c638e28ba725649d6608159ad18083939184074ab66ea99ce2f"
     },
     "v5_dinlemek_08": {
       "text": "Verifique sua suposição sobre uma frase antes de tratá-la como o que realmente foi dito.",
@@ -4661,8 +4661,8 @@
       "sourceHash": "3b1832a4b7370f80c2c3edadf5aaa65e77b024f816cc71f3e91baa536588f3c4"
     },
     "v5_beden_05": {
-      "text": "Seu reflexo não é uma medida de como você merece ser tratado.",
-      "sourceHash": "ab856a38d5f4c47acb587cd3ce4953c2fbbf4cabe6a1ae0681237a88d9ee2bb2"
+      "text": "Sua aparência não determina o respeito que você merece. Mudanças no corpo não mudam esse direito.",
+      "sourceHash": "75d4316cfe6db1c7b8b73882f7000be5fb923aa7f154986219df4e6f18294d75"
     },
     "v5_beden_06": {
       "text": "Se um movimento não combina com você, a facilidade de outra pessoa com ele não é motivo para se forçar.",
@@ -5073,8 +5073,8 @@
       "sourceHash": "fc0382bb4a7dbbf9b726c0fbe3d64f58b5bea8f8c9e73af9d91b1c84b306347e"
     },
     "v5_budist_dusunce_13": {
-      "text": "Ao ouvir, deixe de lado a resposta planejada por um momento; pode haver algo que você não ouviu.",
-      "sourceHash": "8cfc2f8ef2952745811b9e30332d9c8fc09fd8f8f23706dd174775f7b41c2a34"
+      "text": "Você pode apreciar a atenção de alguém sem esperar que ela esteja voltada para você o tempo todo.",
+      "sourceHash": "f6d9a0a97dd65428abfe777f622b735290601500442b294067fd167ebaa59eac"
     },
     "v5_budist_dusunce_14": {
       "text": "À medida que sua xícara esfria, você pode cuidar das coisas que ama sem se ressentir das mudanças.",

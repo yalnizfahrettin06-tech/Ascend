@@ -916,7 +916,7 @@
     {
       "id": "v5_kendine_guven_01",
       "category": "kendine_guven",
-      "text": "When making a decision, I remember that my own experience deserves a place at the table."
+      "text": "I listen to others when deciding, without setting aside what my own experience has taught me."
     },
     {
       "id": "v5_kendine_guven_02",
@@ -941,7 +941,7 @@
     {
       "id": "v5_kendine_guven_06",
       "category": "kendine_guven",
-      "text": "When I do something for the first time, I belong there even as a beginner."
+      "text": "Being a beginner is natural when I try something new. I have a place there before I know everything."
     },
     {
       "id": "v5_kendine_guven_07",
@@ -1006,7 +1006,7 @@
     {
       "id": "v5_motivasyon_09",
       "category": "motivasyon",
-      "text": "Give your wish to begin a setting: an open notebook, a tool within reach, a space in your day."
+      "text": "Give the work you want to begin a place today: an open notebook, a free hour, a first attempt."
     },
     {
       "id": "v5_motivasyon_10",
@@ -1036,7 +1036,7 @@
     {
       "id": "v5_azim_05",
       "category": "azim",
-      "text": "Revisit what you work toward regularly; if it still meets your values, make room for it again."
+      "text": "On today's repetition, improve one detail. Practice becomes more useful when you pay attention."
     },
     {
       "id": "v5_azim_06",
@@ -1076,7 +1076,7 @@
     {
       "id": "v5_pes_03",
       "category": "pes",
-      "text": "Returning to an unfinished file can start with finding your place, even before old enthusiasm returns."
+      "text": "When you want to quit, name what feels too heavy. The load may need reducing before the goal does."
     },
     {
       "id": "v5_pes_04",
@@ -1151,7 +1151,7 @@
     {
       "id": "v5_zorluk_sabir_08",
       "category": "zorluk_sabir",
-      "text": "Some days bring no new answer to a hard question; carrying the question may be enough for a while."
+      "text": "An unresolved problem does not make today a wasted day. You did other things while carrying it."
     },
     {
       "id": "v5_zorluk_sabir_09",
@@ -1181,7 +1181,7 @@
     {
       "id": "v5_yorgunluk_sabir_04",
       "category": "yorgunluk_sabir",
-      "text": "Let this break have a space of its own, without filling it with every task that belongs to tomorrow."
+      "text": "You need not plan tomorrow's tasks during this break. These few minutes can simply be for resting."
     },
     {
       "id": "v5_yorgunluk_sabir_05",
@@ -1246,7 +1246,7 @@
     {
       "id": "v5_tukenmislik_07",
       "category": "tukenmislik",
-      "text": "Do not scold yourself for missing enthusiasm. First make room for the draining conditions to be heard."
+      "text": "Before blaming your lack of enthusiasm, look at the workload. Constant demands may be part of the problem."
     },
     {
       "id": "v5_tukenmislik_08",
@@ -1346,7 +1346,7 @@
     {
       "id": "v5_uzun_soluk_07",
       "category": "uzun_soluk",
-      "text": "A long pursuit has room for companionship; sometimes knowledge, sometimes courage, sometimes simply company."
+      "text": "During months of work, share what you are learning with someone, not only the final result."
     },
     {
       "id": "v5_uzun_soluk_08",
@@ -1411,7 +1411,7 @@
     {
       "id": "v5_umut_10",
       "category": "umut",
-      "text": "You can approach the future with care while remaining unsure of it; hope sometimes finds a place there."
+      "text": "It may be hard to expect anything good today. That does not mean tomorrow can only repeat it."
     },
     {
       "id": "v5_erteleme_01",
@@ -1536,12 +1536,12 @@
     {
       "id": "v5_durtu_05",
       "category": "durtu",
-      "text": "Make room to imagine the evening after a decision, alongside the excitement you feel at its beginning."
+      "text": "Picture the hours after getting what you want now. How might you feel about the choice then?"
     },
     {
       "id": "v5_durtu_06",
       "category": "durtu",
-      "text": "You can write the harsh sentence on your mind and leave it unsent; expression and delivery are separate choices."
+      "text": "Put the harsh words into a draft. Having written them does not mean you have to send them now."
     },
     {
       "id": "v5_durtu_07",
@@ -1581,7 +1581,7 @@
     {
       "id": "v5_rutin_04",
       "category": "rutin",
-      "text": "One empty day does not take away what you learned. You can meet the practice again at the next suitable moment."
+      "text": "One disrupted day need not cost you the whole week. Resume your routine on the next suitable day."
     },
     {
       "id": "v5_rutin_05",
@@ -1706,7 +1706,7 @@
     {
       "id": "v5_ozguven_09",
       "category": "ozguven",
-      "text": "A sentence that sets a boundary can be brief; your dignity needs no lengthy explanation."
+      "text": "When describing something you do well, you need not immediately list every weakness. Let the strength be heard."
     },
     {
       "id": "v5_ozguven_10",
@@ -1841,7 +1841,7 @@
     {
       "id": "v5_risk_06",
       "category": "risk",
-      "text": "A reversible experiment can bring useful information out of a large uncertainty."
+      "text": "Before an experiment, decide how you could step back. An exit plan can help you choose more carefully."
     },
     {
       "id": "v5_risk_07",
@@ -1926,7 +1926,7 @@
     {
       "id": "v5_marcus_03",
       "category": "marcus",
-      "text": "When the argument ends, the fact that we must go on sharing life remains on the table."
+      "text": "We will still share life after this argument. I do not want winning it to cost tomorrow's relationship."
     },
     {
       "id": "v5_marcus_04",
@@ -1986,7 +1986,7 @@
     {
       "id": "v5_seneca_05",
       "category": "seneca",
-      "text": "Leaving an angry message unsent can spare a relationship that tomorrow would need repair."
+      "text": "I can leave an angry message unsent. Tomorrow, I would rather not have to take back today's words."
     },
     {
       "id": "v5_seneca_06",
@@ -2001,7 +2001,7 @@
     {
       "id": "v5_seneca_08",
       "category": "seneca",
-      "text": "Today I choose another use for the minutes I might spend resenting a lost hour."
+      "text": "I do not want to lose another hour resenting the last one. I can use the time still available to me."
     },
     {
       "id": "v5_seneca_09",
@@ -2036,7 +2036,7 @@
     {
       "id": "v5_epiktetos_05",
       "category": "epiktetos",
-      "text": "If I cannot act on a reminder now, I can choose it again at the next suitable moment."
+      "text": "I cannot make the queue move faster; I can choose how I treat the person waiting beside me."
     },
     {
       "id": "v5_epiktetos_06",
@@ -2111,7 +2111,7 @@
     {
       "id": "v5_platon_10",
       "category": "platon",
-      "text": "A screen shows part of an event; thinking also includes looking for the context it leaves unseen."
+      "text": "A short clip may not show the whole event. Before judging, I can look for what happened before and after."
     },
     {
       "id": "v5_aristoteles_01",
@@ -2236,7 +2236,7 @@
     {
       "id": "v5_konfucyus_05",
       "category": "konfucyus",
-      "text": "Before reminding others of a practice, I can try setting an example at my own desk."
+      "text": "I can first show the care I ask of others in my own actions. My example says something too."
     },
     {
       "id": "v5_konfucyus_06",
@@ -2271,7 +2271,7 @@
     {
       "id": "v5_machiavelli_02",
       "category": "machiavelli",
-      "text": "A table that accepts only good news may be late to recognise a bad decision."
+      "text": "Where bad news is silenced, problems do not disappear. There is simply less time left to notice them."
     },
     {
       "id": "v5_machiavelli_03",
@@ -2371,7 +2371,7 @@
     {
       "id": "v5_yunus_02",
       "category": "yunus",
-      "text": "Setting one more place at the table can translate love of people into the language of daily life."
+      "text": "Setting a place for one more person turns my care for others into something I can do today."
     },
     {
       "id": "v5_yunus_03",
@@ -2531,7 +2531,7 @@
     {
       "id": "v5_zen_04",
       "category": "zen",
-      "text": "Wiping my desk is not outside life while I wait for a more important moment."
+      "text": "I wipe the table while waiting for a more important moment. Yet this ordinary task is part of life too."
     },
     {
       "id": "v5_zen_05",
@@ -2661,7 +2661,7 @@
     {
       "id": "v5_incil_10",
       "category": "incil",
-      "text": "Noticing who is left out at a table can turn my reflection on compassion into action."
+      "text": "I can notice who has been left out of a meal and invite them; compassion then becomes an action."
     },
     {
       "id": "v5_tevrat_01",
@@ -2766,7 +2766,7 @@
     {
       "id": "v5_sukur_01",
       "category": "sukur",
-      "text": "As I give thanks for something on my table today, I remember the people whose work brought it here."
+      "text": "As I give thanks for today's meal, I remember the people whose work brought it to my table."
     },
     {
       "id": "v5_sukur_02",
@@ -2931,7 +2931,7 @@
     {
       "id": "v5_sakatlik_04",
       "category": "sakatlik",
-      "text": "As you remember your former performance, make room at the table for your current needs."
+      "text": "You may miss your old performance. Tell those planning your return what your body needs now too."
     },
     {
       "id": "v5_sakatlik_05",
@@ -3031,7 +3031,7 @@
     {
       "id": "v5_beslenme_04",
       "category": "beslenme",
-      "text": "A table set with the means you have can still carry effort and thoughtfulness."
+      "text": "A simple meal made with what you have can carry care. Your table need not be impressive."
     },
     {
       "id": "v5_beslenme_05",
@@ -3086,7 +3086,7 @@
     {
       "id": "v5_girisimcilik_05",
       "category": "girisimcilik",
-      "text": "See the time and strain you can carry before starting; let your limits sit at the table with your excitement."
+      "text": "Consider a venture's demands alongside its excitement. Leave time for your own life in the plan."
     },
     {
       "id": "v5_girisimcilik_06",
@@ -3261,7 +3261,7 @@
     {
       "id": "v5_para_10",
       "category": "para",
-      "text": "Organising a payment record adds a readable line to your money story; the whole tangle need not be settled at once."
+      "text": "Writing down a pending payment will not solve everything, but you will know what needs attention."
     },
     {
       "id": "v5_zaman_01",
@@ -3291,7 +3291,7 @@
     {
       "id": "v5_zaman_06",
       "category": "zaman",
-      "text": "If someone you want to spend time with keeps being postponed, suggest a moment you could share."
+      "text": "If you keep postponing seeing someone, suggest a specific day. Give the meeting a place in your calendar."
     },
     {
       "id": "v5_zaman_07",
@@ -3471,7 +3471,7 @@
     {
       "id": "v5_ayrilik_02",
       "category": "ayrilik",
-      "text": "Missing someone does not have to come with an instruction to return."
+      "text": "Missing someone does not mean you have to return to that relationship."
     },
     {
       "id": "v5_ayrilik_03",
@@ -3686,7 +3686,7 @@
     {
       "id": "v5_affetmek_05",
       "category": "affetmek",
-      "text": "When facing your mistake, consider what you can repair; exhausting yourself cannot do that work."
+      "text": "Even if you choose forgiveness, trust may return slowly. One decision need not change every feeling at once."
     },
     {
       "id": "v5_affetmek_06",
@@ -3706,7 +3706,7 @@
     {
       "id": "v5_affetmek_09",
       "category": "affetmek",
-      "text": "Forgiving yourself while recognizing responsibility can open a more considerate path in your life."
+      "text": "Being pressured to forgive does not lessen the hurt. It matters that the decision belongs to you."
     },
     {
       "id": "v5_affetmek_10",
@@ -3951,7 +3951,7 @@
     {
       "id": "v5_uyku_08",
       "category": "uyku",
-      "text": "You do not have to carry a decision through the night if it can wait until morning."
+      "text": "You need not rehearse tomorrow's conversation in bed. There can be time to prepare for it tomorrow."
     },
     {
       "id": "v5_uyku_09",
@@ -4186,7 +4186,7 @@
     {
       "id": "v5_hata_05",
       "category": "hata",
-      "text": "Listening to someone affected by a mistake can show where repair might begin."
+      "text": "Return to the last correct step in a wrong solution. You need not erase all your work to fix it."
     },
     {
       "id": "v5_hata_06",
@@ -4196,7 +4196,7 @@
     {
       "id": "v5_hata_07",
       "category": "hata",
-      "text": "A concrete change after an apology gives your words somewhere to stand."
+      "text": "Try a correction on a similar problem. That is where understanding meets what you can actually do."
     },
     {
       "id": "v5_hata_08",
@@ -4966,7 +4966,7 @@
     {
       "id": "v5_schopenhauer_01",
       "category": "schopenhauer",
-      "text": "I can plan this day around the energy I have rather than the energy I wish I had."
+      "text": "After fulfilling a wish, I can pause before chasing another. Searching for lack can hide what I have."
     },
     {
       "id": "v5_schopenhauer_02",
@@ -5011,7 +5011,7 @@
     {
       "id": "v5_schopenhauer_10",
       "category": "schopenhauer",
-      "text": "I can give today's limits a place in my plans without calling myself a failure."
+      "text": "For these few minutes of music, I need not try to gain anything. I can simply attend to what I hear."
     },
     {
       "id": "v5_kierkegaard_01",
@@ -5341,7 +5341,7 @@
     {
       "id": "v5_dustukten_sonra_06",
       "category": "dustukten_sonra",
-      "text": "You now know something you did not know on your first try; your starting point has changed."
+      "text": "Before trying again, keep the part that worked. One failure need not make you discard the whole method."
     },
     {
       "id": "v5_dustukten_sonra_07",
@@ -5676,7 +5676,7 @@
     {
       "id": "v5_onay_03",
       "category": "onay",
-      "text": "An achievement you have not shared still happened; being seen does not make it real."
+      "text": "An achievement you keep to yourself is still real. Your effort matters even when nobody sees it."
     },
     {
       "id": "v5_onay_04",
@@ -6201,7 +6201,7 @@
     {
       "id": "v5_mukemmeliyet_08",
       "category": "mukemmeliyet",
-      "text": "Leaving something that is good enough takes effort too; effort does not always mean adding more."
+      "text": "Before revising again, ask: Is something truly missing, or am I struggling to trust that I am finished?"
     },
     {
       "id": "v5_mukemmeliyet_09",
@@ -6256,7 +6256,7 @@
     {
       "id": "v5_belirsizlik_09",
       "category": "belirsizlik",
-      "text": "A possibility being frightening does not make it more certain than the others."
+      "text": "You need not make promises based on news that is not confirmed. Say what remains uncertain first."
     },
     {
       "id": "v5_belirsizlik_10",
@@ -6371,7 +6371,7 @@
     {
       "id": "v5_tek_basina_02",
       "category": "tek_basina",
-      "text": "You need not wait for a guest to put care into a table set for one."
+      "text": "You need not wait for guests to set a lovely table. The care you take for yourself matters too."
     },
     {
       "id": "v5_tek_basina_03",
@@ -6496,7 +6496,7 @@
     {
       "id": "v5_dinlemek_07",
       "category": "dinlemek",
-      "text": "Someone telling you a problem may not want a solution; first ask how you can help."
+      "text": "When someone shares good news, pause before adding a warning. First hear what makes it good for them."
     },
     {
       "id": "v5_dinlemek_08",
@@ -6636,7 +6636,7 @@
     {
       "id": "v5_beden_05",
       "category": "beden",
-      "text": "Your reflection is not a measure of how you deserve to be treated."
+      "text": "Your appearance does not determine the respect you deserve. A changing body does not change that right."
     },
     {
       "id": "v5_beden_06",
@@ -7151,7 +7151,7 @@
     {
       "id": "v5_budist_dusunce_13",
       "category": "budist_dusunce",
-      "text": "When listening, set your planned reply aside for a moment; there may be something you have not heard."
+      "text": "You can appreciate someone's attention without expecting it to be yours at every moment."
     },
     {
       "id": "v5_budist_dusunce_14",

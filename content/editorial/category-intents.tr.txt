@@ -1,0 +1,126 @@
+ozsefkat|Kendine yönelttiğin sert dili yumuşatmak; birinci tekil şahıs.
+ic_huzur|Duyularla kendine dönmek; birinci tekil şahıs, kısa kişisel olumlama.
+kendine_guven|Kendi kararlarına ve deneyimine güvenmek; birinci tekil şahıs.
+motivasyon|Bir işe başlamak için kişisel nedeni ve isteği bulmak.
+azim|Aynı beceriyi zaman içinde dikkatle ve yöntemini geliştirerek çalışmak.
+pes|Vazgeçme eşiğinde hedefi, yükü ve koşulları yeniden değerlendirmek.
+zorluk_sabir|Süren bir güçlüğün içinde kendine ve başkasına zarar vermeden dayanmak.
+yorgunluk_sabir|O günün azalan enerjisini fark etmek ve gündelik yükü ayarlamak.
+tukenmislik|Süreğen yük ve tükenmişlikte koşulları, paylaşımı ve desteği konuşmak; teşhis koymamak.
+yeniden|Ara verilmiş uğraşa bugünün koşullarıyla dönmek.
+uzun_soluk|Aylar süren hedeflerde sürdürülebilir plan ve değerlendirme aralıkları.
+umut|Kesin iyi sonuç vadetmeden gelecekteki ihtimalleri açık tutmak.
+erteleme|Başlama eşiğini somut bir eylemle küçültmek; kişiyi tembellikle etiketlememek.
+derin_odak|Seçilen tek konuya kesintisiz düşünme süresi ayırmak.
+durtu|İstek ile eylem arasında seçim payı bırakmak; arzuyu suçlamamak.
+rutin|Günün farklı parçalarını taşıyan düzeni kurmak ve koşullara uyarlamak.
+dagilma|Kesilen veya dağılan dikkati işe geri getirmek.
+ozguven|Yeteneklerini dış dünyada göstermek ve katılım cesareti.
+korku|Tehlikeyi küçümsemeden korkulan duruma hazırlanmak.
+reddedilme|Olumsuz yanıtın yarattığı kırgınlığı kişisel değerden ayırmak.
+risk|Belirsiz bir denemenin bedelini, sınırlarını ve geri dönüşünü tartmak.
+utangaclik|Sosyal ortamlara kişinin kendi hızında katılması.
+marcus|Ortak yaşam, sorumluluk, adalet ve günlük öz değerlendirme; özgün esinlenme.
+seneca|Zamanı, arzuyu ve öfkeyi incelemek; dostluk ve sade yaşam; özgün esinlenme.
+epiktetos|Yargı ve seçim ile dış koşulların ayrımı; özgün esinlenme.
+platon|Görünüş ile gerekçeyi sorgulamak, adalet ve diyalog; özgün esinlenme.
+aristoteles|Somut duruma uygun ölçülü davranış, alışkanlık ve dostluk; özgün esinlenme.
+nietzsche|Devralınmış değerleri ve taklit edilen yaşamı sorgulamak; özgün esinlenme.
+konfucyus|Gündelik davranışta özen, örneklik ve öğrenme; özgün esinlenme.
+machiavelli|Planların gerçek koşulları, kötü habere açıklık ve değişime hazırlık; özgün esinlenme.
+mevlana|Sevgi, karşılaşma ve kendine dürüst dönüş; özgün esinlenme.
+yunus|İnsanın onuru, gönül kırmamak ve sade dilde somut iyilik; özgün esinlenme.
+sems|Rahatsız eden dürüst sorular, niyet ile davranışın yüzleşmesi; özgün esinlenme.
+hafiz|Gösterişsiz içtenlik, neşe ve ikiyüzlülüğü fark etmek; özgün esinlenme.
+zen|Gündelik işi ve anı araçsallaştırmadan dikkatle yaşamak; gelenekten özgün esinlenme.
+kuran|Emanet, doğruluk, hak ve yardımlaşma üzerine özgün düşünce; ayet olarak sunulmaz.
+incil|Merhamet, komşuluk, dışarıda bırakılanı fark etmek üzerine özgün düşünce; kutsal metin alıntısı değildir.
+tevrat|Emek, adalet, ortak alan ve karşılıklı haklar üzerine özgün düşünce; kutsal metin alıntısı değildir.
+dua|Tanrıya yönelen kişisel dilek; garanti veya başkalarını yargılama yok.
+sukur|İnanç içinde nimeti, emeği ve sorumluluğu fark etmek.
+antrenman|Antrenmana hazırlanmak, hareketi öğrenmek ve kendi pratiğine özen göstermek.
+dayaniklilik|Fiziksel çabada tempo, mesafe ve yükü değerlendirmek; acıyı zorlamayı övmemek.
+sakatlik|Destekle geri dönüş sürecinde sabır ve iletişim; tedavi veya egzersiz reçetesi vermemek.
+sabah_rutini|Uyanıştan günün başlangıcına geçiş; erken kalkmayı üstünlük saymamak.
+beslenme|Yemekle ilişkiyi suçluluk ve kıyas olmadan ele almak; diyet reçetesi yok.
+girisimcilik|Fikri gerçek kullanıcı ihtiyacıyla sınamak ve kaynakları gözetmek.
+kariyer|İş yaşamı, rol, başvuru ve mesleki yönün kişiye uygunluğu.
+liderlik|Ortak çalışmada sorumluluk, dinleme, adil iş paylaşımı.
+para|Gündelik para kararlarındaki duygu ve sınırlar; yatırım önerisi yok.
+zaman|Zaman taahhütleri, öncelikler ve takvimde gerçekçi paylar.
+basarisizlik|İstenmeyen sonucu kişinin değerinden ayırarak değerlendirmek.
+basari|Tamamlanan işi tanımak, katkıları görmek ve başarı sonrası beklentiler.
+ask|Romantik ilişkide karşılıklı özen, ses ve güvenli yakınlık.
+ayrilik|Biten romantik ilişkinin gündelik izleri ve sınırlar.
+aile|Aile içindeki roller, bakım ve değişime izin veren ilişkiler.
+arkadaslik|Dostluğu sürdürmek; karşılıklı ilgi ve emeğin dengesi.
+yalnizlik|İstenmeyen yalnızlıkta güvenli bağlantı aramak; kişinin seçiciliğini korumak.
+affetmek|Başkasını affetmenin kişisel karar oluşu; güven ve yeniden yakınlaşmadan ayrılması.
+kaygi|Gelecek tehdidi düşünceleriyle ilişki; kesinlik veya iyileşme garantisi yok.
+stres|Anlık beklenti ve iş yükü baskısını somutlaştırmak.
+minnettarlik|İnanç şartı olmadan gündelik iyiliği ve emeği fark etmek.
+simdiki_an|Duyusal ayrıntılarla o ana dikkat; sakinleşme zorunluluğu yok.
+uyku|Akşamın kapanışı ve dinlenmeye geçiş; uyuma garantisi yok.
+karamsarlik|Tek bir olumsuz dönemi tüm geleceğe yaymadan düşünmek.
+huzur|Sakin hissettiren ortam ve yaşam düzeni; olumlamadan farklı olarak keşif soruları.
+merak|Yanıt arama, bilinmeyeni fark etme ve yeni sorular.
+okumak|Metinle ilişki, anlamı tartışma ve okuma deneyimi.
+hata|Öğrenirken yanlışın nerede oluştuğunu bulmak ve düzeltmeyi uygulamak; özür dileme bölümü değildir.
+aliskanlik|Tek bir davranışın tetikleyicisi, en küçük biçimi ve tekrar koşulları.
+sinav|Ders çalışma, bilgiyi yoklama ve sınav süreci; notla kişisel değeri eşitlememek.
+epikuros|Yeterlilik, sade haz, dostluk ve arzu; özgün esinlenme.
+diogenes|Gereksiz yük, statü ve toplumsal alışkanlıkları sorgulamak; özgün esinlenme.
+herakleitos|Değişimi, karşıtlığı ve görünmeyen süreci fark etmek; özgün esinlenme.
+cicero|Dostluk, karşılıklı sorumluluk ve yaşlar arası saygı; özgün esinlenme.
+montaigne|Kendi deneyiminin sınırları ve çelişkilerini dürüstçe gözlemlemek; özgün esinlenme.
+bacon|Gözlem, kanıt, okuma ve düşünceyi sınama; özgün esinlenme.
+descartes|Problemi parçalara ayırmak, akıl yürütme adımlarını kontrol etmek; özgün esinlenme.
+spinoza|Duyguları doğuran nedenler ve eyleme gücünü anlamak; özgün esinlenme.
+pascal|Oyalanma, kırılganlık ve insanın sınırlılığı; özgün esinlenme.
+locke|Sözcüklerin anlamı, deneyim ve bilginin sınırları; özgün esinlenme.
+hume|Alışkanlık, beklenti, kanıt ve duygunun yargıya etkisi; özgün esinlenme.
+rousseau|Deneyerek öğrenme, doğa ve başkalarının gözünde yaşamak; özgün esinlenme.
+kant|İnsan onuru, ilke, sorumluluk ve gerekçeyi herkes için sınamak; özgün esinlenme.
+schopenhauer|Arzu, yetinme, başkasının acısına özen ve çıkarsız dikkat; özgün esinlenme.
+kierkegaard|Belirsizlik içinde kişisel seçim ve o seçimi yaşamak; özgün esinlenme.
+emerson|Kendi düşüncesine güven, taklitten ayrılma ve içtenlik; özgün esinlenme.
+thoreau|Bilinçli sade yaşam, zamanın bedeli ve doğaya dikkat; özgün esinlenme.
+sadi|Gündelik davranışta insaf ve bilginin işe dönüşmesi; özgün esinlenme.
+attar|Arayış, yol arkadaşlığı ve kendine dair anlatıyı sorgulama; özgün esinlenme.
+hayyam|Geçicilik içinde bugünün tadını ve açık soruları yaşamak; özgün esinlenme.
+dustukten_sonra|Somut bir başarısızlığın hemen ardından toparlanma; uzun ara sonrası dönüşten ayrılır.
+kucuk_adim|Büyük işi bugün yapılabilir tek parçaya indirmek.
+gelisimi_gormek|Önce ve şimdi arasındaki öğrenme işaretlerini fark etmek.
+beklemek|Başvuru, yanıt veya sonuç beklerken gündelik hayatı sürdürmek.
+niyetine_sadik|Başlangıçtaki kişisel değer ile bugünkü karar arasındaki bağı korumak.
+hayir_demek|Bir isteğe yanıt verirken reddetme hakkını kullanmak.
+sinirlar|Belirtilmiş sınırı zaman içinde davranışla korumak.
+onay|Kararı sürekli başkasının kabulüne bağlamamak.
+kiyas|Başkalarının görünür sonucu ile kendi koşullarını eşitlememek.
+elestiri|Geri bildirimin içeriğini, üslubunu ve uygulanabilirliğini ayırmak.
+kendini_ifade|Duygu, ihtiyaç ve görüşü anlaşılır biçimde anlatmak.
+kararsizlik|Seçenekleri ve eksik bilgiyi belirleyerek karar vermek.
+kontrol|Etki alanı ile dış etkenleri ayırmak.
+fazla_dusunmek|Yeni bilgi üretmeyen zihinsel tekrarı fark etmek; kaygıdan farklı olarak döngüye odaklanır.
+ofke|Öfkenin tetikleyicisi, ifade edilişi ve davranışa dönüşmesi.
+pismanlik|Geçmiş seçimleri bugünün bilgisiyle yargılarken koşulları hatırlamak.
+kendini_affet|Kendi hatasına sorumlulukla ve şefkatle yaklaşmak; birinci tekil şahıs.
+mukemmeliyet|Bitirme ölçütü, gereksiz düzeltme ve yeterince iyi iş.
+belirsizlik|Eksik bilgiyle geçici plan ve taahhütleri yönetmek; yalnız korkuya odaklanmaz.
+degisim|Değişmiş koşullara düzeni ve beklentiyi uyarlamak.
+vedalar|İnsan, dönem veya kayıp sonrası yas ve hatırlama; yalnız romantik ayrılık değildir.
+tek_basina|Seçilmiş yalnız zamanda keyif ve kendine özen; bağlantı eksikliği değildir.
+destek|Yardım istemeyi somutlaştırmak ve kabul etmek.
+dinlemek|Karşıdakinin ihtiyacını, sevincini ve anlatısını kendi yanıtına indirgemeden duymak.
+onarim|Başkasına verilen zararı kabul edip davranışla telafi etmek.
+dinlenme|Molayı hak etme şartından ve üretkenlik baskısından ayırmak.
+beden|Görünüş değerlendirmesinden bağımsız bedenin ihtiyaçlarına saygı.
+is_sinir|Mesai, erişilebilirlik ve iş dışı zamanı korumak.
+yaraticilik|Yaratıcı deneme, malzemeyle çalışma ve sonucu keşfetmek.
+anlam|Gündelik tercihlerde kişisel değerleri fark etmek; büyük amaç zorunluluğu yok.
+sokrates|İnancı ve varsayımı soruyla sınamak; özgün esinlenme.
+demokritos|Görünmeyen nedenler, ölçülülük ve gözlemi açıklamadan ayırmak; özgün esinlenme.
+plotinos|Bütüne, güzelliğe ve iç dikkate yönelmek; özgün esinlenme.
+pyrrhon|Kesin hükmü ertelemek ve geçici görünüşle eylem arasındaki ayrım; özgün esinlenme.
+tao|Zorlamadan, koşulları gözeterek ve gereksizi azaltarak davranmak; özgün esinlenme.
+budist_dusunce|Geçicilik, tutunma, niyet ve şefkat; geleneklerin tamamını temsil etme iddiası yok.

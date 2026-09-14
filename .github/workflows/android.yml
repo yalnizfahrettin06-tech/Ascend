@@ -46,13 +46,14 @@ jobs:
           python tools/icerik_derle.py --check
           python tools/check_need_content.py
           python tools/check_antiquity.py
+          python tools/check_editorial.py
           python tools/build_locales.py --check
           python tools/check_category_art.py
           python tools/check_scene_art.py
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.18.0-test-APK
+          name: Ascend-9.19.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -108,8 +109,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -d screenshots ]; then
-            zip -r Ascend-9.18.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
-            gh release upload v9.18.0-ui Ascend-9.18.0-visual-evidence.zip --clobber
+            zip -r Ascend-9.19.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
+            gh release upload v9.19.0-ui Ascend-9.19.0-visual-evidence.zip --clobber
           fi
 
   share-regression:
@@ -163,7 +164,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v8
         with:
-          name: Ascend-9.18.0-test-APK
+          name: Ascend-9.19.0-test-APK
           path: apk
       - uses: actions/download-artifact@v8
         with:
@@ -174,6 +175,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          cp apk/app-debug.apk Ascend-9.18.0.apk
-          zip -r Ascend-9.18.0-test-evidence.zip evidence
-          gh release create v9.18.0-ui Ascend-9.18.0.apk Ascend-9.18.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.18.0 — Simpler discovery and reliable reminders" --notes "Simpler discovery and reliable reminders, 126 categories and 1,270 active texts per language. Adds Portuguese, German, French, Italian and Russian UI and content. Machine-assisted translation with sampled editorial review. Unit, lint, content, persistence and emulator sharing checks completed before publication. Demo Pro; test APK."
+          cp apk/app-debug.apk Ascend-9.19.0.apk
+          zip -r Ascend-9.19.0-test-evidence.zip evidence
+          gh release create v9.19.0-ui Ascend-9.19.0.apk Ascend-9.19.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.19.0 — Seven-language editorial revision" --notes "Seven-language editorial revision, 126 categories and 1,270 active texts per language. 47 content records revised in all seven languages, 10 additional translation fixes and category intent definitions. All 8,890 localized texts structurally screened; complete native-language editorial review remains pending. Unit, lint, content, persistence and emulator sharing checks completed before publication. Demo Pro; test APK."
