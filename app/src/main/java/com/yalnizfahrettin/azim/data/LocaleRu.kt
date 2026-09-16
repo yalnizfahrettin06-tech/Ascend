@@ -2145,7 +2145,6 @@ internal object LocaleRu {
         "Which unnecessary switch between tasks could you reduce today?" to "Какие ненужные переключения между задачами вы могли бы сократить сегодня?",
         "Which voice feels closer?" to "Какой голос кажется вам ближе?",
         "White" to "Белый",
-        "White and Black are free. Change them anytime." to "Белый и черный свободны. Меняйте их в любое время.",
         "Wide" to "Широкий",
         "Wide · 4 × 2" to "Широкий · 4 × 2",
         "Widget" to "Виджет",
@@ -2207,9 +2206,9 @@ internal object LocaleRu {
         "beslenme sakatlik antrenman dayaniklilik beden dinlenme" to "бесленме сакатлик антренман даяниклилик беден динленме",
         "d MMMM yyyy" to "д ММММ гггг",
         "d MMMM, EEEE" to "д ММММ, ЭЭЭЭ",
+        "days" to "дни",
     )
     private fun ui11(): Map<String, String> = mapOf(
-        "days" to "дни",
         "days here · past 7 days" to "дней здесь · последние 7 дней",
         "derin_odak dagilma durtu" to "derin_odak дагилма дурту",
         "derin_odak kariyer zaman girisimcilik" to "дерин_одак карийер заман гирисимджилик",
@@ -2289,10 +2288,11 @@ internal object LocaleRu {
         "Arena Champion" to "Чемпион арены",
         "Siege" to "Осада",
         "NEW COLLECTION" to "НОВАЯ КОЛЛЕКЦИЯ",
+        "Rome and warriors" to "Рим и воины",
     )
     private fun ui12(): Map<String, String> = mapOf(
-        "Rome and warriors" to "Рим и воины",
         "All themes" to "Все темы",
         "Selected" to "Выбрано",
+        "White, Black, Rome and Dark Rider are free. Change them anytime." to "Белая, чёрная темы, Рим и Тёмный всадник бесплатны. Меняйте их в любое время.",
     )
 }

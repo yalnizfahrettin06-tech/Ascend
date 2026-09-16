@@ -48,7 +48,7 @@ fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit,
                 ProGorselOrnek(dil)
                 Surface(color = Renk.yuzey, shape = RoundedCornerShape(22.dp)) {
                     Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        listOf(cevir(dil,"Tüm konular ve sözler","Every topic and quote"), cevir(dil,"Roma, Atlı Yolcu ve tüm temalar","Rome, Rider and every theme"),
+                        listOf(cevir(dil,"Tüm konular ve sözler","Every topic and quote"), cevir(dil,"Tüm temalar","All themes"),
                             cevir(dil,"Telefonuna özel widget’lar","Widgets for your phone"), cevir(dil,"Görsel ve video paylaşımları","Image and video sharing")).forEach {
                             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) { Icon(AzimIkon.Tik,null,Modifier.size(20.dp),tint = Renk.metin); Text(it,color = Renk.metin,fontSize = 15.sp,lineHeight = 21.sp) }
                         }

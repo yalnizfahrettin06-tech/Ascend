@@ -42,6 +42,7 @@ object Planlayici {
         saatler.forEachIndexed { i, an ->
             wm.enqueueUniqueWork(DILIM_ONEK + i, ExistingWorkPolicy.REPLACE,
                 OneTimeWorkRequestBuilder<SozWorker>()
+                    .setInputData(workDataOf("scheduled_at" to an.atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli()))
                     .setInitialDelay(Duration.between(simdi, an).seconds.coerceAtLeast(1), TimeUnit.SECONDS).build())
         }
         depo.planliSaatleriYaz(saatler)
@@ -76,6 +77,10 @@ class SozWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, p
         if (depo.pausedUntil.first() > System.currentTimeMillis()) return@withLock Result.success()
         val saat = java.time.LocalTime.now().hour
         if (saat < depo.baslangicSaati.first() || saat >= depo.bitisSaati.first()) return@withLock Result.success()
+        val now = System.currentTimeMillis()
+        if (!DeliveryPolicy.shouldDeliver(now, inputData.getLong("scheduled_at", 0L),
+                depo.lastNotificationDelivery.first(), depo.gunlukAdet.first(),
+                depo.baslangicSaati.first(), depo.bitisSaati.first())) return@withLock Result.success()
         val secili = depo.secili.first()
         val dil = depo.dil.first()
         val profil = depo.personalProfile.first()

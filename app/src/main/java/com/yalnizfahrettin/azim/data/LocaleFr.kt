@@ -2145,7 +2145,6 @@ internal object LocaleFr {
         "Which unnecessary switch between tasks could you reduce today?" to "Quels changements inutiles entre les tâches pourriez-vous réduire aujourd’hui ?",
         "Which voice feels closer?" to "Quelle voix semble la plus proche ?",
         "White" to "Blanc",
-        "White and Black are free. Change them anytime." to "Le blanc et le noir sont gratuits. Changez-les à tout moment.",
         "Wide" to "Large",
         "Wide · 4 × 2" to "Large · 4 × 2",
         "Widget" to "Widget",
@@ -2207,9 +2206,9 @@ internal object LocaleFr {
         "beslenme sakatlik antrenman dayaniklilik beden dinlenme" to "beslenme sakatlik antrenman dayaniklilik beden dinlenme",
         "d MMMM yyyy" to "d MMMM aaaa",
         "d MMMM, EEEE" to "d MMMM, EEEE",
+        "days" to "jours",
     )
     private fun ui11(): Map<String, String> = mapOf(
-        "days" to "jours",
         "days here · past 7 days" to "jours ici · 7 derniers jours",
         "derin_odak dagilma durtu" to "derin_odak dagilma durtu",
         "derin_odak kariyer zaman girisimcilik" to "derin_odak kariyer zaman girisimcilik",
@@ -2289,10 +2288,11 @@ internal object LocaleFr {
         "Arena Champion" to "Champion de l’arène",
         "Siege" to "Siège",
         "NEW COLLECTION" to "NOUVELLE COLLECTION",
+        "Rome and warriors" to "Rome et guerriers",
     )
     private fun ui12(): Map<String, String> = mapOf(
-        "Rome and warriors" to "Rome et guerriers",
         "All themes" to "Tous les thèmes",
         "Selected" to "Sélectionné",
+        "White, Black, Rome and Dark Rider are free. Change them anytime." to "Blanc, Noir, Rome et Cavalier sombre sont gratuits. Change à tout moment.",
     )
 }

@@ -37,6 +37,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val NOTIF_RECENT = stringPreferencesKey("recent_notification_order")
         val RECENT = stringPreferencesKey("recent_quote_order")
         val HIDDEN = stringSetPreferencesKey("hidden_quotes")
+        val LAST_DELIVERY = longPreferencesKey("last_notification_delivery_ms")
         val PAUSED_UNTIL = longPreferencesKey("reminders_paused_until")
         val GECMIS = stringSetPreferencesKey("gosterilen_gecmis")
         val SON_BILDIRIM = stringPreferencesKey("son_bildirim_kimlik")
@@ -170,6 +171,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     }
     val favoriler: Flow<Set<String>> = store.data.map { it[K.FAVORI] ?: emptySet() }
     val sonBildirimKimlik: Flow<String?> = store.data.map { it[K.SON_BILDIRIM] }
+    val lastNotificationDelivery = store.data.map { it[K.LAST_DELIVERY] ?: 0L }
     val notificationRecent = store.data.map { it[K.NOTIF_RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi) }
     val seriesProgress = store.data.map { p -> p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode).associateBy { it.id } }
     suspend fun startSeries(id: String) = store.edit { p ->
@@ -378,6 +380,7 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
             .filterNot { id -> Sozler.kimlikten(id)?.kategori in yeniTurKategorileri }
         it[K.GECMIS] = (onceki + kimlik).filter(Sozler::aktifKimlikMi).toSet()
         if (teslimEdildi) {
+            it[K.LAST_DELIVERY] = System.currentTimeMillis()
             val day = LocalDate.now()
             val kept = it[K.BUGUN_GELEN].orEmpty().filter { entry ->
                 runCatching { LocalDate.parse(entry.substringBefore("|")) >= day.minusDays(29) }.getOrDefault(false)

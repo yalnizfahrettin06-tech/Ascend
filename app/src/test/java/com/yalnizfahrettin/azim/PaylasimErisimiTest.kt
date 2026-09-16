@@ -8,7 +8,7 @@ import org.junit.Test
 class PaylasimErisimiTest {
     @Test
     fun `free export has marble night and paper backgrounds`() {
-        val expected = listOf(KartZemin.Sahne(R.drawable.art_roman_home_v9), HazirZeminler.duzler.first(), HazirZeminler.duzler.last())
+        val expected = listOf(KartZemin.Sahne(R.drawable.art_roman_home_v9), HazirZeminler.duzler.first(), HazirZeminler.duzler.last(), KartZemin.Sahne(R.drawable.scene_atli_yolcu))
         assertEquals(expected, PaylasimErisimi.ucretsizZeminler)
         expected.forEach { background ->
             assertTrue(PaylasimErisimi.izinVar(false, PaylasimAyari(zemin = background)))
@@ -22,7 +22,7 @@ class PaylasimErisimiTest {
 
     @Test
     fun `all other built in backgrounds require Pro`() {
-        val backgrounds = Atmosfer.entries.filter { it != Atmosfer.ZIRVE }.map { KartZemin.Sahne(it.res) } +
+        val backgrounds = Atmosfer.entries.filter { it != Atmosfer.ZIRVE && it.res != R.drawable.scene_atli_yolcu }.map { KartZemin.Sahne(it.res) } +
             KartZemin.Sahne(Int.MAX_VALUE) + HazirZeminler.duzler.drop(1).dropLast(1) + HazirZeminler.gradyanlar
         backgrounds.forEach { background ->
             assertFalse("Unexpected free background: $background", PaylasimErisimi.izinVar(false, PaylasimAyari(zemin = background)))

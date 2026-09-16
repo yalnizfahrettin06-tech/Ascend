@@ -56,7 +56,12 @@ class KatalogDepoTest {
 
     @Test fun successfulDeliveryPersistsBothHistoryAndRepeatState() = isolated { depot, _ ->
         val quote = Sozler.kategoriden("motivasyon").first()
+        assertEquals(0L, depot.lastNotificationDelivery.first())
+        depot.bildirimGecmisineEkle(quote.kimlik)
+        assertEquals(0L, depot.lastNotificationDelivery.first())
+        val before = System.currentTimeMillis()
         depot.bildirimGecmisineEkle(quote.kimlik, teslimEdildi = true)
+        assertTrue(depot.lastNotificationDelivery.first() >= before)
         assertTrue(quote.kimlik in depot.bugunGelenler.first())
         assertTrue(quote.kimlik in depot.gecmis.first())
         assertEquals(quote.kimlik, depot.sonBildirimKimlik.first())

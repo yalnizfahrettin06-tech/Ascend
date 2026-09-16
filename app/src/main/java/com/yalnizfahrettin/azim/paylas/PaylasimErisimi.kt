@@ -8,6 +8,7 @@ object PaylasimErisimi {
         KartZemin.Sahne(R.drawable.art_roman_home_v9),
         HazirZeminler.duzler.first(),
         HazirZeminler.duzler.last(),
+        KartZemin.Sahne(R.drawable.scene_atli_yolcu),
     )
 
     fun zeminProMu(zemin: KartZemin): Boolean = zemin !in ucretsizZeminler && zemin != KartZemin.Sahne(R.drawable.scene_summit)

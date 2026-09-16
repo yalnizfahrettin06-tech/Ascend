@@ -9,8 +9,8 @@ data class AnaTema(val id: String, val tr: String, val en: String, val dark: Boo
 object AnaTemalar {
     val white = AnaTema("white", "Beyaz", "White", false, false)
     val black = AnaTema("black", "Siyah", "Black", true, false)
-    val roma = AnaTema("roma", "Roma", "Rome", false, true, R.drawable.art_roman_home_v9)
-    val rider = AnaTema("rider", "Koyu Atlı Yolcu", "Dark Rider", true, true, R.drawable.scene_atli_yolcu)
+    val roma = AnaTema("roma", "Roma", "Rome", false, false, R.drawable.art_roman_home_v9)
+    val rider = AnaTema("rider", "Koyu Atlı Yolcu", "Dark Rider", true, false, R.drawable.scene_atli_yolcu)
     val knight = AnaTema("knight", "Şövalye", "Knight", true, true, R.drawable.scene_sovalye)
     val emperor = AnaTema("emperor", "İmparator", "Emperor", true, true, R.drawable.warrior_emperor)
     val duel = AnaTema("duel", "Düello", "Duel", true, true, R.drawable.warrior_duel)

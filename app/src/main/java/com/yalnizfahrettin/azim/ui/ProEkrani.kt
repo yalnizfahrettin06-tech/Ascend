@@ -118,7 +118,7 @@ fun ProGorselOrnek(dil: String) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(cevir(dil, "Tema ve widget örneği", "Theme and widget preview"), color = Renk.metin, style = MaterialTheme.typography.titleSmall)
         Box(Modifier.fillMaxWidth().height(190.dp).clip(RoundedCornerShape(20.dp)).testTag("pro-visual-preview")) {
-            TemaZemini(com.yalnizfahrettin.azim.data.AnaTemalar.rider, Modifier.matchParentSize(), thumbnail = true)
+            TemaZemini(com.yalnizfahrettin.azim.data.AnaTemalar.emperor, Modifier.matchParentSize(), thumbnail = true)
             Text(cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward."),
                 Modifier.align(Alignment.Center).padding(24.dp), color = androidx.compose.ui.graphics.Color.White,
                 fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 29.sp, textAlign = TextAlign.Center)

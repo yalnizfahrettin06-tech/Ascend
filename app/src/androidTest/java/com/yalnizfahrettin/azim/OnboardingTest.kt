@@ -159,7 +159,7 @@ class OnboardingTest {
         compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true,
             initialDraft = PersonalProfile(setupVersion = 3, step = 4),
             finishProfile = { value, _ -> finished = value }) { _,_,_,_,_ -> } } }
-        compose.onNodeWithTag("theme-rider").performScrollTo().performClick()
+        compose.onNodeWithTag("theme-emperor").performScrollTo().performClick()
         compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
         compose.runOnIdle { assertNull(finished) }
         next()
@@ -171,10 +171,10 @@ class OnboardingTest {
     @Test fun successfulDemoTrialKeepsSelectedProTheme() {
         var finished: PersonalProfile? = null
         compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true,
-            initialDraft = PersonalProfile(setupVersion = 3, step = 4).choose("theme", "rider"),
+            initialDraft = PersonalProfile(setupVersion = 3, step = 4).choose("theme", "emperor"),
             startTrial = { it(true) }, finishProfile = { value, _ -> finished = value }) { _,_,_,_,_ -> } } }
         next()
         compose.onNodeWithTag("trial-start").performClick()
-        compose.runOnIdle { assertEquals("rider", finished?.answer("theme")?.firstOrNull()) }
+        compose.runOnIdle { assertEquals("emperor", finished?.answer("theme")?.firstOrNull()) }
     }
 }

@@ -123,10 +123,10 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             } else {
                 if(results.isEmpty()) item { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp)) }
                 items(results, key = { it.anahtar }) { topic ->
-                    Surface(onClick = { focus.clearFocus(); if(topic.anahtar !in acik) proAc() else detayKey = topic.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("category-${topic.anahtar}")) {
+                    Surface(onClick = { focus.clearFocus(); detayKey = topic.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("category-${topic.anahtar}")) {
                         Row(Modifier.padding(16.dp).heightIn(min = 42.dp), verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                                Text(topic.ad(dil), color = if(topic.anahtar !in acik) Renk.metinIkincil else Renk.metin, fontSize = 15.sp, lineHeight = 21.sp, textDecoration = if(topic.anahtar !in acik) androidx.compose.ui.text.style.TextDecoration.LineThrough else null)
+                                Text(topic.ad(dil), color = if(topic.anahtar !in acik) Renk.metinIkincil else Renk.metin, fontSize = 15.sp, lineHeight = 21.sp)
                                 if(topic.anahtar in secili) Text(cevir(dil,"✓ Bildirimlerinde","✓ In your reminders"), color = Renk.metinIkincil, fontSize = 11.sp)
                             }
                             if(topic.anahtar !in acik) ProRozeti()
@@ -185,14 +185,6 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                     if (!degisebilir) Text(cevir(dil, "Son konunu kaldırmadan önce başka bir konu seç.", "Choose another topic before removing your last one."),
                         color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp,
                         modifier = Modifier.padding(bottom = 18.dp))
-                } else {
-                    Text(cevir(dil, "Bu konu kilitli. Önce sözlere göz at; erişimi açtıktan sonra bildirimlerine eklemeyi seçebilirsin.",
-                        "This topic is locked. Preview the quotes first; once unlocked, you can choose to add it to your reminders."),
-                        color = Renk.metinIkincil, fontSize = 13.sp, lineHeight = 20.sp,
-                        modifier = Modifier.padding(top = 16.dp, bottom = 12.dp))
-                    Button(onClick = { detayKey = null; proAc() }, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                        shape = RoundedCornerShape(50)) { Text(cevir(dil, "Pro ile eriş · Demo", "Access with Pro · Demo")) }
-
                 }
                 if (kat.grup in setOf("filozoflar", "tasavvuf", "inanc")) {
                     Text(cevir(dil, "Ascend yorumu · Doğrudan alıntı değildir.",
@@ -207,6 +199,12 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                     onClickLabel = cevir(dil, "Sözü aç", "Open quote")) { oku(soz) }.padding(vertical = 16.dp).testTag("category-quote-${soz.kimlik}"),
                     color = Renk.metin, fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 29.sp)
             }
+            if (!acildi) item {
+                Button(onClick = { detayKey = null; proAc() },
+                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp).heightIn(min = 52.dp).testTag("category-preview-pro"),
+                    shape = RoundedCornerShape(50)) { Text(cevir(dil, "Pro ile eriş · Demo", "Access with Pro · Demo")) }
+            }
+
         }
     }
 }

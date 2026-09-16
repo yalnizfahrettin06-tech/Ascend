@@ -141,7 +141,7 @@ fun Onboarding(
                                 2 -> PlanRhythm(profile, dil, { update(profile.copy(dailyCount = it)) }, { hourDialog = it })
                                 3 -> PlanPermission(profile, dil, bildirimIzni, previewAccess, stageHeight) { permissionHelp = true }
                                 4 -> {
-                                    PlanTitle(cevir(dil, "Sana ait bir görünüm.", "Make it feel like you."), cevir(dil, "Beyaz ve Siyah ücretsiz. Dilediğin zaman değiştir.", "White and Black are free. Change them anytime."))
+                                    PlanTitle(cevir(dil, "Sana ait bir görünüm.", "Make it feel like you."), cevir(dil, "Beyaz, Siyah, Roma ve Atlı Yolcu ücretsiz. Dilediğin zaman değiştir.", "White, Black, Rome and Dark Rider are free. Change them anytime."))
                                     TemaGrid(dil, AnaTemalar.onboarding, AnaTemalar.find(profile.answer("theme").firstOrNull()).id, pro, compact = true) {
                                         if (it.pro) previewTheme = it.id else update(profile.choose("theme", it.id))
                                     }
