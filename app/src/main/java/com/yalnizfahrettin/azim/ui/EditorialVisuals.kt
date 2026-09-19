@@ -47,7 +47,7 @@ object EditorialArt {
 
 @Composable
 fun EditorialPhoto(resource: Int, modifier: Modifier = Modifier) {
-    TemaZemini(AnaTema("editorial-$resource","","",false,true,resource),modifier,veil = .02f,thumbnail = true,previewSize = 640)
+    TemaZemini(AnaTema("editorial-$resource","","",true,false,resource),modifier,veil = .02f,thumbnail = true,previewSize = 640)
 }
 
 @Composable

@@ -157,10 +157,7 @@ object AzimIkon {
         }
     }
 
-    // Ascend's single rising line: a small pause before the next step upward.
-    val Yukselis = ikon("ascend") {
-        cizgi { moveTo(3f, 19f); lineTo(10f, 12f); lineTo(14f, 15f); lineTo(21f, 4f) }
-    }
+    val Yukselis = YukselenMarka
     val Kisi = ikon("senin") {
         cizgi {
             moveTo(12f, 12f); arcTo(4f, 4f, 0f, true, true, 12f, 4f)
