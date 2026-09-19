@@ -13,3 +13,5 @@ Ana ekran yerleşimi ve tema galerisi korunur. Beyaz/Siyah/Roma/Atlı Yolcu ücr
 Fotoğraflar mevcut koleksiyondan seçildi; yeni büyük dosyalar indirilmez. Kapaklar mevcut sınırlı önbellek ve arka planda resim çözme mekanizmasını kullanır. Logo vektördür; küçük boyutta bulanık bitmap kullanılmaz.
 
 Hedefli kontrol: koleksiyona giriş, kaydedilen karttan okuma, seri kapakları/başlamadan ilerleme göstermeme, büyük Almanca yazıda erişim ve marka önizlemesi. Önceki Pro geçiş testleri de korunur. Sonuçlar tamamlandığında teslim mesajına eklenir.
+
+Doğrulama: 47c3393 kaynak sürümü, GitHub Actions 35466402289. Derleme ve lint başarılı; 103 birim testi ve 21 hedefli Android testi geçti. Keşfet, kısa seriler ve kaydedilenler ekran görüntüleri incelendi. Fiziksel cihaz testi yapılmadı. APK: https://github.com/yalnizfahrettin06-tech/Ascend/releases/tag/v9.23.0-ui
