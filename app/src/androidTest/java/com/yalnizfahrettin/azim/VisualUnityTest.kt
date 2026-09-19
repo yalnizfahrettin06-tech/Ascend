@@ -20,19 +20,23 @@ import org.junit.Assert.*
 class VisualUnityTest {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
 
-    @Test fun discoveryCoversNavigateAndSavedCardReadsWithoutThemeDependency() {
-        var saved by mutableStateOf(false)
-        var read = false
-        val quote = Sozler.kategoriden("zorluk_sabir").first()
+    @Test fun discoveryCoversNavigateToTopics() {
         compose.setContent { AzimTema(modu = TemaModu.KARANLIK) {
-            if(saved) FavorilerEkrani(listOf(quote),"tr",{}, { read = true },{},embedded = true)
-            else KesifMerkezi("tr") { KategorilerEkrani(emptySet(),Erisim.ucretsizKategoriler,"tr",{},{},false,{},insets = false,series = {}) }
+            KesifMerkezi("tr") { KategorilerEkrani(emptySet(),Erisim.ucretsizKategoriler,"tr",{},{},false,{},insets = false,series = {}) }
         } }
         compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.group("olumlamalar")}",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
         ekranKaydet("923-discovery-dark")
         compose.onNodeWithTag("collection-feature").performClick()
         compose.onNodeWithTag("category-ozsefkat").assertExists()
-        compose.runOnIdle { saved = true }
+    }
+
+    @Test fun savedCardReadsWithoutThemeDependency() {
+        var read = false
+        val quote = Sozler.kategoriden("zorluk_sabir").first()
+        compose.setContent { AzimTema(modu = TemaModu.KARANLIK) {
+            FavorilerEkrani(listOf(quote),"tr",{}, { read = true },{},embedded = true)
+        } }
+        compose.waitForIdle()
         compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.saved(quote.kategori)}",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
         ekranKaydet("923-saved-dark")
         compose.onNodeWithTag("saved-read-${quote.kimlik}").performClick()
