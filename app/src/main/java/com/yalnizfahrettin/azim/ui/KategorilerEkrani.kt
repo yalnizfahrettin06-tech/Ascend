@@ -84,6 +84,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 Text(cevir(dil,"Bildirimlerim","My reminders"), fontSize = 12.sp)
             }
         }
+        val columns = if(LocalDensity.current.fontScale > 1.3f || LocalConfiguration.current.screenWidthDp < 340) 1 else 2
         LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)) {
             if (showGroups && series != null) item {
@@ -100,7 +101,6 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 }
             }
             if (showGroups) {
-                val columns = if(LocalDensity.current.fontScale > 1.3f || LocalConfiguration.current.screenWidthDp < 340) 1 else 2
                 items(Kategoriler.kesfetGruplari.chunked(columns),key = { it.first().anahtar }) { row ->
                     Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min),horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         row.forEach { g ->
