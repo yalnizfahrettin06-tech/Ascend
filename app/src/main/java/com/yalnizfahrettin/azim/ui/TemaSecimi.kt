@@ -110,7 +110,7 @@ fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolea
 }
 
 @Composable
-fun TemaKoleksiyonKapagi(dil: String, open: () -> Unit) {
+fun TemaKoleksiyonKapagi(dil: String, selected: Boolean = false, open: () -> Unit) {
     Surface(onClick = open, shape = RoundedCornerShape(22.dp), modifier = Modifier.fillMaxWidth().height((186 * LocalDensity.current.fontScale.coerceAtLeast(1f)).dp).testTag("theme-featured")) {
         Box {
             TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize(),thumbnail = true,previewSize = 1024)
@@ -121,7 +121,7 @@ fun TemaKoleksiyonKapagi(dil: String, open: () -> Unit) {
                 Text(AnaTemalar.emperor.label(dil),Modifier.fillMaxWidth(.7f),color = Color.White,fontSize = 24.sp,lineHeight = 29.sp,fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(10.dp))
                 Row(verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text(cevir(dil,"Önizle","Preview"),color = Color.White,fontSize = 12.sp)
+                    Text(if(selected) cevir(dil,"Seçili","Selected") else cevir(dil,"Önizle","Preview"),color = Color.White,fontSize = 12.sp)
                     Icon(AzimIkon.Ileri,null,Modifier.size(16.dp),tint = Color.White)
                 }
             }

@@ -67,8 +67,10 @@ class LivingExperienceTest {
         animation("1")
         var active by mutableStateOf(true)
         try {
+            compose.mainClock.autoAdvance = false
             compose.setContent { AzimTema(modu = TemaModu.KARANLIK) { LivingScene(Modifier.size(240.dp,320.dp),active) } }
-            compose.waitUntil(15000) { compose.onAllNodesWithTag("theme-art-emperor",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
+            compose.mainClock.advanceTimeBy(64)
+            compose.waitUntil(15000) { compose.mainClock.advanceTimeBy(32); compose.onAllNodesWithTag("theme-art-emperor",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
             compose.onNodeWithTag("living-moving").assertExists()
             compose.mainClock.autoAdvance = false
             val first = compose.onNodeWithTag("living-moving").captureToImage().asAndroidBitmap()

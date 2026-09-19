@@ -143,6 +143,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     val arkaPlan: Flow<String?> = erisimVerisi.map { AnaTemalar.allowed(it[K.ARKA_PLAN], it[K.PRO_DEMO] ?: false).id }
 
     suspend fun arkaPlanAyarla(ad: String?) = store.edit { p ->
+        erisimiGocur(p)
+        gorseliGocur(p)
         val theme = AnaTemalar.allowed(ad, p[K.PRO_DEMO] ?: false)
         p[K.ARKA_PLAN] = theme.id
         p[K.TEMA] = if (theme.dark) TemaModu.KARANLIK.name else TemaModu.AYDINLIK.name
