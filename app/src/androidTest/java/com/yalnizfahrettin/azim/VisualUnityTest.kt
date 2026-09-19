@@ -28,12 +28,12 @@ class VisualUnityTest {
             if(saved) FavorilerEkrani(listOf(quote),"tr",{}, { read = true },{},embedded = true)
             else KesifMerkezi("tr") { KategorilerEkrani(emptySet(),Erisim.ucretsizKategoriler,"tr",{},{},false,{},insets = false,series = {}) }
         } }
-        compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.group("olumlamalar")}").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.group("olumlamalar")}",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
         ekranKaydet("923-discovery-dark")
         compose.onNodeWithTag("collection-feature").performClick()
         compose.onNodeWithTag("category-ozsefkat").assertExists()
         compose.runOnIdle { saved = true }
-        compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.saved(quote.kategori)}").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.saved(quote.kategori)}",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
         ekranKaydet("923-saved-dark")
         compose.onNodeWithTag("saved-read-${quote.kimlik}").performClick()
         compose.runOnIdle { assertTrue(read) }
@@ -45,7 +45,7 @@ class VisualUnityTest {
         } }
         compose.onAllNodesWithText("Kısa seriler").assertCountEquals(1)
         compose.onNodeWithTag("series-progress-kindness").assertDoesNotExist()
-        compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.series("steps")}").fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.series("steps")}",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
         ekranKaydet("923-series-dark")
         compose.onNodeWithTag("series-kindness").performClick()
         compose.onNodeWithTag("series-start").performScrollTo().assertIsDisplayed()
