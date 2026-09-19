@@ -33,3 +33,16 @@ Her gün yeni bir özgün okuma ve isteğe bağlı eylem içerir. Eşlik eden ye
 ## Kontrol sınırı
 
 Hedefli testler: ücretsiz önizleme, Pro erişimi, tema iptali/uygulama, seride günlük sınır ve Pro kapatılınca ilerleme, yedi dil içerik bütünlüğü, animasyonun piksel değiştirmesi ve durdurulması. Fiziksel cihazda uzun süreli pil, ısınma ve kare hızı ölçümü bu teslimin kapsamı değildir. Son CI sonuçları teslimle birlikte eklenir.
+
+## Teslim sonucu
+
+Kaynak sürümü: 14167d3. GitHub Actions: https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/35469481730
+
+- Derleme ve lint başarılı.
+- 105 birim testi, 25 hedefli Android testi: sıfır hata.
+- Hareket testi iki farklı zamandaki görüntü piksellerinin değiştiğini ve durdurma durumunu doğruladı; bu, fiziksel cihaz kare hızı/pil ölçümü değildir.
+- İlk seçimden sonra eski ayar dönüşümünün yeni temayı silmesi düzeltildi; depolama testiyle doğrulandı.
+- Widget sekmesi ve özel seri ilk gün ekranının son görüntüleri incelendi.
+- Yedi dilde tüm günler mevcut ve birbirinden farklı. Bağımsız ana dil editörü incelemesi yapılmadı.
+
+APK: https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v9.24.0-ui/Ascend-9.24.0.apk
