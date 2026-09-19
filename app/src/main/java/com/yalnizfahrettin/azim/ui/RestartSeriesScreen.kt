@@ -40,7 +40,7 @@ fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, fa
     } }
     Column(Modifier.fillMaxSize().background(Renk.zemin).testTag("restart-series")) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp),verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = back) { Icon(AzimIkon.Geri,cevir(dil,"Geri","Back")) }
+            IconButton(onClick = back) { Icon(AzimIkon.Geri,cevir(dil,"Geri","Back"),tint = Renk.metin) }
             Text(RestartSeries.title(dil),Modifier.weight(1f),color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.Medium)
             Text("${day + 1} / 7",Modifier.padding(end = 16.dp),color = Renk.metinIkincil,fontSize = 12.sp)
         }
@@ -55,7 +55,7 @@ fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, fa
             }
             if(progress == null || !pro) {
                 Text(CollectionCopy.text("read",dil),color = Renk.metinIkincil,fontSize = 12.sp)
-                Text(RestartSeries.summary(dil),color = Renk.metinIkincil,fontSize = 14.sp,lineHeight = 21.sp)
+                Text(CollectionCopy.text("promise",dil),color = Renk.metinIkincil,fontSize = 14.sp,lineHeight = 21.sp)
             }
             Text(chapter.story,color = Renk.metin,fontSize = 17.sp,lineHeight = 27.sp,modifier = Modifier.testTag("restart-story"))
             Surface(color = Renk.yuzey,shape = RoundedCornerShape(20.dp)) {

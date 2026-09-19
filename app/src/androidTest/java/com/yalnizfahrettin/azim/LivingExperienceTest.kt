@@ -33,6 +33,8 @@ class LivingExperienceTest {
         compose.onNodeWithText(CollectionCopy.text("preview","tr")).performScrollTo().assertExists()
         ekranKaydet("924-wallpaper-preview")
         compose.onNodeWithTag("collection-tab-2").performScrollTo().performClick()
+        compose.onNodeWithTag("collection-tab-2").assertIsSelected()
+        compose.waitForIdle()
         ekranKaydet("924-collection-widget")
         compose.onNodeWithTag("collection-tab-0").performScrollTo().performClick()
         compose.runOnIdle { paid = true }
@@ -44,8 +46,8 @@ class LivingExperienceTest {
         var state by mutableStateOf<SeriesProgress?>(null)
         var offers = 0
         compose.setContent { AzimTema(modu = TemaModu.KARANLIK) {
-            RestartSeriesScreen("tr",pro,state,emptySet(),{}, { state = SeriesProgress("restart") },
-                { state = state!!.complete(LocalDate.now()) },{},{},{ offers++ })
+            Column(Modifier.fillMaxSize().safeDrawingPadding()) { RestartSeriesScreen("tr",pro,state,emptySet(),{}, { state = SeriesProgress("restart") },
+                { state = state!!.complete(LocalDate.now()) },{},{},{ offers++ }) }
         } }
         compose.onNodeWithTag("restart-story").assertTextEquals(RestartSeries.days("tr")[0].story)
         ekranKaydet("924-series-first-day")
