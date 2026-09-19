@@ -53,7 +53,7 @@ fun AnaEkran(
     ipucunuKapat: () -> Unit, ayarlaraGit: () -> Unit,
     secilenAtmosfer: String? = null, atmosferSec: (String?) -> Unit = {},
     seciliKonular: Set<String> = emptySet(), konulariDuzenle: () -> Unit = {}, haptikAcik: Boolean = true,
-    gizle: (Soz) -> Unit = {},
+    gizle: (Soz) -> Unit = {}, motionActive: Boolean = true,
     pro: Boolean = false, proAc: () -> Unit = {}, kullaniciAdi: String = "", planAc: () -> Unit = {}, ihtiyac: String? = null, ihtiyacSec: (String?) -> Unit = {},
 ) {
     // A feed replacement must replace its count, keys and page content together.
@@ -91,7 +91,8 @@ fun AnaEkran(
     LaunchedEffect(pager, aktif?.kimlik) { if (aktif != null) indeksDegisti(pager.settledPage); ses.durdur() }
     Box(Modifier.fillMaxSize().background(Renk.zemin)) {
         val homeTheme = AnaTemalar.find(secilenAtmosfer)
-        TemaZemini(homeTheme, Modifier.matchParentSize(), if (buyukYazi) .94f else .25f)
+        if(homeTheme.id == AnaTemalar.living.id) LivingScene(Modifier.matchParentSize(), enabled = motionActive && !buyukYazi && !araclar)
+        else TemaZemini(homeTheme, Modifier.matchParentSize(), if (buyukYazi) .94f else .25f)
         Column(Modifier.fillMaxSize().statusBarsPadding().testTag("home-content")) {
             Row(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(AzimIkon.YukselenMarka, null, Modifier.size(30.dp), tint = Renk.accent)

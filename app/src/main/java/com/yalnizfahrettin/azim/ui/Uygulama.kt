@@ -313,6 +313,7 @@ fun Uygulama(
                         },
                         ipucunuKapat = { kapsam.launch { depo.ipucunuKapat() } },
                         ayarlaraGit = { ayarlardaMi = true },
+                        motionActive = !proGoster && !notificationTopicsOpen && !planGoster && readerId == null && paylasilanKimlik == null,
                     )
 
                     Sekme.GORUNUM -> GorunumEkrani(dil, arkaPlan, proDemo == true, { proGoster = true },
@@ -320,7 +321,7 @@ fun Uygulama(
                     Sekme.KATEGORI -> KesifMerkezi(dil,showHeading = !discoverySeries) {
                         if (discoverySeries) KisaSerilerEkrani(dil, seriesProgress, favoriler, { discoverySeries = false },
                             { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
-                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, insets = false)
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, insets = false, pro = proDemo == true, proOpen = { openOffer(ProOffer(ProSource.SERIES,"restart")) })
                         else
                         KategorilerEkrani(
                         secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },

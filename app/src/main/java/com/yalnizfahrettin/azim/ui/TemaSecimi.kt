@@ -116,9 +116,9 @@ fun TemaKoleksiyonKapagi(dil: String, open: () -> Unit) {
             TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize(),thumbnail = true,previewSize = 1024)
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(Color.Black.copy(alpha = .62f),Color.Transparent))))
             Column(Modifier.fillMaxSize().padding(20.dp),verticalArrangement = Arrangement.Bottom) {
-                Text(cevir(dil,"YENİ KOLEKSİYON","NEW COLLECTION"),color = Color.White.copy(alpha = .8f),fontSize = 9.sp,letterSpacing = 1.sp)
+                Text(CollectionCopy.text("badge",dil),color = Color.White.copy(alpha = .8f),fontSize = 9.sp,letterSpacing = 1.sp)
                 Spacer(Modifier.height(7.dp))
-                Text(cevir(dil,"Roma ve savaşçılar","Rome and warriors"),Modifier.fillMaxWidth(.7f),color = Color.White,fontSize = 24.sp,lineHeight = 29.sp,fontWeight = FontWeight.SemiBold)
+                Text(AnaTemalar.emperor.label(dil),Modifier.fillMaxWidth(.7f),color = Color.White,fontSize = 24.sp,lineHeight = 29.sp,fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(10.dp))
                 Row(verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(cevir(dil,"Önizle","Preview"),color = Color.White,fontSize = 12.sp)

@@ -34,7 +34,7 @@ private fun PersonalHeader(title: String, dil: String, back: () -> Unit) {
 }
 
 @Composable
-private fun QuoteActions(quote: Soz, dil: String, favorites: Set<String>, save: (Soz) -> Unit, share: (Soz) -> Unit) {
+internal fun QuoteActions(quote: Soz, dil: String, favorites: Set<String>, save: (Soz) -> Unit, share: (Soz) -> Unit) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
         IconButton(onClick = { save(quote) }, modifier = Modifier.testTag("personal-save-${quote.kimlik}")) {
             Icon(if(quote.kimlik in favorites) AzimIkon.KalpDolu else AzimIkon.Kalp, cevir(dil,if(quote.kimlik in favorites) "Kaydedildi" else "Kaydet",if(quote.kimlik in favorites) "Saved" else "Save"), Modifier.size(20.dp), tint = Renk.metinIkincil)
@@ -80,7 +80,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
 
 @Composable
 fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorites: Set<String>, back: () -> Unit,
-    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true) {
+    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true, pro: Boolean = false, proOpen: () -> Unit = {}) {
     var chosen by rememberSaveable { mutableStateOf(progress.values.filter { it.completed < 7 }.maxByOrNull { it.lastDay ?: LocalDate.MIN }?.id) }
     val context = LocalContext.current
     var readingDay by rememberSaveable(chosen) { mutableStateOf<Int?>(null) }
@@ -92,6 +92,10 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
     val series = ShortSeries.all.firstOrNull { it.id == chosen }
     val goBack = { if(chosen != null) chosen = null else back() }
     if(!embedded || chosen != null) BackHandler(onBack = goBack)
+    if(series?.id == "restart") {
+        RestartSeriesScreen(dil,pro,progress["restart"],favorites,goBack,{ start("restart") },{ complete("restart") },save,share,proOpen)
+        return
+    }
     Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded || !insets) Modifier else Modifier.statusBarsPadding()).testTag("short-series")) {
         if(!embedded || chosen != null) PersonalHeader(cevir(dil,"Kısa seriler","Short series"),dil,goBack)
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement = Arrangement.spacedBy(20.dp)) {
@@ -104,6 +108,7 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
                             EditorialPhoto(EditorialArt.series(item.id),Modifier.fillMaxWidth().height(132.dp))
                             Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                                 Column(Modifier.weight(1f),verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    if(item.pro) Text(CollectionCopy.text("exclusive",dil),color = Renk.metinIkincil,fontSize = 10.sp)
                                     Text(item.title(dil),color = Renk.metin,fontSize = 18.sp,lineHeight = 24.sp,fontWeight = FontWeight.Medium)
                                     Text(if(count == 7) cevir(dil,"Tamamlandı · Yeniden oku","Completed · Read again") else if(state != null) "$count / 7" else cevir(dil,"7 günlük seri","7-day series"),color = Renk.metinIkincil,fontSize = 12.sp)
                                 }

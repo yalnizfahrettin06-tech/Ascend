@@ -20,13 +20,17 @@ data class SeriesProgress(val id: String, val completed: Int = 0, val lastDay: L
 
 /** Curated stable IDs: catalog reordering cannot silently alter a series. */
 data class ShortSeries(val id: String, val tr: String, val en: String, val category: String,
-    val prompts: List<Pair<String,String>>, val quoteIds: List<String>, val description: Pair<String,String>) {
-    fun title(dil: String) = Diller.metin(dil,tr,en)
-    fun summary(dil: String) = Diller.metin(dil,description.first,description.second)
+    val prompts: List<Pair<String,String>>, val quoteIds: List<String>, val description: Pair<String,String>, val pro: Boolean = false) {
+    fun title(dil: String) = if(id == "restart") RestartSeries.title(dil) else Diller.metin(dil,tr,en)
+    fun summary(dil: String) = if(id == "restart") RestartSeries.summary(dil) else Diller.metin(dil,description.first,description.second)
     val quotes get() = quoteIds.map { requireNotNull(Sozler.kimlikten(it)) { "Missing series quote: $it" } }
-    fun prompt(index: Int, dil: String) = prompts[index].let { Diller.metin(dil,it.first,it.second) }
+    fun prompt(index: Int, dil: String) = if(id == "restart") RestartSeries.days(dil)[index].step else prompts[index].let { Diller.metin(dil,it.first,it.second) }
     companion object {
         val all = listOf(
+            ShortSeries("restart", "Yeniden Başlamak", "Begin Again", "motivasyon",
+                List(7) { RestartSeries.days("tr")[it].step to RestartSeries.days("en")[it].step },
+                listOf("v5_yeniden_02","v5_motivasyon_07","v5_erteleme_01","v5_erteleme_10","v5_rutin_04","v5_motivasyon_08","v5_rutin_05"),
+                "Yedi günde yeniden yer aç." to "Make room to begin again in seven days.", pro = true),
             ShortSeries("kindness","Kendine daha nazik","A little kinder to yourself","ozsefkat",listOf(
                 "Bugün iyi görünmeye çalışmadan kabul edebileceğin duygu ne?" to "What feeling could you acknowledge today without trying to look fine?",
                 "İçindeki sert cümleyi bir arkadaşına söyleseydin nasıl değiştirirdin?" to "How would you change that harsh sentence if you were speaking to a friend?",

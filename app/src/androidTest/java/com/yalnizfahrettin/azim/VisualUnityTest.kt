@@ -51,9 +51,9 @@ class VisualUnityTest {
         compose.onNodeWithTag("series-progress-kindness").assertDoesNotExist()
         compose.waitUntil(10000) { compose.onAllNodesWithTag("theme-art-editorial-${EditorialArt.series("steps")}",useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() }
         ekranKaydet("923-series-dark")
-        compose.onNodeWithTag("series-kindness").performClick()
+        compose.onNodeWithTag("series-kindness").performScrollTo().performClick()
         compose.onNodeWithTag("series-start").performScrollTo().assertIsDisplayed()
-        assertEquals(3,ShortSeries.all.map { EditorialArt.series(it.id) }.distinct().size)
+        assertEquals(4,ShortSeries.all.map { EditorialArt.series(it.id) }.distinct().size)
     }
 
     @Test fun largeGermanTextKeepsCollectionsUsableAndBrandIsVisible() {

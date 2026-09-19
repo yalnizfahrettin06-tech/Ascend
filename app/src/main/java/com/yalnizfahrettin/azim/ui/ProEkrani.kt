@@ -52,6 +52,7 @@ fun ProEkrani(
                     modifier = Modifier.testTag("pro-context-title").semantics { heading() })
                 ProGorselOrnek(dil,offer,widgetPreview)
                 Text(cevir(dil,"Pro ile açılanlar","What Pro adds"), color = Renk.metin, fontWeight = FontWeight.SemiBold)
+                ProOzelligi(AzimIkon.YukselenMarka,CollectionCopy.text("benefit",dil),CollectionCopy.text("promise",dil))
                 ProOzelligi(AzimIkon.Kesfet,cevir(dil,"Tüm konular ve sözler","Every topic and quote"),cevir(dil,"Bildirim konularını yine sen seçersin.","You still choose your notification topics."))
                 ProOzelligi(AzimIkon.Izgara,cevir(dil,"Tüm temalar ve widget’lar","All themes and widgets"),cevir(dil,"Seçtiğin görünümü telefonuna taşı.","Bring your chosen look to your phone."))
                 ProOzelligi(AzimIkon.Paylas,cevir(dil,"Tüm arka planlar ve video","Every background and video"),cevir(dil,"Sevdiğin sözü görsel veya video olarak paylaş.","Share a favorite quote as an image or video."))
@@ -75,6 +76,8 @@ fun ProEkrani(
 }
 
 fun proOfferTitle(offer: ProOffer, dil: String): String = when(offer.source) {
+    ProSource.COLLECTION -> CollectionCopy.text("title",dil)
+    ProSource.SERIES -> RestartSeries.title(dil)
     ProSource.THEME -> AnaTemalar.find(offer.selection).label(dil)
     ProSource.TOPIC -> Kategoriler.bul(offer.selection)?.ad(dil) ?: cevir(dil,"Tüm konular ve sözler","Every topic and quote")
     ProSource.WIDGET -> cevir(dil,"Hazırladığın widget, telefonunda.","Your widget, on your home screen.")
@@ -111,7 +114,14 @@ fun ProGorselOrnek(dil: String, offer: ProOffer = ProOffer(), widgetPreview: and
     val quote = Sozler.kimlikten(offer.quoteId) ?: if(offer.source == ProSource.TOPIC) Sozler.kategoriden(offer.selection).firstOrNull() else null
     val sample = quote?.metin(dil) ?: cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward.")
     val theme = if(offer.selection.isNotBlank() && offer.source != ProSource.TOPIC) AnaTemalar.find(offer.selection) else AnaTemalar.emperor
-    if(offer.source == ProSource.TOPIC) {
+    if(offer.source == ProSource.SERIES) {
+        Surface(color = Renk.yuzey,shape = RoundedCornerShape(20.dp)) {
+            Column(Modifier.padding(20.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(RestartSeries.days(dil)[1].title,color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.SemiBold)
+                Text(RestartSeries.days(dil)[1].step,color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
+            }
+        }
+    } else if(offer.source == ProSource.TOPIC) {
         Surface(color = Renk.yuzey,shape = RoundedCornerShape(20.dp),modifier = Modifier.testTag("pro-visual-preview")) {
             Column(Modifier.padding(20.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text(sample,color = Renk.metin,fontFamily = LoraSerif,fontSize = 21.sp,lineHeight = 29.sp)

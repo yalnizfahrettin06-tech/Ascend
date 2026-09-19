@@ -103,4 +103,21 @@ class KatalogDepoTest {
         assertEquals("A same-day reread must not increment daily statistics", count, depo.gorulenToplam.first())
         assertEquals(1, depo.bugunGorulen.first())
     }
+    @Test fun proSeriesIsGuardedInStorageAndRevocationKeepsItsProgress() = isolated { depot, _ ->
+        depot.proDemoAyarla(false)
+        depot.startSeries("restart")
+        assertFalse("restart" in depot.seriesProgress.first())
+        depot.startSeries("kindness")
+        assertTrue("kindness" in depot.seriesProgress.first())
+        depot.proDemoAyarla(true)
+        depot.startSeries("restart")
+        depot.completeSeriesDay("restart")
+        assertEquals(1,depot.seriesProgress.first().getValue("restart").completed)
+        depot.arkaPlanAyarla("emperor_living")
+        assertEquals("emperor_living",depot.arkaPlan.first())
+        depot.proDemoAyarla(false)
+        depot.completeSeriesDay("restart")
+        assertEquals(1,depot.seriesProgress.first().getValue("restart").completed)
+        assertEquals("black",depot.arkaPlan.first())
+    }
 }

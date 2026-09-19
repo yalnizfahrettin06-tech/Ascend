@@ -1,6 +1,6 @@
 package com.yalnizfahrettin.azim.data
 
-enum class ProSource { GENERAL, THEME, TOPIC, WIDGET, SHARE, VIDEO, PHOTO, ONBOARDING }
+enum class ProSource { GENERAL, THEME, TOPIC, WIDGET, SHARE, VIDEO, PHOTO, ONBOARDING, COLLECTION, SERIES }
 
 /** Only stable selection IDs, never payment state or entitlement. */
 data class ProOffer(val source: ProSource = ProSource.GENERAL, val selection: String = "", val quoteId: String = "", val square: Boolean = false) {

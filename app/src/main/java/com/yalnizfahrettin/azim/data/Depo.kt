@@ -175,11 +175,13 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
     val notificationRecent = store.data.map { it[K.NOTIF_RECENT].orEmpty().split('|').filter(Sozler::aktifKimlikMi) }
     val seriesProgress = store.data.map { p -> p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode).associateBy { it.id } }
     suspend fun startSeries(id: String) = store.edit { p ->
-        if (ShortSeries.all.none { it.id == id }) return@edit
+        val series = ShortSeries.all.firstOrNull { it.id == id } ?: return@edit
+        if (series.pro && p[K.PRO_DEMO] != true) return@edit
         val existing = p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode)
         if (existing.none { it.id == id }) p[K.SERIES] = (existing + SeriesProgress(id)).map { it.encode() }.toSet()
     }
     suspend fun completeSeriesDay(id: String) = store.edit { p ->
+        if (ShortSeries.all.firstOrNull { it.id == id }?.pro == true && p[K.PRO_DEMO] != true) return@edit
         val existing = p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode)
         p[K.SERIES] = existing.map { if(it.id == id) it.complete(LocalDate.now()) else it }.map { it.encode() }.toSet()
     }

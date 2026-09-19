@@ -36,6 +36,9 @@ fun KesifMerkezi(dil: String, showHeading: Boolean = true, topics: @Composable (
 
 @Composable
 fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0) {
+    var living by rememberSaveable { mutableStateOf(false) }
+    var collectionOffering by rememberSaveable { mutableStateOf(false) }
+    LaunchedEffect(pro,offerDismissals) { collectionOffering = false }
     var widgetTab by rememberSaveable { mutableStateOf(false) }
     var preview by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingApply by rememberSaveable { mutableStateOf(false) }
@@ -59,7 +62,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
             val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f) 1 else 2
             val rows = remember(columns) { AnaTemalar.all.chunked(columns) }
             LazyColumn(Modifier.weight(1f).clipToBounds().testTag("appearance-gallery"),contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 6.dp, bottom = 24.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                item(key = "featured") { TemaKoleksiyonKapagi(dil) { preview = AnaTemalar.emperor.id } }
+                item(key = "featured") { TemaKoleksiyonKapagi(dil) { living = true } }
                 item(key = "gallery-heading") {
                     Row(Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
                         Text(cevir(dil,"Tüm temalar","All themes"),Modifier.weight(1f),fontSize = 16.sp,fontWeight = FontWeight.SemiBold,color = Renk.metin)
@@ -87,5 +90,9 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
             }
         }
     }
+    if(living) LivingCollection(dil,pro,close = { living = false },apply = select, suspendedMotion = collectionOffering, proOpen = {
+        collectionOffering = true
+        if(offerOpen != null) offerOpen(ProOffer(ProSource.COLLECTION,AnaTemalar.living.id)) else proOpen()
+    })
     preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null; pendingApply = false }, apply = { select(id); preview = null }, proOpen = { pendingApply = true; if(offerOpen != null) offerOpen(ProOffer(ProSource.THEME,id)) else proOpen() }) }
 }

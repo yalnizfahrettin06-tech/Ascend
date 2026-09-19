@@ -26,7 +26,7 @@ class ProJourneyTest {
                 }
             }
         }
-        assertEquals("v5_ozsefkat_08",ShortSeries.all.first().quoteIds.first())
-        assertEquals(setOf("kindness","steps","focus"),ShortSeries.all.map { it.id }.toSet())
+        assertEquals("v5_ozsefkat_08",ShortSeries.all.first { !it.pro }.quoteIds.first())
+        assertEquals(setOf("kindness","steps","focus"),ShortSeries.all.filterNot { it.pro }.map { it.id }.toSet())
     }
 }

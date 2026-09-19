@@ -13,6 +13,7 @@ object AnaTemalar {
     val rider = AnaTema("rider", "Koyu Atlı Yolcu", "Dark Rider", true, false, R.drawable.scene_atli_yolcu)
     val knight = AnaTema("knight", "Şövalye", "Knight", true, true, R.drawable.scene_sovalye)
     val emperor = AnaTema("emperor", "İmparator", "Emperor", true, true, R.drawable.warrior_emperor)
+    val living = AnaTema("emperor_living", "İmparator · Hareketli", "Emperor · Living", true, true, R.drawable.warrior_emperor)
     val duel = AnaTema("duel", "Düello", "Duel", true, true, R.drawable.warrior_duel)
     val onboarding = listOf(white, black, roma, rider, emperor, duel)
     private val curated = listOf(white, black, emperor, duel,
@@ -33,6 +34,6 @@ object AnaTemalar {
     private val retired = setOf("forest", "sea", "summit", "graphite", "scene_cadi", "scene_bordo_doku",
         "scene_turkuaz_doku", "scene_lacivert_doku", "scene_ametist_doku", "scene_zeytin_doku", "scene_bakir_doku",
         "scene_orman_muhafizi", "scene_col_yolcusu")
-    fun find(id: String?): AnaTema = all.firstOrNull { it.id == id } ?: if(id in retired) black else white
+    fun find(id: String?): AnaTema = if(id == living.id) living else all.firstOrNull { it.id == id } ?: if(id in retired) black else white
     fun allowed(id: String?, pro: Boolean): AnaTema = find(id).let { if (it.pro && !pro) if (it.dark) black else white else it }
 }

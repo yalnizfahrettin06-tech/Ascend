@@ -25,8 +25,8 @@ class WarriorGalleryTest {
         compose.waitForIdle()
         ekranKaydet("warrior-gallery-light")
         compose.onNodeWithTag("theme-featured").performClick()
-        compose.onNodeWithTag("theme-preview").assertExists()
-        compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
+        compose.onNodeWithTag("living-collection").assertExists()
+        compose.onNodeWithTag("collection-use").performClick()
         compose.runOnIdle { assertTrue(proOpened); assertEquals("white",selected) }
         ekranKaydet("warrior-emperor-preview")
     }

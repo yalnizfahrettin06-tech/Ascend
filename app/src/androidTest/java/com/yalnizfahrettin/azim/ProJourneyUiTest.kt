@@ -21,7 +21,8 @@ class ProJourneyUiTest {
             GorunumEkrani("tr",selected,pro,{}, { selected = it },offerOpen = { offer = it })
             offer?.let { request -> ProEkrani("tr",pro,kapat = { offer = null },degistir = { pro = it; offer = null },offer = request) }
         } }
-        compose.onNodeWithTag("theme-featured").performClick()
+        compose.onNodeWithTag("appearance-gallery").performScrollToNode(hasTestTag("theme-emperor"))
+        compose.onNodeWithTag("theme-emperor").performClick()
         compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
         compose.onNodeWithTag("pro-context-title").assertTextEquals("İmparator")
         compose.runOnIdle { assertEquals("white",selected); assertFalse(pro) }

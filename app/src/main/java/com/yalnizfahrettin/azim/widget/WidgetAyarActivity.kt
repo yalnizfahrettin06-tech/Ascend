@@ -43,7 +43,7 @@ class WidgetAyarActivity : ComponentActivity() {
             val mode by depot.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
             var square by rememberSaveable { mutableStateOf(
                 AppWidgetManager.getInstance(this@WidgetAyarActivity).getAppWidgetInfo(id)?.provider == ComponentName(this@WidgetAyarActivity,AzimSquareWidgetSaglayici::class.java)) }
-            var theme by rememberSaveable { mutableStateOf(initial.theme) }
+            var theme by rememberSaveable { mutableStateOf(intent.getStringExtra("collection_theme")?.takeIf { it == "emperor" } ?: initial.theme) }
             var showPro by rememberSaveable { mutableStateOf(false) }
             var busy by remember { mutableStateOf(false) }
             var message by rememberSaveable { mutableStateOf<String?>(null) }
