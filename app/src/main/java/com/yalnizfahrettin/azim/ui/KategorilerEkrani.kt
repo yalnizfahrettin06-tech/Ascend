@@ -85,31 +85,31 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             }
         }
         LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            verticalArrangement = Arrangement.spacedBy(14.dp)) {
             if (showGroups && series != null) item {
-                Surface(onClick = series, color = Renk.yuzey, shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().testTag("discovery-series")) {
-                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(if(seriesProgress.values.any { it.completed < 7 }) cevir(dil,"Serine devam et","Continue your series") else cevir(dil,"Kısa seriler","Short series"), color = Renk.metin, fontSize = 16.sp)
-                            Text(cevir(dil,"7 gün, her gün bir söz.","7 days, one quote each day."), color = Renk.metinIkincil, fontSize = 12.sp)
+                val active = seriesProgress.values.firstOrNull { it.completed < 7 }
+                Surface(onClick = series, color = Renk.yuzey, shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth().testTag("discovery-series")) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        EditorialPhoto(EditorialArt.series(active?.id ?: "steps"),Modifier.width(100.dp).height(110.dp))
+                        Column(Modifier.weight(1f).padding(16.dp),verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(if(active != null) cevir(dil,"Serine devam et","Continue your series") else cevir(dil,"Kısa seriler","Short series"),color = Renk.metin,fontSize = 16.sp,fontWeight = FontWeight.Medium)
+                            Text(active?.let { "${it.completed} / 7" } ?: cevir(dil,"7 gün, her gün bir söz.","7 days, one quote each day."),color = Renk.metinIkincil,fontSize = 12.sp)
                         }
-                        Icon(AzimIkon.Ileri, null, Modifier.size(18.dp))
+                        Icon(AzimIkon.Ileri,null,Modifier.padding(end = 14.dp).size(18.dp),tint = Renk.metinIkincil)
                     }
                 }
             }
-            if(showGroups) { items(LibraryQuery.visibleGroups(), key = { it.anahtar }) { g ->
-                Surface(onClick = { group = g.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier.fillMaxWidth().testTag(if(g == Kategoriler.kesfetGruplari.first()) "collection-feature" else "collection-${g.anahtar}")) {
-                    Row(Modifier.padding(16.dp).heightIn(min = 44.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-                        Icon(koleksiyonIkonu(g.anahtar), null, Modifier.size(24.dp), tint = Renk.metinIkincil)
-                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(g.ad(dil), color = Renk.metin, fontSize = 16.sp, lineHeight = 21.sp, fontWeight = FontWeight.Medium)
-                            Text(if (g.anahtar == Kategoriler.DUSUNURLER) cevir(dil,"${g.altlar.size} düşünür","${g.altlar.size} thinkers") else cevir(dil,"${g.altlar.size} konu","${g.altlar.size} topics"), color = Renk.metinIkincil, fontSize = 12.sp)
+            if (showGroups) {
+                val columns = if(LocalDensity.current.fontScale > 1.3f || LocalConfiguration.current.screenWidthDp < 340) 1 else 2
+                items(Kategoriler.kesfetGruplari.chunked(columns),key = { it.first().anahtar }) { row ->
+                    Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min),horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        row.forEach { g ->
+                            EditorialCover(g.ad(dil),if(g.anahtar == Kategoriler.DUSUNURLER) cevir(dil,"${g.altlar.size} düşünür","${g.altlar.size} thinkers") else cevir(dil,"${g.altlar.size} konu","${g.altlar.size} topics"),
+                                EditorialArt.group(g.anahtar),Modifier.weight(1f).fillMaxHeight().testTag(if(g == Kategoriler.kesfetGruplari.first()) "collection-feature" else "collection-${g.anahtar}")) { group = g.anahtar }
                         }
-                        Icon(AzimIkon.Ileri, null, Modifier.size(18.dp), tint = Renk.metinIkincil)
+                        if(row.size < columns) Spacer(Modifier.weight(1f))
                     }
                 }
-            }
             } else {
                 if(results.isEmpty()) item { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp)) }
                 items(results, key = { it.anahtar }) { topic ->

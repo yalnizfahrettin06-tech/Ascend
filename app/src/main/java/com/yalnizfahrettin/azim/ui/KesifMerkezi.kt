@@ -27,9 +27,9 @@ import com.yalnizfahrettin.azim.data.*
 import com.yalnizfahrettin.azim.widget.WidgetAyarActivity
 
 @Composable
-fun KesifMerkezi(dil: String, topics: @Composable () -> Unit) {
+fun KesifMerkezi(dil: String, showHeading: Boolean = true, topics: @Composable () -> Unit) {
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
-        Text(cevir(dil,"Keşfet","Explore"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+        if(showHeading) Text(cevir(dil,"Keşfet","Explore"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
         Box(Modifier.weight(1f)) { topics() }
     }
 }

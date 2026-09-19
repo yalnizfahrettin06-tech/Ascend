@@ -47,15 +47,8 @@ object AzimIkon {
             moveTo(1f,12f); lineTo(7f,12f); moveTo(17f,12f); lineTo(23f,12f) }
     }
 
-    val YukselenMarka = ikon("yukselen_marka") {
-        dolgu {
-            moveTo(2f,22f); lineTo(4f,22f); lineTo(4f,16f); lineTo(2f,16f); close()
-            moveTo(7f,22f); lineTo(9f,22f); lineTo(9f,13f); lineTo(7f,13f); close()
-            moveTo(12f,22f); lineTo(14f,22f); lineTo(14f,10f); lineTo(12f,10f); close()
-            moveTo(17f,22f); lineTo(19f,22f); lineTo(19f,6f); lineTo(17f,6f); close()
-            moveTo(2f,12f); lineTo(20f,1f); lineTo(20f,4f); close()
-        }
-    }
+    val YukselenMarka = ImageVector.Builder("ascend_helmet",24.dp,24.dp,24f,24f)
+        .addPath(androidx.compose.ui.graphics.vector.PathParser().parsePathString(BrandMark.PATH).toNodes(),fill = SolidColor(Color.Black)).build()
     val Fotograf = ikon("fotograf") {
         cizgi { moveTo(4f,3f); lineTo(20f,3f); lineTo(21f,4f); lineTo(21f,20f); lineTo(20f,21f); lineTo(4f,21f); lineTo(3f,20f); lineTo(3f,4f); close()
             moveTo(3f,16f); lineTo(9f,10f); lineTo(15f,16f); lineTo(18f,13f); lineTo(21f,16f) }

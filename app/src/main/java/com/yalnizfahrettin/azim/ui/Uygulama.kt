@@ -317,7 +317,7 @@ fun Uygulama(
 
                     Sekme.GORUNUM -> GorunumEkrani(dil, arkaPlan, proDemo == true, { proGoster = true },
                         { id -> kapsam.launch { depo.arkaPlanAyarla(id) } }, offerOpen = ::openOffer, offerDismissals = offerDismissals)
-                    Sekme.KATEGORI -> KesifMerkezi(dil) {
+                    Sekme.KATEGORI -> KesifMerkezi(dil,showHeading = !discoverySeries) {
                         if (discoverySeries) KisaSerilerEkrani(dil, seriesProgress, favoriler, { discoverySeries = false },
                             { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
                             { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, insets = false)

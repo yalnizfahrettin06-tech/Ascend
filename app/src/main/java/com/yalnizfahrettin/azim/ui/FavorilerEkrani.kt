@@ -72,37 +72,28 @@ fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, 
                 }
             }
         }
-        itemsIndexed(results, key = { _, soz -> soz.kimlik }) { index, soz ->
-            Column(Modifier.fillMaxWidth().testTag("saved-quote-${soz.kimlik}"), verticalArrangement = Arrangement.spacedBy(15.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text((index + 1).toString().padStart(2, '0'), color = Renk.metinIkincil, style = MaterialTheme.typography.labelMedium)
-                    Box(Modifier.width(26.dp).height(1.dp).background(Renk.kenarlikGuclu))
-                    Text(Kategoriler.bul(soz.kategori)?.ad(dil).orEmpty(), color = Renk.metinIkincil,
-                        style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
-                }
-                Text(soz.metin(dil), color = Renk.metin, fontFamily = LoraSerif, fontSize = 23.sp, lineHeight = 33.sp)
-                Text(soz.imza(dil), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall, fontStyle = FontStyle.Italic)
-                FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    TextButton(onClick = { oku(soz) }, modifier = Modifier.heightIn(min = 48.dp), contentPadding = PaddingValues(horizontal = 12.dp)) {
-                        Icon(AzimIkon.Kitap, null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
-                        Text(cevir(dil, "Oku", "Read"))
+        itemsIndexed(results, key = { _, soz -> soz.kimlik }) { _, soz ->
+            Surface(shape = RoundedCornerShape(22.dp),color = Renk.yuzey,modifier = Modifier.fillMaxWidth().testTag("saved-quote-${soz.kimlik}")) {
+                Column {
+                    Column(Modifier.clickable(onClickLabel = cevir(dil,"Oku","Read")) { oku(soz) }.testTag("saved-read-${soz.kimlik}")) {
+                        EditorialPhoto(EditorialArt.saved(soz.kategori),Modifier.fillMaxWidth().aspectRatio(2.65f).testTag("saved-art-${soz.kimlik}"))
+                        Column(Modifier.padding(start = 18.dp,end = 18.dp,top = 18.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Text(Kategoriler.bul(soz.kategori)?.ad(dil).orEmpty(),color = Renk.metinIkincil,fontSize = 12.sp)
+                            Text(soz.metin(dil),color = Renk.metin,fontFamily = LoraSerif,fontSize = 21.sp,lineHeight = 29.sp,maxLines = 5,overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+                            Text(soz.sunumEtiketi(dil),color = Renk.metinIkincil,fontSize = 11.sp,lineHeight = 16.sp)
+                        }
                     }
-                    TextButton(onClick = { paylas(soz) }, modifier = Modifier.heightIn(min = 48.dp), contentPadding = PaddingValues(horizontal = 12.dp)) {
-                        Icon(AzimIkon.Paylas, null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
-                        Text(cevir(dil, "Paylaş", "Share"))
-                    }
-                    IconButton(onClick = { cikar(soz.kimlik) }, modifier = Modifier.size(48.dp)) {
-                        Icon(AzimIkon.AyracDolu, cevir(dil, "Kaydedilenlerden çıkar", "Remove from saved"), Modifier.size(22.dp), tint = Renk.metin)
+                    Row(Modifier.fillMaxWidth().padding(horizontal = 10.dp,vertical = 4.dp),verticalAlignment = Alignment.CenterVertically) {
+                        TextButton(onClick = { paylas(soz) },modifier = Modifier.heightIn(min = 48.dp)) {
+                            Icon(AzimIkon.Paylas,null,Modifier.size(19.dp)); Spacer(Modifier.width(8.dp)); Text(cevir(dil,"Paylaş","Share"))
+                        }
+                        Spacer(Modifier.weight(1f))
+                        IconButton(onClick = { cikar(soz.kimlik) },modifier = Modifier.size(48.dp)) {
+                            Icon(AzimIkon.KalpDolu,cevir(dil,"Kaydedilenlerden çıkar","Remove from saved"),Modifier.size(22.dp),tint = Renk.metin)
+                        }
                     }
                 }
-                HorizontalDivider(color = Renk.kenarlik)
             }
-        }
-        if (favoriler.isNotEmpty()) item {
-            Text(cevir(dil, "Her dönüşte yeni bir anlam.", "A new meaning each time you return."), color = Renk.metinIkincil,
-                fontFamily = LoraSerif, fontStyle = FontStyle.Italic, fontSize = 16.sp, modifier = Modifier.padding(bottom = 12.dp))
         }
     }
 }

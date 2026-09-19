@@ -157,9 +157,8 @@ object KartCizici {
         }
         if (a.imzaGoster) {
             val markY = h * .09f
-            for (n in 0..3) canvas.drawRect(left + n * w * .013f, markY - w * (.012f + n * .01f), left + n * w * .013f + w * .007f, markY, accent)
-            canvas.drawLine(left, markY - w * .045f, left + w * .05f, markY - w * .07f, accent)
-            val brand = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(20,20,20); typeface = font; textSize = w * .06f }
+            com.yalnizfahrettin.azim.core.BrandMark.draw(canvas,left,markY - w * .065f,w * .065f,accent)
+            val brand = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(20,20,20); typeface = Typeface.create(Typeface.SANS_SERIF,Typeface.BOLD); textSize = w * .06f }
             canvas.drawText("ascend", left + w * .075f, markY, brand)
         }
     }

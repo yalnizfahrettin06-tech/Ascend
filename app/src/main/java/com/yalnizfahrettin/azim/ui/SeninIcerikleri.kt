@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -58,6 +59,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             item { Text(cevir(dil,"Son 30 günde sana gelen sözler.","Quotes sent to you in the last 30 days."),color = Renk.metinIkincil,fontSize = 14.sp) }
             if(groups.isEmpty()) item {
+                EditorialPhoto(EditorialArt.group("zihin"),Modifier.fillMaxWidth().height(144.dp).clip(RoundedCornerShape(20.dp)))
                 Text(cevir(dil,"Henüz bir bildirim yok. İlk sözün geldiğinde burada bulabilirsin.","No notifications yet. Your first quote will appear here after it is sent."),Modifier.padding(vertical = 32.dp),color = Renk.metinIkincil)
             }
             groups.forEach { (day, quotes) ->
@@ -94,22 +96,29 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
         if(!embedded || chosen != null) PersonalHeader(cevir(dil,"Kısa seriler","Short series"),dil,goBack)
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement = Arrangement.spacedBy(20.dp)) {
             if(series == null) {
-                Text(cevir(dil,"7 gün, her gün bir söz. Kendi isteğinle başla; ara vermek ilerlemeni silmez.","7 days, one quote each day. Start when you want; taking a break keeps your progress."),color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
-                ShortSeries.all.forEach { item ->
+                ShortSeries.all.sortedByDescending { it.id in progress && (progress[it.id]?.completed ?: 7) < 7 }.forEach { item ->
+                    val state = progress[item.id]
+                    val count = state?.completed ?: 0
                     Surface(onClick = { chosen = item.id },color = Renk.yuzey,shape = RoundedCornerShape(20.dp),modifier = Modifier.fillMaxWidth().testTag("series-${item.id}")) {
-                        Column(Modifier.padding(20.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                            Text(item.title(dil),color = Renk.metin,fontSize = 21.sp,fontWeight = FontWeight.Medium)
-                            Text(item.summary(dil),color = Renk.metinIkincil,fontSize = 14.sp,lineHeight = 21.sp)
-                            val count = progress[item.id]?.completed ?: 0
-                            Text(if(count == 7) cevir(dil,"Tamamlandı · Yeniden oku","Completed · Read again") else if(item.id in progress) cevir(dil,"$count / 7 gün tamamlandı","$count / 7 days completed") else cevir(dil,"7 günlük seri","7-day series"),color = Renk.metinIkincil,fontSize = 13.sp)
-                            LinearProgressIndicator(progress = { count / 7f },modifier = Modifier.fillMaxWidth(),color = Renk.metin,trackColor = Renk.kenarlik)
+                        Column {
+                            EditorialPhoto(EditorialArt.series(item.id),Modifier.fillMaxWidth().height(132.dp))
+                            Row(Modifier.fillMaxWidth().padding(16.dp),verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                Column(Modifier.weight(1f),verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Text(item.title(dil),color = Renk.metin,fontSize = 18.sp,lineHeight = 24.sp,fontWeight = FontWeight.Medium)
+                                    Text(if(count == 7) cevir(dil,"Tamamlandı · Yeniden oku","Completed · Read again") else if(state != null) "$count / 7" else cevir(dil,"7 günlük seri","7-day series"),color = Renk.metinIkincil,fontSize = 12.sp)
+                                }
+                                Icon(AzimIkon.Ileri,null,Modifier.size(20.dp),tint = Renk.metinIkincil)
+                            }
+                            if(state != null) LinearProgressIndicator(progress = { count / 7f },modifier = Modifier.fillMaxWidth().testTag("series-progress-${item.id}"),color = Renk.metin,trackColor = Renk.kenarlik)
                         }
                     }
                 }
             } else {
-                Text(series.title(dil),color = Renk.metin,fontSize = 27.sp,lineHeight = 34.sp,fontWeight = FontWeight.SemiBold)
+                EditorialPhoto(EditorialArt.series(series.id),Modifier.fillMaxWidth().height(142.dp).clip(RoundedCornerShape(20.dp)))
+                Text(series.title(dil),color = Renk.metin,fontSize = 23.sp,lineHeight = 30.sp,fontWeight = FontWeight.Medium)
                 val state = progress[series.id]
                 if(state == null) {
+                    Text(series.summary(dil),color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
                     Text(cevir(dil,"Her gün bir söz ve istersen üzerinde düşüneceğin kısa bir soru. Yanıt yazman gerekmez; ek bildirim gönderilmez.","A quote each day and a short optional reflection. No answers to write and no extra notifications."),color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
                     Button(onClick = { scope.launch { busy = true; error = false; try { start(series.id); ProductSignals.record(context,ProductSignals.Event.SERIES_STARTED) } catch(_: java.io.IOException) { error = true } finally { busy = false } } },enabled = !busy,modifier = Modifier.fillMaxWidth().testTag("series-start")) { Text(cevir(dil,"Seriye başla","Start series")) }
                 } else {
