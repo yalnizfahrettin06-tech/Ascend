@@ -16,6 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +37,8 @@ import kotlin.math.sin
 fun LivingScene(modifier: Modifier = Modifier, enabled: Boolean = true) {
     val context = LocalContext.current
     val owner = LocalLifecycleOwner.current
+    val view = LocalView.current
+    var inViewport by remember { mutableStateOf(true) }
     var resumed by remember { mutableStateOf(owner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) }
     var systemAllows by remember { mutableStateOf(false) }
     DisposableEffect(owner, context) {
@@ -45,17 +50,24 @@ fun LivingScene(modifier: Modifier = Modifier, enabled: Boolean = true) {
         val receiver = object : android.content.BroadcastReceiver() {
             override fun onReceive(c: Context?, intent: Intent?) = refresh()
         }
+        val settingsObserver = object : android.database.ContentObserver(android.os.Handler(android.os.Looper.getMainLooper())) {
+            override fun onChange(selfChange: Boolean) = refresh()
+        }
+        context.contentResolver.registerContentObserver(android.provider.Settings.Global.getUriFor(android.provider.Settings.Global.ANIMATOR_DURATION_SCALE),false,settingsObserver)
         owner.lifecycle.addObserver(observer)
         androidx.core.content.ContextCompat.registerReceiver(context,receiver,android.content.IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED),androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED)
         refresh()
-        onDispose { owner.lifecycle.removeObserver(observer); context.unregisterReceiver(receiver) }
+        onDispose { owner.lifecycle.removeObserver(observer); context.unregisterReceiver(receiver); context.contentResolver.unregisterContentObserver(settingsObserver) }
     }
-    val moving = enabled && resumed && systemAllows
+    val moving = enabled && resumed && systemAllows && inViewport
     val phase: State<Float> = if(moving) {
         val transition = rememberInfiniteTransition(label = "emperor-atmosphere")
         transition.animateFloat(0f,1f,infiniteRepeatable(tween(18000,easing = LinearEasing),RepeatMode.Restart),label = "atmosphere-phase")
     } else remember { mutableFloatStateOf(0f) }
-    Box(modifier.clip(RoundedCornerShape(0.dp)).testTag(if(moving) "living-moving" else "living-still")) {
+    Box(modifier.onGloballyPositioned { coordinates ->
+        val bounds = coordinates.boundsInWindow()
+        inViewport = bounds.bottom > 0f && bounds.top < view.height && bounds.right > 0f && bounds.left < view.width
+    }.clip(RoundedCornerShape(0.dp)).testTag(if(moving) "living-moving" else "living-still")) {
         TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize().graphicsLayer {
             val drift = sin(phase.value * 6.283185f)
             scaleX = 1.025f; scaleY = 1.025f; translationX = drift * 4f
