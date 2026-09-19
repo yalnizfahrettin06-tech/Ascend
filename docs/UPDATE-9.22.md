@@ -13,9 +13,9 @@
 
 Seriler artık kategori listesinin ilk yedi elemanını almaz. Sabit söz kimlikleriyle editoryal sıra kullanır; katalog sırası değişse bile seri aynı kalır. Her günün sorusu o sözle ilişkilidir. Sorular ve seri açıklamaları Türkçe, İngilizce, Portekizce, Almanca, Fransızca, İtalyanca ve Rusça hazırdır.
 
-- **Kendine nezaket:** yorgunluğu fark etme → duraklama → dinlenmeye izin → aksama karşısında yaklaşım → kıyas → kişisel tempo → yeniden değerlendirme.
-- **Küçük adımlar:** eksik günü kabul → kolay bir başlangıç → yarım kalanı sürdür → işi küçült → etkiyi fark et → sessiz emek → yeniden dönüş.
-- **Odak:** niyet → tek işe yer açma → kesintiyi fark etme → geri dönüş → dikkat dağıtanı ayırma → sınır koyma → değerlendirme.
+- **Kendine nezaket:** duyguyu kabul → iç sesi yumuşatma → görünmeyen yük → hata karşısında yaklaşım → geçmişteki kendini anlama → dinlenme → başarıdan bağımsız değer.
+- **Küçük adımlar:** kişisel neden → hedefe küçük bakım → ilk düşünce → ilk denemeye zaman → merak → denemeden öğrenme → küçük ilerlemeyi fark etme.
+- **Odak:** niyet → tek işe yer açma → yeterli parçayı belirleme → kesintiden dönüş → bitiş sınırı → dinlenme → çalışma zamanını koruma.
 
 Mevcut katalogdan seçilen sözler korunur; 21 yeni düşünme sorusu eklenmiştir. Bunlar 21 yeni tarihî alıntı değildir. Atıf türleri değiştirilmemiştir. Üç mevcut seri ücretsizdir; eski kullanıcıların serileri sonradan kilitlenmez. Devam eden seri doğrudan açılır; listeye geri dönülebilir. İlerleme kayıtları silinmez.
 
@@ -32,3 +32,11 @@ Gerçek ödeme entegrasyonu bu sürüme eklenmedi. Önce düzenli içerik üreti
 ## Doğrulama
 
 İçerik/çeviri denetimleri, birim testleri, lint ve sınırlı Android geçiş testleri derleme hattında çalışır. Özellikle tema uygulama, konuya dönüşte bildirim tercihinin değişmemesi, videoya geçiş ve tekliften vazgeçme kontrol edilir. APK üretiminden sonra uzun cihaz taraması yapılmaz. Nihai çalıştırma sonucu teslim mesajında bildirilir.
+
+### Tamamlanan derleme
+
+Kaynak: `2fc3773`. GitHub Actions: https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/35462267869
+
+103 birim testi, 17 hedefli Android testi ve lint başarılı. APK: https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v9.22.0-ui/Ascend-9.22.0.apk
+
+Tek bir Pro ekranı görüntüsü kısa görsel kontrol için incelendi. Fiziksel cihaz, uzun süreli bildirim teslimatı, gerçek ödeme ve ana dil editör incelemesi yapılmadı.
