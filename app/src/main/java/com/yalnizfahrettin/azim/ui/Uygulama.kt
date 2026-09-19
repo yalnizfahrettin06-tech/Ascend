@@ -28,6 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yalnizfahrettin.azim.R
 import com.yalnizfahrettin.azim.core.TemaModu
 import com.yalnizfahrettin.azim.data.Depo
+import com.yalnizfahrettin.azim.data.*
 import com.yalnizfahrettin.azim.data.Soz
 import com.yalnizfahrettin.azim.data.Sozler
 import com.yalnizfahrettin.azim.data.PersonalProfile
@@ -101,8 +102,10 @@ fun Uygulama(
     var readerId by rememberSaveable { mutableStateOf<String?>(null) }
     var selectedRequest by rememberSaveable { mutableIntStateOf(0) }
     var ihtiyac by rememberSaveable { mutableStateOf<String?>(null) }
-    var kilitKategori by remember { mutableStateOf<com.yalnizfahrettin.azim.data.Kategori?>(null) }
     var proGoster by rememberSaveable { mutableStateOf(false) }
+    var encodedOffer by rememberSaveable { mutableStateOf(ProOffer().encode()) }
+    var offerDismissals by rememberSaveable { mutableIntStateOf(0) }
+    val currentOffer = ProOffer.decode(encodedOffer)
     var proKaydediliyor by remember { mutableStateOf(false) }
     var proHata by remember { mutableStateOf<String?>(null) }
     var acilacakGrup by rememberSaveable { mutableStateOf<String?>(null) }
@@ -111,6 +114,10 @@ fun Uygulama(
     // Akış: pager'ın gezineceği söz listesi
     var akis by remember { mutableStateOf<List<Soz>>(emptyList()) }
     var indeks by remember { mutableIntStateOf(0) }
+    fun openOffer(offer: ProOffer) {
+        encodedOffer = offer.copy(quoteId = offer.quoteId.ifBlank { akis.getOrNull(indeks)?.kimlik.orEmpty() }).encode()
+        proHata = null; proGoster = true
+    }
     var kutlamaGunu by remember { mutableStateOf<Int?>(null) }
     val snackbar = remember { SnackbarHostState() }
     LaunchedEffect(dil) { snackbar.currentSnackbarData?.dismiss() }
@@ -137,7 +144,7 @@ fun Uygulama(
             initialDraft = taslak!!, previewAccess = acik, pro = proDemo == true, proOpen = { proGoster = true },
             languageChanged = { kapsam.launch { depo.dilAyarla(it) } },
             startTrial = { result -> kapsam.launch {
-                try { depo.proDemoAyarla(true); result(true) }
+                try { depo.proDemoAyarla(true); ProductSignals.record(ctx,ProductSignals.Event.DEMO_ENABLED,ProSource.ONBOARDING); result(true) }
                 catch (_: java.io.IOException) { result(false) }
             } },
             draftChanged = { yeni ->
@@ -152,6 +159,7 @@ fun Uygulama(
                     kapsam.launch {
                         try {
                             depo.completePersonalPlan(yeni, hatirlat)
+                            ProductSignals.record(ctx,ProductSignals.Event.SETUP_COMPLETED,ProSource.ONBOARDING)
                             ihtiyac = null
                             Planlayici.yenidenKur(ctx)
                             AzimWidget.tazele(ctx)
@@ -261,7 +269,7 @@ fun Uygulama(
                                 depo.hideQuote(quote.kimlik, false); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx)
                             }
                         } },
-                        pro = proDemo == true, proAc = { proGoster = true }, kullaniciAdi = profil?.name.orEmpty(), planAc = { planGoster = true },
+                        pro = proDemo == true, proAc = { openOffer(ProOffer()) }, kullaniciAdi = profil?.name.orEmpty(), planAc = { planGoster = true },
                         ihtiyac = ihtiyac, ihtiyacSec = { ihtiyac = it },
                         secilenAtmosfer = arkaPlan, atmosferSec = { ad -> kapsam.launch { depo.arkaPlanAyarla(ad) } },
                         sozler = akis,
@@ -308,7 +316,7 @@ fun Uygulama(
                     )
 
                     Sekme.GORUNUM -> GorunumEkrani(dil, arkaPlan, proDemo == true, { proGoster = true },
-                        { id -> kapsam.launch { depo.arkaPlanAyarla(id) } })
+                        { id -> kapsam.launch { depo.arkaPlanAyarla(id) } }, offerOpen = ::openOffer, offerDismissals = offerDismissals)
                     Sekme.KATEGORI -> KesifMerkezi(dil) {
                         if (discoverySeries) KisaSerilerEkrani(dil, seriesProgress, favoriler, { discoverySeries = false },
                             { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
@@ -317,9 +325,10 @@ fun Uygulama(
                         KategorilerEkrani(
                         secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },
                         sec = { kapsam.launch { depo.kategoriSec(it); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx) } },
-                        kilidiAc = { kilitKategori = it },
+                        kilidiAc = { openOffer(ProOffer(ProSource.TOPIC,it.anahtar)) },
                         acilacakGrup = acilacakGrup, bildirimAcik = hatirlaticiAcik && bildirimIzni,
                         oku = { readerId = it.kimlik }, selectedRequest = selectedRequest, insets = false,
+                        seriesProgress = seriesProgress, offerOpen = ::openOffer,
                         series = { discoverySeries = true }, remindersOpen = { notificationTopicsOpen = true },
                     )
                     }
@@ -363,7 +372,7 @@ fun Uygulama(
     readerQuote?.let { quote -> SozOkuyucu(quote, dil, quote.kimlik in favoriler,
         close = { readerId = null }, save = { kapsam.launch { depo.favoriDegistir(quote.kimlik) } },
         share = { paylasilanKimlik = quote.kimlik }) }
-    paylasilanSoz?.let { soz -> PaylasimEkrani(soz = soz, dil = dil, geri = { paylasilanKimlik = null }, pro = proDemo == true, proAc = { proGoster = true }) }
+    paylasilanSoz?.let { soz -> PaylasimEkrani(soz = soz, dil = dil, geri = { paylasilanKimlik = null }, pro = proDemo == true, proAc = { openOffer(ProOffer()) }, offerOpen = ::openOffer, offerDismissals = offerDismissals) }
     if (planGoster) KisiselPlanPaneli(
         profil = profil, secili = secili, acik = acik, dil = dil,
         adet = gunlukAdet, bas = bas, bit = bit, bildirimAcik = hatirlaticiAcik,
@@ -391,45 +400,18 @@ fun Uygulama(
         }
     }
 
-    var demoHatasi by rememberSaveable { mutableStateOf<String?>(null) }
-    val demoBaslat = rememberDemoReklam(
-        acildi = { grupAnahtari ->
-            kapsam.launch {
-                try {
-                    depo.kategoriAc(grupAnahtari, bildirimlereEkle = false)
-                    Planlayici.yenidenKur(ctx)
-                    AzimWidget.tazele(ctx)
-                    snackbar.showSnackbar(cevir(dil, "Demo tamamlandı. Seçtiğin kategori açıldı.", "Demo complete. Your selected topic is unlocked."))
-                } catch (_: java.io.IOException) {
-                    snackbar.showSnackbar(cevir(dil, "Kategori kaydedilemedi. Lütfen yeniden dene.", "The topic could not be saved. Please try again."))
-                }
-            }
-        },
-        hata = { demoHatasi = cevir(dil, "Tarayıcı açılamadı. Kategori kilitli kaldı; yeniden deneyebilirsin.", "The browser could not open. The topic is still locked; you can try again.") },
-    )
-    val acilanGrup = kilitKategori
-    if (acilanGrup != null) {
-        LaunchedEffect(acilanGrup.anahtar) { demoHatasi = null }
-        KilitDialog(
-            kategori = acilanGrup, dil = dil,
-            proAc = { kilitKategori = null; proGoster = true },
-            kapat = { kilitKategori = null; demoHatasi = null },
-            hata = demoHatasi,
-            demoAc = {
-                demoHatasi = null
-                if (demoBaslat(acilanGrup.anahtar)) kilitKategori = null
-            },
-        )
-    }
     if (proGoster) ProEkrani(
-        dil = dil, acik = proDemo == true, kaydediliyor = proKaydediliyor, hata = proHata,
-        kapat = { proGoster = false; proHata = null },
+        dil = dil, acik = proDemo == true, kaydediliyor = proKaydediliyor, hata = proHata, offer = currentOffer,
+        kapat = { proGoster = false; proHata = null; offerDismissals++ },
         degistir = { etkin ->
             if (!proKaydediliyor) {
                 proKaydediliyor = true; proHata = null
                 kapsam.launch {
                     try {
                         depo.proDemoAyarla(etkin)
+                        if(etkin) {
+                            ProductSignals.record(ctx,ProductSignals.Event.DEMO_ENABLED,currentOffer.source)
+                        }
                         Planlayici.yenidenKur(ctx)
                         AzimWidget.tazele(ctx)
                         proGoster = false

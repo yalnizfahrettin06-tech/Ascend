@@ -177,6 +177,7 @@ fun Onboarding(
     }
     if (permissionHelp) PlanPermissionHelp(dil) { permissionHelp = false }
     if(trial) DenemeTeklifi(dil, trialBusy, trialError, close = { trial = false },
+        offer = ProOffer(ProSource.ONBOARDING, AnaTemalar.find(profile.answer("theme").firstOrNull()).takeIf { it.pro }?.id.orEmpty()),
         start = {
             trialBusy = true; trialError = false
             startTrial { success ->

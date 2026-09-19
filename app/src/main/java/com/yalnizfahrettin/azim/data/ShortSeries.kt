@@ -18,36 +18,42 @@ data class SeriesProgress(val id: String, val completed: Int = 0, val lastDay: L
     }
 }
 
-data class ShortSeries(val id: String, val tr: String, val en: String, val category: String, val prompts: List<Pair<String,String>>) {
-    fun title(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
-    val quotes get() = Sozler.kategoriden(category).take(7)
-    fun prompt(index: Int, dil: String) = prompts[index].let { com.yalnizfahrettin.azim.data.Diller.metin(dil, it.first, it.second) }
+/** Curated stable IDs: catalog reordering cannot silently alter a series. */
+data class ShortSeries(val id: String, val tr: String, val en: String, val category: String,
+    val prompts: List<Pair<String,String>>, val quoteIds: List<String>, val description: Pair<String,String>) {
+    fun title(dil: String) = Diller.metin(dil,tr,en)
+    fun summary(dil: String) = Diller.metin(dil,description.first,description.second)
+    val quotes get() = quoteIds.map { requireNotNull(Sozler.kimlikten(it)) { "Missing series quote: $it" } }
+    fun prompt(index: Int, dil: String) = prompts[index].let { Diller.metin(dil,it.first,it.second) }
     companion object {
         val all = listOf(
-            ShortSeries("kindness", "Kendine daha nazik", "A little kinder to yourself", "ozsefkat", listOf(
-                "Bugün kendine hangi cümleyi daha yumuşak söyleyebilirsin?" to "Which sentence could you say to yourself more gently today?",
-                "Bir arkadaşın aynı şeyi yaşasaydı ona ne söylerdin?" to "What would you say to a friend going through the same thing?",
-                "Bugün yeterli olan küçük bir şey neydi?" to "What small thing was enough today?",
-                "Kendinden beklediğin hangi şeyi biraz hafifletebilirsin?" to "Which expectation of yourself could you soften?",
-                "Dinlenmek için kendine nasıl küçük bir yer açabilirsin?" to "How could you make a little room to rest?",
-                "Görünmeyen hangi çabanı bugün fark ettin?" to "What unseen effort did you notice today?",
-                "Bu haftadan kendine söylemeye devam etmek istediğin cümle hangisi?" to "Which sentence from this week would you like to keep telling yourself?")),
-            ShortSeries("steps", "Küçük adımlar", "Small steps", "motivasyon", listOf(
-                "Bugün başlayabileceğin en küçük şey ne?" to "What is the smallest thing you could start today?",
-                "Bir işi kolaylaştırmak için ilk adımı nasıl küçültebilirsin?" to "How could you make the first step of a task smaller?",
-                "Bugün hangi küçük ilerlemeyi fark ettin?" to "What small progress did you notice today?",
-                "Plan aksarsa geri dönebileceğin basit bir adım ne olabilir?" to "What simple step could help you return if plans change?",
-                "Devam etmene yardımcı olan bir şey ne?" to "What is one thing that helps you keep going?",
-                "Bugün bitirmek yerine başlamayı seçebileceğin bir şey var mı?" to "Is there something you could choose to start rather than finish today?",
-                "Önümüzdeki haftaya hangi küçük adımı taşımak istersin?" to "Which small step would you like to carry into next week?")),
-            ShortSeries("focus", "Dikkatine alan aç", "Room for your attention", "derin_odak", listOf(
-                "Bugün dikkatini vermek istediğin tek bir şey ne?" to "What is one thing you want to give your attention to today?",
-                "Çevrende sadeleştirebileceğin küçük bir şey var mı?" to "Is there something small you could simplify around you?",
-                "Dikkatin dağıldığında geri dönmene ne yardımcı olur?" to "What helps you return when your attention wanders?",
-                "Hangi işi birkaç dakika boyunca tek başına yapabilirsin?" to "Which task could you do on its own for a few minutes?",
-                "Kısa bir mola vermek için uygun bir an ne zaman?" to "When would be a good moment for a short break?",
-                "Bugün hangi gereksiz geçişi azaltabilirsin?" to "Which unnecessary switch between tasks could you reduce today?",
-                "Bu hafta sana iyi gelen hangi düzeni korumak istersin?" to "Which helpful routine from this week would you like to keep?"))
+            ShortSeries("kindness","Kendine daha nazik","A little kinder to yourself","ozsefkat",listOf(
+                "Bugün iyi görünmeye çalışmadan kabul edebileceğin duygu ne?" to "What feeling could you acknowledge today without trying to look fine?",
+                "İçindeki sert cümleyi bir arkadaşına söyleseydin nasıl değiştirirdin?" to "How would you change that harsh sentence if you were speaking to a friend?",
+                "Yapılacaklar listende görünmeyen hangi yükü bugün taşıdın?" to "What burden did you carry today that does not appear on your to-do list?",
+                "Bir hatanı kendine hakaret etmeden nasıl anlatabilirsin?" to "How could you describe a mistake without insulting yourself?",
+                "Geçmişteki kendinin o gün bilmediği neyi şimdi biliyorsun?" to "What do you know now that your past self did not know then?",
+                "Bugün dinlenmek için kendine ayırabileceğin küçük bir zaman var mı?" to "Is there a small stretch of time you could set aside to rest today?",
+                "Bu haftadan, başarı sayısına bağlı olmayan hangi niteliğini yanında götürmek istersin?" to "Which quality of yours, unrelated to achievement, would you like to carry forward from this week?"
+            ), listOf("v5_ozsefkat_08","v5_ozsefkat_05","v5_ozsefkat_02","v5_ozsefkat_03","v5_ozsefkat_06","v5_ozsefkat_07","v5_ozsefkat_10"), "Kendi dilini yumuşat; bir haftada kendine daha anlayışlı yaklaşmayı dene." to "Soften your inner voice; spend a week practicing understanding toward yourself."),
+            ShortSeries("steps","Küçük adımlar","Small steps","motivasyon",listOf(
+                "Bu hedefin hangi kısmını gerçekten sen istiyorsun?" to "Which part of this goal do you truly want for yourself?",
+                "Uzakta duran hedefin için bugün yapabileceğin küçük bakım ne?" to "What small act of care could you give your distant goal today?",
+                "Boş sayfaya yazabileceğin tek bir düşünce ne?" to "What is one thought you could put on the blank page?",
+                "İlk denemen için bugün nerede ve ne zaman yer açabilirsin?" to "Where and when could you make room for a first attempt today?",
+                "İstek gelmiyorsa bu işin hangi küçük parçası merakını uyandırıyor?" to "If motivation is absent, what small part of this work makes you curious?",
+                "Henüz bitirmesen de bu denemeden ne öğrendin?" to "What have you learned from this attempt, even if it is not finished?",
+                "Bu hafta attığın hangi küçük adımı birine anlatmak istersin?" to "Which small step from this week would you like to tell someone about?"
+            ), listOf("v5_motivasyon_07","v5_motivasyon_10","v5_motivasyon_01","v5_motivasyon_09","v5_motivasyon_03","v5_motivasyon_08","v5_motivasyon_04"), "Sana ait bir neden bul, ilk adımı küçült ve ilerlemeni fark et." to "Find a reason of your own, make the first step smaller and notice your progress."),
+            ShortSeries("focus","Dikkatine alan aç","Room for your attention","derin_odak",listOf(
+                "Bugünkü çalışmanın cevaplamasını istediğin tek soru ne?" to "What one question would you like today’s work to answer?",
+                "Şimdi kapatabileceğin gereksiz bir pencere veya sekme var mı?" to "Is there an unnecessary window or tab you could close now?",
+                "Bu oturum bittiğinde hangi küçük parçanın tamamlanması yeterli?" to "What small piece would be enough to finish in this session?",
+                "Aklına gelen başka işi nereye not edip çalışmana dönebilirsin?" to "Where could you note that other task so you can return to your work?",
+                "Bugünkü odaklanma sürene hangi bitiş saatini koyabilirsin?" to "What ending time could you set for today’s period of focus?",
+                "Dikkatin yorulduğunda verebileceğin kısa mola nasıl olurdu?" to "What would a short break look like when your attention gets tired?",
+                "Gelecek hafta çalışma alanını korumak için çevrendekilerden ne isteyebilirsin?" to "What could you ask of people around you to protect your work time next week?"
+            ), listOf("v5_derin_odak_01","v5_derin_odak_02","v5_derin_odak_07","v5_derin_odak_04","v5_derin_odak_05","v5_derin_odak_10","v5_derin_odak_08"), "Dikkatine sınır çiz; dağıldığında dönmek ve yorulduğunda durmak için alan aç." to "Give your attention a boundary; make room to return when distracted and pause when tired."),
         )
     }
 }

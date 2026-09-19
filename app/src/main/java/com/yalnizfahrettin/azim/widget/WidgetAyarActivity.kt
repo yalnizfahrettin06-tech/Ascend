@@ -54,33 +54,8 @@ class WidgetAyarActivity : ComponentActivity() {
             LaunchedEffect(config,dil,square) {
                 previewState.value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 1080, if(square) 1080 else 540) }
             }
-            AzimTema(modu = mode) {
-                Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {
-                    Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = { finish() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
-                        Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
-                        ProRozeti()
-                    }
-                    if(id == AppWidgetManager.INVALID_APPWIDGET_ID) Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        listOf(false,true).forEach { option ->
-                            FilterChip(selected = square == option,onClick = { square = option },label = {
-                                Text(if(option) cevir(dil,"Kare · 2 × 2","Square · 2 × 2") else cevir(dil,"Geniş · 4 × 2","Wide · 4 × 2"))
-                            },modifier = Modifier.weight(1f).testTag(if(option) "widget-square" else "widget-wide"))
-                        }
-                    }
-                    LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        item {
-                            Box(Modifier.fillMaxWidth().aspectRatio(if(square) 1f else 2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
-                                bitmap?.let { Image(it.asImageBitmap(), quote, Modifier.fillMaxSize()) }
-                            }
-                        }
-                        item { Text(cevir(dil,"Her gün yeni bir söz · Boyutu ana ekranında da ayarlayabilirsin.", "A new quote each day · Resize on your home screen too."), color = Renk.metinIkincil, fontSize = 12.sp) }
-                        items(AnaTemalar.all.chunked(3), key = { it.first().id }) { row -> ArkaPlanGrid(dil, row, theme) { theme = it.id } }
-                    }
-                    Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        message?.let { Text(it, color = Renk.metinIkincil, fontSize = 12.sp) }
-                        Button(onClick = {
-                            if (!pro) showPro = true else {
+            fun addWidget() {
+                if (!pro) showPro = true else {
                                 busy = true
                                 lifecycleScope.launch {
                                     try {
@@ -108,13 +83,52 @@ class WidgetAyarActivity : ComponentActivity() {
                                     finally { busy = false }
                                 }
                             }
+            }
+            var resumeAdd by rememberSaveable { mutableStateOf(false) }
+            LaunchedEffect(pro,resumeAdd) { if(pro && resumeAdd) { resumeAdd = false; addWidget() } }
+            AzimTema(modu = mode) {
+                Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {
+                    Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = { finish() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
+                        Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
+                        ProRozeti()
+                    }
+                    if(id == AppWidgetManager.INVALID_APPWIDGET_ID) Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        listOf(false,true).forEach { option ->
+                            FilterChip(selected = square == option,onClick = { square = option },label = {
+                                Text(if(option) cevir(dil,"Kare · 2 × 2","Square · 2 × 2") else cevir(dil,"Geniş · 4 × 2","Wide · 4 × 2"))
+                            },modifier = Modifier.weight(1f).testTag(if(option) "widget-square" else "widget-wide"))
+                        }
+                    }
+                    LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        item {
+                            Box(Modifier.fillMaxWidth().aspectRatio(if(square) 1f else 2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
+                                bitmap?.let { Image(it.asImageBitmap(), quote, Modifier.fillMaxSize()) }
+                            }
+                        }
+                        item { Text(cevir(dil,"Her gün yeni bir söz · Boyutu ana ekranında da ayarlayabilirsin.", "A new quote each day · Resize on your home screen too."), color = Renk.metinIkincil, fontSize = 12.sp) }
+                        items(AnaTemalar.all.chunked(3), key = { it.first().id }) { row -> ArkaPlanGrid(dil, row, theme) { theme = it.id } }
+                    }
+                    Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        message?.let { Text(it, color = Renk.metinIkincil, fontSize = 12.sp) }
+                        Button(onClick = {
+                            addWidget()
                         }, enabled = !busy, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("widget-add")) {
                             Text(cevir(dil, if(!pro) "Pro ile kullan" else if(id > 0) "Widget’ı kaydet" else "Telefon ekranına ekle",
                                 if(!pro) "Use with Pro" else if(id > 0) "Save widget" else "Add to home screen"))
                         }
                     }
                 }
-                if(showPro) ProEkrani(dil, pro, kapat = { showPro = false }, degistir = { enabled -> lifecycleScope.launch { depot.proDemoAyarla(enabled); AzimWidget.tazele(this@WidgetAyarActivity); showPro = false } })
+                if(showPro) ProEkrani(dil, pro, kaydediliyor = busy, hata = message,
+                    offer = ProOffer(ProSource.WIDGET,theme,square = square), widgetPreview = bitmap,
+                    kapat = { showPro = false }, degistir = { enabled ->
+                        if(!busy) { busy = true; lifecycleScope.launch {
+                            try { depot.proDemoAyarla(enabled); showPro = false; resumeAdd = enabled
+                                if(enabled) ProductSignals.record(this@WidgetAyarActivity,ProductSignals.Event.DEMO_ENABLED,ProSource.WIDGET)
+                            } catch(_: java.io.IOException) { message = cevir(dil,"Kaydedilemedi. Yeniden dene.","Could not save. Try again.") }
+                            finally { busy = false }
+                        } }
+                    })
             }
         }
     }

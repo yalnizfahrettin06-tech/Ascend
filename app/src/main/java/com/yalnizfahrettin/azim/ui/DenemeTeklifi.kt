@@ -18,9 +18,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.yalnizfahrettin.azim.core.*
+import com.yalnizfahrettin.azim.data.*
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit, start: () -> Unit, free: () -> Unit) {
+fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit, start: () -> Unit, free: () -> Unit, offer: ProOffer = ProOffer(ProSource.ONBOARDING)) {
+    val context = LocalContext.current
+    LaunchedEffect(Unit) { ProductSignals.record(context,ProductSignals.Event.OFFER_VIEWED,ProSource.ONBOARDING) }
     Dialog(onDismissRequest = { if(!busy) close() }, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         val view = LocalView.current
         val colors = Renk
@@ -45,11 +50,11 @@ fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit,
                 ProRozeti(metin = "ASCEND PRO")
                 Text(cevir(dil,"Kendine daha\nfazla alan aç.","Make more\nroom for yourself."), fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold, color = Renk.metin)
                 Text(cevir(dil,"3 günlük denemeyle keşfet.","Explore with a 3-day trial."), fontSize = 18.sp, color = Renk.metinIkincil)
-                ProGorselOrnek(dil)
+                ProGorselOrnek(dil,offer)
                 Surface(color = Renk.yuzey, shape = RoundedCornerShape(22.dp)) {
                     Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         listOf(cevir(dil,"Tüm konular ve sözler","Every topic and quote"), cevir(dil,"Tüm temalar","All themes"),
-                            cevir(dil,"Telefonuna özel widget’lar","Widgets for your phone"), cevir(dil,"Görsel ve video paylaşımları","Image and video sharing")).forEach {
+                            cevir(dil,"Telefonuna özel widget’lar","Widgets for your phone"), cevir(dil,"Tüm arka planlar ve video","Every background and video")).forEach {
                             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) { Icon(AzimIkon.Tik,null,Modifier.size(20.dp),tint = Renk.metin); Text(it,color = Renk.metin,fontSize = 15.sp,lineHeight = 21.sp) }
                         }
                     }

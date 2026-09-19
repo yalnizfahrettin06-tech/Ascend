@@ -51,10 +51,10 @@ fun KilitDialog(kategori: Kategori, dil: String, kapat: () -> Unit, demoAc: () -
 fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: (String) -> Unit,
     kilidiAc: (Kategori) -> Unit, pro: Boolean, proAc: () -> Unit, acilacakGrup: String? = null, bildirimAcik: Boolean = true,
     series: (() -> Unit)? = null, remindersOpen: (() -> Unit)? = null,
+    offerOpen: ((ProOffer) -> Unit)? = null, seriesProgress: Map<String,SeriesProgress> = emptyMap(),
     oku: (Soz) -> Unit = {}, selectedRequest: Int = 0, insets: Boolean = true,
 ) {
 
-    var emptyTopic by rememberSaveable { mutableStateOf<String?>(null) }
     var group by rememberSaveable { mutableStateOf(acilacakGrup) }
     var reminders by rememberSaveable { mutableStateOf(false) }
     var query by rememberSaveable { mutableStateOf("") }
@@ -90,7 +90,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 Surface(onClick = series, color = Renk.yuzey, shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().testTag("discovery-series")) {
                     Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(cevir(dil,"Kısa seriler","Short series"), color = Renk.metin, fontSize = 16.sp)
+                            Text(if(seriesProgress.values.any { it.completed < 7 }) cevir(dil,"Serine devam et","Continue your series") else cevir(dil,"Kısa seriler","Short series"), color = Renk.metin, fontSize = 16.sp)
                             Text(cevir(dil,"7 gün, her gün bir söz.","7 days, one quote each day."), color = Renk.metinIkincil, fontSize = 12.sp)
                         }
                         Icon(AzimIkon.Ileri, null, Modifier.size(18.dp))
@@ -110,16 +110,6 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                     }
                 }
             }
-                item { Text(cevir(dil,"Yakında","Coming soon"), Modifier.padding(top = 16.dp, bottom = 4.dp), color = Renk.metinIkincil, fontSize = 12.sp) }
-                items(listOf("Sabah niyeti" to "Morning intention", "Dijital mola" to "Digital break", "Yaratıcı cesaret" to "Creative courage")) { names ->
-                    val name = cevir(dil,names.first,names.second)
-                    Surface(onClick = { emptyTopic = name }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth()) {
-                        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                            Text(name, Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 15.sp)
-                            Text(cevir(dil,"0 söz · Yakında","0 quotes · Soon"), color = Renk.metinIkincil, fontSize = 11.sp)
-                        }
-                    }
-                }
             } else {
                 if(results.isEmpty()) item { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp)) }
                 items(results, key = { it.anahtar }) { topic ->
@@ -138,7 +128,6 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
         }
     }
 
-    emptyTopic?.let { name -> AlertDialog(onDismissRequest = { emptyTopic = null }, title = { Text(name) }, text = { Text(cevir(dil,"Bu kategori hazırlanıyor. Henüz söz eklenmedi.","This category is being prepared. No quotes have been added yet.")) }, confirmButton = { TextButton(onClick = { emptyTopic = null }) { Text(cevir(dil,"Tamam","OK")) } }) }
 
     val kat = Kategoriler.bul(detayKey ?: "")
     if (kat != null) ModalBottomSheet(onDismissRequest = { detayKey = null }, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = Renk.zemin) {
@@ -200,7 +189,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                     color = Renk.metin, fontFamily = LoraSerif, fontSize = 20.sp, lineHeight = 29.sp)
             }
             if (!acildi) item {
-                Button(onClick = { detayKey = null; proAc() },
+                Button(onClick = { if(offerOpen != null) offerOpen(ProOffer(ProSource.TOPIC,kat.anahtar,gosterilenSozler.firstOrNull()?.kimlik.orEmpty())) else proAc() },
                     modifier = Modifier.fillMaxWidth().padding(top = 12.dp).heightIn(min = 52.dp).testTag("category-preview-pro"),
                     shape = RoundedCornerShape(50)) { Text(cevir(dil, "Pro ile eriş · Demo", "Access with Pro · Demo")) }
             }

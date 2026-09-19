@@ -65,13 +65,22 @@ private val ayarSaver = listSaver<PaylasimAyari, String>(save = { a ->
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false, proAc: () -> Unit = {}) {
+fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false, proAc: () -> Unit = {}, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0) {
     val ctx = LocalContext.current
     val focusManager = LocalFocusManager.current
     val buyukYazi = LocalDensity.current.fontScale > 1.35f
     val kapsam = rememberCoroutineScope()
     val lastStyle = remember { ctx.getSharedPreferences("share-last-style", android.content.Context.MODE_PRIVATE) }
     var ayar by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(SonPaylasimDuzeni.oku(lastStyle).copy(format = KartFormat.STORY, yazi = KartYazi.LORA, yaziOlcegi = 1f, hizalama = KartHizalama.ORTA, karartma = .45f, imzaGoster = true)) }
+    var pendingStyle by rememberSaveable(stateSaver = ayarSaver) { mutableStateOf(ayar) }
+    var pendingKind by rememberSaveable { mutableStateOf("") }
+    var lastDismissal by rememberSaveable { mutableIntStateOf(offerDismissals) }
+    LaunchedEffect(offerDismissals) { if(lastDismissal != offerDismissals) { pendingKind = ""; lastDismissal = offerDismissals } }
+    fun offer(source: ProSource, style: PaylasimAyari = ayar) {
+        pendingStyle = style; pendingKind = source.name
+        val theme = AnaTemalar.all.firstOrNull { KartZemin.Sahne(it.art ?: -1) == style.zemin }
+        if(offerOpen != null) offerOpen(ProOffer(source,theme?.id.orEmpty(),soz.kimlik)) else proAc()
+    }
     var video by rememberSaveable { mutableStateOf(false) }
     var saniye by rememberSaveable { mutableIntStateOf(10) }
     var kutuphane by rememberSaveable { mutableStateOf(false) }
@@ -122,7 +131,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
         val kaynak = bekleyenUri?.let(Uri::parse)
         val proDosya = bekleyenPro
         if (bekleyenPro && !guncelPro) {
-            hata = cevir(dil, "Pro demosu kapalı. Üç ücretsiz arka planla görsel paylaşabilirsin.", "Pro demo is off. You can share images with the three free backgrounds.")
+            hata = cevir(dil, "Pro demosu kapalı. Ücretsiz arka planlarla görsel paylaşabilirsin.", "Pro demo is off. You can share images with the free backgrounds.")
         } else if (uri != null && kaynak != null) {
             hazirlaniyor = true
             islem = kapsam.launch {
@@ -144,6 +153,15 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
         if (uri != null && guncelPro) {
             runCatching { ctx.contentResolver.takePersistableUriPermission(uri, android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION) }
             ayar = ayar.copy(zemin = KartZemin.Foto(uri))
+        }
+    }
+    LaunchedEffect(pro,pendingKind) {
+        if(pro && pendingKind.isNotBlank()) {
+            ayar = pendingStyle
+            if(pendingKind == ProSource.VIDEO.name) video = true
+            if(pendingKind == ProSource.PHOTO.name) fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            kutuphane = false; pendingKind = ""
+            ProductSignals.record(ctx,ProductSignals.Event.ACTION_RESUMED,ProSource.SHARE)
         }
     }
     fun uret(galeri: Boolean) {
@@ -226,7 +244,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                                 selectedContainerColor = Renk.metin, selectedLabelColor = Renk.zemin, selectedLeadingIconColor = Renk.zemin),
                             leadingIcon = if (!gorunenVideo) { { Icon(AzimIkon.Tik, null, Modifier.size(18.dp)) } } else null,
                             label = { Text(cevir(dil, "Görsel", "Image")) }, modifier = Modifier.testTag("share-image"))
-                        FilterChip(selected = gorunenVideo, onClick = { if(!pro) proAc() else video = true }, enabled = !hazirlaniyor,
+                        FilterChip(selected = gorunenVideo, onClick = { if(!pro) offer(ProSource.VIDEO) else video = true }, enabled = !hazirlaniyor,
                             colors = FilterChipDefaults.filterChipColors(containerColor = Renk.yuzey, labelColor = Renk.metin,
                                 selectedContainerColor = Renk.metin, selectedLabelColor = Renk.zemin, selectedLeadingIconColor = Renk.zemin),
                             leadingIcon = if (gorunenVideo) { { Icon(AzimIkon.Tik, null, Modifier.size(18.dp)) } } else null,
@@ -242,7 +260,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                     LazyRow(Modifier.fillMaxWidth().padding(top = 12.dp).testTag("share-background-options"), contentPadding = PaddingValues(horizontal = 14.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         items(curated, key = { it.anahtar }) { z ->
                             PaylasimZeminSecenegi(z, gorunenAyar.zemin == z.zemin, dil, hazirlaniyor) {
-                                if (PaylasimErisimi.zeminProMu(z.zemin) && !pro) proAc() else ayar = gorunenAyar.copy(zemin = z.zemin)
+                                if (PaylasimErisimi.zeminProMu(z.zemin) && !pro) offer(ProSource.SHARE,gorunenAyar.copy(zemin = z.zemin)) else ayar = gorunenAyar.copy(zemin = z.zemin)
                             }
                         }
                     }
@@ -271,7 +289,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
             Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp).padding(bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text(cevir(dil,"Arka plan seç","Choose a background"), Modifier.weight(1f), fontSize = 20.sp, color = Renk.metin)
-                    TextButton(onClick = { if(!pro) proAc() else { kutuphane = false; fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) } }, modifier = Modifier.testTag("share-background-photo")) { Text(cevir(dil,"Fotoğrafım","My photo")) }
+                    TextButton(onClick = { if(!pro) offer(ProSource.PHOTO) else { kutuphane = false; fotoSecici.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) } }, modifier = Modifier.testTag("share-background-photo")) { Text(cevir(dil,"Fotoğrafım","My photo")) }
                 }
                 OutlinedTextField(value = gorselArama, onValueChange = { gorselArama = it }, singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -282,7 +300,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                 LazyVerticalGrid(columns = GridCells.Adaptive(if(buyukYazi) 112.dp else 84.dp), modifier = Modifier.fillMaxWidth().height(340.dp).testTag("share-artwork-grid"), verticalArrangement = Arrangement.spacedBy(14.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     items(found, key = { it.anahtar }) { z ->
                         Box(contentAlignment = Alignment.TopCenter) { PaylasimZeminSecenegi(z, gorunenAyar.zemin == z.zemin, dil, hazirlaniyor) {
-                            if(PaylasimErisimi.zeminProMu(z.zemin) && !pro) proAc() else { ayar = gorunenAyar.copy(zemin = z.zemin); kutuphane = false }
+                            if(PaylasimErisimi.zeminProMu(z.zemin) && !pro) offer(ProSource.SHARE,gorunenAyar.copy(zemin = z.zemin)) else { ayar = gorunenAyar.copy(zemin = z.zemin); kutuphane = false }
                         } }
                     }
                 }

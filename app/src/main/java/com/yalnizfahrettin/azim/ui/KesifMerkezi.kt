@@ -35,9 +35,13 @@ fun KesifMerkezi(dil: String, topics: @Composable () -> Unit) {
 }
 
 @Composable
-fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit) {
+fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0) {
     var widgetTab by rememberSaveable { mutableStateOf(false) }
     var preview by rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingApply by rememberSaveable { mutableStateOf(false) }
+    var lastDismissal by rememberSaveable { mutableIntStateOf(offerDismissals) }
+    LaunchedEffect(offerDismissals) { if(lastDismissal != offerDismissals) { pendingApply = false; lastDismissal = offerDismissals } }
+    LaunchedEffect(pro) { if(pro && pendingApply && preview != null) { select(preview!!); preview = null; pendingApply = false } }
     val ctx = LocalContext.current
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
         Text(cevir(dil,"Görünüm","Appearance"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
@@ -83,5 +87,5 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
             }
         }
     }
-    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null }, apply = { select(id); preview = null }, proOpen = proOpen) }
+    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null; pendingApply = false }, apply = { select(id); preview = null }, proOpen = { pendingApply = true; if(offerOpen != null) offerOpen(ProOffer(ProSource.THEME,id)) else proOpen() }) }
 }

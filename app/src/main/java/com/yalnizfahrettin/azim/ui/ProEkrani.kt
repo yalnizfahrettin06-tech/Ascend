@@ -8,7 +8,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.foundation.Image
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,71 +26,61 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.*
-import com.yalnizfahrettin.azim.data.Kategoriler
+import com.yalnizfahrettin.azim.data.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProEkrani(
-    dil: String,
-    acik: Boolean,
-    kaydediliyor: Boolean = false,
-    hata: String? = null,
-    kapat: () -> Unit,
-    degistir: (Boolean) -> Unit,
+    dil: String, acik: Boolean, kaydediliyor: Boolean = false, hata: String? = null,
+    kapat: () -> Unit, degistir: (Boolean) -> Unit,
+    offer: ProOffer = ProOffer(), widgetPreview: android.graphics.Bitmap? = null,
 ) {
-    val kategoriSayisi = Kategoriler.tumAltlar.size
-    ModalBottomSheet(
-        onDismissRequest = { if (!kaydediliyor) kapat() },
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        containerColor = Renk.zemin,
-        dragHandle = null,
-    ) {
+    val ctx = LocalContext.current
+    LaunchedEffect(offer.encode()) { ProductSignals.record(ctx, ProductSignals.Event.OFFER_VIEWED, offer.source) }
+    val close = { if (!kaydediliyor) { ProductSignals.record(ctx, ProductSignals.Event.OFFER_CLOSED, offer.source); kapat() } }
+    ModalBottomSheet(onDismissRequest = close, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        containerColor = Renk.zemin, dragHandle = null) {
         Column(Modifier.fillMaxWidth().fillMaxHeight(.94f).testTag("pro-sheet")) {
-            Row(Modifier.fillMaxWidth().padding(start = 24.dp, end = 12.dp, top = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth().padding(start = 24.dp, end = 12.dp, top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 ProRozeti(metin = "PRO DEMO")
                 Spacer(Modifier.weight(1f))
-                IconButton(onClick = kapat, enabled = !kaydediliyor, modifier = Modifier.testTag("pro-close")) { Icon(AzimIkon.Kapat, cevir(dil, "Kapat", "Close"), tint = Renk.metin) }
+                IconButton(onClick = close, enabled = !kaydediliyor, modifier = Modifier.testTag("pro-close")) { Icon(AzimIkon.Kapat, cevir(dil,"Kapat","Close"), tint = Renk.metin) }
             }
-            Column(
-                Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp),
-            ) {
-                Box(Modifier.fillMaxWidth()) {
-                    Column(Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Icon(AzimIkon.Yukselis, null, Modifier.size(32.dp), tint = Renk.metin)
-                        Box(Modifier.width(32.dp).height(1.dp).background(Renk.accent))
-                        Text(cevir(dil, "İlhamın tamamı.", "More room for inspiration."), color = Renk.metin, fontFamily = ArayuzFont,
-                            fontSize = 32.sp, lineHeight = 39.sp, modifier = Modifier.semantics { heading() })
-                        Text(cevir(dil, "Temanı seç. Widget’ını ekle. Sözünü paylaş.", "Choose your theme. Add a widget. Share a quote."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)
-                    }
-                }
-                ProGorselOrnek(dil)
-                ProOzelligi(AzimIkon.Kesfet, cevir(dil, "Tüm konular ve sözler", "Every topic and quote"), cevir(dil, "Bildirim konularını yine sen seçersin.", "You still choose your notification topics."))
-                ProOzelligi(AzimIkon.Paylas, cevir(dil, "Görsel ve video paylaşımları", "Image and video sharing"), cevir(dil, "Arka planını seç, sözünü paylaş.", "Choose a background and share your quote."))
-                Surface(color = Renk.yuzey, shape = RoundedCornerShape(14.dp), border = BorderStroke(1.dp, Renk.kenarlik)) {
-                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                        Text(cevir(dil, "Bu bir test demosu", "This is a test demo"), fontFamily = ArayuzFont, fontSize = 21.sp, color = Renk.metin)
-                        Text(cevir(dil, "Bildirim konularını yine sen seçersin.", "You still choose your notification topics."), style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
-                        if (acik) Text(cevir(dil, "Demo kapanınca Pro araçları kilitlenir. Tek tek açtığın kategoriler sende kalır.", "Turning off the demo locks Pro tools. Categories you unlocked individually stay available."), style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
-                    }
-                }
+            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                Text(proOfferTitle(offer,dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 26.sp, lineHeight = 33.sp,
+                    modifier = Modifier.testTag("pro-context-title").semantics { heading() })
+                ProGorselOrnek(dil,offer,widgetPreview)
+                Text(cevir(dil,"Pro ile açılanlar","What Pro adds"), color = Renk.metin, fontWeight = FontWeight.SemiBold)
+                ProOzelligi(AzimIkon.Kesfet,cevir(dil,"Tüm konular ve sözler","Every topic and quote"),cevir(dil,"Bildirim konularını yine sen seçersin.","You still choose your notification topics."))
+                ProOzelligi(AzimIkon.Izgara,cevir(dil,"Tüm temalar ve widget’lar","All themes and widgets"),cevir(dil,"Seçtiğin görünümü telefonuna taşı.","Bring your chosen look to your phone."))
+                ProOzelligi(AzimIkon.Paylas,cevir(dil,"Tüm arka planlar ve video","Every background and video"),cevir(dil,"Sevdiğin sözü görsel veya video olarak paylaş.","Share a favorite quote as an image or video."))
+                HorizontalDivider(color = Renk.kenarlik)
+                Text(cevir(dil,"Ücretsiz sende kalanlar","What stays free"),color = Renk.metin,fontWeight = FontWeight.SemiBold)
+                Text(cevir(dil,"6 konu, 4 tema, bildirimler, kaydetme, geçmiş ve temel görsel paylaşımı.","6 topics, 4 themes, reminders, saved quotes, history and basic image sharing."),color = Renk.metinIkincil,style = MaterialTheme.typography.bodySmall)
             }
             HorizontalDivider(color = Renk.kenarlik)
-            Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                hata?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Assertive }) }
-                Text(cevir(dil, "Ödeme alınmaz. Abonelik başlatılmaz.", "No payment is taken. No subscription starts."), style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil, textAlign = TextAlign.Center)
-                Button(
-                    onClick = { degistir(!acik) }, enabled = !kaydediliyor,
-                    modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag(if (acik) "pro-demo-disable" else "pro-demo-enable"),
-                    shape = RoundedCornerShape(28.dp),
-                ) {
-                    if (kaydediliyor) CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp, color = MaterialTheme.colorScheme.onPrimary)
-                    else Text(if (acik) cevir(dil, "Pro demosunu kapat", "Turn off Pro demo") else cevir(dil, "Pro demosunu aç", "Enable Pro demo"), textAlign = TextAlign.Center)
+            Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 10.dp),verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                hata?.let { Text(it,color = MaterialTheme.colorScheme.error,modifier = Modifier.semantics { liveRegion = LiveRegionMode.Assertive }) }
+                Text(cevir(dil,"Ödeme alınmaz. Abonelik başlatılmaz.","No payment is taken. No subscription starts."),color = Renk.metinIkincil,style = MaterialTheme.typography.bodySmall)
+                Button(onClick = { degistir(!acik) }, enabled = !kaydediliyor,
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag(if(acik) "pro-demo-disable" else "pro-demo-enable"), shape = RoundedCornerShape(18.dp)) {
+                    if(kaydediliyor) CircularProgressIndicator(Modifier.size(20.dp),strokeWidth = 2.dp)
+                    else Text(if(acik) cevir(dil,"Pro demosunu kapat","Turn off Pro demo") else cevir(dil,"Demoyu aç ve devam et","Enable demo and continue"))
                 }
-                if (!acik) TextButton(onClick = kapat, enabled = !kaydediliyor) { Text(cevir(dil, "Ücretsiz devam et", "Continue free")) }
+                if(!acik) TextButton(onClick = close,enabled = !kaydediliyor,modifier = Modifier.align(Alignment.CenterHorizontally)) { Text(cevir(dil,"Ücretsiz devam et","Continue free")) }
             }
         }
     }
+}
+
+fun proOfferTitle(offer: ProOffer, dil: String): String = when(offer.source) {
+    ProSource.THEME -> AnaTemalar.find(offer.selection).label(dil)
+    ProSource.TOPIC -> Kategoriler.bul(offer.selection)?.ad(dil) ?: cevir(dil,"Tüm konular ve sözler","Every topic and quote")
+    ProSource.WIDGET -> cevir(dil,"Hazırladığın widget, telefonunda.","Your widget, on your home screen.")
+    ProSource.VIDEO -> cevir(dil,"Bu sözü videoya dönüştür.","Turn this quote into a video.")
+    ProSource.SHARE, ProSource.PHOTO -> cevir(dil,"Sözünü seçtiğin görünümle paylaş.","Share your quote with your chosen look.")
+    else -> cevir(dil,"Sevdiğin sözleri gününe taşı.","Bring the words you love into your day.")
 }
 
 @Composable
@@ -106,7 +99,7 @@ private fun ProOzelligi(ikon: ImageVector, baslik: String, aciklama: String) {
             Icon(ikon, null, Modifier.size(23.dp), tint = Renk.metin)
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(baslik, fontFamily = ArayuzFont, fontSize = 22.sp, lineHeight = 28.sp, color = Renk.metin)
+            Text(baslik, fontFamily = ArayuzFont, fontSize = 16.sp, lineHeight = 22.sp, color = Renk.metin)
             Text(aciklama, style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
         }
     }
@@ -114,15 +107,24 @@ private fun ProOzelligi(ikon: ImageVector, baslik: String, aciklama: String) {
 
 /** Concrete, read-only examples; no additional editor or purchase step. */
 @Composable
-fun ProGorselOrnek(dil: String) {
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(cevir(dil, "Tema ve widget örneği", "Theme and widget preview"), color = Renk.metin, style = MaterialTheme.typography.titleSmall)
-        Box(Modifier.fillMaxWidth().height(190.dp).clip(RoundedCornerShape(20.dp)).testTag("pro-visual-preview")) {
-            TemaZemini(com.yalnizfahrettin.azim.data.AnaTemalar.emperor, Modifier.matchParentSize(), thumbnail = true)
-            Text(cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward."),
-                Modifier.align(Alignment.Center).padding(24.dp), color = androidx.compose.ui.graphics.Color.White,
-                fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 29.sp, textAlign = TextAlign.Center)
+fun ProGorselOrnek(dil: String, offer: ProOffer = ProOffer(), widgetPreview: android.graphics.Bitmap? = null) {
+    val quote = Sozler.kimlikten(offer.quoteId) ?: if(offer.source == ProSource.TOPIC) Sozler.kategoriden(offer.selection).firstOrNull() else null
+    val sample = quote?.metin(dil) ?: cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward.")
+    val theme = if(offer.selection.isNotBlank() && offer.source != ProSource.TOPIC) AnaTemalar.find(offer.selection) else AnaTemalar.emperor
+    if(offer.source == ProSource.TOPIC) {
+        Surface(color = Renk.yuzey,shape = RoundedCornerShape(20.dp),modifier = Modifier.testTag("pro-visual-preview")) {
+            Column(Modifier.padding(20.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(sample,color = Renk.metin,fontFamily = LoraSerif,fontSize = 21.sp,lineHeight = 29.sp)
+                Text(quote?.sunumEtiketi(dil).orEmpty(),color = Renk.metinIkincil,fontSize = 11.sp)
+            }
         }
-        Text(cevir(dil, "Arka planını seç; widget her gün yeni bir söz göstersin.", "Choose a background; your widget shows a new quote each day."), color = Renk.metinIkincil, style = MaterialTheme.typography.bodySmall)
+    } else if(widgetPreview != null) {
+        Image(widgetPreview.asImageBitmap(),cevir(dil,"Önizleme","Preview"),Modifier.fillMaxWidth().heightIn(max = 250.dp).clip(RoundedCornerShape(20.dp)).testTag("pro-widget-preview"))
+    } else {
+        Box(Modifier.fillMaxWidth().heightIn(min = 210.dp).clip(RoundedCornerShape(20.dp)).testTag("pro-visual-preview")) {
+            TemaZemini(theme,Modifier.matchParentSize(),thumbnail = false)
+            Text(sample,Modifier.align(Alignment.Center).padding(24.dp), color = if(theme.dark) androidx.compose.ui.graphics.Color.White else androidx.compose.ui.graphics.Color(0xFF191919),
+                fontFamily = LoraSerif,fontSize = 22.sp,lineHeight = 30.sp,textAlign = TextAlign.Center)
+        }
     }
 }
