@@ -182,4 +182,4 @@ jobs:
         run: |
           cp apk/app-debug.apk Ascend-9.25.0.apk
           zip -r Ascend-9.25.0-test-evidence.zip evidence ui-evidence
-          gh release create v9.25.0-ui Ascend-9.25.0.apk Ascend-9.25.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.25.0 — Living Emperor and Begin Again" --notes "Persistent onboarding actions, content preference safety for widgets, saved-quote undo, consistent series continuation, artwork focal cropping and accessible previews. Seven-language font-scale checks, user journey and sharing regressions required before publication. Existing free themes and demo Pro preserved. Test APK."
+          gh release create v9.25.0-ui Ascend-9.25.0.apk Ascend-9.25.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.25.0 — Phase 1 and 2" --notes "Persistent onboarding actions, content preference safety for widgets, saved-quote undo, consistent series continuation, artwork focal cropping and accessible previews. Seven-language font-scale checks, user journey and sharing regressions required before publication. Existing free themes and demo Pro preserved. Test APK."

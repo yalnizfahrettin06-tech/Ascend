@@ -2,6 +2,9 @@ package com.yalnizfahrettin.azim
 
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.test.*
@@ -23,7 +26,9 @@ class AuditPhasesUiTest {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, scale)) {
                 key(locale, scale, page) { AzimTema {
-                    Onboarding(locale, initialDraft = PersonalProfile(step = page)) { _,_,_,_,_ -> }
+                    Box(Modifier.fillMaxWidth().height(560.dp)) {
+                        Onboarding(locale, initialDraft = PersonalProfile(step = page)) { _,_,_,_,_ -> }
+                    }
                 } }
             }
         }
@@ -31,7 +36,10 @@ class AuditPhasesUiTest {
             listOf(1f, 1.3f, 2f).forEach { size ->
                 repeat(5) { step ->
                     compose.runOnIdle { locale = lang; scale = size; page = step }
-                    compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertHasClickAction()
+                    val action = compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertHasClickAction().assertHeightIsAtLeast(56.dp)
+                    val root = compose.onNodeWithTag("onboarding-root").getUnclippedBoundsInRoot()
+                    val bounds = action.getUnclippedBoundsInRoot()
+                    org.junit.Assert.assertTrue("Action outside root: $lang / $size / $step", bounds.bottom <= root.bottom && bounds.top >= root.top)
                 }
             }
         }

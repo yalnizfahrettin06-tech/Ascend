@@ -6,7 +6,9 @@ import android.provider.MediaStore
 import androidx.lifecycle.Lifecycle
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.test.core.app.ActivityScenario
+import org.junit.After
 import androidx.test.platform.app.InstrumentationRegistry
 import com.yalnizfahrettin.azim.data.Depo
 import com.yalnizfahrettin.azim.data.Erisim
@@ -24,7 +26,9 @@ import org.junit.Rule
 import org.junit.Test
 
 class VisualAcceptanceTest {
-    @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+    @get:Rule val compose = createEmptyComposeRule()
+    private lateinit var scenario: ActivityScenario<MainActivity>
+    @After fun closeActivity() { if (::scenario.isInitialized) scenario.close() }
     private lateinit var demoDepo: Depo
     @Before fun startWithSavedPersonalPlan() {
         demoDepo = Depo(InstrumentationRegistry.getInstrumentation().targetContext)
@@ -38,7 +42,7 @@ class VisualAcceptanceTest {
                 demoDepo.favoriler.first().forEach { demoDepo.favoriDegistir(it) }
             }
         }
-        compose.activityRule.scenario.recreate()
+        scenario = ActivityScenario.launch(MainActivity::class.java)
         waitForHome()
     }
 
@@ -46,7 +50,7 @@ class VisualAcceptanceTest {
         compose.waitUntil(15000) { compose.onAllNodesWithTag("active-quote").fetchSemanticsNodes().isNotEmpty() }
         // Recreation can compose the page before Android returns input focus.
         // A coordinate click during that window is dropped by the platform.
-        compose.waitUntil(15000) { compose.runOnUiThread { compose.activity.hasWindowFocus() } }
+        compose.waitUntil(15000) { var focused = false; scenario.onActivity { focused = it.hasWindowFocus() }; focused }
         compose.waitForIdle()
     }
 

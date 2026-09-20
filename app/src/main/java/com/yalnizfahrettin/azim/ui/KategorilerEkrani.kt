@@ -21,6 +21,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,6 +61,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     var query by rememberSaveable { mutableStateOf("") }
     var detayKey by rememberSaveable { mutableStateOf<String?>(null) }
     val focus = LocalFocusManager.current
+    val scrollStates = rememberSaveableStateHolder()
     LaunchedEffect(acilacakGrup) { group = acilacakGrup }
     LaunchedEffect(selectedRequest) { if(selectedRequest != 0) { reminders = selectedRequest > 0; group = null; query = "" } }
     fun goBack() {
@@ -89,6 +91,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             }
         }
         val columns = if(LocalDensity.current.fontScale > 1.3f || LocalConfiguration.current.screenWidthDp < 340) 1 else 2
+        scrollStates.SaveableStateProvider(if(query.isNotBlank()) "search" else if(reminders) "reminders" else group ?: "collections") {
         LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)) {
             if (showGroups && series != null) item {
@@ -129,6 +132,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                     }
                 }
             }
+        }
         }
     }
 
