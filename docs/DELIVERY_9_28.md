@@ -22,6 +22,17 @@ Ana ekran, Keşfet yapısı, dört alt bölüm ve ücretsiz erişim hakları kor
 
 ## Doğrulama
 
-Son derleme, kısa ekran kanıtı, test sonucu ve APK eşlemesi yayın sonrasında bu bölüme eklenecek. Kaynak dil paketleri kontrolünden geçti. İlk geçişte onboarding testleri geçti; eski ücretsiz çıkış metnini arayan regresyon testi yeni sabit eylem kimliğine güncellendi. Ücretsiz çıkış davranışı testi korunmuştur.
+- Sürüm: 9.28.0 / kod 59.
+- APK kaynak commit: c7002e9ab3ce878ad3eba1731b5437f06fbe1b72.
+- GitHub Actions: https://github.com/yalnizfahrettin06-tech/Ascend/actions/runs/35521474404 — build, ui-tests, share-regression ve publish başarılı.
+- Android testleri: 35 ana UI + 26 paylaşım/regresyon + 1 görsel tanılama + 1 sistem duvar kâğıdı testi, toplam 63; sıfır hata.
+- Derleme işindeki birim testleri ve lint başarılı. Dil paketleri kontrolü başarılı.
+- Dar 320×640 alan ve iki kat yazı boyutunda Almanca onboarding ana eylemleri doğrulandı. Taslak favorilerin korunması, tamamlanırken tek kez yazılması ve ücretsiz/Pro çıkış davranışları test edildi.
+- Son APK ekranlarından ritim/lejyon görünümü açılıp kısa görsel kontrol yapıldı. Uzun fiziksel cihaz taraması yapılmadı.
+- APK: https://github.com/yalnizfahrettin06-tech/Ascend/releases/download/v9.28.0-ui/Ascend-9.28.0.apk
+- Boyut: 54.456.535 bayt. ZIP/CRC, manifest ve DEX kontrolü başarılı.
+- SHA256: B2E62C321539AB1E0ABC51DE6EF382AB341AB307AC3D43D03983E98D463F6C3B.
+- İlk test geçişindeki eski ücretsiz çıkış metni beklentisi sabit eylem kimliğine güncellendi; ücretsiz çıkış davranışı testi korunup son derlemede geçti.
 
 Gerçek cihaz testi ve ana dili konuşan editör değerlendirmesi yapılmadı. Yeni satın alma dönüşümü veya gelir iddiası yok.
+
