@@ -224,8 +224,12 @@ private fun previewTimes(profile: PersonalProfile) = BildirimZamanlari.hesapla(
 private fun PlanRhythm(profile: PersonalProfile, dil: String, count: (Int) -> Unit, hour: (Int) -> Unit) {
     PlanTitle(cevir(dil, "Günün ritmini seç.", "Choose your daily rhythm."),
         cevir(dil, "Kaç kez, hangi saatler arasında?", "How often, and between which hours?"))
-    Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(24.dp)).background(silverBrush()).padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(24.dp))) {
+        EditorialPhoto(R.drawable.warrior_legion,Modifier.matchParentSize())
+        Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color.Black.copy(alpha=.08f),Color.Black.copy(alpha=.9f)))))
+        Column(Modifier.fillMaxWidth().padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        if(LocalDensity.current.fontScale <= 1.35f) Spacer(Modifier.height(96.dp))
         Text(cevir(dil, "Günlük bildirim", "Daily reminders"), color = Renk.metinIkincil, fontSize = 13.sp)
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
             OutlinedIconButton(onClick = { count(profile.dailyCount - 1) }, enabled = profile.dailyCount > 1,
@@ -238,6 +242,7 @@ private fun PlanRhythm(profile: PersonalProfile, dil: String, count: (Int) -> Un
                 border = BorderStroke(1.dp, Renk.metinIkincil),
                 modifier = Modifier.size(48.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını artır", "More reminders") }) { Icon(AzimIkon.Arti, null) }
         }
+    }
     }
     if (LocalDensity.current.fontScale > 1.35f) {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
