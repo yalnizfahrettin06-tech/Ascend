@@ -182,6 +182,13 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         val existing = p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode)
         if (existing.none { it.id == id }) p[K.SERIES] = (existing + SeriesProgress(id)).map { it.encode() }.toSet()
     }
+    suspend fun beginAndCompleteSeriesDay(id: String, today: LocalDate = LocalDate.now()) = store.edit { p ->
+        val series = ShortSeries.all.firstOrNull { it.id == id } ?: return@edit
+        if (series.pro && p[K.PRO_DEMO] != true) return@edit
+        val existing = p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode)
+        val updated = (existing.firstOrNull { it.id == id } ?: SeriesProgress(id)).complete(today)
+        p[K.SERIES] = (existing.filterNot { it.id == id } + updated).map { it.encode() }.toSet()
+    }
     suspend fun completeSeriesDay(id: String) = store.edit { p ->
         if (ShortSeries.all.firstOrNull { it.id == id }?.pro == true && p[K.PRO_DEMO] != true) return@edit
         val existing = p[K.SERIES].orEmpty().mapNotNull(SeriesProgress::decode)

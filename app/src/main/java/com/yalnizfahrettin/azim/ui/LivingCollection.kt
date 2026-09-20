@@ -90,10 +90,22 @@ fun LivingScene(modifier: Modifier = Modifier, enabled: Boolean = true) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LivingCollection(dil: String, pro: Boolean, close: () -> Unit, apply: (String) -> Unit, suspendedMotion: Boolean = false, proOpen: () -> Unit) {
+fun LivingCollection(dil: String, pro: Boolean, close: () -> Unit, apply: (String) -> Unit, suspendedMotion: Boolean = false, offerDismissals: Int = 0, proOpen: () -> Unit) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var motion by rememberSaveable { mutableStateOf(true) }
     val ctx = LocalContext.current
+    var pending by rememberSaveable { mutableStateOf(false) }
+    var lastDismissal by rememberSaveable { mutableIntStateOf(offerDismissals) }
+    LaunchedEffect(offerDismissals) {
+        if(lastDismissal != offerDismissals) { pending = false; lastDismissal = offerDismissals }
+    }
+    fun useSelection() {
+        if(tab == 2) ctx.startActivity(Intent(ctx,WidgetAyarActivity::class.java).putExtra("collection_theme","emperor"))
+        else { apply(if(motion) AnaTemalar.living.id else AnaTemalar.emperor.id); close() }
+    }
+    LaunchedEffect(pro, pending) {
+        if(pro && pending) { pending = false; useSelection(); ProductSignals.record(ctx,ProductSignals.Event.ACTION_RESUMED,ProSource.COLLECTION) }
+    }
     val copy = { key: String -> CollectionCopy.text(key,dil) }
     ModalBottomSheet(onDismissRequest = close,containerColor = Renk.zemin,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),dragHandle = null) {
@@ -146,9 +158,7 @@ fun LivingCollection(dil: String, pro: Boolean, close: () -> Unit, apply: (Strin
             }
             Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp,vertical = 12.dp)) {
                 if(tab != 1) Button(onClick = {
-                    if(!pro) { proOpen() }
-                    else if(tab == 2) ctx.startActivity(Intent(ctx,WidgetAyarActivity::class.java).putExtra("collection_theme","emperor"))
-                    else { apply(if(motion) AnaTemalar.living.id else AnaTemalar.emperor.id); close() }
+                    if(!pro) { pending = true; proOpen() } else useSelection()
                 },modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("collection-use")) {
                     Text(if(!pro) copy("pro") else if(tab == 2) copy("widget") else if(motion) copy("apply") else copy("still"))
                 }

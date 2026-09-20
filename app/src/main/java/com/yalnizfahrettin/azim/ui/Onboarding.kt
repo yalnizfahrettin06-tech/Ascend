@@ -202,7 +202,7 @@ private fun PlanLanguage(dil: String, language: String, select: (String) -> Unit
             PlanChoice(name, language == code, "language-$code") { select(code) }
         }
     }
-    Text(cevir(dil, "Hesap gerekmez. Tercihlerin cihazında saklanır.", "No account needed. Your preferences stay on your device."),
+    Text(PhaseCopy.text("backup",dil),
         color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
 }
 

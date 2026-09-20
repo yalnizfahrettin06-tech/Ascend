@@ -54,7 +54,7 @@ jobs:
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.25.0-test-APK
+          name: Ascend-9.26.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -110,8 +110,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -d screenshots ]; then
-            zip -r Ascend-9.25.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
-            gh release view v9.25.0-ui >/dev/null 2>&1 && gh release upload v9.25.0-ui Ascend-9.25.0-visual-evidence.zip --clobber || true
+            zip -r Ascend-9.26.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
+            gh release view v9.26.0-ui >/dev/null 2>&1 && gh release upload v9.26.0-ui Ascend-9.26.0-visual-evidence.zip --clobber || true
           fi
 
   share-regression:
@@ -165,7 +165,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v8
         with:
-          name: Ascend-9.25.0-test-APK
+          name: Ascend-9.26.0-test-APK
           path: apk
       - uses: actions/download-artifact@v8
         with:
@@ -180,6 +180,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          cp apk/app-debug.apk Ascend-9.25.0.apk
-          zip -r Ascend-9.25.0-test-evidence.zip evidence ui-evidence
-          gh release create v9.25.0-ui Ascend-9.25.0.apk Ascend-9.25.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.25.0 — Phase 1 and 2" --notes "Persistent onboarding actions, content preference safety for widgets, saved-quote undo, consistent series continuation, artwork focal cropping and accessible previews. Seven-language font-scale checks, user journey and sharing regressions required before publication. Existing free themes and demo Pro preserved. Test APK."
+          cp apk/app-debug.apk Ascend-9.26.0.apk
+          zip -r Ascend-9.26.0-test-evidence.zip evidence ui-evidence
+          gh release create v9.26.0-ui Ascend-9.26.0.apk Ascend-9.26.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.26.0 — Phase 3 and 4" --notes "Persistent onboarding actions, content preference safety for widgets, saved-quote undo, consistent series continuation, artwork focal cropping and accessible previews. Seven-language font-scale checks, user journey and sharing regressions required before publication. Existing free themes and demo Pro preserved. Test APK."

@@ -54,8 +54,6 @@ class LivingExperienceTest {
         compose.onNodeWithTag("restart-action").performClick()
         compose.runOnIdle { assertEquals(1,offers); assertNull(state); pro = true }
         compose.onNodeWithTag("restart-action").performClick()
-        compose.runOnIdle { assertEquals(0,state!!.completed) }
-        compose.onNodeWithTag("restart-action").performClick()
         compose.runOnIdle { assertEquals(1,state!!.completed); state = state!!.copy(completed = 3,lastDay = LocalDate.now().minusDays(1)) }
         compose.onNodeWithTag("restart-story").assertTextEquals(RestartSeries.days("tr")[3].story)
         compose.runOnIdle { pro = false }

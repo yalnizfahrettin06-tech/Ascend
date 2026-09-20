@@ -72,6 +72,7 @@ fun AyarlarEkrani(
             AyarAnahtari(stringResource(R.string.haptik), haptik, haptikSec)
 
             AyarBolumu(stringResource(R.string.hakkinda))
+            HelpAndData(dil)
             Row(Modifier.fillMaxWidth().heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(stringResource(R.string.surum), Modifier.weight(1f), color = Renk.metin, style = MaterialTheme.typography.bodyMedium)
                 Text(BuildConfig.VERSION_NAME, color = Renk.metinIkincil, style = MaterialTheme.typography.bodyMedium)

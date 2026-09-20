@@ -49,7 +49,7 @@ fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit,
             Column(Modifier.padding(horizontal = 20.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 ProRozeti(metin = "ASCEND PRO")
                 Text(cevir(dil,"Kendine daha\nfazla alan aç.","Make more\nroom for yourself."), fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold, color = Renk.metin)
-                Text(cevir(dil,"3 günlük denemeyle keşfet.","Explore with a 3-day trial."), fontSize = 18.sp, color = Renk.metinIkincil)
+                Text(PhaseCopy.text("demo",dil), fontSize = 18.sp, color = Renk.metinIkincil)
                 ProGorselOrnek(dil,offer)
                 Surface(color = Renk.yuzey, shape = RoundedCornerShape(22.dp)) {
                     Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -59,13 +59,12 @@ fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit,
                         }
                     }
                 }
-                Text(cevir(dil,"Demo ekranı: ödeme alınmaz, abonelik başlamaz. Bu sürümde üç günlük süre işletilmez; Pro denemesi açılır.",
-                    "Demo screen: no payment or subscription. The three-day timer is not active in this build; demo Pro is enabled."), color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 18.sp)
+                Text(PhaseCopy.text("demoBody",dil), color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 18.sp)
             }
             Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 if(error) Text(cevir(dil,"Kaydedilemedi. Yeniden dene.","Could not save. Try again."),color = MaterialTheme.colorScheme.error)
                 Button(onClick = start,enabled = !busy,modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("trial-start"),shape = RoundedCornerShape(16.dp)) {
-                    Text(cevir(dil,if(busy) "Hazırlanıyor…" else "3 günlük denemeyi başlat",if(busy) "Preparing…" else "Start 3-day trial"))
+                    Text(if(busy) cevir(dil,"Hazırlanıyor…","Preparing…") else PhaseCopy.text("enable",dil))
                 }
                 TextButton(onClick = free,enabled = !busy,modifier = Modifier.testTag("trial-free")) { Text(cevir(dil,"Ücretsiz devam et","Continue free")) }
             }

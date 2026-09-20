@@ -22,7 +22,7 @@ cp -R app/build/outputs/androidTest-results screenshots/visual-diagnostics/resul
 cp -R app/build/reports/androidTests screenshots/visual-diagnostics/reports 2>/dev/null
 adb logcat -d > screenshots/visual-diagnostics/logcat.txt
 adb pull /sdcard/Download/ascend-screenshots screenshots
-bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.OnboardingTest,com.yalnizfahrettin.azim.AuditPhasesUiTest,com.yalnizfahrettin.azim.ArtworkRenderingTest --no-daemon --max-workers=2
+bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.OnboardingTest,com.yalnizfahrettin.azim.AuditPhasesUiTest,com.yalnizfahrettin.azim.ArtworkRenderingTest,com.yalnizfahrettin.azim.Phase34UiTest,com.yalnizfahrettin.azim.Phase34StorageTest --no-daemon --max-workers=2
 onboarding_status=$?
 adb logcat -d > screenshots/final-logcat.txt
 kill "$logcat_pid" 2>/dev/null

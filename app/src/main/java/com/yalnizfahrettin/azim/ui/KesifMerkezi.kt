@@ -90,7 +90,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
             }
         }
     }
-    if(living) LivingCollection(dil,pro,close = { living = false },apply = select, suspendedMotion = collectionOffering, proOpen = {
+    if(living) LivingCollection(dil,pro,close = { living = false },apply = select, suspendedMotion = collectionOffering, offerDismissals = offerDismissals, proOpen = {
         collectionOffering = true
         if(offerOpen != null) offerOpen(ProOffer(ProSource.COLLECTION,AnaTemalar.living.id)) else proOpen()
     })

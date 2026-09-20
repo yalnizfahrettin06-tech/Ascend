@@ -81,12 +81,11 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
 
 @Composable
 fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorites: Set<String>, back: () -> Unit,
-    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true, pro: Boolean = false, proOpen: () -> Unit = {}) {
+    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true, pro: Boolean = false, proOpen: () -> Unit = {}, firstComplete: suspend () -> Unit = { start("restart"); complete("restart") }) {
     var chosen by rememberSaveable { mutableStateOf(ShortSeries.active(progress)?.id) }
     val context = LocalContext.current
     var readingDay by rememberSaveable(chosen) { mutableStateOf<Int?>(null) }
-    var today by remember { mutableStateOf(LocalDate.now()) }
-    LaunchedEffect(Unit) { while(true) { today = LocalDate.now(); delay(60_000) } }
+    val today = rememberCurrentDay()
     var busy by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -94,7 +93,7 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
     val goBack = { if(chosen != null) chosen = null else back() }
     if(!embedded || chosen != null) BackHandler(onBack = goBack)
     if(series?.id == "restart") {
-        RestartSeriesScreen(dil,pro,progress["restart"],favorites,goBack,{ start("restart") },{ complete("restart") },save,share,proOpen)
+        RestartSeriesScreen(dil,pro,progress["restart"],favorites,goBack,{ start("restart") },{ complete("restart") },save,share,proOpen,firstComplete)
         return
     }
     Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded || !insets) Modifier else Modifier.statusBarsPadding()).testTag("short-series")) {
@@ -126,7 +125,7 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
                 if(state == null) {
                     Text(series.summary(dil),color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
                     Text(cevir(dil,"Her gün bir söz ve istersen üzerinde düşüneceğin kısa bir soru. Yanıt yazman gerekmez; ek bildirim gönderilmez.","A quote each day and a short optional reflection. No answers to write and no extra notifications."),color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
-                    Button(onClick = { scope.launch { busy = true; error = false; try { start(series.id); ProductSignals.record(context,ProductSignals.Event.SERIES_STARTED) } catch(_: java.io.IOException) { error = true } finally { busy = false } } },enabled = !busy,modifier = Modifier.fillMaxWidth().testTag("series-start")) { Text(cevir(dil,"Seriye başla","Start series")) }
+                    Button(onClick = { scope.launch { busy = true; error = false; try { start(series.id); ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_STARTED,series.id,1) } catch(_: java.io.IOException) { error = true } finally { busy = false } } },enabled = !busy,modifier = Modifier.fillMaxWidth().testTag("series-start")) { Text(cevir(dil,"Seriye başla","Start series")) }
                 } else {
                     val available = if(state.canComplete(today)) state.completed.coerceAtMost(6) else (state.completed - 1).coerceAtLeast(0)
                     val index = (readingDay ?: available).coerceIn(0,available)
@@ -145,7 +144,7 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
                     }
                     if(state.completed == 7) Text(cevir(dil,"Seriyi tamamladın. Sözlere istediğin zaman dönebilirsin.","You completed the series. Revisit the quotes anytime."),color = Renk.metinIkincil)
                     else if(!state.canComplete(today)) Text(cevir(dil,"Bugünlük bu kadar. Sonraki söz yarın açılacak.","That is enough for today. The next quote opens tomorrow."),color = Renk.metinIkincil)
-                    else if(index == state.completed) Button(onClick = { scope.launch { busy = true; error = false; try { complete(series.id); ProductSignals.record(context,ProductSignals.Event.SERIES_DAY_COMPLETED); readingDay = null } catch(_: java.io.IOException) { error = true } finally { busy = false } } },enabled = !busy,modifier = Modifier.fillMaxWidth().testTag("series-complete-day")) { Text(cevir(dil,"Bugünü tamamla","Complete today")) }
+                    else if(index == state.completed) Button(onClick = { scope.launch { busy = true; error = false; try { complete(series.id); ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_DAY_COMPLETED,series.id,state.completed + 1); readingDay = null } catch(_: java.io.IOException) { error = true } finally { busy = false } } },enabled = !busy,modifier = Modifier.fillMaxWidth().testTag("series-complete-day")) { Text(cevir(dil,"Bugünü tamamla","Complete today")) }
                 }
             }
             if(error) Text(cevir(dil,"Kaydedilemedi. Yeniden dene.","Could not save. Please retry."),color = MaterialTheme.colorScheme.error)
