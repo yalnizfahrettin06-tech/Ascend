@@ -77,7 +77,7 @@ fun WallpaperPreview(theme: AnaTema, dil: String, pro: Boolean, close: () -> Uni
                 IconButton(onClick = close,enabled = !busy,modifier = Modifier.testTag("wallpaper-close")) { Icon(AzimIkon.Kapat,cevir(dil,"Kapat","Close"),tint = Renk.metin) }
             }
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Box(Modifier.fillMaxWidth(.78f).align(Alignment.CenterHorizontally).aspectRatio(aspect).clip(RoundedCornerShape(22.dp))) {
+                Box(Modifier.fillMaxWidth(.56f).align(Alignment.CenterHorizontally).aspectRatio(aspect).clip(RoundedCornerShape(22.dp))) {
                     TemaZemini(theme,Modifier.matchParentSize(),thumbnail = true,previewSize = 2048,dil = dil)
                 }
                 Text(copy("target"),color = Renk.metin,fontSize = 15.sp,fontWeight = FontWeight.Medium)

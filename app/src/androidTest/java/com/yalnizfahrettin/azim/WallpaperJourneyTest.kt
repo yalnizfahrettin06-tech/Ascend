@@ -20,6 +20,7 @@ class WallpaperJourneyTest {
         compose.onNodeWithTag("wallpaper-emperor").performScrollTo().performClick()
         compose.onNodeWithTag("wallpaper-preview").assertExists()
         compose.onNodeWithTag("wallpaper-apply").assertIsDisplayed()
+        compose.onNodeWithTag("wallpaper-target-3").assertIsDisplayed()
         ekranKaydet("927-wallpaper-preview")
     }
     @Test fun paidArtworkRequiresProAndNeverAppliesMerelyByEnablingDemo() {
