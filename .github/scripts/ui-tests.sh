@@ -12,6 +12,9 @@ adb shell wm density 280
   sleep 3
 done) &
 evidence_pid=$!
+# Compile before dismissing the emulator launcher; cold boot launcher ANRs can steal focus.
+bash gradlew :app:assembleDebug :app:assembleDebugAndroidTest --no-daemon --max-workers=2 || exit $?
+adb shell am force-stop com.google.android.apps.nexuslauncher
 bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.VisualAcceptanceTest --no-daemon --max-workers=2
 visual_status=$?
 mkdir -p screenshots/visual-diagnostics
