@@ -171,7 +171,7 @@ fun Onboarding(
                                     0 -> cevir(dil, "Devam", "Continue")
                                     1 -> cevir(dil, "Ritmimi ayarla", "Set my rhythm")
                                     3 -> if (bildirimIzni) cevir(dil, "Temamı seç", "Choose my theme") else cevir(dil, "Bildirimleri aç", "Enable notifications")
-                                    4 -> if (!pro && AnaTemalar.find(profile.answer("theme").firstOrNull()).pro) SetupCopy.text("openLook",dil) else cevir(dil,"Ascend’e başla","Start Ascend")
+                                    4 -> if (!pro && AnaTemalar.find(profile.answer("theme").firstOrNull()).pro) SetupCopy.text("openLook",dil) else SetupCopy.text("start",dil)
                                     else -> cevir(dil, "Devam", "Continue")
                                 }, textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Medium)
                             }

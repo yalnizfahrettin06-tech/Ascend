@@ -4,6 +4,7 @@ package com.yalnizfahrettin.azim.data
 object SetupCopy {
     private val languages = listOf("tr","en","pt","de","fr","it","ru")
     private val entries = mapOf(
+        "start" to listOf("Ascend’e başla", "Start Ascend", "Começar no Ascend", "Ascend starten", "Commencer avec Ascend", "Inizia con Ascend", "Начать с Ascend"),
         "hello" to listOf("Kendi disiplinine dön.", "Return to your discipline.", "Retoma a tua disciplina.", "Finde zu deiner Disziplin zurück.", "Retrouve ta discipline.", "Ritrova la tua disciplina.", "Вернись к своей дисциплине."),
         "helloBody" to listOf("Gününe eşlik eden sözler. Önce dilini seç.", "Words for your day. First, choose your language.", "Palavras para o teu dia. Primeiro, escolhe o idioma.", "Worte für deinen Tag. Wähle zuerst deine Sprache.", "Des mots pour ta journée. Choisis ta langue.", "Parole per la tua giornata. Scegli la lingua.", "Слова для твоего дня. Сначала выбери язык."),
         "account" to listOf("Hesap gerekmez.", "No account needed.", "Não é preciso criar conta.", "Kein Konto nötig.", "Aucun compte nécessaire.", "Non serve un account.", "Аккаунт не нужен."),
