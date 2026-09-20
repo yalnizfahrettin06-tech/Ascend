@@ -214,7 +214,8 @@ object KartCizici {
                     val boy = foto.height * olcek
                     val matris = Matrix().apply {
                         setScale(olcek, olcek)
-                        postTranslate((g - en) / 2f, (y - boy) / 2f)
+                        val focus = com.yalnizfahrettin.azim.data.ArtworkFocus.forResource((z as? KartZemin.Sahne)?.kaynak)
+                        postTranslate(focus.left(g.toFloat(), en), focus.top(y.toFloat(), boy))
                     }
                     tuval.drawBitmap(foto, matris, Paint(Paint.FILTER_BITMAP_FLAG))
                     if (zeminBitmap == null) foto.recycle()

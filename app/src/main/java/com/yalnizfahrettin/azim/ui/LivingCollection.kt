@@ -111,11 +111,17 @@ fun LivingCollection(dil: String, pro: Boolean, close: () -> Unit, apply: (Strin
                     }
                 }
                 if(tab == 2) {
-                    // Same artwork, a dedicated wide crop and centered widget text.
-                    Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(22.dp))) {
-                        TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize(),thumbnail = true,previewSize = 1024)
-                        Box(Modifier.matchParentSize().background(Color.Black.copy(alpha = .32f)))
-                        Text(cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward."),Modifier.align(Alignment.Center).padding(24.dp),color = Color.White,fontSize = 19.sp,lineHeight = 26.sp,textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                    val sample = cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward.")
+                    val fontScale = androidx.compose.ui.platform.LocalDensity.current.fontScale
+                    val bitmap by produceState<android.graphics.Bitmap?>(null, sample, fontScale) {
+                        value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
+                            com.yalnizfahrettin.azim.widget.WidgetTasarimi.render(ctx,
+                                com.yalnizfahrettin.azim.widget.WidgetSecimi("emperor"), sample, "Ascend", 1080, 540)
+                        }
+                    }
+                    Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(22.dp)),contentAlignment = Alignment.Center) {
+                        bitmap?.let { Image(it.asImageBitmap(),sample,Modifier.fillMaxSize()) }
+                        if(bitmap == null) CircularProgressIndicator(Modifier.size(24.dp),color = Renk.metin)
                     }
                 } else {
                     Box(Modifier.fillMaxWidth().aspectRatio(if(tab == 0) .84f else .66f).clip(RoundedCornerShape(24.dp))) {

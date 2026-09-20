@@ -331,6 +331,12 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         p[K.SECILI] = Erisim.guvenliSecim(p[K.SECILI] ?: emptySet(), etkinErisim(p))
     }
 
+    suspend fun restoreFavorite(id: String, index: Int) = store.edit { p ->
+        val items = (p[K.FAVORI] ?: emptySet()).filterNot { it == id }.toMutableList()
+        items.add(index.coerceIn(0, items.size), id)
+        p[K.FAVORI] = items.toSet()
+    }
+
     suspend fun favoriDegistir(kimlik: String) = store.edit { p ->
         val f = (p[K.FAVORI] ?: emptySet()).toMutableSet()
         if (!f.add(kimlik)) f.remove(kimlik)

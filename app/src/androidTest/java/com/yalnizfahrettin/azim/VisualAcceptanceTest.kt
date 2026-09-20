@@ -66,7 +66,7 @@ class VisualAcceptanceTest {
         ekranKaydet("v97-search")
         compose.onNodeWithTag("nav-gorunum").performClick()
         compose.onNodeWithTag("theme-black").performScrollTo().performClick()
-        compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
+        compose.onNodeWithTag("theme-apply").assertIsDisplayed().performClick()
         compose.waitForIdle()
         ekranKaydet("v97-customize-dark")
         compose.onNodeWithText("Bugün").performClick()
@@ -80,7 +80,7 @@ class VisualAcceptanceTest {
         ekranKaydet("v97-home-roma")
         runBlocking { demoDepo.proDemoAyarla(false) }
         compose.waitForIdle()
-        assertEquals("white", runBlocking { demoDepo.arkaPlan.first() })
+        assertEquals("roma", runBlocking { demoDepo.arkaPlan.first() })
 
     }
 }

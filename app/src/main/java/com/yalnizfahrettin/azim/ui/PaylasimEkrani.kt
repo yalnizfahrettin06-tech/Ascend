@@ -121,7 +121,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
         onizleme = null
         hata = null
         try {
-            val bmp = withContext(Dispatchers.Default) { KartCizici.ciz(ctx, soz.metin(dil), soz.sunumEtiketi(dil), gorunenAyar, 480, (480 / gorunenAyar.format.oran).toInt()) }
+            val bmp = withContext(Dispatchers.Default) { KartCizici.ciz(ctx, soz.metin(dil), soz.sunumEtiketi(dil), gorunenAyar, 1080, (1080 / gorunenAyar.format.oran).toInt()) }
             onizleme = bmp
             hata = null
         } catch (e: CancellationException) { throw e }

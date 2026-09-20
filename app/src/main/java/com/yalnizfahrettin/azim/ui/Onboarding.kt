@@ -54,7 +54,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/** Five distinct experiences. Content and its action are measured as one scrollable group. */
+/** Five scrollable experiences with one persistent, inset-safe primary action. */
 @Composable
 fun Onboarding(
     dil: String, kaydediliyor: Boolean = false, hata: String? = null,
@@ -127,13 +127,12 @@ fun Onboarding(
                 (slideInHorizontally(tween(360)) { if (targetState > initialState) it / 6 else -it / 6 } + fadeIn(tween(280))) togetherWith
                     (slideOutHorizontally(tween(240)) { if (targetState > initialState) -it / 8 else it / 8 } + fadeOut(tween(180)))
             }, modifier = Modifier.fillMaxSize().clipToBounds(), label = "onboarding-step") { shownStep ->
-                // Center the complete composition, never a detached footer. Short screens scroll;
-                // tall screens enlarge the visual stage without stretching copy-to-action spacing.
+                // Only content scrolls; the primary action remains reachable at every text size.
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).testTag("onboarding-scroll"),
                     horizontalAlignment = Alignment.CenterHorizontally) {
                     Column(Modifier.widthIn(max = 480.dp).fillMaxWidth().heightIn(min = viewport)
                         .padding(horizontal = 24.dp, vertical = 24.dp),
-                        verticalArrangement = if(shownStep == 4) Arrangement.Top else Arrangement.Center) {
+                        verticalArrangement = Arrangement.Top) {
                         Column(Modifier.fillMaxWidth().testTag("onboarding-body"), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                             when (shownStep) {
                                 0 -> PlanLanguage(dil, profile.answer("language").firstOrNull() ?: dil) { update(profile.choose("language", it)); languageChanged(it) }
@@ -148,8 +147,12 @@ fun Onboarding(
                                 }
                             }
                         }
-                        Spacer(Modifier.height(24.dp))
-                        Column(Modifier.fillMaxWidth().testTag("onboarding-footer")) {
+
+                    }
+                }
+            }
+        }
+                        Column(Modifier.fillMaxWidth().background(Renk.zemin).padding(horizontal = 24.dp, vertical = 12.dp).testTag("onboarding-footer"), horizontalAlignment = Alignment.CenterHorizontally) {
                             hata?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall,
                                 modifier = Modifier.padding(bottom = 8.dp).semantics { liveRegion = LiveRegionMode.Polite }) }
                             Button(onClick = {
@@ -157,7 +160,7 @@ fun Onboarding(
                                 else if (step < 4) move(step + 1)
                                 else if (bildirimIzni) { if(pro) finish(true) else trial = true } else move(3)
                             }, enabled = !kaydediliyor, shape = RoundedCornerShape(16.dp),
-                                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("onboarding-next")) {
+                                modifier = Modifier.widthIn(max = 480.dp).fillMaxWidth().heightIn(min = 56.dp).testTag("onboarding-next")) {
                                 Text(if (kaydediliyor) cevir(dil, "Kaydediliyor…", "Saving…") else when (step) {
                                     0 -> cevir(dil, "Devam", "Continue")
                                     1 -> cevir(dil, "Ritmimi ayarla", "Set my rhythm")
@@ -167,10 +170,6 @@ fun Onboarding(
                                 }, textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Medium)
                             }
                         }
-                    }
-                }
-            }
-        }
     }
     if (hourDialog != 0) PlanHourDialog(profile, hourDialog == 1, dil, { hourDialog = 0 }) { hour ->
         update(if (hourDialog == 1) profile.copy(startHour = hour) else profile.copy(endHour = hour)); hourDialog = 0
@@ -221,9 +220,13 @@ private fun PlanRhythm(profile: PersonalProfile, dil: String, count: (Int) -> Un
         Text(cevir(dil, "Günlük bildirim", "Daily reminders"), color = Renk.metinIkincil, fontSize = 13.sp)
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
             OutlinedIconButton(onClick = { count(profile.dailyCount - 1) }, enabled = profile.dailyCount > 1,
+                colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Renk.metin, disabledContentColor = Renk.metinIkincil),
+                border = BorderStroke(1.dp, Renk.metinIkincil),
                 modifier = Modifier.size(48.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını azalt", "Fewer reminders") }) { Icon(AzimIkon.Eksi, null) }
             AnimatedContent(profile.dailyCount, label = "rhythm-number") { Text("$it", fontSize = 48.sp, color = Renk.metin, fontWeight = FontWeight.Medium, modifier = Modifier.testTag("reminder-count")) }
             OutlinedIconButton(onClick = { count(profile.dailyCount + 1) }, enabled = profile.dailyCount < 7,
+                colors = IconButtonDefaults.outlinedIconButtonColors(contentColor = Renk.metin, disabledContentColor = Renk.metinIkincil),
+                border = BorderStroke(1.dp, Renk.metinIkincil),
                 modifier = Modifier.size(48.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını artır", "More reminders") }) { Icon(AzimIkon.Arti, null) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

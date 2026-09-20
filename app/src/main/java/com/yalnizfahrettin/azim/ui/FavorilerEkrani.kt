@@ -2,6 +2,10 @@ package com.yalnizfahrettin.azim.ui
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withTimeoutOrNull
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
@@ -21,13 +25,19 @@ import com.yalnizfahrettin.azim.data.*
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, oku: (Soz) -> Unit,
-    kesfet: () -> Unit, paylas: (Soz) -> Unit = {}, onBack: (() -> Unit)? = null, embedded: Boolean = false,
+    kesfet: () -> Unit, paylas: (Soz) -> Unit = {}, onBack: (() -> Unit)? = null, embedded: Boolean = false, restore: (String, Int) -> Unit = { id, _ -> cikar(id) },
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     val results = remember(favoriler, query, dil) { LibraryQuery.saved(favoriler, query, dil) }
+    val currentFavorites by rememberUpdatedState(favoriler)
+    val snackbar = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+    Box(Modifier.fillMaxSize()) {
     LazyColumn(
         Modifier.fillMaxSize().background(Renk.zemin).then(if (embedded) Modifier else Modifier.statusBarsPadding()).testTag("saved-list"),
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 20.dp),
+        state = listState,
+        contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 20.dp, bottom = 88.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         if (!embedded) item {
@@ -88,12 +98,28 @@ fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, 
                             Icon(AzimIkon.Paylas,null,Modifier.size(19.dp)); Spacer(Modifier.width(8.dp)); Text(cevir(dil,"Paylaş","Share"))
                         }
                         Spacer(Modifier.weight(1f))
-                        IconButton(onClick = { cikar(soz.kimlik) },modifier = Modifier.size(48.dp)) {
+                        IconButton(onClick = {
+                            val index = favoriler.indexOfFirst { it.kimlik == soz.kimlik }
+                            val position = listState.firstVisibleItemIndex
+                            val offset = listState.firstVisibleItemScrollOffset
+                            cikar(soz.kimlik)
+                            scope.launch {
+                                snackbar.currentSnackbarData?.dismiss()
+                                if(snackbar.showSnackbar(cevir(dil,"Kaydedilenlerden çıkarıldı","Removed from saved"),
+                                    cevir(dil,"Geri al","Undo"), withDismissAction = true, duration = SnackbarDuration.Long) == SnackbarResult.ActionPerformed) {
+                                    restore(soz.kimlik, index)
+                                    withTimeoutOrNull(3000) { snapshotFlow { currentFavorites }.first { quotes -> quotes.any { it.kimlik == soz.kimlik } } }
+                                    listState.scrollToItem(position, offset)
+                                }
+                            }
+                        },modifier = Modifier.size(48.dp).testTag("saved-remove-${soz.kimlik}")) {
                             Icon(AzimIkon.KalpDolu,cevir(dil,"Kaydedilenlerden çıkar","Remove from saved"),Modifier.size(22.dp),tint = Renk.metin)
                         }
                     }
                 }
             }
         }
+    }
+    SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter).padding(12.dp).testTag("saved-undo"))
     }
 }

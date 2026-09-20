@@ -12,8 +12,8 @@ android {
         applicationId = "com.yalnizfahrettin.azim"
         minSdk = 26
         targetSdk = 35
-        versionCode = 55
-        versionName = "9.24.0"
+        versionCode = 56
+        versionName = "9.25.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations += listOf("tr", "en", "pt", "de", "fr", "it", "ru")
     }

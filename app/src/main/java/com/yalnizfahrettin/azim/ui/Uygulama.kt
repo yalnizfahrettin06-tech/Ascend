@@ -317,7 +317,7 @@ fun Uygulama(
                     )
 
                     Sekme.GORUNUM -> GorunumEkrani(dil, arkaPlan, proDemo == true, { proGoster = true },
-                        { id -> kapsam.launch { depo.arkaPlanAyarla(id) } }, offerOpen = ::openOffer, offerDismissals = offerDismissals)
+                        { id -> kapsam.launch { depo.arkaPlanAyarla(id) } }, offerOpen = ::openOffer, offerDismissals = offerDismissals, quote = akis.getOrNull(indeks))
                     Sekme.KATEGORI -> KesifMerkezi(dil,showHeading = !discoverySeries) {
                         if (discoverySeries) KisaSerilerEkrani(dil, seriesProgress, favoriler, { discoverySeries = false },
                             { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
@@ -339,6 +339,7 @@ fun Uygulama(
                         favoriler = favoriler.mapNotNull { Sozler.kimlikten(it) },
                         dil = dil,
                         cikar = { kapsam.launch { depo.favoriDegistir(it) } },
+                        restore = { id, index -> kapsam.launch { depo.restoreFavorite(id, index) } },
                         oku = { soz -> readerId = soz.kimlik },
                         kesfet = { sekme = Sekme.ANA },
                         paylas = { paylasilanKimlik = it.kimlik },
@@ -346,9 +347,10 @@ fun Uygulama(
 
                     Sekme.ISTATISTIK -> SeninBolumleri(dil, personalPage, { personalPage = it }, { ayarlardaMi = true }) { when(personalPage) {
                         "history" -> BildirimGecmisiEkrani(dil, gunlukGelenler, favoriler, { personalPage = "" },
-                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, embedded = true)
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, embedded = true, reminders = { notificationTopicsOpen = true })
                         else -> FavorilerEkrani(favoriler.mapNotNull(Sozler::kimlikten), dil,
                             cikar = { kapsam.launch { depo.favoriDegistir(it) } },
+                        restore = { id, index -> kapsam.launch { depo.restoreFavorite(id, index) } },
                             oku = { readerId = it.kimlik }, kesfet = { sekme = Sekme.ANA },
                             paylas = { paylasilanKimlik = it.kimlik }, embedded = true)
 

@@ -2333,5 +2333,8 @@ internal object LocaleIt {
         "What ending time could you set for today’s period of focus?" to "Quale orario di fine potresti fissare per il periodo di concentrazione di oggi?",
         "What would a short break look like when your attention gets tired?" to "Come sarebbe una breve pausa quando la tua attenzione si stanca?",
         "What could you ask of people around you to protect your work time next week?" to "Che cosa potresti chiedere a chi ti circonda per proteggere il tempo di lavoro la prossima settimana?",
+        "Removed from saved" to "Rimosso dai salvati",
+        "Search results" to "Risultati di ricerca",
+        "Try again" to "Riprova",
     )
 }

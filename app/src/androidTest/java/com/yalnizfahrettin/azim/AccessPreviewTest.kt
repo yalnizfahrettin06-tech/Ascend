@@ -39,7 +39,7 @@ class AccessPreviewTest {
         listOf("roma", "rider").forEach { id ->
             compose.onNodeWithTag("appearance-gallery").performScrollToNode(hasTestTag("theme-$id"))
             compose.onNodeWithTag("theme-$id").performClick()
-            compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
+            compose.onNodeWithTag("theme-apply").assertIsDisplayed().performClick()
             compose.runOnIdle { assertEquals(id,selected); assertFalse(proOpened) }
         }
     }

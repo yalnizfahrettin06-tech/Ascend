@@ -46,7 +46,7 @@ internal fun QuoteActions(quote: Soz, dil: String, favorites: Set<String>, save:
 }
 
 @Composable
-fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favorites: Set<String>, back: () -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false) {
+fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favorites: Set<String>, back: () -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, reminders: (() -> Unit)? = null) {
     if(!embedded) BackHandler(onBack = back)
     val cutoff = LocalDate.now().minusDays(29)
     val groups = history.toSortedMap(reverseOrder()).mapNotNull { (date, ids) ->
@@ -61,6 +61,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
             if(groups.isEmpty()) item {
                 EditorialPhoto(EditorialArt.group("zihin"),Modifier.fillMaxWidth().height(144.dp).clip(RoundedCornerShape(20.dp)))
                 Text(cevir(dil,"Henüz bir bildirim yok. İlk sözün geldiğinde burada bulabilirsin.","No notifications yet. Your first quote will appear here after it is sent."),Modifier.padding(vertical = 32.dp),color = Renk.metinIkincil)
+                reminders?.let { TextButton(onClick = it) { Text(cevir(dil,"Bildirimlerim","My reminders")) } }
             }
             groups.forEach { (day, quotes) ->
                 item(key = day.toString()) { Text(day.format(DateTimeFormatter.ofPattern("d MMMM yyyy",Locale.forLanguageTag(dil))),Modifier.padding(top = 14.dp),color = Renk.metinIkincil,fontSize = 12.sp) }
@@ -81,7 +82,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
 @Composable
 fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorites: Set<String>, back: () -> Unit,
     start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true, pro: Boolean = false, proOpen: () -> Unit = {}) {
-    var chosen by rememberSaveable { mutableStateOf(progress.values.filter { it.completed < 7 }.maxByOrNull { it.lastDay ?: LocalDate.MIN }?.id) }
+    var chosen by rememberSaveable { mutableStateOf(ShortSeries.active(progress)?.id) }
     val context = LocalContext.current
     var readingDay by rememberSaveable(chosen) { mutableStateOf<Int?>(null) }
     var today by remember { mutableStateOf(LocalDate.now()) }

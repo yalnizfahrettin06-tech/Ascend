@@ -100,14 +100,16 @@ class WidgetAyarActivity : ComponentActivity() {
                             },modifier = Modifier.weight(1f).testTag(if(option) "widget-square" else "widget-wide"))
                         }
                     }
+                    val gridColumns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f || androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp < 360) 2 else 3
                     LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                         item {
                             Box(Modifier.fillMaxWidth().aspectRatio(if(square) 1f else 2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
                                 bitmap?.let { Image(it.asImageBitmap(), quote, Modifier.fillMaxSize()) }
+                                if(bitmap == null) CircularProgressIndicator(Modifier.align(Alignment.Center).size(24.dp),color = Renk.metin)
                             }
                         }
                         item { Text(cevir(dil,"Her gün yeni bir söz · Boyutu ana ekranında da ayarlayabilirsin.", "A new quote each day · Resize on your home screen too."), color = Renk.metinIkincil, fontSize = 12.sp) }
-                        items(AnaTemalar.all.chunked(3), key = { it.first().id }) { row -> ArkaPlanGrid(dil, row, theme) { theme = it.id } }
+                        items(AnaTemalar.all.chunked(gridColumns), key = { it.first().id }) { row -> ArkaPlanGrid(dil, row, theme) { theme = it.id } }
                     }
                     Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         message?.let { Text(it, color = Renk.metinIkincil, fontSize = 12.sp) }

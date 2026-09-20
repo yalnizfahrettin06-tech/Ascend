@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.Alignment
 import androidx.activity.compose.BackHandler
 import androidx.compose.ui.graphics.asImageBitmap
@@ -35,7 +36,7 @@ fun KesifMerkezi(dil: String, showHeading: Boolean = true, topics: @Composable (
 }
 
 @Composable
-fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0) {
+fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0, quote: Soz? = null) {
     var living by rememberSaveable { mutableStateOf(false) }
     var collectionOffering by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(pro,offerDismissals) { collectionOffering = false }
@@ -50,7 +51,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
         Text(cevir(dil,"Görünüm","Appearance"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
         Row(Modifier.padding(horizontal = 24.dp).fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             listOf(false, true).forEach { widget ->
-                Surface(onClick = { widgetTab = widget }, color = if(widgetTab == widget) Renk.metin else Renk.yuzey, shape = RoundedCornerShape(12.dp), modifier = Modifier.weight(1f).fillMaxHeight().testTag(if(widget) "appearance-widget" else "appearance-theme")) {
+                Surface(onClick = { widgetTab = widget }, color = if(widgetTab == widget) Renk.metin else Renk.yuzey, shape = RoundedCornerShape(12.dp), modifier = Modifier.weight(1f).fillMaxHeight().testTag(if(widget) "appearance-widget" else "appearance-theme").semantics { role = Role.Tab; this.selected = widgetTab == widget }) {
                     Box(Modifier.fillMaxSize(),contentAlignment = Alignment.Center) {
                         Text(if(widget) "Widget" else cevir(dil,"Uygulama teması","App theme"), Modifier.padding(vertical = 13.dp, horizontal = 6.dp), color = if(widgetTab == widget) Renk.zemin else Renk.metinIkincil, fontSize = 13.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                     }
@@ -59,7 +60,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
         }
         Spacer(Modifier.height(10.dp))
         if(!widgetTab) {
-            val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f) 1 else 2
+            val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f || androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp < 360) 1 else 2
             val rows = remember(columns) { AnaTemalar.all.chunked(columns) }
             LazyColumn(Modifier.weight(1f).clipToBounds().testTag("appearance-gallery"),contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 6.dp, bottom = 24.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
                 item(key = "featured") { TemaKoleksiyonKapagi(dil,selected == AnaTemalar.living.id) { living = true } }
@@ -84,6 +85,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
                 }
                 Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(22.dp)).background(Renk.yuzey)) {
                     bmp?.let { androidx.compose.foundation.Image(it.asImageBitmap(), sample, Modifier.fillMaxSize()) }
+                    if(bmp == null) CircularProgressIndicator(Modifier.align(Alignment.Center).size(24.dp),color = Renk.metin)
                 }
                 Text(cevir(dil,"Arka planını seç, telefonuna ekle. Söz her gün yenilenir; yazıyı biz yerleştiririz.","Choose a background and add it to your phone. The quote changes daily; we handle the layout."), color = Renk.metinIkincil, fontSize = 15.sp, lineHeight = 23.sp)
                 Button(onClick = { ctx.startActivity(Intent(ctx, WidgetAyarActivity::class.java)) }, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("widget-editor-open"), shape = RoundedCornerShape(16.dp)) { Text(cevir(dil,"Widget oluştur","Create widget")) }
@@ -94,5 +96,5 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
         collectionOffering = true
         if(offerOpen != null) offerOpen(ProOffer(ProSource.COLLECTION,AnaTemalar.living.id)) else proOpen()
     })
-    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null; pendingApply = false }, apply = { select(id); preview = null }, proOpen = { pendingApply = true; if(offerOpen != null) offerOpen(ProOffer(ProSource.THEME,id)) else proOpen() }) }
+    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null; pendingApply = false }, apply = { select(id); preview = null }, proOpen = { pendingApply = true; if(offerOpen != null) offerOpen(ProOffer(ProSource.THEME,id)) else proOpen() }, quote = quote) }
 }

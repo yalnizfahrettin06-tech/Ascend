@@ -2333,5 +2333,8 @@ internal object LocaleRu {
         "What ending time could you set for today’s period of focus?" to "Какое время окончания можно назначить сегодняшней сосредоточенной работе?",
         "What would a short break look like when your attention gets tired?" to "Каким мог бы быть короткий перерыв, когда внимание устаёт?",
         "What could you ask of people around you to protect your work time next week?" to "О чём можно попросить окружающих, чтобы защитить время для работы на следующей неделе?",
+        "Removed from saved" to "Удалено из сохранённого",
+        "Search results" to "Результаты поиска",
+        "Try again" to "Повторить",
     )
 }

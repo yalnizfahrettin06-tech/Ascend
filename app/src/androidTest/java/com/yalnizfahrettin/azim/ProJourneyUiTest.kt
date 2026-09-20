@@ -23,7 +23,7 @@ class ProJourneyUiTest {
         } }
         compose.onNodeWithTag("appearance-gallery").performScrollToNode(hasTestTag("theme-emperor"))
         compose.onNodeWithTag("theme-emperor").performClick()
-        compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
+        compose.onNodeWithTag("theme-apply").assertIsDisplayed().performClick()
         compose.onNodeWithTag("pro-context-title").assertTextEquals("İmparator")
         compose.runOnIdle { assertEquals("white",selected); assertFalse(pro) }
         ekranKaydet("pro-context-emperor")

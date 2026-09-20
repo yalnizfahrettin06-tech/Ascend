@@ -62,7 +62,11 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
     val focus = LocalFocusManager.current
     LaunchedEffect(acilacakGrup) { group = acilacakGrup }
     LaunchedEffect(selectedRequest) { if(selectedRequest != 0) { reminders = selectedRequest > 0; group = null; query = "" } }
-    BackHandler((group != null || reminders) && detayKey == null) { group = null; reminders = false }
+    fun goBack() {
+        focus.clearFocus()
+        if(query.isNotBlank()) query = "" else { group = null; reminders = false }
+    }
+    BackHandler((query.isNotBlank() || group != null || reminders) && detayKey == null) { goBack() }
     val showGroups = group == null && !reminders && query.isBlank()
     val results = LibraryQuery.filter(query.trim(), dil, group = if(query.isBlank()) group else null,
         selectedOnly = reminders, unlockedOnly = false, selected = secili, unlocked = acik).filter { Sozler.kategoriden(it.anahtar).isNotEmpty() && (!reminders || it.anahtar in secili) }
@@ -76,10 +80,10 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
             colors = TextFieldDefaults.colors(focusedContainerColor = Renk.yuzey, unfocusedContainerColor = Renk.yuzey,
                 focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent))
         Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-            if(group != null || reminders) IconButton(onClick = { group = null; reminders = false; query = "" }) { Icon(AzimIkon.Geri, cevir(dil,"Koleksiyonlar","Collections"), tint = Renk.metin) }
-            Text(if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.kesfetGrupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
+            if(query.isNotBlank() || group != null || reminders) IconButton(onClick = { goBack() }, modifier = Modifier.testTag("discovery-back")) { Icon(AzimIkon.Geri, cevir(dil,"Koleksiyonlar","Collections"), tint = Renk.metin) }
+            Text(if(query.isNotBlank()) cevir(dil,"Arama sonuçları","Search results") else if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.kesfetGrupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
                 Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 13.sp)
-            if(!reminders) TextButton(onClick = { if (remindersOpen != null) remindersOpen() else { reminders = true; group = null; query = "" } }, modifier = Modifier.testTag("category-selection-summary")) {
+            if(!reminders && query.isBlank()) TextButton(onClick = { if (remindersOpen != null) remindersOpen() else { reminders = true; group = null; query = "" } }, modifier = Modifier.testTag("category-selection-summary")) {
                 Icon(AzimIkon.Bildirim, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp))
                 Text(cevir(dil,"Bildirimlerim","My reminders"), fontSize = 12.sp)
             }
@@ -88,7 +92,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
         LazyColumn(Modifier.weight(1f).testTag("category-grid"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)) {
             if (showGroups && series != null) item {
-                val active = seriesProgress.values.firstOrNull { it.completed < 7 }
+                val active = ShortSeries.active(seriesProgress)
                 Surface(onClick = series, color = Renk.yuzey, shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth().testTag("discovery-series")) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         EditorialPhoto(EditorialArt.series(active?.id ?: "steps"),Modifier.width(100.dp).height(110.dp))

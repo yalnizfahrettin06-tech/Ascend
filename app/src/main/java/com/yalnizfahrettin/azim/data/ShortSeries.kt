@@ -26,6 +26,12 @@ data class ShortSeries(val id: String, val tr: String, val en: String, val categ
     val quotes get() = quoteIds.map { requireNotNull(Sozler.kimlikten(it)) { "Missing series quote: $it" } }
     fun prompt(index: Int, dil: String) = if(id == "restart") RestartSeries.days(dil)[index].step else prompts[index].let { Diller.metin(dil,it.first,it.second) }
     companion object {
+        /** One stable continuation target, independent of map iteration order. */
+        fun active(progress: Map<String, SeriesProgress>): SeriesProgress? = progress.values
+            .filter { it.completed < 7 && valueExists(it.id) }
+            .sortedWith(compareByDescending<SeriesProgress> { it.lastDay ?: LocalDate.MIN }.thenBy { it.id })
+            .firstOrNull()
+        private fun valueExists(id: String) = all.any { it.id == id }
         val all = listOf(
             ShortSeries("restart", "Yeniden Başlamak", "Begin Again", "motivasyon",
                 List(7) { RestartSeries.days("tr")[it].step to RestartSeries.days("en")[it].step },

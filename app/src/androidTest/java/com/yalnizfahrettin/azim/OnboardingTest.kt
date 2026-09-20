@@ -16,13 +16,13 @@ import org.junit.Assert.*
 
 class OnboardingTest {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
-    private fun next() = compose.onNodeWithTag("onboarding-next").performScrollTo().performClick()
+    private fun next() = compose.onNodeWithTag("onboarding-next").assertIsDisplayed().performClick()
 
     @Test fun setupHasOneFooterActionWithoutSkippingPermission() {
         var done = false
         compose.setContent { AzimTema { Onboarding("en") { _, _, _, _, _ -> done = true } } }
         compose.onNodeWithTag("onboarding-quick-start").assertDoesNotExist()
-        compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
         compose.runOnIdle { assertFalse(done) }
     }
 
@@ -89,15 +89,15 @@ class OnboardingTest {
         compose.onNodeWithText("2 / 5").assertIsDisplayed()
     }
 
-    @Test fun actionStaysCloseToContentOnEveryPage() {
+    @Test fun actionStaysVisibleOnEveryPageWithoutScrolling() {
         compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true) { _, _, _, _, _ -> } } }
+        var top: Float? = null
         repeat(5) { page ->
-            compose.onNodeWithTag("onboarding-next").performScrollTo()
-            val body = compose.onNodeWithTag("onboarding-body").fetchSemanticsNode().boundsInRoot
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
             val footer = compose.onNodeWithTag("onboarding-footer").fetchSemanticsNode().boundsInRoot
-            val gap = (footer.top - body.bottom) / compose.activity.resources.displayMetrics.density
-            assertTrue("Page $page has a detached action: $gap dp", gap in 23f..25f)
-            if (page < 4) next()
+            top?.let { assertEquals(it, footer.top, 1f) }
+            top = footer.top
+            if(page < 4) next()
         }
     }
 
@@ -120,13 +120,13 @@ class OnboardingTest {
             }
         }
         compose.onNodeWithText("1 / 5").assertIsDisplayed()
-        compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
     }
 
     @Test fun captureFiveTurkishPagesAndExpandedNotification() {
         compose.setContent { AzimTema { Onboarding("tr", bildirimIzni = true) { _, _, _, _, _ -> } } }
         repeat(5) { page ->
-            compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
             compose.waitForIdle()
             ekranKaydet("v97-onboarding-${page + 1}")
             if (page < 4) next()
@@ -149,7 +149,7 @@ class OnboardingTest {
         }
         repeat(5) { current ->
             compose.runOnIdle { page = current }
-            compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
             compose.waitForIdle()
             ekranKaydet("v97-large-dark-${current + 1}")
         }
@@ -160,7 +160,7 @@ class OnboardingTest {
             initialDraft = PersonalProfile(setupVersion = 3, step = 4),
             finishProfile = { value, _ -> finished = value }) { _,_,_,_,_ -> } } }
         compose.onNodeWithTag("theme-emperor").performScrollTo().performClick()
-        compose.onNodeWithTag("theme-apply").performScrollTo().performClick()
+        compose.onNodeWithTag("theme-apply").assertIsDisplayed().performClick()
         compose.runOnIdle { assertNull(finished) }
         next()
         compose.onNodeWithTag("trial-offer").assertExists()

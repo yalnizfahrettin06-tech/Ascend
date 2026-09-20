@@ -129,13 +129,9 @@ fun AnaEkran(
                     val uzun = metin.length > 150
                     // Short thoughts can breathe at a larger size; longer passages
                     // use the full measure instead of forcing isolated trailing words.
-                    val yaziBoyutu = when {
-                        buyukYazi -> if (kisa) 30 else if (uzun) 26 else 28
-                        darEkran -> if (kisa) 33 else if (uzun) 28 else 30
-                        else -> if (kisa) 34 else if (uzun) 26 else 30
-                    }
+                    val yaziBoyutu = ReadingLayout.quoteSize(metin.length, buyukYazi, darEkran)
                     val satirYuksekligi = yaziBoyutu + 5
-                    val metinGenisligi = if (buyukYazi || homeTheme.art == null) 1f else .76f
+                    val metinGenisligi = ReadingLayout.measure(homeTheme.art != null, buyukYazi)
                     Column(Modifier.fillMaxSize().testTag(if (sayfa == pager.settledPage) "active-quote" else "other-quote")
                         .verticalScroll(rememberScrollState()).padding(top = 12.dp, bottom = 12.dp),
                         horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Center) {

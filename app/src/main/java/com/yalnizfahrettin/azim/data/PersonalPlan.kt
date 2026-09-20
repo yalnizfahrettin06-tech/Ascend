@@ -170,6 +170,12 @@ object PersonalPlan {
         return if ("none" in profile.answer("discovery")) base else valid
     }
 
+    /** Widgets share explicit format/avoid/access boundaries with the reminder plan. */
+    fun widgetPool(profile: PersonalProfile?, selected: Set<String>, access: Set<String>, hidden: Set<String>): List<Soz> {
+        val categories = effectiveCategories(profile, selected, access)
+        return Sozler.tumu().filter { it.kategori in categories && it.kimlik !in hidden }.sortedBy { it.kimlik }
+    }
+
     private fun boostedWeights(profile: PersonalProfile, selected: Set<String>, scores: Map<String, Int>) =
         scores.mapValues { (category, score) -> score * if (category !in selected) 1 else if ("wide" in profile.answer("discovery")) 2 else 5 }
 

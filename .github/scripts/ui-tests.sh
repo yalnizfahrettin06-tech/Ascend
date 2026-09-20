@@ -11,8 +11,12 @@ done) &
 evidence_pid=$!
 bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.VisualAcceptanceTest --no-daemon --max-workers=2
 visual_status=$?
+mkdir -p screenshots/visual-diagnostics
+cp -R app/build/outputs/androidTest-results screenshots/visual-diagnostics/results 2>/dev/null
+cp -R app/build/reports/androidTests screenshots/visual-diagnostics/reports 2>/dev/null
+adb logcat -d > screenshots/visual-diagnostics/logcat.txt
 adb pull /sdcard/Download/ascend-screenshots screenshots
-bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.OnboardingTest --no-daemon --max-workers=2
+bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.OnboardingTest,com.yalnizfahrettin.azim.AuditPhasesUiTest --no-daemon --max-workers=2
 onboarding_status=$?
 kill "$evidence_pid" 2>/dev/null
 adb pull /sdcard/Download/ascend-screenshots screenshots

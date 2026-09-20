@@ -106,7 +106,7 @@ open class AzimWidget : GlanceAppWidget() {
             val secili = depo.secili.first()
             val allowed = depo.acik.first()
             val hidden = depo.hiddenQuotes.first()
-            val choices = Sozler.tumu().filter { it.kategori in secili && it.kategori in allowed && it.kimlik !in hidden }.sortedBy { it.kimlik }
+            val choices = PersonalPlan.widgetPool(depo.personalProfile.first(), secili, allowed, hidden)
             return choices.takeIf { it.isNotEmpty() }?.random(kotlin.random.Random(java.time.LocalDate.now().toEpochDay().toInt()))
         }
 

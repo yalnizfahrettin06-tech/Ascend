@@ -40,7 +40,7 @@ class WarriorGalleryTest {
         }
         compose.onNodeWithTag("appearance-gallery").performScrollToNode(hasTestTag("theme-duel"))
         compose.onNodeWithTag("theme-duel").assertIsDisplayed().performClick()
-        compose.onNodeWithTag("theme-apply").performScrollTo().assertIsDisplayed().performClick()
+        compose.onNodeWithTag("theme-apply").assertIsDisplayed().assertIsDisplayed().performClick()
         compose.runOnIdle { assertEquals("duel",selected) }
         compose.onNodeWithTag("theme-duel").assertIsSelected()
         ekranKaydet("warrior-gallery-large-french")

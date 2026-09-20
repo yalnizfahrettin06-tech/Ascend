@@ -41,7 +41,9 @@ object WidgetTasarimi {
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG).apply {
                     colorFilter = null
                 }
-                canvas.drawBitmap(art, null, RectF((w-dw)/2, (h-dh)/2, (w+dw)/2, (h+dh)/2), paint)
+                val focus = com.yalnizfahrettin.azim.data.ArtworkFocus.forResource(theme.art)
+                val left = focus.left(w.toFloat(), dw); val top = focus.top(h.toFloat(), dh)
+                canvas.drawBitmap(art, null, RectF(left, top, left + dw, top + dh), paint)
                 art.recycle()
             }
         }
