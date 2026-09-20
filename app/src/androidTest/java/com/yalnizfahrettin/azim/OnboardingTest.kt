@@ -22,7 +22,7 @@ class OnboardingTest {
         var done = false
         compose.setContent { AzimTema { Onboarding("en") { _, _, _, _, _ -> done = true } } }
         compose.onNodeWithTag("onboarding-quick-start").assertDoesNotExist()
-        compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
         compose.runOnIdle { assertFalse(done) }
     }
 
@@ -120,13 +120,13 @@ class OnboardingTest {
             }
         }
         compose.onNodeWithText("1 / 5").assertIsDisplayed()
-        compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
     }
 
     @Test fun captureFiveTurkishPagesAndExpandedNotification() {
         compose.setContent { AzimTema { Onboarding("tr", bildirimIzni = true) { _, _, _, _, _ -> } } }
         repeat(5) { page ->
-            compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
             compose.waitForIdle()
             ekranKaydet("v97-onboarding-${page + 1}")
             if (page < 4) next()
@@ -149,7 +149,7 @@ class OnboardingTest {
         }
         repeat(5) { current ->
             compose.runOnIdle { page = current }
-            compose.onNodeWithTag("onboarding-next").assertIsDisplayed().assertIsDisplayed()
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
             compose.waitForIdle()
             ekranKaydet("v97-large-dark-${current + 1}")
         }

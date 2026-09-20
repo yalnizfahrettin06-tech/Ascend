@@ -54,6 +54,8 @@ object KartCizici {
         val loraItalik = Typeface.create(lora, Typeface.ITALIC)
         val metinRengi = HazirZeminler.metinRengi(ayar.zemin).toArgb()
 
+        val scene = (ayar.zemin as? KartZemin.Sahne)?.kaynak
+        val lowerText = com.yalnizfahrettin.azim.data.ArtworkFocus.lowerText(scene) && yukseklik > genislik * 1.3f
         val kenar = genislik * 0.10f
         val icGenislik = (genislik - kenar * 2).toInt()
 
@@ -73,7 +75,7 @@ object KartCizici {
         }
         fun tamYukseklik() = StaticLayout.Builder.obtain(metin, 0, metin.length, sozBoya, icGenislik)
             .setLineSpacing(genislik * 0.016f, 1f).build().height
-        while (tamYukseklik() > yukseklik * .62f && sozBoya.textSize > genislik * .023f) sozBoya.textSize *= .95f
+        while (tamYukseklik() > yukseklik * (if(lowerText) .28f else .62f) && sozBoya.textSize > genislik * .023f) sozBoya.textSize *= .95f
         val duzen = StaticLayout.Builder
             .obtain(gorunen, 0, gorunen.length, sozBoya, icGenislik)
             .setAlignment(hiza)
@@ -96,7 +98,17 @@ object KartCizici {
         }
         val yazarMetni = if (yazar.isBlank()) "" else "— $yazar"
         val blokYukseklik = tamDuzen.height + genislik * 0.09f
-        val ust = max(yukseklik * 0.14f, (yukseklik - blokYukseklik) / 2f)
+        val ust = if(lowerText) max(yukseklik * .58f, yukseklik * .86f - blokYukseklik)
+            else max(yukseklik * 0.14f, (yukseklik - blokYukseklik) / 2f)
+        if(scene != null) {
+            val shade = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                val alpha = (255 * (ayar.karartma + .22f).coerceIn(.50f,.80f)).toInt()
+                val dark = Color.argb(alpha,0,0,0)
+                shader = LinearGradient(0f, ust - genislik * .08f, 0f, ust + blokYukseklik + genislik * .08f,
+                    intArrayOf(Color.TRANSPARENT,dark,dark,Color.TRANSPARENT),floatArrayOf(0f,.15f,.85f,1f),Shader.TileMode.CLAMP)
+            }
+            tuval.drawRect(0f,ust - genislik * .08f,genislik.toFloat(),ust + blokYukseklik + genislik * .08f,shade)
+        }
 
         tuval.save()
         tuval.translate(kenar, ust)
@@ -214,14 +226,14 @@ object KartCizici {
                     val boy = foto.height * olcek
                     val matris = Matrix().apply {
                         setScale(olcek, olcek)
-                        val focus = com.yalnizfahrettin.azim.data.ArtworkFocus.forResource((z as? KartZemin.Sahne)?.kaynak)
+                        val focus = com.yalnizfahrettin.azim.data.ArtworkFocus.forResource((z as? KartZemin.Sahne)?.kaynak, g.toFloat()/y)
                         postTranslate(focus.left(g.toFloat(), en), focus.top(y.toFloat(), boy))
                     }
                     tuval.drawBitmap(foto, matris, Paint(Paint.FILTER_BITMAP_FLAG))
                     if (zeminBitmap == null) foto.recycle()
                     // Okunurluk katmanı
                     val marble = z == KartZemin.Sahne(com.yalnizfahrettin.azim.R.drawable.art_roman_home_v9)
-                    val dim = if (marble) ((ayar.karartma - .45f).coerceAtLeast(0f) * 255).toInt() else (ayar.karartma * 255).toInt()
+                    val dim = if (marble) ((ayar.karartma - .45f).coerceAtLeast(0f) * 255).toInt() else if(z is KartZemin.Sahne) 0 else (ayar.karartma * 255).toInt()
                     tuval.drawColor(Color.argb(dim, 0, 0, 0))
                 }
             }

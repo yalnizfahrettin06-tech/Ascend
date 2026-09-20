@@ -171,11 +171,15 @@ jobs:
         with:
           name: focused-share-regression
           path: evidence
+      - uses: actions/download-artifact@v8
+        with:
+          name: ui-test-results-and-screenshots
+          path: ui-evidence
       - name: Publish tested APK
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
           cp apk/app-debug.apk Ascend-9.25.0.apk
-          zip -r Ascend-9.25.0-test-evidence.zip evidence
-          gh release create v9.25.0-ui Ascend-9.25.0.apk Ascend-9.25.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.25.0 — Living Emperor and Begin Again" --notes "Single living Emperor prototype with reduced-motion fallback and still wallpaper preview. New seven-day editorial Pro series in seven languages; day one preview is free. Existing free and Pro access preserved. Unit and focused Android tests required before publication. Demo Pro; test APK."
+          zip -r Ascend-9.25.0-test-evidence.zip evidence ui-evidence
+          gh release create v9.25.0-ui Ascend-9.25.0.apk Ascend-9.25.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.25.0 — Living Emperor and Begin Again" --notes "Persistent onboarding actions, content preference safety for widgets, saved-quote undo, consistent series continuation, artwork focal cropping and accessible previews. Seven-language font-scale checks, user journey and sharing regressions required before publication. Existing free themes and demo Pro preserved. Test APK."

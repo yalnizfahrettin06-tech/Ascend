@@ -347,7 +347,11 @@ private fun PaylasimZeminSecenegi(z: PaylasimZemini, secili: Boolean, dil: Strin
         Box(Modifier.fillMaxWidth().aspectRatio(.66f).clip(RoundedCornerShape(10.dp))
             .border(if (secili) 2.dp else 1.dp, if (secili) Renk.accent else Renk.kenarlik, RoundedCornerShape(10.dp))) {
             when (val zemin = z.zemin) {
-                is KartZemin.Sahne -> Image(painterResource(zemin.kaynak), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop)
+                is KartZemin.Sahne -> {
+                    val focus = com.yalnizfahrettin.azim.data.ArtworkFocus.forResource(zemin.kaynak)
+                    Image(painterResource(zemin.kaynak), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
+                        alignment = androidx.compose.ui.BiasAlignment(focus.x * 2 - 1, focus.y * 2 - 1))
+                }
                 is KartZemin.Duz -> Box(Modifier.matchParentSize().background(Color(zemin.renk)))
                 is KartZemin.Gradyan -> Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color(zemin.ust), Color(zemin.alt)))))
                 is KartZemin.Foto -> Unit

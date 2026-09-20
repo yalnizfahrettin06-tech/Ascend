@@ -51,7 +51,7 @@ private object ThemeImages {
 @Composable
 fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f, thumbnail: Boolean = false, previewSize: Int = 640, dil: String = "tr") {
     val base = if (theme.dark) Color(0xFF171719) else Color(0xFFF5F5F4)
-    Box(modifier.background(base)) {
+    BoxWithConstraints(modifier.background(base)) {
         theme.art?.let { art ->
             val context = LocalContext.current
             val size = if(thumbnail) previewSize else 1920
@@ -70,7 +70,7 @@ fun TemaZemini(theme: AnaTema, modifier: Modifier = Modifier, veil: Float = .25f
                     Icon(AzimIkon.Sonraki, cevir(dil,"Yeniden dene","Try again"), tint = if(theme.dark) Color.White else Color.Black)
                 } else CircularProgressIndicator(Modifier.size(20.dp),color = if(theme.dark) Color.White else Color.Black,strokeWidth = 2.dp)
             }
-            val focus = ArtworkFocus.forResource(art)
+            val focus = ArtworkFocus.forResource(art, maxWidth.value / maxHeight.value.coerceAtLeast(1f))
             bitmap?.let { Image(it.asImageBitmap(), null, Modifier.matchParentSize().testTag("theme-art-${theme.id}"), contentScale = ContentScale.Crop, alignment = BiasAlignment(focus.x * 2 - 1, focus.y * 2 - 1),
                 colorFilter = null) }
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(

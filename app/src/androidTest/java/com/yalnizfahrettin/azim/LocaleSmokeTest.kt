@@ -26,13 +26,13 @@ class LocaleSmokeTest {
         } }
         listOf("pt","de","fr","it","ru").forEach { code ->
             compose.onNodeWithTag("language-$code").performScrollTo().performClick().assertIsSelected()
-            compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
             compose.onNodeWithText(Diller.metin(code,"Devam","Continue")).assertIsDisplayed()
         }
         ekranKaydet("locale-picker-russian")
         compose.onNodeWithTag("onboarding-next").performClick()
         compose.waitForIdle()
-        compose.onNodeWithTag("onboarding-next").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
         ekranKaydet("locale-introduction-russian")
     }
 
