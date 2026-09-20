@@ -25,7 +25,7 @@ class CompactUiTest {
                 AzimTema { DenemeTeklifi("tr",false,false,{}, { started = true },{}) }
             }
         }
-        compose.onNodeWithTag("trial-start").performScrollTo().assertIsDisplayed().performClick()
+        compose.onNodeWithTag("trial-start").assertIsDisplayed().performClick()
         compose.runOnIdle { assertTrue(started) }
         compose.onNodeWithTag("trial-free").assertIsDisplayed()
     }

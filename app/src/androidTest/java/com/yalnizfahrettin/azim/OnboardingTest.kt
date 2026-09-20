@@ -89,6 +89,24 @@ class OnboardingTest {
         compose.onNodeWithText("2 / 5").assertIsDisplayed()
     }
 
+    @Test fun savedPracticeChoiceSurvivesRecreationAndFreeCompletion() {
+        val restore = StateRestorationTester(compose)
+        var completed: PersonalProfile? = null
+        restore.setContent { AzimTema {
+            Onboarding("en", bildirimIzni = true, initialDraft = PersonalProfile(step = 1),
+                finishProfile = { value, _ -> completed = value }) { _,_,_,_,_ -> }
+        } }
+        compose.onNodeWithTag("practice-like").performScrollTo().performClick()
+        restore.emulateSavedInstanceStateRestore()
+        compose.onNodeWithTag("practice-like").assertIsOn()
+        repeat(4) { next() }
+        compose.onNodeWithTag("trial-offer").assertDoesNotExist()
+        compose.runOnIdle {
+            assertEquals(setOf(SetupPractice.quotes.first().kimlik),SetupPractice.saved(completed!!))
+            assertEquals("rider",completed!!.answer("theme").single())
+        }
+    }
+
     @Test fun actionStaysVisibleOnEveryPageWithoutScrolling() {
         compose.setContent { AzimTema { Onboarding("en", bildirimIzni = true) { _, _, _, _, _ -> } } }
         var top: Float? = null

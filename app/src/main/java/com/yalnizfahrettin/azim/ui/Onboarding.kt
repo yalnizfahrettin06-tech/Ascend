@@ -238,19 +238,31 @@ private fun PlanRhythm(profile: PersonalProfile, dil: String, count: (Int) -> Un
                 border = BorderStroke(1.dp, Renk.metinIkincil),
                 modifier = Modifier.size(48.dp).semantics { contentDescription = cevir(dil, "Bildirim sayısını artır", "More reminders") }) { Icon(AzimIkon.Arti, null) }
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            repeat(7) { i -> Box(Modifier.size(if(i < profile.dailyCount) 8.dp else 5.dp).background(if(i < profile.dailyCount) Renk.metin else Renk.kenarlikGuclu, CircleShape)) }
-        }
     }
-    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+    if (LocalDensity.current.fontScale > 1.35f) {
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            HourControl(dil, true, profile.startHour, Modifier.fillMaxWidth()) { hour(1) }
+            HourControl(dil, false, profile.endHour, Modifier.fillMaxWidth()) { hour(2) }
+        }
+    } else Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         HourControl(dil, true, profile.startHour, Modifier.weight(1f)) { hour(1) }
         HourControl(dil, false, profile.endHour, Modifier.weight(1f)) { hour(2) }
     }
+
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(cevir(dil, "Yaklaşık bildirim saatlerin", "Your approximate reminder times"), color = Renk.metinIkincil, fontSize = 12.sp)
+        val lineColor = Renk.kenarlik
+        val dotColor = Renk.metin
+        Canvas(Modifier.fillMaxWidth().height(16.dp)) {
+            val y = size.height / 2
+            drawLine(lineColor,Offset(0f,y),Offset(size.width,y),2.dp.toPx())
+            repeat(profile.dailyCount) { i ->
+                drawCircle(dotColor,3.dp.toPx(),Offset(size.width * (i + .5f) / profile.dailyCount,y))
+            }
+        }
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.testTag("reminder-preview-times")) {
             previewTimes(profile).forEach { Text(it.format(DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT)), color = Renk.metin, fontSize = 13.sp,
-                modifier = Modifier.background(Renk.yuzey, RoundedCornerShape(8.dp)).padding(10.dp)) }
+                modifier = Modifier.padding(end = 8.dp, top = 2.dp, bottom = 2.dp)) }
         }
         Text(cevir(dil, "Bu aralığın dışında sessiz kalırız.", "We stay quiet outside this window."), color = Renk.metinIkincil, fontSize = 12.sp)
     }

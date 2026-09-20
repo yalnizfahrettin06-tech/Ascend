@@ -52,8 +52,9 @@ fun DenemeTeklifi(dil: String, busy: Boolean, error: Boolean, close: () -> Unit,
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 ProRozeti(metin = "PRO DEMO")
                 Text(proOfferTitle(offer,dil), fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold, color = Renk.metin)
-                Text(PhaseCopy.text("demo",dil), fontSize = 18.sp, color = Renk.metinIkincil)
+                if(offer.selection.isNotBlank()) Text(PhaseCopy.text("demo",dil), fontSize = 16.sp, color = Renk.metinIkincil)
                 ProGorselOrnek(dil,offer)
+                ProOutcome(dil,offer)
                 ProBenefits(dil,offer)
 
             }

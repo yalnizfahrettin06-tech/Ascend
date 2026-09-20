@@ -23,7 +23,7 @@ cp -R app/build/outputs/androidTest-results screenshots/visual-diagnostics/resul
 cp -R app/build/reports/androidTests screenshots/visual-diagnostics/reports 2>/dev/null
 adb logcat -d > screenshots/visual-diagnostics/logcat.txt
 adb pull /sdcard/Download/ascend-screenshots screenshots
-bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.OnboardingTest,com.yalnizfahrettin.azim.AuditPhasesUiTest,com.yalnizfahrettin.azim.ArtworkRenderingTest,com.yalnizfahrettin.azim.Phase34UiTest,com.yalnizfahrettin.azim.Phase34StorageTest,com.yalnizfahrettin.azim.WallpaperJourneyTest --no-daemon --max-workers=2
+bash gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.yalnizfahrettin.azim.OnboardingTest,com.yalnizfahrettin.azim.CompactUiTest,com.yalnizfahrettin.azim.AuditPhasesUiTest,com.yalnizfahrettin.azim.ArtworkRenderingTest,com.yalnizfahrettin.azim.Phase34UiTest,com.yalnizfahrettin.azim.Phase34StorageTest,com.yalnizfahrettin.azim.WallpaperJourneyTest --no-daemon --max-workers=2
 onboarding_status=$?
 mkdir -p screenshots/ui-suite-results
 cp -R app/build/outputs/androidTest-results screenshots/ui-suite-results/results

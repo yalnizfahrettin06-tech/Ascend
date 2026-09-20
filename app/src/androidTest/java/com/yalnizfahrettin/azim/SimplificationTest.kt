@@ -20,7 +20,7 @@ class SimplificationTest {
         compose.onNodeWithTag("home-pro").performClick()
         compose.onNodeWithTag("pro-visual-preview").assertExists()
         compose.onNodeWithText("Gelişmiş paylaşım araçları").assertDoesNotExist()
-        compose.onNodeWithText("Ücretsiz devam et").assertIsDisplayed().performClick()
+        compose.onNodeWithTag("pro-decline").assertIsDisplayed().performClick()
         compose.onNodeWithTag("pro-sheet").assertDoesNotExist()
         assertFalse(runBlocking { depot.proDemo.first() })
     }

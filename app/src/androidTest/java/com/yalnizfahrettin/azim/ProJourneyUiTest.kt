@@ -13,6 +13,17 @@ import org.junit.Assert.*
 
 class ProJourneyUiTest {
     @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
+    @Test fun offerKeepsOtherBenefitsSecondaryAndActionsVisible() {
+        compose.setContent { AzimTema {
+            ProEkrani("en",false,kapat = {},degistir = {},offer = ProOffer(ProSource.WALLPAPER,"emperor"))
+        } }
+        compose.onNodeWithTag("pro-demo-enable").assertIsDisplayed()
+        compose.onNodeWithText("Every topic and quote").assertDoesNotExist()
+        compose.onNodeWithTag("pro-more").performScrollTo().performClick()
+        compose.onNodeWithText("Every topic and quote").assertExists()
+        compose.onNodeWithTag("pro-demo-enable").assertIsDisplayed()
+    }
+
     @Test fun chosenThemeIsShownAndAppliedAfterDemo() {
         var selected by mutableStateOf("white")
         var pro by mutableStateOf(false)

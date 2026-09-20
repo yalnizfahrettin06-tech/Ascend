@@ -54,6 +54,7 @@ fun ProEkrani(
                 Text(proOfferTitle(offer,dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 26.sp, lineHeight = 33.sp,
                     modifier = Modifier.testTag("pro-context-title").semantics { heading() })
                 ProGorselOrnek(dil,offer,widgetPreview)
+                ProOutcome(dil,offer)
                 ProBenefits(dil,offer)
 
             }
@@ -66,7 +67,7 @@ fun ProEkrani(
                     if(kaydediliyor) CircularProgressIndicator(Modifier.size(20.dp),strokeWidth = 2.dp)
                     else Text(if(acik) cevir(dil,"Pro demosunu kapat","Turn off Pro demo") else cevir(dil,"Demoyu aç ve devam et","Enable demo and continue"))
                 }
-                if(!acik) TextButton(onClick = close,enabled = !kaydediliyor,modifier = Modifier.align(Alignment.CenterHorizontally)) { Text(SetupCopy.text("cancel",dil)) }
+                if(!acik) TextButton(onClick = close,enabled = !kaydediliyor,modifier = Modifier.align(Alignment.CenterHorizontally).testTag("pro-decline")) { Text(SetupCopy.text("cancel",dil)) }
             }
         }
     }
@@ -77,7 +78,7 @@ fun proOfferTitle(offer: ProOffer, dil: String): String = when(offer.source) {
     ProSource.WALLPAPER -> WallpaperCopy.text("intro",dil)
     ProSource.COLLECTION -> CollectionCopy.text("title",dil)
     ProSource.SERIES -> RestartSeries.title(dil)
-    ProSource.THEME, ProSource.ONBOARDING -> AnaTemalar.find(offer.selection).label(dil)
+    ProSource.THEME, ProSource.ONBOARDING -> if(offer.selection.isNotBlank()) AnaTemalar.find(offer.selection).label(dil) else PhaseCopy.text("demo",dil)
     ProSource.TOPIC -> Kategoriler.bul(offer.selection)?.ad(dil) ?: cevir(dil,"Tüm konular ve sözler","Every topic and quote")
     ProSource.WIDGET -> cevir(dil,"Hazırladığın widget, telefonunda.","Your widget, on your home screen.")
     ProSource.VIDEO -> cevir(dil,"Bu sözü videoya dönüştür.","Turn this quote into a video.")
@@ -174,4 +175,17 @@ fun ProBenefits(dil: String, offer: ProOffer) {
             Text(SetupCopy.text("freeRights",dil),color = Renk.metinIkincil,fontSize = 13.sp,lineHeight = 19.sp)
         }
     }
+}
+
+@Composable
+fun ProOutcome(dil: String, offer: ProOffer) {
+    val key = when(offer.source) {
+        ProSource.WALLPAPER -> "wallResult"
+        ProSource.WIDGET -> "widgetResult"
+        ProSource.SERIES -> "seriesResult"
+        ProSource.SHARE, ProSource.VIDEO, ProSource.PHOTO -> "shareResult"
+        ProSource.TOPIC -> null
+        else -> "artResult"
+    }
+    if(key != null) Text(SetupCopy.text(key,dil),color = Renk.metinIkincil,fontSize = 14.sp,lineHeight = 21.sp)
 }
