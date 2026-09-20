@@ -56,4 +56,15 @@ class Phase34UiTest {
         compose.onNodeWithTag("restart-day-6").assertDoesNotExist()
         compose.onNodeWithTag("restart-story").assertTextEquals(RestartSeries.days("en")[0].story)
     }
+    @Test fun allSevenLanguagesDescribeDemoWithoutFictionalTrial() {
+        var language by mutableStateOf("tr")
+        compose.setContent { AzimTema { DenemeTeklifi(language,false,false,{},{},{}) } }
+        PhaseCopy.languages.forEach { lang ->
+            compose.runOnIdle { language = lang }
+            compose.onNodeWithText(PhaseCopy.text("demo",lang)).assertExists()
+            compose.onNodeWithTag("trial-start").performScrollTo().assertTextEquals(PhaseCopy.text("enable",lang))
+            compose.onNodeWithText(PhaseCopy.text("demoBody",lang)).assertExists()
+            compose.onNodeWithTag("trial-free").assertExists()
+        }
+    }
 }
