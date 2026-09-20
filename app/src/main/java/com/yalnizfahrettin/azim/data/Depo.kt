@@ -96,7 +96,8 @@ class Depo(ctx: Context, private val store: DataStore<Preferences> = ctx.ds) {
         p[K.ARKA_PLAN] = chosenTheme.id
         p[K.TEMA] = if (chosenTheme.dark) TemaModu.KARANLIK.name else TemaModu.AYDINLIK.name
         p[K.DIL] = safe.answer("language").firstOrNull()?.takeIf { it in Diller.kodlar } ?: p[K.DIL] ?: "tr"
-        p[K.PERSONAL_PROFILE] = safe.encode()
+        p[K.FAVORI] = p[K.FAVORI].orEmpty() + SetupPractice.saved(safe)
+        p[K.PERSONAL_PROFILE] = safe.skip(SetupPractice.SAVED).encode()
         p[K.SECILI] = if (preserveTopics) p[K.SECILI].orEmpty().intersect(etkinErisim(p)).ifEmpty { PersonalPlan.initialCategories(safe, etkinErisim(p)) }
             else PersonalPlan.initialCategories(safe, etkinErisim(p))
         p[K.GUNLUK] = safe.dailyCount

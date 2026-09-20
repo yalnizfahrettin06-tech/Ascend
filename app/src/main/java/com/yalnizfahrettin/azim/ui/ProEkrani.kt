@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.foundation.Image
@@ -35,8 +36,10 @@ fun ProEkrani(
     kapat: () -> Unit, degistir: (Boolean) -> Unit,
     offer: ProOffer = ProOffer(), widgetPreview: android.graphics.Bitmap? = null,
 ) {
+    SetupTheme {
     val ctx = LocalContext.current
-    LaunchedEffect(offer.encode()) { ProductSignals.record(ctx, ProductSignals.Event.OFFER_VIEWED, offer.source) }
+    var impression by rememberSaveable(offer.encode()) { mutableStateOf(false) }
+    LaunchedEffect(offer.encode()) { if (!impression) { ProductSignals.record(ctx, ProductSignals.Event.OFFER_VIEWED, offer.source); impression = true } }
     val close = { if (!kaydediliyor) { ProductSignals.record(ctx, ProductSignals.Event.OFFER_CLOSED, offer.source); kapat() } }
     ModalBottomSheet(onDismissRequest = close, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = Renk.zemin, dragHandle = null) {
@@ -51,14 +54,8 @@ fun ProEkrani(
                 Text(proOfferTitle(offer,dil), color = Renk.metin, fontFamily = ArayuzFont, fontSize = 26.sp, lineHeight = 33.sp,
                     modifier = Modifier.testTag("pro-context-title").semantics { heading() })
                 ProGorselOrnek(dil,offer,widgetPreview)
-                Text(cevir(dil,"Pro ile açılanlar","What Pro adds"), color = Renk.metin, fontWeight = FontWeight.SemiBold)
-                ProOzelligi(AzimIkon.YukselenMarka,CollectionCopy.text("benefit",dil),CollectionCopy.text("promise",dil))
-                ProOzelligi(AzimIkon.Kesfet,cevir(dil,"Tüm konular ve sözler","Every topic and quote"),cevir(dil,"Bildirim konularını yine sen seçersin.","You still choose your notification topics."))
-                ProOzelligi(AzimIkon.Izgara,WallpaperCopy.text("benefit",dil),WallpaperCopy.text("promise",dil))
-                ProOzelligi(AzimIkon.Paylas,cevir(dil,"Tüm arka planlar ve video","Every background and video"),cevir(dil,"Sevdiğin sözü görsel veya video olarak paylaş.","Share a favorite quote as an image or video."))
-                HorizontalDivider(color = Renk.kenarlik)
-                Text(cevir(dil,"Ücretsiz sende kalanlar","What stays free"),color = Renk.metin,fontWeight = FontWeight.SemiBold)
-                Text(cevir(dil,"6 konu, 4 tema, bildirimler, kaydetme, geçmiş ve temel görsel paylaşımı.","6 topics, 4 themes, reminders, saved quotes, history and basic image sharing."),color = Renk.metinIkincil,style = MaterialTheme.typography.bodySmall)
+                ProBenefits(dil,offer)
+
             }
             HorizontalDivider(color = Renk.kenarlik)
             Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 10.dp),verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -69,9 +66,10 @@ fun ProEkrani(
                     if(kaydediliyor) CircularProgressIndicator(Modifier.size(20.dp),strokeWidth = 2.dp)
                     else Text(if(acik) cevir(dil,"Pro demosunu kapat","Turn off Pro demo") else cevir(dil,"Demoyu aç ve devam et","Enable demo and continue"))
                 }
-                if(!acik) TextButton(onClick = close,enabled = !kaydediliyor,modifier = Modifier.align(Alignment.CenterHorizontally)) { Text(cevir(dil,"Ücretsiz devam et","Continue free")) }
+                if(!acik) TextButton(onClick = close,enabled = !kaydediliyor,modifier = Modifier.align(Alignment.CenterHorizontally)) { Text(SetupCopy.text("cancel",dil)) }
             }
         }
+    }
     }
 }
 
@@ -79,7 +77,7 @@ fun proOfferTitle(offer: ProOffer, dil: String): String = when(offer.source) {
     ProSource.WALLPAPER -> WallpaperCopy.text("intro",dil)
     ProSource.COLLECTION -> CollectionCopy.text("title",dil)
     ProSource.SERIES -> RestartSeries.title(dil)
-    ProSource.THEME -> AnaTemalar.find(offer.selection).label(dil)
+    ProSource.THEME, ProSource.ONBOARDING -> AnaTemalar.find(offer.selection).label(dil)
     ProSource.TOPIC -> Kategoriler.bul(offer.selection)?.ad(dil) ?: cevir(dil,"Tüm konular ve sözler","Every topic and quote")
     ProSource.WIDGET -> cevir(dil,"Hazırladığın widget, telefonunda.","Your widget, on your home screen.")
     ProSource.VIDEO -> cevir(dil,"Bu sözü videoya dönüştür.","Turn this quote into a video.")
@@ -138,6 +136,42 @@ fun ProGorselOrnek(dil: String, offer: ProOffer = ProOffer(), widgetPreview: and
             TemaZemini(theme,Modifier.matchParentSize(),thumbnail = false)
             Text(sample,Modifier.align(Alignment.Center).padding(24.dp), color = if(theme.dark) androidx.compose.ui.graphics.Color.White else androidx.compose.ui.graphics.Color(0xFF191919),
                 fontFamily = LoraSerif,fontSize = 22.sp,lineHeight = 30.sp,textAlign = TextAlign.Center)
+        }
+    }
+}
+
+@Composable
+fun ProBenefits(dil: String, offer: ProOffer) {
+    var expanded by rememberSaveable(offer.encode()) { mutableStateOf(false) }
+    val art = cevir(dil,"Tüm temalar","All themes")
+    val widgets = cevir(dil,"Telefonuna özel widget’lar","Widgets for your phone")
+    val wallpaper = WallpaperCopy.text("title",dil)
+    val topics = cevir(dil,"Tüm konular ve sözler","Every topic and quote")
+    val series = CollectionCopy.text("benefit",dil)
+    val share = cevir(dil,"Tüm arka planlar ve video","Every background and video")
+    val primary = when(offer.source) {
+        ProSource.WIDGET -> listOf(widgets, wallpaper, art)
+        ProSource.WALLPAPER -> listOf(wallpaper, art, widgets)
+        ProSource.SERIES -> listOf(series, topics, art)
+        ProSource.TOPIC -> listOf(topics, series, art)
+        ProSource.SHARE, ProSource.VIDEO, ProSource.PHOTO -> listOf(share, art, widgets)
+        else -> listOf(art, widgets, wallpaper)
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.testTag("pro-benefits")) {
+        primary.forEach { label ->
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp),verticalAlignment = Alignment.CenterVertically) {
+                Icon(AzimIkon.Tik,null,Modifier.size(18.dp),tint = Renk.metin)
+                Text(label,color = Renk.metin,fontSize = 14.sp,lineHeight = 20.sp)
+            }
+        }
+        TextButton(onClick = { expanded = !expanded },modifier = Modifier.heightIn(min = 48.dp).testTag("pro-more")) {
+            Text(SetupCopy.text(if(expanded) "less" else "more",dil))
+        }
+        if(expanded) {
+            (listOf(art,widgets,wallpaper,topics,series,share) - primary.toSet()).forEach {
+                Text(it,color = Renk.metinIkincil,fontSize = 14.sp,lineHeight = 20.sp)
+            }
+            Text(SetupCopy.text("freeRights",dil),color = Renk.metinIkincil,fontSize = 13.sp,lineHeight = 19.sp)
         }
     }
 }

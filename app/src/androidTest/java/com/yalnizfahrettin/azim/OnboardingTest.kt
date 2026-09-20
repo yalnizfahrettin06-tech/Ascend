@@ -42,7 +42,7 @@ class OnboardingTest {
         next()
         compose.onNodeWithTag("theme-white").assertExists()
         next()
-        compose.onNodeWithTag("trial-free").performClick()
+        compose.onNodeWithTag("trial-offer").assertDoesNotExist()
         compose.runOnIdle { assertTrue(completed) }
     }
 
@@ -78,14 +78,14 @@ class OnboardingTest {
 
     @Test fun practiceSupportsSwipingAndAccessibleAlternativeWithoutChangingSetup() {
         compose.setContent { AzimTema { Onboarding("en", initialDraft = PersonalProfile(setupVersion = 3, step = 1)) { _, _, _, _, _ -> } } }
-        val first = "You do not have to finish everything today."
+        val first = SetupPractice.quotes[0].metin("en")
         compose.onNodeWithTag("practice-quote-text").assertTextEquals(first)
         compose.onNodeWithTag("practice-like").performScrollTo().performClick()
-        compose.onNodeWithText("Sample liked").assertExists()
+        compose.onNodeWithText(SetupCopy.text("saved","en")).assertExists()
         compose.onNodeWithTag("practice-next").performScrollTo().performClick()
-        compose.onNodeWithTag("practice-quote-text").assertTextEquals("A small step is still a step forward.")
+        compose.onNodeWithTag("practice-quote-text").assertTextEquals(SetupPractice.quotes[1].metin("en"))
         compose.onNodeWithTag("practice-deck").performScrollTo().performTouchInput { swipeLeft() }
-        compose.onNodeWithTag("practice-quote-text").assertTextEquals("Speak to yourself as you would to someone you love.")
+        compose.onNodeWithTag("practice-quote-text").assertTextEquals(SetupPractice.quotes[2].metin("en"))
         compose.onNodeWithText("2 / 5").assertIsDisplayed()
     }
 
@@ -127,8 +127,9 @@ class OnboardingTest {
         compose.setContent { AzimTema { Onboarding("tr", bildirimIzni = true) { _, _, _, _, _ -> } } }
         repeat(5) { page ->
             compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+            compose.waitUntil(10000) { compose.onAllNodesWithTag("art-loading").fetchSemanticsNodes().isEmpty() }
             compose.waitForIdle()
-            ekranKaydet("v97-onboarding-${page + 1}")
+            ekranKaydet("v928-onboarding-${page + 1}")
             if (page < 4) next()
         }
         compose.onNodeWithTag("onboarding-back").performClick()
@@ -151,7 +152,7 @@ class OnboardingTest {
             compose.runOnIdle { page = current }
             compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
             compose.waitForIdle()
-            ekranKaydet("v97-large-dark-${current + 1}")
+            ekranKaydet("v928-large-dark-${current + 1}")
         }
     }
     @Test fun proPreviewWaitsForTrialAndFreeChoiceUsesFreeTheme() {
@@ -165,6 +166,10 @@ class OnboardingTest {
         next()
         compose.onNodeWithTag("trial-offer").assertExists()
         compose.onNodeWithTag("trial-free").performClick()
+        compose.runOnIdle { assertNull(finished) }
+        compose.onNodeWithTag("theme-black").performScrollTo().performClick()
+        next()
+        compose.onNodeWithTag("trial-offer").assertDoesNotExist()
         compose.runOnIdle { assertEquals("black", finished?.answer("theme")?.firstOrNull()) }
     }
 

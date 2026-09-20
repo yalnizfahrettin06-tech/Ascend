@@ -67,8 +67,9 @@ fun Onboarding(
     startTrial: ((Boolean) -> Unit) -> Unit = { it(false) },
     bitir: (Set<String>, Int, Int, Int, Boolean) -> Unit,
 ) {
+    SetupTheme {
     var encoded by rememberSaveable { mutableStateOf(initialDraft.copy(
-        step = if (initialDraft.setupVersion >= 3) initialDraft.step.coerceIn(0, 4) else 0, setupVersion = 3).encode()) }
+        step = if (initialDraft.setupVersion >= 3) initialDraft.step.coerceIn(0, 4) else 0, setupVersion = 3).let { if (it.answer("theme").isEmpty()) it.choose("theme", "rider") else it }.encode()) }
     var trial by rememberSaveable { mutableStateOf(false) }
     var trialBusy by remember { mutableStateOf(false) }
     var trialError by remember { mutableStateOf(false) }
@@ -124,7 +125,7 @@ fun Onboarding(
                 ((viewport.value - 650f) * .85f).coerceIn(0f, 130f).dp else 0.dp
             val stageHeight = (viewport.value * .43f).coerceIn(210f, 310f).dp + sceneExtension
             AnimatedContent(step, transitionSpec = {
-                (slideInHorizontally(tween(360)) { if (targetState > initialState) it / 6 else -it / 6 } + fadeIn(tween(280))) togetherWith
+                (slideInHorizontally(tween(220)) { if (targetState > initialState) it / 6 else -it / 6 } + fadeIn(tween(200))) togetherWith
                     (slideOutHorizontally(tween(240)) { if (targetState > initialState) -it / 8 else it / 8 } + fadeOut(tween(180)))
             }, modifier = Modifier.fillMaxSize().clipToBounds(), label = "onboarding-step") { shownStep ->
                 // Only content scrolls; the primary action remains reachable at every text size.
@@ -135,14 +136,19 @@ fun Onboarding(
                         verticalArrangement = Arrangement.Top) {
                         Column(Modifier.fillMaxWidth().testTag("onboarding-body"), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                             when (shownStep) {
-                                0 -> PlanLanguage(dil, profile.answer("language").firstOrNull() ?: dil) { update(profile.choose("language", it)); languageChanged(it) }
-                                1 -> PlanIntroduction(dil, stageHeight)
+                                0 -> PlanLanguage(dil, profile.answer("language").firstOrNull() ?: dil, viewport) { update(profile.choose("language", it)); languageChanged(it) }
+                                1 -> PlanIntroduction(dil, stageHeight, profile) { update(profile.choose(SetupPractice.SAVED, it, multiple = true)) }
                                 2 -> PlanRhythm(profile, dil, { update(profile.copy(dailyCount = it)) }, { hourDialog = it })
                                 3 -> PlanPermission(profile, dil, bildirimIzni, previewAccess, stageHeight) { permissionHelp = true }
                                 4 -> {
-                                    PlanTitle(cevir(dil, "Sana ait bir görünüm.", "Make it feel like you."), cevir(dil, "Beyaz, Siyah, Roma ve Atlı Yolcu ücretsiz. Dilediğin zaman değiştir.", "White, Black, Rome and Dark Rider are free. Change them anytime."))
-                                    TemaGrid(dil, AnaTemalar.onboarding, AnaTemalar.find(profile.answer("theme").firstOrNull()).id, pro, compact = true) {
-                                        if (it.pro) previewTheme = it.id else update(profile.choose("theme", it.id))
+                                    PlanTitle(SetupCopy.text("appearance", dil), SetupCopy.text("appearanceBody", dil))
+                                    TemaGrid(dil, listOf(AnaTemalar.rider, AnaTemalar.roma, AnaTemalar.emperor, AnaTemalar.duel), AnaTemalar.find(profile.answer("theme").firstOrNull()).id, pro, compact = true) {
+                                        previewTheme = it.id
+                                    }
+                                    Row(Modifier.selectableGroup(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                        listOf(AnaTemalar.black, AnaTemalar.white).forEach { theme ->
+                                            Box(Modifier.weight(1f)) { PlanChoice(theme.label(dil), theme.id in profile.answer("theme"), "theme-${theme.id}") { update(profile.choose("theme",theme.id)) } }
+                                        }
                                     }
                                 }
                             }
@@ -158,14 +164,14 @@ fun Onboarding(
                             Button(onClick = {
                                 if (step == 3 && !bildirimIzni) izinIste()
                                 else if (step < 4) move(step + 1)
-                                else if (bildirimIzni) { if(pro) finish(true) else trial = true } else move(3)
+                                else if (bildirimIzni) { if(pro || !AnaTemalar.find(profile.answer("theme").firstOrNull()).pro) finish(true) else trial = true } else move(3)
                             }, enabled = !kaydediliyor, shape = RoundedCornerShape(16.dp),
                                 modifier = Modifier.widthIn(max = 480.dp).fillMaxWidth().heightIn(min = UiRoles.primaryTarget).testTag("onboarding-next")) {
                                 Text(if (kaydediliyor) cevir(dil, "Kaydediliyor…", "Saving…") else when (step) {
                                     0 -> cevir(dil, "Devam", "Continue")
                                     1 -> cevir(dil, "Ritmimi ayarla", "Set my rhythm")
                                     3 -> if (bildirimIzni) cevir(dil, "Temamı seç", "Choose my theme") else cevir(dil, "Bildirimleri aç", "Enable notifications")
-                                    4 -> cevir(dil, "Devam", "Continue")
+                                    4 -> if (!pro && AnaTemalar.find(profile.answer("theme").firstOrNull()).pro) SetupCopy.text("openLook",dil) else cevir(dil,"Ascend’e başla","Start Ascend")
                                     else -> cevir(dil, "Devam", "Continue")
                                 }, textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Medium)
                             }
@@ -183,9 +189,10 @@ fun Onboarding(
                 trialBusy = false
                 if(success) { trial = false; finish(true) } else trialError = true
             }
-        }, free = { val freeProfile = profile.choose("theme", AnaTemalar.allowed(profile.answer("theme").firstOrNull(), false).id); update(freeProfile); trial = false; finish(true, freeProfile) })
+        }, free = { trial = false })
     previewTheme?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, true,
         close = { previewTheme = null }, apply = { update(profile.choose("theme", id)); previewTheme = null }, proOpen = proOpen) }
+    }
 }
 
 @Composable
@@ -194,15 +201,17 @@ private fun silverBrush() = Brush.linearGradient(if (Renk.karanlikMi)
     else listOf(Color(0xFFE1E4E6), Color(0xFFF7F8F8), Color(0xFFC9CED2)))
 
 @Composable
-private fun PlanLanguage(dil: String, language: String, select: (String) -> Unit) {
-    PlanTitle(cevir(dil, "İyi bir başlangıç.\nSenin dilinde.", "A fresh start.\nIn your language."),
-        cevir(dil, "Ascend'e hoş geldin. Önce dilini seç.", "Welcome to Ascend. Choose your language."))
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.selectableGroup()) {
+private fun PlanLanguage(dil: String, language: String, viewport: Dp, select: (String) -> Unit) {
+    val fontScale = LocalDensity.current.fontScale
+    if (fontScale <= 1.35f) EditorialPhoto(R.drawable.warrior_gladiator,
+        Modifier.fillMaxWidth().height((viewport.value * .19f).coerceIn(64f, 130f).dp).clip(RoundedCornerShape(20.dp)))
+    PlanTitle(SetupCopy.text("hello",dil), SetupCopy.text("helloBody",dil))
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp), modifier = Modifier.selectableGroup()) {
         Diller.secenekler.forEach { (code, name) ->
             PlanChoice(name, language == code, "language-$code") { select(code) }
         }
     }
-    Text(PhaseCopy.text("backup",dil),
+    Text(SetupCopy.text("account",dil),
         color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
 }
 
@@ -263,9 +272,9 @@ private fun PlanChoice(label: String, selected: Boolean, tag: String, role: Role
     val markShape = if (role == Role.Checkbox) RoundedCornerShape(5.dp) else CircleShape
     val interaction = if (role == Role.Checkbox) Modifier.toggleable(selected, role = role, onValueChange = { onClick() })
         else Modifier.selectable(selected, role = role, onClick = onClick)
-    Row(Modifier.fillMaxWidth().heightIn(min = UiRoles.primaryTarget).clip(RoundedCornerShape(14.dp)).background(fill)
+    Row(Modifier.fillMaxWidth().heightIn(min = 48.dp).clip(RoundedCornerShape(14.dp)).background(fill)
         .border(if (selected) 1.5.dp else 1.dp, stroke, RoundedCornerShape(14.dp))
-        .then(interaction).testTag(tag).padding(horizontal = 16.dp, vertical = 16.dp),
+        .then(interaction).testTag(tag).padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(label, Modifier.weight(1f), color = Renk.metin, fontSize = 16.sp, lineHeight = 23.sp,
             fontWeight = if (selected) FontWeight.Medium else FontWeight.Normal)
@@ -290,24 +299,24 @@ private fun HourControl(dil: String, start: Boolean, hour: Int, modifier: Modifi
 }
 
 @Composable
-private fun PlanIntroduction(dil: String, stageHeight: Dp) {
+private fun PlanIntroduction(dil: String, stageHeight: Dp, profile: PersonalProfile, save: (String) -> Unit) {
     var page by rememberSaveable { mutableIntStateOf(0) }
-    var liked by rememberSaveable { mutableStateOf(false) }
-    val quotes = listOf(
-        cevir(dil, "Her şeyi bugün bitirmek zorunda değilsin.", "You do not have to finish everything today."),
-        cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward."),
-        cevir(dil, "Kendine, sevdiğin birine konuşur gibi konuş.", "Speak to yourself as you would to someone you love."))
-    fun change(direction: Int) { page = (page + direction + quotes.size) % quotes.size; liked = false }
-    PlanTitle(cevir(dil, "Bir sözde dur.\nSonrakini keşfet.", "Pause on a quote.\nDiscover another."),
-        cevir(dil, "Kartı kaydır; sevdiğin söze kalpten dokun.", "Swipe the card. Tap the heart on a quote you like."))
+    val quotes = remember { SetupPractice.quotes }
+    val liked = quotes[page].kimlik in profile.answer(SetupPractice.SAVED)
+    fun change(direction: Int) { page = (page + direction + quotes.size) % quotes.size }
+    PlanTitle(SetupCopy.text("practice",dil), SetupCopy.text("practiceBody",dil))
     val dragThreshold = with(LocalDensity.current) { 48.dp.toPx() }
     Box(Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 10.dp).testTag("practice-deck")) {
         Box(Modifier.matchParentSize().padding(horizontal = 14.dp).offset(y = 10.dp)
             .background(Renk.kenarlik.copy(alpha = .5f), RoundedCornerShape(24.dp)))
         Box(Modifier.matchParentSize().padding(horizontal = 6.dp).offset(y = 5.dp)
             .background(Renk.yuzey, RoundedCornerShape(24.dp)))
+        Box(Modifier.matchParentSize().clip(RoundedCornerShape(24.dp))) {
+            EditorialPhoto(R.drawable.warrior_throne, Modifier.matchParentSize())
+            Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color.Black.copy(alpha=.16f), Color.Black.copy(alpha=.74f)))))
+        }
         Column(Modifier.fillMaxWidth().heightIn(min = stageHeight).clip(RoundedCornerShape(24.dp))
-            .background(silverBrush()).border(1.dp, Renk.kenarlik, RoundedCornerShape(24.dp))
+            .border(1.dp, Renk.kenarlik, RoundedCornerShape(24.dp))
             .pointerInput(page) {
                 var travel = 0f
                 detectHorizontalDragGestures(onDragStart = { travel = 0f }, onHorizontalDrag = { change, amount ->
@@ -320,16 +329,16 @@ private fun PlanIntroduction(dil: String, stageHeight: Dp) {
             }, label = "practice-quote") { index ->
                 Box(Modifier.fillMaxWidth().heightIn(min = (stageHeight - 150.dp).coerceAtLeast(90.dp)),
                     contentAlignment = Alignment.CenterStart) {
-                    Text(quotes[index], color = Renk.metin, fontFamily = LoraSerif, fontSize = 27.sp, lineHeight = 36.sp,
+                    Text(quotes[index].metin(dil), color = Color.White, fontFamily = LoraSerif, fontSize = 27.sp, lineHeight = 36.sp,
                         modifier = Modifier.testTag("practice-quote-text"))
                 }
             }
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Text(if (liked) cevir(dil, "Örnek beğenildi", "Sample liked") else cevir(dil, "Bir kez dene", "Give it a try"),
+                Text(if (liked) SetupCopy.text("saved",dil) else cevir(dil, "Bir kez dene", "Give it a try"),
                     Modifier.weight(1f).semantics { liveRegion = LiveRegionMode.Polite }, color = Renk.metinIkincil, fontSize = 12.sp, lineHeight = 18.sp)
-                IconToggleButton(checked = liked, onCheckedChange = { liked = it }, modifier = Modifier.size(48.dp).testTag("practice-like")) {
+                IconToggleButton(checked = liked, onCheckedChange = { save(quotes[page].kimlik) }, modifier = Modifier.size(48.dp).testTag("practice-like")) {
                     val scale by animateFloatAsState(if (liked) 1.15f else 1f, tween(180), label = "practice-heart")
-                    Icon(if (liked) AzimIkon.KalpDolu else AzimIkon.Kalp, cevir(dil, "Örnek sözü beğen", "Like sample quote"),
+                    Icon(if (liked) AzimIkon.KalpDolu else AzimIkon.Kalp, cevir(dil, "Kaydet", "Save"),
                         Modifier.size(25.dp).graphicsLayer { scaleX = scale; scaleY = scale }, tint = Renk.metin)
                 }
             }
@@ -352,6 +361,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
     PlanTitle(cevir(dil, "İyi bir söz seni bulsun.", "Let good words find you."),
         cevir(dil, "Günde ${profile.dailyCount} kez, ${planHour(profile.startHour)}–${planHour(profile.endHour)} arasında.",
             "${profile.dailyCount} times a day, between ${planHour(profile.startHour)} and ${planHour(profile.endHour)}."))
+    if (!allowed) Text(SetupCopy.text("permission",dil),color = Renk.metinIkincil,fontSize = 13.sp)
     Surface(onClick = help, color = Renk.yuzey, shape = RoundedCornerShape(16.dp), border = BorderStroke(1.dp, Renk.kenarlik), modifier = Modifier.fillMaxWidth().testTag("notification-appearance-help")) {
         Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Icon(AzimIkon.Bildirim, null, tint = Renk.metin)
@@ -373,7 +383,7 @@ private fun PlanPermission(profile: PersonalProfile, dil: String, allowed: Boole
         Box(Modifier.width(38.dp).height(4.dp).background(Renk.metinIkincil.copy(alpha = .45f), CircleShape))
         Text(cevir(dil, "BİLDİRİM ÖRNEĞİ", "NOTIFICATION PREVIEW"), modifier = Modifier.padding(vertical = 22.dp), color = Renk.metinIkincil, fontSize = 10.sp, letterSpacing = 1.2.sp)
         Surface(onClick = { expanded = !expanded }, color = Renk.zemin, shape = RoundedCornerShape(18.dp), border = BorderStroke(1.dp, Renk.kenarlik),
-            modifier = Modifier.fillMaxWidth().animateContentSize(tween(280)).testTag("live-reminder-preview")
+            modifier = Modifier.fillMaxWidth().animateContentSize(tween(200)).testTag("live-reminder-preview")
                 .semantics { stateDescription = cevir(dil, if (expanded) "Genişletilmiş" else "Daraltılmış", if (expanded) "Expanded" else "Collapsed") }) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {

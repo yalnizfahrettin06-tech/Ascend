@@ -27,7 +27,7 @@ class CompactUiTest {
         }
         compose.onNodeWithTag("trial-start").performScrollTo().assertIsDisplayed().performClick()
         compose.runOnIdle { assertTrue(started) }
-        compose.onNodeWithTag("trial-free").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("trial-free").assertIsDisplayed()
     }
     @Test fun topicsCanBeTurnedBackOnWithoutShowingQuotes() {
         var selected by mutableStateOf(setOf("motivasyon","ozsefkat"))

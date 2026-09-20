@@ -12,6 +12,26 @@ import java.time.LocalDate
 import java.util.UUID
 
 class Phase34StorageTest {
+    @Test fun setupFavoritesCommitOnceAndCannotImportOtherRecords() = runBlocking {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val file = File(context.cacheDir,"setup-${UUID.randomUUID()}.preferences_pb")
+        val job = SupervisorJob()
+        val store = PreferenceDataStoreFactory.create(scope = CoroutineScope(job + Dispatchers.IO),produceFile = { file })
+        try {
+            val depot = Depo(context,store)
+            val first = SetupPractice.quotes.first().kimlik
+            val original = Sozler.tumu().last().kimlik
+            depot.favoriDegistir(original)
+            val profile = PersonalProfile().choose("theme","rider").choose(SetupPractice.SAVED,first,multiple = true)
+                .choose(SetupPractice.SAVED,"invalid-id",multiple = true)
+            depot.saveOnboardingDraft(profile)
+            assertEquals(setOf(original),depot.favoriler.first())
+            repeat(2) { depot.completePersonalPlan(profile,true) }
+            assertEquals(setOf(original,first),depot.favoriler.first())
+            assertTrue(depot.personalProfile.first()!!.answer(SetupPractice.SAVED).isEmpty())
+        } finally { job.cancelAndJoin(); file.delete() }
+    }
+
     @Test fun legacySavedAndSeriesDataSurviveAndFirstCompletionIsAtomic() = runBlocking {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val file = File(context.cacheDir,"phase34-${UUID.randomUUID()}.preferences_pb")
