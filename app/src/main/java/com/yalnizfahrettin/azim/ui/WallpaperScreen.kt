@@ -22,8 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.CancellationException
 
 @Composable
 fun WallpaperGallery(dil: String, pro: Boolean, openOffer: (ProOffer) -> Unit) {
@@ -64,9 +62,11 @@ fun WallpaperPreview(theme: AnaTema, dil: String, pro: Boolean, close: () -> Uni
     val metrics = context.resources.displayMetrics
     val aspect = metrics.widthPixels.toFloat() / metrics.heightPixels.coerceAtLeast(1)
     var target by rememberSaveable(theme.id) { mutableIntStateOf(1) }
-    var busy by remember { mutableStateOf(false) }
-    var result by rememberSaveable(theme.id) { mutableStateOf<String?>(null) }
-    val scope = rememberCoroutineScope()
+    val operation: WallpaperOperation = androidx.lifecycle.viewmodel.compose.viewModel()
+    val session = rememberSaveable(theme.id) { java.util.UUID.randomUUID().toString() }
+    LaunchedEffect(session) { operation.begin(session) }
+    val busy = operation.busy
+    val result = operation.result
     val copy = { key: String -> WallpaperCopy.text(key,dil) }
     BackHandler(busy) { }
     ModalBottomSheet(onDismissRequest = { if(!busy) close() },containerColor = Renk.zemin,dragHandle = null,
@@ -83,7 +83,7 @@ fun WallpaperPreview(theme: AnaTema, dil: String, pro: Boolean, close: () -> Uni
                 Text(copy("target"),color = Renk.metin,fontSize = 15.sp,fontWeight = FontWeight.Medium)
                 // Vertical choices remain readable with long translations and large fonts.
                 listOf("home","lock","both").forEachIndexed { index, key ->
-                    Surface(onClick = { target = index + 1; result = null },enabled = !busy,
+                    Surface(onClick = { target = index + 1; operation.clearResult() },enabled = !busy,
                         color = if(target == index + 1) Renk.metin else Renk.yuzey,shape = RoundedCornerShape(12.dp),
                         modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("wallpaper-target-${index + 1}").semantics { role = Role.RadioButton; selected = target == index + 1 }) {
                         Text(copy(key),Modifier.padding(14.dp),color = if(target == index + 1) Renk.zemin else Renk.metin,fontSize = 14.sp)
@@ -98,14 +98,10 @@ fun WallpaperPreview(theme: AnaTema, dil: String, pro: Boolean, close: () -> Uni
                 Button(enabled = !busy,onClick = {
                     if(theme.pro && !pro) proOpen()
                     else {
-                        busy = true; result = null
-                        scope.launch {
-                            try {
-                                val success = applyWallpaper?.invoke(theme,target,aspect) ?: WallpaperService.apply(context,theme,target,aspect)
-                                result = if(success) "done" else "error"
-                            } catch(e: CancellationException) { throw e }
-                            catch(_: Exception) { result = "error" }
-                            finally { busy = false }
+                        val appContext = context.applicationContext
+                        val chosenTarget = target
+                        operation.apply {
+                            applyWallpaper?.invoke(theme,chosenTarget,aspect) ?: WallpaperService.apply(appContext,theme,chosenTarget,aspect)
                         }
                     }
                 },modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("wallpaper-apply")) {

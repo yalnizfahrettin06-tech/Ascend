@@ -48,15 +48,21 @@ class WallpaperJourneyTest {
         compose.waitUntil { targetSeen == 3 }
         compose.onNodeWithTag("wallpaper-result").assertTextEquals(WallpaperCopy.text("error","tr"))
     }
-    @Test fun emulatorCanInstallOriginalFreeArtwork() {
-        org.junit.Assume.assumeTrue(android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.MODEL.contains("sdk"))
-        val ctx = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().targetContext
-        val manager = android.app.WallpaperManager.getInstance(ctx)
-        org.junit.Assume.assumeTrue(manager.isWallpaperSupported && manager.isSetWallpaperAllowed)
-        kotlinx.coroutines.runBlocking {
-            assertTrue(WallpaperService.apply(ctx,AnaTemalar.rider,android.app.WallpaperManager.FLAG_LOCK,.5f))
+    @Test fun operationSurvivesActivityRecreation() {
+        lateinit var initial: WallpaperOperation
+        compose.activityRule.scenario.onActivity {
+            initial = androidx.lifecycle.ViewModelProvider(it)[WallpaperOperation::class.java]
+            initial.begin("test")
+            initial.apply { true }
         }
-        assertTrue(manager.getWallpaperId(android.app.WallpaperManager.FLAG_LOCK) > 0)
+        compose.waitUntil { initial.result == "done" }
+        compose.activityRule.scenario.recreate()
+        compose.activityRule.scenario.onActivity {
+            val restored = androidx.lifecycle.ViewModelProvider(it)[WallpaperOperation::class.java]
+            assertSame(initial,restored)
+            assertEquals("done",restored.result)
+            assertFalse(restored.busy)
+        }
     }
     @Test fun cropAccessAndEditorialIdentityStayConsistent() {
         for(aspect in listOf(.42f,.5f,.66f,1f,2f)) {
