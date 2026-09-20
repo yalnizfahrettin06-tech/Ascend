@@ -6,8 +6,9 @@ adb logcat -v threadtime > screenshots/session-logcat.txt &
 logcat_pid=$!
 adb shell wm size 720x1600
 adb shell wm density 280
+# Avoid concurrent bulk ADB transfers while instrumentation owns its shell connection.
+# Screenshots are still copied after each test suite below; failures remain failures.
 (while true; do
-  adb pull /sdcard/Download/ascend-screenshots screenshots >/dev/null 2>&1
   free -m >> screenshots/host-memory.txt
   sleep 3
 done) &

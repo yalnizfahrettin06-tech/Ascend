@@ -41,6 +41,7 @@ Bu rapor gerçek kullanıcı görüşmesi, gelir analizi veya bütün cihazlarda
 - Pro teklifi duvar kâğıdına özgü seçimi gösterir. Demo açılması tek başına telefonun duvar kâğıdını değiştirmez; kullanıcı Uygula’ya basar.
 - Hareketli koleksiyondaki eski duvar kâğıdı önizlemesi çalışan uygulama ekranına bağlandı.
 - Yeni metinler mevcut yedi dilde tanımlandı.
+- Sistem duvar kâğıdı uygulamanın ana temasından bağımsızdır. Pro demosunu kapatmak daha önce uygulanmış telefon duvar kâğıdını geri almaz; uygulama kullanıcının sonradan yaptığı sistem seçimine müdahale etmez.
 
 ### 3.2 Henüz uygulanmış sayılmayanlar
 
@@ -335,6 +336,6 @@ Pro’nun görsel paketi için kısa öneri: **“Aynı dünyayı her ekranda ya
 
 ## 12. Kaynaklar
 
-- Android WallpaperManager: https://developer.android.com/reference/android/app/WallpaperManager — statik görsel uygulama, hedef bayrakları ve cihaz kısıtlamaları.
+- [Android WallpaperManager](https://developer.android.com/reference/android/app/WallpaperManager) — statik görsel uygulama, hedef bayrakları ve cihaz kısıtlamaları.
 - Proje içi Faz 3–4 teslimi: `PHASE_3_4_9_26.md` — kapanan sorunlar ve açık gerçek cihaz kapıları.
 - Önceki kapsamlı denetim: `02-Kapsamli-Inceleme.md` — rapor maddeleriyle bağ kurulmuştur; eski sürüm bulguları doğrudan yeni hata ilan edilmez.
