@@ -103,7 +103,7 @@ fun TemaGrid(dil: String, themes: List<AnaTema>, selectedId: String, pro: Boolea
                                 if(theme.art == null) Text(cevir(dil,"Kendi hızında.\nBir adım daha.","At your pace.\nOne step more."),
                                     Modifier.align(Alignment.CenterStart).padding(16.dp), color = ink, fontFamily = LoraSerif,
                                     fontSize = if(compact) 16.sp else 18.sp, lineHeight = if(compact) 21.sp else 24.sp)
-                                if(theme.pro) Text("PRO", color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold,
+                                if(theme.pro) Text("PRO", color = Color.White, fontSize = UiRoles.badge, fontWeight = FontWeight.Bold,
                                     modifier = Modifier.align(Alignment.TopStart).padding(10.dp)
                                         .background(Color.Black.copy(alpha = .75f), RoundedCornerShape(6.dp)).padding(horizontal = 7.dp, vertical = 4.dp))
                                 if(selected) Surface(color = ink, shape = androidx.compose.foundation.shape.CircleShape,
@@ -131,7 +131,7 @@ fun TemaKoleksiyonKapagi(dil: String, selected: Boolean = false, open: () -> Uni
             TemaZemini(AnaTemalar.emperor,Modifier.matchParentSize(),thumbnail = true,previewSize = 1024)
             Box(Modifier.matchParentSize().background(Brush.horizontalGradient(listOf(Color.Black.copy(alpha = .62f),Color.Transparent))))
             Column(Modifier.fillMaxSize().padding(20.dp),verticalArrangement = Arrangement.Bottom) {
-                Text(CollectionCopy.text("badge",dil),color = Color.White.copy(alpha = .8f),fontSize = 9.sp,letterSpacing = 1.sp)
+                Text(CollectionCopy.text("badge",dil),color = Color.White.copy(alpha = .8f),fontSize = UiRoles.badge,letterSpacing = 1.sp)
                 Spacer(Modifier.height(7.dp))
                 Text(AnaTemalar.emperor.label(dil),Modifier.fillMaxWidth(.7f),color = Color.White,fontSize = 24.sp,lineHeight = 29.sp,fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(10.dp))
@@ -160,7 +160,7 @@ fun TemaOnizleme(theme: AnaTema, dil: String, pro: Boolean, close: () -> Unit, a
                 TemaZemini(theme, Modifier.matchParentSize(), dil = dil)
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.Center) {
                     val previewText = quote?.metin(dil) ?: cevir(dil,"Kendine ayırdığın\nbu an yeter.","This moment\nfor yourself is enough.")
-                    val quoteSize = ReadingLayout.quoteSize(previewText.length, LocalDensity.current.fontScale > 1.35f, LocalConfiguration.current.screenWidthDp < 380)
+                    val quoteSize = ReadingLayout.quoteSize(previewText.length, LocalDensity.current.fontScale > 1.35f, LocalConfiguration.current.screenWidthDp < 360)
                     Text(quote?.metin(dil) ?: cevir(dil, "Kendine ayırdığın\nbu an yeter.", "This moment\nfor yourself is enough."), Modifier.fillMaxWidth(if(theme.art == null || LocalDensity.current.fontScale > 1.35f) 1f else .76f), fontFamily = LoraSerif,
                         fontSize = quoteSize.sp, lineHeight = (quoteSize + 5).sp, color = if(theme.dark) Color.White else Color.Black)
                 }

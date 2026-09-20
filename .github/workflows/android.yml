@@ -68,7 +68,7 @@ jobs:
           retention-days: 7
 
   ui-tests:
-    if: github.event_name == 'workflow_dispatch' && inputs.run_ui
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.run_ui)
     needs: build
     permissions:
       contents: write
@@ -111,7 +111,7 @@ jobs:
         run: |
           if [ -d screenshots ]; then
             zip -r Ascend-9.25.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
-            gh release upload v9.25.0-ui Ascend-9.25.0-visual-evidence.zip --clobber
+            gh release view v9.25.0-ui >/dev/null 2>&1 && gh release upload v9.25.0-ui Ascend-9.25.0-visual-evidence.zip --clobber || true
           fi
 
   share-regression:
@@ -158,7 +158,7 @@ jobs:
 
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [build, share-regression]
+    needs: [build, share-regression, ui-tests]
     runs-on: ubuntu-latest
     permissions:
       contents: write

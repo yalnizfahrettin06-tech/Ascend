@@ -49,11 +49,8 @@ class WidgetAyarActivity : ComponentActivity() {
             var message by rememberSaveable { mutableStateOf<String?>(null) }
             val config = WidgetSecimi(theme, true, false)
             val quote = cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward.")
-            val previewState = remember(config,dil,square) { mutableStateOf<android.graphics.Bitmap?>(null) }
-            val bitmap by previewState
-            LaunchedEffect(config,dil,square) {
-                previewState.value = withContext(Dispatchers.Default) { WidgetTasarimi.render(this@WidgetAyarActivity, config, quote, "Ascend", 1080, if(square) 1080 else 540) }
-            }
+            val widgetPreview = rememberWidgetPreview(config, quote, if(square) 1080 else 540)
+            val bitmap = widgetPreview.bitmap
             fun addWidget() {
                 if (!pro) showPro = true else {
                                 busy = true
@@ -105,7 +102,8 @@ class WidgetAyarActivity : ComponentActivity() {
                         item {
                             Box(Modifier.fillMaxWidth().aspectRatio(if(square) 1f else 2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
                                 bitmap?.let { Image(it.asImageBitmap(), quote, Modifier.fillMaxSize()) }
-                                if(bitmap == null) CircularProgressIndicator(Modifier.align(Alignment.Center).size(24.dp),color = Renk.metin)
+                                if(widgetPreview.failed) TextButton(onClick = widgetPreview::retry, modifier = Modifier.align(Alignment.Center)) { Text(cevir(dil,"Yeniden dene","Try again")) }
+                                else if(bitmap == null) CircularProgressIndicator(Modifier.align(Alignment.Center).size(24.dp),color = Renk.metin)
                             }
                         }
                         item { Text(cevir(dil,"Her gün yeni bir söz · Boyutu ana ekranında da ayarlayabilirsin.", "A new quote each day · Resize on your home screen too."), color = Renk.metinIkincil, fontSize = 12.sp) }

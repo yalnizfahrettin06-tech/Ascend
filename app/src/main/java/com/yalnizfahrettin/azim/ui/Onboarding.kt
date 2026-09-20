@@ -160,7 +160,7 @@ fun Onboarding(
                                 else if (step < 4) move(step + 1)
                                 else if (bildirimIzni) { if(pro) finish(true) else trial = true } else move(3)
                             }, enabled = !kaydediliyor, shape = RoundedCornerShape(16.dp),
-                                modifier = Modifier.widthIn(max = 480.dp).fillMaxWidth().heightIn(min = 56.dp).testTag("onboarding-next")) {
+                                modifier = Modifier.widthIn(max = 480.dp).fillMaxWidth().heightIn(min = UiRoles.primaryTarget).testTag("onboarding-next")) {
                                 Text(if (kaydediliyor) cevir(dil, "Kaydediliyor…", "Saving…") else when (step) {
                                     0 -> cevir(dil, "Devam", "Continue")
                                     1 -> cevir(dil, "Ritmimi ayarla", "Set my rhythm")
@@ -251,7 +251,7 @@ private fun PlanRhythm(profile: PersonalProfile, dil: String, count: (Int) -> Un
 private fun PlanTitle(title: String, description: String) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(title, Modifier.semantics { heading() }, color = Renk.metin, fontFamily = ArayuzFont,
-            fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold)
+            fontSize = UiRoles.setupTitle, lineHeight = UiRoles.setupLine, fontWeight = FontWeight.SemiBold)
         Text(description, color = Renk.metinIkincil, fontSize = 14.sp, lineHeight = 21.sp)
     }
 }
@@ -263,7 +263,7 @@ private fun PlanChoice(label: String, selected: Boolean, tag: String, role: Role
     val markShape = if (role == Role.Checkbox) RoundedCornerShape(5.dp) else CircleShape
     val interaction = if (role == Role.Checkbox) Modifier.toggleable(selected, role = role, onValueChange = { onClick() })
         else Modifier.selectable(selected, role = role, onClick = onClick)
-    Row(Modifier.fillMaxWidth().heightIn(min = 60.dp).clip(RoundedCornerShape(14.dp)).background(fill)
+    Row(Modifier.fillMaxWidth().heightIn(min = UiRoles.primaryTarget).clip(RoundedCornerShape(14.dp)).background(fill)
         .border(if (selected) 1.5.dp else 1.dp, stroke, RoundedCornerShape(14.dp))
         .then(interaction).testTag(tag).padding(horizontal = 16.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
