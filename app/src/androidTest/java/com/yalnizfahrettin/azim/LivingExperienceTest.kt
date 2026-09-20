@@ -29,8 +29,8 @@ class LivingExperienceTest {
         compose.onNodeWithTag("collection-use").performClick()
         compose.runOnIdle { assertEquals(1,offers); assertEquals("white",chosen) }
         compose.onNodeWithTag("collection-tab-1").performClick()
-        compose.onNodeWithTag("collection-use").assertDoesNotExist()
-        compose.onNodeWithText(CollectionCopy.text("preview","tr")).performScrollTo().assertExists()
+        compose.onNodeWithTag("collection-use").assertExists()
+        compose.onNodeWithText(WallpaperCopy.text("note","tr")).performScrollTo().assertExists()
         ekranKaydet("924-wallpaper-preview")
         compose.onNodeWithTag("collection-tab-2").performScrollTo().performClick()
         compose.onNodeWithTag("collection-tab-2").assertIsSelected()

@@ -40,7 +40,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
     var living by rememberSaveable { mutableStateOf(false) }
     var collectionOffering by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(pro,offerDismissals) { collectionOffering = false }
-    var widgetTab by rememberSaveable { mutableStateOf(false) }
+    var appearanceTab by rememberSaveable { mutableIntStateOf(0) }
     var preview by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingApply by rememberSaveable { mutableStateOf(false) }
     var lastDismissal by rememberSaveable { mutableIntStateOf(offerDismissals) }
@@ -50,16 +50,16 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
         Text(cevir(dil,"Görünüm","Appearance"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = UiRoles.sectionTitle, fontWeight = FontWeight.SemiBold)
         Row(Modifier.padding(horizontal = 24.dp).fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            listOf(false, true).forEach { widget ->
-                Surface(onClick = { widgetTab = widget }, color = if(widgetTab == widget) Renk.metin else Renk.yuzey, shape = RoundedCornerShape(12.dp), modifier = Modifier.weight(1f).fillMaxHeight().testTag(if(widget) "appearance-widget" else "appearance-theme").semantics { role = Role.Tab; this.selected = widgetTab == widget }) {
+            listOf(cevir(dil,"Uygulama teması","App theme"), "Widget", WallpaperCopy.text("title",dil)).forEachIndexed { index, label ->
+                Surface(onClick = { appearanceTab = index }, color = if(appearanceTab == index) Renk.metin else Renk.yuzey, shape = RoundedCornerShape(12.dp), modifier = Modifier.weight(1f).fillMaxHeight().testTag(listOf("appearance-theme","appearance-widget","appearance-wallpaper")[index]).semantics { role = Role.Tab; this.selected = appearanceTab == index }) {
                     Box(Modifier.fillMaxSize(),contentAlignment = Alignment.Center) {
-                        Text(if(widget) "Widget" else cevir(dil,"Uygulama teması","App theme"), Modifier.padding(vertical = 13.dp, horizontal = 6.dp), color = if(widgetTab == widget) Renk.zemin else Renk.metinIkincil, fontSize = 13.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+                        Text(label, Modifier.padding(vertical = 13.dp, horizontal = 6.dp), color = if(appearanceTab == index) Renk.zemin else Renk.metinIkincil, fontSize = 13.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                     }
                 }
             }
         }
         Spacer(Modifier.height(10.dp))
-        if(!widgetTab) {
+        if(appearanceTab == 0) {
             val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f || androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp < 360) 1 else 2
             val rows = remember(columns) { AnaTemalar.all.chunked(columns) }
             LazyColumn(Modifier.weight(1f).clipToBounds().testTag("appearance-gallery"),contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 6.dp, bottom = 24.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
@@ -72,6 +72,8 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
                 }
                 items(rows,key = { it.first().id }) { row -> TemaGrid(dil,row,AnaTemalar.allowed(selected,pro).id,pro) { preview = it.id } }
             }
+        } else if(appearanceTab == 2) {
+            Box(Modifier.weight(1f)) { WallpaperGallery(dil,pro) { if(offerOpen != null) offerOpen(it) else proOpen() } }
         } else {
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
                 ProRozeti(metin = "WIDGET · PRO")

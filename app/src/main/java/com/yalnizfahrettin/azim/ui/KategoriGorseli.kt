@@ -88,7 +88,7 @@ object KategoriResimleri {
     )
 
     @DrawableRes
-    fun kaynak(key: String): Int = all[key] ?: R.drawable.scene_summit
+    fun kaynak(key: String): Int = EditorialArt.saved(key)
 }
 
 /** The category title supplies semantics; the background is intentionally decorative. */

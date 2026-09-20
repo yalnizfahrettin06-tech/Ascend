@@ -19,30 +19,30 @@ import com.yalnizfahrettin.azim.data.*
 /** Editorial artwork is independent of the user's home theme and access level. */
 object EditorialArt {
     val groups = mapOf(
-        "olumlamalar" to R.drawable.category_ozsefkat,
-        "azim" to R.drawable.warrior_shieldwall,
-        "disiplin" to R.drawable.category_derin_odak,
+        "olumlamalar" to R.drawable.warrior_throne,
+        "azim" to R.drawable.warrior_spartan,
+        "disiplin" to R.drawable.warrior_legion,
         "cesaret" to R.drawable.warrior_champion,
         Kategoriler.DUSUNURLER to R.drawable.scene_wisdom,
-        "dogu_gelenegi" to R.drawable.category_zen,
-        "inanc" to R.drawable.category_dua,
-        "spor" to R.drawable.category_antrenman,
-        "is" to R.drawable.category_girisimcilik,
-        "iliskiler" to R.drawable.category_arkadaslik,
-        "zihin" to R.drawable.category_huzur,
-        "ogrenme" to R.drawable.category_okumak,
+        "dogu_gelenegi" to R.drawable.scene_tas_salon,
+        "inanc" to R.drawable.art_roman_home_v9,
+        "spor" to R.drawable.warrior_gladiator,
+        "is" to R.drawable.warrior_commander,
+        "iliskiler" to R.drawable.warrior_shieldwall,
+        "zihin" to R.drawable.scene_kiyi_nobeti,
+        "ogrenme" to R.drawable.scene_wisdom,
     )
-    fun group(key: String) = groups[key] ?: R.drawable.category_azim
-    fun saved(category: String): Int = KategoriResimleri.all[category] ?: when(Kategoriler.bul(category)?.grup) {
+    fun group(key: String) = groups[key] ?: R.drawable.warrior_spartan
+    fun saved(category: String): Int = when(Kategoriler.bul(category)?.grup) {
         "filozoflar" -> group(Kategoriler.DUSUNURLER)
         "tasavvuf" -> group("dogu_gelenegi")
         else -> group(Kategoriler.bul(category)?.grup.orEmpty())
     }
     fun series(id: String) = when(id) {
         "restart" -> R.drawable.warrior_emperor
-        "kindness" -> R.drawable.category_ozsefkat
-        "steps" -> R.drawable.category_azim
-        else -> R.drawable.category_derin_odak
+        "kindness" -> R.drawable.warrior_throne
+        "steps" -> R.drawable.warrior_commander
+        else -> R.drawable.warrior_legion
     }
 }
 

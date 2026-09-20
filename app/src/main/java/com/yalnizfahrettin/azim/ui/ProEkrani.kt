@@ -54,7 +54,7 @@ fun ProEkrani(
                 Text(cevir(dil,"Pro ile açılanlar","What Pro adds"), color = Renk.metin, fontWeight = FontWeight.SemiBold)
                 ProOzelligi(AzimIkon.YukselenMarka,CollectionCopy.text("benefit",dil),CollectionCopy.text("promise",dil))
                 ProOzelligi(AzimIkon.Kesfet,cevir(dil,"Tüm konular ve sözler","Every topic and quote"),cevir(dil,"Bildirim konularını yine sen seçersin.","You still choose your notification topics."))
-                ProOzelligi(AzimIkon.Izgara,cevir(dil,"Tüm temalar ve widget’lar","All themes and widgets"),cevir(dil,"Seçtiğin görünümü telefonuna taşı.","Bring your chosen look to your phone."))
+                ProOzelligi(AzimIkon.Izgara,WallpaperCopy.text("benefit",dil),WallpaperCopy.text("promise",dil))
                 ProOzelligi(AzimIkon.Paylas,cevir(dil,"Tüm arka planlar ve video","Every background and video"),cevir(dil,"Sevdiğin sözü görsel veya video olarak paylaş.","Share a favorite quote as an image or video."))
                 HorizontalDivider(color = Renk.kenarlik)
                 Text(cevir(dil,"Ücretsiz sende kalanlar","What stays free"),color = Renk.metin,fontWeight = FontWeight.SemiBold)
@@ -76,6 +76,7 @@ fun ProEkrani(
 }
 
 fun proOfferTitle(offer: ProOffer, dil: String): String = when(offer.source) {
+    ProSource.WALLPAPER -> WallpaperCopy.text("intro",dil)
     ProSource.COLLECTION -> CollectionCopy.text("title",dil)
     ProSource.SERIES -> RestartSeries.title(dil)
     ProSource.THEME -> AnaTemalar.find(offer.selection).label(dil)
@@ -114,7 +115,9 @@ fun ProGorselOrnek(dil: String, offer: ProOffer = ProOffer(), widgetPreview: and
     val quote = Sozler.kimlikten(offer.quoteId) ?: if(offer.source == ProSource.TOPIC) Sozler.kategoriden(offer.selection).firstOrNull() else null
     val sample = quote?.metin(dil) ?: cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward.")
     val theme = if(offer.selection.isNotBlank() && offer.source != ProSource.TOPIC) AnaTemalar.find(offer.selection) else AnaTemalar.emperor
-    if(offer.source == ProSource.SERIES) {
+    if(offer.source == ProSource.WALLPAPER) {
+        Box(Modifier.fillMaxWidth().height(260.dp).clip(RoundedCornerShape(20.dp))) { TemaZemini(theme,Modifier.matchParentSize(),thumbnail = true,previewSize = 1536,dil = dil) }
+    } else if(offer.source == ProSource.SERIES) {
         Surface(color = Renk.yuzey,shape = RoundedCornerShape(20.dp)) {
             Column(Modifier.padding(20.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text(RestartSeries.days(dil)[1].title,color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.SemiBold)

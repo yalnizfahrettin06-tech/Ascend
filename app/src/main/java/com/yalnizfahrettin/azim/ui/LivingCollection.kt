@@ -92,6 +92,7 @@ fun LivingScene(modifier: Modifier = Modifier, enabled: Boolean = true) {
 @Composable
 fun LivingCollection(dil: String, pro: Boolean, close: () -> Unit, apply: (String) -> Unit, suspendedMotion: Boolean = false, offerDismissals: Int = 0, proOpen: () -> Unit) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
+    var wallpaper by rememberSaveable { mutableStateOf(false) }
     var motion by rememberSaveable { mutableStateOf(true) }
     val ctx = LocalContext.current
     var pending by rememberSaveable { mutableStateOf(false) }
@@ -100,7 +101,8 @@ fun LivingCollection(dil: String, pro: Boolean, close: () -> Unit, apply: (Strin
         if(lastDismissal != offerDismissals) { pending = false; lastDismissal = offerDismissals }
     }
     fun useSelection() {
-        if(tab == 2) ctx.startActivity(Intent(ctx,WidgetAyarActivity::class.java).putExtra("collection_theme","emperor"))
+        if(tab == 1) wallpaper = true
+        else if(tab == 2) ctx.startActivity(Intent(ctx,WidgetAyarActivity::class.java).putExtra("collection_theme","emperor"))
         else { apply(if(motion) AnaTemalar.living.id else AnaTemalar.emperor.id); close() }
     }
     LaunchedEffect(pro, pending) {
@@ -153,16 +155,17 @@ fun LivingCollection(dil: String, pro: Boolean, close: () -> Unit, apply: (Strin
                     }
                     Text(copy("quiet"),color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 18.sp)
                 }
-                if(tab == 1) Text(copy("preview"),color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 18.sp)
+                if(tab == 1) Text(WallpaperCopy.text("note",dil),color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 18.sp)
                 Spacer(Modifier.height(8.dp))
             }
             Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp,vertical = 12.dp)) {
-                if(tab != 1) Button(onClick = {
-                    if(!pro) { pending = true; proOpen() } else useSelection()
+                Button(onClick = {
+                    if(tab == 1) wallpaper = true else if(!pro) { pending = true; proOpen() } else useSelection()
                 },modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("collection-use")) {
-                    Text(if(!pro) copy("pro") else if(tab == 2) copy("widget") else if(motion) copy("apply") else copy("still"))
+                    Text(if(tab == 1) WallpaperCopy.text("title",dil) else if(!pro) copy("pro") else if(tab == 2) copy("widget") else if(motion) copy("apply") else copy("still"))
                 }
             }
         }
     }
+    if(wallpaper) WallpaperPreview(AnaTemalar.emperor,dil,pro,{ wallpaper = false },proOpen)
 }

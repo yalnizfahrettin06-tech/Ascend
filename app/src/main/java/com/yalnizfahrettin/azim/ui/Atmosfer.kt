@@ -65,10 +65,14 @@ enum class Atmosfer(val res: Int, val tr: String, val en: String, val grup: Atmo
             ATLI_YOLCU, KAR_MUHAFIZI, KALE_NOBETI, KIYI_NOBETI, KALE, HISAR, TAS_SALON, BILGELIK)
 
         fun grup(anahtar: String?) = when (anahtar) {
-            "olumlamalar", "iliskiler", "zihin" -> DENIZ
+            "olumlamalar" -> TAHT
+            "iliskiler" -> KALKAN
+            "zihin" -> KIYI_NOBETI
             "filozoflar", "tasavvuf", "inanc" -> BILGELIK
-            "disiplin", "ogrenme", "is" -> ORMAN
-            else -> ZIRVE
+            "disiplin" -> LEJYON
+            "ogrenme" -> BILGELIK
+            "is" -> KOMUTAN
+            else -> GLADYATOR
         }
     }
 }
