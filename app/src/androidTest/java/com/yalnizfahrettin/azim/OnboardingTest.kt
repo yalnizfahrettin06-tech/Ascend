@@ -1,6 +1,10 @@
 package com.yalnizfahrettin.azim
 
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
@@ -104,6 +108,28 @@ class OnboardingTest {
         compose.runOnIdle {
             assertEquals(setOf(SetupPractice.quotes.first().kimlik),SetupPractice.saved(completed!!))
             assertEquals("rider",completed!!.answer("theme").single())
+        }
+    }
+
+    @Test fun compactViewportKeepsEveryPrimaryActionVisible() {
+        var page by mutableIntStateOf(0)
+        compose.setContent {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(density.density, 2f)) {
+                Box(Modifier.size(320.dp, 640.dp)) {
+                    key(page) { AzimTema {
+                        Onboarding("de", bildirimIzni = true, initialDraft = PersonalProfile(step = page)) { _,_,_,_,_ -> }
+                    } }
+                }
+            }
+        }
+        repeat(5) { current ->
+            compose.runOnIdle { page = current }
+            compose.onNodeWithTag("onboarding-next").assertIsDisplayed()
+            val root = compose.onNodeWithTag("onboarding-root").fetchSemanticsNode().boundsInRoot
+            val action = compose.onNodeWithTag("onboarding-next").fetchSemanticsNode().boundsInRoot
+            assertTrue(action.bottom <= root.bottom)
+            assertTrue(action.left >= root.left && action.right <= root.right)
         }
     }
 

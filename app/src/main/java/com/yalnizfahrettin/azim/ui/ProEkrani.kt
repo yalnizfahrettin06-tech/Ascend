@@ -184,8 +184,8 @@ fun ProOutcome(dil: String, offer: ProOffer) {
         ProSource.WIDGET -> "widgetResult"
         ProSource.SERIES -> "seriesResult"
         ProSource.SHARE, ProSource.VIDEO, ProSource.PHOTO -> "shareResult"
-        ProSource.TOPIC -> null
-        else -> "artResult"
+        ProSource.THEME, ProSource.ONBOARDING -> "artResult"
+        else -> null
     }
     if(key != null) Text(SetupCopy.text(key,dil),color = Renk.metinIkincil,fontSize = 14.sp,lineHeight = 21.sp)
 }
