@@ -37,6 +37,7 @@ fun KesifMerkezi(dil: String, showHeading: Boolean = true, topics: @Composable (
 
 @Composable
 fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0, quote: Soz? = null) {
+    val appearanceState = androidx.compose.runtime.saveable.rememberSaveableStateHolder()
     var living by rememberSaveable { mutableStateOf(false) }
     var collectionOffering by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(pro,offerDismissals) { collectionOffering = false }
@@ -53,6 +54,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
         ChoiceTabs(listOf(cevir(dil,"Uygulama teması","App theme"), "Widget", WallpaperCopy.text("title",dil)),
             appearanceTab, { appearanceTab = it },listOf("appearance-theme","appearance-widget","appearance-wallpaper"))
         Spacer(Modifier.height(10.dp))
+        appearanceState.SaveableStateProvider(appearanceTab) {
         if(appearanceTab == 0) {
             val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f || androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp < 360) 1 else 2
             val rows = remember(columns) { AnaTemalar.all.chunked(columns) }
@@ -71,6 +73,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
         } else {
             Box(Modifier.weight(1f)) { com.yalnizfahrettin.azim.widget.WidgetSetup(initialTheme = selected,embedded = true,language = dil) }
 
+        }
         }
     }
     if(living) LivingCollection(dil,pro,close = { living = false },apply = select, suspendedMotion = collectionOffering, offerDismissals = offerDismissals, proOpen = {

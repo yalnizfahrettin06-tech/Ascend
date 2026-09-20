@@ -6,6 +6,8 @@ adb logcat -v threadtime > screenshots/session-logcat.txt &
 logcat_pid=$!
 adb shell wm size 720x1600
 adb shell wm density 280
+adb shell cmd overlay enable --user 0 com.android.internal.systemui.navbar.gestural || true
+adb shell cmd overlay list > screenshots/navigation-overlays.txt
 # Avoid concurrent bulk ADB transfers while instrumentation owns its shell connection.
 # Screenshots are still copied after each test suite below; failures remain failures.
 (while true; do

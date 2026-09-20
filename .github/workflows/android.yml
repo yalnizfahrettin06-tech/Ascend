@@ -156,9 +156,43 @@ jobs:
             app/build/outputs/androidTest-results/
             screenshots/
 
+  compatibility:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-java@v6.0.0
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v6.3.0
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm4all", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          target: google_apis
+          arch: x86_64
+          profile: pixel_2
+          emulator-options: -no-window -gpu swiftshader -no-snapshot -noaudio -no-boot-anim -memory 1536 -cores 2 -feature -Vulkan
+          disable-animations: true
+          script: bash .github/scripts/compatibility.sh
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: compatibility-api29
+          path: |
+            app/build/outputs/androidTest-results/
+            compatibility-evidence/
+
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [build, share-regression, ui-tests]
+    needs: [build, share-regression, ui-tests, compatibility]
     runs-on: ubuntu-latest
     permissions:
       contents: write

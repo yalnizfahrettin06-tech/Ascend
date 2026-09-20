@@ -79,6 +79,24 @@ class Days59UiTest {
         ekranKaydet("v929-discipline")
     }
 
+
+    @Test fun widgetSetupIsInlineAndItsActionFitsLargeGermanText() {
+        compose.setContent {
+            val d = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(d.density,2f)) {
+                AzimTema(modu = TemaModu.KARANLIK) { Box(Modifier.width(320.dp).height(640.dp)) { GorunumEkrani("de","rider",false,{}, {}) } }
+            }
+        }
+        compose.onNodeWithTag("appearance-widget").performClick().assertIsSelected()
+        compose.onNodeWithTag("widget-add").assertIsDisplayed()
+        compose.onNodeWithTag("widget-square").performClick().assertIsSelected()
+        compose.onNodeWithTag("appearance-theme").performClick()
+        compose.onNodeWithTag("appearance-widget").performClick()
+        compose.onNodeWithTag("widget-square").assertIsSelected()
+        compose.onNodeWithTag("widget-add").assertIsDisplayed()
+        ekranKaydet("v929-widget-large-de")
+    }
+
     @Test fun galleryRecordsMeasuredLoadingFramesAndMemory() {
         val frames = Collections.synchronizedList(mutableListOf<Long>())
         val listener = android.view.Window.OnFrameMetricsAvailableListener { _, metrics, _ -> frames.add(metrics.getMetric(FrameMetrics.TOTAL_DURATION)) }

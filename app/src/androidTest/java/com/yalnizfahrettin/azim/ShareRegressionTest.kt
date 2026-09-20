@@ -76,4 +76,14 @@ class ShareRegressionTest {
         buttonsFit()
         ekranKaydet("share-safe-large-text")
     }
+    @Test fun cancelledVideoReturnsToUsableActions() {
+        open(1f)
+        compose.onNodeWithTag("share-video").performScrollTo().performClick()
+        compose.onNodeWithTag("share-save-device").performClick()
+        compose.onNodeWithText("Hazırlanıyor · İptal").performClick()
+        compose.waitUntil(15000) { compose.onAllNodesWithTag("share-save-device").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithTag("share-save-device").assertIsEnabled().assertIsDisplayed()
+        compose.onNodeWithText(com.yalnizfahrettin.azim.data.JourneyCopy.text("cancelled","tr")).assertExists()
+    }
+
 }

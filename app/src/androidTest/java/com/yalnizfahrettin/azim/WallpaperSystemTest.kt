@@ -12,8 +12,11 @@ class WallpaperSystemTest {
         val manager = android.app.WallpaperManager.getInstance(ctx)
         org.junit.Assume.assumeTrue(manager.isWallpaperSupported && manager.isSetWallpaperAllowed)
         kotlinx.coroutines.runBlocking {
-            assertTrue(WallpaperService.apply(ctx,AnaTemalar.rider,android.app.WallpaperManager.FLAG_LOCK,.5f))
+            listOf(1,2,3).forEach { flags ->
+                assertTrue(WallpaperService.apply(ctx,AnaTemalar.rider,flags,.5f))
+                if(flags and 1 != 0) assertTrue(manager.getWallpaperId(android.app.WallpaperManager.FLAG_SYSTEM) > 0)
+                if(flags == 2) assertTrue(manager.getWallpaperId(android.app.WallpaperManager.FLAG_LOCK) > 0)
+            }
         }
-        assertTrue(manager.getWallpaperId(android.app.WallpaperManager.FLAG_LOCK) > 0)
     }
 }
