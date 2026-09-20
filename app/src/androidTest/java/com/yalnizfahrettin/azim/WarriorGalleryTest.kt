@@ -42,6 +42,8 @@ class WarriorGalleryTest {
         compose.onNodeWithTag("theme-duel").assertIsDisplayed().performClick()
         compose.onNodeWithTag("theme-apply").assertIsDisplayed().performClick()
         compose.runOnIdle { assertEquals("duel",selected) }
+        // Applying closes the dialog before the underlying lazy gallery recomposes.
+        compose.waitUntil(15000) { compose.onAllNodes(hasTestTag("theme-duel") and isSelected()).fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithTag("theme-duel").assertIsSelected()
         ekranKaydet("warrior-gallery-large-french")
     }
