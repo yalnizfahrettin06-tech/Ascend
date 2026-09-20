@@ -77,7 +77,7 @@ fun ProEkrani(
 fun proOfferTitle(offer: ProOffer, dil: String): String = when(offer.source) {
     ProSource.WALLPAPER -> WallpaperCopy.text("intro",dil)
     ProSource.COLLECTION -> CollectionCopy.text("title",dil)
-    ProSource.SERIES -> RestartSeries.title(dil)
+    ProSource.SERIES -> ShortSeries.all.firstOrNull { it.id == offer.selection }?.title(dil) ?: RestartSeries.title(dil)
     ProSource.THEME, ProSource.ONBOARDING -> if(offer.selection.isNotBlank()) AnaTemalar.find(offer.selection).label(dil) else PhaseCopy.text("demo",dil)
     ProSource.TOPIC -> Kategoriler.bul(offer.selection)?.ad(dil) ?: cevir(dil,"Tüm konular ve sözler","Every topic and quote")
     ProSource.WIDGET -> cevir(dil,"Hazırladığın widget, telefonunda.","Your widget, on your home screen.")
@@ -117,10 +117,11 @@ fun ProGorselOrnek(dil: String, offer: ProOffer = ProOffer(), widgetPreview: and
     if(offer.source == ProSource.WALLPAPER) {
         Box(Modifier.fillMaxWidth().height(260.dp).clip(RoundedCornerShape(20.dp))) { TemaZemini(theme,Modifier.matchParentSize(),thumbnail = true,previewSize = 1536,dil = dil) }
     } else if(offer.source == ProSource.SERIES) {
+        val series = ShortSeries.all.firstOrNull { it.id == offer.selection && it.pro } ?: ShortSeries.all.first { it.id == "restart" }
         Surface(color = Renk.yuzey,shape = RoundedCornerShape(20.dp)) {
             Column(Modifier.padding(20.dp),verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(RestartSeries.days(dil)[1].title,color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.SemiBold)
-                Text(RestartSeries.days(dil)[1].step,color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
+                Text(series.days(dil)[1].title,color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.SemiBold)
+                Text(series.days(dil)[1].step,color = Renk.metinIkincil,fontSize = 15.sp,lineHeight = 23.sp)
             }
         }
     } else if(offer.source == ProSource.TOPIC) {

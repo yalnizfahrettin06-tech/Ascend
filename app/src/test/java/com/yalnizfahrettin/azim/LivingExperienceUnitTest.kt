@@ -8,7 +8,7 @@ import java.time.LocalDate
 class LivingExperienceUnitTest {
     @Test fun onlyNewSeriesIsPaidAndEachLanguageHasSevenDifferentEditorialDays() {
         assertEquals(setOf("kindness","steps","focus"),ShortSeries.all.filterNot { it.pro }.map { it.id }.toSet())
-        assertEquals(listOf("restart"),ShortSeries.all.filter { it.pro }.map { it.id })
+        assertEquals(listOf("discipline","restart"),ShortSeries.all.filter { it.pro }.map { it.id })
         Diller.kodlar.forEach { language ->
             val chapters = RestartSeries.days(language)
             assertEquals(7,chapters.size)

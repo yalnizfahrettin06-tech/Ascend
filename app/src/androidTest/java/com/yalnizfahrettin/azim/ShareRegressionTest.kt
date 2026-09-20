@@ -40,7 +40,7 @@ class ShareRegressionTest {
     @Test fun imageAndVideoCanActuallyBeSaved() {
         open(1f)
         buttonsFit()
-        compose.onNodeWithTag("share-format-options").performScrollTo().performClick()
+        compose.onNodeWithTag("share-image").performScrollTo().assertIsDisplayed()
         compose.onNodeWithTag("share-image").assertIsSelected()
         compose.onNodeWithTag("share-video").assertIsNotSelected()
         compose.onNodeWithText("Tümünü gör").performScrollTo().performClick()

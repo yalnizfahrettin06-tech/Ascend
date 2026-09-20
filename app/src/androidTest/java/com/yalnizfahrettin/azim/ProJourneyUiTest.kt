@@ -70,7 +70,7 @@ class ProJourneyUiTest {
             PaylasimEkrani(quote,"tr",{},pro,offerOpen = { offer = it },offerDismissals = dismissed)
             offer?.let { request -> ProEkrani("tr",pro,kapat = { dismissed++; offer = null },degistir = { pro = it; offer = null },offer = request) }
         } }
-        compose.onNodeWithTag("share-format-options").performClick()
+        compose.onNodeWithTag("share-image").assertIsDisplayed()
         compose.onNodeWithTag("share-video").performClick()
         compose.runOnIdle { assertEquals(ProSource.VIDEO,offer?.source) }
         compose.onNodeWithTag("pro-close").performClick()

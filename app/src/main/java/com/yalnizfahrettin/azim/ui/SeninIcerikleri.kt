@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.semantics.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -57,7 +58,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
     Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded) Modifier else Modifier.statusBarsPadding()).testTag("notification-history")) {
         if(!embedded) PersonalHeader(cevir(dil,"Bildirim geçmişi","Notification history"),dil,back)
         LazyColumn(contentPadding = PaddingValues(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            item { Text(cevir(dil,"Son 30 günde sana gelen sözler.","Quotes sent to you in the last 30 days."),color = Renk.metinIkincil,fontSize = 14.sp) }
+            item { Text(JourneyCopy.text("historyNote",dil),color = Renk.metinIkincil,fontSize = 14.sp) }
             if(groups.isEmpty()) item {
                 EditorialPhoto(EditorialArt.group("zihin"),Modifier.fillMaxWidth().height(144.dp).clip(RoundedCornerShape(20.dp)))
                 Text(cevir(dil,"Henüz bir bildirim yok. İlk sözün geldiğinde burada bulabilirsin.","No notifications yet. Your first quote will appear here after it is sent."),Modifier.padding(vertical = 32.dp),color = Renk.metinIkincil)
@@ -81,7 +82,7 @@ fun BildirimGecmisiEkrani(dil: String, history: Map<String,List<String>>, favori
 
 @Composable
 fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorites: Set<String>, back: () -> Unit,
-    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true, pro: Boolean = false, proOpen: () -> Unit = {}, firstComplete: suspend () -> Unit = { start("restart"); complete("restart") }) {
+    start: suspend (String) -> Unit, complete: suspend (String) -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, embedded: Boolean = false, insets: Boolean = true, pro: Boolean = false, proOpen: () -> Unit = {}, firstComplete: suspend () -> Unit = { start("restart"); complete("restart") }, firstCompleteFor: (suspend (String) -> Unit)? = null, offerFor: ((String) -> Unit)? = null) {
     var chosen by rememberSaveable { mutableStateOf(ShortSeries.active(progress)?.id) }
     val context = LocalContext.current
     var readingDay by rememberSaveable(chosen) { mutableStateOf<Int?>(null) }
@@ -92,8 +93,10 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
     val series = ShortSeries.all.firstOrNull { it.id == chosen }
     val goBack = { if(chosen != null) chosen = null else back() }
     if(!embedded || chosen != null) BackHandler(onBack = goBack)
-    if(series?.id == "restart") {
-        RestartSeriesScreen(dil,pro,progress["restart"],favorites,goBack,{ start("restart") },{ complete("restart") },save,share,proOpen,firstComplete)
+    if(series?.pro == true) {
+        key(series.id) { RestartSeriesScreen(dil,pro,progress[series.id],favorites,goBack,{ start(series.id) },{ complete(series.id) },save,share,
+            { if(offerFor != null) offerFor(series.id) else proOpen() },
+            { if(firstCompleteFor != null) firstCompleteFor(series.id) else if(series.id == "restart") firstComplete() else { start(series.id); complete(series.id) } },seriesId = series.id) }
         return
     }
     Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded || !insets) Modifier else Modifier.statusBarsPadding()).testTag("short-series")) {
@@ -162,7 +165,7 @@ fun SeninBolumleri(dil: String, selected: String, select: (String) -> Unit, sett
         }
         Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp),horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf("" to cevir(dil,"Kaydedilenler","Saved quotes"), "history" to cevir(dil,"Geçmiş","History")).forEach { (key,label) ->
-                Surface(onClick = { select(key) },color = if(selected == key) Renk.metin else Renk.yuzey,shape = RoundedCornerShape(12.dp),modifier = Modifier.weight(1f).testTag("personal-tab-${key.ifEmpty { "overview" }}")) {
+                Surface(onClick = { select(key) },color = if(selected == key) Renk.metin else Renk.yuzey,shape = RoundedCornerShape(12.dp),modifier = Modifier.weight(1f).testTag("personal-tab-${key.ifEmpty { "overview" }}").semantics { role = Role.Tab; this.selected = selected == key }) {
                     Text(label,Modifier.padding(vertical = 12.dp),color = if(selected == key) Renk.zemin else Renk.metinIkincil,fontSize = 12.sp,textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                 }
             }

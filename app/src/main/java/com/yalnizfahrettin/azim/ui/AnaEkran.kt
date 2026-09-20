@@ -53,7 +53,7 @@ fun AnaEkran(
     ipucunuKapat: () -> Unit, ayarlaraGit: () -> Unit,
     secilenAtmosfer: String? = null, atmosferSec: (String?) -> Unit = {},
     seciliKonular: Set<String> = emptySet(), konulariDuzenle: () -> Unit = {}, haptikAcik: Boolean = true,
-    gizle: (Soz) -> Unit = {}, motionActive: Boolean = true,
+    gizle: (Soz) -> Unit = {}, motionActive: Boolean = true, activeSeries: SeriesProgress? = null, seriesOpen: () -> Unit = {},
     pro: Boolean = false, proAc: () -> Unit = {}, kullaniciAdi: String = "", planAc: () -> Unit = {}, ihtiyac: String? = null, ihtiyacSec: (String?) -> Unit = {},
 ) {
     // A feed replacement must replace its count, keys and page content together.
@@ -110,6 +110,10 @@ fun AnaEkran(
                     Text(cevir(dil,"${seciliKonular.size} konu seçili","${seciliKonular.size} topics selected"),Modifier.weight(1f),fontSize = 12.sp,color = Renk.metin)
                     Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
                 }
+            }
+            if(activeSeries != null) TextButton(onClick = seriesOpen,modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp).heightIn(min = 48.dp).testTag("home-series")) {
+                Text(cevir(dil,"Serine devam et","Continue your series") + " · " + activeSeries.completed + " / 7",Modifier.weight(1f),fontSize = 12.sp,color = Renk.metin)
+                Icon(AzimIkon.Ileri,null,Modifier.size(16.dp),tint = Renk.metin)
             }
             Column(Modifier.weight(1f).fillMaxWidth().padding(horizontal = 24.dp)) {
             if (feed.isEmpty()) {

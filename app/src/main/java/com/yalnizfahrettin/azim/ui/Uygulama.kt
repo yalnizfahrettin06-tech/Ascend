@@ -261,6 +261,7 @@ fun Uygulama(
                 tabState.SaveableStateProvider(s.rota) {
                 when (s) {
                     Sekme.ANA -> AnaEkran(
+                        activeSeries = ShortSeries.active(seriesProgress), seriesOpen = { sekme = Sekme.KATEGORI; discoverySeries = true },
                         gizle = { quote -> kapsam.launch {
                             depo.hideQuote(quote.kimlik, true); Planlayici.yenidenKur(ctx); AzimWidget.tazele(ctx)
                             val action = snackbar.showSnackbar(cevir(dil, "Bu söz akışta ve bildirimlerde gösterilmeyecek.", "This quote will no longer appear in your feed or reminders."), cevir(dil, "Geri al", "Undo"),
@@ -321,7 +322,7 @@ fun Uygulama(
                     Sekme.KATEGORI -> KesifMerkezi(dil,showHeading = !discoverySeries) {
                         if (discoverySeries) KisaSerilerEkrani(dil, seriesProgress, favoriler, { discoverySeries = false },
                             { depo.startSeries(it) }, { depo.completeSeriesDay(it) },
-                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, insets = false, pro = proDemo == true, proOpen = { openOffer(ProOffer(ProSource.SERIES,"restart")) }, firstComplete = { depo.beginAndCompleteSeriesDay("restart") })
+                            { quote -> kapsam.launch { depo.favoriDegistir(quote.kimlik) } }, { paylasilanKimlik = it.kimlik }, insets = false, pro = proDemo == true, proOpen = { openOffer(ProOffer(ProSource.SERIES,"restart")) }, firstComplete = { depo.beginAndCompleteSeriesDay("restart") }, firstCompleteFor = { depo.beginAndCompleteSeriesDay(it) }, offerFor = { openOffer(ProOffer(ProSource.SERIES,it)) })
                         else
                         KategorilerEkrani(
                         secili = secili, acik = acik, dil = dil, pro = proDemo == true, proAc = { proGoster = true },

@@ -21,10 +21,11 @@ data class SeriesProgress(val id: String, val completed: Int = 0, val lastDay: L
 /** Curated stable IDs: catalog reordering cannot silently alter a series. */
 data class ShortSeries(val id: String, val tr: String, val en: String, val category: String,
     val prompts: List<Pair<String,String>>, val quoteIds: List<String>, val description: Pair<String,String>, val pro: Boolean = false) {
-    fun title(dil: String) = if(id == "restart") RestartSeries.title(dil) else Diller.metin(dil,tr,en)
-    fun summary(dil: String) = if(id == "restart") RestartSeries.summary(dil) else Diller.metin(dil,description.first,description.second)
+    fun days(dil: String) = if(id == "discipline") DisciplineSeries.days(dil) else RestartSeries.days(dil)
+    fun title(dil: String) = if(id == "discipline") DisciplineSeries.title(dil) else if(id == "restart") RestartSeries.title(dil) else Diller.metin(dil,tr,en)
+    fun summary(dil: String) = if(id == "discipline") DisciplineSeries.days(dil)[0].story else if(id == "restart") RestartSeries.summary(dil) else Diller.metin(dil,description.first,description.second)
     val quotes get() = quoteIds.map { requireNotNull(Sozler.kimlikten(it)) { "Missing series quote: $it" } }
-    fun prompt(index: Int, dil: String) = if(id == "restart") RestartSeries.days(dil)[index].step else prompts[index].let { Diller.metin(dil,it.first,it.second) }
+    fun prompt(index: Int, dil: String) = if(pro) days(dil)[index].step else prompts[index].let { Diller.metin(dil,it.first,it.second) }
     companion object {
         /** One stable continuation target, independent of map iteration order. */
         fun active(progress: Map<String, SeriesProgress>): SeriesProgress? = progress.values
@@ -33,6 +34,10 @@ data class ShortSeries(val id: String, val tr: String, val en: String, val categ
             .firstOrNull()
         private fun valueExists(id: String) = all.any { it.id == id }
         val all = listOf(
+            ShortSeries("discipline", "Disipline dönüş", "Return to discipline", "derin_odak",
+                List(7) { DisciplineSeries.days("tr")[it].step to DisciplineSeries.days("en")[it].step },
+                listOf("v5_erteleme_01","v5_erteleme_10","v5_derin_odak_02","v5_rutin_04","v5_yeniden_02","v5_derin_odak_10","v5_rutin_05"),
+                "" to "", pro = true),
             ShortSeries("restart", "Yeniden Başlamak", "Begin Again", "motivasyon",
                 List(7) { RestartSeries.days("tr")[it].step to RestartSeries.days("en")[it].step },
                 listOf("v5_yeniden_02","v5_motivasyon_07","v5_erteleme_01","v5_erteleme_10","v5_rutin_04","v5_motivasyon_08","v5_rutin_05"),

@@ -39,6 +39,7 @@ object EditorialArt {
         else -> group(Kategoriler.bul(category)?.grup.orEmpty())
     }
     fun series(id: String) = when(id) {
+        "discipline" -> R.drawable.warrior_gladiator
         "restart" -> R.drawable.warrior_emperor
         "kindness" -> R.drawable.warrior_throne
         "steps" -> R.drawable.warrior_commander

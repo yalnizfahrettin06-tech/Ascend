@@ -35,15 +35,29 @@ class WidgetAyarActivity : ComponentActivity() {
         setResult(RESULT_CANCELED)
         val id = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         if (id != AppWidgetManager.INVALID_APPWIDGET_ID && !ownsWidget(this, id)) { finish(); return }
-        val depot = Depo(this)
-        val initial = WidgetTasarimi.load(this, id)
         setContent {
+            WidgetSetup(id = id, initialTheme = intent.getStringExtra("collection_theme"), close = { finish() }, configured = { widgetId ->
+                setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,widgetId)); finish()
+            })
+        }
+    }
+}
+
+@Composable
+fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: String? = null,
+    embedded: Boolean = false, language: String? = null, close: () -> Unit = {}, configured: (Int) -> Unit = {}) {
+    val ctx = androidx.compose.ui.platform.LocalContext.current
+    val scope = rememberCoroutineScope()
+    val depot = remember(ctx) { Depo(ctx) }
+    val initial = remember(ctx,id) { WidgetTasarimi.load(ctx,id) }
+
             val pro by depot.proDemo.collectAsStateWithLifecycle(false)
-            val dil by depot.dil.collectAsStateWithLifecycle("tr")
+            val storedLanguage by depot.dil.collectAsStateWithLifecycle("tr")
+            val dil = language ?: storedLanguage
             val mode by depot.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
             var square by rememberSaveable { mutableStateOf(
-                AppWidgetManager.getInstance(this@WidgetAyarActivity).getAppWidgetInfo(id)?.provider == ComponentName(this@WidgetAyarActivity,AzimSquareWidgetSaglayici::class.java)) }
-            var theme by rememberSaveable { mutableStateOf(intent.getStringExtra("collection_theme")?.takeIf { it == "emperor" } ?: initial.theme) }
+                AppWidgetManager.getInstance(ctx).getAppWidgetInfo(id)?.provider == ComponentName(ctx,AzimSquareWidgetSaglayici::class.java)) }
+            var theme by rememberSaveable { mutableStateOf(initialTheme?.takeIf { choice -> AnaTemalar.all.any { it.id == choice } } ?: initial.theme) }
             var showPro by rememberSaveable { mutableStateOf(false) }
             var busy by remember { mutableStateOf(false) }
             var message by rememberSaveable { mutableStateOf<String?>(null) }
@@ -54,24 +68,24 @@ class WidgetAyarActivity : ComponentActivity() {
             fun addWidget() {
                 if (!pro) showPro = true else {
                                 busy = true
-                                lifecycleScope.launch {
+                                scope.launch {
                                     try {
                                         if (!depot.proDemo.first()) { showPro = true; return@launch }
                                         if (id != AppWidgetManager.INVALID_APPWIDGET_ID) {
-                                            WidgetTasarimi.save(this@WidgetAyarActivity, id, config)
-                                            AzimWidget.tazele(this@WidgetAyarActivity)
-                                            setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id)); finish()
+                                            WidgetTasarimi.save(ctx, id, config)
+                                            AzimWidget.tazele(ctx)
+                                            configured(id)
                                         } else {
-                                            val manager = AppWidgetManager.getInstance(this@WidgetAyarActivity)
+                                            val manager = AppWidgetManager.getInstance(ctx)
                                             if (!manager.isRequestPinAppWidgetSupported) {
                                                 message = cevir(dil,"Ana ekranına uzun bas → Widget’lar → Ascend.","Long press your home screen → Widgets → Ascend.")
                                             } else {
-                                                val intent = Intent(this@WidgetAyarActivity, WidgetEkleAlicisi::class.java)
+                                                val intent = Intent(ctx, WidgetEkleAlicisi::class.java)
                                                     .setAction("ascend.widget.pin." + java.util.UUID.randomUUID())
                                                     .putExtra("theme", theme).putExtra("center", true).putExtra("large", false)
-                                                val callback = PendingIntent.getBroadcast(this@WidgetAyarActivity, 0, intent,
+                                                val callback = PendingIntent.getBroadcast(ctx, 0, intent,
                                                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
-                                                val requested = manager.requestPinAppWidget(ComponentName(this@WidgetAyarActivity, if(square) AzimSquareWidgetSaglayici::class.java else AzimWidgetSaglayici::class.java), null, callback)
+                                                val requested = manager.requestPinAppWidget(ComponentName(ctx, if(square) AzimSquareWidgetSaglayici::class.java else AzimWidgetSaglayici::class.java), null, callback)
                                                 message = if(requested) cevir(dil,"Telefonunun ekleme penceresini onayla.","Confirm in your phone's add-widget dialog.")
                                                     else cevir(dil,"Ana ekranından Widget’lar → Ascend yolunu kullan.","Use Widgets → Ascend on your home screen.")
                                             }
@@ -83,16 +97,16 @@ class WidgetAyarActivity : ComponentActivity() {
             }
             var resumeAdd by rememberSaveable { mutableStateOf(false) }
             LaunchedEffect(pro,resumeAdd) { if(pro && resumeAdd) { resumeAdd = false; addWidget() } }
-            AzimTema(modu = mode) {
-                Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding()) {
+            WidgetTheme(mode,embedded) {
+                Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded) Modifier else Modifier.safeDrawingPadding())) {
                     Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = { finish() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
+                        if(!embedded) IconButton(onClick = { close() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
                         Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
                         ProRozeti()
                     }
                     if(id == AppWidgetManager.INVALID_APPWIDGET_ID) Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         listOf(false,true).forEach { option ->
-                            FilterChip(selected = square == option,onClick = { square = option },label = {
+                            FilterChip(selected = square == option,onClick = { square = option },leadingIcon = if(square == option) {{ Icon(AzimIkon.Tik,null,Modifier.size(16.dp)) }} else null,label = {
                                 Text(if(option) cevir(dil,"Kare · 2 × 2","Square · 2 × 2") else cevir(dil,"Geniş · 4 × 2","Wide · 4 × 2"))
                             },modifier = Modifier.weight(1f).testTag(if(option) "widget-square" else "widget-wide"))
                         }
@@ -122,16 +136,14 @@ class WidgetAyarActivity : ComponentActivity() {
                 if(showPro) ProEkrani(dil, pro, kaydediliyor = busy, hata = message,
                     offer = ProOffer(ProSource.WIDGET,theme,square = square), widgetPreview = bitmap,
                     kapat = { showPro = false }, degistir = { enabled ->
-                        if(!busy) { busy = true; lifecycleScope.launch {
+                        if(!busy) { busy = true; scope.launch {
                             try { depot.proDemoAyarla(enabled); showPro = false; resumeAdd = enabled
-                                if(enabled) ProductSignals.record(this@WidgetAyarActivity,ProductSignals.Event.DEMO_ENABLED,ProSource.WIDGET)
+                                if(enabled) ProductSignals.record(ctx,ProductSignals.Event.DEMO_ENABLED,ProSource.WIDGET)
                             } catch(_: java.io.IOException) { message = cevir(dil,"Kaydedilemedi. Yeniden dene.","Could not save. Try again.") }
                             finally { busy = false }
                         } }
                     })
             }
-        }
-    }
 }
 
 internal fun ownsWidget(ctx: Context, id: Int): Boolean = AppWidgetManager.getInstance(ctx).getAppWidgetInfo(id)?.provider in setOf(
@@ -150,4 +162,9 @@ class WidgetEkleAlicisi : BroadcastReceiver() {
             } finally { pending.finish() }
         }
     }
+}
+
+@Composable
+private fun WidgetTheme(mode: TemaModu, embedded: Boolean, content: @Composable () -> Unit) {
+    if(embedded) content() else AzimTema(modu = mode, icerik = content)
 }

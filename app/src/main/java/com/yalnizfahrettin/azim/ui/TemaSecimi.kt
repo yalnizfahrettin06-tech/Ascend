@@ -28,12 +28,17 @@ import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 
-private object ThemeImages {
+internal object ThemeImages {
+    fun cachedBytes() = cache.size()
+    fun trim() = cache.evictAll()
     private val cache = object : android.util.LruCache<String, android.graphics.Bitmap>(32 * 1024 * 1024) {
         override fun sizeOf(key: String, value: android.graphics.Bitmap) = value.allocationByteCount
     }
     private val permits = Semaphore(2)
     suspend fun load(context: android.content.Context, resource: Int, maxSide: Int): android.graphics.Bitmap? = withContext(Dispatchers.IO) {
+        val manager = context.getSystemService(android.content.Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+        val budget = if(manager.isLowRamDevice) 12 * 1024 * 1024 else 24 * 1024 * 1024
+        if(cache.maxSize() != budget) cache.resize(budget)
         val key = "$resource:$maxSide"
         cache.get(key) ?: permits.withPermit {
             cache.get(key) ?: run {
@@ -146,7 +151,7 @@ fun TemaKoleksiyonKapagi(dil: String, selected: Boolean = false, open: () -> Uni
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TemaOnizleme(theme: AnaTema, dil: String, pro: Boolean, close: () -> Unit, apply: () -> Unit, proOpen: () -> Unit, quote: Soz? = null) {
+fun TemaOnizleme(theme: AnaTema, dil: String, pro: Boolean, close: () -> Unit, apply: () -> Unit, proOpen: () -> Unit, quote: Soz? = null, widget: (() -> Unit)? = null, wallpaper: (() -> Unit)? = null) {
     ModalBottomSheet(onDismissRequest = close, containerColor = Renk.zemin,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
         Column(Modifier.fillMaxWidth().fillMaxHeight(.94f)) {
@@ -155,6 +160,14 @@ fun TemaOnizleme(theme: AnaTema, dil: String, pro: Boolean, close: () -> Unit, a
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(theme.label(dil), Modifier.weight(1f), color = Renk.metin, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
                 IconButton(onClick = close) { Icon(AzimIkon.Kapat, cevir(dil, "Kapat", "Close")) }
+            }
+            if(widget != null || wallpaper != null) {
+                Text(JourneyCopy.text("threeUses",dil),color = Renk.metin,fontSize = 16.sp,fontWeight = FontWeight.Medium)
+                Text(JourneyCopy.text("separate",dil),color = Renk.metinIkincil,fontSize = 13.sp,lineHeight = 19.sp)
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    widget?.let { action -> OutlinedButton(onClick = action,modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("artwork-widget")) { Text("Widget · " + theme.label(dil)) } }
+                    wallpaper?.let { action -> OutlinedButton(onClick = action,modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("artwork-wallpaper")) { Text(WallpaperCopy.text("title",dil) + " · " + theme.label(dil)) } }
+                }
             }
             Box(Modifier.fillMaxWidth().aspectRatio(.58f).clip(RoundedCornerShape(22.dp)).testTag("theme-preview")) {
                 TemaZemini(theme, Modifier.matchParentSize(), dil = dil)

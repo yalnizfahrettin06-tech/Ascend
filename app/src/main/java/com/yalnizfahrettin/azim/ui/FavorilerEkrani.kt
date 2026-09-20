@@ -27,6 +27,7 @@ import com.yalnizfahrettin.azim.data.*
 fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, oku: (Soz) -> Unit,
     kesfet: () -> Unit, paylas: (Soz) -> Unit = {}, onBack: (() -> Unit)? = null, embedded: Boolean = false, restore: (String, Int) -> Unit = { id, _ -> cikar(id) },
 ) {
+    var searchOpen by rememberSaveable { mutableStateOf(false) }
     var query by rememberSaveable { mutableStateOf("") }
     val results = remember(favoriler, query, dil) { LibraryQuery.saved(favoriler, query, dil) }
     val currentFavorites by rememberUpdatedState(favoriler)
@@ -58,8 +59,14 @@ fun FavorilerEkrani(favoriler: List<Soz>, dil: String, cikar: (String) -> Unit, 
                 color = Renk.metinIkincil, modifier = Modifier.padding(top = 12.dp), style = MaterialTheme.typography.bodyMedium)
             HorizontalDivider(Modifier.padding(top = 22.dp), color = Renk.kenarlik)
         }
-        if (favoriler.isNotEmpty()) item {
-            OutlinedTextField(value = query, onValueChange = { query = it }, singleLine = true,
+        if (favoriler.isNotEmpty()) item(key = "saved-tools") {
+            Row(Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
+                Text(JourneyCopy.text("savedOrder",dil),Modifier.weight(1f),color = Renk.metinIkincil,fontSize = 12.sp)
+                IconButton(onClick = { searchOpen = !searchOpen; if(!searchOpen) query = "" },modifier = Modifier.testTag("saved-search-toggle")) {
+                    Icon(AzimIkon.Ara,cevir(dil,"Kaydedilenlerde ara","Search saved quotes"),tint = Renk.metin)
+                }
+            }
+            if(searchOpen || favoriler.size >= 8 || query.isNotBlank()) OutlinedTextField(value = query, onValueChange = { query = it }, singleLine = true,
                 label = { Text(cevir(dil, "Kaydedilenlerde ara", "Search saved quotes")) },
                 leadingIcon = { Icon(AzimIkon.Ara, null) },
                 trailingIcon = { if (query.isNotEmpty()) IconButton(onClick = { query = "" }) {

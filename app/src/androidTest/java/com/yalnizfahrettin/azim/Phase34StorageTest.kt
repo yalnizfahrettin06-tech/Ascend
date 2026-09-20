@@ -61,4 +61,22 @@ class Phase34StorageTest {
             assertTrue(quote in depot.favoriler.first())
         } finally { job.cancelAndJoin(); file.delete() }
     }
+    @Test fun disciplineProgressSurvivesDemoOffAndConcurrentCompletion() = runBlocking {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val file = File(context.cacheDir,"discipline-${UUID.randomUUID()}.preferences_pb")
+        val job = SupervisorJob()
+        val store = PreferenceDataStoreFactory.create(scope = CoroutineScope(job + Dispatchers.IO),produceFile = { file })
+        try {
+            val depot = Depo(context,store)
+            depot.beginAndCompleteSeriesDay("discipline")
+            assertNull(depot.seriesProgress.first()["discipline"])
+            depot.proDemoAyarla(true)
+            coroutineScope { repeat(3) { launch { depot.beginAndCompleteSeriesDay("discipline") } } }
+            assertEquals(1,depot.seriesProgress.first().getValue("discipline").completed)
+            depot.proDemoAyarla(false)
+            depot.beginAndCompleteSeriesDay("discipline",LocalDate.now().plusDays(1))
+            assertEquals(1,depot.seriesProgress.first().getValue("discipline").completed)
+        } finally { job.cancelAndJoin(); file.delete() }
+    }
+
 }

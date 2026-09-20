@@ -23,14 +23,15 @@ import java.time.LocalDate
 
 @Composable
 fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, favorites: Set<String>, back: () -> Unit,
-    start: suspend () -> Unit, complete: suspend () -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, proOpen: () -> Unit, firstComplete: suspend () -> Unit = { start(); complete() }) {
+    start: suspend () -> Unit, complete: suspend () -> Unit, save: (Soz) -> Unit, share: (Soz) -> Unit, proOpen: () -> Unit, firstComplete: suspend () -> Unit = { start(); complete() }, seriesId: String = "restart") {
+    val series = ShortSeries.all.first { it.id == seriesId }
     val today = rememberCurrentDay()
     val context = androidx.compose.ui.platform.LocalContext.current
     val available = if(!pro || progress == null) 0 else if(progress.canComplete(today)) progress.completed.coerceAtMost(6) else (progress.completed - 1).coerceAtLeast(0)
     var reading by rememberSaveable { mutableStateOf<Int?>(null) }
     val day = (reading ?: available).coerceIn(0,available)
-    val chapter = remember(dil,day) { RestartSeries.days(dil)[day] }
-    val quote = ShortSeries.all.first { it.id == "restart" }.quotes[day]
+    val chapter = remember(dil,day,seriesId) { series.days(dil)[day] }
+    val quote = series.quotes[day]
     val scope = rememberCoroutineScope()
     var busy by remember { mutableStateOf(false) }
     var failed by remember { mutableStateOf(false) }
@@ -41,12 +42,12 @@ fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, fa
     Column(Modifier.fillMaxSize().background(Renk.zemin).testTag("restart-series")) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp),verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = back) { Icon(AzimIkon.Geri,cevir(dil,"Geri","Back"),tint = Renk.metin) }
-            Text(RestartSeries.title(dil),Modifier.weight(1f),color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.Medium)
+            Text(series.title(dil),Modifier.weight(1f),color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.Medium)
             Text("${day + 1} / 7",Modifier.padding(end = 16.dp),color = Renk.metinIkincil,fontSize = 12.sp)
         }
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
             Box(Modifier.fillMaxWidth().heightIn(min = 144.dp).clip(RoundedCornerShape(22.dp)).testTag("restart-cover")) {
-                EditorialPhoto(EditorialArt.series("restart"),Modifier.matchParentSize())
+                EditorialPhoto(EditorialArt.series(seriesId),Modifier.matchParentSize())
                 Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color.Transparent,Color.Black.copy(alpha = .84f)))))
                 Column(Modifier.align(Alignment.BottomStart).padding(20.dp),verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(CollectionCopy.text("exclusive",dil),color = Color.White.copy(alpha = .8f),fontSize = 10.sp)
@@ -67,11 +68,14 @@ fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, fa
                     QuoteActions(quote,dil,favorites,save,share)
                 }
             }
+            if(progress != null && progress.completed in 1..6 && !progress.canComplete(today)) {
+                Text(JourneyCopy.text("next",dil) + " · " + series.days(dil)[progress.completed].title,color = Renk.metinIkincil,fontSize = 14.sp)
+            }
             var pathOpen by rememberSaveable { mutableStateOf(false) }
             TextButton(onClick = { pathOpen = !pathOpen },modifier = Modifier.testTag("restart-path")) {
                 Text(PhaseCopy.text("roadmap",dil))
             }
-            if(pathOpen) RestartSeries.days(dil).forEachIndexed { index, item ->
+            if(pathOpen) series.days(dil).forEachIndexed { index, item ->
                 Row(Modifier.fillMaxWidth().heightIn(min = 48.dp),verticalAlignment = Alignment.CenterVertically) {
                     Text("${index + 1}",Modifier.width(30.dp),color = Renk.metinIkincil)
                     Text(item.title,Modifier.weight(1f),color = Renk.metin,fontSize = 14.sp)
@@ -89,9 +93,9 @@ fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, fa
             if(!pro || progress == null || (progress.canComplete(today) && day == progress.completed)) Button(
                 onClick = { if(!pro) proOpen() else if(progress == null) write {
                     firstComplete()
-                    ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_STARTED,"restart",1)
-                    ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_DAY_COMPLETED,"restart",1)
-                } else write { complete(); ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_DAY_COMPLETED,"restart",progress.completed + 1) } },enabled = !busy,
+                    ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_STARTED,seriesId,1)
+                    ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_DAY_COMPLETED,seriesId,1)
+                } else write { complete(); ProductSignals.recordSeries(context,ProductSignals.Event.SERIES_DAY_COMPLETED,seriesId,progress.completed + 1) } },enabled = !busy,
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag("restart-action")) {
                 Text(if(!pro) CollectionCopy.text("start",dil) else if(progress == null) PhaseCopy.text("first",dil) else cevir(dil,"Bugünü tamamla","Complete today"))
             }

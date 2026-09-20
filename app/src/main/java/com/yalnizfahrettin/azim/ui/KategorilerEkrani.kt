@@ -74,7 +74,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
         selectedOnly = reminders, unlockedOnly = false, selected = secili, unlocked = acik).filter { Sozler.kategoriden(it.anahtar).isNotEmpty() && (!reminders || it.anahtar in secili) }
     Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(insets) Modifier.statusBarsPadding() else Modifier)) {
         TextField(query, { query = it }, singleLine = true,
-            placeholder = { Text(cevir(dil, "Konu veya düşünür ara", "Search topics or thinkers"), fontSize = 14.sp) },
+            placeholder = { Text(JourneyCopy.text("searchAll",dil), fontSize = 14.sp) },
             leadingIcon = { Icon(AzimIkon.Ara, null, tint = Renk.metinIkincil) },
             trailingIcon = { if(query.isNotBlank()) IconButton(onClick = { query = "" }) { Icon(AzimIkon.Kapat, cevir(dil,"Temizle","Clear")) } },
             shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp).testTag("category-search"),
@@ -83,7 +83,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent))
         Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             if(query.isNotBlank() || group != null || reminders) IconButton(onClick = { goBack() }, modifier = Modifier.testTag("discovery-back")) { Icon(AzimIkon.Geri, cevir(dil,"Koleksiyonlar","Collections"), tint = Renk.metin) }
-            Text(if(query.isNotBlank()) cevir(dil,"Arama sonuçları","Search results") else if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.kesfetGrupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
+            Text(if(query.isNotBlank()) JourneyCopy.text("allResults",dil) else if(reminders) cevir(dil,"Bildirimlerim","My reminders") else Kategoriler.kesfetGrupBul(group.orEmpty())?.ad(dil) ?: cevir(dil,"Konular","Topics"),
                 Modifier.weight(1f), color = Renk.metinIkincil, fontSize = 13.sp)
             if(!reminders && query.isBlank()) TextButton(onClick = { if (remindersOpen != null) remindersOpen() else { reminders = true; group = null; query = "" } }, modifier = Modifier.testTag("category-selection-summary")) {
                 Icon(AzimIkon.Bildirim, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp))
@@ -111,22 +111,25 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 items(Kategoriler.kesfetGruplari.chunked(columns),key = { it.first().anahtar }) { row ->
                     Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min),horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         row.forEach { g ->
-                            EditorialCover(g.ad(dil),if(g.anahtar == Kategoriler.DUSUNURLER) cevir(dil,"${g.altlar.size} düşünür","${g.altlar.size} thinkers") else cevir(dil,"${g.altlar.size} konu","${g.altlar.size} topics"),
+                            EditorialCover(g.ad(dil),koleksiyonOzeti(g.anahtar,dil),
                                 EditorialArt.group(g.anahtar),Modifier.weight(1f).fillMaxHeight().testTag(if(g == Kategoriler.kesfetGruplari.first()) "collection-feature" else "collection-${g.anahtar}")) { group = g.anahtar }
                         }
                         if(row.size < columns) Spacer(Modifier.weight(1f))
                     }
                 }
             } else {
-                if(results.isEmpty()) item { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp)) }
+                if(results.isEmpty()) item { Column { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp))
+                    TextButton(onClick = { query = ""; group = null; reminders = false },modifier = Modifier.testTag("search-reset")) { Text(cevir(dil,"Konular","Topics")) }
+                } }
                 items(results, key = { it.anahtar }) { topic ->
                     Surface(onClick = { focus.clearFocus(); detayKey = topic.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("category-${topic.anahtar}")) {
                         Row(Modifier.padding(16.dp).heightIn(min = 42.dp), verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                                Text(topic.ad(dil), color = if(topic.anahtar !in acik) Renk.metinIkincil else Renk.metin, fontSize = 15.sp, lineHeight = 21.sp)
-                                if(topic.anahtar in secili) Text(cevir(dil,"✓ Bildirimlerinde","✓ In your reminders"), color = Renk.metinIkincil, fontSize = 11.sp)
+                                Text(topic.ad(dil), color = Renk.metin, fontSize = 15.sp, lineHeight = 21.sp)
+                                if(topic in Kategoriler.dusunurler) Text(JourneyCopy.thinker(topic.anahtar,dil),color = Renk.metinIkincil,fontSize = 12.sp)
+                                else if(topic.anahtar in secili) Text(cevir(dil,"✓ Bildirimlerinde","✓ In your reminders"), color = Renk.metinIkincil, fontSize = 11.sp)
                             }
-                            if(topic.anahtar !in acik) ProRozeti()
+                            if(topic.anahtar !in acik) Text("PRO",color = Color.White,fontSize = 11.sp,fontWeight = FontWeight.Bold,modifier = Modifier.background(Color.Black,RoundedCornerShape(6.dp)).padding(horizontal = 7.dp,vertical = 5.dp))
                             Spacer(Modifier.width(8.dp)); Icon(AzimIkon.Ileri, null, Modifier.size(16.dp), tint = Renk.metinIkincil)
                         }
                     }
@@ -279,8 +282,8 @@ private fun koleksiyonOzeti(key: String, dil: String): String {
         "azim" -> "Devam et, yeniden başla" to "Keep going, begin again"
         "disiplin" -> "Dikkatine alan aç" to "Make room for focus"
         "cesaret" -> "Korkuya rağmen bir adım" to "A step beyond fear"
-        "filozoflar" -> "Düşünceye yeni bir açı" to "A fresh perspective"
-        "tasavvuf" -> "İç dünyana bir bakış" to "A look within"
+        "filozoflar", Kategoriler.DUSUNURLER -> "Düşünceye yeni bir açı" to "A fresh perspective"
+        "tasavvuf", "dogu_gelenegi" -> "İç dünyana bir bakış" to "A look within"
         "inanc" -> "İnanç üzerine düşünceler" to "Reflections on faith"
         "spor" -> "Harekete eşlik eden sözler" to "Words for your movement"
         "is" -> "Emek, amaç ve gelişim" to "Effort, purpose and growth"

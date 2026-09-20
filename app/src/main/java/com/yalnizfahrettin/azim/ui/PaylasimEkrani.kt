@@ -102,7 +102,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
     val gorunenVideo = video && pro
     val zeminler = remember(dil) { paylasimZeminleri(dil) }
     val sheet = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    fun durdur() { islem?.cancel() }
+    fun durdur() { islem?.cancel(); durum = JourneyCopy.text("cancelled",dil) }
     BackHandler { if (hazirlaniyor) durdur() else geri() }
     DisposableEffect(Unit) { onDispose { islem?.cancel() } }
     LaunchedEffect(Unit) { withContext(Dispatchers.IO) { MedyaDeposu.eskiDosyalariTemizle(ctx) } }
@@ -128,6 +128,7 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
         catch (_: Exception) { hata = cevir(dil, "Bu fotoğraf açılamadı. Başka bir arka plan seç.", "Cannot open this photo. Choose another background.") }
     }
     fun dosyaSonucu(uri: Uri?) {
+        if(uri == null) durum = JourneyCopy.text("cancelled",dil)
         val kaynak = bekleyenUri?.let(Uri::parse)
         val proDosya = bekleyenPro
         if (bekleyenPro && !guncelPro) {
@@ -235,10 +236,10 @@ fun PaylasimEkrani(soz: Soz, dil: String, geri: () -> Unit, pro: Boolean = false
                         else if (hata == null) CircularProgressIndicator(Modifier.size(24.dp), color = Renk.metin, strokeWidth = 2.dp)
                         else Text(cevir(dil, "Başka bir arka plan seç", "Choose another background"), Modifier.padding(16.dp), color = Renk.metin)
                     }
-                    TextButton(onClick = { formatOptions = !formatOptions }, modifier = Modifier.testTag("share-format-options")) {
+                    Box(modifier = Modifier.padding(8.dp).testTag("share-format-options")) {
                         Text(cevir(dil,"Biçim","Format") + " · " + if(gorunenVideo) "Video" else cevir(dil,"Görsel","Image"))
                     }
-                    if (formatOptions) FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(Modifier.fillMaxWidth().padding(horizontal = 18.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         FilterChip(selected = !gorunenVideo, onClick = { video = false }, enabled = !hazirlaniyor,
                             colors = FilterChipDefaults.filterChipColors(containerColor = Renk.yuzey, labelColor = Renk.metin,
                                 selectedContainerColor = Renk.metin, selectedLabelColor = Renk.zemin, selectedLeadingIconColor = Renk.zemin),
@@ -349,8 +350,7 @@ private fun PaylasimZeminSecenegi(z: PaylasimZemini, secili: Boolean, dil: Strin
             when (val zemin = z.zemin) {
                 is KartZemin.Sahne -> {
                     val focus = com.yalnizfahrettin.azim.data.ArtworkFocus.forResource(zemin.kaynak)
-                    Image(painterResource(zemin.kaynak), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop,
-                        alignment = androidx.compose.ui.BiasAlignment(focus.x * 2 - 1, focus.y * 2 - 1))
+                    TemaZemini(AnaTema("share-${zemin.kaynak}","","",true,false,zemin.kaynak), Modifier.matchParentSize(),thumbnail = true,previewSize = 320,dil = dil)
                 }
                 is KartZemin.Duz -> Box(Modifier.matchParentSize().background(Color(zemin.renk)))
                 is KartZemin.Gradyan -> Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color(zemin.ust), Color(zemin.alt)))))

@@ -54,7 +54,7 @@ jobs:
           bash gradlew :app:testDebugUnitTest :app:lintDebug :app:compileDebugAndroidTestKotlin :app:assembleDebug --no-daemon --max-workers=2
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: Ascend-9.28.0-test-APK
+          name: Ascend-9.29.0-test-APK
           path: app/build/outputs/apk/debug/*.apk
           retention-days: 7
           if-no-files-found: error
@@ -110,8 +110,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -d screenshots ]; then
-            zip -r Ascend-9.28.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
-            gh release view v9.28.0-ui >/dev/null 2>&1 && gh release upload v9.28.0-ui Ascend-9.28.0-visual-evidence.zip --clobber || true
+            zip -r Ascend-9.29.0-visual-evidence.zip screenshots app/build/outputs/androidTest-results/ || true
+            gh release view v9.29.0-ui >/dev/null 2>&1 && gh release upload v9.29.0-ui Ascend-9.29.0-visual-evidence.zip --clobber || true
           fi
 
   share-regression:
@@ -165,7 +165,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v8
         with:
-          name: Ascend-9.28.0-test-APK
+          name: Ascend-9.29.0-test-APK
           path: apk
       - uses: actions/download-artifact@v8
         with:
@@ -180,6 +180,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          cp apk/app-debug.apk Ascend-9.28.0.apk
-          zip -r Ascend-9.28.0-test-evidence.zip evidence ui-evidence
-          gh release create v9.28.0-ui Ascend-9.28.0.apk Ascend-9.28.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.28.0 — Warrior identity and wallpapers" --notes "Unified warrior editorial artwork, third Appearance tab for static home and lock screen wallpapers, original image export and contextual Pro preview. Existing free artworks and local demo Pro preserved. Automated checks required before publication. Test APK."
+          cp apk/app-debug.apk Ascend-9.29.0.apk
+          zip -r Ascend-9.29.0-test-evidence.zip evidence ui-evidence
+          gh release create v9.29.0-ui Ascend-9.29.0.apk Ascend-9.29.0-test-evidence.zip --target "$GITHUB_SHA" --prerelease --title "Ascend 9.29.0 — Warrior identity and wallpapers" --notes "Unified warrior editorial artwork, third Appearance tab for static home and lock screen wallpapers, original image export and contextual Pro preview. Existing free artworks and local demo Pro preserved. Automated checks required before publication. Test APK."

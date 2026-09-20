@@ -41,6 +41,7 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
     var collectionOffering by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(pro,offerDismissals) { collectionOffering = false }
     var appearanceTab by rememberSaveable { mutableIntStateOf(0) }
+    var collectionWallpaper by rememberSaveable { mutableStateOf<String?>(null) }
     var preview by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingApply by rememberSaveable { mutableStateOf(false) }
     var lastDismissal by rememberSaveable { mutableIntStateOf(offerDismissals) }
@@ -49,15 +50,8 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
     val ctx = LocalContext.current
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
         Text(cevir(dil,"Görünüm","Appearance"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = UiRoles.sectionTitle, fontWeight = FontWeight.SemiBold)
-        Row(Modifier.padding(horizontal = 24.dp).fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            listOf(cevir(dil,"Uygulama teması","App theme"), "Widget", WallpaperCopy.text("title",dil)).forEachIndexed { index, label ->
-                Surface(onClick = { appearanceTab = index }, color = if(appearanceTab == index) Renk.metin else Renk.yuzey, shape = RoundedCornerShape(12.dp), modifier = Modifier.weight(1f).fillMaxHeight().testTag(listOf("appearance-theme","appearance-widget","appearance-wallpaper")[index]).semantics { role = Role.Tab; this.selected = appearanceTab == index }) {
-                    Box(Modifier.fillMaxSize(),contentAlignment = Alignment.Center) {
-                        Text(label, Modifier.padding(vertical = 13.dp, horizontal = 6.dp), color = if(appearanceTab == index) Renk.zemin else Renk.metinIkincil, fontSize = 13.sp, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
-                    }
-                }
-            }
-        }
+        ChoiceTabs(listOf(cevir(dil,"Uygulama teması","App theme"), "Widget", WallpaperCopy.text("title",dil)),
+            appearanceTab, { appearanceTab = it },listOf("appearance-theme","appearance-widget","appearance-wallpaper"))
         Spacer(Modifier.height(10.dp))
         if(appearanceTab == 0) {
             val columns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f || androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp < 360) 1 else 2
@@ -75,26 +69,15 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
         } else if(appearanceTab == 2) {
             Box(Modifier.weight(1f)) { WallpaperGallery(dil,pro) { if(offerOpen != null) offerOpen(it) else proOpen() } }
         } else {
-            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
-                ProRozeti(metin = "WIDGET · PRO")
-                Text(cevir(dil,"İyi bir söz, telefonunda.","A good thought, on your phone."), fontSize = 27.sp, lineHeight = 34.sp, fontWeight = FontWeight.SemiBold, color = Renk.metin)
-                val theme = AnaTemalar.allowed(selected, pro)
-                val sample = cevir(dil,"Küçük bir adım da ilerlemektir.","A small step is still a step forward.")
-                val widgetPreview = rememberWidgetPreview(com.yalnizfahrettin.azim.widget.WidgetSecimi(theme.id), sample)
-                val bmp = widgetPreview.bitmap
-                Box(Modifier.fillMaxWidth().aspectRatio(2f).clip(RoundedCornerShape(22.dp)).background(Renk.yuzey)) {
-                    bmp?.let { androidx.compose.foundation.Image(it.asImageBitmap(), sample, Modifier.fillMaxSize()) }
-                    if(widgetPreview.failed) TextButton(onClick = widgetPreview::retry, modifier = Modifier.align(Alignment.Center)) { Text(cevir(dil,"Yeniden dene","Try again")) }
-                    else if(bmp == null) CircularProgressIndicator(Modifier.align(Alignment.Center).size(24.dp),color = Renk.metin)
-                }
-                Text(cevir(dil,"Arka planını seç, telefonuna ekle. Söz her gün yenilenir; yazıyı biz yerleştiririz.","Choose a background and add it to your phone. The quote changes daily; we handle the layout."), color = Renk.metinIkincil, fontSize = 15.sp, lineHeight = 23.sp)
-                Button(onClick = { ctx.startActivity(Intent(ctx, WidgetAyarActivity::class.java)) }, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("widget-editor-open"), shape = RoundedCornerShape(16.dp)) { Text(cevir(dil,"Widget oluştur","Create widget")) }
-            }
+            Box(Modifier.weight(1f)) { com.yalnizfahrettin.azim.widget.WidgetSetup(initialTheme = selected,embedded = true,language = dil) }
+
         }
     }
     if(living) LivingCollection(dil,pro,close = { living = false },apply = select, suspendedMotion = collectionOffering, offerDismissals = offerDismissals, proOpen = {
         collectionOffering = true
         if(offerOpen != null) offerOpen(ProOffer(ProSource.COLLECTION,AnaTemalar.living.id)) else proOpen()
     })
-    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null; pendingApply = false }, apply = { select(id); preview = null }, proOpen = { pendingApply = true; if(offerOpen != null) offerOpen(ProOffer(ProSource.THEME,id)) else proOpen() }, quote = quote) }
+    preview?.let { id -> TemaOnizleme(AnaTemalar.find(id), dil, pro, close = { preview = null; pendingApply = false }, apply = { select(id); preview = null }, proOpen = { pendingApply = true; if(offerOpen != null) offerOpen(ProOffer(ProSource.THEME,id)) else proOpen() }, quote = quote, widget = { ctx.startActivity(Intent(ctx,WidgetAyarActivity::class.java).putExtra("collection_theme",id)) }, wallpaper = if(AnaTemalar.find(id).art != null) {{ collectionWallpaper = id }} else null) }
+    collectionWallpaper?.let { id -> WallpaperPreview(AnaTemalar.find(id),dil,pro,{ collectionWallpaper = null },{ if(offerOpen != null) offerOpen(ProOffer(ProSource.WALLPAPER,id)) else proOpen() }) }
+
 }
