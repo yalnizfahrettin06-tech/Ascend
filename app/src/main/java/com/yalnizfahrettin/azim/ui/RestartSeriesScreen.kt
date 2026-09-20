@@ -45,12 +45,12 @@ fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, fa
             Text("${day + 1} / 7",Modifier.padding(end = 16.dp),color = Renk.metinIkincil,fontSize = 12.sp)
         }
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp),verticalArrangement = Arrangement.spacedBy(18.dp)) {
-            Box(Modifier.fillMaxWidth().height(144.dp).clip(RoundedCornerShape(22.dp))) {
+            Box(Modifier.fillMaxWidth().heightIn(min = 144.dp).clip(RoundedCornerShape(22.dp)).testTag("restart-cover")) {
                 EditorialPhoto(EditorialArt.series("restart"),Modifier.matchParentSize())
                 Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color.Transparent,Color.Black.copy(alpha = .84f)))))
                 Column(Modifier.align(Alignment.BottomStart).padding(20.dp),verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(CollectionCopy.text("exclusive",dil),color = Color.White.copy(alpha = .8f),fontSize = 10.sp)
-                    Text(chapter.title,color = Color.White,fontSize = 22.sp,lineHeight = 28.sp,fontWeight = FontWeight.SemiBold)
+                    Text(chapter.title,modifier = Modifier.testTag("restart-title"),color = Color.White,fontSize = 22.sp,lineHeight = 28.sp,fontWeight = FontWeight.SemiBold)
                 }
             }
             if(!pro && progress != null) Text(PhaseCopy.text("preserved",dil),color = Renk.metinIkincil,fontSize = 13.sp)

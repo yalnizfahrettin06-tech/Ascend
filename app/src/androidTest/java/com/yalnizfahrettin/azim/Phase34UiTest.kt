@@ -67,4 +67,20 @@ class Phase34UiTest {
             compose.onNodeWithTag("trial-free").assertExists()
         }
     }
+    @Test fun seriesCoverFitsLargeTitlesInAllLanguages() {
+        var language by mutableStateOf("tr")
+        compose.setContent {
+            val density = androidx.compose.ui.platform.LocalDensity.current
+            CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides androidx.compose.ui.unit.Density(density.density,2f)) {
+                AzimTema { RestartSeriesScreen(language,false,null,emptySet(),{},{},{},{},{},{}) }
+            }
+        }
+        PhaseCopy.languages.forEach { lang ->
+            compose.runOnIdle { language = lang }
+            val title = compose.onNodeWithTag("restart-title").getUnclippedBoundsInRoot()
+            val cover = compose.onNodeWithTag("restart-cover").getUnclippedBoundsInRoot()
+            assertTrue(lang,title.top >= cover.top && title.bottom <= cover.bottom)
+            compose.onNodeWithTag("restart-action").assertIsDisplayed()
+        }
+    }
 }
