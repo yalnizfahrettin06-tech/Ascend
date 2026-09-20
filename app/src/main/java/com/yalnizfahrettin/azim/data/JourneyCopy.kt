@@ -4,6 +4,18 @@ package com.yalnizfahrettin.azim.data
 object JourneyCopy {
     val languages = listOf("tr", "en", "pt", "de", "fr", "it", "ru")
     val entries = mapOf(
+        "group-olumlamalar" to listOf("Kendine daha nazik bir dil", "A kinder inner voice", "Uma voz interior mais gentil", "Eine freundlichere innere Stimme", "Une voix intérieure plus douce", "Una voce interiore più gentile", "Более добрый внутренний голос"),
+        "group-azim" to listOf("Devam et, yeniden başla", "Keep going, begin again", "Continuar e recomeçar", "Weitermachen und neu anfangen", "Continuer et recommencer", "Continuare e ricominciare", "Продолжать и начинать заново"),
+        "group-disiplin" to listOf("Dikkatine alan aç", "Make room for focus", "Dar espaço à concentração", "Raum für Konzentration", "Faire place à la concentration", "Fare spazio alla concentrazione", "Место для сосредоточенности"),
+        "group-cesaret" to listOf("Korkuya rağmen bir adım", "A step despite fear", "Um passo apesar do medo", "Ein Schritt trotz Angst", "Un pas malgré la peur", "Un passo nonostante la paura", "Шаг несмотря на страх"),
+        "group-unlu_dusunurler" to listOf("Düşünceye yeni bir açı", "A fresh perspective", "Uma nova perspetiva", "Eine neue Perspektive", "Un autre regard", "Una nuova prospettiva", "Новый взгляд"),
+        "group-dogu_gelenegi" to listOf("İç dünyana bir bakış", "A look within", "Um olhar para dentro", "Ein Blick nach innen", "Un regard intérieur", "Uno sguardo interiore", "Взгляд внутрь себя"),
+        "group-inanc" to listOf("İnanç üzerine düşünceler", "Reflections on faith", "Reflexões sobre a fé", "Gedanken über den Glauben", "Réflexions sur la foi", "Riflessioni sulla fede", "Размышления о вере"),
+        "group-spor" to listOf("Harekete eşlik eden sözler", "Words for your movement", "Palavras para acompanhar o movimento", "Worte, die Bewegung begleiten", "Des mots pour accompagner le mouvement", "Parole che accompagnano il movimento", "Слова, сопровождающие движение"),
+        "group-is" to listOf("Emek, amaç ve gelişim", "Effort, purpose and growth", "Esforço, propósito e crescimento", "Einsatz, Sinn und Entwicklung", "Effort, sens et progression", "Impegno, scopo e crescita", "Труд, смысл и развитие"),
+        "group-iliskiler" to listOf("Bağ kurmak ve anlamak", "Connection and understanding", "Ligação e compreensão", "Verbundenheit und Verständnis", "Lien et compréhension", "Legame e comprensione", "Связь и понимание"),
+        "group-zihin" to listOf("Günün içinde sakin bir durak", "A quiet pause in your day", "Uma pausa tranquila no dia", "Eine ruhige Pause im Tag", "Une pause paisible dans la journée", "Una pausa tranquilla nella giornata", "Спокойная пауза в течение дня"),
+        "group-ogrenme" to listOf("Merakına yer aç", "Make room for curiosity", "Dar espaço à curiosidade", "Raum für Neugier", "Faire place à la curiosité", "Fare spazio alla curiosità", "Место для любопытства"),
         "searchAll" to listOf("Tüm konularda ve düşünürlerde ara", "Search all topics and thinkers", "Pesquisar todos os temas e pensadores", "Alle Themen und Denker durchsuchen", "Rechercher tous les thèmes et penseurs", "Cerca in tutti i temi e pensatori", "Поиск по всем темам и мыслителям"),
         "allResults" to listOf("Tüm katalogdaki sonuçlar", "Results from the whole library", "Resultados de toda a biblioteca", "Ergebnisse aus der gesamten Bibliothek", "Résultats de toute la bibliothèque", "Risultati dell’intera raccolta", "Результаты по всей библиотеке"),
         "savedOrder" to listOf("Kaydettiğin sırayla", "In the order you saved them", "Pela ordem em que guardaste", "In deiner Speicherreihenfolge", "Dans l’ordre d’enregistrement", "Nell’ordine di salvataggio", "В порядке сохранения"),

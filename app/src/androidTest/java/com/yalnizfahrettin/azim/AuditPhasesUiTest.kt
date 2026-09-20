@@ -64,7 +64,7 @@ class AuditPhasesUiTest {
         compose.onNodeWithTag("collection-feature").performClick()
         compose.onNodeWithTag("category-search").performTextInput("Marcus")
         compose.onNodeWithTag("category-search").performImeAction()
-        compose.onNodeWithText("Search results").assertIsDisplayed()
+        compose.onNodeWithText(JourneyCopy.text("allResults","en")).assertIsDisplayed()
         compose.onNodeWithTag("discovery-back").performClick()
         compose.onNodeWithTag("collection-feature").assertDoesNotExist()
         compose.onNodeWithTag("discovery-back").performClick()

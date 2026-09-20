@@ -111,7 +111,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 items(Kategoriler.kesfetGruplari.chunked(columns),key = { it.first().anahtar }) { row ->
                     Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min),horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         row.forEach { g ->
-                            EditorialCover(g.ad(dil),koleksiyonOzeti(g.anahtar,dil),
+                            EditorialCover(g.ad(dil),JourneyCopy.text("group-${g.anahtar}",dil),
                                 EditorialArt.group(g.anahtar),Modifier.weight(1f).fillMaxHeight().testTag(if(g == Kategoriler.kesfetGruplari.first()) "collection-feature" else "collection-${g.anahtar}")) { group = g.anahtar }
                         }
                         if(row.size < columns) Spacer(Modifier.weight(1f))
@@ -119,7 +119,7 @@ fun KategorilerEkrani(secili: Set<String>, acik: Set<String>, dil: String, sec: 
                 }
             } else {
                 if(results.isEmpty()) item { Column { Text(cevir(dil,"Burada henüz bir konu yok. Aramanı değiştir veya başka bir konu seç.","No topics here yet. Try another search or choose a topic."), color = Renk.metinIkincil, modifier = Modifier.padding(vertical = 24.dp))
-                    TextButton(onClick = { query = ""; group = null; reminders = false },modifier = Modifier.testTag("search-reset")) { Text(cevir(dil,"Konular","Topics")) }
+                    TextButton(onClick = { focus.clearFocus(); query = ""; group = null; reminders = false },modifier = Modifier.testTag("search-reset")) { Text(cevir(dil,"Konular","Topics")) }
                 } }
                 items(results, key = { it.anahtar }) { topic ->
                     Surface(onClick = { focus.clearFocus(); detayKey = topic.anahtar }, color = Renk.yuzey, shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth().testTag("category-${topic.anahtar}")) {

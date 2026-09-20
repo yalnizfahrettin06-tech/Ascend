@@ -35,6 +35,7 @@ class Days59Test {
             assertEquals(key,7,values.size)
             values.forEach { assertTrue(key,it.isNotBlank()); assertFalse(key,it.contains("TODO")) }
         }
+        Kategoriler.kesfetGruplari.forEach { group -> JourneyCopy.languages.forEach { assertTrue(JourneyCopy.text("group-${group.anahtar}",it).isNotBlank()) } }
         Kategoriler.dusunurler.forEach { thinker -> JourneyCopy.languages.forEach { assertTrue(JourneyCopy.thinker(thinker.anahtar,it).isNotBlank()) } }
     }
 }

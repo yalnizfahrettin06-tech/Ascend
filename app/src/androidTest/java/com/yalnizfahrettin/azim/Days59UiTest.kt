@@ -89,12 +89,27 @@ class Days59UiTest {
         }
         compose.onNodeWithTag("appearance-widget").performClick().assertIsSelected()
         compose.onNodeWithTag("widget-add").assertIsDisplayed()
-        compose.onNodeWithTag("widget-square").performClick().assertIsSelected()
+        compose.onNodeWithTag("widget-square").performScrollTo().performClick().assertIsSelected()
         compose.onNodeWithTag("appearance-theme").performClick()
         compose.onNodeWithTag("appearance-widget").performClick()
         compose.onNodeWithTag("widget-square").assertIsSelected()
         compose.onNodeWithTag("widget-add").assertIsDisplayed()
         ekranKaydet("v929-widget-large-de")
+    }
+
+    @Test fun artworkUsesAreSeparateAndDoNotApplyOnPreview() {
+        var themeApplied = 0
+        var widgetOpened = 0
+        var wallpaperOpened = 0
+        compose.setContent { AzimTema(modu = TemaModu.KARANLIK) {
+            TemaOnizleme(AnaTemalar.rider,"tr",false,{}, { themeApplied++ },{},
+                widget = { widgetOpened++ }, wallpaper = { wallpaperOpened++ })
+        } }
+        compose.onNodeWithTag("artwork-widget").performClick()
+        compose.onNodeWithTag("artwork-wallpaper").performClick()
+        compose.runOnIdle { assertEquals(1,widgetOpened); assertEquals(1,wallpaperOpened); assertEquals(0,themeApplied) }
+        compose.onNodeWithTag("theme-apply").assertIsDisplayed()
+        ekranKaydet("v929-three-uses")
     }
 
     @Test fun galleryRecordsMeasuredLoadingFramesAndMemory() {
@@ -117,6 +132,9 @@ class Days59UiTest {
         println("ASCEND_PERFORMANCE=$result")
         compose.runOnUiThread { compose.activity.window.removeOnFrameMetricsAvailableListener(listener) }
         assertTrue(ThemeImages.cachedBytes() <= 24 * 1024 * 1024)
+        compose.activityRule.scenario.moveToState(androidx.lifecycle.Lifecycle.State.CREATED)
+        compose.activityRule.scenario.moveToState(androidx.lifecycle.Lifecycle.State.RESUMED)
+        compose.onNodeWithTag("appearance-gallery").assertIsDisplayed()
         ekranKaydet("v929-gallery-scroll")
     }
 }

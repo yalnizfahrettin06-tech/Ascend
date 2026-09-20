@@ -44,6 +44,7 @@ class WidgetAyarActivity : ComponentActivity() {
 }
 
 @Composable
+@OptIn(ExperimentalLayoutApi::class)
 fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: String? = null,
     embedded: Boolean = false, language: String? = null, close: () -> Unit = {}, configured: (Int) -> Unit = {}) {
     val ctx = androidx.compose.ui.platform.LocalContext.current
@@ -66,6 +67,7 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
             val widgetPreview = rememberWidgetPreview(config, quote, if(square) 1080 else 540)
             val bitmap = widgetPreview.bitmap
             fun addWidget() {
+                if(busy) return
                 if (!pro) showPro = true else {
                                 busy = true
                                 scope.launch {
@@ -99,20 +101,23 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
             LaunchedEffect(pro,resumeAdd) { if(pro && resumeAdd) { resumeAdd = false; addWidget() } }
             WidgetTheme(mode,embedded) {
                 Column(Modifier.fillMaxSize().background(Renk.zemin).then(if(embedded) Modifier else Modifier.safeDrawingPadding())) {
+                    val gridColumns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f || androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp < 360) 2 else 3
+                    LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    item {
                     Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                         if(!embedded) IconButton(onClick = { close() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
                         Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
                         ProRozeti()
                     }
-                    if(id == AppWidgetManager.INVALID_APPWIDGET_ID) Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    }
+                    item { if(id == AppWidgetManager.INVALID_APPWIDGET_ID) FlowRow(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                         listOf(false,true).forEach { option ->
                             FilterChip(selected = square == option,onClick = { square = option },leadingIcon = if(square == option) {{ Icon(AzimIkon.Tik,null,Modifier.size(16.dp)) }} else null,label = {
                                 Text(if(option) cevir(dil,"Kare · 2 × 2","Square · 2 × 2") else cevir(dil,"Geniş · 4 × 2","Wide · 4 × 2"))
-                            },modifier = Modifier.weight(1f).testTag(if(option) "widget-square" else "widget-wide"))
+                            },modifier = Modifier.widthIn(min = 120.dp).testTag(if(option) "widget-square" else "widget-wide"))
                         }
                     }
-                    val gridColumns = if(androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f || androidx.compose.ui.platform.LocalConfiguration.current.screenWidthDp < 360) 2 else 3
-                    LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    }
                         item {
                             Box(Modifier.fillMaxWidth().aspectRatio(if(square) 1f else 2f).clip(RoundedCornerShape(20.dp)).background(Renk.yuzey).testTag("widget-live-preview")) {
                                 bitmap?.let { Image(it.asImageBitmap(), quote, Modifier.fillMaxSize()) }

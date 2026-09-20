@@ -53,7 +53,7 @@ class VisualUnityTest {
         ekranKaydet("923-series-dark")
         compose.onNodeWithTag("series-kindness").performScrollTo().performClick()
         compose.onNodeWithTag("series-start").performScrollTo().assertIsDisplayed()
-        assertEquals(4,ShortSeries.all.map { EditorialArt.series(it.id) }.distinct().size)
+        assertEquals(ShortSeries.all.size,ShortSeries.all.map { EditorialArt.series(it.id) }.distinct().size)
     }
 
     @Test fun largeGermanTextKeepsCollectionsUsableAndBrandIsVisible() {

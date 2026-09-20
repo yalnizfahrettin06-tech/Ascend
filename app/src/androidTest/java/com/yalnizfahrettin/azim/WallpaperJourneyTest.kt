@@ -75,7 +75,7 @@ class WallpaperJourneyTest {
         assertEquals(R.drawable.warrior_legion,EditorialArt.group("disiplin"))
         assertEquals(R.drawable.warrior_gladiator,EditorialArt.group("spor"))
         assertEquals(R.drawable.warrior_throne,EditorialArt.saved("ozsefkat"))
-        assertEquals(4,ShortSeries.all.map { EditorialArt.series(it.id) }.distinct().size)
+        assertEquals(ShortSeries.all.size,ShortSeries.all.map { EditorialArt.series(it.id) }.distinct().size)
         for(language in WallpaperCopy.languages) for(key in listOf("title","apply","detail","pro","done","error","target")) assertTrue(WallpaperCopy.text(key,language).isNotBlank())
         val offer = ProOffer(ProSource.WALLPAPER,"emperor")
         assertEquals(offer,ProOffer.decode(offer.encode()))

@@ -39,7 +39,7 @@ fun RestartSeriesScreen(dil: String, pro: Boolean, progress: SeriesProgress?, fa
         busy = true; failed = false
         try { action(); reading = null } catch(_: java.io.IOException) { failed = true } finally { busy = false }
     } }
-    Column(Modifier.fillMaxSize().background(Renk.zemin).testTag("restart-series")) {
+    Column(Modifier.fillMaxSize().background(Renk.zemin).safeDrawingPadding().testTag("restart-series")) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp),verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = back) { Icon(AzimIkon.Geri,cevir(dil,"Geri","Back"),tint = Renk.metin) }
             Text(series.title(dil),Modifier.weight(1f),color = Renk.metin,fontSize = 18.sp,fontWeight = FontWeight.Medium)
