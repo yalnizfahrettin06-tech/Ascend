@@ -355,19 +355,20 @@ Widget yenilemesi kaldırılmalı. Sayaç yazımları debounce edilmeli ya da te
 ### Faz 2: Derinlik ve cila
 | ID | İş | Durum |
 |---|---|---|
-| F2-1 | Doğrulanmış kamu malı gerçek alıntılar (Marcus Aurelius, Seneca, Epiktetos, Mevlana...) ayrı etiketle | ⬜ |
-| F2-2 | İçerik derinliği: konu başına 30+ söz | ⬜ |
-| F2-3 | Widget yenileme: dokununca yeni söz, bitmapsiz erişilebilir düzen | ⬜ |
-| F2-4 | Paylaşım stüdyosu, duvar kâğıdı ve kısa serilerin yeni tasarıma uyarlanması | ⬜ |
-| F2-5 | Erişilebilirlik turu ve yeni UI testleri (emülatör) | ⬜ |
-| F2-6 | 5 dilin `strings.xml` ile geri dönüşü ve anadil kontrolü | ⬜ |
-| F2-7 | Pro deneyimi: billing hazırlığı, demo yalnızca debug derlemede | ⬜ |
-| F2-8 | Dokümantasyon arşivi: `docs/` sadeleştirme | ⬜ |
+| F2-1 | Doğrulanmış kamu malı gerçek alıntılar: Marcus Aurelius, Epiktetos, Seneca, Thoreau, Emerson (46 alıntı, eser ve çevirmen künyesiyle). CI her derlemede orijinal metinle birebir karşılaştırır | ✅ |
+| F2-2 | İçerik derinliği: 26 ücretsiz konunun her birinde en az 30 metin (490 yeni özgün söz, toplam 1.760 + 46 alıntı) | ✅ |
+| F2-3 | Widget: gerçek Glance metni (TalkBack, sistem yazı boyutu), "Sonraki" düğmesi, sade arka planlar ücretsiz | ✅ |
+| F2-4 | Eski ekranların (Pro, seriler, görünüm, paylaşım) yeni palete uyumu | ✅ palet ve tipografi ortak; yerleşim yenilemesi Faz 3'te |
+| F2-5 | Erişilebilirlik: büyük yazı (1,6×) ekran testleri, widget metni, bileşen etiketleri | ✅ |
+| F2-6 | 5 dil (DE, FR, IT, PT, RU) arayüzü tek kaynaktan, yer tutucu ve çoğul denetimiyle | ✅ arayüz tam; yeni 536 metnin çevirisi Faz 3'te (o zamana kadar bu dillerde gizli) |
+| F2-7 | Pro demosu yalnızca test derlemesinde; mağaza derlemesinde "Çok yakında" | ✅ |
+| F2-8 | `docs/` sadeleştirme: eski belgeler `docs/archive/` altında | ✅ |
 
 ### İlerleme günlüğü
 | Tarih | Olay |
 |---|---|
 | 4 Ekim 2026 | Analiz raporu yayımlandı; kararlar alındı |
+| 4 Ekim 2026 | **Faz 2 uygulandı (10.1.0):** gerçek alıntılar, 490 yeni söz, yeni widget, 7 dil, Pro demo kısıtı, belge arşivi |
 | 4 Ekim 2026 | **Faz 1 uygulandı (10.0.0):** veri katmanı, bildirim motoru, onboarding, 4 sekmeli arayüz, ayarlar, palet, görsel optimizasyonu (40 → 7,9 MB), TR/EN metinler, yeni testler ve sade CI |
 
 **Faz 1 sonrası notlar**
@@ -395,3 +396,24 @@ Widget yenilemesi kaldırılmalı. Sayaç yazımları debounce edilmeli ya da te
 <img src="screenshots-v10/05-reminders.png" width="180" alt="Bildirimler merkezi">
 <img src="screenshots-v10/07-you.png" width="180" alt="Senin: seri ve kaydedilenler">
 </p>
+
+### Faz 2 doğrulaması
+| Kontrol | Sonuç |
+|---|---|
+| 46 gerçek alıntı, kaynak metinlerle birebir (CI'da ağdan indirilip karşılaştırılır) | ✅ |
+| İçerik, editoryal, yerelleştirme ve görsel bütçesi kontrolleri | ✅ |
+| Derleme + lint (7 dil, çoğul biçimleri) | ✅ |
+| Birim testleri (24) ve emülatör testleri: onboarding + 23 ekranlık görüntü turu | ✅ |
+
+<p>
+<img src="screenshots-v10/40-reader-classic.png" width="180" alt="Künyeli gerçek alıntı">
+<img src="screenshots-v10/33-today-de.png" width="180" alt="Almanca Bugün">
+<img src="screenshots-v10/32-settings-de.png" width="180" alt="7 dilli ayarlar">
+<img src="screenshots-v10/30-today-large-text.png" width="180" alt="Büyük yazı">
+</p>
+
+### Faz 3 için açık kalanlar
+- Yeni 536 metnin (490 özgün söz + 46 alıntı) DE/FR/IT/PT/RU çevirisi. Bu metinler şimdilik o dillerde gösterilmez.
+- Eski katalogdaki Almanca söz çevirilerinde resmî "Sie" hitabı var; arayüzle uyumlu "du" hitabına çevrilmeli. Diğer dillerde de anadil kontrolü gerekiyor.
+- Paylaşım stüdyosu, kısa seriler ve görünüm ekranlarının yerleşimini yeni tasarım diliyle yeniden yazmak (renk ve tipografi şimdiden ortak).
+- Ödeme altyapısı (Play Billing) hazır olduğunda Pro'nun açılması.

@@ -2,6 +2,14 @@
 
 Seçtiğin konulardan, belirlediğin saatlerde kısa ve özgün sözler gönderen günlük motivasyon uygulaması. Android · Kotlin · Jetpack Compose · Material 3.
 
+## 10.1 — Faz 2: derinlik ve cila
+
+- **Gerçek alıntılar:** Marcus Aurelius, Epiktetos, Seneca, Thoreau ve Emerson'dan 46 alıntı, eser ve çevirmen künyesiyle. Kaynak kamu malı çevirilerdir ve her CI çalışması orijinal metinle birebir karşılaştırır ([content/classics.json](content/classics.json)).
+- **Daha derin içerik:** 490 yeni özgün söz. Her ücretsiz konuda en az 30 metin var.
+- **Yeni widget:** Gerçek metin (TalkBack ve sistem yazı boyutu uyumlu), "Sonraki" düğmesi. Sade arka planlar ücretsiz.
+- **7 dil:** Türkçe, İngilizce, Almanca, Fransızca, İtalyanca, Portekizce, Rusça. Henüz çevrilmemiş yeni metinler o dillerde gösterilmez.
+- **Pro:** Demo yalnızca test derlemesinde. Mağaza derlemesinde "Çok yakında" görünür.
+
 ## 10.0 — Faz 1: sağlam çekirdek ve yeni deneyim
 
 - **Bildirimler seçtiğin konulardan gelir.** Yaklaşık her yedi bildirimden biri, istersen kapatabileceğin bir "sürpriz"dir. Sürprizler yalnızca açık konulardan gelir; inanç/tasavvuf ve hassas konular (ayrılık, veda...) sen seçmedikçe gelmez.
@@ -11,7 +19,7 @@ Seçtiğin konulardan, belirlediğin saatlerde kısa ve özgün sözler göndere
 - **Dört sekme:** Bugün · Keşfet · Bildirimler · Senin, ayrıca Ayarlar (dil, sistem/açık/koyu tema, arka plan/widget/duvar kâğıdı, titreşim, Pro demo, gizlenen sözler).
 - **Ücretsiz kütüphane** 6 konudan 26 konuya çıktı. Pro demosu ödeme almaz.
 - **Performans:** Görseller 40 MB'tan 7,9 MB'a indi, kullanılmayan 72 görsel kaldırıldı. Widget her kaydırmada yeniden çizilmiyor. Açılışta tema ve dil yüklenene kadar splash ekranı kalıyor.
-- **Diller:** Türkçe ve İngilizce. Diğer 5 dil Faz 2'de `strings.xml` ile geri gelecek.
+- **Diller:** Türkçe ve İngilizce (Faz 2'de 7 dile çıktı).
 
 Ayrıntılı analiz, alınan kararlar ve iki fazlı yol haritası: [docs/ANALIZ_VE_ILERLEME_RAPORU.md](docs/ANALIZ_VE_ILERLEME_RAPORU.md)
 
@@ -32,7 +40,8 @@ JDK 17 ve Android SDK 35:
 
 ```sh
 python tools/icerik_derle.py --check
-python tools/strings_source.py      # strings.xml üretir
+python tools/klasik_derle.py --check --verify   # alıntıları kaynakla karşılaştırır
+python tools/strings_source.py      # 7 dilin strings.xml dosyalarını üretir
 python tools/check_assets.py        # görsel bütçesi ve referanslar
 ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
 ./gradlew :app:connectedDebugAndroidTest
@@ -44,6 +53,8 @@ Sürüm imzası için `ASCEND_KEYSTORE_PATH`, `ASCEND_STORE_PASSWORD`, `ASCEND_K
 
 ## İçerik ilkesi
 
-Bütün metinler özgün Ascend düşünceleridir. Düşünür ve inanç koleksiyonları bu kişilerden ya da geleneklerden esinlenir, doğrudan alıntı olarak sunulmaz. Kaynağı doğrulanmış, kamu malı gerçek alıntılar Faz 2'de ayrı etiketle eklenecek.
+Ascend düşünceleri özgün metinlerdir. Düşünür ve inanç koleksiyonlarındaki özgün metinler bu kişilerden ya da geleneklerden esinlenir. Gerçek alıntılar yalnızca kamu malı çevirilerden birebir alınır, yazar, eser ve çevirmen künyesiyle gösterilir. Türkçeleri Ascend'e aittir.
+
+Yeni içerik `content/additions/*.txt` dosyalarına `konu | English | Türkçe` biçiminde eklenir; `python tools/add_content.py` ve ardından `python tools/icerik_derle.py` ile kataloğa girer. Gerçek alıntılar için `python tools/klasik_derle.py --verify` kullanılır.
 
 Önceki sürümlerin tarihsel kayıtları [docs/archive](docs/archive/README.md) altındadır.
