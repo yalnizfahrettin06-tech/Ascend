@@ -46,4 +46,4 @@ Sürüm imzası için `ASCEND_KEYSTORE_PATH`, `ASCEND_STORE_PASSWORD`, `ASCEND_K
 
 Bütün metinler özgün Ascend düşünceleridir. Düşünür ve inanç koleksiyonları bu kişilerden ya da geleneklerden esinlenir, doğrudan alıntı olarak sunulmaz. Kaynağı doğrulanmış, kamu malı gerçek alıntılar Faz 2'de ayrı etiketle eklenecek.
 
-Önceki sürümlerin tarihsel kayıtları `docs/` altındadır.
+Önceki sürümlerin tarihsel kayıtları [docs/archive](docs/archive/README.md) altındadır.

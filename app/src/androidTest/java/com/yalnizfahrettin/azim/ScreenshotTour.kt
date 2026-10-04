@@ -44,14 +44,20 @@ class ScreenshotTour {
         streak = 5, bestStreak = 9, lastActiveDay = today, readToday = 3, readDay = today, totalRead = 42,
     )
 
-    private fun shoot(name: String, dark: Boolean = false, language: String = "tr", content: @Composable () -> Unit) {
-        rule.setContent { Localized(language) { AzimTema(if (dark) TemaModu.KARANLIK else TemaModu.AYDINLIK) { HaptikSaglayici(true) { content() } } } }
+    private fun shoot(name: String, dark: Boolean = false, language: String = "tr", fontScale: Float = 1f, node: String? = null, content: @Composable () -> Unit) {
+        rule.setContent { Localized(language) {
+            val density = androidx.compose.ui.platform.LocalDensity.current
+            CompositionLocalProvider(androidx.compose.ui.platform.LocalDensity provides androidx.compose.ui.unit.Density(density.density, fontScale)) {
+                AzimTema(if (dark) TemaModu.KARANLIK else TemaModu.AYDINLIK) { HaptikSaglayici(true) { content() } }
+            }
+        } }
         rule.waitForIdle()
-        save(name)
+        save(name, node)
     }
 
-    private fun save(name: String) {
-        val bitmap = rule.onRoot().captureToImage().asAndroidBitmap()
+    private fun save(name: String, node: String? = null) {
+        val target = if (node != null) rule.onNodeWithTag(node, useUnmergedTree = true) else rule.onRoot()
+        val bitmap = target.captureToImage().asAndroidBitmap()
         val dir = File(InstrumentationRegistry.getInstrumentation().targetContext.getExternalFilesDir(null), "screenshots").apply { mkdirs() }
         val file = File(dir, "$name.png")
         file.outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
@@ -123,4 +129,35 @@ class ScreenshotTour {
         val s = sample.copy(language = "en")
         TodayScreen(s, HomeFeed.build(s, today), true, next, remember { SnackbarHostState() }, {}, {}, {}, { _, _ -> }, {}, {}, {}, {})
     }
+
+    @Test fun todayLargeText() = shoot("30-today-large-text", fontScale = 1.6f) {
+        TodayScreen(sample, HomeFeed.build(sample, today), false, next, remember { SnackbarHostState() }, {}, {}, {}, { _, _ -> }, {}, {}, {}, {})
+    }
+
+    @Test fun remindersLargeText() = shoot("31-reminders-large-text", fontScale = 1.6f) {
+        RemindersScreen(sample, true, next, {}, {}, {}, {}, {}, {}, {})
+    }
+
+    @Test fun germanSettings() = shoot("32-settings-de", language = "de") { SettingsScreen(sample.copy(language = "de"), {}, {}, {}, {}, {}, {}, {}) }
+
+    @Test fun germanToday() = shoot("33-today-de", language = "de") {
+        val s = sample.copy(language = "de")
+        TodayScreen(s, HomeFeed.build(s, today), true, next, remember { SnackbarHostState() }, {}, {}, {}, { _, _ -> }, {}, {}, {}, {})
+    }
+
+    @Test fun classicQuoteReader() = shoot("40-reader-classic", node = "quote-reader") {
+        SozOkuyucu(Sozler.kimlikten("pd_marcus_04")!!, "tr", false, {}, {}, {})
+    }
+
+    @Test fun thinkerTopicExplore() = shoot("41-explore-search", language = "tr") {
+        ExploreScreen(sample.copy(pro = true), {}, {}, {}, {})
+    }
+
+    @Test fun proSheet() = shoot("42-pro", node = "pro-sheet") { ProEkrani("tr", false, false, null, {}, {}) }
+
+    @Test fun series() = shoot("43-series") {
+        KisaSerilerEkrani("tr", emptyMap(), emptySet(), {}, {}, {}, {}, {})
+    }
+
+    @Test fun appearance() = shoot("44-appearance") { GorunumEkrani("tr", AnaTemalar.white.id, false, {}, {}) }
 }

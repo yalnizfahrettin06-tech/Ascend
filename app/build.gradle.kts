@@ -30,6 +30,8 @@ android {
 
     buildTypes {
         release {
+            // Billing is not connected yet; the free Pro demo stays out of store builds.
+            buildConfigField("boolean", "PRO_DEMO", "false")
             // R8 varsayilan olarak ACIK. Zayif makinede kapatmak icin:
             //   ./gradlew :app:assembleRelease -PazimMinify=false
             val minify = (project.findProperty("azimMinify") as String? ?: "true").toBoolean()
@@ -39,6 +41,7 @@ android {
             if (releaseStore != null) signingConfig = signingConfigs.getByName("release")
         }
         debug {
+            buildConfigField("boolean", "PRO_DEMO", "true")
             applicationIdSuffix = ".debug"
         }
     }
