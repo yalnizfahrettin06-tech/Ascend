@@ -52,26 +52,8 @@ data class AzimRenkleri(
 
 
 
-object Olcu {
-    val xs = 4.dp
-    val sm = 8.dp
-    val md = 12.dp
-    val lg = 16.dp
-    val xl = 20.dp
-    val xxl = 24.dp
-    val x3 = 32.dp
-    val x4 = 40.dp
-    val x5 = 48.dp
-}
 
 
-object Yaricap {
-    val sm = 12.dp
-    val md = 18.dp
-    val lg = 24.dp
-    val xl = 30.dp
-    val hap = 999.dp
-}
 
 val LoraSerif = FontFamily(
     Font(R.font.lora, FontWeight.Normal),

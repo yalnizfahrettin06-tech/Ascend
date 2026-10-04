@@ -9,25 +9,9 @@ enum class Palet(val etiketTr: String, val etiketEn: String) {
     fun etiket(dil: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, etiketTr, etiketEn)
 }
 
-fun guncelPalet(palet: Palet): Palet = when (palet) {
-    Palet.KUM, Palet.LACIVERT, Palet.YOSUN, Palet.BORDO -> Palet.MERMER
-    else -> palet
-}
 
-private fun nispiParlaklik(c: Color): Double {
-    fun kanal(v: Float): Double {
-        val d = v.toDouble()
-        return if (d <= .04045) d / 12.92 else Math.pow((d + .055) / 1.055, 2.4)
-    }
-    return .2126 * kanal(c.red) + .7152 * kanal(c.green) + .0722 * kanal(c.blue)
-}
 
-fun kontrastOrani(a: Color, b: Color): Double {
-    val l1 = nispiParlaklik(a); val l2 = nispiParlaklik(b)
-    return (maxOf(l1, l2) + .05) / (minOf(l1, l2) + .05)
-}
 
-fun paletiCozTest(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri = paletiCoz(palet, karanlik, oled)
 
 /** Ascend identity: warm paper and ink with one amber accent. Legacy palette names map to it. */
 internal fun paletiCoz(palet: Palet, karanlik: Boolean, oled: Boolean): AzimRenkleri = if (karanlik) AzimRenkleri(

@@ -86,13 +86,3 @@ class Seslendirici(ctx: Context, private val dil: String) {
     }
 }
 
-/** Ekran ömrüne bağlı seslendirici. Dil değişince yeniden kurulur. */
-@Composable
-fun rememberSeslendirici(dil: String): Seslendirici {
-    val ctx = LocalContext.current
-    val seslendirici = remember(dil) { Seslendirici(ctx, dil) }
-    DisposableEffect(seslendirici) {
-        onDispose { seslendirici.kapat() }
-    }
-    return seslendirici
-}

@@ -54,32 +54,3 @@ fun guclüDokunus(): () -> Unit {
     }
 }
 
-/**
- * Tıklanabilir + basma animasyonu + haptik, tek modifier'da.
- *
- * @param guclu true ise belirgin haptik (favori, kilit açma gibi anlar)
- */
-fun Modifier.azimTikla(
-    guclu: Boolean = false,
-    etiket: String? = null,
-    tikla: () -> Unit,
-): Modifier = composed {
-    val kaynak = remember { MutableInteractionSource() }
-    val basili by kaynak.collectIsPressedAsState()
-    val olcek by animateFloatAsState(
-        targetValue = if (basili) 0.96f else 1f,
-        animationSpec = spring(dampingRatio = 0.55f, stiffness = 900f),
-        label = "basma",
-    )
-    val dokun = if (guclu) guclüDokunus() else hafifDokunus()
-    this
-        .scale(olcek)
-        .clickable(
-            interactionSource = kaynak,
-            indication = null,
-            onClickLabel = etiket,
-        ) {
-            dokun()
-            tikla()
-        }
-}

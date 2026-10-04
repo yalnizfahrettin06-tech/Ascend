@@ -155,21 +155,3 @@ fun KisaSerilerEkrani(dil: String, progress: Map<String,SeriesProgress>, favorit
     }
 }
 
-@Composable
-fun SeninBolumleri(dil: String, selected: String, select: (String) -> Unit, settings: () -> Unit, content: @Composable () -> Unit) {
-    val holder = androidx.compose.runtime.saveable.rememberSaveableStateHolder()
-    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
-        Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp),verticalAlignment = Alignment.CenterVertically) {
-            Text(cevir(dil,"Senin","You"),Modifier.weight(1f),fontSize = 18.sp,fontWeight = FontWeight.SemiBold,color = Renk.metin)
-            IconButton(onClick = settings,modifier = Modifier.testTag("profile-settings")) { Icon(AzimIkon.Ayarlar,cevir(dil,"Ayarlar","Settings"),Modifier.size(20.dp),tint = Renk.metinIkincil) }
-        }
-        Row(Modifier.fillMaxWidth().padding(horizontal = 20.dp),horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf("" to cevir(dil,"Kaydedilenler","Saved quotes"), "history" to cevir(dil,"Geçmiş","History")).forEach { (key,label) ->
-                Surface(onClick = { select(key) },color = if(selected == key) Renk.metin else Renk.yuzey,shape = RoundedCornerShape(12.dp),modifier = Modifier.weight(1f).testTag("personal-tab-${key.ifEmpty { "overview" }}").semantics { role = Role.Tab; this.selected = selected == key }) {
-                    Text(label,Modifier.padding(vertical = 12.dp),color = if(selected == key) Renk.zemin else Renk.metinIkincil,fontSize = 12.sp,textAlign = androidx.compose.ui.text.style.TextAlign.Center)
-                }
-            }
-        }
-        Box(Modifier.weight(1f)) { holder.SaveableStateProvider(selected) { content() } }
-    }
-}

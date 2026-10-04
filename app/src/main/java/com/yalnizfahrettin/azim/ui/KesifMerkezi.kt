@@ -27,13 +27,6 @@ import com.yalnizfahrettin.azim.core.*
 import com.yalnizfahrettin.azim.data.*
 import com.yalnizfahrettin.azim.widget.WidgetAyarActivity
 
-@Composable
-fun KesifMerkezi(dil: String, showHeading: Boolean = true, topics: @Composable () -> Unit) {
-    Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
-        if(showHeading) Text(cevir(dil,"Keşfet","Explore"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = UiRoles.sectionTitle, fontWeight = FontWeight.SemiBold)
-        Box(Modifier.weight(1f)) { topics() }
-    }
-}
 
 @Composable
 fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0, quote: Soz? = null, back: (() -> Unit)? = null) {

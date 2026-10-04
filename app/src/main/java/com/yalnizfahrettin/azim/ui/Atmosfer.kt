@@ -77,24 +77,7 @@ enum class Atmosfer(val res: Int, val tr: String, val en: String, val grup: Atmo
     }
 }
 
-@Composable
-fun AtmosferResmi(atmosfer: Atmosfer, modifier: Modifier = Modifier, karartma: Float = .20f) {
-    Box(modifier) {
-        Image(painterResource(atmosfer.res), null, Modifier.matchParentSize(), contentScale = ContentScale.Crop)
-        Box(Modifier.matchParentSize().background(Brush.verticalGradient(listOf(Color.Black.copy(alpha = karartma), Color.Black.copy(alpha = karartma + .08f), Color.Black.copy(alpha = .58f)))))
-    }
-}
 
-@Composable
-fun KucukBaslik(metin: String, modifier: Modifier = Modifier) {
-    Text(metin, modifier, style = MaterialTheme.typography.titleMedium, color = Renk.metin)
-}
 
-@Composable
-fun YuvarlakIkon(ikon: ImageVector, aciklama: String, tikla: () -> Unit, modifier: Modifier = Modifier) {
-    Surface(color = Renk.yuzeyYuksek, shape = CircleShape, modifier = modifier) {
-        IconButton(onClick = tikla) { Icon(ikon, aciklama, tint = Renk.metin, modifier = Modifier.size(22.dp)) }
-    }
-}
 
 fun cevir(dil: String, tr: String, en: String) = com.yalnizfahrettin.azim.data.Diller.metin(dil, tr, en)
