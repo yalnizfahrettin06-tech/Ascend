@@ -164,11 +164,11 @@
         <item quantity="other">%1$d citations de plus avec Pro</item>
     </plurals>
     <plurals name="reminders_times_day">
-        <item quantity="one">Une fois par jour</item>
+        <item quantity="one">%1$d fois par jour</item>
         <item quantity="other">%1$d fois par jour</item>
     </plurals>
     <plurals name="reminders_summary">
-        <item quantity="one">Une fois par jour, %2$s–%3$s</item>
+        <item quantity="one">%1$d fois par jour, %2$s–%3$s</item>
         <item quantity="other">%1$d fois par jour, %2$s–%3$s</item>
     </plurals>
     <plurals name="settings_hidden_restore">

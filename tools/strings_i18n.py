@@ -125,7 +125,7 @@ FR_P = {
  "streak_days": ("%1$d jour", "%1$d jours"), "topics_count": ("%1$d thème", "%1$d thèmes"), "quotes_count": ("%1$d citation", "%1$d citations"),
  "explore_subtitle": ("%1$d thèmes · %2$d dans tes rappels", "%1$d thèmes · %2$d dans tes rappels"),
  "explore_locked_more": ("%1$d citation de plus avec Pro", "%1$d citations de plus avec Pro"),
- "reminders_times_day": ("Une fois par jour", "%1$d fois par jour"), "reminders_summary": ("Une fois par jour, %2$s–%3$s", "%1$d fois par jour, %2$s–%3$s"),
+ "reminders_times_day": ("%1$d fois par jour", "%1$d fois par jour"), "reminders_summary": ("%1$d fois par jour, %2$s–%3$s", "%1$d fois par jour, %2$s–%3$s"),
  "settings_hidden_restore": ("Rétablir %1$d citation masquée", "Rétablir %1$d citations masquées"),
 }
 
@@ -253,7 +253,7 @@ PT_P = {
  "streak_days": ("%1$d dia", "%1$d dias"), "topics_count": ("%1$d tema", "%1$d temas"), "quotes_count": ("%1$d citação", "%1$d citações"),
  "explore_subtitle": ("%1$d temas · %2$d nos teus lembretes", "%1$d temas · %2$d nos teus lembretes"),
  "explore_locked_more": ("Mais %1$d citação com o Pro", "Mais %1$d citações com o Pro"),
- "reminders_times_day": ("Uma vez por dia", "%1$d vezes por dia"), "reminders_summary": ("Uma vez por dia, %2$s–%3$s", "%1$d vezes por dia, %2$s–%3$s"),
+ "reminders_times_day": ("%1$d vez por dia", "%1$d vezes por dia"), "reminders_summary": ("%1$d vez por dia, %2$s–%3$s", "%1$d vezes por dia, %2$s–%3$s"),
  "settings_hidden_restore": ("Repor %1$d citação oculta", "Repor %1$d citações ocultas"),
 }
 
