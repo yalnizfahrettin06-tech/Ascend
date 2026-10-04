@@ -42,7 +42,7 @@ object UserActions {
         val active = markActive(s, today)
         // Today's reads are exactly the first [readToday] entries of the recency list.
         val alreadyToday = active.readDay == today && id in active.recent.take(active.readToday)
-        val recent = (listOf(id) + active.recent.filterNot { it == id }).take(UserStateCodec.RECENT_LIMIT)
+        val recent = (listOf(id) + active.recent.filterNot { it == id }).take(Limits.RECENT)
         if (alreadyToday) return active.copy(recent = recent)
         val todayCount = if (active.readDay == today) active.readToday + 1 else 1
         return active.copy(recent = recent, readToday = todayCount, readDay = today, totalRead = active.totalRead + 1)
@@ -58,9 +58,9 @@ object UserActions {
     }
 
     fun recordDelivery(s: UserState, id: String, surprise: Boolean, now: Long, today: LocalDate): UserState = s.copy(
-        notified = (listOf(id) + s.notified.filterNot { it == id }).take(UserStateCodec.NOTIFIED_LIMIT),
+        notified = (listOf(id) + s.notified.filterNot { it == id }).take(Limits.NOTIFIED),
         deliveries = listOf(Delivery(today, id, surprise)) +
-            s.deliveries.filter { !it.day.isBefore(today.minusDays(UserStateCodec.DELIVERY_DAYS - 1)) },
+            s.deliveries.filter { !it.day.isBefore(today.minusDays(Limits.DELIVERY_DAYS - 1)) },
         lastDeliveryAt = now,
     )
 

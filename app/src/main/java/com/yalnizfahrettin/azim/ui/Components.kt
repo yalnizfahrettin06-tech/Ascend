@@ -86,7 +86,6 @@ fun NavRow(title: String, value: String? = null, icon: ImageVector? = null, tag:
     }
 }
 
-private fun Modifier.clip(RoundedCornerShape(16.dp)) = this.then(Modifier.background(androidx.compose.ui.graphics.Color.Transparent, RoundedCornerShape(16.dp)))
 
 /** Accessible − value + control. */
 @Composable

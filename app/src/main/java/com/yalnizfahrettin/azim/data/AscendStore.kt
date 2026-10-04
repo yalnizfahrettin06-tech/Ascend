@@ -77,9 +77,9 @@ object UserStateCodec {
     private val TOTAL_READ = intPreferencesKey("total_read")
     private val SERIES = stringSetPreferencesKey("series")
 
-    const val NOTIFIED_LIMIT = 400
-    const val RECENT_LIMIT = 300
-    const val DELIVERY_DAYS = 30L
+    const val NOTIFIED_LIMIT = Limits.NOTIFIED
+    const val RECENT_LIMIT = Limits.RECENT
+    const val DELIVERY_DAYS = Limits.DELIVERY_DAYS
 
     private fun list(raw: String?): List<String> = raw.orEmpty().split('|').filter(String::isNotBlank)
     private fun day(raw: String?): LocalDate? = raw?.let { runCatching { LocalDate.parse(it) }.getOrNull() }

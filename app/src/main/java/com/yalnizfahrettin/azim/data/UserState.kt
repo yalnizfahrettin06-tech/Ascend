@@ -75,6 +75,13 @@ data class UserState(
     fun deliveriesByDay(): Map<LocalDate, List<Delivery>> = deliveries.groupBy { it.day }
 }
 
+/** Storage limits shared by the codec and state transitions. */
+object Limits {
+    const val NOTIFIED = 400
+    const val RECENT = 300
+    const val DELIVERY_DAYS = 30L
+}
+
 object Defaults {
     const val PER_DAY = 3
     const val MAX_PER_DAY = 7

@@ -337,20 +337,20 @@ Widget yenilemesi kaldırılmalı. Sayaç yazımları debounce edilmeli ya da te
 ### Faz 1: Sağlam çekirdek ve yeni deneyim (şu an)
 | ID | İş | Durum |
 |---|---|---|
-| F1-1 | Veri katmanı baştan: tek durum modeli, temiz varsayılanlar, eski göçlerin silinmesi, cihaz diline göre TR/EN | ⬜ |
-| F1-2 | Bildirim motoru: AlarmManager, seçili konular + %15 sürpriz, gecikme toleransı, yaz saati güvenli hesap, açılış/güncelleme alıcıları, sessiz (DEFAULT) kanal | ⬜ |
-| F1-3 | Bildirimdeki "Kaydet" yalnızca ekler; kayıtlıysa düğme görünmez | ⬜ |
-| F1-4 | Yeni onboarding: Dil → Konular (1–5) → Ritim → İzin (geçilebilir) → Hazır | ⬜ |
-| F1-5 | Yeni navigasyon: Bugün · Keşfet · Bildirimler · Senin; tek ViewModel | ⬜ |
-| F1-6 | Bugün: seçili konulardan akış, durum şeridi, sonraki bildirim saati, konum korunarak gizleme | ⬜ |
-| F1-7 | Keşfet: arama, koleksiyonlar, listeden doğrudan "bildirimlere ekle" | ⬜ |
-| F1-8 | Bildirimler merkezi: izin durumu, aç/kapa, sıklık, saat aralığı, saat önizlemesi, konular, sürpriz, bugün ara ver, deneme bildirimi | ⬜ |
-| F1-9 | Senin: seri, istatistik, kaydedilenler, geçmiş; Ayarlar: dil, tema (sistem/açık/koyu), arka plan, titreşim, Pro demo, gizlenenler | ⬜ |
-| F1-10 | Yeni görsel kimlik (sıcak kâğıt zemin + amber vurgu), açılışta yanıp sönme yok | ⬜ |
-| F1-11 | Ücretsiz katalog 6 → 26 konu | ⬜ |
-| F1-12 | Görsel optimizasyonu (~40 MB → ~8 MB), ölü kod temizliği, widget'ın kaydırmada yenilenmemesi | ⬜ |
-| F1-13 | TR/EN `strings.xml`; diğer 5 dil geçici olarak kapalı | ⬜ |
-| F1-14 | Testler, CI ve README güncellemesi | ⬜ |
+| F1-1 | Veri katmanı baştan: tek durum modeli, temiz varsayılanlar, eski göçlerin silinmesi, cihaz diline göre TR/EN | ✅ |
+| F1-2 | Bildirim motoru: AlarmManager, seçili konular + %15 sürpriz, gecikme toleransı, yaz saati güvenli hesap, açılış/güncelleme alıcıları, sessiz (DEFAULT) kanal | ✅ |
+| F1-3 | Bildirimdeki "Kaydet" yalnızca ekler; kayıtlıysa düğme görünmez | ✅ |
+| F1-4 | Yeni onboarding: Dil → Konular (1–5) → Ritim → İzin (geçilebilir) → Hazır | ✅ |
+| F1-5 | Yeni navigasyon: Bugün · Keşfet · Bildirimler · Senin; tek ViewModel | ✅ |
+| F1-6 | Bugün: seçili konulardan akış, durum şeridi, sonraki bildirim saati, konum korunarak gizleme | ✅ |
+| F1-7 | Keşfet: arama, koleksiyonlar, listeden doğrudan "bildirimlere ekle" | ✅ |
+| F1-8 | Bildirimler merkezi: izin durumu, aç/kapa, sıklık, saat aralığı, saat önizlemesi, konular, sürpriz, bugün ara ver, deneme bildirimi | ✅ |
+| F1-9 | Senin: seri, istatistik, kaydedilenler, geçmiş; Ayarlar: dil, tema (sistem/açık/koyu), arka plan, titreşim, Pro demo, gizlenenler | ✅ |
+| F1-10 | Yeni görsel kimlik (sıcak kâğıt zemin + amber vurgu), açılışta yanıp sönme yok | ✅ |
+| F1-11 | Ücretsiz katalog 6 → 26 konu | ✅ |
+| F1-12 | Görsel optimizasyonu (~40 MB → ~8 MB), ölü kod temizliği, widget'ın kaydırmada yenilenmemesi | ✅ |
+| F1-13 | TR/EN `strings.xml`; diğer 5 dil geçici olarak kapalı | ✅ |
+| F1-14 | Testler, CI ve README güncellemesi | ✅ |
 
 ### Faz 2: Derinlik ve cila
 | ID | İş | Durum |
@@ -363,3 +363,14 @@ Widget yenilemesi kaldırılmalı. Sayaç yazımları debounce edilmeli ya da te
 | F2-6 | 5 dilin `strings.xml` ile geri dönüşü ve anadil kontrolü | ⬜ |
 | F2-7 | Pro deneyimi: billing hazırlığı, demo yalnızca debug derlemede | ⬜ |
 | F2-8 | Dokümantasyon arşivi: `docs/` sadeleştirme | ⬜ |
+
+### İlerleme günlüğü
+| Tarih | Olay |
+|---|---|
+| 4 Ekim 2026 | Analiz raporu yayımlandı; kararlar alındı |
+| 4 Ekim 2026 | **Faz 1 uygulandı (10.0.0):** veri katmanı, bildirim motoru, onboarding, 4 sekmeli arayüz, ayarlar, palet, görsel optimizasyonu (40 → 7,9 MB), TR/EN metinler, yeni testler ve sade CI |
+
+**Faz 1 sonrası notlar**
+- 10.0 yeni bir veri modeli kullanır; önceki test sürümlerinin yerel verileri (kayıtlı sözler dahil) taşınmaz. Uygulama yayında olmadığı için bu bilinçli bir tercihtir.
+- Paylaşım stüdyosu, Pro sayfası, kısa seriler, duvar kâğıdı ve widget kurulumu korunur ama henüz eski görsel dili kullanır. Yeni tasarıma uyarlanmaları Faz 2'dedir.
+- Emülatör UI testleri yalnızca `main` dalına push'ta ve elle tetiklemede çalışır.
