@@ -6,6 +6,8 @@
     <string name="widget_square_name">Ascend · Square</string>
     <string name="widget_wide_name">Ascend · Wide</string>
     <string name="yeni_soz">Today</string>
+    <string name="widget_next">Next</string>
+    <string name="widget_empty">Choose topics in Ascend to see a quote here.</string>
     <string name="favoriler_baslik">Saved</string>
     <string name="channel_name">Daily words</string>
     <string name="channel_description">Quotes from the topics you chose, at the times you set.</string>

@@ -8,6 +8,8 @@ S = {
  "widget_square_name": ("Ascend · Square", "Ascend · Kare"),
  "widget_wide_name": ("Ascend · Wide", "Ascend · Geniş"),
  "yeni_soz": ("Today", "Bugün"),
+ "widget_next": ("Next", "Sonraki"),
+ "widget_empty": ("Choose topics in Ascend to see a quote here.", "Burada söz görmek için Ascend'de konu seç."),
  "favoriler_baslik": ("Saved", "Kaydedilenler"),
  "channel_name": ("Daily words", "Günlük sözler"),
  "channel_description": ("Quotes from the topics you chose, at the times you set.", "Seçtiğin konulardan sözler, belirlediğin saatlerde."),

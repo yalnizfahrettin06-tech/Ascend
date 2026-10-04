@@ -67,13 +67,15 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
             val quote = cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward.")
             val widgetPreview = rememberWidgetPreview(config, quote, if(square) 1080 else 540)
             val bitmap = widgetPreview.bitmap
+            // Plain backgrounds are free; artwork backgrounds are part of Pro.
+            val needsPro = AnaTemalar.find(theme).pro && !pro
             fun addWidget() {
                 if(busy) return
-                if (!pro) showPro = true else {
+                if (needsPro) showPro = true else {
                                 busy = true
                                 scope.launch {
                                     try {
-                                        if (!store.current().pro) { showPro = true; return@launch }
+                                        if (AnaTemalar.find(theme).pro && !store.current().pro) { showPro = true; return@launch }
                                         if (id != AppWidgetManager.INVALID_APPWIDGET_ID) {
                                             WidgetTasarimi.save(ctx, id, config)
                                             AzimWidget.tazele(ctx)
@@ -108,7 +110,7 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
                     Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                         if(!embedded) IconButton(onClick = { close() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
                         Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
-                        ProRozeti()
+                        if (AnaTemalar.find(theme).pro) ProRozeti()
                     }
                     }
                     item { if(id == AppWidgetManager.INVALID_APPWIDGET_ID) FlowRow(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -134,8 +136,8 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
                         Button(onClick = {
                             addWidget()
                         }, enabled = !busy, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("widget-add")) {
-                            Text(cevir(dil, if(!pro) "Pro ile kullan" else if(id > 0) "Widget’ı kaydet" else "Telefon ekranına ekle",
-                                if(!pro) "Use with Pro" else if(id > 0) "Save widget" else "Add to home screen"))
+                            Text(cevir(dil, if(needsPro) "Bu arka plan Pro ile" else if(id > 0) "Widget’ı kaydet" else "Telefon ekranına ekle",
+                                if(needsPro) "This background is Pro" else if(id > 0) "Save widget" else "Add to home screen"))
                         }
                     }
                 }
@@ -162,8 +164,9 @@ class WidgetEkleAlicisi : BroadcastReceiver() {
         val pending = goAsync()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                if (com.yalnizfahrettin.azim.data.AscendStore.get(context).current().pro) WidgetTasarimi.save(context,id,WidgetSecimi(
-                    AnaTemalar.find(intent.getStringExtra("theme")).id, intent.getBooleanExtra("center",false), intent.getBooleanExtra("large",false)))
+                val chosen = AnaTemalar.allowed(intent.getStringExtra("theme"), com.yalnizfahrettin.azim.data.AscendStore.get(context).current().pro)
+                WidgetTasarimi.save(context,id,WidgetSecimi(
+                    chosen.id, intent.getBooleanExtra("center",false), intent.getBooleanExtra("large",false)))
                 AzimWidget.tazele(context)
             } finally { pending.finish() }
         }

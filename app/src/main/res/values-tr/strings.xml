@@ -6,6 +6,8 @@
     <string name="widget_square_name">Ascend · Kare</string>
     <string name="widget_wide_name">Ascend · Geniş</string>
     <string name="yeni_soz">Bugün</string>
+    <string name="widget_next">Sonraki</string>
+    <string name="widget_empty">Burada söz görmek için Ascend\'de konu seç.</string>
     <string name="favoriler_baslik">Kaydedilenler</string>
     <string name="channel_name">Günlük sözler</string>
     <string name="channel_description">Seçtiğin konulardan sözler, belirlediğin saatlerde.</string>
