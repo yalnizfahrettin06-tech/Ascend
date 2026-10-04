@@ -117,7 +117,7 @@ private fun TopicRow(topic: Kategori, state: UserState, toggle: () -> Unit, open
         Column(Modifier.weight(1f)) {
             Text(topic.ad(language), style = MaterialTheme.typography.bodyLarge, color = Renk.metin)
             Text(if (locked) stringResource(R.string.explore_pro_topic) else if (on) stringResource(R.string.explore_in_reminders)
-                else pluralStringResource(R.plurals.quotes_count, Sozler.kategoriden(topic.anahtar).size, Sozler.kategoriden(topic.anahtar).size),
+                else Sozler.kategoriden(topic.anahtar).count { it.mevcut(language) }.let { n -> pluralStringResource(R.plurals.quotes_count, n, n) },
                 style = MaterialTheme.typography.bodySmall, color = if (on) Renk.accent else Renk.metinIkincil)
         }
         val description = stringResource(if (on) R.string.explore_remove_from_reminders else R.string.explore_add_to_reminders, topic.ad(language))

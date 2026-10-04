@@ -15,7 +15,7 @@ android {
         versionCode = 61
         versionName = "10.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        resourceConfigurations += listOf("en", "tr")
+        resourceConfigurations += listOf("en", "tr", "de", "fr", "it", "pt", "ru")
     }
 
     val releaseStore = providers.environmentVariable("ASCEND_KEYSTORE_PATH").orNull

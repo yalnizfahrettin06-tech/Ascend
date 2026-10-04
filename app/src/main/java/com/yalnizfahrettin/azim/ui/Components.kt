@@ -123,6 +123,17 @@ fun <T> Segmented(options: List<Pair<T, String>>, selected: T, onSelect: (T) -> 
     }
 }
 
+/** Seven languages do not fit a segmented row; a wrapping set of pills does. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun LanguagePicker(selected: String, onSelect: (String) -> Unit, tag: String = "language") {
+    FlowRow(Modifier.fillMaxWidth().selectableGroup().testTag(tag), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        com.yalnizfahrettin.azim.data.Languages.options.forEach { (code, name) ->
+            TopicChip(name, code == selected, tag = "$tag-$code") { onSelect(code) }
+        }
+    }
+}
+
 /** Selectable topic pill; locked topics show a lock and stay tappable for the offer. */
 @Composable
 fun TopicChip(label: String, selected: Boolean, locked: Boolean = false, tag: String = "", onClick: () -> Unit) {

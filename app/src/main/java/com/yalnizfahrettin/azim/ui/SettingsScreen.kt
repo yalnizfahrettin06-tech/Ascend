@@ -33,8 +33,7 @@ fun SettingsScreen(
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)) {
             SectionTitle(stringResource(R.string.settings_language))
-            Segmented(Languages.options, language, setLanguage, tag = "settings-language")
-            Text(stringResource(R.string.settings_language_note), style = MaterialTheme.typography.bodySmall, color = Renk.metinIkincil)
+            LanguagePicker(language, setLanguage, tag = "settings-language")
 
             SectionTitle(stringResource(R.string.settings_theme))
             Segmented(listOf(ThemeMode.SYSTEM to stringResource(R.string.settings_theme_system),

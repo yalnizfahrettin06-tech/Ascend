@@ -132,7 +132,7 @@ private fun WelcomeStep(language: String, setLanguage: (String) -> Unit) {
     Text(Sozler.kimlikten("v5_motivasyon_07")?.metin(language).orEmpty(), fontFamily = LoraSerif, fontSize = 22.sp, lineHeight = 31.sp,
         color = Renk.metin, modifier = Modifier.padding(vertical = 8.dp))
     SectionTitle(stringResource(R.string.settings_language))
-    Segmented(Languages.options, language, setLanguage, tag = "language")
+    LanguagePicker(language, setLanguage)
 }
 
 @OptIn(ExperimentalLayoutApi::class)

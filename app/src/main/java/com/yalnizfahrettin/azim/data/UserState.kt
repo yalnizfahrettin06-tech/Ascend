@@ -92,5 +92,5 @@ object Defaults {
     const val SURPRISE_RATE = 0.15
     val STARTER_TOPICS = setOf("motivasyon", "ozsefkat", "derin_odak")
 
-    fun languageFor(locale: java.util.Locale): String = if (locale.language == "tr") "tr" else "en"
+    fun languageFor(locale: java.util.Locale): String = locale.language.takeIf { it in Languages.codes } ?: "en"
 }

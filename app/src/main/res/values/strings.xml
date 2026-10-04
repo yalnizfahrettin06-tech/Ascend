@@ -129,7 +129,6 @@
     <string name="you_history_tab">History</string>
     <string name="settings_title">Settings</string>
     <string name="settings_language">Language</string>
-    <string name="settings_language_note">More languages are coming back soon.</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_theme_system">System</string>
     <string name="settings_theme_light">Light</string>
@@ -142,7 +141,7 @@
     <string name="settings_content">Content</string>
     <string name="settings_hidden_none">No hidden quotes.</string>
     <string name="settings_about">About</string>
-    <string name="settings_about_body">Ascend\'s reflections are original texts. Thinker collections are inspired by their ideas and are not presented as direct quotations.</string>
+    <string name="settings_about_body">Ascend\'s reflections are original texts. Quotes shown with an author and work are verbatim public-domain translations; their renderings in other languages are Ascend\'s own.</string>
     <string name="settings_version">Version %1$s</string>
     <plurals name="streak_days">
         <item quantity="one">%1$d day</item>
