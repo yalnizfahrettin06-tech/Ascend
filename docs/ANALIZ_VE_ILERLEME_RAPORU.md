@@ -374,3 +374,24 @@ Widget yenilemesi kaldırılmalı. Sayaç yazımları debounce edilmeli ya da te
 - 10.0 yeni bir veri modeli kullanır; önceki test sürümlerinin yerel verileri (kayıtlı sözler dahil) taşınmaz. Uygulama yayında olmadığı için bu bilinçli bir tercihtir.
 - Paylaşım stüdyosu, Pro sayfası, kısa seriler, duvar kâğıdı ve widget kurulumu korunur ama henüz eski görsel dili kullanır. Yeni tasarıma uyarlanmaları Faz 2'dedir.
 - Emülatör UI testleri yalnızca `main` dalına push'ta ve elle tetiklemede çalışır.
+
+### Faz 1 doğrulaması
+| Kontrol | Sonuç |
+|---|---|
+| İçerik, metin ve görsel bütçesi kontrolleri | ✅ |
+| Kotlin derlemesi + Android lint | ✅ |
+| Birim testleri (bildirim planı, sürpriz oranı, konu sınırı, yaz saati, rotasyon, seri, kayıt/kodlama) | ✅ |
+| Emülatör: onboarding akışı (konu seç → izni geç → bitir) ve 14 ekranlık görüntü turu (API 35) | ✅ |
+
+<p>
+<img src="screenshots-v10/10-onboarding-welcome.png" width="180" alt="Karşılama ve dil">
+<img src="screenshots-v10/11-onboarding-topics.png" width="180" alt="Konu seçimi">
+<img src="screenshots-v10/13-onboarding-permission.png" width="180" alt="İzin adımı, şimdilik geç">
+<img src="screenshots-v10/01-today.png" width="180" alt="Bugün">
+</p>
+<p>
+<img src="screenshots-v10/02-today-dark-permission.png" width="180" alt="Koyu tema, izin kapalı uyarısı">
+<img src="screenshots-v10/04-explore.png" width="180" alt="Keşfet, listeden ekleme">
+<img src="screenshots-v10/05-reminders.png" width="180" alt="Bildirimler merkezi">
+<img src="screenshots-v10/07-you.png" width="180" alt="Senin: seri ve kaydedilenler">
+</p>
