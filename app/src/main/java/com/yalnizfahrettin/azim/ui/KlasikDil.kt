@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import com.yalnizfahrettin.azim.R
 import com.yalnizfahrettin.azim.core.*
 
-enum class KlasikMotif { BUST, COLUMN, ARCH }
 
 
 

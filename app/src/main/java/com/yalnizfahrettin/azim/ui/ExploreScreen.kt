@@ -94,7 +94,7 @@ fun ExploreScreen(
                             if (chosen > 0) Text(stringResource(R.string.explore_group_selected, chosen), style = MaterialTheme.typography.labelSmall, color = Renk.accent)
                         }
                     }
-                    items(group.altlar, key = { group.anahtar + "-" + it.anahtar }) { TopicRow(it, state, { toggle(it) }) { detail = it.anahtar } }
+                    items(group.altlar.sortedBy { it.anahtar !in state.access }, key = { group.anahtar + "-" + it.anahtar }) { TopicRow(it, state, { toggle(it) }) { detail = it.anahtar } }
                 }
             }
         }
