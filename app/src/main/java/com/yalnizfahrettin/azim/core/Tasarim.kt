@@ -110,10 +110,16 @@ val LocalAzimRenk = staticCompositionLocalOf { paletiCoz(Palet.MERMER, karanlik 
 
 enum class TemaModu { SISTEM, AYDINLIK, KARANLIK, OLED }
 
+fun com.yalnizfahrettin.azim.data.ThemeMode.asTemaModu(): TemaModu = when (this) {
+    com.yalnizfahrettin.azim.data.ThemeMode.SYSTEM -> TemaModu.SISTEM
+    com.yalnizfahrettin.azim.data.ThemeMode.LIGHT -> TemaModu.AYDINLIK
+    com.yalnizfahrettin.azim.data.ThemeMode.DARK -> TemaModu.KARANLIK
+}
+
 
 @Composable
 fun AzimTema(
-    modu: TemaModu = TemaModu.AYDINLIK,
+    modu: TemaModu = TemaModu.SISTEM,
     palet: Palet = Palet.MERMER,
     dinamik: Boolean = false,
     icerik: @Composable () -> Unit,
@@ -131,7 +137,7 @@ fun AzimTema(
     val base = if (renk.karanlikMi) darkColorScheme() else lightColorScheme()
     val onAccent = if (renk.karanlikMi) Color(0xFF121416) else Color.White
     val m3 = base.copy(
-        primary = renk.metin, onPrimary = renk.zemin,
+        primary = renk.marka, onPrimary = renk.markaUstu,
         primaryContainer = renk.accentZemin, onPrimaryContainer = renk.metin,
         secondary = renk.accent, onSecondary = onAccent,
         secondaryContainer = renk.accentZemin, onSecondaryContainer = renk.metin,
@@ -148,7 +154,7 @@ fun AzimTema(
         surfaceContainerLowest = renk.zemin, surfaceContainerLow = renk.yuzey,
         surfaceContainer = renk.yuzey, surfaceContainerHigh = renk.yuzeyYuksek,
         surfaceContainerHighest = renk.yuzeyYuksek,
-        error = if (renk.karanlikMi) Color(0xFFE2E2E0) else Color(0xFF343432),
+        error = if (renk.karanlikMi) Color(0xFFFFB4A9) else Color(0xFFB3261E),
         onError = onAccent, errorContainer = renk.accentZemin, onErrorContainer = renk.metin,
     )
     val view = androidx.compose.ui.platform.LocalView.current
@@ -172,24 +178,6 @@ fun AzimTema(
 }
 
 
-@Composable
-fun zeminFircasi(): Brush {
-    val r = LocalAzimRenk.current
-    return Brush.verticalGradient(
-        0f to r.yuzey.copy(alpha = if (r.karanlikMi) 0.55f else 0.7f),
-        0.32f to r.zemin,
-        1f to r.zemin,
-    )
-}
-
-
-@Composable
-fun accentIzi(): Brush {
-    val r = LocalAzimRenk.current
-    return Brush.radialGradient(
-        listOf(r.accent.copy(alpha = if (r.karanlikMi) 0.055f else 0.05f), Color.Transparent),
-    )
-}
 
 
 val Renk: AzimRenkleri

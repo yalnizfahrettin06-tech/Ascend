@@ -36,7 +36,7 @@ fun KesifMerkezi(dil: String, showHeading: Boolean = true, topics: @Composable (
 }
 
 @Composable
-fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0, quote: Soz? = null) {
+fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> Unit, select: (String) -> Unit, offerOpen: ((ProOffer) -> Unit)? = null, offerDismissals: Int = 0, quote: Soz? = null, back: (() -> Unit)? = null) {
     val appearanceState = androidx.compose.runtime.saveable.rememberSaveableStateHolder()
     var living by rememberSaveable { mutableStateOf(false) }
     var collectionOffering by rememberSaveable { mutableStateOf(false) }
@@ -50,7 +50,10 @@ fun GorunumEkrani(dil: String, selected: String?, pro: Boolean, proOpen: () -> U
     LaunchedEffect(pro) { if(pro && pendingApply && preview != null) { select(preview!!); preview = null; pendingApply = false } }
     val ctx = LocalContext.current
     Column(Modifier.fillMaxSize().background(Renk.zemin).statusBarsPadding()) {
-        Text(cevir(dil,"Görünüm","Appearance"), Modifier.padding(horizontal = 24.dp, vertical = 9.dp), color = Renk.metin, fontSize = UiRoles.sectionTitle, fontWeight = FontWeight.SemiBold)
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = if (back != null) 8.dp else 24.dp, top = 4.dp, bottom = 4.dp)) {
+            if (back != null) IconButton(onClick = back) { Icon(AzimIkon.Geri, cevir(dil, "Geri", "Back"), tint = Renk.metin) }
+            Text(cevir(dil,"Görünüm","Appearance"), color = Renk.metin, fontSize = UiRoles.sectionTitle, fontWeight = FontWeight.SemiBold)
+        }
         ChoiceTabs(listOf(cevir(dil,"Uygulama teması","App theme"), "Widget", WallpaperCopy.text("title",dil)),
             appearanceTab, { appearanceTab = it },listOf("appearance-theme","appearance-widget","appearance-wallpaper"))
         Spacer(Modifier.height(10.dp))

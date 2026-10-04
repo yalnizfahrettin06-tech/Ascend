@@ -46,7 +46,8 @@ object Sozler {
     private val kimlikDizini by lazy { icerik.associateBy { it.kimlik } }
     fun tumu(): List<Soz> = icerik
     fun aktifKimlikMi(kimlik: String): Boolean = kimlik in kimlikDizini
-    fun kategoriden(anahtar: String): List<Soz> = icerik.filter { it.kategori == anahtar }
+    private val kategoriDizini by lazy { icerik.groupBy { it.kategori } }
+    fun kategoriden(anahtar: String): List<Soz> = kategoriDizini[anahtar].orEmpty()
     fun bildirimHavuzu(secili: Set<String>, dil: String): List<Soz> =
         icerik.filter { it.kategori in secili && it.metin(dil).length <= HAVUZ_TAVANI }
     /** Exhaust the selected pool before another cycle, without an immediate boundary repeat. */
@@ -63,8 +64,7 @@ object Sozler {
         val uygun = icerik.filter { it.kategori in secili }
         return uygun.filterNot { it.kimlik in gecmis }.randomOrNull() ?: uygun.randomOrNull()
     }
-    /** Archived records only resolve an existing saved ID; never enter the new catalogue. */
-    fun kimlikten(kimlik: String): Soz? = kimlikDizini[kimlik] ?: EskiSozler.kimlikler[kimlik]
+    fun kimlikten(kimlik: String): Soz? = kimlikDizini[kimlik]
     fun akis(secili: Set<String>, gecmis: Set<String> = emptySet()): List<Soz> {
         // A loading, empty or invalid selection must never expose the whole paid catalogue.
         val uygun = icerik.filter { it.kategori in secili }

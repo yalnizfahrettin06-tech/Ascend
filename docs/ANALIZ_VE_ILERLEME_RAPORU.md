@@ -321,92 +321,45 @@ Widget yenilemesi kaldırılmalı. Sayaç yazımları debounce edilmeli ya da te
 
 ---
 
-## 14. Yol haritası ve ilerleme tablosu
+## 14. Kararlar ve iki fazlı yol haritası
 
-Durum açıklamaları: ⬜ Bekliyor · 🟨 Devam ediyor · ✅ Tamamlandı · ⏸ Karar bekliyor
+### Alınan kararlar (4 Ekim 2026)
+| Soru | Karar |
+|---|---|
+| Keşif | Bildirimler seçili konulardan gelir; **küçük oranda (≈%15) sürpriz söz** olur, ayarlardan kapatılabilir |
+| İzin | Onboarding'de **"Şimdilik geç"** seçeneği olur |
+| Sekmeler | "Görünüm" kalkar, yerine **Bildirimler** gelir |
+| Ödeme | Play Billing **şimdilik yok**; Pro demosu sürer |
+| Gerçek alıntılar | **Eklenecek** (kaynağı doğrulanmış, kamu malı) |
+| Yayın | Yayında değil → eski sürüm göç kodları silinebilir |
+| Dil | Öncelik **Türkçe + İngilizce**; 7 dil sonra |
 
-### Faz 0: Çekirdek vaadi düzelt (en yüksek öncelik, ~2–3 gün)
-| ID | İş | Bulgu | Durum |
-|---|---|---|---|
-| F0-1 | Bildirim havuzunu yalnızca seçili kategorilerle sınırla; keşfi isteğe bağlı yap (varsayılan kapalı) | 2.1 | ⬜ |
-| F0-2 | Ana akışı seçili kategorilerden oluştur; "her şeyden karışık" ayrı mod | 2.2 | ⬜ |
-| F0-3 | Onboarding'e kategori seçim adımı ekle (1–5 seçim) | 3.1 | ⬜ |
-| F0-4 | Onboarding'de "Şimdilik bildirimsiz devam et" seçeneği | 3.2 | ⬜ |
-| F0-5 | Bildirim aksiyonu yalnızca eklesin (`favoriEkle`) | 4.2 | ⬜ |
-| F0-6 | İlgili testleri yeni davranışa göre güncelle | 13 | ⬜ |
+### Faz 1: Sağlam çekirdek ve yeni deneyim (şu an)
+| ID | İş | Durum |
+|---|---|---|
+| F1-1 | Veri katmanı baştan: tek durum modeli, temiz varsayılanlar, eski göçlerin silinmesi, cihaz diline göre TR/EN | ⬜ |
+| F1-2 | Bildirim motoru: AlarmManager, seçili konular + %15 sürpriz, gecikme toleransı, yaz saati güvenli hesap, açılış/güncelleme alıcıları, sessiz (DEFAULT) kanal | ⬜ |
+| F1-3 | Bildirimdeki "Kaydet" yalnızca ekler; kayıtlıysa düğme görünmez | ⬜ |
+| F1-4 | Yeni onboarding: Dil → Konular (1–5) → Ritim → İzin (geçilebilir) → Hazır | ⬜ |
+| F1-5 | Yeni navigasyon: Bugün · Keşfet · Bildirimler · Senin; tek ViewModel | ⬜ |
+| F1-6 | Bugün: seçili konulardan akış, durum şeridi, sonraki bildirim saati, konum korunarak gizleme | ⬜ |
+| F1-7 | Keşfet: arama, koleksiyonlar, listeden doğrudan "bildirimlere ekle" | ⬜ |
+| F1-8 | Bildirimler merkezi: izin durumu, aç/kapa, sıklık, saat aralığı, saat önizlemesi, konular, sürpriz, bugün ara ver, deneme bildirimi | ⬜ |
+| F1-9 | Senin: seri, istatistik, kaydedilenler, geçmiş; Ayarlar: dil, tema (sistem/açık/koyu), arka plan, titreşim, Pro demo, gizlenenler | ⬜ |
+| F1-10 | Yeni görsel kimlik (sıcak kâğıt zemin + amber vurgu), açılışta yanıp sönme yok | ⬜ |
+| F1-11 | Ücretsiz katalog 6 → 26 konu | ⬜ |
+| F1-12 | Görsel optimizasyonu (~40 MB → ~8 MB), ölü kod temizliği, widget'ın kaydırmada yenilenmemesi | ⬜ |
+| F1-13 | TR/EN `strings.xml`; diğer 5 dil geçici olarak kapalı | ⬜ |
+| F1-14 | Testler, CI ve README güncellemesi | ⬜ |
 
-### Faz 1: Bildirim güvenilirliği (~2–3 gün)
-| ID | İş | Bulgu | Durum |
-|---|---|---|---|
-| F1-1 | AlarmManager tabanlı zamanlama (`setAndAllowWhileIdle`) ve açılış/güncelleme alıcıları | 4.1 | ⬜ |
-| F1-2 | Gecikme toleransını artır, kaçan slotları bir sonrakiyle birleştir | 4.1 | ⬜ |
-| F1-3 | `onResume` yeniden planlamasını kaldır, değişiklik tabanlı planlama | 4.3 | ⬜ |
-| F1-4 | `ZonedDateTime` ile yaz saati güvenli hesap | 4.4 | ⬜ |
-| F1-5 | Kanal önemini `DEFAULT` yap, açılır bildirimi isteğe bağlı sun | 4.5 | ⏸ |
-| F1-6 | Ana ekranda izin/kapalı durumu ve "sonraki bildirim" bilgisi | 4.6 | ⬜ |
-
-### Faz 2: Bilgi mimarisi ve UX (~4–5 gün)
-| ID | İş | Bulgu | Durum |
-|---|---|---|---|
-| F2-1 | Sekmeleri yeniden düzenle: Bugün · Keşfet · Bildirimler · Senin | 5.1 | ⏸ |
-| F2-2 | Tek "Bildirimler" ekranı (durum, aç/kapa, sıklık, saat, konular, duraklat, test) | 5.2 | ⬜ |
-| F2-3 | Ayarlar ekranını gerçek ayarlarla doldur (tema: sistem/açık/koyu, dil, titreşim) | 5.2, 5.5 | ⬜ |
-| F2-4 | Karanlık modu arka plan görselinden ayır, sistemi takip et | 5.5 | ⬜ |
-| F2-5 | Splash'i veri yüklenene kadar tut (ilk kare yanıp sönmesi) | 5.6 | ⬜ |
-| F2-6 | Keşfet'te listeden doğrudan "bildirimlere ekle" | 5.4 | ⬜ |
-| F2-7 | Gizlemede akış konumunu koru | 2.5 | ⬜ |
-| F2-8 | "Yeni söz" kısayolunu bağla, widget dokunuşuyla yeni söz | 5.7, 6 | ⬜ |
-| F2-9 | Kullanıcı adını selamlamada kullan ya da sormayı bırak | 5.3 | ⏸ |
-
-### Faz 3: Performans (~2 gün)
-| ID | İş | Bulgu | Durum |
-|---|---|---|---|
-| F3-1 | Görselleri yeniden sıkıştır (WebP q≈80, maks. 1080 px), hedef: −30 MB | 10.1 | ⬜ |
-| F3-2 | Tüm büyük görselleri örneklemeli asenkron yükleyiciden geçir | 10.1 | ⬜ |
-| F3-3 | DataStore göçünü açılışta bir kez çalıştır | 10.2 | ⬜ |
-| F3-4 | Kaydırmada widget yenilemesini kaldır, sayaç yazımlarını birleştir | 10.3 | ⬜ |
-| F3-5 | TTS'i tembel başlat | 10.4 | ⬜ |
-| F3-6 | Kategori dizini ve `recent` sıra haritası | 10.5 | ⬜ |
-
-### Faz 4: Mimari temizlik (~3–4 gün)
-| ID | İş | Bulgu | Durum |
-|---|---|---|---|
-| F4-1 | Ölü kodu kaldır (bölüm 12'deki liste) | 12 | ⬜ |
-| F4-2 | `AppViewModel` ve tek `UiState`; `Uygulama.kt` parçalara bölünsün | 12 | ⬜ |
-| F4-3 | Navigasyonu `navigation-compose` ile tanımla, tutarlı geri davranışı | 12 | ⬜ |
-| F4-4 | Varsayılanları tek yerde topla (saat 9–21, sıklık 3, dil = cihaz) | 1, 9 | ⬜ |
-| F4-5 | `cevir(tr,en)` → `strings.xml`/`plurals` göçü | 9 | ⬜ |
-
-### Faz 5: Ürün ve içerik (karar gerektiriyor)
-| ID | İş | Bulgu | Durum |
-|---|---|---|---|
-| F5-1 | İçerik derinliği: kategori başına en az 30–50 söz ya da kategori birleştirme | 8 | ⏸ |
-| F5-2 | Doğrulanmış kamu malı gerçek alıntılar (ayrı etiket) | 8 | ⏸ |
-| F5-3 | Google Play Billing ile gerçek Pro; demo yalnızca debug'da | 7 | ⏸ |
-| F5-4 | Seri/istatistik ekranını geri getir ya da tamamen kaldır | 12 | ⏸ |
-| F5-5 | Anadil çeviri kontrolü, Almancada `du` hitabı | 8 | ⏸ |
-| F5-6 | README ve docs/ sadeleştirme (tek güncel durum belgesi) | 13 | ⬜ |
-
-### Genel ilerleme
-| Faz | Toplam | ✅ | 🟨 | ⬜ | ⏸ |
-|---|---|---|---|---|---|
-| F0 Çekirdek | 6 | 0 | 0 | 6 | 0 |
-| F1 Bildirim | 6 | 0 | 0 | 5 | 1 |
-| F2 UX | 9 | 0 | 0 | 7 | 2 |
-| F3 Performans | 6 | 0 | 0 | 6 | 0 |
-| F4 Mimari | 5 | 0 | 0 | 5 | 0 |
-| F5 Ürün | 6 | 0 | 0 | 1 | 5 |
-| **Toplam** | **38** | **0** | **0** | **30** | **8** |
-
----
-
-## 15. Karar bekleyen sorular
-
-1. **Keşif davranışı:** Bildirimler *yalnızca* seçili kategorilerden mi gelsin, yoksa küçük bir oranda (ör. %10–20) farklı konulardan sürpriz söz de olsun mu? Sürpriz varsa varsayılan açık mı kapalı mı?
-2. **İzin:** Onboarding'de bildirim izni zorunlu olmaktan çıksın mı? Öneri: evet, "şimdilik geç" + ana ekranda hatırlatma.
-3. **Alt sekmeler:** "Görünüm" sekmesinin yerine "Bildirimler" gelsin mi?
-4. **Gelir modeli:** Gerçek Play Billing entegrasyonuna geçilecek mi? Yoksa Pro demosu bir süre daha (test aşaması) kalacak mı?
-5. **İçerik:** Gerçek, kaynağı doğrulanmış alıntılar (Marcus Aurelius, Seneca, Epiktetos, Mevlana gibi kamu malı metinler) eklensin mi? Yoksa yalnızca "özgün Ascend düşünceleri" politikası mı sürsün?
-6. **Seri/istatistik:** Arka planda tutulan seri (streak) ve günlük sayaçlar kullanıcıya gösterilsin mi, tamamen kaldırılsın mı?
-7. **Yayın durumu:** Uygulama Play Store'da yayında mı? Yayında değilse eski sürüm göç kodları güvenle silinebilir.
-8. **Dil önceliği:** 7 dil korunsun mu? Kalite için önce TR/EN'e odaklanıp diğerlerini sonra mı ele alalım?
+### Faz 2: Derinlik ve cila
+| ID | İş | Durum |
+|---|---|---|
+| F2-1 | Doğrulanmış kamu malı gerçek alıntılar (Marcus Aurelius, Seneca, Epiktetos, Mevlana...) ayrı etiketle | ⬜ |
+| F2-2 | İçerik derinliği: konu başına 30+ söz | ⬜ |
+| F2-3 | Widget yenileme: dokununca yeni söz, bitmapsiz erişilebilir düzen | ⬜ |
+| F2-4 | Paylaşım stüdyosu, duvar kâğıdı ve kısa serilerin yeni tasarıma uyarlanması | ⬜ |
+| F2-5 | Erişilebilirlik turu ve yeni UI testleri (emülatör) | ⬜ |
+| F2-6 | 5 dilin `strings.xml` ile geri dönüşü ve anadil kontrolü | ⬜ |
+| F2-7 | Pro deneyimi: billing hazırlığı, demo yalnızca debug derlemede | ⬜ |
+| F2-8 | Dokümantasyon arşivi: `docs/` sadeleştirme | ⬜ |

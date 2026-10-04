@@ -11,11 +11,8 @@ import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
-import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
-import androidx.glance.action.ActionParameters
-import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.updateAll
 import androidx.glance.background
 import androidx.glance.currentState
@@ -31,9 +28,10 @@ import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import androidx.compose.ui.graphics.Color
 import androidx.glance.appwidget.state.updateAppWidgetState
-import com.yalnizfahrettin.azim.data.Depo
+import com.yalnizfahrettin.azim.data.AscendStore
+import com.yalnizfahrettin.azim.data.QuotePicker
+import com.yalnizfahrettin.azim.data.UserState
 import com.yalnizfahrettin.azim.data.Sozler
-import com.yalnizfahrettin.azim.data.PersonalPlan
 import kotlinx.coroutines.flow.first
 
 /*
@@ -58,13 +56,13 @@ open class AzimWidget : GlanceAppWidget() {
     override val stateDefinition: GlanceStateDefinition<*> = PreferencesGlanceStateDefinition
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val depo = Depo(context)
-        val initialPro = depo.proDemo.first()
-        val dil = depo.dil.first()
+        val state = AscendStore.get(context).current()
+        val initialPro = state.pro
+        val dil = state.language
         val manager = androidx.glance.appwidget.GlanceAppWidgetManager(context)
         val widgetId = manager.getAppWidgetId(id)
         val initialConfig = WidgetTasarimi.load(context, widgetId)
-        val daily = gununSozu(depo)
+        val daily = gununSozu(state)
         updateAppWidgetState(context, id) { state ->
             state[ACCESS] = initialPro
             state[SOZ] = daily?.metin(dil) ?: com.yalnizfahrettin.azim.data.Diller.metin(dil, "Kendine küçük bir an ayır.", "Take a moment for yourself.")
@@ -84,7 +82,8 @@ open class AzimWidget : GlanceAppWidget() {
                     (size.width.value * context.resources.displayMetrics.density).toInt(), (size.height.value * context.resources.displayMetrics.density).toInt())
             }
             val intent = if(pro) android.content.Intent(context, com.yalnizfahrettin.azim.MainActivity::class.java)
-                .putExtra(com.yalnizfahrettin.azim.notif.Bildirimler.EXTRA_KIMLIK, state[KIMLIK])
+                .setAction(com.yalnizfahrettin.azim.notif.Notifier.ACTION_OPEN_QUOTE)
+                .putExtra(com.yalnizfahrettin.azim.notif.Notifier.EXTRA_QUOTE_ID, state[KIMLIK])
                 else android.content.Intent(context, WidgetAyarActivity::class.java).putExtra(android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
             androidx.glance.Image(provider = androidx.glance.ImageProvider(bitmap), contentDescription = "$quote $source",
                 contentScale = androidx.glance.layout.ContentScale.FillBounds,
@@ -102,20 +101,18 @@ open class AzimWidget : GlanceAppWidget() {
         val SOZ = stringPreferencesKey("widget_soz")
         val YAZAR = stringPreferencesKey("widget_yazar")
 
-        private suspend fun gununSozu(depo: Depo): com.yalnizfahrettin.azim.data.Soz? {
-            val secili = depo.secili.first()
-            val allowed = depo.acik.first()
-            val hidden = depo.hiddenQuotes.first()
-            val choices = PersonalPlan.widgetPool(depo.personalProfile.first(), secili, allowed, hidden)
+        /** One stable quote per day from the chosen topics. */
+        private fun gununSozu(state: UserState): com.yalnizfahrettin.azim.data.Soz? {
+            val choices = QuotePicker.topicPool(state).sortedBy { it.kimlik }
             return choices.takeIf { it.isNotEmpty() }?.random(kotlin.random.Random(java.time.LocalDate.now().toEpochDay().toInt()))
         }
 
         /** Tüm widget örneklerine yeni bir söz yazar. */
         suspend fun tazele(ctx: Context) {
-            val depo = Depo(ctx)
-            val dil = depo.dil.first()
-            val access = depo.proDemo.first()
-            val soz = gununSozu(depo)
+            val state = AscendStore.get(ctx).current()
+            val dil = state.language
+            val access = state.pro
+            val soz = gununSozu(state)
             val manager = androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
             val ids = manager.getGlanceIds(AzimWidget::class.java) + manager.getGlanceIds(AzimSquareWidget::class.java)
             ids
@@ -135,13 +132,6 @@ open class AzimWidget : GlanceAppWidget() {
             AzimWidget().updateAll(ctx)
             AzimSquareWidget().updateAll(ctx)
         }
-    }
-}
-
-/** Widget'a dokununca yeni söz. */
-class YenileEylemi : ActionCallback {
-    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
-        AzimWidget.tazele(context)
     }
 }
 

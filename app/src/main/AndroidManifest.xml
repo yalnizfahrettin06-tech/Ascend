@@ -50,9 +50,8 @@
                 android:resource="@xml/kisayollar" />
         </activity>
 
-        <receiver
-            android:name=".notif.FavoriAlicisi"
-            android:exported="false" />
+        <receiver android:name=".notif.ReminderReceiver" android:exported="false" />
+        <receiver android:name=".notif.NotificationActionReceiver" android:exported="false" />
 
         <receiver
             android:name=".widget.AzimWidgetSaglayici"
@@ -86,12 +85,14 @@
         </provider>
 
         <receiver
-            android:name=".notif.AcilisAlicisi"
+            android:name=".notif.SystemEventsReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
                 <action android:name="android.intent.action.TIME_SET" />
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
         </receiver>
     </application>

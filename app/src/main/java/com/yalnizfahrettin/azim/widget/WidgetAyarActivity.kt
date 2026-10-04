@@ -49,13 +49,14 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
     embedded: Boolean = false, language: String? = null, close: () -> Unit = {}, configured: (Int) -> Unit = {}) {
     val ctx = androidx.compose.ui.platform.LocalContext.current
     val scope = rememberCoroutineScope()
-    val depot = remember(ctx) { Depo(ctx) }
+    val store = remember(ctx) { com.yalnizfahrettin.azim.data.AscendStore.get(ctx) }
+    val userState by store.state.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.data.UserState())
     val initial = remember(ctx,id) { WidgetTasarimi.load(ctx,id) }
 
-            val pro by depot.proDemo.collectAsStateWithLifecycle(false)
-            val storedLanguage by depot.dil.collectAsStateWithLifecycle("tr")
+            val pro = userState.pro
+            val storedLanguage = userState.language
             val dil = language ?: storedLanguage
-            val mode by depot.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
+            val mode = userState.themeMode.asTemaModu()
             var square by rememberSaveable { mutableStateOf(
                 AppWidgetManager.getInstance(ctx).getAppWidgetInfo(id)?.provider == ComponentName(ctx,AzimSquareWidgetSaglayici::class.java)) }
             var theme by rememberSaveable { mutableStateOf(initialTheme?.takeIf { choice -> AnaTemalar.all.any { it.id == choice } } ?: initial.theme) }
@@ -72,7 +73,7 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
                                 busy = true
                                 scope.launch {
                                     try {
-                                        if (!depot.proDemo.first()) { showPro = true; return@launch }
+                                        if (!store.current().pro) { showPro = true; return@launch }
                                         if (id != AppWidgetManager.INVALID_APPWIDGET_ID) {
                                             WidgetTasarimi.save(ctx, id, config)
                                             AzimWidget.tazele(ctx)
@@ -142,7 +143,7 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
                     offer = ProOffer(ProSource.WIDGET,theme,square = square), widgetPreview = bitmap,
                     kapat = { showPro = false }, degistir = { enabled ->
                         if(!busy) { busy = true; scope.launch {
-                            try { depot.proDemoAyarla(enabled); showPro = false; resumeAdd = enabled
+                            try { store.update { com.yalnizfahrettin.azim.data.UserActions.setPro(it, enabled) }; showPro = false; resumeAdd = enabled
                                 if(enabled) ProductSignals.record(ctx,ProductSignals.Event.DEMO_ENABLED,ProSource.WIDGET)
                             } catch(_: java.io.IOException) { message = cevir(dil,"Kaydedilemedi. Yeniden dene.","Could not save. Try again.") }
                             finally { busy = false }
@@ -161,7 +162,7 @@ class WidgetEkleAlicisi : BroadcastReceiver() {
         val pending = goAsync()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                if (Depo(context).proDemo.first()) WidgetTasarimi.save(context,id,WidgetSecimi(
+                if (com.yalnizfahrettin.azim.data.AscendStore.get(context).current().pro) WidgetTasarimi.save(context,id,WidgetSecimi(
                     AnaTemalar.find(intent.getStringExtra("theme")).id, intent.getBooleanExtra("center",false), intent.getBooleanExtra("large",false)))
                 AzimWidget.tazele(context)
             } finally { pending.finish() }

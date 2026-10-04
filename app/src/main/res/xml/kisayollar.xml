@@ -7,7 +7,7 @@
         android:shortcutShortLabel="@string/yeni_soz"
         android:shortcutLongLabel="@string/yeni_soz">
         <intent
-            android:action="com.yalnizfahrettin.azim.YENI_SOZ"
+            android:action="com.yalnizfahrettin.azim.TODAY"
             android:targetPackage="com.yalnizfahrettin.azim"
             android:targetClass="com.yalnizfahrettin.azim.MainActivity" />
     </shortcut>
@@ -18,7 +18,7 @@
         android:shortcutShortLabel="@string/favoriler_baslik"
         android:shortcutLongLabel="@string/favoriler_baslik">
         <intent
-            android:action="com.yalnizfahrettin.azim.FAVORILER"
+            android:action="com.yalnizfahrettin.azim.SAVED"
             android:targetPackage="com.yalnizfahrettin.azim"
             android:targetClass="com.yalnizfahrettin.azim.MainActivity" />
     </shortcut>
