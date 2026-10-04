@@ -97,4 +97,5 @@ jobs:
           path: |
             app/build/reports/androidTests/
             app/build/outputs/androidTest-results/
+            screenshots/
           retention-days: 7
