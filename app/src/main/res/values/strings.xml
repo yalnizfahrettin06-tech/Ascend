@@ -79,7 +79,8 @@
     <string name="explore_add_switch">Send me quotes from this topic</string>
     <string name="explore_last_topic">Add another topic before removing your last one.</string>
     <string name="explore_unlock_with_pro">Unlock with Ascend Pro</string>
-    <string name="explore_inspired_note">Original Ascend reflections inspired by this thinker or tradition, not direct quotations.</string>
+    <string name="explore_inspired_note">Quotes marked with a source are verbatim from public-domain texts; the others are original Ascend reflections inspired by this thinker.</string>
+    <string name="explore_quote_badge">Quote</string>
     <string name="reminders_subtitle">When and what you receive</string>
     <string name="reminders_status_on">Reminders are on</string>
     <string name="reminders_status_off">Reminders are off</string>

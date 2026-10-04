@@ -9,7 +9,9 @@ def check():
     catalog = {'en': source}
     for lang in ['tr', 'pt', 'de', 'fr', 'it', 'ru']:
         rows = json.loads((ROOT / f'content/translations/{lang}.json').read_text(encoding='utf-8'))['quotes']
-        assert set(rows) == set(source), f'{lang}: missing or orphaned IDs'
+        # Turkish is complete; other locales may lag behind new English additions (the app hides those there).
+        assert set(rows) <= set(source), f'{lang}: orphaned IDs'
+        if lang == 'tr': assert set(rows) == set(source), 'tr: missing IDs'
         assert all(r['sourceHash'] == fingerprint(source[qid]) for qid, r in rows.items()), f'{lang}: stale source'
         catalog[lang] = {qid: r['text'] for qid, r in rows.items()}
     intents = {}

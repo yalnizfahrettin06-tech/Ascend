@@ -13,7 +13,7 @@ done
   echo "} }"; } > "$W/stub/R.kt"
 { echo "package com.yalnizfahrettin.azim.ui"; echo "import com.yalnizfahrettin.azim.R"
   sed -n '/^enum class AtmosferGrubu/,/^@Composable/p' "$SRC/ui/Atmosfer.kt" | sed '$d'; } > "$W/stub/Atmosfer.kt"
-DATA="Access AnaTemalar Diller LocaleCatalog LocaleDe LocaleFr LocaleIt LocalePt LocaleRu Languages IcerikVerisi Kategoriler Sozler UserState UserActions Policies ShortSeries RestartSeries DisciplineSeries JourneyCopy"
+DATA="KlasikVerisi Access AnaTemalar Diller LocaleCatalog LocaleDe LocaleFr LocaleIt LocalePt LocaleRu Languages IcerikVerisi Kategoriler Sozler UserState UserActions Policies ShortSeries RestartSeries DisciplineSeries JourneyCopy"
 FILES=""; for d in $DATA; do FILES="$FILES $SRC/data/$d.kt"; done
 CP="$W/lib/junit-4.13.2.jar:$W/lib/hamcrest-core-1.3.jar"
 sed '/codecRoundTrips/,/^    }$/d; /emptyStoreUsesDevice/,/^    }$/d; /mutablePreferencesOf/d' "$ROOT/app/src/test/java/com/yalnizfahrettin/azim/UserStateTest.kt" > "$W/stub/UserStateTest.kt"

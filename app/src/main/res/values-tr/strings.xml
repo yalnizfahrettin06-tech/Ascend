@@ -79,7 +79,8 @@
     <string name="explore_add_switch">Bu konudan bildirim gelsin</string>
     <string name="explore_last_topic">Son konunu çıkarmadan önce başka bir konu ekle.</string>
     <string name="explore_unlock_with_pro">Ascend Pro ile aç</string>
-    <string name="explore_inspired_note">Bu düşünür ya da gelenekten esinlenen özgün Ascend düşünceleri; doğrudan alıntı değildir.</string>
+    <string name="explore_inspired_note">Kaynağı belirtilenler kamu malı metinlerden birebir alıntıdır; diğerleri bu düşünürden esinlenen özgün Ascend düşünceleridir.</string>
+    <string name="explore_quote_badge">Alıntı</string>
     <string name="reminders_subtitle">Ne zaman, hangi sözler</string>
     <string name="reminders_status_on">Hatırlatmalar açık</string>
     <string name="reminders_status_off">Hatırlatmalar kapalı</string>

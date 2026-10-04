@@ -44,13 +44,14 @@ object QuotePicker {
     private val sensitiveTopics = setOf("ask", "ayrilik", "vedalar", "sakatlik", "pismanlik")
     private const val COOLDOWN = 8
 
-    fun topicPool(s: UserState): List<Soz> = Sozler.tumu().filter { it.kategori in s.activeTopics && it.kimlik !in s.hidden }
+    fun topicPool(s: UserState): List<Soz> = s.activeTopics.flatMap(Sozler::kategoriden)
+        .filter { it.kimlik !in s.hidden && it.mevcut(s.language) }
 
     fun surprisePool(s: UserState): List<Soz> {
         val chosenGroups = s.activeTopics.mapNotNull { Kategoriler.bul(it)?.grup }.toSet()
         val topics = s.access - s.activeTopics - sensitiveTopics
         return Sozler.tumu().filter { q ->
-            q.kategori in topics && q.kimlik !in s.hidden &&
+            q.kategori in topics && q.kimlik !in s.hidden && q.mevcut(s.language) &&
                 Kategoriler.bul(q.kategori)?.grup.let { it !in personalGroups || it in chosenGroups }
         }
     }

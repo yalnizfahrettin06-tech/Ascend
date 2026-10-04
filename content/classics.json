@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "note": "Verbatim public-domain English translations. Turkish renderings are Ascend's own translations of the English text. Run tools/klasik_derle.py --verify to re-check every quote against its source.",
+  "sources": {
+    "meditations": {
+      "author": "Marcus Aurelius",
+      "work": {"en": "Meditations", "tr": "Düşünceler"},
+      "translator": "Meric Casaubon",
+      "url": "https://raw.githubusercontent.com/GITenberg/Meditations_2680/master/2680.txt",
+      "reference": "Project Gutenberg #2680"
+    },
+    "enchiridion": {
+      "author": "Epiktetos",
+      "authorEn": "Epictetus",
+      "work": {"en": "The Enchiridion", "tr": "Enkheiridion"},
+      "translator": "Thomas Wentworth Higginson",
+      "url": "https://raw.githubusercontent.com/GITenberg/The-Enchiridion_45109/master/45109-0.txt",
+      "reference": "Project Gutenberg #45109"
+    },
+    "discourses": {
+      "author": "Epiktetos",
+      "authorEn": "Epictetus",
+      "work": {"en": "Discourses", "tr": "Söylevler"},
+      "translator": "George Long",
+      "url": "https://raw.githubusercontent.com/GITenberg/A-Selection-from-the-Discourses-of-Epictetus-with-the-Encheiridion_10661/master/10661.txt",
+      "reference": "Project Gutenberg #10661"
+    },
+    "seneca": {
+      "author": "Seneca",
+      "work": {"en": "Seneca's Morals", "tr": "Ahlak Üzerine"},
+      "translator": "Roger L'Estrange",
+      "url": "https://raw.githubusercontent.com/GITenberg/Seneca-s-Morals-of-a-Happy-Life-Benefits-Anger-and-Clemency_56075/master/56075-0.txt",
+      "reference": "Project Gutenberg #56075"
+    },
+    "walden": {
+      "author": "Henry David Thoreau",
+      "work": {"en": "Walden", "tr": "Walden"},
+      "translator": "",
+      "url": "https://raw.githubusercontent.com/GITenberg/Walden-and-On-The-Duty-Of-Civil-Disobedience_205/master/205.txt",
+      "reference": "Project Gutenberg #205"
+    },
+    "emerson": {
+      "author": "Ralph Waldo Emerson",
+      "work": {"en": "Essays", "tr": "Denemeler"},
+      "translator": "",
+      "url": "https://raw.githubusercontent.com/GITenberg/Essays-by-Ralph-Waldo-Emerson_16643/master/16643.txt",
+      "reference": "Project Gutenberg #16643"
+    }
+  },
+  "quotes": [
+    {"id": "pd_marcus_01", "category": "marcus", "source": "meditations", "en": "Wheresoever thou mayest live, there it is in thy power to live well and happy.", "tr": "Nerede yaşarsan yaşa, orada iyi ve mutlu yaşamak senin elindedir."},
+    {"id": "pd_marcus_02", "category": "marcus", "source": "meditations", "en": "Such as thy thoughts and ordinary cogitations are, such will thy mind be in time.", "tr": "Düşüncelerin ve her günkü fikirlerin neyse, zamanla zihnin de o olur."},
+    {"id": "pd_marcus_03", "category": "marcus", "source": "meditations", "en": "Look within; within is the fountain of all good.", "tr": "İçine bak; bütün iyiliğin kaynağı içindedir."},
+    {"id": "pd_marcus_04", "category": "marcus", "source": "meditations", "en": "In the morning when thou findest thyself unwilling to rise, consider with thyself presently, it is to go about a man's work that I am stirred up.", "tr": "Sabah kalkmak istemediğinde hemen kendine şunu hatırlat: Bir insanın işini yapmak için uyandırılıyorum."},
+    {"id": "pd_marcus_05", "category": "marcus", "source": "meditations", "en": "This world is mere change, and this life, opinion.", "tr": "Bu dünya değişimden, bu hayat da görüşlerimizden ibarettir."},
+    {"id": "pd_marcus_06", "category": "marcus", "source": "meditations", "en": "Let opinion be taken away, and no man will think himself wronged.", "tr": "Yargıyı ortadan kaldır; kimse kendine haksızlık edildiğini düşünmez."},
+    {"id": "pd_marcus_07", "category": "marcus", "source": "meditations", "en": "At what time soever thou wilt, it is in thy power to retire into thyself, and to be at rest, and free from all businesses.", "tr": "Ne zaman istersen kendi içine çekilip dinlenmek ve bütün meşgalelerden kurtulmak senin elindedir."},
+    {"id": "pd_marcus_08", "category": "marcus", "source": "meditations", "en": "To comprehend all in a few words, our life is short; we must endeavour to gain the present time with best discretion and justice.", "tr": "Kısacası hayatımız kısa; şimdiki zamanı en iyi sağduyu ve adaletle değerlendirmeye çalışmalıyız."},
+    {"id": "pd_marcus_09", "category": "marcus", "source": "meditations", "en": "If anybody shall reprove me, and shall make it apparent unto me, that in any either opinion or action of mine I do err, I will most gladly retract.", "tr": "Biri beni eleştirir ve bir görüşümde ya da davranışımda yanıldığımı gösterirse, seve seve geri adım atarım."},
+    {"id": "pd_marcus_10", "category": "marcus", "source": "meditations", "en": "A happy lot and portion is, good inclinations of the soul, good desires, good actions.", "tr": "Mutlu bir pay, ruhun iyi eğilimleri, iyi istekler ve iyi davranışlardır."},
+    {"id": "pd_epiktetos_01", "category": "epiktetos", "source": "enchiridion", "en": "Men are disturbed not by things, but by the views which they take of things.", "tr": "İnsanları rahatsız eden şeylerin kendisi değil, o şeyler hakkındaki görüşleridir."},
+    {"id": "pd_epiktetos_02", "category": "epiktetos", "source": "enchiridion", "en": "Demand not that events should happen as you wish; but wish them to happen as they do happen, and you will go on well.", "tr": "Olayların istediğin gibi olmasını bekleme; oldukları gibi olmalarını iste, yolun iyi gider."},
+    {"id": "pd_epiktetos_03", "category": "epiktetos", "source": "enchiridion", "en": "Sickness is an impediment to the body, but not to the will unless itself pleases.", "tr": "Hastalık bedene engeldir, ama irade kendisi izin vermedikçe iradeye engel olamaz."},
+    {"id": "pd_epiktetos_04", "category": "epiktetos", "source": "enchiridion", "en": "When, therefore, anyone provokes you, be assured that it is your own opinion which provokes you.", "tr": "Biri seni kızdırdığında bil ki seni kızdıran, kendi yargındır."},
+    {"id": "pd_epiktetos_05", "category": "epiktetos", "source": "enchiridion", "en": "If you would improve, be content to be thought foolish and dull with regard to externals.", "tr": "Gelişmek istiyorsan, dış şeyler konusunda saf ve sıkıcı sanılmaya razı ol."},
+    {"id": "pd_epiktetos_06", "category": "epiktetos", "source": "enchiridion", "en": "Never proclaim yourself a philosopher, nor make much talk among the ignorant about your principles, but show them by actions.", "tr": "Kendini asla filozof ilan etme, ilkelerinden de çok söz etme; onları davranışlarınla göster."},
+    {"id": "pd_epiktetos_07", "category": "epiktetos", "source": "enchiridion", "en": "The condition and characteristic of a philosopher is that he looks to himself for all help or harm.", "tr": "Bilge kişinin özelliği, her yardımı ve her zararı kendinde aramasıdır."},
+    {"id": "pd_epiktetos_08", "category": "epiktetos", "source": "enchiridion", "en": "Within our power are opinion, aim, desire, aversion, and, in one word, whatever affairs are our own.", "tr": "Görüşümüz, amacımız, isteğimiz, kaçındığımız şeyler; tek kelimeyle bize ait olan her şey elimizdedir."},
+    {"id": "pd_epiktetos_09", "category": "epiktetos", "source": "discourses", "en": "What is the first business of him who philosophizes? To throw away self-conceit.", "tr": "Bilgelik yolundaki kişinin ilk işi nedir? Kibri bir kenara atmak."},
+    {"id": "pd_epiktetos_10", "category": "epiktetos", "source": "discourses", "en": "For it is impossible for a man to begin to learn that which he thinks that he knows.", "tr": "Çünkü insanın bildiğini sandığı bir şeyi öğrenmeye başlaması imkânsızdır."},
+    {"id": "pd_seneca_01", "category": "seneca", "source": "seneca", "en": "He that is perfectly wise is perfectly happy; nay, the very beginning of wisdom makes life easy to us.", "tr": "Tam bilge olan tam mutludur; dahası bilgeliğin daha başlangıcı bile hayatı kolaylaştırır."},
+    {"id": "pd_seneca_02", "category": "seneca", "source": "seneca", "en": "No man is born wise; but wisdom and virtue require a tutor, though we can easily learn to be vicious without a master.", "tr": "Kimse bilge doğmaz; bilgelik ve erdem bir öğretmen ister, kötülüğü ise ustasız da kolayca öğreniriz."},
+    {"id": "pd_seneca_03", "category": "seneca", "source": "seneca", "en": "A good conscience fears no witnesses, but a guilty conscience is solicitous even of solitude.", "tr": "Temiz bir vicdan tanıktan korkmaz; suçlu bir vicdan ise yalnızlıkta bile tedirgindir."},
+    {"id": "pd_seneca_04", "category": "seneca", "source": "seneca", "en": "Walls and castles may be mined and battered, but there is no art or engine that can subvert a steady mind.", "tr": "Surlar ve kaleler yıkılabilir, ama sağlam bir zihni devirecek hiçbir sanat ya da makine yoktur."},
+    {"id": "pd_seneca_05", "category": "seneca", "source": "seneca", "en": "Neither are we to value ourselves upon a day, or an hour, or any one action, but upon the whole habit of the mind.", "tr": "Kendimizi bir güne, bir saate ya da tek bir davranışa göre değil, zihnimizin bütün alışkanlığına göre değerlendirmeliyiz."},
+    {"id": "pd_seneca_06", "category": "seneca", "source": "seneca", "en": "It is the mind, and not the event, that distinguishes a benefit from an injury.", "tr": "Bir iyiliği bir zarardan ayıran olay değil, niyettir."},
+    {"id": "pd_seneca_07", "category": "seneca", "source": "seneca", "en": "To give and to lose, is nothing; but to lose and to give still, is the part of a great mind.", "tr": "Verip kaybetmek bir şey değil; kaybedip yine de vermek büyük bir yüreğin işidir."},
+    {"id": "pd_seneca_08", "category": "seneca", "source": "seneca", "en": "It is only in adverse fortune, and in bad times, that we find great examples.", "tr": "Büyük örnekleri ancak talihin döndüğü, zor zamanlarda buluruz."},
+    {"id": "pd_seneca_09", "category": "seneca", "source": "seneca", "en": "What can be more reasonable than this daily review of a life that we cannot warrant for a moment?", "tr": "Bir an bile garanti edemediğimiz bir hayatı her gün gözden geçirmekten daha akıllıca ne olabilir?"},
+    {"id": "pd_seneca_10", "category": "seneca", "source": "seneca", "en": "It is not the value of the present, but the benevolence of the mind, that we are to consider.", "tr": "Bakmamız gereken hediyenin değeri değil, verenin iyi niyetidir."},
+    {"id": "pd_thoreau_01", "category": "thoreau", "source": "walden", "en": "The mass of men lead lives of quiet desperation.", "tr": "İnsanların çoğu sessiz bir umutsuzluk içinde yaşar."},
+    {"id": "pd_thoreau_02", "category": "thoreau", "source": "walden", "en": "Our life is frittered away by detail.", "tr": "Hayatımız ayrıntılar içinde ufalanıp gidiyor."},
+    {"id": "pd_thoreau_03", "category": "thoreau", "source": "walden", "en": "Simplicity, simplicity, simplicity!", "tr": "Sadelik, sadelik, sadelik!"},
+    {"id": "pd_thoreau_04", "category": "thoreau", "source": "walden", "en": "If one advances confidently in the direction of his dreams, and endeavors to live the life which he has imagined, he will meet with a success unexpected in common hours.", "tr": "İnsan hayallerinin yönünde güvenle ilerler ve hayal ettiği hayatı yaşamaya çalışırsa, sıradan saatlerde beklemediği bir başarıyla karşılaşır."},
+    {"id": "pd_thoreau_05", "category": "thoreau", "source": "walden", "en": "If you have built castles in the air, your work need not be lost; that is where they should be. Now put the foundations under them.", "tr": "Havada şatolar kurduysan emeğin boşa gitmiş değil; olmaları gereken yer orası. Şimdi altlarına temel koy."},
+    {"id": "pd_thoreau_06", "category": "thoreau", "source": "walden", "en": "Time is but the stream I go a-fishing in.", "tr": "Zaman, içinde balık tuttuğum bir dereden başka bir şey değil."},
+    {"id": "pd_thoreau_07", "category": "thoreau", "source": "walden", "en": "A man is rich in proportion to the number of things which he can afford to let alone.", "tr": "İnsan, vazgeçebildiği şeylerin sayısı oranında zengindir."},
+    {"id": "pd_thoreau_08", "category": "thoreau", "source": "walden", "en": "The cost of a thing is the amount of what I will call life which is required to be exchanged for it.", "tr": "Bir şeyin bedeli, onun karşılığında vermek zorunda kaldığımız hayat miktarıdır."},
+    {"id": "pd_emerson_01", "category": "emerson", "source": "emerson", "en": "Trust thyself: every heart vibrates to that iron string.", "tr": "Kendine güven: her yürek o demir telle titreşir."},
+    {"id": "pd_emerson_02", "category": "emerson", "source": "emerson", "en": "Nothing great was ever achieved without enthusiasm.", "tr": "Coşku olmadan büyük hiçbir şey başarılmadı."},
+    {"id": "pd_emerson_03", "category": "emerson", "source": "emerson", "en": "Nothing can bring you peace but yourself.", "tr": "Sana huzuru kendinden başka hiçbir şey getiremez."},
+    {"id": "pd_emerson_04", "category": "emerson", "source": "emerson", "en": "To be great is to be misunderstood.", "tr": "Büyük olmak, yanlış anlaşılmaktır."},
+    {"id": "pd_emerson_05", "category": "emerson", "source": "emerson", "en": "The only reward of virtue, is virtue; the only way to have a friend is to be one.", "tr": "Erdemin tek ödülü erdemdir; dost edinmenin tek yolu dost olmaktır."},
+    {"id": "pd_emerson_06", "category": "emerson", "source": "emerson", "en": "A friend is a person with whom I may be sincere. Before him, I may think aloud.", "tr": "Dost, karşısında içten olabileceğim kişidir. Onun yanında yüksek sesle düşünebilirim."},
+    {"id": "pd_emerson_07", "category": "emerson", "source": "emerson", "en": "Insist on yourself; never imitate.", "tr": "Kendinde ısrar et; asla taklit etme."},
+    {"id": "pd_emerson_08", "category": "emerson", "source": "emerson", "en": "Nothing is at last sacred but the integrity of your own mind.", "tr": "Sonunda kutsal olan tek şey, kendi zihninin bütünlüğüdür."}
+  ]
+}

@@ -1,74 +1,56 @@
 package com.yalnizfahrettin.azim.data
 
+/** Bibliographic record of a verbatim public-domain quote. */
+data class Eser(val yazar: String, val adTr: String, val adEn: String, val cevirmen: String, val kaynak: String) {
+    fun ad(dil: String) = Diller.metin(dil, adTr, adEn)
+}
+
 /** IDs belong to the English master and never depend on a translation's wording. */
 data class Soz(
     val tr: String,
     val en: String,
     val yazar: String,
     val kategori: String,
-    val uyarlama: Boolean = false,
     val sabitKimlik: String? = null,
-    val arsiv: Boolean = false,
+    val eser: Eser? = null,
 ) {
-    fun metin(dil: String): String = if (Diller.normalize(dil) == "tr") tr else Diller.soz(dil, kimlik) ?: en
+    fun metin(dil: String): String = when (Diller.normalize(dil)) {
+        "tr" -> tr
+        "en" -> en
+        else -> Diller.soz(dil, kimlik) ?: en
+    }
+
+    /** Whether this text exists in [dil]; untranslated additions stay out of that language's feed. */
+    fun mevcut(dil: String): Boolean = Diller.normalize(dil) in setOf("tr", "en") || Diller.soz(dil, kimlik) != null
+
+    val gercekAlinti: Boolean get() = eser != null
+
     fun imza(dil: String): String = when {
-        arsiv -> com.yalnizfahrettin.azim.data.Diller.metin(dil, "Arşiv · Önceki sürüm", "Archive · Earlier edition")
-        sabitKimlik != null && Kategoriler.bul(kategori)?.grup in setOf("filozoflar", "tasavvuf", "inanc") -> Diller.metin(dil, "Ascend · Esinlenilmiş düşünce", "Ascend · Inspired reflection")
-        sabitKimlik != null -> com.yalnizfahrettin.azim.data.Diller.metin(dil, "Ascend · Özgün düşünce", "Ascend · Original reflection")
-        uyarlama -> "$yazar · ${com.yalnizfahrettin.azim.data.Diller.metin(dil, "uyarlama", "adapted")}"
-        else -> yazar
+        eser != null -> "${eser.yazar} · ${eser.ad(dil)}"
+        Kategoriler.bul(kategori)?.grup in setOf("filozoflar", "tasavvuf", "inanc") -> Diller.metin(dil, "Ascend · Esinlenilmiş düşünce", "Ascend · Inspired reflection")
+        else -> Diller.metin(dil, "Ascend · Özgün düşünce", "Ascend · Original reflection")
     }
-    fun sunumEtiketi(dil: String): String = if (!arsiv && Kategoriler.bul(kategori)?.grup == "olumlamalar") {
-        com.yalnizfahrettin.azim.data.Diller.metin(dil, "Ascend · Olumlama", "Ascend · Affirmation")
+
+    fun sunumEtiketi(dil: String): String = if (eser == null && Kategoriler.bul(kategori)?.grup == "olumlamalar") {
+        Diller.metin(dil, "Ascend · Olumlama", "Ascend · Affirmation")
     } else imza(dil)
-    val kimlik: String get() = sabitKimlik ?: "$kategori:${tr.hashCode()}"
-    fun bildirimeUygun(dil: String) = metin(dil).length <= Sozler.BILDIRIM_SINIRI
-    fun kisaltilirMi(dil: String) = !bildirimeUygun(dil)
-    /** Legacy text helper. Expanded notifications always use the complete text. */
-    fun bildirimMetni(dil: String): String {
-        val tam = metin(dil)
-        if (tam.length <= Sozler.BILDIRIM_SINIRI) return tam
-        val kesit = tam.take(Sozler.KISALTMA_UZUNLUGU)
-        val bosluk = kesit.lastIndexOf(' ')
-        return (if (bosluk > Sozler.KISALTMA_UZUNLUGU / 2) kesit.take(bosluk) else kesit)
-            .trimEnd(' ', ',', ';', ':', '.', '-', '—') + "…"
+
+    /** Translator credit for quotes; the Turkish line notes that the rendering is Ascend's own. */
+    fun ceviriNotu(dil: String): String? = eser?.let {
+        val translator = it.cevirmen.takeIf(String::isNotBlank)?.let { name -> Diller.metin(dil, "İngilizcesi: $name", "Translated by $name") }
+        val rendering = if (Diller.normalize(dil) == "en") null else Diller.metin(dil, "Türkçesi: Ascend", "Rendering: Ascend")
+        listOfNotNull(translator, rendering, it.kaynak).joinToString(" · ")
     }
+
+    val kimlik: String get() = sabitKimlik ?: "$kategori:${tr.hashCode()}"
 }
 
-data class BildirimSecimi(val soz: Soz, val yeniTur: Boolean)
-
 object Sozler {
-    const val BILDIRIM_SINIRI = 120
-    const val IDEAL_SINIR = 90
-    const val KISALTMA_UZUNLUGU = 100
-    const val HAVUZ_TAVANI = 400
-    private val icerik by lazy { IcerikVerisi.tumu }
+    private val icerik by lazy { IcerikVerisi.tumu + KlasikVerisi.tumu }
     private val kimlikDizini by lazy { icerik.associateBy { it.kimlik } }
+    private val kategoriDizini by lazy { icerik.groupBy { it.kategori } }
     fun tumu(): List<Soz> = icerik
     fun aktifKimlikMi(kimlik: String): Boolean = kimlik in kimlikDizini
-    private val kategoriDizini by lazy { icerik.groupBy { it.kategori } }
-    fun kategoriden(anahtar: String): List<Soz> = kategoriDizini[anahtar].orEmpty()
-    fun bildirimHavuzu(secili: Set<String>, dil: String): List<Soz> =
-        icerik.filter { it.kategori in secili && it.metin(dil).length <= HAVUZ_TAVANI }
-    /** Exhaust the selected pool before another cycle, without an immediate boundary repeat. */
-    fun bildirimSec(secili: Set<String>, dil: String, gecmis: Set<String>, sonKimlik: String?): BildirimSecimi? {
-        val havuz = bildirimHavuzu(secili, dil)
-        if (havuz.isEmpty()) return null
-        val yeni = havuz.filterNot { it.kimlik in gecmis }
-        val tur = yeni.isEmpty()
-        val adaylar = yeni.ifEmpty { havuz }
-        val soz = adaylar.filterNot { it.kimlik == sonKimlik }.ifEmpty { adaylar }.random()
-        return BildirimSecimi(soz, tur)
-    }
-    fun rastgele(secili: Set<String>, gecmis: Set<String> = emptySet()): Soz? {
-        val uygun = icerik.filter { it.kategori in secili }
-        return uygun.filterNot { it.kimlik in gecmis }.randomOrNull() ?: uygun.randomOrNull()
-    }
     fun kimlikten(kimlik: String): Soz? = kimlikDizini[kimlik]
-    fun akis(secili: Set<String>, gecmis: Set<String> = emptySet()): List<Soz> {
-        // A loading, empty or invalid selection must never expose the whole paid catalogue.
-        val uygun = icerik.filter { it.kategori in secili }
-        val (gorulmus, yeni) = uygun.partition { it.kimlik in gecmis }
-        return yeni.shuffled() + gorulmus.shuffled()
-    }
+    fun kategoriden(anahtar: String): List<Soz> = kategoriDizini[anahtar].orEmpty()
 }

@@ -1,0 +1,81 @@
+# Faz 2 · Günlük olumlamalar · 20 new pairs per topic
+ozsefkat | I can speak to myself today the way I would speak to a tired friend. | Bugün kendimle, yorgun bir arkadaşıma konuştuğum gibi konuşabilirim.
+ozsefkat | A slow day is still a day I lived; I do not have to earn my rest. | Yavaş geçen bir gün de yaşadığım bir gündür; dinlenmeyi hak etmek zorunda değilim.
+ozsefkat | I notice the effort behind my small steps, even when nobody else does. | Küçük adımlarımın arkasındaki emeği, kimse görmese de ben fark ediyorum.
+ozsefkat | My worth does not rise and fall with today's to-do list. | Değerim, bugünkü yapılacaklar listesiyle birlikte inip çıkmıyor.
+ozsefkat | When I fall short, I can ask what I need instead of what is wrong with me. | Yetişemediğimde, bende neyin yanlış olduğunu değil neye ihtiyacım olduğunu sorabilirim.
+ozsefkat | I can hold a hard feeling for a moment without turning it against myself. | Zor bir duyguyu kendime karşı çevirmeden bir süre taşıyabilirim.
+ozsefkat | Taking care of my body today is a quiet way of being on my own side. | Bugün bedenime özen göstermek, sessizce kendi tarafımda durmanın bir yoludur.
+ozsefkat | I allow myself to be a beginner without apologizing for it. | Bir şeye yeni başlayan biri olmama özür dilemeden izin veriyorum.
+ozsefkat | I can say no to one more task and still be a kind person. | Bir işe daha hayır deyip yine de iyi bir insan olabilirim.
+ozsefkat | The voice I use with myself is something I can practise changing. | Kendime seslendiğim tonu değiştirmeyi pratik edebilirim.
+ozsefkat | I do not need to be finished to be worthy of care. | Özeni hak etmek için tamamlanmış olmam gerekmiyor.
+ozsefkat | Today I will thank myself for one thing I usually overlook. | Bugün genellikle görmezden geldiğim bir şey için kendime teşekkür edeceğim.
+ozsefkat | Resting when I am tired is part of keeping my promises, not breaking them. | Yorulduğumda dinlenmek, sözlerimi bozmak değil onları sürdürebilmenin parçasıdır.
+ozsefkat | I can comfort the part of me that is afraid instead of rushing it. | İçimdeki korkan yanı aceleye getirmek yerine onu yatıştırabilirim.
+ozsefkat | My mistakes are information about a moment, not a verdict on my life. | Hatalarım hayatım hakkında bir hüküm değil, bir an hakkında bilgidir.
+ozsefkat | I give myself the same patience I hope to receive from others. | Başkalarından görmeyi umduğum sabrı kendime de gösteriyorum.
+ozsefkat | Even on a messy day, there is something in me worth looking after. | Dağınık bir günde bile içimde özen göstermeye değer bir şey var.
+ozsefkat | I can let a compliment land instead of explaining it away. | Bir iltifatı geçiştirmek yerine içime işlemesine izin verebilirim.
+ozsefkat | I am allowed to need help, and to ask for it plainly. | Yardıma ihtiyaç duymama ve bunu açıkça istememe izin var.
+ozsefkat | Being gentle with myself makes it easier, not harder, to keep going. | Kendime nazik davranmak devam etmeyi zorlaştırmaz, kolaylaştırır.
+ic_huzur | I can take three slow breaths before I answer the next message. | Sıradaki mesaja cevap vermeden önce üç yavaş nefes alabilirim.
+ic_huzur | Not every thought that visits me needs to stay for the evening. | Aklıma gelen her düşüncenin akşama kadar kalması gerekmiyor.
+ic_huzur | I can lower my shoulders and let my jaw soften right now. | Şu anda omuzlarımı indirip çenemi gevşetebilirim.
+ic_huzur | Calm is not something I must win; I can return to it in small moments. | Sakinlik kazanmam gereken bir şey değil; küçük anlarda ona dönebilirim.
+ic_huzur | I give my mind one thing to do at a time, and that is enough. | Zihnime aynı anda tek bir iş veriyorum ve bu yeterli.
+ic_huzur | The noise around me does not have to decide the pace inside me. | Etrafımdaki gürültü, içimdeki temponun ne olacağına karar vermek zorunda değil.
+ic_huzur | I can step outside for a minute and let the air change my thoughts. | Bir dakikalığına dışarı çıkıp havanın düşüncelerimi değiştirmesine izin verebilirim.
+ic_huzur | I let today be ordinary, and I find room to breathe in that. | Bugünün sıradan olmasına izin veriyor, bunun içinde nefes alacak yer buluyorum.
+ic_huzur | Some questions can wait until tomorrow without losing their answers. | Bazı sorular cevaplarını kaybetmeden yarına kadar bekleyebilir.
+ic_huzur | I notice the ground under my feet and let it hold me for a moment. | Ayaklarımın altındaki zemini fark edip bir an beni taşımasına izin veriyorum.
+ic_huzur | Turning off one screen can give my mind a little more room. | Bir ekranı kapatmak zihnime biraz daha alan açabilir.
+ic_huzur | I can listen to a song from start to end without doing anything else. | Bir şarkıyı başka hiçbir şey yapmadan baştan sona dinleyebilirim.
+ic_huzur | My breath is always here, ready when I remember to come back to it. | Nefesim hep burada; ona dönmeyi hatırladığımda hazır bekliyor.
+ic_huzur | I do not need to solve the whole day to feel at ease in this hour. | Bu saatte rahat hissetmek için bütün günü çözmem gerekmiyor.
+ic_huzur | Slowing down my steps on the way home can slow my thoughts as well. | Eve dönerken adımlarımı yavaşlatmak düşüncelerimi de yavaşlatabilir.
+ic_huzur | Peace can be as small as a warm drink held with both hands. | Huzur, iki elle tutulan sıcak bir içecek kadar küçük olabilir.
+ic_huzur | I can put my worries on paper and close the notebook for tonight. | Endişelerimi kâğıda yazıp bu gece için defteri kapatabilirim.
+ic_huzur | I choose one quiet minute before the day asks for my attention. | Gün dikkatimi istemeden önce kendime sessiz bir dakika ayırıyorum.
+ic_huzur | Feeling restless is a signal to pause, not a reason to rush. | Huzursuz hissetmek acele etmek için değil, durmak için bir işarettir.
+ic_huzur | I can let the evening be softer than the morning was. | Akşamın, sabahtan daha yumuşak geçmesine izin verebilirim.
+kendine_guven | I have handled hard days before; I can trust that experience today. | Daha önce zor günlerin üstesinden geldim; bugün o deneyime güvenebilirim.
+kendine_guven | My first try does not have to be my best try to be worth making. | Değerli olması için ilk denememin en iyi denemem olması gerekmiyor.
+kendine_guven | I can make a decision with what I know now and adjust it later. | Şu an bildiklerimle bir karar verip sonra onu düzeltebilirim.
+kendine_guven | I keep small promises to myself, and each one builds my trust. | Kendime verdiğim küçük sözleri tutuyorum; her biri güvenimi büyütüyor.
+kendine_guven | Other people's doubts are information about them, not a limit on me. | Başkalarının şüpheleri onlar hakkında bilgidir, benim için bir sınır değil.
+kendine_guven | I can ask a question without fearing that it makes me look small. | Beni küçük gösterir korkusu olmadan bir soru sorabilirim.
+kendine_guven | I remember one thing I learned this year that once felt impossible. | Bu yıl öğrendiğim ve bir zamanlar imkânsız görünen bir şeyi hatırlıyorum.
+kendine_guven | I can disagree respectfully and still stand by my point of view. | Saygıyla karşı çıkıp yine de kendi bakış açımın arkasında durabilirim.
+kendine_guven | My pace is my own; comparing it to others only blurs my path. | Hızım bana ait; onu başkalarınınkiyle kıyaslamak yolumu bulanıklaştırır.
+kendine_guven | I can take up space in a conversation without apologizing for it. | Bir sohbette özür dilemeden yer kaplayabilirim.
+kendine_guven | Not knowing yet is a stage of learning, not a sign of failure. | Henüz bilmemek bir başarısızlık işareti değil, öğrenmenin bir aşamasıdır.
+kendine_guven | I trust myself to learn from whatever happens next. | Bundan sonra ne olursa olsun ondan öğrenebileceğime güveniyorum.
+kendine_guven | I can change my mind when I learn something new, and that is strength. | Yeni bir şey öğrendiğimde fikrimi değiştirebilirim ve bu bir güçtür.
+kendine_guven | My voice counts in the rooms I enter, even when it shakes a little. | Girdiğim odalarda sesim biraz titrese de değer taşır.
+kendine_guven | I can finish a task imperfectly and still be proud that I finished. | Bir işi kusursuz bitirmesem de bitirdiğim için gurur duyabilirim.
+kendine_guven | Looking back at my notes reminds me how far I have already come. | Notlarıma geri bakmak, şimdiden ne kadar yol aldığımı hatırlatıyor.
+kendine_guven | I can set a boundary and trust that the right people will respect it. | Bir sınır koyabilir ve doğru insanların buna saygı duyacağına güvenebilirim.
+kendine_guven | A clumsy start is still a start that belongs to me. | Beceriksiz bir başlangıç da bana ait bir başlangıçtır.
+kendine_guven | I can listen to advice and still decide what fits my life. | Tavsiyeleri dinleyip yine de hayatıma neyin uyduğuna kendim karar verebilirim.
+kendine_guven | Today I act on one idea instead of waiting to feel completely ready. | Bugün tamamen hazır hissetmeyi beklemek yerine bir fikri hayata geçiriyorum.
+kendini_affet | I did what I could with what I understood then; today I understand more. | O zaman anladığım kadarıyla elimden geleni yaptım; bugün daha fazlasını anlıyorum.
+kendini_affet | Forgiving myself means I can learn the lesson without carrying the shame. | Kendimi affetmek, utancı taşımadan dersi öğrenebilmem demek.
+kendini_affet | I can apologize where it is needed and then let my mind rest. | Gereken yerde özür dileyip ardından zihnimin dinlenmesine izin verebilirim.
+kendini_affet | Replaying an old mistake will not change it; acting differently can. | Eski bir hatayı yeniden oynatmak onu değiştirmez; farklı davranmak değiştirebilir.
+kendini_affet | I am more than the worst thing I did on a difficult day. | Zor bir günde yaptığım en kötü şeyden çok daha fazlasıyım.
+kendini_affet | I can make amends in small ways instead of punishing myself in big ones. | Kendimi büyük biçimde cezalandırmak yerine küçük yollarla telafi edebilirim.
+kendini_affet | The person I was did not have the tools I have now. | Geçmişteki ben, şimdi sahip olduğum araçlara sahip değildi.
+kendini_affet | Letting go of guilt makes room for the care I can still give. | Suçluluğu bırakmak, hâlâ verebileceğim özene yer açar.
+kendini_affet | I can admit regret without deciding that I am a bad person. | Kötü bir insan olduğuma karar vermeden pişmanlığımı kabul edebilirim.
+kendini_affet | Today I close one old chapter by writing what I learned from it. | Bugün eski bir bölümden ne öğrendiğimi yazarak onu kapatıyorum.
+kendini_affet | Mistakes are part of every life that is actually being lived. | Hatalar, gerçekten yaşanan her hayatın bir parçasıdır.
+kendini_affet | I treat my past self with the understanding I would offer a friend. | Geçmişteki kendime, bir arkadaşıma göstereceğim anlayışla yaklaşıyorum.
+kendini_affet | Forgiveness can begin as a decision before it becomes a feeling. | Affetmek, bir duyguya dönüşmeden önce bir kararla başlayabilir.
+kendini_affet | I can carry responsibility lightly enough to keep moving forward. | Sorumluluğu, ilerlemeye devam edebileceğim kadar hafif taşıyabilirim.
+kendini_affet | Each new day gives me a chance to act in line with who I want to be. | Her yeni gün, olmak istediğim kişiye uygun davranmam için bir fırsat sunar.
+kendini_affet | I do not need everyone's forgiveness to begin forgiving myself. | Kendimi affetmeye başlamak için herkesin affına ihtiyacım yok.
+kendini_affet | The lesson can stay with me while the blame slowly leaves. | Suçlama yavaş yavaş giderken ders benimle kalabilir.
+kendini_affet | I can speak about my mistake calmly, without hiding or exaggerating it. | Hatamdan saklamadan ve büyütmeden, sakin bir sesle söz edebilirim.
+kendini_affet | Growth means I am allowed to be different from who I was last year. | Büyümek, geçen yılki hâlimden farklı olmama izin verilmesi demek.
+kendini_affet | Tonight I set down one regret and let tomorrow begin lighter. | Bu gece bir pişmanlığımı bırakıyor, yarının daha hafif başlamasına izin veriyorum.

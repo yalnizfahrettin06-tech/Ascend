@@ -138,7 +138,8 @@ private fun TopicSheet(topic: Kategori, state: UserState, close: () -> Unit, tog
     val language = state.language
     val locked = topic.anahtar !in state.access
     val on = topic.anahtar in state.activeTopics
-    val quotes = Sozler.kategoriden(topic.anahtar).filterNot { it.kimlik in state.hidden }
+    // Verbatim quotes first, then reflections; both only where this language has them.
+    val quotes = Sozler.kategoriden(topic.anahtar).filter { it.kimlik !in state.hidden && it.mevcut(language) }.sortedBy { !it.gercekAlinti }
     ModalBottomSheet(onDismissRequest = close, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), containerColor = Renk.zemin) {
         LazyColumn(Modifier.fillMaxWidth().testTag("topic-sheet"), contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 32.dp)) {
             item {
@@ -154,8 +155,12 @@ private fun TopicSheet(topic: Kategori, state: UserState, close: () -> Unit, tog
             }
             items(if (locked) quotes.take(2) else quotes, key = { it.kimlik }) { quote ->
                 HorizontalDivider(color = Renk.kenarlik)
-                Text(quote.metin(language), fontFamily = LoraSerif, style = MaterialTheme.typography.bodyLarge, color = Renk.metin,
-                    modifier = Modifier.fillMaxWidth().clickable(enabled = !locked) { openQuote(quote.kimlik) }.padding(vertical = 16.dp))
+                Column(Modifier.fillMaxWidth().clickable(enabled = !locked) { openQuote(quote.kimlik) }.padding(vertical = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    if (quote.gercekAlinti) Text(stringResource(R.string.explore_quote_badge).uppercase(Locale.forLanguageTag(language)) + " · " + quote.imza(language),
+                        style = MaterialTheme.typography.labelSmall, color = Renk.accent)
+                    Text(quote.metin(language), fontFamily = LoraSerif, style = MaterialTheme.typography.bodyLarge, color = Renk.metin)
+                }
             }
             if (locked) item {
                 Text(pluralStringResource(R.plurals.explore_locked_more, quotes.size - 2, quotes.size - 2), style = MaterialTheme.typography.bodySmall,

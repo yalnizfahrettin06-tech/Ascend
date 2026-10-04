@@ -49,6 +49,8 @@ jobs:
           python tools/check_need_content.py
           python tools/check_antiquity.py
           python tools/check_editorial.py
+          python tools/klasik_derle.py --check --verify
+          python tools/build_locales.py --check
           python tools/strings_source.py && git diff --exit-code app/src/main/res
           python tools/check_assets.py
       - name: Unit tests, lint and APK

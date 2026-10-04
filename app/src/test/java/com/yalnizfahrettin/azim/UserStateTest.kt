@@ -103,4 +103,27 @@ class UserStateTest {
         assertTrue(Access.free.all { Kategoriler.bul(it) != null && Sozler.kategoriden(it).isNotEmpty() })
         assertTrue(Defaults.STARTER_TOPICS.all { it in Access.free })
     }
+
+    @Test fun everyFreeTopicHasAtLeastThirtyTexts() {
+        Access.free.forEach { topic -> assertTrue(topic, Sozler.kategoriden(topic).size >= 30) }
+    }
+
+    @Test fun classicQuotesCarryTheirSource() {
+        val classics = Sozler.tumu().filter { it.gercekAlinti }
+        assertTrue(classics.size >= 40)
+        classics.forEach { q ->
+            assertTrue(q.kimlik.startsWith("pd_"))
+            assertTrue(q.imza("tr").contains(q.eser!!.yazar))
+            assertNotNull(q.ceviriNotu("tr"))
+        }
+        assertEquals("Marcus Aurelius · Meditations", Sozler.kimlikten("pd_marcus_01")!!.imza("en"))
+    }
+
+    @Test fun untranslatedQuotesStayOutOfOtherLanguages() {
+        val s = UserState(onboarded = true, language = "de", topics = setOf("motivasyon"))
+        val pool = QuotePicker.topicPool(s)
+        assertTrue(pool.isNotEmpty())
+        assertTrue(pool.all { it.mevcut("de") })
+        assertTrue(QuotePicker.topicPool(s.copy(language = "tr")).size > pool.size || pool.size >= 30)
+    }
 }
