@@ -104,7 +104,7 @@ def main() -> None:
         "count": len(records),
         "scenes": records,
     }
-    (repo / "docs/scene-art.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (repo / "docs/archive/scene-art.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"prepared": len(records), "uniqueImages": len({item["sha256"] for item in records}), "totalBytes": sum(item["bytes"] for item in records), "size": list(MAX_SIZE)}))
 
 

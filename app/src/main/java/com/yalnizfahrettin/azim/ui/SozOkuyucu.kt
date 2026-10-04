@@ -30,6 +30,8 @@ fun SozOkuyucu(soz: Soz, dil: String, saved: Boolean, close: () -> Unit, save: (
                 Text(soz.metin(dil), fontFamily = LoraSerif, fontSize = if (soz.metin(dil).length > 180) 26.sp else 30.sp, lineHeight = if (soz.metin(dil).length > 180) 36.sp else 41.sp, color = Renk.metin)
                 Spacer(Modifier.height(24.dp))
                 Text(soz.sunumEtiketi(dil), color = Renk.metinIkincil)
+                soz.ceviriNotu(dil)?.let { Text(it, color = Renk.metinIkincil, style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 6.dp).testTag("reader-citation")) }
             }
             HorizontalDivider(color = Renk.kenarlik)
             Row(Modifier.fillMaxWidth().padding(top = 12.dp), horizontalArrangement = Arrangement.SpaceEvenly) {

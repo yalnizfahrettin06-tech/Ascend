@@ -33,10 +33,13 @@ class Seslendirici(ctx: Context, private val dil: String) {
         private set
     var konusuyor by mutableStateOf(false)
         private set
+    /** Engine start is asynchronous; the first request waits for it instead of failing. */
+    private var bekleyen: String? = null
+    private var basarisiz = false
 
     init {
         motor = TextToSpeech(ctx.applicationContext) { durum ->
-            if (durum != TextToSpeech.SUCCESS) return@TextToSpeech
+            if (durum != TextToSpeech.SUCCESS) { main.post { basarisiz = true; konusuyor = false; bekleyen = null }; return@TextToSpeech }
             motor?.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
                 override fun onStart(id: String?) {}
                 override fun onDone(id: String?) { main.post { konusuyor = false } }
@@ -44,22 +47,31 @@ class Seslendirici(ctx: Context, private val dil: String) {
             })
             val yerel = Locale.forLanguageTag(com.yalnizfahrettin.azim.data.Diller.normalize(dil))
             val sonuc = motor?.setLanguage(yerel)
-            hazir = sonuc != TextToSpeech.LANG_MISSING_DATA &&
-                sonuc != TextToSpeech.LANG_NOT_SUPPORTED
+            val uygun = sonuc != TextToSpeech.LANG_MISSING_DATA && sonuc != TextToSpeech.LANG_NOT_SUPPORTED
+            main.post {
+                hazir = uygun
+                basarisiz = !uygun
+                val metin = bekleyen
+                bekleyen = null
+                if (uygun && metin != null) motor?.speak(metin, TextToSpeech.QUEUE_FLUSH, null, "azim") else konusuyor = false
+            }
         }
     }
 
-    /** Okuyorsa durdurur, okumuyorsa okur. */
-    fun degistir(metin: String) {
-        val m = motor ?: return
+    /** Okuyorsa durdurur, okumuyorsa okur. Returns false when the device cannot speak this language. */
+    fun degistir(metin: String): Boolean {
+        val m = motor ?: return false
         if (konusuyor) {
             m.stop()
+            bekleyen = null
             konusuyor = false
-            return
+            return true
         }
-        if (!hazir) return
+        if (basarisiz) return false
+        if (!hazir) { bekleyen = metin; konusuyor = true; return true }
         m.speak(metin, TextToSpeech.QUEUE_FLUSH, null, "azim")
         konusuyor = true
+        return true
     }
 
     fun durdur() {
@@ -74,13 +86,3 @@ class Seslendirici(ctx: Context, private val dil: String) {
     }
 }
 
-/** Ekran ömrüne bağlı seslendirici. Dil değişince yeniden kurulur. */
-@Composable
-fun rememberSeslendirici(dil: String): Seslendirici {
-    val ctx = LocalContext.current
-    val seslendirici = remember(dil) { Seslendirici(ctx, dil) }
-    DisposableEffect(seslendirici) {
-        onDispose { seslendirici.kapat() }
-    }
-    return seslendirici
-}

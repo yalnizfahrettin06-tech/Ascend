@@ -61,11 +61,15 @@ fun ProEkrani(
             HorizontalDivider(color = Renk.kenarlik)
             Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 10.dp),verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 hata?.let { Text(it,color = MaterialTheme.colorScheme.error,modifier = Modifier.semantics { liveRegion = LiveRegionMode.Assertive }) }
-                Text(cevir(dil,"Ödeme alınmaz. Abonelik başlatılmaz.","No payment is taken. No subscription starts."),color = Renk.metinIkincil,style = MaterialTheme.typography.bodySmall)
-                Button(onClick = { degistir(!acik) }, enabled = !kaydediliyor,
+                // No billing is connected: the free demo exists only in test builds; release builds announce Pro instead.
+                val demo = com.yalnizfahrettin.azim.BuildConfig.PRO_DEMO || acik
+                Text(if (demo) cevir(dil,"Ödeme alınmaz. Abonelik başlatılmaz.","No payment is taken. No subscription starts.")
+                    else cevir(dil,"Ascend Pro çok yakında. Şimdilik ücretsiz konular ve araçlar açık.","Ascend Pro is coming soon. Free topics and tools stay open meanwhile."),
+                    color = Renk.metinIkincil,style = MaterialTheme.typography.bodySmall, modifier = Modifier.testTag("pro-note"))
+                Button(onClick = { degistir(!acik) }, enabled = !kaydediliyor && demo,
                     modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag(if(acik) "pro-demo-disable" else "pro-demo-enable"), shape = RoundedCornerShape(18.dp)) {
                     if(kaydediliyor) CircularProgressIndicator(Modifier.size(20.dp),strokeWidth = 2.dp)
-                    else Text(if(acik) cevir(dil,"Pro demosunu kapat","Turn off Pro demo") else cevir(dil,"Demoyu aç ve devam et","Enable demo and continue"))
+                    else Text(if(acik) cevir(dil,"Pro demosunu kapat","Turn off Pro demo") else if (demo) cevir(dil,"Demoyu aç ve devam et","Enable demo and continue") else cevir(dil,"Çok yakında","Coming soon"))
                 }
                 if(!acik) TextButton(onClick = close,enabled = !kaydediliyor,modifier = Modifier.align(Alignment.CenterHorizontally).testTag("pro-decline")) { Text(SetupCopy.text("cancel",dil)) }
             }

@@ -7162,6 +7162,2456 @@
       "id": "v5_budist_dusunce_15",
       "category": "budist_dusunce",
       "text": "If you noticed a hurtful action today, look for what you can repair rather than labeling yourself."
+    },
+    {
+      "id": "v5_ozsefkat_11",
+      "category": "ozsefkat",
+      "text": "I can speak to myself today the way I would speak to a tired friend."
+    },
+    {
+      "id": "v5_ozsefkat_12",
+      "category": "ozsefkat",
+      "text": "A slow day is still a day I lived; I do not have to earn my rest."
+    },
+    {
+      "id": "v5_ozsefkat_13",
+      "category": "ozsefkat",
+      "text": "I notice the effort behind my small steps, even when nobody else does."
+    },
+    {
+      "id": "v5_ozsefkat_14",
+      "category": "ozsefkat",
+      "text": "My worth does not rise and fall with today's to-do list."
+    },
+    {
+      "id": "v5_ozsefkat_15",
+      "category": "ozsefkat",
+      "text": "When I fall short, I can ask what I need instead of what is wrong with me."
+    },
+    {
+      "id": "v5_ozsefkat_16",
+      "category": "ozsefkat",
+      "text": "I can hold a hard feeling for a moment without turning it against myself."
+    },
+    {
+      "id": "v5_ozsefkat_17",
+      "category": "ozsefkat",
+      "text": "Taking care of my body today is a quiet way of being on my own side."
+    },
+    {
+      "id": "v5_ozsefkat_18",
+      "category": "ozsefkat",
+      "text": "I allow myself to be a beginner without apologizing for it."
+    },
+    {
+      "id": "v5_ozsefkat_19",
+      "category": "ozsefkat",
+      "text": "I can say no to one more task and still be a kind person."
+    },
+    {
+      "id": "v5_ozsefkat_20",
+      "category": "ozsefkat",
+      "text": "The voice I use with myself is something I can practise changing."
+    },
+    {
+      "id": "v5_ozsefkat_21",
+      "category": "ozsefkat",
+      "text": "I do not need to be finished to be worthy of care."
+    },
+    {
+      "id": "v5_ozsefkat_22",
+      "category": "ozsefkat",
+      "text": "Today I will thank myself for one thing I usually overlook."
+    },
+    {
+      "id": "v5_ozsefkat_23",
+      "category": "ozsefkat",
+      "text": "Resting when I am tired is part of keeping my promises, not breaking them."
+    },
+    {
+      "id": "v5_ozsefkat_24",
+      "category": "ozsefkat",
+      "text": "I can comfort the part of me that is afraid instead of rushing it."
+    },
+    {
+      "id": "v5_ozsefkat_25",
+      "category": "ozsefkat",
+      "text": "My mistakes are information about a moment, not a verdict on my life."
+    },
+    {
+      "id": "v5_ozsefkat_26",
+      "category": "ozsefkat",
+      "text": "I give myself the same patience I hope to receive from others."
+    },
+    {
+      "id": "v5_ozsefkat_27",
+      "category": "ozsefkat",
+      "text": "Even on a messy day, there is something in me worth looking after."
+    },
+    {
+      "id": "v5_ozsefkat_28",
+      "category": "ozsefkat",
+      "text": "I can let a compliment land instead of explaining it away."
+    },
+    {
+      "id": "v5_ozsefkat_29",
+      "category": "ozsefkat",
+      "text": "I am allowed to need help, and to ask for it plainly."
+    },
+    {
+      "id": "v5_ozsefkat_30",
+      "category": "ozsefkat",
+      "text": "Being gentle with myself makes it easier, not harder, to keep going."
+    },
+    {
+      "id": "v5_ic_huzur_11",
+      "category": "ic_huzur",
+      "text": "I can take three slow breaths before I answer the next message."
+    },
+    {
+      "id": "v5_ic_huzur_12",
+      "category": "ic_huzur",
+      "text": "Not every thought that visits me needs to stay for the evening."
+    },
+    {
+      "id": "v5_ic_huzur_13",
+      "category": "ic_huzur",
+      "text": "I can lower my shoulders and let my jaw soften right now."
+    },
+    {
+      "id": "v5_ic_huzur_14",
+      "category": "ic_huzur",
+      "text": "Calm is not something I must win; I can return to it in small moments."
+    },
+    {
+      "id": "v5_ic_huzur_15",
+      "category": "ic_huzur",
+      "text": "I give my mind one thing to do at a time, and that is enough."
+    },
+    {
+      "id": "v5_ic_huzur_16",
+      "category": "ic_huzur",
+      "text": "The noise around me does not have to decide the pace inside me."
+    },
+    {
+      "id": "v5_ic_huzur_17",
+      "category": "ic_huzur",
+      "text": "I can step outside for a minute and let the air change my thoughts."
+    },
+    {
+      "id": "v5_ic_huzur_18",
+      "category": "ic_huzur",
+      "text": "I let today be ordinary, and I find room to breathe in that."
+    },
+    {
+      "id": "v5_ic_huzur_19",
+      "category": "ic_huzur",
+      "text": "Some questions can wait until tomorrow without losing their answers."
+    },
+    {
+      "id": "v5_ic_huzur_20",
+      "category": "ic_huzur",
+      "text": "I notice the ground under my feet and let it hold me for a moment."
+    },
+    {
+      "id": "v5_ic_huzur_21",
+      "category": "ic_huzur",
+      "text": "Turning off one screen can give my mind a little more room."
+    },
+    {
+      "id": "v5_ic_huzur_22",
+      "category": "ic_huzur",
+      "text": "I can listen to a song from start to end without doing anything else."
+    },
+    {
+      "id": "v5_ic_huzur_23",
+      "category": "ic_huzur",
+      "text": "My breath is always here, ready when I remember to come back to it."
+    },
+    {
+      "id": "v5_ic_huzur_24",
+      "category": "ic_huzur",
+      "text": "I do not need to solve the whole day to feel at ease in this hour."
+    },
+    {
+      "id": "v5_ic_huzur_25",
+      "category": "ic_huzur",
+      "text": "Slowing down my steps on the way home can slow my thoughts as well."
+    },
+    {
+      "id": "v5_ic_huzur_26",
+      "category": "ic_huzur",
+      "text": "Peace can be as small as a warm drink held with both hands."
+    },
+    {
+      "id": "v5_ic_huzur_27",
+      "category": "ic_huzur",
+      "text": "I can put my worries on paper and close the notebook for tonight."
+    },
+    {
+      "id": "v5_ic_huzur_28",
+      "category": "ic_huzur",
+      "text": "I choose one quiet minute before the day asks for my attention."
+    },
+    {
+      "id": "v5_ic_huzur_29",
+      "category": "ic_huzur",
+      "text": "Feeling restless is a signal to pause, not a reason to rush."
+    },
+    {
+      "id": "v5_ic_huzur_30",
+      "category": "ic_huzur",
+      "text": "I can let the evening be softer than the morning was."
+    },
+    {
+      "id": "v5_kendine_guven_11",
+      "category": "kendine_guven",
+      "text": "I have handled hard days before; I can trust that experience today."
+    },
+    {
+      "id": "v5_kendine_guven_12",
+      "category": "kendine_guven",
+      "text": "My first try does not have to be my best try to be worth making."
+    },
+    {
+      "id": "v5_kendine_guven_13",
+      "category": "kendine_guven",
+      "text": "I can make a decision with what I know now and adjust it later."
+    },
+    {
+      "id": "v5_kendine_guven_14",
+      "category": "kendine_guven",
+      "text": "I keep small promises to myself, and each one builds my trust."
+    },
+    {
+      "id": "v5_kendine_guven_15",
+      "category": "kendine_guven",
+      "text": "Other people's doubts are information about them, not a limit on me."
+    },
+    {
+      "id": "v5_kendine_guven_16",
+      "category": "kendine_guven",
+      "text": "I can ask a question without fearing that it makes me look small."
+    },
+    {
+      "id": "v5_kendine_guven_17",
+      "category": "kendine_guven",
+      "text": "I remember one thing I learned this year that once felt impossible."
+    },
+    {
+      "id": "v5_kendine_guven_18",
+      "category": "kendine_guven",
+      "text": "I can disagree respectfully and still stand by my point of view."
+    },
+    {
+      "id": "v5_kendine_guven_19",
+      "category": "kendine_guven",
+      "text": "My pace is my own; comparing it to others only blurs my path."
+    },
+    {
+      "id": "v5_kendine_guven_20",
+      "category": "kendine_guven",
+      "text": "I can take up space in a conversation without apologizing for it."
+    },
+    {
+      "id": "v5_kendine_guven_21",
+      "category": "kendine_guven",
+      "text": "Not knowing yet is a stage of learning, not a sign of failure."
+    },
+    {
+      "id": "v5_kendine_guven_22",
+      "category": "kendine_guven",
+      "text": "I trust myself to learn from whatever happens next."
+    },
+    {
+      "id": "v5_kendine_guven_23",
+      "category": "kendine_guven",
+      "text": "I can change my mind when I learn something new, and that is strength."
+    },
+    {
+      "id": "v5_kendine_guven_24",
+      "category": "kendine_guven",
+      "text": "My voice counts in the rooms I enter, even when it shakes a little."
+    },
+    {
+      "id": "v5_kendine_guven_25",
+      "category": "kendine_guven",
+      "text": "I can finish a task imperfectly and still be proud that I finished."
+    },
+    {
+      "id": "v5_kendine_guven_26",
+      "category": "kendine_guven",
+      "text": "Looking back at my notes reminds me how far I have already come."
+    },
+    {
+      "id": "v5_kendine_guven_27",
+      "category": "kendine_guven",
+      "text": "I can set a boundary and trust that the right people will respect it."
+    },
+    {
+      "id": "v5_kendine_guven_28",
+      "category": "kendine_guven",
+      "text": "A clumsy start is still a start that belongs to me."
+    },
+    {
+      "id": "v5_kendine_guven_29",
+      "category": "kendine_guven",
+      "text": "I can listen to advice and still decide what fits my life."
+    },
+    {
+      "id": "v5_kendine_guven_30",
+      "category": "kendine_guven",
+      "text": "Today I act on one idea instead of waiting to feel completely ready."
+    },
+    {
+      "id": "v5_kendini_affet_11",
+      "category": "kendini_affet",
+      "text": "I did what I could with what I understood then; today I understand more."
+    },
+    {
+      "id": "v5_kendini_affet_12",
+      "category": "kendini_affet",
+      "text": "Forgiving myself means I can learn the lesson without carrying the shame."
+    },
+    {
+      "id": "v5_kendini_affet_13",
+      "category": "kendini_affet",
+      "text": "I can apologize where it is needed and then let my mind rest."
+    },
+    {
+      "id": "v5_kendini_affet_14",
+      "category": "kendini_affet",
+      "text": "Replaying an old mistake will not change it; acting differently can."
+    },
+    {
+      "id": "v5_kendini_affet_15",
+      "category": "kendini_affet",
+      "text": "I am more than the worst thing I did on a difficult day."
+    },
+    {
+      "id": "v5_kendini_affet_16",
+      "category": "kendini_affet",
+      "text": "I can make amends in small ways instead of punishing myself in big ones."
+    },
+    {
+      "id": "v5_kendini_affet_17",
+      "category": "kendini_affet",
+      "text": "The person I was did not have the tools I have now."
+    },
+    {
+      "id": "v5_kendini_affet_18",
+      "category": "kendini_affet",
+      "text": "Letting go of guilt makes room for the care I can still give."
+    },
+    {
+      "id": "v5_kendini_affet_19",
+      "category": "kendini_affet",
+      "text": "I can admit regret without deciding that I am a bad person."
+    },
+    {
+      "id": "v5_kendini_affet_20",
+      "category": "kendini_affet",
+      "text": "Today I close one old chapter by writing what I learned from it."
+    },
+    {
+      "id": "v5_kendini_affet_21",
+      "category": "kendini_affet",
+      "text": "Mistakes are part of every life that is actually being lived."
+    },
+    {
+      "id": "v5_kendini_affet_22",
+      "category": "kendini_affet",
+      "text": "I treat my past self with the understanding I would offer a friend."
+    },
+    {
+      "id": "v5_kendini_affet_23",
+      "category": "kendini_affet",
+      "text": "Forgiveness can begin as a decision before it becomes a feeling."
+    },
+    {
+      "id": "v5_kendini_affet_24",
+      "category": "kendini_affet",
+      "text": "I can carry responsibility lightly enough to keep moving forward."
+    },
+    {
+      "id": "v5_kendini_affet_25",
+      "category": "kendini_affet",
+      "text": "Each new day gives me a chance to act in line with who I want to be."
+    },
+    {
+      "id": "v5_kendini_affet_26",
+      "category": "kendini_affet",
+      "text": "I do not need everyone's forgiveness to begin forgiving myself."
+    },
+    {
+      "id": "v5_kendini_affet_27",
+      "category": "kendini_affet",
+      "text": "The lesson can stay with me while the blame slowly leaves."
+    },
+    {
+      "id": "v5_kendini_affet_28",
+      "category": "kendini_affet",
+      "text": "I can speak about my mistake calmly, without hiding or exaggerating it."
+    },
+    {
+      "id": "v5_kendini_affet_29",
+      "category": "kendini_affet",
+      "text": "Growth means I am allowed to be different from who I was last year."
+    },
+    {
+      "id": "v5_kendini_affet_30",
+      "category": "kendini_affet",
+      "text": "Tonight I set down one regret and let tomorrow begin lighter."
+    },
+    {
+      "id": "v5_motivasyon_11",
+      "category": "motivasyon",
+      "text": "Motivation often arrives after the first five minutes, not before them."
+    },
+    {
+      "id": "v5_motivasyon_12",
+      "category": "motivasyon",
+      "text": "Pick the task you can finish today and let it carry you to the next one."
+    },
+    {
+      "id": "v5_motivasyon_13",
+      "category": "motivasyon",
+      "text": "Write down why this goal matters to you and keep it where you can see it."
+    },
+    {
+      "id": "v5_motivasyon_14",
+      "category": "motivasyon",
+      "text": "You do not need a perfect plan; you need a next step you can take today."
+    },
+    {
+      "id": "v5_motivasyon_15",
+      "category": "motivasyon",
+      "text": "Energy follows action more often than action follows energy."
+    },
+    {
+      "id": "v5_motivasyon_16",
+      "category": "motivasyon",
+      "text": "Make the start so small that it feels almost too easy to skip."
+    },
+    {
+      "id": "v5_motivasyon_17",
+      "category": "motivasyon",
+      "text": "Celebrate the effort you made today, not only the result you hoped for."
+    },
+    {
+      "id": "v5_motivasyon_18",
+      "category": "motivasyon",
+      "text": "Think of the person who will thank you for starting today: your future self."
+    },
+    {
+      "id": "v5_motivasyon_19",
+      "category": "motivasyon",
+      "text": "A clear finish line for today makes it easier to begin."
+    },
+    {
+      "id": "v5_motivasyon_20",
+      "category": "motivasyon",
+      "text": "Momentum is built from finished small things, not from big intentions."
+    },
+    {
+      "id": "v5_motivasyon_21",
+      "category": "motivasyon",
+      "text": "Put on your work clothes, open the file, and let the routine pull you in."
+    },
+    {
+      "id": "v5_motivasyon_22",
+      "category": "motivasyon",
+      "text": "If the goal feels far away, measure how far you have already come."
+    },
+    {
+      "id": "v5_motivasyon_23",
+      "category": "motivasyon",
+      "text": "Work beside someone who is also working; focus can be contagious."
+    },
+    {
+      "id": "v5_motivasyon_24",
+      "category": "motivasyon",
+      "text": "Ten honest minutes today are worth more than a perfect hour you never start."
+    },
+    {
+      "id": "v5_motivasyon_25",
+      "category": "motivasyon",
+      "text": "Decide when you will start, and let that time do the deciding for you."
+    },
+    {
+      "id": "v5_motivasyon_26",
+      "category": "motivasyon",
+      "text": "Remove one obstacle between you and the work before you need willpower."
+    },
+    {
+      "id": "v5_motivasyon_27",
+      "category": "motivasyon",
+      "text": "Progress you can see is fuel; keep a simple record of what you finish."
+    },
+    {
+      "id": "v5_motivasyon_28",
+      "category": "motivasyon",
+      "text": "Your reasons can be quiet and personal; they still deserve your effort."
+    },
+    {
+      "id": "v5_motivasyon_29",
+      "category": "motivasyon",
+      "text": "Choose the hardest small task first while your mind is still fresh."
+    },
+    {
+      "id": "v5_motivasyon_30",
+      "category": "motivasyon",
+      "text": "Today is a good day to do one thing your future depends on."
+    },
+    {
+      "id": "v5_azim_11",
+      "category": "azim",
+      "text": "Keep showing up; consistency quietly beats occasional brilliance."
+    },
+    {
+      "id": "v5_azim_12",
+      "category": "azim",
+      "text": "When progress is slow, it is still progress; keep the direction."
+    },
+    {
+      "id": "v5_azim_13",
+      "category": "azim",
+      "text": "A plateau is often the place where skill settles before it grows again."
+    },
+    {
+      "id": "v5_azim_14",
+      "category": "azim",
+      "text": "You can lower the pace without lowering the commitment."
+    },
+    {
+      "id": "v5_azim_15",
+      "category": "azim",
+      "text": "Every repetition you do on a hard day counts twice."
+    },
+    {
+      "id": "v5_azim_16",
+      "category": "azim",
+      "text": "Look at the long line of small days behind any result you admire."
+    },
+    {
+      "id": "v5_azim_17",
+      "category": "azim",
+      "text": "Persistence is not stubbornness; it is staying open while you keep going."
+    },
+    {
+      "id": "v5_azim_18",
+      "category": "azim",
+      "text": "When you feel stuck, change the method and keep the goal."
+    },
+    {
+      "id": "v5_azim_19",
+      "category": "azim",
+      "text": "The days you continue without feeling like it shape you the most."
+    },
+    {
+      "id": "v5_azim_20",
+      "category": "azim",
+      "text": "A setback asks for a pause and a plan, not a final decision."
+    },
+    {
+      "id": "v5_azim_21",
+      "category": "azim",
+      "text": "Patience is easier when you measure effort instead of outcomes."
+    },
+    {
+      "id": "v5_azim_22",
+      "category": "azim",
+      "text": "You only need to win today's small fight, not the whole season."
+    },
+    {
+      "id": "v5_azim_23",
+      "category": "azim",
+      "text": "Steady work turns impossible-looking things into ordinary ones."
+    },
+    {
+      "id": "v5_azim_24",
+      "category": "azim",
+      "text": "Rest is part of endurance; the long road needs recovered legs."
+    },
+    {
+      "id": "v5_azim_25",
+      "category": "azim",
+      "text": "Keep a note of the times you almost quit and did not."
+    },
+    {
+      "id": "v5_azim_26",
+      "category": "azim",
+      "text": "The work you repeat in silence becomes the confidence you show later."
+    },
+    {
+      "id": "v5_azim_27",
+      "category": "azim",
+      "text": "Slow and steady still arrives; it just arrives more often."
+    },
+    {
+      "id": "v5_azim_28",
+      "category": "azim",
+      "text": "Keep the promise small enough that you can keep it on a bad day."
+    },
+    {
+      "id": "v5_azim_29",
+      "category": "azim",
+      "text": "Endurance grows each time you finish what you said you would."
+    },
+    {
+      "id": "v5_azim_30",
+      "category": "azim",
+      "text": "Today, do the next part well and let the whole take care of itself."
+    },
+    {
+      "id": "v5_pes_11",
+      "category": "pes",
+      "text": "Before you give up, sleep on it; tired minds make heavy decisions."
+    },
+    {
+      "id": "v5_pes_12",
+      "category": "pes",
+      "text": "Quitting the method is different from quitting the dream."
+    },
+    {
+      "id": "v5_pes_13",
+      "category": "pes",
+      "text": "Ask for help before you ask yourself to give up."
+    },
+    {
+      "id": "v5_pes_14",
+      "category": "pes",
+      "text": "Shrink the goal for a while instead of dropping it completely."
+    },
+    {
+      "id": "v5_pes_15",
+      "category": "pes",
+      "text": "The moment you want to stop is often the moment before you learn something."
+    },
+    {
+      "id": "v5_pes_16",
+      "category": "pes",
+      "text": "Remember why you started, then decide if that reason still matters."
+    },
+    {
+      "id": "v5_pes_17",
+      "category": "pes",
+      "text": "One more honest try can tell you more than a hundred worried thoughts."
+    },
+    {
+      "id": "v5_pes_18",
+      "category": "pes",
+      "text": "Not giving up can mean taking a break and coming back."
+    },
+    {
+      "id": "v5_pes_19",
+      "category": "pes",
+      "text": "Hard does not mean wrong; it may simply mean new."
+    },
+    {
+      "id": "v5_pes_20",
+      "category": "pes",
+      "text": "Look for one small win today to remind yourself that movement is possible."
+    },
+    {
+      "id": "v5_pes_21",
+      "category": "pes",
+      "text": "Talk to someone who has walked this road; their story can steady yours."
+    },
+    {
+      "id": "v5_pes_22",
+      "category": "pes",
+      "text": "You can feel like quitting and still decide to continue for one more day."
+    },
+    {
+      "id": "v5_pes_23",
+      "category": "pes",
+      "text": "Write down what is truly too hard, and what only feels that way tonight."
+    },
+    {
+      "id": "v5_pes_24",
+      "category": "pes",
+      "text": "The road may bend, but you can still keep walking forward on it."
+    },
+    {
+      "id": "v5_pes_25",
+      "category": "pes",
+      "text": "Give yourself credit for still being here after a difficult week."
+    },
+    {
+      "id": "v5_pes_26",
+      "category": "pes",
+      "text": "Lower the bar for today, but keep the door open for tomorrow."
+    },
+    {
+      "id": "v5_pes_27",
+      "category": "pes",
+      "text": "A single bad result does not cancel all the work that came before it."
+    },
+    {
+      "id": "v5_pes_28",
+      "category": "pes",
+      "text": "When the whole climb feels too steep, look only at the next foothold."
+    },
+    {
+      "id": "v5_pes_29",
+      "category": "pes",
+      "text": "Some goals take longer than planned; that is not the same as failing."
+    },
+    {
+      "id": "v5_pes_30",
+      "category": "pes",
+      "text": "Stay with it a little longer; the answer may be closer than it seems."
+    },
+    {
+      "id": "v5_yeniden_11",
+      "category": "yeniden",
+      "text": "You can begin again today without explaining the pause to anyone."
+    },
+    {
+      "id": "v5_yeniden_12",
+      "category": "yeniden",
+      "text": "Starting over is easier when you start smaller than before."
+    },
+    {
+      "id": "v5_yeniden_13",
+      "category": "yeniden",
+      "text": "The skills you built last time are still somewhere inside you."
+    },
+    {
+      "id": "v5_yeniden_14",
+      "category": "yeniden",
+      "text": "A fresh start does not erase the past; it uses it."
+    },
+    {
+      "id": "v5_yeniden_15",
+      "category": "yeniden",
+      "text": "Choose one habit to restart this week instead of all of them at once."
+    },
+    {
+      "id": "v5_yeniden_16",
+      "category": "yeniden",
+      "text": "Monday is not required; any morning can be the first day."
+    },
+    {
+      "id": "v5_yeniden_17",
+      "category": "yeniden",
+      "text": "Returning after a break is a skill, and you are practising it now."
+    },
+    {
+      "id": "v5_yeniden_18",
+      "category": "yeniden",
+      "text": "Let the first day back be gentle; you are rebuilding, not proving."
+    },
+    {
+      "id": "v5_yeniden_19",
+      "category": "yeniden",
+      "text": "Clean the desk, open the notebook, and let the room say: we begin."
+    },
+    {
+      "id": "v5_yeniden_20",
+      "category": "yeniden",
+      "text": "Count the days you returned, not only the days you missed."
+    },
+    {
+      "id": "v5_yeniden_21",
+      "category": "yeniden",
+      "text": "Every expert has restarted more times than anyone saw."
+    },
+    {
+      "id": "v5_yeniden_22",
+      "category": "yeniden",
+      "text": "Write the reason you stopped, then write what will be different now."
+    },
+    {
+      "id": "v5_yeniden_23",
+      "category": "yeniden",
+      "text": "Beginning again takes courage; give yourself credit for it."
+    },
+    {
+      "id": "v5_yeniden_24",
+      "category": "yeniden",
+      "text": "You do not need the old enthusiasm back to take the first step."
+    },
+    {
+      "id": "v5_yeniden_25",
+      "category": "yeniden",
+      "text": "A new chapter can open quietly, with one small change in your day."
+    },
+    {
+      "id": "v5_yeniden_26",
+      "category": "yeniden",
+      "text": "Forgive the gap, keep the lesson, and step back onto the path."
+    },
+    {
+      "id": "v5_yeniden_27",
+      "category": "yeniden",
+      "text": "Tell one person you are starting again; support makes return easier."
+    },
+    {
+      "id": "v5_yeniden_28",
+      "category": "yeniden",
+      "text": "The second start often goes deeper than the first."
+    },
+    {
+      "id": "v5_yeniden_29",
+      "category": "yeniden",
+      "text": "Today is a clean page; you only need to write the first line."
+    },
+    {
+      "id": "v5_yeniden_30",
+      "category": "yeniden",
+      "text": "It is never too late to return to something that matters to you."
+    },
+    {
+      "id": "v5_kucuk_adim_11",
+      "category": "kucuk_adim",
+      "text": "Put your running shoes by the door tonight; tomorrow begins there."
+    },
+    {
+      "id": "v5_kucuk_adim_12",
+      "category": "kucuk_adim",
+      "text": "Read one page today; a book is only many single pages."
+    },
+    {
+      "id": "v5_kucuk_adim_13",
+      "category": "kucuk_adim",
+      "text": "Send the one email you have been avoiding, then take a breath."
+    },
+    {
+      "id": "v5_kucuk_adim_14",
+      "category": "kucuk_adim",
+      "text": "Two minutes of practice counts; it keeps the door open."
+    },
+    {
+      "id": "v5_kucuk_adim_15",
+      "category": "kucuk_adim",
+      "text": "Wash one dish, fold one shirt, and let order begin small."
+    },
+    {
+      "id": "v5_kucuk_adim_16",
+      "category": "kucuk_adim",
+      "text": "Break the task into steps so small that each one feels obvious."
+    },
+    {
+      "id": "v5_kucuk_adim_17",
+      "category": "kucuk_adim",
+      "text": "A single glass of water is a small step toward caring for yourself."
+    },
+    {
+      "id": "v5_kucuk_adim_18",
+      "category": "kucuk_adim",
+      "text": "Write the title of the document; the empty page is no longer empty."
+    },
+    {
+      "id": "v5_kucuk_adim_19",
+      "category": "kucuk_adim",
+      "text": "Walk around the block once; movement does not need a whole plan."
+    },
+    {
+      "id": "v5_kucuk_adim_20",
+      "category": "kucuk_adim",
+      "text": "Learn one new word today and use it in a sentence."
+    },
+    {
+      "id": "v5_kucuk_adim_21",
+      "category": "kucuk_adim",
+      "text": "Put five minutes on a timer and start; you can stop when it rings."
+    },
+    {
+      "id": "v5_kucuk_adim_22",
+      "category": "kucuk_adim",
+      "text": "Tidy just the surface you work on, and notice how your mind feels."
+    },
+    {
+      "id": "v5_kucuk_adim_23",
+      "category": "kucuk_adim",
+      "text": "Save a small amount today; habits grow before balances do."
+    },
+    {
+      "id": "v5_kucuk_adim_24",
+      "category": "kucuk_adim",
+      "text": "Stretch for one minute when you stand up from your desk."
+    },
+    {
+      "id": "v5_kucuk_adim_25",
+      "category": "kucuk_adim",
+      "text": "Choose tomorrow's first task tonight so the morning starts easier."
+    },
+    {
+      "id": "v5_kucuk_adim_26",
+      "category": "kucuk_adim",
+      "text": "Reply to one message you have left waiting; a small weight lifts."
+    },
+    {
+      "id": "v5_kucuk_adim_27",
+      "category": "kucuk_adim",
+      "text": "Fix one small thing that bothers you every day at home."
+    },
+    {
+      "id": "v5_kucuk_adim_28",
+      "category": "kucuk_adim",
+      "text": "Practise for the length of one song, then decide if you want more."
+    },
+    {
+      "id": "v5_kucuk_adim_29",
+      "category": "kucuk_adim",
+      "text": "Today's small step is tomorrow's starting point, not its limit."
+    },
+    {
+      "id": "v5_kucuk_adim_30",
+      "category": "kucuk_adim",
+      "text": "A big change is usually a hundred small steps nobody applauded."
+    },
+    {
+      "id": "v5_umut_11",
+      "category": "umut",
+      "text": "Hard seasons end; this one is also moving, even if slowly."
+    },
+    {
+      "id": "v5_umut_12",
+      "category": "umut",
+      "text": "Someone, somewhere, has come through what you are facing now."
+    },
+    {
+      "id": "v5_umut_13",
+      "category": "umut",
+      "text": "Small good things still happen on difficult days; look for one."
+    },
+    {
+      "id": "v5_umut_14",
+      "category": "umut",
+      "text": "Tomorrow can bring a conversation, an idea, or a door you cannot see yet."
+    },
+    {
+      "id": "v5_umut_15",
+      "category": "umut",
+      "text": "Hope can be a plan for the next hour, not a promise about the whole year."
+    },
+    {
+      "id": "v5_umut_16",
+      "category": "umut",
+      "text": "The sun rose today without asking how you felt; it will rise again."
+    },
+    {
+      "id": "v5_umut_17",
+      "category": "umut",
+      "text": "Plant something small, a seed or a habit, and let time help you."
+    },
+    {
+      "id": "v5_umut_18",
+      "category": "umut",
+      "text": "You have been surprised by good news before; you can be again."
+    },
+    {
+      "id": "v5_umut_19",
+      "category": "umut",
+      "text": "Even a slow recovery is recovery; give it the time it needs."
+    },
+    {
+      "id": "v5_umut_20",
+      "category": "umut",
+      "text": "Hope grows when you share a worry with someone who listens."
+    },
+    {
+      "id": "v5_umut_21",
+      "category": "umut",
+      "text": "Write down three things that could go right, not only what could go wrong."
+    },
+    {
+      "id": "v5_umut_22",
+      "category": "umut",
+      "text": "The story is not finished; today is only one of its pages."
+    },
+    {
+      "id": "v5_umut_23",
+      "category": "umut",
+      "text": "Help someone else today; hope often returns through giving."
+    },
+    {
+      "id": "v5_umut_24",
+      "category": "umut",
+      "text": "A small light in the window is enough to find the way home."
+    },
+    {
+      "id": "v5_umut_25",
+      "category": "umut",
+      "text": "Things can change faster than they seem to from where you stand."
+    },
+    {
+      "id": "v5_umut_26",
+      "category": "umut",
+      "text": "You do not need to see the whole path to take the next step on it."
+    },
+    {
+      "id": "v5_umut_27",
+      "category": "umut",
+      "text": "Remember a time things turned out better than you feared."
+    },
+    {
+      "id": "v5_umut_28",
+      "category": "umut",
+      "text": "Winter always ends in spring, even when the cold feels endless."
+    },
+    {
+      "id": "v5_umut_29",
+      "category": "umut",
+      "text": "Hope is not denying the difficulty; it is believing in what comes after."
+    },
+    {
+      "id": "v5_umut_30",
+      "category": "umut",
+      "text": "Today, let yourself imagine one good thing that has not happened yet."
+    },
+    {
+      "id": "v5_erteleme_11",
+      "category": "erteleme",
+      "text": "Do the first two minutes now; deciding is often harder than doing."
+    },
+    {
+      "id": "v5_erteleme_12",
+      "category": "erteleme",
+      "text": "The task you keep postponing is usually smaller than the worry around it."
+    },
+    {
+      "id": "v5_erteleme_13",
+      "category": "erteleme",
+      "text": "Name the very first physical action, then do only that."
+    },
+    {
+      "id": "v5_erteleme_14",
+      "category": "erteleme",
+      "text": "Put your phone in another room for twenty minutes and begin."
+    },
+    {
+      "id": "v5_erteleme_15",
+      "category": "erteleme",
+      "text": "Waiting for the right mood is another way of waiting forever."
+    },
+    {
+      "id": "v5_erteleme_16",
+      "category": "erteleme",
+      "text": "Lower the standard for the first draft; raise it for the second."
+    },
+    {
+      "id": "v5_erteleme_17",
+      "category": "erteleme",
+      "text": "Tell someone what you will finish today; a witness helps you begin."
+    },
+    {
+      "id": "v5_erteleme_18",
+      "category": "erteleme",
+      "text": "Delay often hides a question; find it and the task gets lighter."
+    },
+    {
+      "id": "v5_erteleme_19",
+      "category": "erteleme",
+      "text": "Start with the part you understand best, not the beginning."
+    },
+    {
+      "id": "v5_erteleme_20",
+      "category": "erteleme",
+      "text": "A messy start beats a perfect plan that stays in your head."
+    },
+    {
+      "id": "v5_erteleme_21",
+      "category": "erteleme",
+      "text": "Set a timer, work until it rings, and give yourself a real break."
+    },
+    {
+      "id": "v5_erteleme_22",
+      "category": "erteleme",
+      "text": "Tomorrow will have its own tasks; give this one its place today."
+    },
+    {
+      "id": "v5_erteleme_23",
+      "category": "erteleme",
+      "text": "Open the file before you decide whether you feel like working."
+    },
+    {
+      "id": "v5_erteleme_24",
+      "category": "erteleme",
+      "text": "Finishing a small thing early can change the mood of the whole day."
+    },
+    {
+      "id": "v5_erteleme_25",
+      "category": "erteleme",
+      "text": "Write down the excuse you are about to use, then read it aloud."
+    },
+    {
+      "id": "v5_erteleme_26",
+      "category": "erteleme",
+      "text": "The longer a task waits, the heavier it looks; lighten it by touching it."
+    },
+    {
+      "id": "v5_erteleme_27",
+      "category": "erteleme",
+      "text": "Ask yourself what would make this task fifty percent easier."
+    },
+    {
+      "id": "v5_erteleme_28",
+      "category": "erteleme",
+      "text": "Reward yourself after starting, not only after finishing."
+    },
+    {
+      "id": "v5_erteleme_29",
+      "category": "erteleme",
+      "text": "Feeling resistance is normal; start anyway and let it fade."
+    },
+    {
+      "id": "v5_erteleme_30",
+      "category": "erteleme",
+      "text": "Today, do the thing you will be glad you did by evening."
+    },
+    {
+      "id": "v5_derin_odak_11",
+      "category": "derin_odak",
+      "text": "Choose one task for the next hour and let everything else wait."
+    },
+    {
+      "id": "v5_derin_odak_12",
+      "category": "derin_odak",
+      "text": "Silence notifications for one session; the world will still be there."
+    },
+    {
+      "id": "v5_derin_odak_13",
+      "category": "derin_odak",
+      "text": "Write down distracting thoughts and return to them later."
+    },
+    {
+      "id": "v5_derin_odak_14",
+      "category": "derin_odak",
+      "text": "Deep work feels uncomfortable at first; the calm comes after a while."
+    },
+    {
+      "id": "v5_derin_odak_15",
+      "category": "derin_odak",
+      "text": "Clear your desk of everything the current task does not need."
+    },
+    {
+      "id": "v5_derin_odak_16",
+      "category": "derin_odak",
+      "text": "Work in blocks with a clear end; focus is easier when it has a limit."
+    },
+    {
+      "id": "v5_derin_odak_17",
+      "category": "derin_odak",
+      "text": "Your best hours are precious; protect them for your hardest work."
+    },
+    {
+      "id": "v5_derin_odak_18",
+      "category": "derin_odak",
+      "text": "When your attention drifts, gently bring it back without scolding."
+    },
+    {
+      "id": "v5_derin_odak_19",
+      "category": "derin_odak",
+      "text": "One tab, one document, one question: that is enough for now."
+    },
+    {
+      "id": "v5_derin_odak_20",
+      "category": "derin_odak",
+      "text": "Begin each session by writing what done will look like."
+    },
+    {
+      "id": "v5_derin_odak_21",
+      "category": "derin_odak",
+      "text": "Boredom is often the doorway to deeper concentration."
+    },
+    {
+      "id": "v5_derin_odak_22",
+      "category": "derin_odak",
+      "text": "Tell people when you are not available; boundaries protect focus."
+    },
+    {
+      "id": "v5_derin_odak_23",
+      "category": "derin_odak",
+      "text": "A short walk can reset tired attention better than another coffee."
+    },
+    {
+      "id": "v5_derin_odak_24",
+      "category": "derin_odak",
+      "text": "Read slowly enough to think, not just fast enough to finish."
+    },
+    {
+      "id": "v5_derin_odak_25",
+      "category": "derin_odak",
+      "text": "Multitasking divides your mind; give one thing your whole attention."
+    },
+    {
+      "id": "v5_derin_odak_26",
+      "category": "derin_odak",
+      "text": "At the end of a session, note where you stopped to restart easily."
+    },
+    {
+      "id": "v5_derin_odak_27",
+      "category": "derin_odak",
+      "text": "Focus is a muscle; short daily sessions make it stronger."
+    },
+    {
+      "id": "v5_derin_odak_28",
+      "category": "derin_odak",
+      "text": "Put on the same music each time you work; let it signal focus."
+    },
+    {
+      "id": "v5_derin_odak_29",
+      "category": "derin_odak",
+      "text": "The urge to check something will pass if you let it."
+    },
+    {
+      "id": "v5_derin_odak_30",
+      "category": "derin_odak",
+      "text": "An hour of real focus can do more than a day of scattered effort."
+    },
+    {
+      "id": "v5_rutin_11",
+      "category": "rutin",
+      "text": "Attach a new habit to something you already do every day."
+    },
+    {
+      "id": "v5_rutin_12",
+      "category": "rutin",
+      "text": "A good routine leaves room for bad days without falling apart."
+    },
+    {
+      "id": "v5_rutin_13",
+      "category": "rutin",
+      "text": "Prepare tonight what tomorrow's routine will need."
+    },
+    {
+      "id": "v5_rutin_14",
+      "category": "rutin",
+      "text": "Keep the routine short enough to repeat when you are tired."
+    },
+    {
+      "id": "v5_rutin_15",
+      "category": "rutin",
+      "text": "The same start time every day saves you a decision every day."
+    },
+    {
+      "id": "v5_rutin_16",
+      "category": "rutin",
+      "text": "Routines are not cages; they are rails that make freedom easier."
+    },
+    {
+      "id": "v5_rutin_17",
+      "category": "rutin",
+      "text": "Review your week on Sunday and adjust one small part of your routine."
+    },
+    {
+      "id": "v5_rutin_18",
+      "category": "rutin",
+      "text": "An evening routine can be the beginning of a calmer morning."
+    },
+    {
+      "id": "v5_rutin_19",
+      "category": "rutin",
+      "text": "Make the next step of your routine visible: a note, a cup, a book."
+    },
+    {
+      "id": "v5_rutin_20",
+      "category": "rutin",
+      "text": "Missing one day is a pause; missing two is a choice to make consciously."
+    },
+    {
+      "id": "v5_rutin_21",
+      "category": "rutin",
+      "text": "Add one thing to your routine at a time and let it settle first."
+    },
+    {
+      "id": "v5_rutin_22",
+      "category": "rutin",
+      "text": "A routine that fits your energy will outlast one that fights it."
+    },
+    {
+      "id": "v5_rutin_23",
+      "category": "rutin",
+      "text": "Write your routine down; seeing it makes it easier to follow."
+    },
+    {
+      "id": "v5_rutin_24",
+      "category": "rutin",
+      "text": "Small daily actions become the structure that holds a busy life."
+    },
+    {
+      "id": "v5_rutin_25",
+      "category": "rutin",
+      "text": "Protect the first hour of your day from other people's urgency."
+    },
+    {
+      "id": "v5_rutin_26",
+      "category": "rutin",
+      "text": "Let weekends have a lighter version of your routine, not none at all."
+    },
+    {
+      "id": "v5_rutin_27",
+      "category": "rutin",
+      "text": "A shared routine with a friend makes it easier to keep."
+    },
+    {
+      "id": "v5_rutin_28",
+      "category": "rutin",
+      "text": "Repeat the routine until it no longer needs motivation."
+    },
+    {
+      "id": "v5_rutin_29",
+      "category": "rutin",
+      "text": "End the day by preparing a clear first step for the next one."
+    },
+    {
+      "id": "v5_rutin_30",
+      "category": "rutin",
+      "text": "Order in small things makes room for calm in big things."
+    },
+    {
+      "id": "v5_ozguven_11",
+      "category": "ozguven",
+      "text": "Confidence often comes after action, not before it."
+    },
+    {
+      "id": "v5_ozguven_12",
+      "category": "ozguven",
+      "text": "Speak a little earlier in the meeting than feels comfortable."
+    },
+    {
+      "id": "v5_ozguven_13",
+      "category": "ozguven",
+      "text": "Keep a list of things you did well; read it before hard moments."
+    },
+    {
+      "id": "v5_ozguven_14",
+      "category": "ozguven",
+      "text": "Stand straight, breathe slowly, and let your body lead your mind."
+    },
+    {
+      "id": "v5_ozguven_15",
+      "category": "ozguven",
+      "text": "You can be unsure and still act with good intentions."
+    },
+    {
+      "id": "v5_ozguven_16",
+      "category": "ozguven",
+      "text": "Prepare well, then trust the preparation when the moment comes."
+    },
+    {
+      "id": "v5_ozguven_17",
+      "category": "ozguven",
+      "text": "Others are thinking about you far less than you imagine."
+    },
+    {
+      "id": "v5_ozguven_18",
+      "category": "ozguven",
+      "text": "Say your idea simply; clarity sounds confident on its own."
+    },
+    {
+      "id": "v5_ozguven_19",
+      "category": "ozguven",
+      "text": "Each time you try something new, your comfort zone grows a little."
+    },
+    {
+      "id": "v5_ozguven_20",
+      "category": "ozguven",
+      "text": "You do not need to be the best in the room to have something to add."
+    },
+    {
+      "id": "v5_ozguven_21",
+      "category": "ozguven",
+      "text": "Practise the first sentence of a hard conversation out loud."
+    },
+    {
+      "id": "v5_ozguven_22",
+      "category": "ozguven",
+      "text": "Your value does not depend on agreement from everyone."
+    },
+    {
+      "id": "v5_ozguven_23",
+      "category": "ozguven",
+      "text": "Wear clothes you feel good in on a day that asks for courage."
+    },
+    {
+      "id": "v5_ozguven_24",
+      "category": "ozguven",
+      "text": "Accept a compliment with a simple thank you and nothing more."
+    },
+    {
+      "id": "v5_ozguven_25",
+      "category": "ozguven",
+      "text": "Look at how much you have learned instead of how much is left."
+    },
+    {
+      "id": "v5_ozguven_26",
+      "category": "ozguven",
+      "text": "Ask for what you need clearly; it is a sign of respect for yourself."
+    },
+    {
+      "id": "v5_ozguven_27",
+      "category": "ozguven",
+      "text": "Mistakes in public are survivable, and most people forget them quickly."
+    },
+    {
+      "id": "v5_ozguven_28",
+      "category": "ozguven",
+      "text": "Make eye contact and let a short pause give your words weight."
+    },
+    {
+      "id": "v5_ozguven_29",
+      "category": "ozguven",
+      "text": "Choose one skill and get a little better at it every week."
+    },
+    {
+      "id": "v5_ozguven_30",
+      "category": "ozguven",
+      "text": "Confidence is quiet trust in your ability to handle what comes."
+    },
+    {
+      "id": "v5_korku_11",
+      "category": "korku",
+      "text": "Fear points to something that matters to you; listen, then decide."
+    },
+    {
+      "id": "v5_korku_12",
+      "category": "korku",
+      "text": "Ask what the worst realistic outcome is and how you would handle it."
+    },
+    {
+      "id": "v5_korku_13",
+      "category": "korku",
+      "text": "Courage is feeling afraid and taking one small step anyway."
+    },
+    {
+      "id": "v5_korku_14",
+      "category": "korku",
+      "text": "Break the frightening task into parts until one part feels possible."
+    },
+    {
+      "id": "v5_korku_15",
+      "category": "korku",
+      "text": "Fear grows in silence; saying it to someone can shrink it."
+    },
+    {
+      "id": "v5_korku_16",
+      "category": "korku",
+      "text": "Your body's alarm is trying to protect you; thank it and breathe."
+    },
+    {
+      "id": "v5_korku_17",
+      "category": "korku",
+      "text": "Most of what we fear never happens the way we imagine it."
+    },
+    {
+      "id": "v5_korku_18",
+      "category": "korku",
+      "text": "Practise the scary thing in a small, safe version first."
+    },
+    {
+      "id": "v5_korku_19",
+      "category": "korku",
+      "text": "You can carry fear with you and still keep walking."
+    },
+    {
+      "id": "v5_korku_20",
+      "category": "korku",
+      "text": "Remember a fear you already outgrew; you have done this before."
+    },
+    {
+      "id": "v5_korku_21",
+      "category": "korku",
+      "text": "Facing a fear once makes the second time a little easier."
+    },
+    {
+      "id": "v5_korku_22",
+      "category": "korku",
+      "text": "Fear of failure often protects us from growth as well."
+    },
+    {
+      "id": "v5_korku_23",
+      "category": "korku",
+      "text": "Write your fear in one sentence; it often looks smaller on paper."
+    },
+    {
+      "id": "v5_korku_24",
+      "category": "korku",
+      "text": "Brave people are not fearless; they have simply decided what matters more."
+    },
+    {
+      "id": "v5_korku_25",
+      "category": "korku",
+      "text": "Slow breathing tells your body that you are safe enough to think."
+    },
+    {
+      "id": "v5_korku_26",
+      "category": "korku",
+      "text": "Ask yourself what you would do if you were a little less afraid."
+    },
+    {
+      "id": "v5_korku_27",
+      "category": "korku",
+      "text": "You do not have to defeat fear; you only have to not let it decide."
+    },
+    {
+      "id": "v5_korku_28",
+      "category": "korku",
+      "text": "A trusted person beside you can make a hard step feel lighter."
+    },
+    {
+      "id": "v5_korku_29",
+      "category": "korku",
+      "text": "Uncertainty is uncomfortable, but it is also where new things begin."
+    },
+    {
+      "id": "v5_korku_30",
+      "category": "korku",
+      "text": "Today, choose one thing fear has kept you from and take a tiny step."
+    },
+    {
+      "id": "v5_kaygi_11",
+      "category": "kaygi",
+      "text": "A worry about tomorrow can wait until tomorrow; tonight you can rest."
+    },
+    {
+      "id": "v5_kaygi_12",
+      "category": "kaygi",
+      "text": "Ask what is in your control right now, and do one small part of it."
+    },
+    {
+      "id": "v5_kaygi_13",
+      "category": "kaygi",
+      "text": "Anxious thoughts sound urgent, but most of them are not emergencies."
+    },
+    {
+      "id": "v5_kaygi_14",
+      "category": "kaygi",
+      "text": "Breathe out longer than you breathe in; your body understands that signal."
+    },
+    {
+      "id": "v5_kaygi_15",
+      "category": "kaygi",
+      "text": "Name five things you can see to bring your mind back to the room."
+    },
+    {
+      "id": "v5_kaygi_16",
+      "category": "kaygi",
+      "text": "Set a short worry time each day and let other hours be lighter."
+    },
+    {
+      "id": "v5_kaygi_17",
+      "category": "kaygi",
+      "text": "Feeling anxious does not mean something bad is about to happen."
+    },
+    {
+      "id": "v5_kaygi_18",
+      "category": "kaygi",
+      "text": "Talk to your worry like a friend who means well but exaggerates."
+    },
+    {
+      "id": "v5_kaygi_19",
+      "category": "kaygi",
+      "text": "Moving your body for ten minutes can loosen anxious energy."
+    },
+    {
+      "id": "v5_kaygi_20",
+      "category": "kaygi",
+      "text": "You have survived every hard day so far; that is real evidence."
+    },
+    {
+      "id": "v5_kaygi_21",
+      "category": "kaygi",
+      "text": "Replace what if with what now, and choose the next simple action."
+    },
+    {
+      "id": "v5_kaygi_22",
+      "category": "kaygi",
+      "text": "Reduce caffeine on anxious days; your nerves will thank you."
+    },
+    {
+      "id": "v5_kaygi_23",
+      "category": "kaygi",
+      "text": "Uncertainty is hard to hold; you can hold it for one hour at a time."
+    },
+    {
+      "id": "v5_kaygi_24",
+      "category": "kaygi",
+      "text": "Write down the evidence for and against your fearful thought."
+    },
+    {
+      "id": "v5_kaygi_25",
+      "category": "kaygi",
+      "text": "Warm water on your hands can help your body feel safer."
+    },
+    {
+      "id": "v5_kaygi_26",
+      "category": "kaygi",
+      "text": "Limit news and scrolling before sleep; give your mind a quieter evening."
+    },
+    {
+      "id": "v5_kaygi_27",
+      "category": "kaygi",
+      "text": "Anxiety asks for certainty; kindness to yourself is often enough."
+    },
+    {
+      "id": "v5_kaygi_28",
+      "category": "kaygi",
+      "text": "Look for one thing that is going well right now, however small."
+    },
+    {
+      "id": "v5_kaygi_29",
+      "category": "kaygi",
+      "text": "Asking for support when anxious is wise, not weak."
+    },
+    {
+      "id": "v5_kaygi_30",
+      "category": "kaygi",
+      "text": "This feeling will rise, peak, and pass, as it has before."
+    },
+    {
+      "id": "v5_stres_11",
+      "category": "stres",
+      "text": "Write everything on your mind on one page, then pick three items."
+    },
+    {
+      "id": "v5_stres_12",
+      "category": "stres",
+      "text": "Not everything urgent is important; separate the two before acting."
+    },
+    {
+      "id": "v5_stres_13",
+      "category": "stres",
+      "text": "A short pause between tasks keeps stress from carrying over."
+    },
+    {
+      "id": "v5_stres_14",
+      "category": "stres",
+      "text": "Unclench your hands, relax your face, and let one breath go slowly."
+    },
+    {
+      "id": "v5_stres_15",
+      "category": "stres",
+      "text": "Say no to one thing this week so you can say yes to rest."
+    },
+    {
+      "id": "v5_stres_16",
+      "category": "stres",
+      "text": "Stress shrinks when the problem becomes a clear next step."
+    },
+    {
+      "id": "v5_stres_17",
+      "category": "stres",
+      "text": "Drink water, eat something real, and then look at the problem again."
+    },
+    {
+      "id": "v5_stres_18",
+      "category": "stres",
+      "text": "Ask for a deadline you can actually meet instead of a perfect one."
+    },
+    {
+      "id": "v5_stres_19",
+      "category": "stres",
+      "text": "You cannot pour from an empty cup; refill before you give more."
+    },
+    {
+      "id": "v5_stres_20",
+      "category": "stres",
+      "text": "A walk outside can turn tense thoughts into clearer ones."
+    },
+    {
+      "id": "v5_stres_21",
+      "category": "stres",
+      "text": "Do one task completely instead of five tasks halfway."
+    },
+    {
+      "id": "v5_stres_22",
+      "category": "stres",
+      "text": "Share the load; asking a colleague for help is part of good work."
+    },
+    {
+      "id": "v5_stres_23",
+      "category": "stres",
+      "text": "Notice where stress sits in your body and give that place attention."
+    },
+    {
+      "id": "v5_stres_24",
+      "category": "stres",
+      "text": "Close the day by writing what you finished, not only what is left."
+    },
+    {
+      "id": "v5_stres_25",
+      "category": "stres",
+      "text": "Good sleep is not a reward for finishing; it helps you finish."
+    },
+    {
+      "id": "v5_stres_26",
+      "category": "stres",
+      "text": "The pressure you feel today is real, and it is also temporary."
+    },
+    {
+      "id": "v5_stres_27",
+      "category": "stres",
+      "text": "Laughing with someone can release tension faster than you expect."
+    },
+    {
+      "id": "v5_stres_28",
+      "category": "stres",
+      "text": "Protect a small part of each day that belongs only to you."
+    },
+    {
+      "id": "v5_stres_29",
+      "category": "stres",
+      "text": "When everything feels important, ask what will matter in a month."
+    },
+    {
+      "id": "v5_stres_30",
+      "category": "stres",
+      "text": "You are doing a lot; it is okay to slow down and still be enough."
+    },
+    {
+      "id": "v5_minnettarlik_11",
+      "category": "minnettarlik",
+      "text": "Write down three good things from today before you sleep."
+    },
+    {
+      "id": "v5_minnettarlik_12",
+      "category": "minnettarlik",
+      "text": "Thank someone today for something they probably think nobody noticed."
+    },
+    {
+      "id": "v5_minnettarlik_13",
+      "category": "minnettarlik",
+      "text": "Gratitude turns what we have into enough."
+    },
+    {
+      "id": "v5_minnettarlik_14",
+      "category": "minnettarlik",
+      "text": "Notice the comfort of a warm bed, a clean glass of water, a safe room."
+    },
+    {
+      "id": "v5_minnettarlik_15",
+      "category": "minnettarlik",
+      "text": "Remember a person who helped you become who you are today."
+    },
+    {
+      "id": "v5_minnettarlik_16",
+      "category": "minnettarlik",
+      "text": "Even a hard day contains something worth thanking."
+    },
+    {
+      "id": "v5_minnettarlik_17",
+      "category": "minnettarlik",
+      "text": "Appreciate your body for what it does, not only how it looks."
+    },
+    {
+      "id": "v5_minnettarlik_18",
+      "category": "minnettarlik",
+      "text": "Say thank you slowly enough that the other person can feel it."
+    },
+    {
+      "id": "v5_minnettarlik_19",
+      "category": "minnettarlik",
+      "text": "Look at an old photo and appreciate how far you have come."
+    },
+    {
+      "id": "v5_minnettarlik_20",
+      "category": "minnettarlik",
+      "text": "A meal shared with someone is a small gift worth noticing."
+    },
+    {
+      "id": "v5_minnettarlik_21",
+      "category": "minnettarlik",
+      "text": "Gratitude does not deny problems; it keeps them from filling every corner."
+    },
+    {
+      "id": "v5_minnettarlik_22",
+      "category": "minnettarlik",
+      "text": "Write a short note of thanks and send it today, not someday."
+    },
+    {
+      "id": "v5_minnettarlik_23",
+      "category": "minnettarlik",
+      "text": "Notice the skills you use every day that once took effort to learn."
+    },
+    {
+      "id": "v5_minnettarlik_24",
+      "category": "minnettarlik",
+      "text": "The morning light, a quiet street, a kind word: count the small gifts."
+    },
+    {
+      "id": "v5_minnettarlik_25",
+      "category": "minnettarlik",
+      "text": "Thank yourself for one choice that made your life better."
+    },
+    {
+      "id": "v5_minnettarlik_26",
+      "category": "minnettarlik",
+      "text": "Appreciation grows when you pay attention to details."
+    },
+    {
+      "id": "v5_minnettarlik_27",
+      "category": "minnettarlik",
+      "text": "Some of your best days started as ordinary ones; honor ordinary days."
+    },
+    {
+      "id": "v5_minnettarlik_28",
+      "category": "minnettarlik",
+      "text": "Remember a problem you were once afraid of that is now behind you."
+    },
+    {
+      "id": "v5_minnettarlik_29",
+      "category": "minnettarlik",
+      "text": "Gratitude spoken out loud travels further than gratitude kept inside."
+    },
+    {
+      "id": "v5_minnettarlik_30",
+      "category": "minnettarlik",
+      "text": "Tonight, end the day with one sentence of thanks."
+    },
+    {
+      "id": "v5_simdiki_an_11",
+      "category": "simdiki_an",
+      "text": "Feel the weight of your feet on the floor; you are here, now."
+    },
+    {
+      "id": "v5_simdiki_an_12",
+      "category": "simdiki_an",
+      "text": "Eat the first three bites of your meal without any screen."
+    },
+    {
+      "id": "v5_simdiki_an_13",
+      "category": "simdiki_an",
+      "text": "Listen to the room for ten seconds and count the sounds you hear."
+    },
+    {
+      "id": "v5_simdiki_an_14",
+      "category": "simdiki_an",
+      "text": "The past is a memory and the future an idea; this moment is real."
+    },
+    {
+      "id": "v5_simdiki_an_15",
+      "category": "simdiki_an",
+      "text": "Do one ordinary task slowly and notice every part of it."
+    },
+    {
+      "id": "v5_simdiki_an_16",
+      "category": "simdiki_an",
+      "text": "When you walk, notice the air on your face and the rhythm of your steps."
+    },
+    {
+      "id": "v5_simdiki_an_17",
+      "category": "simdiki_an",
+      "text": "Put down your phone during a conversation and really listen."
+    },
+    {
+      "id": "v5_simdiki_an_18",
+      "category": "simdiki_an",
+      "text": "Watch the sky for a minute; it changes even when you do not notice."
+    },
+    {
+      "id": "v5_simdiki_an_19",
+      "category": "simdiki_an",
+      "text": "This breath is enough to begin again, right where you are."
+    },
+    {
+      "id": "v5_simdiki_an_20",
+      "category": "simdiki_an",
+      "text": "Notice the temperature of your hands and the feel of the chair under you."
+    },
+    {
+      "id": "v5_simdiki_an_21",
+      "category": "simdiki_an",
+      "text": "Washing dishes can be a pause if you feel the warm water and slow down."
+    },
+    {
+      "id": "v5_simdiki_an_22",
+      "category": "simdiki_an",
+      "text": "You do not need to plan the whole day to enjoy the next ten minutes."
+    },
+    {
+      "id": "v5_simdiki_an_23",
+      "category": "simdiki_an",
+      "text": "Smell your tea or coffee before the first sip; let the moment open."
+    },
+    {
+      "id": "v5_simdiki_an_24",
+      "category": "simdiki_an",
+      "text": "When your mind runs ahead, gently say: back to here."
+    },
+    {
+      "id": "v5_simdiki_an_25",
+      "category": "simdiki_an",
+      "text": "Look at a familiar object as if you were seeing it for the first time."
+    },
+    {
+      "id": "v5_simdiki_an_26",
+      "category": "simdiki_an",
+      "text": "Presence is a practice, not a talent; a few seconds count."
+    },
+    {
+      "id": "v5_simdiki_an_27",
+      "category": "simdiki_an",
+      "text": "Let one moment today be complete without needing to share it."
+    },
+    {
+      "id": "v5_simdiki_an_28",
+      "category": "simdiki_an",
+      "text": "Feel your shoulders rise and fall with each breath for one minute."
+    },
+    {
+      "id": "v5_simdiki_an_29",
+      "category": "simdiki_an",
+      "text": "The best answer to a crowded mind is often a single slow breath."
+    },
+    {
+      "id": "v5_simdiki_an_30",
+      "category": "simdiki_an",
+      "text": "Right now, nothing more is asked of you than to be here."
+    },
+    {
+      "id": "v5_aliskanlik_11",
+      "category": "aliskanlik",
+      "text": "Make the good habit easy and the bad habit a little harder."
+    },
+    {
+      "id": "v5_aliskanlik_12",
+      "category": "aliskanlik",
+      "text": "Start with a version of the habit so small you cannot fail."
+    },
+    {
+      "id": "v5_aliskanlik_13",
+      "category": "aliskanlik",
+      "text": "Habits grow from repetition, not from intensity."
+    },
+    {
+      "id": "v5_aliskanlik_14",
+      "category": "aliskanlik",
+      "text": "Track the habit with a simple mark; seeing the chain helps you keep it."
+    },
+    {
+      "id": "v5_aliskanlik_15",
+      "category": "aliskanlik",
+      "text": "Never miss twice; one missed day is normal, two starts a new pattern."
+    },
+    {
+      "id": "v5_aliskanlik_16",
+      "category": "aliskanlik",
+      "text": "Change your environment before you rely on willpower."
+    },
+    {
+      "id": "v5_aliskanlik_17",
+      "category": "aliskanlik",
+      "text": "Replace a habit instead of only removing it; fill the empty space."
+    },
+    {
+      "id": "v5_aliskanlik_18",
+      "category": "aliskanlik",
+      "text": "Decide when and where the habit will happen, not only that it will."
+    },
+    {
+      "id": "v5_aliskanlik_19",
+      "category": "aliskanlik",
+      "text": "Every action is a small vote for the person you want to become."
+    },
+    {
+      "id": "v5_aliskanlik_20",
+      "category": "aliskanlik",
+      "text": "Keep your phone out of the bedroom and see how your mornings change."
+    },
+    {
+      "id": "v5_aliskanlik_21",
+      "category": "aliskanlik",
+      "text": "Pair a habit you need with something you enjoy."
+    },
+    {
+      "id": "v5_aliskanlik_22",
+      "category": "aliskanlik",
+      "text": "Notice what triggers the habit you want to change."
+    },
+    {
+      "id": "v5_aliskanlik_23",
+      "category": "aliskanlik",
+      "text": "A habit is easier to keep when it is part of your identity."
+    },
+    {
+      "id": "v5_aliskanlik_24",
+      "category": "aliskanlik",
+      "text": "Lay out your clothes, your book, or your bottle the night before."
+    },
+    {
+      "id": "v5_aliskanlik_25",
+      "category": "aliskanlik",
+      "text": "Celebrate small streaks; they are proof that change is possible."
+    },
+    {
+      "id": "v5_aliskanlik_26",
+      "category": "aliskanlik",
+      "text": "Be patient: new habits feel strange before they feel natural."
+    },
+    {
+      "id": "v5_aliskanlik_27",
+      "category": "aliskanlik",
+      "text": "Review your habits each month and keep only those that serve you."
+    },
+    {
+      "id": "v5_aliskanlik_28",
+      "category": "aliskanlik",
+      "text": "Join people who already have the habit you want to build."
+    },
+    {
+      "id": "v5_aliskanlik_29",
+      "category": "aliskanlik",
+      "text": "Small daily habits shape a life more than rare big efforts."
+    },
+    {
+      "id": "v5_aliskanlik_30",
+      "category": "aliskanlik",
+      "text": "Start today; the best time to build a habit is the next ordinary day."
+    },
+    {
+      "id": "v5_hata_11",
+      "category": "hata",
+      "text": "A mistake shows you where the edge of your skill is today."
+    },
+    {
+      "id": "v5_hata_12",
+      "category": "hata",
+      "text": "Fix what you can, learn what you can, and let the rest go."
+    },
+    {
+      "id": "v5_hata_13",
+      "category": "hata",
+      "text": "Everyone who learned something well made many mistakes on the way."
+    },
+    {
+      "id": "v5_hata_14",
+      "category": "hata",
+      "text": "Ask what the mistake taught you before asking whose fault it was."
+    },
+    {
+      "id": "v5_hata_15",
+      "category": "hata",
+      "text": "Owning a mistake quickly often makes it smaller."
+    },
+    {
+      "id": "v5_hata_16",
+      "category": "hata",
+      "text": "A wrong turn can still show you a road you would not have seen."
+    },
+    {
+      "id": "v5_hata_17",
+      "category": "hata",
+      "text": "Try, fail, adjust: that is how almost everything good is built."
+    },
+    {
+      "id": "v5_hata_18",
+      "category": "hata",
+      "text": "Being afraid of mistakes often causes more of them; relax and focus."
+    },
+    {
+      "id": "v5_hata_19",
+      "category": "hata",
+      "text": "Keep a notebook of lessons from mistakes; reread it now and then."
+    },
+    {
+      "id": "v5_hata_20",
+      "category": "hata",
+      "text": "A mistake is a chance to practise honesty and repair."
+    },
+    {
+      "id": "v5_hata_21",
+      "category": "hata",
+      "text": "You can be disappointed by a result without being disappointed in yourself."
+    },
+    {
+      "id": "v5_hata_22",
+      "category": "hata",
+      "text": "Making the same mistake twice shows where you need a better system."
+    },
+    {
+      "id": "v5_hata_23",
+      "category": "hata",
+      "text": "Laughing at a small mistake can keep it from becoming a big story."
+    },
+    {
+      "id": "v5_hata_24",
+      "category": "hata",
+      "text": "Progress is not a straight line; mistakes are part of the curve."
+    },
+    {
+      "id": "v5_hata_25",
+      "category": "hata",
+      "text": "Share what went wrong; others can learn from it too."
+    },
+    {
+      "id": "v5_hata_26",
+      "category": "hata",
+      "text": "A mistake made while trying is better than a perfect plan never tried."
+    },
+    {
+      "id": "v5_hata_27",
+      "category": "hata",
+      "text": "Look at the decision with the information you had then, not now."
+    },
+    {
+      "id": "v5_hata_28",
+      "category": "hata",
+      "text": "Experts are people who have made the most useful mistakes."
+    },
+    {
+      "id": "v5_hata_29",
+      "category": "hata",
+      "text": "Apologize where needed, then put your energy into the next attempt."
+    },
+    {
+      "id": "v5_hata_30",
+      "category": "hata",
+      "text": "Today, let one mistake be a teacher instead of a judge."
+    },
+    {
+      "id": "v5_sabah_rutini_11",
+      "category": "sabah_rutini",
+      "text": "Drink a glass of water before you look at your phone."
+    },
+    {
+      "id": "v5_sabah_rutini_12",
+      "category": "sabah_rutini",
+      "text": "Open the window and let fresh air start the day with you."
+    },
+    {
+      "id": "v5_sabah_rutini_13",
+      "category": "sabah_rutini",
+      "text": "Make your bed; one finished task in the first minutes sets a tone."
+    },
+    {
+      "id": "v5_sabah_rutini_14",
+      "category": "sabah_rutini",
+      "text": "Stretch for two minutes to tell your body the day has begun."
+    },
+    {
+      "id": "v5_sabah_rutini_15",
+      "category": "sabah_rutini",
+      "text": "Write one intention for today on a small piece of paper."
+    },
+    {
+      "id": "v5_sabah_rutini_16",
+      "category": "sabah_rutini",
+      "text": "Daylight in the morning helps your sleep at night; step outside briefly."
+    },
+    {
+      "id": "v5_sabah_rutini_17",
+      "category": "sabah_rutini",
+      "text": "Keep the first ten minutes of your day free from news."
+    },
+    {
+      "id": "v5_sabah_rutini_18",
+      "category": "sabah_rutini",
+      "text": "A slow breakfast can be a small act of respect for yourself."
+    },
+    {
+      "id": "v5_sabah_rutini_19",
+      "category": "sabah_rutini",
+      "text": "Choose the day's most important task before your inbox chooses for you."
+    },
+    {
+      "id": "v5_sabah_rutini_20",
+      "category": "sabah_rutini",
+      "text": "Wake at a steady time, even on weekends, and your mornings get easier."
+    },
+    {
+      "id": "v5_sabah_rutini_21",
+      "category": "sabah_rutini",
+      "text": "Put on music you love while you get ready and let it carry you into the morning."
+    },
+    {
+      "id": "v5_sabah_rutini_22",
+      "category": "sabah_rutini",
+      "text": "Read one page of something good before the day gets busy."
+    },
+    {
+      "id": "v5_sabah_rutini_23",
+      "category": "sabah_rutini",
+      "text": "Prepare your bag and clothes the night before to make mornings calm."
+    },
+    {
+      "id": "v5_sabah_rutini_24",
+      "category": "sabah_rutini",
+      "text": "A short walk before work can clear your head for the whole day."
+    },
+    {
+      "id": "v5_sabah_rutini_25",
+      "category": "sabah_rutini",
+      "text": "Three deep breaths before getting up can start the day more gently."
+    },
+    {
+      "id": "v5_sabah_rutini_26",
+      "category": "sabah_rutini",
+      "text": "Your morning does not need to be perfect, only kind and a little ordered."
+    },
+    {
+      "id": "v5_sabah_rutini_27",
+      "category": "sabah_rutini",
+      "text": "Think of one thing you are looking forward to today."
+    },
+    {
+      "id": "v5_sabah_rutini_28",
+      "category": "sabah_rutini",
+      "text": "Let the first coffee or tea be a pause, not a race."
+    },
+    {
+      "id": "v5_sabah_rutini_29",
+      "category": "sabah_rutini",
+      "text": "Move your body in a way you enjoy, even for five minutes."
+    },
+    {
+      "id": "v5_sabah_rutini_30",
+      "category": "sabah_rutini",
+      "text": "A good morning starts the night before with a reasonable bedtime."
+    },
+    {
+      "id": "v5_arkadaslik_11",
+      "category": "arkadaslik",
+      "text": "Send a message today to a friend you have been thinking about."
+    },
+    {
+      "id": "v5_arkadaslik_12",
+      "category": "arkadaslik",
+      "text": "Good friends are made through small, repeated moments of attention."
+    },
+    {
+      "id": "v5_arkadaslik_13",
+      "category": "arkadaslik",
+      "text": "Ask a friend how they really are, and wait for the real answer."
+    },
+    {
+      "id": "v5_arkadaslik_14",
+      "category": "arkadaslik",
+      "text": "Celebrate a friend's success as if it were partly your own."
+    },
+    {
+      "id": "v5_arkadaslik_15",
+      "category": "arkadaslik",
+      "text": "Being a good listener is one of the most generous gifts you can give."
+    },
+    {
+      "id": "v5_arkadaslik_16",
+      "category": "arkadaslik",
+      "text": "Make a plan with a friend instead of saying we should meet sometime."
+    },
+    {
+      "id": "v5_arkadaslik_17",
+      "category": "arkadaslik",
+      "text": "Old friends do not need perfect timing; a simple hello is enough."
+    },
+    {
+      "id": "v5_arkadaslik_18",
+      "category": "arkadaslik",
+      "text": "Tell a friend one specific thing you appreciate about them."
+    },
+    {
+      "id": "v5_arkadaslik_19",
+      "category": "arkadaslik",
+      "text": "Friendship grows when you show up, especially on ordinary days."
+    },
+    {
+      "id": "v5_arkadaslik_20",
+      "category": "arkadaslik",
+      "text": "You can be honest with a friend and still be kind."
+    },
+    {
+      "id": "v5_arkadaslik_21",
+      "category": "arkadaslik",
+      "text": "Forgive small misunderstandings; friendships need room to breathe."
+    },
+    {
+      "id": "v5_arkadaslik_22",
+      "category": "arkadaslik",
+      "text": "Share a walk, a meal, or a quiet hour; presence matters more than plans."
+    },
+    {
+      "id": "v5_arkadaslik_23",
+      "category": "arkadaslik",
+      "text": "A friend who stays in hard times is worth more than many in good times."
+    },
+    {
+      "id": "v5_arkadaslik_24",
+      "category": "arkadaslik",
+      "text": "Remember the details your friends share; it shows that you care."
+    },
+    {
+      "id": "v5_arkadaslik_25",
+      "category": "arkadaslik",
+      "text": "It is never too late to reach out and repair a quiet distance."
+    },
+    {
+      "id": "v5_arkadaslik_26",
+      "category": "arkadaslik",
+      "text": "Let friends help you too; friendship works in both directions."
+    },
+    {
+      "id": "v5_arkadaslik_27",
+      "category": "arkadaslik",
+      "text": "New friendships often begin with a small question and real curiosity."
+    },
+    {
+      "id": "v5_arkadaslik_28",
+      "category": "arkadaslik",
+      "text": "Laugh together often; shared joy holds friends close."
+    },
+    {
+      "id": "v5_arkadaslik_29",
+      "category": "arkadaslik",
+      "text": "Respect a friend's need for space without taking it personally."
+    },
+    {
+      "id": "v5_arkadaslik_30",
+      "category": "arkadaslik",
+      "text": "The friends you choose shape the person you become."
+    },
+    {
+      "id": "v5_marcus_11",
+      "category": "marcus",
+      "text": "Before the day begins, I remind myself that I can meet difficult people without becoming difficult."
+    },
+    {
+      "id": "v5_marcus_12",
+      "category": "marcus",
+      "text": "I can do the duty in front of me well, whether anyone sees it or not."
+    },
+    {
+      "id": "v5_marcus_13",
+      "category": "marcus",
+      "text": "What I cannot change today, I can at least meet with a steady mind."
+    },
+    {
+      "id": "v5_marcus_14",
+      "category": "marcus",
+      "text": "My time is short; I would rather spend it on what is just than on what is loud."
+    },
+    {
+      "id": "v5_marcus_15",
+      "category": "marcus",
+      "text": "When I feel wronged, I first ask what the other person believed was right."
+    },
+    {
+      "id": "v5_marcus_16",
+      "category": "marcus",
+      "text": "Praise and blame pass quickly; the quality of my actions stays with me."
+    },
+    {
+      "id": "v5_marcus_17",
+      "category": "marcus",
+      "text": "I can return to my inner calm the way one returns home after a long walk."
+    },
+    {
+      "id": "v5_marcus_18",
+      "category": "marcus",
+      "text": "Each task done carefully is a small proof of the person I want to be."
+    },
+    {
+      "id": "v5_marcus_19",
+      "category": "marcus",
+      "text": "Everything changes; I can let that make me humble instead of afraid."
+    },
+    {
+      "id": "v5_marcus_20",
+      "category": "marcus",
+      "text": "Tonight I will review the day: where I acted well and where I can do better."
+    },
+    {
+      "id": "v5_seneca_11",
+      "category": "seneca",
+      "text": "I want to spend today as if it were a whole life, not a waiting room."
+    },
+    {
+      "id": "v5_seneca_12",
+      "category": "seneca",
+      "text": "Much of my worry is about things that have not happened and may never happen."
+    },
+    {
+      "id": "v5_seneca_13",
+      "category": "seneca",
+      "text": "I will guard my time as carefully as I guard my money."
+    },
+    {
+      "id": "v5_seneca_14",
+      "category": "seneca",
+      "text": "A few good books read deeply can teach me more than many read in haste."
+    },
+    {
+      "id": "v5_seneca_15",
+      "category": "seneca",
+      "text": "Anger asks me to act now; wisdom asks me to wait a little."
+    },
+    {
+      "id": "v5_seneca_16",
+      "category": "seneca",
+      "text": "Wanting less can make me richer than having more."
+    },
+    {
+      "id": "v5_seneca_17",
+      "category": "seneca",
+      "text": "I can learn something from every person I meet, even from a hard day."
+    },
+    {
+      "id": "v5_seneca_18",
+      "category": "seneca",
+      "text": "Difficulty is the place where my strength gets a chance to show itself."
+    },
+    {
+      "id": "v5_seneca_19",
+      "category": "seneca",
+      "text": "I choose friends who make me better, and I try to do the same for them."
+    },
+    {
+      "id": "v5_seneca_20",
+      "category": "seneca",
+      "text": "Each evening I ask myself: what fault did I mend today, and what did I learn?"
+    },
+    {
+      "id": "v5_epiktetos_11",
+      "category": "epiktetos",
+      "text": "Some things are up to me and some are not; I give my effort to the first."
+    },
+    {
+      "id": "v5_epiktetos_12",
+      "category": "epiktetos",
+      "text": "I cannot choose what happens, but I can choose how I respond."
+    },
+    {
+      "id": "v5_epiktetos_13",
+      "category": "epiktetos",
+      "text": "Before reacting, I separate the event from the story I tell about it."
+    },
+    {
+      "id": "v5_epiktetos_14",
+      "category": "epiktetos",
+      "text": "I can be free in my mind even when my day is full of obligations."
+    },
+    {
+      "id": "v5_epiktetos_15",
+      "category": "epiktetos",
+      "text": "Other people's opinions belong to them; my choices belong to me."
+    },
+    {
+      "id": "v5_epiktetos_16",
+      "category": "epiktetos",
+      "text": "When I lose something, I remember that it was lent to me for a while."
+    },
+    {
+      "id": "v5_epiktetos_17",
+      "category": "epiktetos",
+      "text": "Practice means doing the right thing again, especially when it is hard."
+    },
+    {
+      "id": "v5_epiktetos_18",
+      "category": "epiktetos",
+      "text": "I do not need to look wise; I need to act wisely in small things."
+    },
+    {
+      "id": "v5_epiktetos_19",
+      "category": "epiktetos",
+      "text": "A difficulty is an opponent sent to train me, not to defeat me."
+    },
+    {
+      "id": "v5_epiktetos_20",
+      "category": "epiktetos",
+      "text": "Tonight I let go of what was never mine to control."
     }
   ]
 }

@@ -1,146 +1,158 @@
 package com.yalnizfahrettin.azim.widget
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.compose.ui.unit.sp
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
-import androidx.glance.GlanceTheme
+import androidx.glance.Image
+import androidx.glance.ImageProvider
+import androidx.glance.LocalSize
+import androidx.glance.action.ActionParameters
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
+import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
+import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
+import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
-import androidx.glance.action.ActionParameters
-import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.glance.appwidget.updateAll
 import androidx.glance.background
 import androidx.glance.currentState
 import androidx.glance.layout.Alignment
+import androidx.glance.layout.Box
 import androidx.glance.layout.Column
+import androidx.glance.layout.ContentScale
+import androidx.glance.layout.Row
+import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxSize
+import androidx.glance.layout.fillMaxWidth
+import androidx.glance.layout.height
 import androidx.glance.layout.padding
+import androidx.glance.semantics.contentDescription
+import androidx.glance.semantics.semantics
 import androidx.glance.state.GlanceStateDefinition
 import androidx.glance.state.PreferencesGlanceStateDefinition
 import androidx.glance.text.FontFamily
+import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
+import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import androidx.compose.ui.graphics.Color
-import androidx.glance.appwidget.state.updateAppWidgetState
-import com.yalnizfahrettin.azim.data.Depo
-import com.yalnizfahrettin.azim.data.Sozler
-import com.yalnizfahrettin.azim.data.PersonalPlan
-import kotlinx.coroutines.flow.first
+import com.yalnizfahrettin.azim.MainActivity
+import com.yalnizfahrettin.azim.R
+import com.yalnizfahrettin.azim.data.AnaTemalar
+import com.yalnizfahrettin.azim.data.AscendStore
+import com.yalnizfahrettin.azim.data.Kategoriler
+import com.yalnizfahrettin.azim.data.QuotePicker
+import com.yalnizfahrettin.azim.data.Soz
+import com.yalnizfahrettin.azim.data.UserState
+import com.yalnizfahrettin.azim.notif.Notifier
+import java.time.LocalDate
 
-/*
- * EV EKRANI WIDGET'I (rapor 3.1)
- *
- * Eski sürümde ÜÇ paralel widget çizim yolu vardı — RemoteViews tabanlı
- * WidgetBuilder, ui/widget/AzimWidget.kt ve widget/ui/WidgetContent.kt.
- * Üçü birbirini görmüyordu; onboarding önizlemesi ile ana ekrandaki gerçek
- * widget farklı kodlardan çiziliyordu. 1.0.0'da bu karmaşayı temizlerken
- * widget'ı tamamen kaldırmıştım.
- *
- * Burada TEK yol var: Glance. Aynı composable üç boyutta da (SizeMode.Exact)
- * kendini uyarlıyor — ayrı mini/normal/geniş kodu yok, dolayısıyla
- * birbirinden ayrışacak ikinci bir yol da yok.
- *
- * Bir söz uygulaması için ev ekranı varlığı çekirdek elde tutma aracıdır:
- * kullanıcı uygulamayı açmadan sözü görür.
+/**
+ * Home-screen quote as real Glance text: readable by TalkBack, scaled with the system font,
+ * and light enough to update without rendering a full-size bitmap.
+ * One stable quote per day from the user's topics; "Next" steps through the same daily order.
  */
 open class AzimWidget : GlanceAppWidget() {
-
     override val sizeMode = SizeMode.Exact
     override val stateDefinition: GlanceStateDefinition<*> = PreferencesGlanceStateDefinition
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val depo = Depo(context)
-        val initialPro = depo.proDemo.first()
-        val dil = depo.dil.first()
-        val manager = androidx.glance.appwidget.GlanceAppWidgetManager(context)
-        val widgetId = manager.getAppWidgetId(id)
-        val initialConfig = WidgetTasarimi.load(context, widgetId)
-        val daily = gununSozu(depo)
-        updateAppWidgetState(context, id) { state ->
-            state[ACCESS] = initialPro
-            state[SOZ] = daily?.metin(dil) ?: com.yalnizfahrettin.azim.data.Diller.metin(dil, "Kendine küçük bir an ayır.", "Take a moment for yourself.")
-            state[YAZAR] = daily?.sunumEtiketi(dil) ?: "Ascend"
-            state[KIMLIK] = daily?.kimlik.orEmpty()
-        }
+        val user = AscendStore.get(context).current()
+        val widgetId = GlanceAppWidgetManager(context).getAppWidgetId(id)
+        val config = WidgetTasarimi.load(context, widgetId)
+        val theme = AnaTemalar.allowed(config.theme, user.pro)
+        val pool = dailyOrder(user)
+        val res = Notifier.localized(context, user.language)
+        val background = theme.art?.let { backgroundArt(context, it) }
         provideContent {
-            val state = currentState<androidx.datastore.preferences.core.Preferences>()
-            val pro = state[ACCESS] ?: initialPro
-            val config = WidgetSecimi(state[THEME] ?: initialConfig.theme, state[CENTER] ?: initialConfig.centered, state[LARGE] ?: initialConfig.large)
-            val size = androidx.glance.LocalSize.current
-            val quote = if(pro) state[SOZ].orEmpty().ifBlank { com.yalnizfahrettin.azim.data.Diller.metin(dil, "Kendine küçük bir an ayır.", "Take a moment for yourself.") }
-                else com.yalnizfahrettin.azim.data.Diller.metin(dil, "Widget’lar Ascend Pro ile.", "Widgets are part of Ascend Pro.")
-            val source = if(pro) state[YAZAR] ?: "Ascend" else com.yalnizfahrettin.azim.data.Diller.metin(dil, "Önizlemek için dokun", "Tap to preview")
-            val bitmap = androidx.compose.runtime.remember(config, quote, source, size, pro) {
-                WidgetTasarimi.render(context, if(pro) config else WidgetSecimi(), quote, source,
-                    (size.width.value * context.resources.displayMetrics.density).toInt(), (size.height.value * context.resources.displayMetrics.density).toInt())
+            val offset = currentState<Preferences>()[OFFSET] ?: 0
+            Content(context, pool.getOrNull(Math.floorMod(offset, pool.size.coerceAtLeast(1))), user.language, theme.dark,
+                background, config.large, res.getString(R.string.widget_next), res.getString(R.string.widget_empty))
+        }
+    }
+
+    @Composable
+    private fun Content(context: Context, quote: Soz?, language: String, dark: Boolean, background: Bitmap?, large: Boolean, nextLabel: String, emptyLabel: String) {
+        val onArt = background != null
+        val ink = ColorProvider(if (onArt || dark) Color.White else Color(0xFF1F1B16))
+        val soft = ColorProvider(if (onArt || dark) Color(0xCCFFFFFF) else Color(0xFF5E554A))
+        val accent = ColorProvider(if (onArt || dark) Color(0xFFF0A066) else Color(0xFFA84B16))
+        val size = LocalSize.current
+        val compact = size.height < 140.dp
+        val text = quote?.metin(language) ?: emptyLabel
+        val fontSize = when {
+            compact -> 13.sp
+            large || text.length < 70 -> 19.sp
+            text.length < 120 -> 16.sp
+            else -> 14.sp
+        }
+        val open = Intent(context, MainActivity::class.java).setAction(Notifier.ACTION_OPEN_QUOTE)
+            .putExtra(Notifier.EXTRA_QUOTE_ID, quote?.kimlik.orEmpty())
+        Box(GlanceModifier.fillMaxSize().cornerRadius(22.dp)
+            .background(if (dark || onArt) Color(0xFF12100E) else Color(0xFFFAF7F2))) {
+            if (background != null) {
+                Image(ImageProvider(background), contentDescription = null, contentScale = ContentScale.Crop, modifier = GlanceModifier.fillMaxSize())
+                Box(GlanceModifier.fillMaxSize().background(Color(0x99000000))) {}
             }
-            val intent = if(pro) android.content.Intent(context, com.yalnizfahrettin.azim.MainActivity::class.java)
-                .putExtra(com.yalnizfahrettin.azim.notif.Bildirimler.EXTRA_KIMLIK, state[KIMLIK])
-                else android.content.Intent(context, WidgetAyarActivity::class.java).putExtra(android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
-            androidx.glance.Image(provider = androidx.glance.ImageProvider(bitmap), contentDescription = "$quote $source",
-                contentScale = androidx.glance.layout.ContentScale.FillBounds,
-                modifier = GlanceModifier.fillMaxSize().cornerRadius(20.dp)
-                    .clickable(androidx.glance.appwidget.action.actionStartActivity(intent)))
+            Column(GlanceModifier.fillMaxSize().padding(horizontal = 16.dp, vertical = if (compact) 10.dp else 14.dp)) {
+                Text(quote?.let { Kategoriler.bul(it.kategori)?.ad(language) }.orEmpty().uppercase(java.util.Locale.forLanguageTag(language)),
+                    style = TextStyle(color = accent, fontSize = 10.sp, fontWeight = FontWeight.Medium), maxLines = 1)
+                Spacer(GlanceModifier.height(6.dp))
+                Text(text, maxLines = if (compact) 3 else 7,
+                    style = TextStyle(color = ink, fontSize = fontSize, fontFamily = FontFamily.Serif),
+                    modifier = GlanceModifier.defaultWeight().fillMaxWidth().clickable(actionStartActivity(open)))
+                Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text(quote?.sunumEtiketi(language).orEmpty(), maxLines = 1, style = TextStyle(color = soft, fontSize = 10.sp),
+                        modifier = GlanceModifier.defaultWeight())
+                    if (quote != null) Text("$nextLabel  ›", style = TextStyle(color = accent, fontSize = 12.sp, fontWeight = FontWeight.Medium, textAlign = TextAlign.End),
+                        modifier = GlanceModifier.padding(start = 8.dp, top = 6.dp, bottom = 2.dp).clickable(actionRunCallback<NextQuoteAction>())
+                            .semantics { contentDescription = nextLabel })
+                }
+            }
         }
     }
 
     companion object {
-        val THEME = stringPreferencesKey("widget_theme")
-        val CENTER = androidx.datastore.preferences.core.booleanPreferencesKey("widget_center")
-        val LARGE = androidx.datastore.preferences.core.booleanPreferencesKey("widget_large")
-        val ACCESS = androidx.datastore.preferences.core.booleanPreferencesKey("widget_pro")
-        val KIMLIK = stringPreferencesKey("widget_quote_id")
-        val SOZ = stringPreferencesKey("widget_soz")
-        val YAZAR = stringPreferencesKey("widget_yazar")
+        val OFFSET = intPreferencesKey("widget_offset")
 
-        private suspend fun gununSozu(depo: Depo): com.yalnizfahrettin.azim.data.Soz? {
-            val secili = depo.secili.first()
-            val allowed = depo.acik.first()
-            val hidden = depo.hiddenQuotes.first()
-            val choices = PersonalPlan.widgetPool(depo.personalProfile.first(), secili, allowed, hidden)
-            return choices.takeIf { it.isNotEmpty() }?.random(kotlin.random.Random(java.time.LocalDate.now().toEpochDay().toInt()))
-        }
+        /** The day's order is stable, so every widget and every "Next" tap agree. */
+        fun dailyOrder(user: UserState): List<Soz> =
+            QuotePicker.topicPool(user).sortedBy { it.kimlik }.shuffled(kotlin.random.Random(LocalDate.now().toEpochDay()))
 
-        /** Tüm widget örneklerine yeni bir söz yazar. */
+        /** A small, cropped-on-device background; the quote itself is never drawn into it. */
+        private fun backgroundArt(context: Context, res: Int): Bitmap? = runCatching {
+            val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true; inScaled = false }
+            BitmapFactory.decodeResource(context.resources, res, bounds)
+            var sample = 1
+            while (bounds.outWidth / (sample * 2) >= 420) sample *= 2
+            BitmapFactory.decodeResource(context.resources, res, BitmapFactory.Options().apply { inSampleSize = sample; inScaled = false })
+        }.getOrNull()
+
+        /** Re-renders every placed widget, e.g. after topics, language or Pro change. */
         suspend fun tazele(ctx: Context) {
-            val depo = Depo(ctx)
-            val dil = depo.dil.first()
-            val access = depo.proDemo.first()
-            val soz = gununSozu(depo)
-            val manager = androidx.glance.appwidget.GlanceAppWidgetManager(ctx)
-            val ids = manager.getGlanceIds(AzimWidget::class.java) + manager.getGlanceIds(AzimSquareWidget::class.java)
-            ids
-                .forEach { id ->
-                    val widgetId = androidx.glance.appwidget.GlanceAppWidgetManager(ctx).getAppWidgetId(id)
-                    val config = WidgetTasarimi.load(ctx, widgetId)
-                    updateAppWidgetState(ctx, id) { p ->
-                        p[THEME] = config.theme
-                        p[CENTER] = config.centered
-                        p[LARGE] = config.large
-                        p[ACCESS] = access
-                        p[SOZ] = soz?.metin(dil) ?: com.yalnizfahrettin.azim.data.Diller.metin(dil, "Uygulamadan içerik tercihlerini düzenleyebilirsin.", "Adjust content preferences in the app.")
-                        p[KIMLIK] = soz?.kimlik.orEmpty()
-                        p[YAZAR] = soz?.sunumEtiketi(dil) ?: "Ascend"
-                    }
-                }
             AzimWidget().updateAll(ctx)
             AzimSquareWidget().updateAll(ctx)
         }
     }
 }
 
-/** Widget'a dokununca yeni söz. */
-class YenileEylemi : ActionCallback {
+class NextQuoteAction : ActionCallback {
     override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        updateAppWidgetState(context, glanceId) { it[AzimWidget.OFFSET] = (it[AzimWidget.OFFSET] ?: 0) + 1 }
         AzimWidget.tazele(context)
     }
 }
@@ -158,7 +170,7 @@ class AzimSquareWidget : AzimWidget()
 class AzimSquareWidgetSaglayici : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget = AzimSquareWidget()
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
-        appWidgetIds.forEach { WidgetTasarimi.remove(context,it) }
-        super.onDeleted(context,appWidgetIds)
+        appWidgetIds.forEach { WidgetTasarimi.remove(context, it) }
+        super.onDeleted(context, appWidgetIds)
     }
 }

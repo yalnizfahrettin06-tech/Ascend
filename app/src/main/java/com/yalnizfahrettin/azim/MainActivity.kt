@@ -1,144 +1,127 @@
 package com.yalnizfahrettin.azim
 
 import android.Manifest
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalConfiguration
-import android.content.ContextWrapper
-import android.content.res.Configuration
-import java.util.Locale
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.yalnizfahrettin.azim.core.AzimTema
 import com.yalnizfahrettin.azim.core.HaptikSaglayici
 import com.yalnizfahrettin.azim.core.TemaModu
-import com.yalnizfahrettin.azim.data.Depo
-import com.yalnizfahrettin.azim.notif.Bildirimler
-import com.yalnizfahrettin.azim.notif.Planlayici
-import com.yalnizfahrettin.azim.ui.*
-import com.yalnizfahrettin.azim.widget.AzimWidget
-import kotlinx.coroutines.launch
+import com.yalnizfahrettin.azim.core.asTemaModu
+import com.yalnizfahrettin.azim.notif.Notifier
+import com.yalnizfahrettin.azim.notif.TeslimatYardimi
+import com.yalnizfahrettin.azim.ui.AppViewModel
+import com.yalnizfahrettin.azim.ui.AscendApp
+import com.yalnizfahrettin.azim.ui.LocalLanguage
+import com.yalnizfahrettin.azim.ui.OpenRequest
+import com.yalnizfahrettin.azim.ui.Tab
+import com.yalnizfahrettin.azim.ui.YouSection
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
+    private val vm: AppViewModel by viewModels()
+    private var request by mutableStateOf<OpenRequest?>(null)
 
-    private var acilisIstegi by mutableStateOf(0L)
-    private var acilistakiKimlik by mutableStateOf<String?>(null)
-    private var acilisSekmesi by mutableStateOf<Sekme?>(null)
-    private lateinit var depo: Depo
-    private var bildirimIzni by mutableStateOf(false)
-
-    private val izinIstegi = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) {
-        bildirimIzni = Bildirimler.izinVarMi(this)
-        Planlayici.yenidenKur(this)
+    private val permissionRequest = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        vm.refreshSystemState()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        // Keep the splash until the stored theme and language are known: no light/Turkish flash.
+        installSplashScreen().setKeepOnScreenCondition { vm.state.value == null }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        depo = Depo(applicationContext)
-        Bildirimler.kanalKur(this)
-        niyetiOku(intent)
-
-        // Sürüm derlemesinde gerçek SDK bağlanana kadar ödül verilmez.
-        val reklam: ReklamKapisi = VarsayilanKapi()
-
-        Planlayici.yenidenKur(this)
-        lifecycleScope.launch { AzimWidget.tazele(applicationContext) }
+        if (savedInstanceState == null) readIntent(intent)
 
         setContent {
-            val tema by depo.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
-            val dinamik by depo.dinamikRenk.collectAsStateWithLifecycle(false)
-            val haptik by depo.haptikAcik.collectAsStateWithLifecycle(true)
-            val palet by depo.palet.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.core.Palet.MERMER)
-            val dil by depo.dil.collectAsStateWithLifecycle("tr")
+            val state by vm.state.collectAsStateWithLifecycle()
+            val language = state?.language ?: "en"
             val base = LocalContext.current
             val configuration = LocalConfiguration.current
-            val localizedConfiguration = remember(dil, configuration) { Configuration(configuration).apply { setLocale(Locale.forLanguageTag(dil)) } }
+            val localizedConfiguration = remember(language, configuration) {
+                Configuration(configuration).apply { setLocale(Locale.forLanguageTag(language)) }
+            }
             val localizedContext = remember(base, localizedConfiguration) {
                 val resources = base.createConfigurationContext(localizedConfiguration).resources
                 object : ContextWrapper(base) { override fun getResources() = resources }
             }
-            androidx.compose.runtime.LaunchedEffect(dil) { Bildirimler.kanalKur(localizedContext) }
-            CompositionLocalProvider(LocalContext provides localizedContext, LocalConfiguration provides localizedConfiguration) {
-            AzimTema(modu = tema, palet = palet, dinamik = dinamik) {
-                HaptikSaglayici(haptik) {
-                    Uygulama(
-                        depo = depo,
-                        reklam = reklam,
-                        acilistakiKimlik = acilistakiKimlik, acilisIstegi = acilisIstegi,
-                        acilisSekmesi = acilisSekmesi,
-                        izinIste = ::bildirimIzniniIste,
-                        bildirimIzni = bildirimIzni,
-                    )
+            CompositionLocalProvider(
+                LocalContext provides localizedContext,
+                LocalConfiguration provides localizedConfiguration,
+                LocalLanguage provides language,
+            ) {
+                AzimTema(modu = state?.themeMode?.asTemaModu() ?: TemaModu.SISTEM) {
+                    HaptikSaglayici(state?.haptics ?: true) {
+                        AscendApp(vm, request, ::requestNotificationPermission)
+                    }
                 }
             }
-        }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (::depo.isInitialized) {
-            bildirimIzni = Bildirimler.izinVarMi(this)
-            Planlayici.yenidenKur(this)
-        }
+        vm.refreshSystemState()
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        niyetiOku(intent)
+        readIntent(intent)
     }
 
-    private fun niyetiOku(i: Intent?) {
-        if (i?.hasExtra(Bildirimler.EXTRA_KIMLIK) == true) acilisIstegi++
-        acilistakiKimlik = i?.getStringExtra(Bildirimler.EXTRA_KIMLIK)
-        acilisSekmesi = when (i?.action) {
-            "com.yalnizfahrettin.azim.FAVORILER" -> Sekme.FAVORI
-            else -> null
+    private fun readIntent(intent: Intent?) {
+        val nonce = System.nanoTime()
+        request = when (intent?.action) {
+            Notifier.ACTION_OPEN_QUOTE -> OpenRequest(quoteId = intent.getStringExtra(Notifier.EXTRA_QUOTE_ID), tab = Tab.TODAY, nonce = nonce)
+            ACTION_SHORTCUT_TODAY -> OpenRequest(tab = Tab.TODAY, nonce = nonce)
+            ACTION_SHORTCUT_SAVED -> OpenRequest(tab = Tab.YOU, section = YouSection.SAVED, nonce = nonce)
+            else -> request
         }
     }
 
-    /**
-     * Bildirim izni artık onboarding'in son adımında, kullanıcı sıklığı
-     * seçtikten HEMEN SONRA isteniyor (rapor 1.4). Önceki sürümde uygulama
-     * açılır açılmaz bağlamsız soruluyordu.
-     */
-    private fun bildirimIzniniIste() {
+    /** Asks once in context; after a permanent denial the system settings page is the only way. */
+    private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            bildirimIzni = Bildirimler.izinVarMi(this)
-            if (!bildirimIzni) com.yalnizfahrettin.azim.notif.TeslimatYardimi.bildirimAyarlariniAc(this)
+            if (!Notifier.canPost(this)) TeslimatYardimi.bildirimAyarlariniAc(this)
             return
         }
-        val durum = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-        if (durum != PackageManager.PERMISSION_GRANTED) {
-            val history = getSharedPreferences("notification_permission", MODE_PRIVATE)
-            if (history.getBoolean("asked", false) && !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-                com.yalnizfahrettin.azim.notif.TeslimatYardimi.bildirimAyarlariniAc(this)
-            } else {
-                history.edit().putBoolean("asked", true).apply()
-                izinIstegi.launch(Manifest.permission.POST_NOTIFICATIONS)
+        val granted = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+        when {
+            granted && !Notifier.canPost(this) -> TeslimatYardimi.kanalAyarlariniAc(this)
+            granted -> vm.refreshSystemState()
+            else -> {
+                val history = getSharedPreferences("notification_permission", MODE_PRIVATE)
+                val askedBefore = history.getBoolean("asked", false)
+                if (askedBefore && !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                    TeslimatYardimi.bildirimAyarlariniAc(this)
+                } else {
+                    history.edit().putBoolean("asked", true).apply()
+                    permissionRequest.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
             }
-        } else if (!Bildirimler.izinVarMi(this)) {
-            com.yalnizfahrettin.azim.notif.TeslimatYardimi.kanalAyarlariniAc(this)
         }
+    }
+
+    companion object {
+        const val ACTION_SHORTCUT_TODAY = "com.yalnizfahrettin.azim.TODAY"
+        const val ACTION_SHORTCUT_SAVED = "com.yalnizfahrettin.azim.SAVED"
     }
 }

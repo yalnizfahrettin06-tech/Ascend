@@ -23,7 +23,7 @@ object WallpaperService {
     suspend fun apply(context: Context, theme: AnaTema, target: Int, aspect: Float): Boolean = withContext(Dispatchers.IO) {
         require(target in 1..3)
         require(gallery.any { it.id == theme.id })
-        check(!theme.pro || Depo(context).proDemo.first())
+        check(!theme.pro || AscendStore.get(context).current().pro)
         val manager = WallpaperManager.getInstance(context)
         check(manager.isWallpaperSupported && manager.isSetWallpaperAllowed)
         val resource = requireNotNull(theme.art)

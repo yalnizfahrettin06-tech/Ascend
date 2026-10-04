@@ -1,0 +1,101 @@
+# Faz 2 · Disiplin, Odak, Özgüven, Cesaret · 20 new pairs per topic
+erteleme | Do the first two minutes now; deciding is often harder than doing. | İlk iki dakikayı şimdi yap; karar vermek çoğu zaman yapmaktan zordur.
+erteleme | The task you keep postponing is usually smaller than the worry around it. | Sürekli ertelediğin iş, genellikle etrafındaki endişeden daha küçüktür.
+erteleme | Name the very first physical action, then do only that. | İlk fiziksel hareketi adlandır, sonra yalnızca onu yap.
+erteleme | Put your phone in another room for twenty minutes and begin. | Telefonunu yirmi dakikalığına başka bir odaya bırak ve başla.
+erteleme | Waiting for the right mood is another way of waiting forever. | Doğru ruh hâlini beklemek, sonsuza kadar beklemenin başka bir yoludur.
+erteleme | Lower the standard for the first draft; raise it for the second. | İlk taslak için çıtayı düşür, ikincisi için yükselt.
+erteleme | Tell someone what you will finish today; a witness helps you begin. | Bugün neyi bitireceğini birine söyle; bir tanık başlamana yardım eder.
+erteleme | Delay often hides a question; find it and the task gets lighter. | Ertelemenin arkasında çoğu zaman bir soru saklıdır; onu bul, iş hafiflesin.
+erteleme | Start with the part you understand best, not the beginning. | Baştan değil, en iyi anladığın kısımdan başla.
+erteleme | A messy start beats a perfect plan that stays in your head. | Dağınık bir başlangıç, kafanda kalan kusursuz bir plandan iyidir.
+erteleme | Set a timer, work until it rings, and give yourself a real break. | Bir zamanlayıcı kur, çalana kadar çalış ve kendine gerçek bir mola ver.
+erteleme | Tomorrow will have its own tasks; give this one its place today. | Yarının kendi işleri olacak; bu işe yerini bugün ver.
+erteleme | Open the file before you decide whether you feel like working. | Çalışmak isteyip istemediğine karar vermeden önce dosyayı aç.
+erteleme | Finishing a small thing early can change the mood of the whole day. | Küçük bir işi erkenden bitirmek bütün günün havasını değiştirebilir.
+erteleme | Write down the excuse you are about to use, then read it aloud. | Kullanmak üzere olduğun bahaneyi yaz, sonra sesli oku.
+erteleme | The longer a task waits, the heavier it looks; lighten it by touching it. | Bir iş ne kadar beklerse o kadar ağır görünür; ona dokunarak hafiflet.
+erteleme | Ask yourself what would make this task fifty percent easier. | Bu işi yüzde elli daha kolay yapacak şeyin ne olduğunu kendine sor.
+erteleme | Reward yourself after starting, not only after finishing. | Kendini yalnızca bitirdikten sonra değil, başladıktan sonra da ödüllendir.
+erteleme | Feeling resistance is normal; start anyway and let it fade. | Direnç hissetmek normal; yine de başla ve onun azalmasına izin ver.
+erteleme | Today, do the thing you will be glad you did by evening. | Bugün, akşam olduğunda yaptığına sevineceğin şeyi yap.
+derin_odak | Choose one task for the next hour and let everything else wait. | Önümüzdeki bir saat için tek bir iş seç ve geri kalan her şeyin beklemesine izin ver.
+derin_odak | Silence notifications for one session; the world will still be there. | Bir oturum için bildirimleri sustur; dünya yine yerinde olacak.
+derin_odak | Write down distracting thoughts and return to them later. | Dikkatini dağıtan düşünceleri yaz ve sonra onlara geri dön.
+derin_odak | Deep work feels uncomfortable at first; the calm comes after a while. | Derin çalışma ilk başta rahatsız hissettirir; sakinlik bir süre sonra gelir.
+derin_odak | Clear your desk of everything the current task does not need. | Masandan şu anki işin ihtiyaç duymadığı her şeyi kaldır.
+derin_odak | Work in blocks with a clear end; focus is easier when it has a limit. | Sonu belli bloklar hâlinde çalış; odaklanmak bir sınırı olduğunda kolaylaşır.
+derin_odak | Your best hours are precious; protect them for your hardest work. | En verimli saatlerin değerlidir; onları en zor işin için koru.
+derin_odak | When your attention drifts, gently bring it back without scolding. | Dikkatin dağıldığında onu azarlamadan, nazikçe geri getir.
+derin_odak | One tab, one document, one question: that is enough for now. | Bir sekme, bir belge, bir soru: şimdilik bu yeterli.
+derin_odak | Begin each session by writing what done will look like. | Her oturuma, bitmiş hâlin nasıl görüneceğini yazarak başla.
+derin_odak | Boredom is often the doorway to deeper concentration. | Can sıkıntısı çoğu zaman daha derin bir odaklanmanın kapısıdır.
+derin_odak | Tell people when you are not available; boundaries protect focus. | Ne zaman müsait olmadığını insanlara söyle; sınırlar odağı korur.
+derin_odak | A short walk can reset tired attention better than another coffee. | Kısa bir yürüyüş, yorgun dikkati bir kahveden daha iyi tazeleyebilir.
+derin_odak | Read slowly enough to think, not just fast enough to finish. | Yalnızca bitirecek kadar hızlı değil, düşünecek kadar yavaş oku.
+derin_odak | Multitasking divides your mind; give one thing your whole attention. | Aynı anda birden çok iş zihnini böler; tek bir şeye tüm dikkatini ver.
+derin_odak | At the end of a session, note where you stopped to restart easily. | Oturumun sonunda nerede kaldığını not et ki kolayca yeniden başlayabilesin.
+derin_odak | Focus is a muscle; short daily sessions make it stronger. | Odaklanma bir kas gibidir; günlük kısa oturumlar onu güçlendirir.
+derin_odak | Put on the same music each time you work; let it signal focus. | Her çalıştığında aynı müziği aç; odaklanma zamanını ona haber ettir.
+derin_odak | The urge to check something will pass if you let it. | Bir şeye bakma isteği, izin verirsen geçip gider.
+derin_odak | An hour of real focus can do more than a day of scattered effort. | Gerçek odakla geçen bir saat, dağınık geçen bir günden fazlasını başarabilir.
+rutin | Attach a new habit to something you already do every day. | Yeni bir alışkanlığı, zaten her gün yaptığın bir şeye bağla.
+rutin | A good routine leaves room for bad days without falling apart. | İyi bir rutin, dağılmadan kötü günlere de yer bırakır.
+rutin | Prepare tonight what tomorrow's routine will need. | Yarınki rutinin ihtiyaç duyacağı şeyleri bu akşamdan hazırla.
+rutin | Keep the routine short enough to repeat when you are tired. | Rutinini yorgunken de tekrarlayabileceğin kadar kısa tut.
+rutin | The same start time every day saves you a decision every day. | Her gün aynı saatte başlamak, seni her gün bir karar vermekten kurtarır.
+rutin | Routines are not cages; they are rails that make freedom easier. | Rutinler kafes değildir; özgürlüğü kolaylaştıran raylardır.
+rutin | Review your week on Sunday and adjust one small part of your routine. | Pazar günü haftanı gözden geçir ve rutininin küçük bir parçasını ayarla.
+rutin | An evening routine can be the beginning of a calmer morning. | Bir akşam rutini, daha sakin bir sabahın başlangıcı olabilir.
+rutin | Make the next step of your routine visible: a note, a cup, a book. | Rutinindeki bir sonraki adımı görünür kıl: bir not, bir fincan, bir kitap.
+rutin | Missing one day is a pause; missing two is a choice to make consciously. | Bir günü kaçırmak bir aradır; ikinci günü kaçırmak bilinçli verilecek bir karardır.
+rutin | Add one thing to your routine at a time and let it settle first. | Rutinine her seferinde tek bir şey ekle ve önce onun yerleşmesine izin ver.
+rutin | A routine that fits your energy will outlast one that fights it. | Enerjine uyan bir rutin, onunla savaşan bir rutinden daha uzun yaşar.
+rutin | Write your routine down; seeing it makes it easier to follow. | Rutinini yaz; onu görmek takip etmeyi kolaylaştırır.
+rutin | Small daily actions become the structure that holds a busy life. | Küçük günlük hareketler, yoğun bir hayatı ayakta tutan yapıya dönüşür.
+rutin | Protect the first hour of your day from other people's urgency. | Gününün ilk saatini başkalarının aceleciliğinden koru.
+rutin | Let weekends have a lighter version of your routine, not none at all. | Hafta sonlarının, rutininin hiç olmamasından çok daha hafif bir sürümü olsun.
+rutin | A shared routine with a friend makes it easier to keep. | Bir arkadaşla paylaşılan bir rutini sürdürmek daha kolaydır.
+rutin | Repeat the routine until it no longer needs motivation. | Rutini, artık motivasyona ihtiyaç duymayana kadar tekrarla.
+rutin | End the day by preparing a clear first step for the next one. | Günü, bir sonraki gün için net bir ilk adım hazırlayarak bitir.
+rutin | Order in small things makes room for calm in big things. | Küçük şeylerdeki düzen, büyük şeylerde sakinliğe yer açar.
+ozguven | Confidence often comes after action, not before it. | Özgüven çoğu zaman hareketten önce değil, sonra gelir.
+ozguven | Speak a little earlier in the meeting than feels comfortable. | Toplantıda konuşmaya, rahat hissettiğinden biraz daha erken başla.
+ozguven | Keep a list of things you did well; read it before hard moments. | İyi yaptığın şeylerin listesini tut; zor anlardan önce onu oku.
+ozguven | Stand straight, breathe slowly, and let your body lead your mind. | Dik dur, yavaş nefes al ve bedeninin zihnine yol göstermesine izin ver.
+ozguven | You can be unsure and still act with good intentions. | Emin olmasan da iyi niyetle harekete geçebilirsin.
+ozguven | Prepare well, then trust the preparation when the moment comes. | İyi hazırlan, sonra an geldiğinde hazırlığına güven.
+ozguven | Others are thinking about you far less than you imagine. | Başkaları seni sandığından çok daha az düşünüyor.
+ozguven | Say your idea simply; clarity sounds confident on its own. | Fikrini sade söyle; açıklık kendi başına özgüvenli duyulur.
+ozguven | Each time you try something new, your comfort zone grows a little. | Her yeni şey denediğinde konfor alanın biraz daha genişler.
+ozguven | You do not need to be the best in the room to have something to add. | Söyleyecek bir şeyin olması için odadaki en iyi kişi olman gerekmiyor.
+ozguven | Practise the first sentence of a hard conversation out loud. | Zor bir konuşmanın ilk cümlesini sesli olarak çalış.
+ozguven | Your value does not depend on agreement from everyone. | Değerin, herkesin seninle aynı fikirde olmasına bağlı değil.
+ozguven | Wear clothes you feel good in on a day that asks for courage. | Cesaret isteyen bir günde, içinde iyi hissettiğin kıyafetleri giy.
+ozguven | Accept a compliment with a simple thank you and nothing more. | Bir iltifatı basit bir teşekkürle kabul et, fazlasını ekleme.
+ozguven | Look at how much you have learned instead of how much is left. | Ne kadarının kaldığına değil, ne kadar öğrendiğine bak.
+ozguven | Ask for what you need clearly; it is a sign of respect for yourself. | İhtiyacın olanı açıkça iste; bu kendine saygının bir işaretidir.
+ozguven | Mistakes in public are survivable, and most people forget them quickly. | Herkesin önünde yapılan hatalar atlatılabilir ve çoğu insan onları çabuk unutur.
+ozguven | Make eye contact and let a short pause give your words weight. | Göz teması kur ve kısa bir duraksamanın sözlerine ağırlık katmasına izin ver.
+ozguven | Choose one skill and get a little better at it every week. | Bir beceri seç ve her hafta onda biraz daha iyileş.
+ozguven | Confidence is quiet trust in your ability to handle what comes. | Özgüven, gelecek olanla baş edebileceğine dair sessiz bir güvendir.
+korku | Fear points to something that matters to you; listen, then decide. | Korku senin için önemli olan bir şeyi gösterir; dinle, sonra karar ver.
+korku | Ask what the worst realistic outcome is and how you would handle it. | Gerçekçi en kötü sonucun ne olduğunu ve onunla nasıl başa çıkacağını sor.
+korku | Courage is feeling afraid and taking one small step anyway. | Cesaret korkmak ve yine de küçük bir adım atmaktır.
+korku | Break the frightening task into parts until one part feels possible. | Korkutucu işi, bir parçası mümkün görünene kadar parçalara böl.
+korku | Fear grows in silence; saying it to someone can shrink it. | Korku sessizlikte büyür; onu birine söylemek küçültebilir.
+korku | Your body's alarm is trying to protect you; thank it and breathe. | Bedenindeki alarm seni korumaya çalışıyor; ona teşekkür et ve nefes al.
+korku | Most of what we fear never happens the way we imagine it. | Korktuğumuz şeylerin çoğu hiçbir zaman hayal ettiğimiz gibi gerçekleşmez.
+korku | Practise the scary thing in a small, safe version first. | Korkutucu şeyi önce küçük ve güvenli bir hâliyle çalış.
+korku | You can carry fear with you and still keep walking. | Korkuyu yanında taşıyıp yine de yürümeye devam edebilirsin.
+korku | Remember a fear you already outgrew; you have done this before. | Çoktan geride bıraktığın bir korkuyu hatırla; bunu daha önce de yaptın.
+korku | Facing a fear once makes the second time a little easier. | Bir korkuyla bir kez yüzleşmek ikinci seferi biraz kolaylaştırır.
+korku | Fear of failure often protects us from growth as well. | Başarısızlık korkusu çoğu zaman bizi büyümekten de korur.
+korku | Write your fear in one sentence; it often looks smaller on paper. | Korkunu tek bir cümleyle yaz; kâğıt üzerinde çoğu zaman daha küçük görünür.
+korku | Brave people are not fearless; they have simply decided what matters more. | Cesur insanlar korkusuz değildir; yalnızca neyin daha önemli olduğuna karar vermişlerdir.
+korku | Slow breathing tells your body that you are safe enough to think. | Yavaş nefes, bedenine düşünebilecek kadar güvende olduğunu söyler.
+korku | Ask yourself what you would do if you were a little less afraid. | Biraz daha az korksaydın ne yapacağını kendine sor.
+korku | You do not have to defeat fear; you only have to not let it decide. | Korkuyu yenmek zorunda değilsin; yalnızca karar vermesine izin verme.
+korku | A trusted person beside you can make a hard step feel lighter. | Yanındaki güvendiğin biri, zor bir adımı daha hafif hissettirebilir.
+korku | Uncertainty is uncomfortable, but it is also where new things begin. | Belirsizlik rahatsız edicidir ama yeni şeylerin başladığı yer de orasıdır.
+korku | Today, choose one thing fear has kept you from and take a tiny step. | Bugün korkunun seni alıkoyduğu bir şeyi seç ve ona doğru minik bir adım at.

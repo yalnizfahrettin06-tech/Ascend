@@ -49,13 +49,14 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
     embedded: Boolean = false, language: String? = null, close: () -> Unit = {}, configured: (Int) -> Unit = {}) {
     val ctx = androidx.compose.ui.platform.LocalContext.current
     val scope = rememberCoroutineScope()
-    val depot = remember(ctx) { Depo(ctx) }
+    val store = remember(ctx) { com.yalnizfahrettin.azim.data.AscendStore.get(ctx) }
+    val userState by store.state.collectAsStateWithLifecycle(com.yalnizfahrettin.azim.data.UserState())
     val initial = remember(ctx,id) { WidgetTasarimi.load(ctx,id) }
 
-            val pro by depot.proDemo.collectAsStateWithLifecycle(false)
-            val storedLanguage by depot.dil.collectAsStateWithLifecycle("tr")
+            val pro = userState.pro
+            val storedLanguage = userState.language
             val dil = language ?: storedLanguage
-            val mode by depot.tema.collectAsStateWithLifecycle(TemaModu.AYDINLIK)
+            val mode = userState.themeMode.asTemaModu()
             var square by rememberSaveable { mutableStateOf(
                 AppWidgetManager.getInstance(ctx).getAppWidgetInfo(id)?.provider == ComponentName(ctx,AzimSquareWidgetSaglayici::class.java)) }
             var theme by rememberSaveable { mutableStateOf(initialTheme?.takeIf { choice -> AnaTemalar.all.any { it.id == choice } } ?: initial.theme) }
@@ -66,13 +67,15 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
             val quote = cevir(dil, "Küçük bir adım da ilerlemektir.", "A small step is still a step forward.")
             val widgetPreview = rememberWidgetPreview(config, quote, if(square) 1080 else 540)
             val bitmap = widgetPreview.bitmap
+            // Plain backgrounds are free; artwork backgrounds are part of Pro.
+            val needsPro = AnaTemalar.find(theme).pro && !pro
             fun addWidget() {
                 if(busy) return
-                if (!pro) showPro = true else {
+                if (needsPro) showPro = true else {
                                 busy = true
                                 scope.launch {
                                     try {
-                                        if (!depot.proDemo.first()) { showPro = true; return@launch }
+                                        if (AnaTemalar.find(theme).pro && !store.current().pro) { showPro = true; return@launch }
                                         if (id != AppWidgetManager.INVALID_APPWIDGET_ID) {
                                             WidgetTasarimi.save(ctx, id, config)
                                             AzimWidget.tazele(ctx)
@@ -107,7 +110,7 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
                     Row(Modifier.padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                         if(!embedded) IconButton(onClick = { close() }) { Icon(AzimIkon.Geri, cevir(dil,"Geri","Back"), tint = Renk.metin) }
                         Text(cevir(dil,"Arka planını seç","Choose a background"), Modifier.weight(1f), color = Renk.metin, fontSize = 18.sp)
-                        ProRozeti()
+                        if (AnaTemalar.find(theme).pro) ProRozeti()
                     }
                     }
                     item { if(id == AppWidgetManager.INVALID_APPWIDGET_ID) FlowRow(Modifier.fillMaxWidth().padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -133,8 +136,8 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
                         Button(onClick = {
                             addWidget()
                         }, enabled = !busy, modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("widget-add")) {
-                            Text(cevir(dil, if(!pro) "Pro ile kullan" else if(id > 0) "Widget’ı kaydet" else "Telefon ekranına ekle",
-                                if(!pro) "Use with Pro" else if(id > 0) "Save widget" else "Add to home screen"))
+                            Text(cevir(dil, if(needsPro) "Bu arka plan Pro ile" else if(id > 0) "Widget’ı kaydet" else "Telefon ekranına ekle",
+                                if(needsPro) "This background is Pro" else if(id > 0) "Save widget" else "Add to home screen"))
                         }
                     }
                 }
@@ -142,7 +145,7 @@ fun WidgetSetup(id: Int = AppWidgetManager.INVALID_APPWIDGET_ID, initialTheme: S
                     offer = ProOffer(ProSource.WIDGET,theme,square = square), widgetPreview = bitmap,
                     kapat = { showPro = false }, degistir = { enabled ->
                         if(!busy) { busy = true; scope.launch {
-                            try { depot.proDemoAyarla(enabled); showPro = false; resumeAdd = enabled
+                            try { store.update { com.yalnizfahrettin.azim.data.UserActions.setPro(it, enabled) }; showPro = false; resumeAdd = enabled
                                 if(enabled) ProductSignals.record(ctx,ProductSignals.Event.DEMO_ENABLED,ProSource.WIDGET)
                             } catch(_: java.io.IOException) { message = cevir(dil,"Kaydedilemedi. Yeniden dene.","Could not save. Try again.") }
                             finally { busy = false }
@@ -161,8 +164,9 @@ class WidgetEkleAlicisi : BroadcastReceiver() {
         val pending = goAsync()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                if (Depo(context).proDemo.first()) WidgetTasarimi.save(context,id,WidgetSecimi(
-                    AnaTemalar.find(intent.getStringExtra("theme")).id, intent.getBooleanExtra("center",false), intent.getBooleanExtra("large",false)))
+                val chosen = AnaTemalar.allowed(intent.getStringExtra("theme"), com.yalnizfahrettin.azim.data.AscendStore.get(context).current().pro)
+                WidgetTasarimi.save(context,id,WidgetSecimi(
+                    chosen.id, intent.getBooleanExtra("center",false), intent.getBooleanExtra("large",false)))
                 AzimWidget.tazele(context)
             } finally { pending.finish() }
         }

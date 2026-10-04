@@ -52,15 +52,3 @@ fun EditorialPhoto(resource: Int, modifier: Modifier = Modifier) {
     TemaZemini(AnaTema("editorial-$resource","","",true,false,resource),modifier,veil = .02f,thumbnail = true,previewSize = 640)
 }
 
-@Composable
-fun EditorialCover(title: String, detail: String, resource: Int, modifier: Modifier = Modifier, open: () -> Unit) {
-    Surface(onClick = open,modifier = modifier,shape = RoundedCornerShape(20.dp),color = Renk.yuzey) {
-        Column {
-            EditorialPhoto(resource,Modifier.fillMaxWidth().aspectRatio(1.65f))
-            Column(Modifier.padding(14.dp),verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text(title,color = Renk.metin,fontSize = 16.sp,lineHeight = 21.sp,fontWeight = FontWeight.Medium)
-                Text(detail,color = Renk.metinIkincil,fontSize = 12.sp,lineHeight = 17.sp)
-            }
-        }
-    }
-}

@@ -12,10 +12,10 @@ android {
         applicationId = "com.yalnizfahrettin.azim"
         minSdk = 26
         targetSdk = 35
-        versionCode = 60
-        versionName = "9.29.0"
+        versionCode = 62
+        versionName = "10.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        resourceConfigurations += listOf("tr", "en", "pt", "de", "fr", "it", "ru")
+        resourceConfigurations += listOf("en", "tr", "de", "fr", "it", "pt", "ru")
     }
 
     val releaseStore = providers.environmentVariable("ASCEND_KEYSTORE_PATH").orNull
@@ -30,6 +30,8 @@ android {
 
     buildTypes {
         release {
+            // Billing is not connected yet; the free Pro demo stays out of store builds.
+            buildConfigField("boolean", "PRO_DEMO", "false")
             // R8 varsayilan olarak ACIK. Zayif makinede kapatmak icin:
             //   ./gradlew :app:assembleRelease -PazimMinify=false
             val minify = (project.findProperty("azimMinify") as String? ?: "true").toBoolean()
@@ -39,6 +41,7 @@ android {
             if (releaseStore != null) signingConfig = signingConfigs.getByName("release")
         }
         debug {
+            buildConfigField("boolean", "PRO_DEMO", "true")
             applicationIdSuffix = ".debug"
         }
     }
@@ -49,7 +52,7 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
     buildFeatures { compose = true; buildConfig = true }
-    // All offline languages remain available to the in-app picker, including offline switches.
+    // In-app language switching needs every language in the base APK.
     bundle { language { enableSplit = false } }
     packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
 }
@@ -68,9 +71,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
-    implementation("androidx.navigation:navigation-compose:2.8.4")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
-    implementation("androidx.work:work-runtime-ktx:2.10.0")
     implementation("androidx.glance:glance-appwidget:1.1.1")
 
     debugImplementation("androidx.compose.ui:ui-tooling")

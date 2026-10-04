@@ -1,0 +1,31 @@
+# Faz 2 · Free thinker topics · 10 new inspired reflections each (verbatim quotes live in content/classics.json)
+marcus | Before the day begins, I remind myself that I can meet difficult people without becoming difficult. | Gün başlamadan, zor insanlarla karşılaştığımda zorlaşmak zorunda olmadığımı kendime hatırlatıyorum.
+marcus | I can do the duty in front of me well, whether anyone sees it or not. | Önümdeki görevi, biri görsün ya da görmesin iyi yapabilirim.
+marcus | What I cannot change today, I can at least meet with a steady mind. | Bugün değiştiremediğim şeyi en azından sakin bir zihinle karşılayabilirim.
+marcus | My time is short; I would rather spend it on what is just than on what is loud. | Zamanım kısa; onu gürültülü olana değil, adil olana harcamayı tercih ederim.
+marcus | When I feel wronged, I first ask what the other person believed was right. | Haksızlığa uğradığımı hissettiğimde, önce karşımdakinin neyi doğru sandığını soruyorum.
+marcus | Praise and blame pass quickly; the quality of my actions stays with me. | Övgü de yergi de çabuk geçer; davranışlarımın niteliği benimle kalır.
+marcus | I can return to my inner calm the way one returns home after a long walk. | Uzun bir yürüyüşten eve döner gibi iç sakinliğime dönebilirim.
+marcus | Each task done carefully is a small proof of the person I want to be. | Özenle yapılmış her iş, olmak istediğim insanın küçük bir kanıtıdır.
+marcus | Everything changes; I can let that make me humble instead of afraid. | Her şey değişiyor; bunun beni korkutmasına değil, alçakgönüllü kılmasına izin verebilirim.
+marcus | Tonight I will review the day: where I acted well and where I can do better. | Bu akşam günü gözden geçireceğim: nerede iyi davrandım, nerede daha iyisini yapabilirim.
+seneca | I want to spend today as if it were a whole life, not a waiting room. | Bugünü bir bekleme salonu gibi değil, başlı başına bir hayat gibi geçirmek istiyorum.
+seneca | Much of my worry is about things that have not happened and may never happen. | Endişelerimin çoğu henüz olmamış ve belki hiç olmayacak şeylerle ilgili.
+seneca | I will guard my time as carefully as I guard my money. | Zamanımı, paramı koruduğum kadar özenle koruyacağım.
+seneca | A few good books read deeply can teach me more than many read in haste. | Derinlemesine okunan birkaç iyi kitap, aceleyle okunan pek çoğundan fazlasını öğretebilir.
+seneca | Anger asks me to act now; wisdom asks me to wait a little. | Öfke hemen harekete geçmemi ister; bilgelik biraz beklememi.
+seneca | Wanting less can make me richer than having more. | Daha azını istemek, beni daha fazlasına sahip olmaktan daha zengin yapabilir.
+seneca | I can learn something from every person I meet, even from a hard day. | Tanıştığım her insandan, hatta zor bir günden bile bir şey öğrenebilirim.
+seneca | Difficulty is the place where my strength gets a chance to show itself. | Zorluk, gücümün kendini gösterme fırsatı bulduğu yerdir.
+seneca | I choose friends who make me better, and I try to do the same for them. | Beni daha iyi yapan dostları seçiyor, onlar için de aynısını yapmaya çalışıyorum.
+seneca | Each evening I ask myself: what fault did I mend today, and what did I learn? | Her akşam kendime soruyorum: bugün hangi kusurumu düzelttim, ne öğrendim?
+epiktetos | Some things are up to me and some are not; I give my effort to the first. | Bazı şeyler bana bağlı, bazıları değil; emeğimi ilkine veriyorum.
+epiktetos | I cannot choose what happens, but I can choose how I respond. | Neyin olacağını seçemem ama nasıl karşılık vereceğimi seçebilirim.
+epiktetos | Before reacting, I separate the event from the story I tell about it. | Tepki vermeden önce olayı, onun hakkında anlattığım hikâyeden ayırıyorum.
+epiktetos | I can be free in my mind even when my day is full of obligations. | Günüm yükümlülüklerle dolu olsa da zihnimde özgür olabilirim.
+epiktetos | Other people's opinions belong to them; my choices belong to me. | Başkalarının görüşleri onlara, seçimlerim bana aittir.
+epiktetos | When I lose something, I remember that it was lent to me for a while. | Bir şeyi kaybettiğimde, onun bir süreliğine bana emanet edildiğini hatırlıyorum.
+epiktetos | Practice means doing the right thing again, especially when it is hard. | Pratik, doğru olanı özellikle zor olduğunda yeniden yapmaktır.
+epiktetos | I do not need to look wise; I need to act wisely in small things. | Bilge görünmeme gerek yok; küçük şeylerde bilgece davranmam gerekiyor.
+epiktetos | A difficulty is an opponent sent to train me, not to defeat me. | Bir zorluk beni yenmek için değil, çalıştırmak için gönderilmiş bir rakiptir.
+epiktetos | Tonight I let go of what was never mine to control. | Bu gece, hiçbir zaman benim kontrolümde olmayan şeyleri bırakıyorum.

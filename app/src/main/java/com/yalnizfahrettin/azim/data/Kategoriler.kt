@@ -16,7 +16,7 @@ data class Kategori(
  * Konuları düzenleyen görsel aile. Yeni erişim kategori seviyesinde saklanır.
  *
  * The historical free flag is retained only to migrate previous entitlements.
- * It must not be used as a current access check; use Depo.acik instead.
+ * Current access lives in [Access].
  */
 data class KategoriGrubu(
     val anahtar: String,
@@ -208,44 +208,7 @@ object Kategoriler {
 
     fun kesfetGrupBul(key: String): KategoriGrubu? = kesfetGruplari.firstOrNull { it.anahtar == key } ?: grupBul(key)
 
-    val ucretsizGruplar: Set<String> = gruplar.filter { it.ucretsiz }.map { it.anahtar }.toSet()
-
-    fun bul(anahtar: String): Kategori? = tumAltlar.firstOrNull { it.anahtar == anahtar }
+    private val dizin: Map<String, Kategori> by lazy { tumAltlar.associateBy { it.anahtar } }
+    fun bul(anahtar: String): Kategori? = dizin[anahtar]
     fun grupBul(anahtar: String): KategoriGrubu? = gruplar.firstOrNull { it.anahtar == anahtar }
-
-    private val eskiKategoriAnahtarlari = setOf("ozsefkat", "ic_huzur", "kendine_guven", "motivasyon", "azim", "pes", "zorluk_sabir", "yorgunluk_sabir", "tukenmislik", "yeniden", "uzun_soluk", "umut", "erteleme", "derin_odak", "durtu", "rutin", "dagilma", "ozguven", "korku", "reddedilme", "risk", "utangaclik", "marcus", "seneca", "epiktetos", "platon", "aristoteles", "nietzsche", "konfucyus", "machiavelli", "mevlana", "yunus", "sems", "hafiz", "zen", "kuran", "incil", "tevrat", "dua", "sukur", "antrenman", "dayaniklilik", "sakatlik", "sabah_rutini", "beslenme", "girisimcilik", "kariyer", "liderlik", "para", "zaman", "basarisizlik", "basari", "ask", "ayrilik", "aile", "arkadaslik", "yalnizlik", "affetmek", "kaygi", "stres", "minnettarlik", "simdiki_an", "uyku", "karamsarlik", "huzur", "merak", "okumak", "hata", "aliskanlik", "sinav")
-
-    /** Expands explicit legacy group grants; current screens must use Depo.acik. */
-    fun acikAltlar(acikGruplar: Set<String>): Set<String> =
-        gruplar.filter { it.anahtar in acikGruplar }
-            .flatMap { it.altlar }.filter { it.anahtar in eskiKategoriAnahtarlari }.map { it.anahtar }.toSet() + Erisim.ucretsizKategoriler
-
-    /** Kurulumda seçili gelen alt kategoriler. */
-    val varsayilanSecili: Set<String> = setOf("motivasyon", "ozsefkat", "marcus")
-
-    /**
-     * Eski düz kategori anahtarlarından yeni alt kategorilere göç.
-     * Eşleşmeyen anahtar sessizce düşer.
-     */
-    val eskiEslesme: Map<String, String> = mapOf(
-        "sabir" to "zorluk_sabir",
-        "odak" to "derin_odak",
-        "stoacilik" to "epiktetos",
-        "marcus_aurelius" to "marcus",
-        "epictetus" to "epiktetos",
-        "felsefe" to "platon",
-        "saglik" to "beslenme",
-        "kararlilik" to "azim",
-        "tutku" to "motivasyon",
-        "cesaret" to "korku",
-        "ogrenme" to "merak",
-    )
-
-    fun gocur(eskiler: Set<String>): Set<String> =
-        eskiler.mapNotNull { e ->
-            when {
-                bul(e) != null -> e
-                else -> eskiEslesme[e]
-            }
-        }.toSet()
 }
